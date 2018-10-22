@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name=".main" template="/WEB-INF/views/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/main.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+	</definition>
+	
+	<!-- 와일드카드매핑 -->
+	<definition name=".*.*.*" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp"></put-attribute>
+	</definition>
+	<!--  
+		뷰이름이 .member.mypage라면
+		".*.*"
+		첫번째별표 -> {1}에 
+		두번째별표 -> {2}에 들어감
+		=> value="/WEB-INF/views/member/mypage.jsp"
+		
+		뷰이름이 .admin.notice라면
+		=> value="/WEB-INF/views/admin/notice.jsp"
+	-->
+	<definition name=".*.*" extends=".main">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+	</definition>	
+</tiles-definitions>
