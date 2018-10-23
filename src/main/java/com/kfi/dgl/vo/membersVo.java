@@ -1,4 +1,4 @@
-/*package com.kfi.dgl.vo;
+package com.kfi.dgl.vo;
 
 import java.util.Date;
 
@@ -112,4 +112,3 @@ public class membersVo {
 		}
 	}
 }
-*/

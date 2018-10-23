@@ -1,6 +1,5 @@
-/*package com.kfi.dgl.service;
+package com.kfi.dgl.service;
 
 public class MembersService {
 
 }
-*/
