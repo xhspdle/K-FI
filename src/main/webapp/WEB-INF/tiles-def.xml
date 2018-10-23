@@ -12,6 +12,9 @@
 		<put-attribute name="content" value="/WEB-INF/views//mypage/mypage.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
 	</definition>
+	<definition name=".admin" template="/WEB-INF/views/admin/main.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/admin/content.jsp"/>
+	</definition>
 	<!-- 와일드카드매핑 -->
 	<definition name=".*.*.*" extends=".main">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp"></put-attribute>
