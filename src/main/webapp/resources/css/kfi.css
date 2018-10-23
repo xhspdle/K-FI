@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*
-	layout.jsp
+	main
 */
 body {
 	font: 400 15px Lato, sans-serif;
@@ -194,4 +194,27 @@ footer .glyphicon {
 		width: 212.4px;
 		height: 158.4px;
 	}
+}
+/*
+	mypage
+*/
+.affix {
+	top: 0;
+	width: 100%;
+	-webkit-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
+	background-color: #F44336;
+	border-color: #F44336;
+}
+.affix a {
+    color: #fff !important;
+    padding: 15px !important;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+.affix-top a {
+    padding: 25px !important;
+}
+.affix + .container-fluid {
+    padding-top: 95px;
 }
