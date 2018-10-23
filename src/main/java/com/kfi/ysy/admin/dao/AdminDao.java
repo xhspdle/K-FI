@@ -15,13 +15,16 @@ public class AdminDao {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.kfi.mybatis.ysy.AdminMapper.";
-	public AdminVo login(HashMap<String, String> map) {
-		return sqlSession.selectOne(NAMESPACE+"login", map);
+	public int admaxcnt() {
+		return sqlSession.selectOne(NAMESPACE+"admaxcnt");
 	}
-	public int checkid(String id) {
-		return sqlSession.selectOne(NAMESPACE+"checkid", id);
+	public AdminVo adlogin(HashMap<String, String> map) {
+		return sqlSession.selectOne(NAMESPACE+"adlogin", map);
 	}
-	public int join(AdminVo vo) {
-		return sqlSession.insert(NAMESPACE+"join", vo);
+	public int adcheckid(String id) {
+		return sqlSession.selectOne(NAMESPACE+"adcheckid", id);
+	}
+	public int adjoin(AdminVo vo) {
+		return sqlSession.insert(NAMESPACE+"adjoin", vo);
 	}
 }

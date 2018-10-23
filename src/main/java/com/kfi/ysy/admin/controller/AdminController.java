@@ -27,17 +27,17 @@ public class AdminController {
 		return ".admin";
 	}
 	@RequestMapping(value="/adlogin", method=RequestMethod.GET)
-	public String loginForm() {
-		return ".admin.login";
+	public String adloginForm() {
+		return ".admin.adlogin";
 	}
 	@RequestMapping(value="/adlogin", method=RequestMethod.POST)
-	public String login(HttpServletRequest request) {
+	public String adlogin(HttpServletRequest request) {
 		String id=request.getParameter("id");
 		String pwd=request.getParameter("pwd");
 		HashMap<String, String> map=new HashMap<String, String>();
 		map.put("id", id);
 		map.put("pwd", pwd);
-		AdminVo vo=service.login(map);
+		AdminVo vo=service.adlogin(map);
 		if(vo!=null) {
 			HttpSession session=request.getSession();
 			session.setAttribute("admininfo", vo);
@@ -48,15 +48,15 @@ public class AdminController {
 			
 	}
 	@RequestMapping("/adlogout")
-	public String logout(HttpSession session) {
+	public String adlogout(HttpSession session) {
 		session.invalidate();
 		return ".main";
 	}
 	
-	@RequestMapping(value="/checkid", produces="application/json;charset=utf-8" )
+	@RequestMapping(value="/adcheckid", produces="application/json;charset=utf-8" )
 	@ResponseBody
-	public String checkid(String id) {	
-		int result=service.checkid(id);
+	public String adcheckid(String admin_id) {	
+		int result=service.adcheckid(admin_id);
 		JSONObject obj=new JSONObject();
 		if(result>0) {
 			obj.put("msg","사용불가능한 아이디입니다!!!!");
@@ -67,12 +67,12 @@ public class AdminController {
 	}	
 	
 	@RequestMapping(value = "/adjoin", method = RequestMethod.GET)
-	public String joinForm() {
+	public String adjoinForm() {
 		return ".admin.join";
 	}
 	@RequestMapping(value = "/adjoin", method = RequestMethod.POST)
-	public String join(AdminVo vo) {
-		int result=service.join(vo);
+	public String adjoin(AdminVo vo) {
+		int result=service.adjoin(vo);
 		if(result>0) {
 			return ".admin.result";
 		}else{

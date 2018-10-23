@@ -7,10 +7,10 @@
 	$(function() {
 		$("#checkid").click(function() {
 			alert("aaa");
-			var id = $("#id").val();
-			alert(id);
-			$.getJSON("<c:url value='/checkid'/>", {
-				id : id
+			var admin_id = $("#id").val();
+			alert(admin_id);
+			$.getJSON("<c:url value='/adcheckid'/>", {
+				admin_id : admin_id
 			}, function(data) {
 				$("#checkedid").html(data.msg);
 			});

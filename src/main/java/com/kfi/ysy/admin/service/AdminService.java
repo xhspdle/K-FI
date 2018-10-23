@@ -14,14 +14,17 @@ import com.kfi.ysy.admin.vo.AdminVo;
 public class AdminService {
 	@Autowired
 	private AdminDao dao;
-	public AdminVo login(HashMap<String, String> map) {
-		return dao.login(map);
+	public int admaxcnt() {
+		return dao.admaxcnt();
 	}
-	public int checkid(String id) {
-		return dao.checkid(id);
+	public AdminVo adlogin(HashMap<String, String> map) {
+		return dao.adlogin(map);
 	}
-	public int join(AdminVo vo) {
-		return dao.join(vo);
+	public int adcheckid(String id) {
+		return dao.adcheckid(id);
+	}
+	public int adjoin(AdminVo vo) {
+		return dao.adjoin(vo);
 	}
 	
 }
