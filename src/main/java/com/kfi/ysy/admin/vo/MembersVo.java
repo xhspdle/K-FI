@@ -10,9 +10,10 @@ public class MembersVo {
 	private String user_email;
 	private Date user_regdate;
 	private int user_status;
+	private int user_certi;
 	public MembersVo() {}
 	public MembersVo(int user_num, String user_id, String user_nickname, String user_pwd, String user_email,
-			Date user_regdate, int user_status) {
+			Date user_regdate, int user_status, int user_certi) {
 		super();
 		this.user_num = user_num;
 		this.user_id = user_id;
@@ -21,6 +22,7 @@ public class MembersVo {
 		this.user_email = user_email;
 		this.user_regdate = user_regdate;
 		this.user_status = user_status;
+		this.user_certi = user_certi;
 	}
 	public int getUser_num() {
 		return user_num;
@@ -64,6 +66,11 @@ public class MembersVo {
 	public void setUser_status(int user_status) {
 		this.user_status = user_status;
 	}
-	
+	public int getUser_certi() {
+		return user_certi;
+	}
+	public void setUser_certi(int user_certi) {
+		this.user_certi = user_certi;
+	}
 	
 }
