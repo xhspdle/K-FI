@@ -6,8 +6,26 @@
 	<select id="getMaxnum" resultType="int">
 		select NVL(max(mb_num),0) maxnum from my_board
 	</select>
+	<select id="getCount" resultType="int">
+		select NVL(count(mb_num),0) cnt from my_board
+	</select>
 	<insert id="insert" parameterType="myboard">
 		insert into my_board 
 		values(#{mb_num},#{user_num},#{mb_title},#{mb_content},sysdate,0)
 	</insert>
+	<update id="addHit" parameterType="int">
+		update my_board set mb_views=mb_views+1 where mb_num=#{mb_num}
+	</update>
+	<update id="update" parameterType="myboard">
+		update my_board set mb_title=#{mb_title},mb_content=#{mb_content}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_board where mb_num=#{mb_num}
+	</delete>
+	<select id="list" resultType="myboard">
+		select * from my_board
+	</select>
+	<select id="getinfo" parameterType="int" resultType="myboard">
+		select * from my_board where mb_num=#{mb_num}
+	</select>
 </mapper>

@@ -11,11 +11,11 @@ import com.kfi.ldk.vo.MyBoardVo;
 @Controller
 public class InsertController {
 	@Autowired private MyBoardService service;
-	@RequestMapping(value="/mypage/insert",method=RequestMethod.GET)
+	@RequestMapping(value="/mypage/myboard/insert",method=RequestMethod.GET)
 	public String insertForm() {
-		return "mypage/insert";
+		return ".mypage.myboard.insert";
 	}
-	@RequestMapping(value="/mypage/insert",method=RequestMethod.POST)
+	@RequestMapping(value="/mypage/myboard/insert",method=RequestMethod.POST)
 	public String insert(MyBoardVo vo) {
 		try {
 			service.insert(vo);

@@ -1,44 +1,45 @@
 --------------------------------------------------------
---  파일이 생성됨 - 월요일-10월-22-2018   
+--  파일이 생성됨 - 화요일-10월-23-2018   
 --------------------------------------------------------
-DROP TABLE "KFI"."AB_PHOTO" cascade constraints;
-DROP TABLE "KFI"."ACCUSE" cascade constraints;
-DROP TABLE "KFI"."ADMIN" cascade constraints;
-DROP TABLE "KFI"."ADMIN_BOARD" cascade constraints;
-DROP TABLE "KFI"."COMM_BOARD" cascade constraints;
-DROP TABLE "KFI"."COMM_BOARD_LIKE" cascade constraints;
-DROP TABLE "KFI"."COMM_CALENDAR" cascade constraints;
-DROP TABLE "KFI"."COMM_CHAT" cascade constraints;
-DROP TABLE "KFI"."COMM_COMMENT" cascade constraints;
-DROP TABLE "KFI"."COMM_COMMENT_LIKE" cascade constraints;
-DROP TABLE "KFI"."COMM_GATHERING" cascade constraints;
-DROP TABLE "KFI"."COMM_PHOTO" cascade constraints;
-DROP TABLE "KFI"."COMM_REFUSE" cascade constraints;
-DROP TABLE "KFI"."COMM_SKIN" cascade constraints;
-DROP TABLE "KFI"."COMM_SKIN_COVER" cascade constraints;
-DROP TABLE "KFI"."COMM_SKIN_PROFILE" cascade constraints;
-DROP TABLE "KFI"."COMM_TAG" cascade constraints;
-DROP TABLE "KFI"."COMM_USER_LIST" cascade constraints;
-DROP TABLE "KFI"."COMM_VIDEO" cascade constraints;
-DROP TABLE "KFI"."COMM_VOTE" cascade constraints;
-DROP TABLE "KFI"."COMMUNITY" cascade constraints;
-DROP TABLE "KFI"."FAQ" cascade constraints;
-DROP TABLE "KFI"."FRIENDS" cascade constraints;
-DROP TABLE "KFI"."MEMBERS" cascade constraints;
-DROP TABLE "KFI"."MY_BOARD" cascade constraints;
-DROP TABLE "KFI"."MY_BOARD_LIKE" cascade constraints;
-DROP TABLE "KFI"."MY_CHAT" cascade constraints;
-DROP TABLE "KFI"."MY_COMMENT" cascade constraints;
-DROP TABLE "KFI"."MY_COMMENT_LIKE" cascade constraints;
-DROP TABLE "KFI"."MY_PHOTO" cascade constraints;
-DROP TABLE "KFI"."MY_SKIN" cascade constraints;
-DROP TABLE "KFI"."MY_SKIN_COVER" cascade constraints;
-DROP TABLE "KFI"."MY_SKIN_PROFILE" cascade constraints;
-DROP TABLE "KFI"."MY_TAG" cascade constraints;
-DROP TABLE "KFI"."MY_VIDEO" cascade constraints;
-DROP TABLE "KFI"."TAG" cascade constraints;
-DROP TABLE "KFI"."VOTEING_USERLIST" cascade constraints;
-DROP TABLE "KFI"."VOTING_OPTION" cascade constraints;
+DROP TABLE "KFI"."AB_PHOTO";
+DROP TABLE "KFI"."ACCUSE";
+DROP TABLE "KFI"."ADMIN";
+DROP TABLE "KFI"."ADMIN_BOARD";
+DROP TABLE "KFI"."CERTI_MEMBERS";
+DROP TABLE "KFI"."COMM_BOARD";
+DROP TABLE "KFI"."COMM_BOARD_LIKE";
+DROP TABLE "KFI"."COMM_CALENDAR";
+DROP TABLE "KFI"."COMM_CHAT";
+DROP TABLE "KFI"."COMM_COMMENT";
+DROP TABLE "KFI"."COMM_COMMENT_LIKE";
+DROP TABLE "KFI"."COMM_GATHERING";
+DROP TABLE "KFI"."COMM_PHOTO";
+DROP TABLE "KFI"."COMM_REFUSE";
+DROP TABLE "KFI"."COMM_SKIN";
+DROP TABLE "KFI"."COMM_SKIN_COVER";
+DROP TABLE "KFI"."COMM_SKIN_PROFILE";
+DROP TABLE "KFI"."COMM_TAG";
+DROP TABLE "KFI"."COMM_USER_LIST";
+DROP TABLE "KFI"."COMM_VIDEO";
+DROP TABLE "KFI"."COMM_VOTE";
+DROP TABLE "KFI"."COMMUNITY";
+DROP TABLE "KFI"."FAQ";
+DROP TABLE "KFI"."FRIENDS";
+DROP TABLE "KFI"."MEMBERS";
+DROP TABLE "KFI"."MY_BOARD";
+DROP TABLE "KFI"."MY_BOARD_LIKE";
+DROP TABLE "KFI"."MY_CHAT";
+DROP TABLE "KFI"."MY_COMMENT";
+DROP TABLE "KFI"."MY_COMMENT_LIKE";
+DROP TABLE "KFI"."MY_PHOTO";
+DROP TABLE "KFI"."MY_SKIN";
+DROP TABLE "KFI"."MY_SKIN_COVER";
+DROP TABLE "KFI"."MY_SKIN_PROFILE";
+DROP TABLE "KFI"."MY_TAG";
+DROP TABLE "KFI"."MY_VIDEO";
+DROP TABLE "KFI"."TAG";
+DROP TABLE "KFI"."VOTEING_USERLIST";
+DROP TABLE "KFI"."VOTING_OPTION";
 --------------------------------------------------------
 --  DDL for Table AB_PHOTO
 --------------------------------------------------------
@@ -65,7 +66,8 @@ DROP TABLE "KFI"."VOTING_OPTION" cascade constraints;
 	"USER2_NUM" NUMBER, 
 	"AC_REASON" VARCHAR2(100), 
 	"CB_NUM" NUMBER, 
-	"BOARD_NUM" NUMBER
+	"BOARD_NUM" NUMBER, 
+	"AC_DATE" DATE
    ) 
 
    COMMENT ON COLUMN "KFI"."ACCUSE"."AC_NUM" IS '신고번호'
@@ -74,6 +76,7 @@ DROP TABLE "KFI"."VOTING_OPTION" cascade constraints;
    COMMENT ON COLUMN "KFI"."ACCUSE"."AC_REASON" IS '신고사유'
    COMMENT ON COLUMN "KFI"."ACCUSE"."CB_NUM" IS '모임글번호'
    COMMENT ON COLUMN "KFI"."ACCUSE"."BOARD_NUM" IS '개인글번호'
+   COMMENT ON COLUMN "KFI"."ACCUSE"."AC_DATE" IS '신고시간'
    COMMENT ON TABLE "KFI"."ACCUSE"  IS '신고'
 --------------------------------------------------------
 --  DDL for Table ADMIN
@@ -84,7 +87,8 @@ DROP TABLE "KFI"."VOTING_OPTION" cascade constraints;
 	"ADMIN_ID" VARCHAR2(20), 
 	"ADMIN_PWD" VARCHAR2(20), 
 	"ADMIN_EMAIL" VARCHAR2(20), 
-	"ADMIN_REGDATE" DATE
+	"ADMIN_REGDATE" DATE, 
+	"ADMIN_NICK" VARCHAR2(20)
    ) 
 
    COMMENT ON COLUMN "KFI"."ADMIN"."ADMIN_NUM" IS '관리자번호'
@@ -92,6 +96,7 @@ DROP TABLE "KFI"."VOTING_OPTION" cascade constraints;
    COMMENT ON COLUMN "KFI"."ADMIN"."ADMIN_PWD" IS '비밀번호'
    COMMENT ON COLUMN "KFI"."ADMIN"."ADMIN_EMAIL" IS '이메일'
    COMMENT ON COLUMN "KFI"."ADMIN"."ADMIN_REGDATE" IS '등록일'
+   COMMENT ON COLUMN "KFI"."ADMIN"."ADMIN_NICK" IS '관리자닉네임'
    COMMENT ON TABLE "KFI"."ADMIN"  IS '관리자'
 --------------------------------------------------------
 --  DDL for Table ADMIN_BOARD
@@ -113,6 +118,20 @@ DROP TABLE "KFI"."VOTING_OPTION" cascade constraints;
    COMMENT ON COLUMN "KFI"."ADMIN_BOARD"."AB_TITLE" IS '글제목'
    COMMENT ON COLUMN "KFI"."ADMIN_BOARD"."AB_DATE" IS '작성일'
    COMMENT ON TABLE "KFI"."ADMIN_BOARD"  IS '관리자게시판'
+--------------------------------------------------------
+--  DDL for Table CERTI_MEMBERS
+--------------------------------------------------------
+
+  CREATE TABLE "KFI"."CERTI_MEMBERS" 
+   (	"CM_NUM" NUMBER, 
+	"USER_NUM" NUMBER, 
+	"CM_KEY" VARCHAR2(100)
+   ) 
+
+   COMMENT ON COLUMN "KFI"."CERTI_MEMBERS"."CM_NUM" IS '인증번호'
+   COMMENT ON COLUMN "KFI"."CERTI_MEMBERS"."USER_NUM" IS '유저번호'
+   COMMENT ON COLUMN "KFI"."CERTI_MEMBERS"."CM_KEY" IS '인증키'
+   COMMENT ON TABLE "KFI"."CERTI_MEMBERS"  IS '사용자인증'
 --------------------------------------------------------
 --  DDL for Table COMM_BOARD
 --------------------------------------------------------
@@ -452,7 +471,8 @@ DROP TABLE "KFI"."VOTING_OPTION" cascade constraints;
 	"USER_PWD" VARCHAR2(20), 
 	"USER_EMAIL" VARCHAR2(30), 
 	"USER_REGDATE" DATE, 
-	"USER_STATUS" NUMBER
+	"USER_STATUS" NUMBER, 
+	"USER_CERTI" NUMBER
    ) 
 
    COMMENT ON COLUMN "KFI"."MEMBERS"."USER_NUM" IS '유저번호'
@@ -462,6 +482,7 @@ DROP TABLE "KFI"."VOTING_OPTION" cascade constraints;
    COMMENT ON COLUMN "KFI"."MEMBERS"."USER_EMAIL" IS '이메일'
    COMMENT ON COLUMN "KFI"."MEMBERS"."USER_REGDATE" IS '가입일'
    COMMENT ON COLUMN "KFI"."MEMBERS"."USER_STATUS" IS '아이디상태'
+   COMMENT ON COLUMN "KFI"."MEMBERS"."USER_CERTI" IS '인증상태'
    COMMENT ON TABLE "KFI"."MEMBERS"  IS '사용자'
 --------------------------------------------------------
 --  DDL for Table MY_BOARD
@@ -695,6 +716,8 @@ REM INSERTING into KFI.ADMIN
 SET DEFINE OFF;
 REM INSERTING into KFI.ADMIN_BOARD
 SET DEFINE OFF;
+REM INSERTING into KFI.CERTI_MEMBERS
+SET DEFINE OFF;
 REM INSERTING into KFI.COMM_BOARD
 SET DEFINE OFF;
 REM INSERTING into KFI.COMM_BOARD_LIKE
@@ -735,7 +758,6 @@ REM INSERTING into KFI.FRIENDS
 SET DEFINE OFF;
 REM INSERTING into KFI.MEMBERS
 SET DEFINE OFF;
-Insert into KFI.MEMBERS (USER_NUM,USER_ID,USER_NICKNAME,USER_PWD,USER_EMAIL,USER_REGDATE,USER_STATUS) values (1,'test','테스트','1234','test@test.com',to_date('18/10/22','RR/MM/DD'),1);
 REM INSERTING into KFI.MY_BOARD
 SET DEFINE OFF;
 REM INSERTING into KFI.MY_BOARD_LIKE
@@ -784,6 +806,11 @@ SET DEFINE OFF;
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "KFI"."ADMIN_BOARD_PK" ON "KFI"."ADMIN_BOARD" ("AB_NUM")
+--------------------------------------------------------
+--  DDL for Index CERTI_MEMBERS_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "KFI"."CERTI_MEMBERS_PK" ON "KFI"."CERTI_MEMBERS" ("CM_NUM")
 --------------------------------------------------------
 --  DDL for Index COMM_BOARD_PK
 --------------------------------------------------------
@@ -978,6 +1005,12 @@ SET DEFINE OFF;
 
   ALTER TABLE "KFI"."ADMIN_BOARD" ADD CONSTRAINT "ADMIN_BOARD_PK" PRIMARY KEY ("AB_NUM") ENABLE
   ALTER TABLE "KFI"."ADMIN_BOARD" MODIFY ("AB_NUM" NOT NULL ENABLE)
+--------------------------------------------------------
+--  Constraints for Table CERTI_MEMBERS
+--------------------------------------------------------
+
+  ALTER TABLE "KFI"."CERTI_MEMBERS" ADD CONSTRAINT "CERTI_MEMBERS_PK" PRIMARY KEY ("CM_NUM") ENABLE
+  ALTER TABLE "KFI"."CERTI_MEMBERS" MODIFY ("CM_NUM" NOT NULL ENABLE)
 --------------------------------------------------------
 --  Constraints for Table COMM_BOARD
 --------------------------------------------------------
