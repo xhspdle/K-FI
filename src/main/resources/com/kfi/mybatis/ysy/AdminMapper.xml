@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.kfi.mybatis.ysy.AdminMapper">
+ 	<select id="login" parameterType="hashmap" resultType="com.kfi.ysy.admin.vo.AdminVo">
+ 		select admin_num,admin_id,admin_nick,admin_email,admin_regdate from admin where admin_id=#{id} and admin_pwd=#{pwd}
+ 	</select>
+ 	<select id="checkid" parameterType="string" resultType="int">
+ 		select count(*) from admin where admin_id=#{id}
+ 	</select>
+ 	<insert id="join" parameterType="com.sys.admin.vo.AdminVo">
+ 		insert into admin values(admin_seq.nextval,#{admin_id},#{admin_pwd},#{admin_nick},#{admin_email},sysdate)
+ 	</insert>
+ </mapper>
