@@ -18,7 +18,9 @@ public class AdminService {
 		return dao.admaxcnt();
 	}
 	public AdminVo adlogin(HashMap<String, String> map) {
-		return dao.adlogin(map);
+		AdminVo vo= dao.adlogin(map);
+		System.out.println("adminvo"+vo.getAdmin_nick()); 
+		return vo;
 	}
 	public int adcheckid(String id) {
 		return dao.adcheckid(id);

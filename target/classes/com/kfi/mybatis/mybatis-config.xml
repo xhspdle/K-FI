@@ -9,6 +9,8 @@
 	<mappers>	 
 		
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/MembersMapper.xml"/>
 		<!--
 		<package name="com.kfi.mybatis.ldk"/>
 		-->

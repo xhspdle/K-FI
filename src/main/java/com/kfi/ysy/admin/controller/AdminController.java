@@ -16,9 +16,6 @@ import com.kfi.ysy.admin.service.AdminService;
 import com.kfi.ysy.admin.vo.AdminVo;
 
 
-
-
-
 @Controller
 public class AdminController {
 	@Autowired private AdminService service;
@@ -28,24 +25,23 @@ public class AdminController {
 	}
 	@RequestMapping(value="/adlogin", method=RequestMethod.GET)
 	public String adloginForm() {
-		return ".admin.adlogin";
+		return ".admin.login";
 	}
 	@RequestMapping(value="/adlogin", method=RequestMethod.POST)
 	public String adlogin(HttpServletRequest request) {
-		String id=request.getParameter("id");
-		String pwd=request.getParameter("pwd");
+		String admin_id=request.getParameter("admin_id");
+		String admin_pwd=request.getParameter("admin_pwd");
 		HashMap<String, String> map=new HashMap<String, String>();
-		map.put("id", id);
-		map.put("pwd", pwd);
+		map.put("admin_id", admin_id);
+		map.put("admin_pwd", admin_pwd);
 		AdminVo vo=service.adlogin(map);
 		if(vo!=null) {
 			HttpSession session=request.getSession();
 			session.setAttribute("admininfo", vo);
 			return ".admin.adminpage";
 		}else {
-			return ".admin.login";
+			return ".main.error";
 		}
-			
 	}
 	@RequestMapping("/adlogout")
 	public String adlogout(HttpSession session) {
