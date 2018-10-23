@@ -12,6 +12,7 @@
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/MembersMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>
 		<!--
 		<package name="com.kfi.mybatis.ldk"/>
 		-->

@@ -30,6 +30,10 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<div class="btn-group">
+		<button class="btn btn-lg">등록</button>
+		<button class="btn btn-lg">체크박스</button>
+	</div>
 
 <div class="container">
   <div class="modal fade" id="myModal" role="dialog">

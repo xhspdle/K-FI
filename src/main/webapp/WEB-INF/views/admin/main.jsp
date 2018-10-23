@@ -22,12 +22,12 @@
 <script src="<c:url value='/resources/js/admin.js'/>"></script>
 </head>
 
-<body id="myPage" data-spy="scroll" data-target=".navbar"
+<body id="myPage" data-spy="scroll" data-target=".navbar1"
 	data-offset="60">
 	<c:set var="admin" value="${sessionScope.admininfo }" />
 	<%-- <c:set var="user" value="${mblist }"/> --%>
 	<div id="wrap">
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<nav class="navbar1 navbar-default navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse"

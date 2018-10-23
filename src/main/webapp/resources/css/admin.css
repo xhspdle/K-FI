@@ -132,7 +132,7 @@ h4 {
 	color: #fff;
 }
 
-.navbar {
+.navbar1 {
 	margin-bottom: 0;
 	background-color: #333333;
 	z-index: 9999;
@@ -142,7 +142,7 @@ h4 {
 	font-family: Montserrat, sans-serif;
 }
 
-.navbar li a, .navbar .navbar-brand {
+.navbar1 li a, .navbar1 .navbar-brand {
 	color: #fff !important;
 }
 

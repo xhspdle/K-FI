@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ysy.AdminBoardMapper">
+	<select id="ablist" resultType="com.kfi.ysy.admin.vo.AdminVo">
+		select * from admin_board
+	</select>
+</mapper>
