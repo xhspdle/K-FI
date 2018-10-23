@@ -31,7 +31,7 @@
 			<version>3.0.8</version>
 		</dependency>
 		
-		<!-- #validation 유효성 검사를 위한 모듈 -->
+		<!-- #validation 유효성 검사를 위한 모듈 
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -41,7 +41,7 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.2.0.Final</version>
-		</dependency>
+		</dependency> -->
 		
 		<!-- #fileupload -->
 		<dependency>
