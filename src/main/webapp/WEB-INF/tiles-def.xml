@@ -7,10 +7,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/main.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
 	</definition>
-	<definition name=".mypage" template="/WEB-INF/views/layout.jsp">
+	<definition name=".mypage" template="/WEB-INF/views/mypage/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
+		<put-attribute name="leftside" value="/WEB-INF/views/mypage/leftside.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views//mypage/mypage.jsp"/>
-		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+		<put-attribute name="rightside" value="/WEB-INF/views/mypage/rightside.jsp"/>
 	</definition>
 	<definition name=".admin" template="/WEB-INF/views/admin/main.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/admin/content.jsp"/>
