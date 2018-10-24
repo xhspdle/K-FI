@@ -88,7 +88,7 @@ h4 {
 
 .panel {
 	border: 1px solid #333333;
-	border-radius: 0 !important;
+	border-radius: 80 !important;
 	transition: box-shadow 0.5s;
 }
 
@@ -105,12 +105,12 @@ h4 {
 .panel-heading {
 	color: #fff !important;
 	background-color: #333333 !important;
-	padding: 25px;
+	padding: 15px;
 	border-bottom: 1px solid transparent;
-	border-top-left-radius: 0px;
-	border-top-right-radius: 0px;
+ 	border-top-left-radius: 80;
+	border-top-right-radius: 80;
 	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px; 
 }
 
 .panel-footer {
@@ -132,7 +132,7 @@ h4 {
 	color: #fff;
 }
 
-.navbar1 {
+.navbar {
 	margin-bottom: 0;
 	background-color: #333333;
 	z-index: 9999;
@@ -142,7 +142,7 @@ h4 {
 	font-family: Montserrat, sans-serif;
 }
 
-.navbar1 li a, .navbar1 .navbar-brand {
+.navbar li a, .navbar .navbar-brand {
 	color: #fff !important;
 }
 
@@ -183,7 +183,15 @@ footer .glyphicon {
 	-webkit-animation-duration: 1s;
 	visibility: visible;
 }
-
+#mainimg{
+	margin: 0px;
+	padding: 0px;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	
+}
 @keyframes slide { 0% {
 		opacity: 0;
 		transform: translateY(70%);
@@ -220,6 +228,7 @@ footer .glyphicon {
 	width: 50%;
 	height: 50%;
 	margin: auto;
+	overflow: none;
 }
 #popup {
 	width: 200px;

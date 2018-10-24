@@ -19,8 +19,9 @@
 						<h4>신고대상 : ${accuse.user1_num}</h4>
 						<h4>신고인 : ${accuse.user2_num}</h4>
 					</div>
-					<button class="btn btn-lg">확인</button>
-					<button class="btn btn-lg">삭제</button>
+					<button class="btn btn-md btn-warning">확인</button>
+					<button class="btn btn-md btn-danger">삭제</button>
+					<br><br>
 				</div>
 			</div>
 		</div>

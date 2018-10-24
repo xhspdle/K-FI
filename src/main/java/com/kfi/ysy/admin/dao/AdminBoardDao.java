@@ -17,4 +17,10 @@ public class AdminBoardDao {
 	public List<AdminBoardVo> ablist(){
 		return sqlSession.selectList(NAMESPACE+"ablist");
 	}
+	public int abmaxcnt() {
+		return sqlSession.selectOne(NAMESPACE+"abmaxcnt");
+	}
+	public int abinsert(AdminBoardVo vo) {
+		return sqlSession.insert(NAMESPACE+"abinsert", vo);
+	}
 }

@@ -13,13 +13,13 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="<c:url value='/resources/css/admin.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/admin.css'/>">	
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <script src="<c:url value='/resources/js/admin.js'/>"></script>
+
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar1"
@@ -27,7 +27,7 @@
 	<c:set var="admin" value="${sessionScope.admininfo }" />
 	<%-- <c:set var="user" value="${mblist }"/> --%>
 	<div id="wrap">
-		<nav class="navbar1 navbar-default navbar-fixed-top">
+		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse"

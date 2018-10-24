@@ -1,5 +1,5 @@
-/**
- * 
+/*
+	scroll : layout.jsp
  */
 
 function hidePopup() {

@@ -17,4 +17,10 @@ public class AdminBoardService {
 	public List<AdminBoardVo> ablist(){
 		return dao.ablist();
 	}
+	public int abmaxcnt() {
+		return dao.abmaxcnt();
+	}
+	public int abinsert(AdminBoardVo vo) {
+		return dao.abinsert(vo);
+	}
 }

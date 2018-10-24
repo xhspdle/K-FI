@@ -46,7 +46,7 @@ public class AdminController {
 	@RequestMapping("/adlogout")
 	public String adlogout(HttpSession session) {
 		session.invalidate();
-		return ".main";
+		return ".admin";
 	}
 	
 	@RequestMapping(value="/adcheckid", produces="application/json;charset=utf-8" )
@@ -68,13 +68,16 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/adjoin", method = RequestMethod.POST)
 	public String adjoin(AdminVo vo) {
+		int admin_num=service.admaxcnt()+1;
+		vo.setAdmin_num(admin_num);
 		int result=service.adjoin(vo);
 		if(result>0) {
-			return ".admin.result";
+			return ".admin";
 		}else{
-			return ".admin.error";
+			return ".admin";
 		}
 	}
+	
 }
 	
 

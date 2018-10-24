@@ -21,7 +21,7 @@
 		</tr>
 		<c:forEach var="user" items="${mblist }">
 			<tr>
-				<td><a data-toggle="modal" data-target="#myModal" id="mbgetinfo" value="${user.user_num}">${user.user_num}</a></td>
+				<td><a data-toggle="modal" data-target="#mbgetinfo_modal" id="mbgetinfo" value="${user.user_num}">${user.user_num}</a></td>
 				<td>${user.user_id }</td>
 				<td>${user.user_nickname }</td>
 				<td>${user.user_email }</td>
@@ -31,30 +31,62 @@
 		</c:forEach>
 	</table>
 	<div class="btn-group">
-		<button class="btn btn-lg">등록</button>
+		<button class="btn btn-lg" data-toggle="modal" data-target="#mbgetinfo_modal" id="mbgetinfo">등록</button>
 		<button class="btn btn-lg">체크박스</button>
 	</div>
 
 <div class="container">
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">   
+  <div class="modal fade" id="mbgetinfo_modal" role="dialog">
+    <div class="modal-dialog ">   
       <!-- Modal content-->
       <div class="modal-content">
-        <div >
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 >사용자 정보</h4>
-        </div>
         <div>
-        	회원ID<input type="text" value="${mbinfo.user_id }"><br>
-        	회원비밀번호<input type="text"><br>
-        	회원NICKNAME<input type="text"><br>
-        	회원EMAIL<input type="text"><br>
-        	회원가입일<input type="text"><br>    	
+          <h3>사용자 등록</h3>
         </div>
-        <div>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
+        <div class="panel-body">
+        <form class="form-horizontal" action="/action_page.php">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">ID:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Enter email">
     </div>
   </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">Password:</label>
+    <div class="col-sm-10"> 
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+  </div>
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">Password:</label>
+    <div class="col-sm-10"> 
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+  </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">NickName:</label>
+    <div class="col-sm-10"> 
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+  </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">Email:</label>
+    <div class="col-sm-10"> 
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+  </div>
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</form>
+         	
+        </div>
+   
+      </div>
+    </div>
+
 </div>

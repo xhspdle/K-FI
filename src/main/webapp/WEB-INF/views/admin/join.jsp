@@ -48,7 +48,7 @@
 		</div>
 		<div class="form-group">
 			<label>NickName:</label> 
-			<input type="text" class="form-control" name="admin_nickname">
+			<input type="text" class="form-control" name="admin_nick">
 		</div>
 		<div class="form-group">
 			<label>E-mail:</label> 

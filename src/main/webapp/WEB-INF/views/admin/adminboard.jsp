@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>	
 <h1>회원정보</h1>
 	<table class="table table-striped">
@@ -12,7 +12,7 @@
 			<th>게시일</th>
 			<th>삭제</th>
 		</tr>
-<%-- 		<c:forEach var="abcontent" items="${ablist }">
+		<c:forEach var="abcontent" items="${ablist }">
 			<tr>
 				<td>${abcontent.ab_num}</td>
 				<td>${abcontent.admin_num }</td>
@@ -21,5 +21,6 @@
 				<td>${abcontent.ab_date }</td>				
 				<td><i class="glyphicon glyphicon-remove"></i></td>
 			</tr>
-		</c:forEach> --%>
+		</c:forEach>	
 	</table>
+	<a href="abinsert" class="btn btn-default">글작성</a>

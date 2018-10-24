@@ -12,6 +12,6 @@
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" name="admin_pwd">
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default">등록</button>
   </form>
 </div>
