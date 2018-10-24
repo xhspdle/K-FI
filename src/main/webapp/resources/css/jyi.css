@@ -1,0 +1,25 @@
+@charset "UTF-8";
+#jyi_calendar {
+	text-align: center;
+	width:300px;
+}
+#jyi_main {
+	background-color: #00cee8;
+}
+.jyi_cal:hover {
+	background-color: #00cee8;
+}
+
+.jyi_week {
+	color: #00cee8;
+	text-align: center;
+}
+
+.jyi_a:link {
+	color: black;
+	text-decoration: none;
+}
+
+.jyi_a:hover {
+	color: white;
+}
