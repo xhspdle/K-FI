@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MyPageController {
 	@RequestMapping(value="/mypage/main",method=RequestMethod.GET)
 	public String myPage() {
-		return ".mypage.main";
+		return ".mypage";
 	}
 }
