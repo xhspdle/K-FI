@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- 프로필 -->
-<div id="leftside_wrap">
-	<div class="well well-lg">
+<!-- <div id="leftside_wrap">
+ -->	<div class="well well-lg">
 		<h4>프로필사진</h4>
 		<div>
 			<img class="img-responsive" alt="프로필사진"
@@ -17,13 +17,13 @@
 	</ul>
 
 	<!-- 게시판 달력 -->
-	<div style="margin-left: 5%;">
+	<%-- <div>
 	<span>
 	<a id="prevcal_left" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month-1 }' />"> < </a>
 	<a id="aftcal_left" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month+1 }' />"> > </a>
 	</span>
 	<span style="color:#00cee8;font-weight: bold;">${year } ${mon[month] }</span>
-		<table class="table table-bordered" id="jyi_calendar" width="300">
+	 --%>	<table class="table table-bordered" id="jyi_calendar" width="100">
 			<tr>
 				<th class="jyi_week">S</th>
 				<th class="jyi_week">M</th>
@@ -58,4 +58,3 @@
 			</c:forEach>
 		</table>
 	</div>
-</div>

@@ -13,10 +13,9 @@
 	<a id="aftcal" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month+1 }' />"> > </a>
 	</span>
 	<span id="mycomm_cal_chat" class="glyphicon glyphicon-comment"></span>
-	
 	</h1>
 	<!-- 날짜 테이블 -->
-	<table class="table table-bordered" id="jyi_calendar">
+	<table class="table table-bordered" id="jyi_mycomm_calendar">
 		<tr>
 			<th class="jyi_week" >SUN</th>
 			<th class="jyi_week" >MON</th>

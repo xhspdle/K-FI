@@ -1,34 +1,64 @@
 @charset "UTF-8";
 
 /* mycomm calendar */
+#jyi_mycomm_calendar {
+	width: 100%;
+}
+
 #mycomm_cal_profile {
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 }
-#mycomm_cal_chat{
+
+#mycomm_cal_chat {
 	font-size: 45px;
-	color:#00cee8;
+	color: #00cee8;
 }
-#prevcal{width:40px;height: 40px;border-radius: 30%;}
-#aftcal{width:40px;height: 40px;border-radius: 30%;}
-.jyi_cal{
-	width:13%;height:150px;
+
+#prevcal {
+	width: 40px;
+	height: 40px;
+	border-radius: 30%;
+}
+
+#aftcal {
+	width: 40px;
+	height: 40px;
+	border-radius: 30%;
+}
+
+.jyi_cal {
+	width: 13%;
+	height: 150px;
 }
 
 /* left-side calendar */
 #jyi_calendar {
-	width: 100%;
+	width: 100px;
 }
-#prevcal_left{width:40px;height: 40px;border-radius: 30%;}
-#aftcal_left{width:40px;height: 40px;border-radius: 30%;}
+
+#prevcal_left {
+	width: 40px;
+	height: 40px;
+	border-radius: 30%;
+}
+
+#aftcal_left {
+	width: 40px;
+	height: 40px;
+	border-radius: 30%;
+}
 
 #jyi_main {
 	background-color: #00cee8;
 }
-.jyi_cal_left{
-	width:13%;height:50px;
+
+.jyi_cal_left {
+	width: 13%;
+	height: 50px;
 }
+
 .jyi_cal:hover {
 	background-color: #00cee8;
 }
@@ -38,6 +68,14 @@
 	background-color: #00cee8;
 	color: white;
 }
+/* 
+.jyi_a {
+	width: 25px;
+	height: 30px;
+	padding: -1px 8px 6px 16px;
+	font-size: 16px;
+} */
+
 .jyi_a:link {
 	color: black;
 	text-decoration: none;
