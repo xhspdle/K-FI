@@ -12,7 +12,7 @@ public class ListController {
 	@Autowired private MyBoardService service;
 	@RequestMapping("/mypage/myboard/list")
 	public String list(Model model) {
-		model.addAttribute("list", service.list());
+		//model.addAttribute("list", service.list());
 		return ".mypage.myboard.list";
 	}
 }

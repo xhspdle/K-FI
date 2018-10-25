@@ -30,7 +30,7 @@ public class MyVideoDao {
 	public List<MyVideoVo> list() {
 		return session.selectList(NAMESPACE + ".list");
 	}
-	public MyVideoVo getinfo(int mv_num) {
-		return session.selectOne(NAMESPACE + ".getinfo", mv_num);
+	public MyVideoVo select(int mv_num) {
+		return session.selectOne(NAMESPACE + ".select", mv_num);
 	}
 }

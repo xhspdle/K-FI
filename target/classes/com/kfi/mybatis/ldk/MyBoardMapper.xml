@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.ldk.MyBoardMapper">
-	<select id="getMaxnum" resultType="int">
+	<select id="getMaxNum" resultType="int">
 		select NVL(max(mb_num),0) maxnum from my_board
 	</select>
 	<select id="getCount" resultType="int">
@@ -25,7 +25,7 @@
 	<select id="list" resultType="myboard">
 		select * from my_board
 	</select>
-	<select id="getinfo" parameterType="int" resultType="myboard">
+	<select id="select" parameterType="int" resultType="myboard">
 		select * from my_board where mb_num=#{mb_num}
 	</select>
 </mapper>

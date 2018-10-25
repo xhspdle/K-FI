@@ -22,7 +22,7 @@
 	<select id="list" resultType="myphoto">
 		select * from my_photo
 	</select>
-	<select id="getinfo" parameterType="int" resultType="myphoto">
+	<select id="select" parameterType="int" resultType="myphoto">
 		select * from my_photo where mp_num=#{mp_num}
 	</select>
 </mapper>

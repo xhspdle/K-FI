@@ -9,31 +9,42 @@ import com.kfi.ldk.dao.MyBoardDao;
 import com.kfi.ldk.vo.MyBoardVo;
 
 @Service
-public class MyBoardService {
+public class MyBoardService implements CommonService{
 	@Autowired private MyBoardDao dao;
-	public int getMaxnum() {
-		return dao.getMaxnum();
-	}
-	public int getCount() {
-		return dao.getCount();
-	}
-	public int insert(MyBoardVo vo) {
-		return dao.insert(new MyBoardVo(getMaxnum(), vo.getUser_num(),
-				vo.getMb_title(), vo.getMb_content(), null, 0));
-	}
 	public int addHit(int mb_num) {
 		return dao.addHit(mb_num);
 	}
-	public int update(MyBoardVo vo) {
+	@Override
+	public int getMaxNum() {
+		return dao.getMaxNum();
+	}
+	@Override
+	public int getCount(Object data) {
+		return dao.getCount();
+	}
+	@Override
+	public int insert(Object data) {
+		MyBoardVo vo=(MyBoardVo)data;
+		return dao.insert(new MyBoardVo(getMaxNum(), vo.getUser_num(),
+				vo.getMb_title(), vo.getMb_content(), null, 0));
+	}
+	@Override
+	public int update(Object data) {
+		MyBoardVo vo=(MyBoardVo)data;
 		return dao.update(vo);
 	}
-	public int delete(int mb_num) {
+	@Override
+	public int delete(Object data) {
+		int mb_num=(Integer)data;
 		return dao.delete(mb_num);
 	}
-	public List<MyBoardVo> list(){
-		return dao.list();
+	@Override
+	public Object select(Object data) {
+		int mb_num=(Integer)data;
+		return dao.select(mb_num);
 	}
-	public MyBoardVo getinfo(int mb_num) {
-		return dao.getinfo(mb_num);
+	@Override
+	public List<Object> list(Object data) {
+		return dao.list();
 	}
 }

@@ -30,7 +30,7 @@ public class MyPhotoDao {
 	public List<MyPhotoVo> list() {
 		return session.selectList(NAMESPACE + ".list");
 	}
-	public MyPhotoVo getinfo(int mp_num) {
-		return session.selectOne(NAMESPACE + ".getinfo", mp_num);
+	public MyPhotoVo select(int mp_num) {
+		return session.selectOne(NAMESPACE + ".select", mp_num);
 	}
 }

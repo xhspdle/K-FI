@@ -22,7 +22,7 @@
 	<select id="list" resultType="myvideo">
 		select * from my_video
 	</select>
-	<select id="getinfo" parameterType="int" resultType="myvideo">
+	<select id="select" parameterType="int" resultType="myvideo">
 		select * from my_video where mv_num=#{mv_num}
 	</select>
 </mapper>
