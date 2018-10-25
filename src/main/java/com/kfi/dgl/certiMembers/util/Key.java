@@ -3,6 +3,7 @@ package com.kfi.dgl.certiMembers.util;
 import java.util.Random;
 
 public class Key {
+	
 	private boolean check;
 	private int size;
 

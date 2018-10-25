@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kfi.dgl.members.service.MembersService;
 import com.kfi.dgl.members.vo.MembersVo;
 
-@Controller
+@Controller(value="LoginController")
 public class LoginController {
 	@Autowired
 	private MembersService service;
 	@RequestMapping(value="/login/login", method=RequestMethod.GET)
 	public String login() {
-		return "login";
+		return "login/login";
 	}
 	@RequestMapping(value="/login/login", method=RequestMethod.POST)
 	public ModelAndView login(MembersVo vo) {
