@@ -27,7 +27,7 @@ public class MyVideoDao {
 	public int delete(int mv_num) {
 		return session.delete(NAMESPACE + ".delete", mv_num);
 	}
-	public List<MyVideoVo> list() {
+	public List<Object> list() {
 		return session.selectList(NAMESPACE + ".list");
 	}
 	public MyVideoVo select(int mv_num) {

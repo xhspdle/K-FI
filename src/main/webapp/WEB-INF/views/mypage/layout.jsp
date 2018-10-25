@@ -48,14 +48,14 @@
 					<h4><span class="glyphicon glyphicon-edit"></span> Write</h4>
 				</div>
 				<div class="modal-body" style="padding:40px 50px;">
-					<form role="form" method="post" action="<c:url value='/mypage/myboard/insert'/>" enctype="multipart/form-data">
+					<form method="post" action="<c:url value='/mypage/myboard/insert'/>" enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
-							<input type="text" class="form-control" id="title" name="mb_title" placeholder="Enter Title">
+							<label for="mb_title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
+							<input type="text" class="form-control" id="mb_title" name="mb_title" placeholder="Enter Title">
 						</div>
 						<div class="form-group">
-							<label for="content1"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
-							<textarea class="form-control" rows="5" id="content1" name="mb_content"></textarea>
+							<label for="mb_content"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
+							<textarea class="form-control" rows="5" id="mb_content" name="mb_content"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>

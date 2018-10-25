@@ -27,7 +27,7 @@ public class MyPhotoDao {
 	public int delete(int mp_num) {
 		return session.delete(NAMESPACE + ".delete", mp_num);
 	}
-	public List<MyPhotoVo> list() {
+	public List<Object> list() {
 		return session.selectList(NAMESPACE + ".list");
 	}
 	public MyPhotoVo select(int mp_num) {

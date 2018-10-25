@@ -1,5 +1,6 @@
 package com.kfi.ldk.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -30,8 +31,8 @@ public class MyBoardDao {
 	public int delete(int mb_num) {
 		return session.delete(NAMESPACE + ".delete", mb_num);
 	}
-	public List<Object> list(){
-		return session.selectList(NAMESPACE + ".list");
+	public List<Object> list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE + ".list",map);
 	}
 	public MyBoardVo select(int mb_num) {
 		return session.selectOne(NAMESPACE + ".select", mb_num);

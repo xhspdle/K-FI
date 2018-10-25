@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.ldk.MyVideoMapper">
-	<select id="getMaxnum" resultType="int">
+	<select id="getMaxNum" resultType="int">
 		select NVL(max(mv_num),0) maxnum from my_video
 	</select>
 	<select id="getCount" resultType="int">
