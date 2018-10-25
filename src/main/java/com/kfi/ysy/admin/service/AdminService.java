@@ -1,6 +1,7 @@
 package com.kfi.ysy.admin.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,7 @@ public class AdminService {
 	public int adjoin(AdminVo vo) {
 		return dao.adjoin(vo);
 	}
-	
+	public List<AdminVo> adminlist(){
+		return dao.adminlist();
+	} 
 }

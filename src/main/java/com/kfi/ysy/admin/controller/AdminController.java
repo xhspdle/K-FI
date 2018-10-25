@@ -1,13 +1,16 @@
 package com.kfi.ysy.admin.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -77,7 +80,36 @@ public class AdminController {
 			return ".admin";
 		}
 	}
-	
+	@RequestMapping(value="/adminlist", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String adminlist() {
+		List<AdminVo> adminlist=service.adminlist();
+		JSONArray jsonarr=new JSONArray();
+		for(int i=0;i<adminlist.size();i++) {
+			JSONObject json=new JSONObject();
+			AdminVo vo=adminlist.get(i);
+			json.put("admin_num", vo.getAdmin_num());
+			json.put("admin_id", vo.getAdmin_id());
+			json.put("admin_pwd", vo.getAdmin_pwd());
+			json.put("admin_nick", vo.getAdmin_nick());
+			json.put("admin_email", vo.getAdmin_email());
+			json.put("admin_regdate", vo.getAdmin_regdate());
+			jsonarr.put(json);
+		}
+		System.out.println(jsonarr);
+		return jsonarr.toString();	
+	}
+/*	
+	@RequestMapping(value="/adminlist", method=RequestMethod.GET)
+	public String adminlist(Model model) {
+		List<AdminVo> adminlist=service.adminlist();
+		model.addAttribute("adminlist", adminlist);
+		if(adminlist!=null) {
+			return ".admin.mblist";
+		}else{
+			return ".admin";
+		}	
+	}*/
 }
 	
 
