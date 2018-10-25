@@ -26,7 +26,7 @@
 	<div id="content" class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 sidenav" id="leftside">
-				<tiles:insertAttribute name="leftside" />
+				<tiles:insertAttribute name="leftside"/>
 			</div>
 			<div class="col-sm-offset-3 col-sm-6" id="center">
 				<div class="container-fluid">
@@ -48,14 +48,14 @@
 					<h4><span class="glyphicon glyphicon-edit"></span> Write</h4>
 				</div>
 				<div class="modal-body" style="padding:40px 50px;">
-					<form role="form" method="post" action="<c:url value='/mypage/myboard/insert'/>">
+					<form role="form" method="post" action="<c:url value='/mypage/myboard/insert'/>" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
-							<input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
+							<input type="text" class="form-control" id="title" name="mb_title" placeholder="Enter Title">
 						</div>
 						<div class="form-group">
 							<label for="content1"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
-							<textarea class="form-control" rows="5" id="content1" name="content"></textarea>
+							<textarea class="form-control" rows="5" id="content1" name="mb_content"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>

@@ -5,6 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.kfi.ldk.vo.MyBoardVo" alias="myboard"/>
+		<typeAlias type="com.kfi.ldk.vo.MyVideoVo" alias="myvideo"/>
 		<typeAlias type="com.kfi.jyi.mycomm.vo.MembersVo" alias="members"/>
 		<typeAlias type="com.kfi.jyi.mycomm.vo.CommUserListVo" alias="commuserlist"/>
 		<typeAlias type="com.kfi.jyi.mycomm.vo.CommunityVo" alias="community"/>
@@ -13,7 +14,7 @@
 	</typeAliases>
 	<mappers>	 
 		<mapper resource="com/kfi/mybatis/jyi/MyCommCalendarMapper.xml"/>
-		<mapper resource="com/kfi/mybatis/ldk/MyBoardMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/*.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/MembersMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>

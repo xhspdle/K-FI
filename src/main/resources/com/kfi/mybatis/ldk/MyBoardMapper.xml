@@ -17,7 +17,7 @@
 		update my_board set mb_views=mb_views+1 where mb_num=#{mb_num}
 	</update>
 	<update id="update" parameterType="myboard">
-		update my_board set mb_title=#{mb_title},mb_content=#{mb_content}
+		update my_board set mb_title=#{mb_title},mb_content=#{mb_content} where mb_num=#{mb_num}
 	</update>
 	<delete id="delete" parameterType="int">
 		delete from my_board where mb_num=#{mb_num}
