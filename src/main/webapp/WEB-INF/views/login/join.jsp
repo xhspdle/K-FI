@@ -9,7 +9,8 @@
 <body>
 <h1>회원가입</h1>
 <form action="join" method="post">
-	아이디 <input type="text" name="id"><br>
+	아이디 <input type="text" name="id">
+	<input type="button" value="중복체크"><br>
 	닉네임 <input type="text" name="nickname"><br>
 	비밀번호 <input type="password" name="pw"><br>
 	이메일 <input type="text" name="email"><br>

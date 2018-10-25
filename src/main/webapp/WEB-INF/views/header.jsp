@@ -15,9 +15,9 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#about">ABOUT</a></li>
 				<li><a href="#explore">EXPLORE</a></li>
-				<li><a href="#signin">SIGNIN</a></li>
 				<li><a href="#contact">CONTACT</a></li>
 				<li><a href="<c:url value='/mypage/main'/>">MyPage</a></li>
+				<li><a href="<c:url value='/login/login'/>">Login</a></li>
 			</ul>
 		</div>
 	</div>
