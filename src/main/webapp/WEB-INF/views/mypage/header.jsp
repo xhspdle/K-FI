@@ -13,9 +13,10 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#contact">MYSKIN</a></li>
 				<li><a href="#contact">COMMUNITY</a></li>
 				<li class="dropdown">
-					<a href="<c:url value='/mypage/main'/>">MyPage</a>
+					<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
 					<ul class="dropdown-menu">
 						<li><a href="#">회원정보</a></li>
 						<li><a href="#">마이커뮤니티</a></li>
@@ -29,10 +30,20 @@
 		</div>
 	</div>
 </nav>
-<div class="header_search">
+<div id="headerSearch"><!--  data-spy="affix" data-offset-top="0" -->
 	<div class="row">
-		<div class="container">
-			
+		<div class="container search_con">
+			<form id="searchForm">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button class="btn btn-default btn-lg search_bar"><i class="glyphicon glyphicon-search"></i></button>
+					</div>
+					<input type="text" class="form-control search_bar" name="keyword" placeholder="search anything!">
+					<div class="input-group-btn">
+						<button class="btn btn-default btn-lg search_bar" id="search_close"><i class="glyphicon glyphicon-remove"></i></button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

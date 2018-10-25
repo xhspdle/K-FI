@@ -13,8 +13,6 @@
 <ul>
 	<li><a href="<c:url value='/mypage/myboard/insert'/>">글쓰기</a></li>
 	<li><a href="<c:url value='/mypage/myboard/list'/>">글목록</a></li>
-	<li><a href="#signin">SIGNIN</a></li>
-	<li><a href="#contact">CONTACT</a></li>
 </ul>
 
 <!-- 게시판 달력 -->
