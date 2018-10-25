@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.MyCommCalendarMapper">
+	
+	<sql id="findUserNum">
+		select user_num from members where user_id=#{user_id}
+	</sql>
+	
+	<select id="MyCommCalList" parameterType="String" resultType="commcalendar">
+		select * from comm_calendar
+		where comm_num in(select comm_num from comm_user_list where user_num=(<include refid="findUserNum"/>))
+	</select>
+
+	
+
+</mapper>

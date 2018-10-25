@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kfi.jyi.utils.MyCalendar;
+import com.kfi.jyi.util.MyCalendar;
 
 @Controller
 public class MyPageController {

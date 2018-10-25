@@ -41,6 +41,8 @@
 	<context:component-scan base-package="com.kfi.ysy.*.controller" />
 	<context:component-scan base-package="com.kfi.dgl.controller" />
 	<context:component-scan base-package="com.kfi.dgl.*.controller" />
+	<context:component-scan base-package="com.kfi.jyi.controller" />
+	<context:component-scan base-package="com.kfi.jyi.*.controller" />
 	<!--  
 	<context:component-scan base-package="com.kfi.dgl.*.controller" />
 	<context:component-scan base-package="com.kfi.ysy.*.controller" />

@@ -13,7 +13,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/kfi.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/jyi.css'/>">
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
+<script src="<c:url value='/resources/js/jyi.js'/>"></script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -23,15 +25,15 @@
 	</div>
 	<div id="content" class="container-fluid">
 		<div class="row">
-			<div class="col-sm-3 sidenav">
-				<tiles:insertAttribute name="leftside"/>
+			<div class="col-sm-3 sidenav" id="leftside">
+				<tiles:insertAttribute name="leftside" />
 			</div>
-			<div class="col-sm-offset-3 col-sm-6">
+			<div class="col-sm-offset-3 col-sm-6" id="center">
 				<div class="container-fluid">
 					<tiles:insertAttribute name="content"/>
 				</div>		
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="rightside">
 				<tiles:insertAttribute name="rightside"/>
 			</div>
 		</div>
