@@ -1,13 +1,6 @@
 /**
  * jyi.js
  */
-/*
- * $("a").click(function(event){ event.preventDefault(); var year=Number(${year
- * }); var month=Number(${month}); var day=parseInt($(this).text()); $.ajax({
- * url:"<c:url value='/mypage/find'/>", dataType:"json", type:"post",
- * data:{"year":year,"month":month,"day":day}, success:function(data){
- * alert("!!"); } }); });
- */
 
 $(function() {
 
@@ -18,7 +11,7 @@ $(function() {
 			/* left right 모두 열린 상태 */
 			closeLeft();
 		} else if (center === "col-sm-9" || center === "col-sm-12") {
-			/*  left right 모두 닫힌 상태 */
+			/* left right 모두 닫힌 상태 */
 			openLeft();
 		}
 	});
@@ -86,4 +79,31 @@ $(function() {
 			$("#center").addClass("col-sm-offset-3 col-sm-6").show();
 		}
 	}
+	
+	$(".jyi_cal_left a").click(function(event){
+		event.preventDefault();
+		var year=$("#year").val();
+		var month=$("#month").val(); 
+		var m=month.slice(1,2);
+		if(m==='') {
+			month=parseInt(month);
+			month+=1;
+			if(month<10){
+				month=month.toString();
+				month="0"+month;
+			}
+		}
+		var day=$(this).prop("id");
+		var d=day.slice(1,2);
+		if(d==='') day="0"+day;
+		alert("#"+year+month+day);
+		var top=$("#"+year+month+day).offset().top; 
+		// 상단을 기준으로 #요소가 위치한 거리를 절대좌표로 반환
+		alert(top+'!!!!');
+		$("html, body").animate({
+			scrollTop:top
+		},1000);
+		//$("body").scrollTop(0);
+		//$("body").scrollTop($(document).height());
+	});
 });
