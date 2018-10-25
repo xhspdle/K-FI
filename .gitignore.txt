@@ -15,7 +15,10 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+<<<<<<< HEAD
 pom.properties
 MANIFEST.MF
+=======
+>>>>>>> refs/remotes/origin/master
 
 # End of https://www.gitignore.io/api/maven,java-web
