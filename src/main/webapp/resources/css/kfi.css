@@ -8,6 +8,12 @@ body {
 	line-height: 1.8;
 	color: #818181;
 }
+.test[style] {
+	padding-right:0 !important;
+}
+.test.modal-open {
+	overflow: auto;
+}
 h2 {
    	font-size: 24px;
     text-transform: uppercase;
@@ -284,4 +290,24 @@ footer .glyphicon {
 	height: 50px;
 	border-radius: 0px;
 	border: 1px solid #00cee8
+}
+/*
+.modal-dialog {
+	width: 70%;
+}
+.modal-content {
+	margin-top: 13%;
+	width: 60%;
+	float: left;
+}
+*/
+.modal-content {
+	margin-top: 13%;
+}
+.btn-file{
+	position: relative;
+	overflow: hidden;
+}
+input[type='file'] {
+	display: none;
 }

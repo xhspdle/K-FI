@@ -11,7 +11,10 @@
 	</div>
 </div>
 <ul>
+	<!--  
 	<li><a href="<c:url value='/mypage/myboard/insert'/>">글쓰기</a></li>
+	-->
+	<li><button type="button" class="btn btn-default btn-lg" id="writeBtn">글쓰기</button></li>
 	<li><a href="<c:url value='/mypage/myboard/list'/>">글목록</a></li>
 </ul>
 

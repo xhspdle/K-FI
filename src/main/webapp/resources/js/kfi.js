@@ -66,5 +66,20 @@ $(document).ready(function(){
 	  event.preventDefault();
 	  $("#headerSearch").css('display','none');
   });
+  $("#writeBtn").click(function(){
+	 $("#writeModal").modal();
+  });
+  $("#writeModal").on('show.bs.modal',function(){
+	  $('body').addClass('test');
+  });
+  var imgUpload=$("#imgUpload");
+  $("#fileP1").change(function(event){
+	  var tmppath=URL.createObjectURL(event.target.files[0]);
+	  $("#fimg1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
+	  if($("#addImg").prop('type','button')==''){
+		  $("<button type='button' class='btn btn-default btn-block id='addImg'>" +
+	  		"추가 업로드</button>").appendTo(imgUpload);
+	  }
+  });
 });
 
