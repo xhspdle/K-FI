@@ -1,5 +1,6 @@
 package com.kfi.dgl.members.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,9 +16,11 @@ public class MembersDao {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
+	/*
 	public int insert(MembersVo vo) {
 		return sqlSession.insert(NAMESPACE +".insert", vo);
 	}
+	*/
 	public List<MembersVo> list() {
 		return sqlSession.selectList(NAMESPACE +".list");
 	}
@@ -30,5 +33,8 @@ public class MembersDao {
 	}*/
 	public int update(MembersVo vo) {
 		return sqlSession.update(NAMESPACE + ".update", vo);
+	}
+	public MembersVo login(HashMap<String,String> map) {
+		return sqlSession.selectOne(NAMESPACE + ".login",map);
 	}
 }

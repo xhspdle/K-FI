@@ -19,7 +19,7 @@ public class InsertController {
 		return "login/join";
 	}
 
-	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/login/join", method = RequestMethod.POST)
 	public ModelAndView join(MembersVo vo) {
 		int n = service.insert(vo);
 		ModelAndView mv = new ModelAndView("result");
@@ -29,5 +29,5 @@ public class InsertController {
 			mv.addObject("code", "fail");
 		}
 		return mv;
-	}
+	}*/
 }

@@ -12,6 +12,7 @@
 		<typeAlias type="com.kfi.jyi.mycomm.vo.CommunityVo" alias="community"/>
 		<typeAlias type="com.kfi.jyi.mycomm.vo.CommGatheringVo" alias="commgathering"/>
 		<typeAlias type="com.kfi.jyi.mycomm.vo.CommCalendarVo" alias="commcalendar"/>
+		<typeAlias type="com.kfi.dgl.members.vo.MembersVo" alias="logmembers"/>
 	</typeAliases>
 	<mappers>	 
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardMapper.xml"/>
@@ -22,6 +23,7 @@
 		<mapper resource="com/kfi/mybatis/ysy/MembersMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/dgl/MembersMapper.xml"/>
 		<!--
 		<package name="com.kfi.mybatis.ldk"/>
 		-->
