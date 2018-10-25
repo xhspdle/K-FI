@@ -3,13 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- mycomm Calendar -->
 <div>
-	<span><img id="mycomm_cal_profile" src="/kfi/resources/images/logo1.png"></span>
+	<h1>
+	<span><img id="mycomm_cal_profile" src="/kfi/resources/images/profile.jpg"></span>
 	<span>
 	<a id="prevcal" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month-1 }' />"> < </a>
-	<a id="aftcal" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month+1 }' />"> > </a>
 	</span>
 	<span style="color:#00cee8;font-weight: bold;">${year } ${mon[month] }</span>
-
+	<span>
+	<a id="aftcal" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month+1 }' />"> > </a>
+	</span>
+	<span id="mycomm_cal_chat" class="glyphicon glyphicon-comment"></span>
+	
+	</h1>
 	<!-- 날짜 테이블 -->
 	<table class="table table-bordered" id="jyi_calendar">
 		<tr>

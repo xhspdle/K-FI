@@ -6,6 +6,10 @@
 	height: 50px;
 	border-radius: 50%;
 }
+#mycomm_cal_chat{
+	font-size: 45px;
+	color:#00cee8;
+}
 #prevcal{width:40px;height: 40px;border-radius: 30%;}
 #aftcal{width:40px;height: 40px;border-radius: 30%;}
 .jyi_cal{
