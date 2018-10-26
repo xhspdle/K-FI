@@ -7,18 +7,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kfi.dgl.members.service.MembersService;
-import com.kfi.dgl.members.service.MembersServiceImpl;
 import com.kfi.dgl.members.vo.MembersVo;
 
 @Controller(value="LoginController")
 public class LoginController {
 	@Autowired //서비스 주입
-	private MembersServiceImpl loginService;
+	private MembersService loginService;
 	//로그인 폼
 	@RequestMapping(value="/login/login", method=RequestMethod.GET)
 	public String login() {
@@ -26,26 +24,26 @@ public class LoginController {
 	}
 	//로그인 처리
 	@RequestMapping(value="/login/login", method=RequestMethod.POST)
-	public String login(HttpServletRequest request,HttpSession session, MembersVo vo) {
+	public String login(HttpServletRequest request,HttpSession session) {
 		String user_id = request.getParameter("userId");
 		String user_pwd = request.getParameter("userPwd");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", user_id);
 		map.put("userPwd", user_pwd);
 		String returnURL ="";
-		
-		if(session.getAttribute("user_num") != null) {
+
+		if ( session.getAttribute("user_id") != null ){
 			//세션에 이전 로그인 세션값이 존재시 제거
 			session.removeAttribute("user_num");
 			session.removeAttribute("user_id");
-		}
-		//로그인 성공시 vo객체 반환
-		MembersVo vo2 =loginService.login(map);
+	}	
+		
+		MembersVo vo =loginService.login(map);
 		
 		//로그인 성공
-		if( vo2 != null) { 
-			session.setAttribute("user_num", vo2.getUserNum() );
-			session.setAttribute("user_id", vo2.getUserId() );
+		if(vo!=null) { 
+			session.setAttribute("user_num", vo.getUser_Num());
+			session.setAttribute("user_id", vo.getUser_Id());
 			returnURL = "redirect:/mypage/main";
 		}else {
 			returnURL = "redirect:/login/login";
