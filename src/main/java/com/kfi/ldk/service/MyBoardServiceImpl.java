@@ -1,12 +1,19 @@
 package com.kfi.ldk.service;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kfi.ldk.dao.MyBoardDao;
 import com.kfi.ldk.dao.MyPhotoDao;
@@ -37,26 +44,50 @@ public class MyBoardServiceImpl implements CommonService{
 	public int insert(Object data) {
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
 		MyBoardVo mbVo=(MyBoardVo)map.get("mbVo");
-		int mpVoLength=(Integer)map.get("mpVoLength");
-		int mvVoLength=(Integer)map.get("mvVoLength");
+		MultipartFile[] fileP=(MultipartFile[])map.get("fileP");
+		MultipartFile[] fileV=(MultipartFile[])map.get("fileV");
+		HttpSession session=(HttpSession)map.get("session");
+		String uploadPathP=session.getServletContext().getRealPath("/resources/upload/img");
+		String uploadPathV=session.getServletContext().getRealPath("/resources/upload/vid");
 		int mb_num=getMaxNum();
 		int mp_num=mpDao.getMaxNum();
 		int mv_num=mvDao.getMaxNum();
-		try {
-			System.out.println(mbVo.getMb_title());
-			mbDao.insert(new MyBoardVo(mb_num, mbVo.getUser_num(),
+		InputStream is=null;
+		FileOutputStream fos=null;
+		try {	
+			mbDao.insert(new MyBoardVo(mb_num + 1, mbVo.getUser_num(),
 					mbVo.getMb_title(), mbVo.getMb_content(), null, 0));
-			for(int i=0;i<mpVoLength;i++) {
-				MyPhotoVo mpVo=(MyPhotoVo)map.get("mpVo");
-				mpDao.insert(new MyPhotoVo(mp_num + i, mb_num, mpVo.getMp_orgimg(),mpVo.getMp_savimg()));
+			String isPUploaded=fileP[0].getOriginalFilename();
+			if(isPUploaded!=null && isPUploaded!="") {
+				for(int i=0;i<fileP.length;i++) {
+					String mp_orgimg=fileP[i].getOriginalFilename();
+					String mp_savimg=UUID.randomUUID() + "_" + mp_orgimg;
+					is=fileP[i].getInputStream();
+					fos=new FileOutputStream(uploadPathP + "\\" + mp_savimg);
+					FileCopyUtils.copy(is, fos);
+					is.close();
+					fos.close();
+					System.out.println(uploadPathP + "경로에 사진 업로드 성공!");
+					mpDao.insert(new MyPhotoVo(mp_num + i +1, mb_num, mp_orgimg, mp_savimg));
+				}
 			}
-			for(int i=0;i<mvVoLength;i++) {
-				MyVideoVo mvVo=(MyVideoVo)map.get("mvVo");
-				mvDao.insert(new MyVideoVo(mv_num + i, mb_num, mvVo.getMv_orgvid(), mvVo.getMv_savvid()));
-			}
+			String isVUploaded=fileV[0].getOriginalFilename();
+			if(isVUploaded!=null && isVUploaded!="") {
+				for(int i=0;i<fileV.length;i++) {
+					String mv_orgvid=fileV[i].getOriginalFilename();
+					String mv_savvid=UUID.randomUUID() + "_" + mv_orgvid;
+					is=fileV[i].getInputStream();
+					fos=new FileOutputStream(uploadPathV + "\\" + mv_savvid);
+					FileCopyUtils.copy(is, fos);
+					is.close();
+					fos.close();
+					System.out.println(uploadPathV + "경로에 영상 업로드 성공!");
+					mvDao.insert(new MyVideoVo(mv_num + i +1, mb_num, mv_orgvid, mv_savvid));
+				}				
+			}	
 			return 1;
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return -1;
 		}
@@ -78,9 +109,9 @@ public class MyBoardServiceImpl implements CommonService{
 		int mb_num=(Integer)data;
 		return mbDao.select(mb_num);
 	}
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> list(Object data) {
-		@SuppressWarnings("unchecked")
+	public List<Object> list(Object data) {	
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
 		return mbDao.list(map);
 	}

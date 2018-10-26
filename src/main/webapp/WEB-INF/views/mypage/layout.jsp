@@ -17,25 +17,15 @@
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script src="<c:url value='/resources/js/jyi.js'/>"></script>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" style="margin-top:60px;">
 
 <div id="wrap">
 	<div id="header">
 		<tiles:insertAttribute name="header"/>
 	</div>
-	<div id="content" class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 sidenav" id="leftside">
-				<tiles:insertAttribute name="leftside"/>
-			</div>
-			<div class="col-sm-offset-3 col-sm-6" id="center">
-				<div class="container-fluid">
-					<tiles:insertAttribute name="content"/>
-				</div>		
-			</div>
-			<div class="col-sm-3" id="rightside">
-				<tiles:insertAttribute name="rightside"/>
-			</div>
+	<div id="content">
+		<div class="row col-sm-offset-2 com-sm-8">
+			<tiles:insertAttribute name="content"/>
 		</div>
 	</div>
 	<!-- Modal -->
@@ -76,19 +66,9 @@
 				</div>
 				<div class="modal-footer">
 				  <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-				  <p>upload picture and video!</p>
+				  <p>upload photo and video!</p>
 				</div>
 			</div> 
-			<!--  
-			<div class="modal-content" id="modalSide" style="margin-left:30px;width:30%;display:none;">
-				<div class="modal-header">
-					<h1>asd</h1>
-				</div>
-				<div class="modal-body">
-					<h1>asd</h1>
-				</div>
-			</div>
-			--> 
 		</div>
 	</div> 
 </div>
