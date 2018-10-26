@@ -35,7 +35,7 @@ $(document).ready(function(){
 	  var max_width=search.left-miniLogo.left;
 	  $("#searchForm").css('position', 'absolute');
 	  $("#searchForm").css('left', miniLogo.left+2);
-	  $("#searchForm").css('top', miniLogo.top);
+	  $("#searchForm").css('top', miniLogo.top-60);
 	  $("#searchForm").css('width', max_width+50);
 	  $("#headerSearch").fadeIn('slow',function(){
 		  $(this).slideDown();
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		  var max_width=search.left-miniLogo.left;
 		  $("#searchForm").css('position', 'absolute');
 		  $("#searchForm").css('left', miniLogo.left+2);
-		  $("#searchForm").css('top', miniLogo.top);
+		  $("#searchForm").css('top', miniLogo.top-60);
 		  $("#searchForm").css('width', max_width+50);
 	  });
 	  $(window).resize(function(){

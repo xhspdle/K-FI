@@ -17,14 +17,14 @@
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script src="<c:url value='/resources/js/jyi.js'/>"></script>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" style="margin-top:60px;">
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" style="padding-top:60px;">
 
 <div id="wrap">
 	<div id="header">
 		<tiles:insertAttribute name="header"/>
 	</div>
 	<div id="content">
-		<div class="row col-sm-offset-2 com-sm-8">
+		<div class="row">
 			<tiles:insertAttribute name="content"/>
 		</div>
 	</div>
