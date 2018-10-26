@@ -4,15 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.jyi.MyCommCalendarMapper">
 	
+	<!-- 해당 유저 아이디의 유저번호 불러오기 -->
 	<sql id="findUserNum">
 		select user_num from members where user_id=#{user_id}
 	</sql>
 	
-	<select id="MyCommCalList" parameterType="String" resultType="commcalendar">
-		select * from comm_calendar
-		where comm_num in(select comm_num from comm_user_list where user_num=(<include refid="findUserNum"/>))
+	<!-- 해당 유저 번호가 가입한 커뮤니티 번호 불러오기 -->
+	<sql id="findUserCommNum">
+		select comm_num from comm_user_list where user_num=(<include refid="findUserNum"/>)
+	</sql>
+	
+	<!-- 유저가 속한 모든 커뮤니티의 월별 일정 불러오기 -->
+	<select id="MyCommCalList" parameterType="hashmap" resultType="commcalendar">
+	select * from (
+    	select * from comm_calendar where comm_num in(
+				select comm_num from comm_user_list where user_num=#{user_num})) where cc_begin between #{begin} and #{end} and cc_end between #{begin} and #{end}
 	</select>
 
+	<!-- <select id="findMyCommCal" parameterType="" resultType=="">
 	
+	</select> -->
 
 </mapper>

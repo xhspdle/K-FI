@@ -2,6 +2,7 @@ package com.kfi.jyi.mycomm.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -29,31 +30,26 @@ public class MyCommCalendarController {
 			HttpSession session) {
 		
 		/* Calendar */
-		if (year == -1) year = cal.get(Calendar.YEAR);
-		if (month == -2) month = cal.get(Calendar.MONTH);
-		if (month == 12) {
-			year += 1;
-			month = 0;
-		} else if (month == -1) {
-			year -= 1;
-			month = 11;
-		}
-
 		MyCalendar mc = new MyCalendar();
+		HashMap<String, Integer> calc=mc.getCalDay(year, month);
+		year=calc.get("year");
+		month=calc.get("month");
 		ArrayList<Integer> arr = mc.getCal(year, month, 1);
-
-		String[] mon = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
-				"October", "November", "December" };
-
+		String mon=mc.getMonth(month);
+		
 		model.addAttribute("arr", arr);
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
 		model.addAttribute("mon", mon);
 
-		/* Comm User List */
-		//String user_id=(String)session.getAttribute("user_id");
-		String user_id="user_id 1";
-		List<CommCalendarVo> list=service.myCommCalendar(user_id);
+		/* 유저가 속한 모든 커뮤니티의 월별 일정 불러오기 */
+		//int user_num=(Integer)session.getAttribute("user_num");
+		HashMap<String, Object> hm=new HashMap<>();
+		hm.put("user_num", 1);
+		hm.put("begin",mc.begin(year, month));
+		hm.put("end",mc.end(year, month));
+
+		List<CommCalendarVo> list=service.myCommCalendar(hm);
 		model.addAttribute("list",list);
 		
 		return ".mypage.mycommcalendar.calendar";

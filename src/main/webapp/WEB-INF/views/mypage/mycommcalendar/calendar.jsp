@@ -1,20 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- mycomm Calendar -->
 <div id="mycomm_Calendar">
+	<div id="jyi_mycomm_calendar_sub">
 	<h1>
-	<span><img id="mycomm_cal_profile" src="/kfi/resources/images/profile.jpg"></span>
 	<span>
 	<a id="prevcal" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month-1 }' />"> < </a>
 	</span>
 	<span style="color:#00cee8;font-weight: bold;">${year } ${mon[month] }</span>
 	<span>
 	<a id="aftcal" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month+1 }' />"> > </a>
+	<select id="mycommlist" class="btn btn-default" >
+			<option>전체</option>
+	</select>
+	<a id="attendcal" class="btn btn-default" role="button" href="<c:url value='#' />"> 참석 </a>
 	</span>
-	<span id="mycomm_cal_chat" class="glyphicon glyphicon-comment"></span>
 	</h1>
-	
+	</div>
+	<input type="hidden" id="year" value="${year }">
+	<input type="hidden" id="month" value="${month }">
+	<input type="hidden" id="url" value="${pageContext.request.contextPath }">
+
 	<!-- 날짜 테이블 -->
 	<table class="table table-bordered" id="jyi_mycomm_calendar">
 		<tr>

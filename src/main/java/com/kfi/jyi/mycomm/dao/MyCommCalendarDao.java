@@ -1,6 +1,7 @@
 package com.kfi.jyi.mycomm.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,8 +16,8 @@ public class MyCommCalendarDao {
 	private final static String NAMESPACE="com.kfi.mybatis.jyi.MyCommCalendarMapper";
 	
 	//유저가 속한 모임의 일정 가져오기 
-	public List<CommCalendarVo> myCommCalendar(String user_id){
-		return session.selectList(NAMESPACE+".MyCommCalList",user_id);
+	public List<CommCalendarVo> myCommCalendar(HashMap<String, Object> hm){
+		return session.selectList(NAMESPACE+".MyCommCalList",hm);
 	}
 	
 }
