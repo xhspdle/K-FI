@@ -39,24 +39,13 @@
 		<beans:property name="order" value="2"/>
 	</beans:bean>
 	
-	<beans:bean id="loginInterceptor" class="com.kfi.dgl.certiMembers.util.loginInterceptor">
-	</beans:bean>
-	<interceptors>
-		<interceptor>
-			<mapping path="/"/>
-			<beans:ref bean="loginInterceptor"/>
-		</interceptor>
-	</interceptors>
-	
-	<context:component-scan base-package="com.kfi.*.controller"/>
-	<context:component-scan base-package="com.kfi.*.*.controller"/>
 	
 	<context:component-scan base-package="com.kfi.ldk.controller" />
 	<context:component-scan base-package="com.kfi.ldk.*.controller" />
 	<context:component-scan base-package="com.kfi.ysy.controller" />
 	<context:component-scan base-package="com.kfi.ysy.*.controller" />
-<!-- 	<context:component-scan base-package="com.kfi.dgl.controller" />
-	<context:component-scan base-package="com.kfi.dgl.*.controller" /> -->
+	<context:component-scan base-package="com.kfi.dgl.controller" />
+	<context:component-scan base-package="com.kfi.dgl.*.controller" /> 
 	<context:component-scan base-package="com.kfi.jyi.controller" />
 	<context:component-scan base-package="com.kfi.jyi.*.controller" />
 	<!--  

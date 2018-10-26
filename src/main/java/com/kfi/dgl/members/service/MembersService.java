@@ -17,9 +17,9 @@ public class MembersService {
 		this.dao = dao;
 	}
 	
-	public int insert(MembersVo vo) {
+/*	public int insert(MembersVo vo) {
 		return dao.insert(vo);
-	}
+	}*/
 	
 	public List<MembersVo> list(){
 		return dao.list();

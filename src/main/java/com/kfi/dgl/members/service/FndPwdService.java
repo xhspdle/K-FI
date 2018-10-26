@@ -1,5 +1,6 @@
-package com.kfi.dgl.members.service;
+/*package com.kfi.dgl.members.service;
 
 public class FndPwdService {
 
 }
+*/
