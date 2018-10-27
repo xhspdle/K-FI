@@ -30,24 +30,12 @@ $(document).ready(function(){
 	  $(this).find("ul").stop().slideUp();
   });
   $("#search").on('click',function(){
-	  var search=$("#search").offset();
-	  var miniLogo=$(".miniLogo").offset();
-	  var max_width=search.left-miniLogo.left;
-	  $("#searchForm").css('position', 'absolute');
-	  $("#searchForm").css('left', miniLogo.left+2);
-	  $("#searchForm").css('top', miniLogo.top-60);
-	  $("#searchForm").css('width', max_width+50);
+	  $.searchBig();
 	  $("#headerSearch").fadeIn('slow',function(){
 		  $(this).slideDown();
 	  });
 	  $(window).scroll(function(){
-		  var search=$("#search").offset();
-		  var miniLogo=$(".miniLogo").offset();
-		  var max_width=search.left-miniLogo.left;
-		  $("#searchForm").css('position', 'absolute');
-		  $("#searchForm").css('left', miniLogo.left+2);
-		  $("#searchForm").css('top', miniLogo.top-60);
-		  $("#searchForm").css('width', max_width+50);
+		  $.searchBig();
 	  });
 	  $(window).resize(function(){
 		  var search=$("#search").offset();
@@ -62,6 +50,38 @@ $(document).ready(function(){
 		  }
 	  });
   });
+  $.searchBig=function(){
+	  if($(".affix-top").children().length>=1){
+		  $(".search_bar").each(function(){
+			  $(this).addClass("search_big");
+			  $(this).css("border","1px solid #00cee8");
+		  });
+		  $("button.search_bar").each(function(){
+			  $(this).addClass("search_big_w");
+			  $(this).css("background-color","#00cee8");
+		  });
+		  $.affixSearch(50,70);
+	  }else{
+		  $(".search_bar").each(function(){
+			 $(this).removeClass("search_big");
+			 $(this).css("border","1px solid #f4511e");
+		  });
+		  $("button.search_bar").each(function(){
+			 $(this).removeClass("search_big_w"); 
+			 $(this).css("background-color","#f4511e");
+		  });
+		  $.affixSearch(0,50);
+	  }
+  }
+  $.affixSearch=function(hh,ww){
+	  var search=$("#search").offset();
+	  var miniLogo=$(".miniLogo").offset();
+	  var max_width=search.left-miniLogo.left;
+	  $("#searchForm").css('position', 'absolute');
+	  $("#searchForm").css('left', miniLogo.left+2);
+	  $("#searchForm").css('top', miniLogo.top-400-hh);
+	  $("#searchForm").css('width', max_width+ww);
+  }
   $("#search_close").on('click',function(event){
 	  event.preventDefault();
 	  $("#headerSearch").css('display','none');
@@ -127,5 +147,56 @@ $(document).ready(function(){
 		  });
 	  }
   });
+  $.getList=function(pageNum,keyword){
+	  	var getPageContext=$("#getPageContext").val();
+		$.getJSON(getPageContext + "/mypage/myboard/list",
+			{"pageNum":pageNum,"keyword":keyword},
+			function(data){
+				$(data.list).each(function(i,json){
+					var mb_num=json.mb_num;
+					var mb_title=json.mb_title;
+					var mb_content=json.mb_content;
+					var mb_date=json.mb_date;
+					var mb_views=json.mb_views;
+					var comment_cnt=json.comment_cnt;
+					var mp_savimg=json.mp_savimg;
+					var mv_savvid=json.mv_savvid;
+					var attachment='';
+					if(mv_savvid!=null && mv_savvid!=''){
+						attachment="<video class='img-responsive center-block' controls autoplay muted='muted' loop src='"+getPageContext +"/resources/upload/vid/" + mv_savvid + "'></video>";
+					}else if(mp_savimg!=null && mp_savimg!=''){
+						attachment="<img class='img-responsive center-block' src='"+getPageContext +"/resources/upload/img/" + mp_savimg + "'>";
+					}else{
+						attachment="<img class='img-responsive center-block' src='"+getPageContext +"/resources/images/logo2.png'>";
+					}
+					if(i==0){
+						$("<div class='panel-group'>" +
+						  "<div class='panel panel-default'>" +
+						  "<div class='panel-heading'>" +
+						  	"<h1>" + mb_title + "</h1></div>" +
+						  "<div class='panel-body'>" + 
+						  	"<p>" + mb_content + "</p>" + 
+						  	attachment + "</div>" +
+						  "<div class='panel-footer'><div>" +
+						  	"<h4>댓글 수: " + comment_cnt + "</h4></div></div></div></div>")
+						.appendTo("#myBoardList");
+					}else{
+						$("<div class='panel-group slideanim'>" +
+						  "<div class='panel panel-default'>" +
+						  "<div class='panel-heading'>" +
+						  	"<h1>" + mb_title + "</h1></div>" +
+						  "<div class='panel-body'>" + 
+						  	"<p>" + mb_content + "</p>" + 
+						  	attachment + "</div>" +
+						  "<div class='panel-footer'><div>" +
+						  	"<h4>댓글 수: " + comment_cnt + "</h4></div></div></div></div>")
+						.appendTo("#myBoardList");
+					}
+				});
+			});
+  }
+  if($("#getPageContext").val()!==undefined){
+	  $.getList();
+  }
 });
 
