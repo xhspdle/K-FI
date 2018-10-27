@@ -1,4 +1,5 @@
-/*package com.kfi.dgl.members.controller;
+package com.kfi.dgl.members.controller;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,7 @@ import com.kfi.dgl.members.service.MembersService;
 import com.kfi.dgl.members.vo.MembersVo;
 
 @Controller(value = "MembersInsertController")
-public class InsertController {
+public class joinController {
 	@Autowired
 	private MembersService service;
 
@@ -30,4 +31,4 @@ public class InsertController {
 		}
 		return mv;
 	}
-}*/
+}

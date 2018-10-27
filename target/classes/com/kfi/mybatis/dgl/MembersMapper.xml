@@ -3,7 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.dgl.MembersMapper">
-	<!-- <insert id="insert" parameterType="logmembers">
+	
+	
+	<!--
+	 <insert id="insert" parameterType="logmembers">
 		insert into members values
 		(#{userNum}, #{userId},#{userNickname}, #{userPwd}, #{userEmail}, #{userRegdate},0,0)
 	</insert> -->
@@ -23,6 +26,7 @@
 		<![CDATA[select USER_NUM, USER_ID, USER_NICKNAME, USER_EMAIL, USER_STATUS from members where USER_ID = #{userId}]]>
 	</select> 
 	-->
+	<!-- 로그인 -->
 	<select id="login" resultType="logmembers" parameterType="hashmap" >
 		select * from members where USER_ID = #{userId} and  USER_PWD=#{userPwd}
 	</select>

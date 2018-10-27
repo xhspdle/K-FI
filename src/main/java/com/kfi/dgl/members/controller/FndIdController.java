@@ -1,6 +1,5 @@
-/*package com.kfi.dgl.members.controller;
+package com.kfi.dgl.members.controller;
 
 public class FndIdController {
-
+	
 }
-*/

@@ -34,6 +34,7 @@ public class MembersDao {
 	public int update(MembersVo vo) {
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
+	//·Î±×ÀÎ
 	public MembersVo login(HashMap<String,Object> map) {
 		return sqlSession.selectOne(NAMESPACE + ".login",map);
 	}
