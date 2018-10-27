@@ -34,20 +34,21 @@ public class MyCommCalendarController {
 		HashMap<String, Integer> calc=mc.getCalDay(year, month);
 		year=calc.get("year");
 		month=calc.get("month");
-		ArrayList<Integer> arr = mc.getCal(year, month, 1);
-		String mon=mc.getMonth(month);
-		
+		ArrayList<Integer> arr = mc.getCal(year,month, 1);
 		model.addAttribute("arr", arr);
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
+		String mon=mc.getMonth(month);
 		model.addAttribute("mon", mon);
 
 		/* 유저가 속한 모든 커뮤니티의 월별 일정 불러오기 */
 		//int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> hm=new HashMap<>();
 		hm.put("user_num", 1);
-		hm.put("begin",mc.begin(year, month));
-		hm.put("end",mc.end(year, month));
+		String begin=mc.begin(year,month);
+		hm.put("begin",begin);
+		String end=mc.end(year,month);
+		hm.put("end",end);
 
 		List<CommCalendarVo> list=service.myCommCalendar(hm);
 		model.addAttribute("list",list);

@@ -9,7 +9,7 @@
 	<span>
 	<a id="prevcal" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month-1 }' />"> < </a>
 	</span>
-	<span style="color:#00cee8;font-weight: bold;">${year } ${mon[month] }</span>
+	<span style="color:#00cee8;font-weight: bold;">${year } ${mon }</span>
 	<span>
 	<a id="aftcal" class="btn btn-default" role="button" href="<c:url value='/mypage/mycommcalendar?year=${year }&month=${month+1 }' />"> > </a>
 	<select id="mycommlist" class="btn btn-default" >

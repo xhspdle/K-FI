@@ -28,10 +28,13 @@
 			<tiles:insertAttribute name="content"/>
 		</div>
 	</div>
-	
 	<!-- Calendar icon -->
 	<input type="hidden" id="url" value="${pageContext.request.contextPath }">
-  	<div id="icon_calendar" class="glyphicon glyphicon-calendar" style="font-size:40px;"></div>
+	<input type="hidden" id="year" value="year">
+	<input type="hidden" id="month" value="month">
+	<div id="wrap_icon_calendar"><!--   class="well" style="width:320px;" -->
+	<div id="icon_calendar" class="glyphicon glyphicon-calendar" style="font-size:40px;"></div>
+	</div>
 	
 	<!-- Modal -->
 	<div class="modal fade" id="writeModal" role="dialog">

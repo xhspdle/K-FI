@@ -4,50 +4,87 @@
 
 $(function() {
 	var url=$("#url").val();
+	var n=1;
 	
 	/* mypage calendar에 날짜넣기 */
 	$("#icon_calendar").click(function(){
-		$(this).empty();
-		$.getJSON(url+"/mypage/mycalendarscroll",function(data){
-			var cal=$("#icon_calendar");
-			var week=data.week;
-			var arr=data.arr;
-			cal.empty();
-			cal.append("<h4>"+data.year+" "+data.mon+"</h4>");
-			cal.append("<table class='table table-bordered' id='jyi_calendar'>");
-			cal.append("<tr>");
+		if(n%2==0){
+			$(this).empty();
+			$("#wrap_icon_calendar").removeClass("well").css("width",0);
+		}else{
+			$("#wrap_icon_calendar").addClass("well").css("width",320);
+			var year=$("#year").val();
+			var month=$("#month").val();
+			var date=new Date();
+			if(year==="year"){
+				year=date.getFullYear();
+				month=date.getMonth();
+				date=new Date(year,month);
+			}
+			var monthEng=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+					'October', 'November', 'December'];
+			$(this).append("<h4 id='miniym'><span><a id='prevmon' class='btn btn-default' role='button'> < </a>"
+					+" "+year+" "+monthEng[month]+" "
+					+"<a id='aftmon' class='btn btn-default' role='button'> > </a>"
+					+"</span></h4>");
+			var week=['SUN','MON','TUE','WED','THU','FRI','SAT'];
 			for(var i=0;i<week.length;i++){
-				cal.append("<th class='jyi_week'>"+week[i]+"</th>");
+				$(this).append("<div class='mini_cal_week'>"+week[i]+"</div>");
 			}
-			cal.append("</tr>");
-			var j=0;
-			cal.append("<tr>");
-			for(var i=0;i<arr.length;i++){
-				if(arr[i]==0){
-					cal.append("<td class='jyi_cal_sc'></td>");
-				}else if(j%7==0){
-					cal.append("<tr></tr>");
-					cal.append("<td class='jyi_cal_sc'><a class='jyi_a' href='#' style='color:red;'>"+arr[i]+"</a></td>");
-				}else if(j%7==6){
-					cal.append("<td class='jyi_cal_sc'><a class='jyi_a' href='#' style='color:blue;'>"+arr[i]+"</a></td>");
+			var total=0;
+			var w=new Date(year,month,1).getDay();
+			//앞공백
+			for(var i=0;i<w;i++){ 
+				$(this).append("<div class='mini_cal'></div>");
+				total+=1;
+			}
+			var m=['4','6','9','11'];
+			var end=31;
+			for(var i=0;i<m.length;i++){
+				if((month+1)===m[i]) end=30;
+			}
+			if((year%4==0 && year%100!=0||year%400==0) && month==1) end=29;
+			for(var i=1;i<=end;i++){
+				if(total%7==0){
+					$(this).append("<div class='mini_cal'><a href='#' id='"+i+"' class='mini_cal_a' style='color:red;'>"+i+"</a></div>");
+				}else if(total%7==6){
+					$(this).append("<div class='mini_cal'><a href='#' id='"+i+"' class='mini_cal_a' style='color:blue;'>"+i+"</a></div>");
 				}else{
-					cal.append("<td class='jyi_cal_sc'><a class='jyi_a' href='#'>"+arr[i]+"</a></td>");
+					$(this).append("<div class='mini_cal'><a href='#' id='"+i+"' class='mini_cal_a' >"+i+"</a></div>");
 				}
-				j++;
+				total+=1;
 			}
-			cal.append("</tr>");
-			cal.append("</table>");
-			$("#mycalendarscroll").css({
-				zIndex:999,
-				drag:false
-			});
-		});
+			//뒷공백
+			if(total>(7*5)) total=(7*6)-total;
+			else if(total>(7*4)) total=(7*5)-total;
+			for(var i=0;i<total;i++){ 
+				$(this).append("<div class='mini_cal'></div>");
+			}
+			$("#year").html(year);
+			$("#month").html(month);
+			$("#ym").text(year+" "+month);
+		}
+		n++;
+	
 	});
+	
+	/*
+	$("#prevmon").click(function(){
+		
+		
+	});
+	
+	$("#aftmon").click(function(){
+		
+		
+	});
+	*/
+	
 	
 	//mycommcalendar의 calendar의 달력 mouseover시 일정보이기 
 	$(".jyi_a").hover(function(){
-		var year=$("#year").val();
-		var month=$("#month").val();
+		var year=$("#year").html();
+		var month=$("#month").html();
 		var day=$(this).prop("id");
 		var url=$("#url").val();
 		$.getJSON(url+"/mycommCalendar/list",{year:year,month:month,day:day},function(data){
@@ -58,83 +95,6 @@ $(function() {
 		
 		
 	});
-	
-	
-	// left side bar 열고 닫기
-	$("#mycomm_cal_profile").click(function() {
-		var center = $("#center").prop("class");
-		if (center === "col-sm-offset-3 col-sm-6" || center === "col-sm-offset-3 col-sm-9" ) {
-			/* left right 모두 열린 상태 */
-			closeLeft();
-		} else if (center === "col-sm-9" || center === "col-sm-12") {
-			/* left right 모두 닫힌 상태 */
-			openLeft();
-		}
-	});
-
-	// left side bar 닫기
-	function closeLeft() {
-		var center = $("#center").prop("class");
-		if (center === "col-sm-offset-3 col-sm-6" ) {
-		$("#leftside").removeClass("col-sm-3 sidenav").hide();
-		$("#center").removeClass("col-sm-offset-3 col-sm-6");
-		$("#center").addClass("col-sm-9");
-		}else if(center === "col-sm-offset-3 col-sm-9" ){
-			$("#leftside").removeClass("col-sm-3 sidenav").hide();
-			$("#center").removeClass("col-sm-offset-3 col-sm-9");
-			$("#center").addClass("col-sm-12");
-		}
-	}
-
-	// left side bar 열기
-	function openLeft() {
-		$("#leftside").addClass("col-sm-3 sidenav").show();
-		var center = $("#center").prop("class");
-		if (center === "col-sm-9") {
-			$("#center").removeClass("col-sm-9");
-			$("#center").addClass("col-sm-offset-3 col-sm-6").show();
-		} else if (center === "col-sm-12") {
-			$("#center").removeClass("col-sm-12");
-			$("#center").addClass("col-sm-offset-3 col-sm-9").show();
-		}
-	}
-
-	// right side bar 열고 닫기
-	$("#mycomm_cal_chat").click(function() {
-		var center = $("#center").prop("class");
-		if (center === "col-sm-offset-3 col-sm-6"  || center === "col-sm-9") {
-			closeRight();
-		} else if (center === "col-sm-offset-3 col-sm-9" || center === "col-sm-12") {
-			openRight();
-		}
-	});
-
-	// right side bar 닫기
-	function closeRight() {
-		var center = $("#center").prop("class");
-		if (center === "col-sm-offset-3 col-sm-6" ) {
-			$("#rightside").removeClass("col-sm-3").hide();
-			$("#center").removeClass("col-sm-offset-3 col-sm-6");
-			$("#center").addClass("col-sm-offset-3 col-sm-9").show();
-		}else if(center === "col-sm-9"){
-			$("#rightside").removeClass("col-sm-3").hide();
-			$("#center").removeClass("col-sm-9");
-			$("#center").addClass("col-sm-12").show();
-		}
-	}
-
-	// right side bar 열기
-	function openRight() {
-		$("#rightside").addClass("col-sm-3").show();
-		var center = $("#center").prop("class");
-		if (center === "col-sm-12") {
-			$("#center").removeClass("col-sm-12");
-			$("#center").addClass("col-sm-9").show();
-		} else if (center === "col-sm-offset-3 col-sm-9") {
-			$("#center").removeClass("col-sm-offset-3 col-sm-9");
-			$("#center").addClass("col-sm-offset-3 col-sm-6").show();
-		}
-	}
 	
 	// left side bar의 달력 날짜 클릭하면 해당 날짜의 게시물 위치로 이동
 	$(".jyi_cal_left a").click(function(event){

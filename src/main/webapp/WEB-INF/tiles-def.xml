@@ -9,7 +9,7 @@
 	</definition>
 	<definition name=".mypage" template="/WEB-INF/views/mypage/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/mypage/header.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/views//mypage/main.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/mypage/main.jsp"/>
 	</definition>
 	<!-- 
 		[ 와일드카드매핑 ] 

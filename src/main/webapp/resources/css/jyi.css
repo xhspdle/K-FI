@@ -3,12 +3,14 @@
 /* mycomm calendar */
 #jyi_mycomm_calendar {
 	width: 90%;
-	margin:auto;
+	margin: auto;
 }
-#jyi_mycomm_calendar_sub{
+
+#jyi_mycomm_calendar_sub {
 	width: 90%;
-	margin:auto;
+	margin: auto;
 }
+
 #mycomm_cal_profile {
 	width: 50px;
 	height: 50px;
@@ -37,8 +39,49 @@
 	height: 150px;
 }
 
-/* mypage scroll Calendar */
+/* mypate mini_Calendar */
+.mini_cal_week {
+	float: left;
+	width: 40px;
+	height: 20px;
+	font-size: 15px;
+	text-align: center;
+	border: 1px solid #00cee8;
+	color: white;
+	background-color: #00cee8;
+}
 
+.mini_cal {
+	float: left;
+	width: 40px;
+	height: 40px;
+	font-size: x-large;
+	text-align: center;
+	border: 1px solid lightgray;
+}
+
+.mini_cal:hover {
+	background-color: #00cee8;
+}
+	
+#ym {
+	color: black;
+	text-align: center;
+	font-size: 25px;
+}
+
+#miniym{
+  margin-bottom: 5px;
+    text-align: center;
+}
+
+#prevmon{
+	font-size: 10px;
+}
+
+#aftmon{
+	font-size: 10px;
+}
 .jyi_cal_sc {
 	width: 13%;
 	height: 50px;
@@ -77,17 +120,16 @@
 	text-align: center;
 	background-color: #00cee8;
 	color: white;
-    font-size: 25px;
+	font-size: 25px;
 }
 
-.jyi_a {
-	width: 25px;
-	height: 30px;
-	font-size: 20px;
-	
-} 
+.mini_cal_a {
+	font-size: 25px;
+	color: black;
+	text-decoration: none;
+}
 
-.jyi_a:link {
+.mini_cal_a:link {
 	color: black;
 	text-decoration: none;
 }
