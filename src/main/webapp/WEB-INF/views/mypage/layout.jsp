@@ -17,7 +17,7 @@
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script src="<c:url value='/resources/js/jyi.js'/>"></script>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" style="padding-top:60px;">
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60"><!-- style="padding-top:60px;" -->
 
 <div id="wrap">
 	<div id="header">
@@ -28,14 +28,6 @@
 			<tiles:insertAttribute name="content"/>
 		</div>
 	</div>
-	<!-- Calendar icon -->
-	<input type="hidden" id="url" value="${pageContext.request.contextPath }">
-	<input type="hidden" id="year" value="year">
-	<input type="hidden" id="month" value="month">
-	<div id="wrap_icon_calendar"><!--   class="well" style="width:320px;" -->
-	<div id="icon_calendar" class="glyphicon glyphicon-calendar" style="font-size:40px;"></div>
-	</div>
-	
 	<!-- Modal -->
 	<div class="modal fade" id="writeModal" role="dialog">
 		<div class="modal-dialog">
