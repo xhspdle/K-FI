@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.MyBoardListViewMapper">
+	<sql id="search">
+		<if test="keyword!=null and keyword!=''">
+		where mb_title like '%'||#{keyword}||'%' or mb_content like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(mb_num),0) maxnum from myboardlist
+	</select>
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		select NVL(count(mb_num),0) cnt from myboardlist
+		<include refid="search"/>
+	</select>
+	<select id="list" parameterType="hashmap" resultType="myboardlist">
+		select *
+		from
+		(
+	 	select aa.*,rownum rnum 
+	 	from
+	 	(
+	 		select *
+	 		from myboardlist
+	 		<include refid="search"/>
+	 		order by mb_num desc
+	 	)aa
+		)
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+	<select id="select" parameterType="int" resultType="myboardlist">
+		select * from my_board where mb_num=#{mb_num}
+	</select>
+</mapper>

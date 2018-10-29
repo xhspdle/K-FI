@@ -13,7 +13,6 @@
 		</div>
 	</form>
 </div>
-
 <div id="about" class="container-fluid">
 	<div class="row">
 		<div class="col-sm-offset-2 col-sm-6">

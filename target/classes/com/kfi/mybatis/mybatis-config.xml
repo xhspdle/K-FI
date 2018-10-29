@@ -5,16 +5,25 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.kfi.ldk.vo.MyBoardVo" alias="myboard"/>
+		<typeAlias type="com.kfi.ldk.vo.MyVideoVo" alias="myvideo"/>
+		<typeAlias type="com.kfi.ldk.vo.MyPhotoVo" alias="myphoto"/>
+		<typeAlias type="com.kfi.ldk.vo.MyBoardListViewVo" alias="myboardlist"/>
+		<typeAlias type="com.kfi.jyi.mycomm.vo.MembersVo" alias="members"/>
+		<typeAlias type="com.kfi.jyi.mycomm.vo.CommUserListVo" alias="commuserlist"/>
+		<typeAlias type="com.kfi.jyi.mycomm.vo.CommunityVo" alias="community"/>
+		<typeAlias type="com.kfi.jyi.mycomm.vo.CommGatheringVo" alias="commgathering"/>
+		<typeAlias type="com.kfi.jyi.mycomm.vo.CommCalendarVo" alias="commcalendar"/>
+		<typeAlias type="com.kfi.dgl.members.vo.MembersVo" alias="logmembers"/>
 	</typeAliases>
 	<mappers>	 
-		
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/MyPhotoMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/MyVideoMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/MyBoardListViewMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/jyi/MyCommCalendarMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/MembersMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>
-		<!--
-		<package name="com.kfi.mybatis.ldk"/>
-		-->
 	</mappers>
 </configuration>

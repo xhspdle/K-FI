@@ -3,11 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.ldk.MyBoardMapper">
-	<select id="getMaxnum" resultType="int">
+	<sql id="search">
+		<if test="keyword!=null and keyword!=''">
+		where title like '%'||#{keyword}||'%' or content like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	<select id="getMaxNum" resultType="int">
 		select NVL(max(mb_num),0) maxnum from my_board
 	</select>
-	<select id="getCount" resultType="int">
+	<select id="getCount" parameterType="hashmap" resultType="int">
 		select NVL(count(mb_num),0) cnt from my_board
+		<include refid="search"/>
 	</select>
 	<insert id="insert" parameterType="myboard">
 		insert into my_board 
@@ -17,15 +23,27 @@
 		update my_board set mb_views=mb_views+1 where mb_num=#{mb_num}
 	</update>
 	<update id="update" parameterType="myboard">
-		update my_board set mb_title=#{mb_title},mb_content=#{mb_content}
+		update my_board set mb_title=#{mb_title},mb_content=#{mb_content} where mb_num=#{mb_num}
 	</update>
 	<delete id="delete" parameterType="int">
 		delete from my_board where mb_num=#{mb_num}
 	</delete>
-	<select id="list" resultType="myboard">
-		select * from my_board
+	<select id="list" parameterType="hashmap" resultType="myboard">
+		select *
+		from
+		(
+	 	select aa.*,rownum rnum 
+	 	from
+	 	(
+	 		select *
+	 		from my_board
+	 		<include refid="search"/>
+	 		order by mb_num desc
+	 	)aa
+		)
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
-	<select id="getinfo" parameterType="int" resultType="myboard">
+	<select id="select" parameterType="int" resultType="myboard">
 		select * from my_board where mb_num=#{mb_num}
 	</select>
 </mapper>

@@ -4,7 +4,7 @@
 
 <div class="jumbotron text-center">
 	<h1><img class="logoImg" alt="logo" src="<c:url value='/resources/images/logo2.png'/>"></h1>
-	<p>We love Korea!</p> 
+	<p>자기상태글 블라블라블라</p> 
 	<form>
 		<div class="input-group col-sm-offset-4 col-sm-4">
 			<input type="email" class="form-control" placeholder="what is you're favorite k-culture?" required>

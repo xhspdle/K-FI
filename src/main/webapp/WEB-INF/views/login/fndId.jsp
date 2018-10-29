@@ -13,10 +13,10 @@ $("#submit").on("click", function(e){
 </head>
 <body>
 <form action="fndIdOk" style="display:none">
-이메일 <input type="text" name="user_email" placeholder="이메일로 인증코드 전송">
-보내기 <input type="submit" id="submit">
-
-
+<input type="text" id="user_email" name="user_email" placeholder="이메일주소">
+<input type="submit" id="submit" value="인증코드 받기"><br>
+<input type="text" name="idCode" placeholder="인증코드 입력"><br>
+<input type="submit" value="확인">
 </form>
 </body>
 </html>

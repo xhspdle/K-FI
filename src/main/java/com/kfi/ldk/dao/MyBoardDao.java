@@ -1,5 +1,6 @@
 package com.kfi.ldk.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,8 +13,8 @@ import com.kfi.ldk.vo.MyBoardVo;
 public class MyBoardDao {
 	@Autowired private SqlSession session;
 	private static final String NAMESPACE="com.kfi.mybatis.ldk.MyBoardMapper";
-	public int getMaxnum() {
-		return session.selectOne(NAMESPACE + ".getMaxnum");
+	public int getMaxNum() {
+		return session.selectOne(NAMESPACE + ".getMaxNum");
 	}
 	public int getCount() {
 		return session.selectOne(NAMESPACE + ".getCount");
@@ -30,10 +31,10 @@ public class MyBoardDao {
 	public int delete(int mb_num) {
 		return session.delete(NAMESPACE + ".delete", mb_num);
 	}
-	public List<MyBoardVo> list(){
-		return session.selectList(NAMESPACE + ".list");
+	public List<Object> list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE + ".list",map);
 	}
-	public MyBoardVo getinfo(int mb_num) {
-		return session.selectOne(NAMESPACE + ".getinfo", mb_num);
+	public MyBoardVo select(int mb_num) {
+		return session.selectOne(NAMESPACE + ".select", mb_num);
 	}
 }

@@ -13,6 +13,9 @@
  		select count(*) from admin where admin_id=#{admin_id}
  	</select>
  	<insert id="adjoin" parameterType="com.kfi.ysy.admin.vo.AdminVo">
- 		insert into admin values(admin_seq.nextval,#{admin_id},#{admin_pwd},#{admin_nick},#{admin_email},sysdate)
+ 		insert into admin values(#{admin_num},#{admin_id},#{admin_pwd},#{admin_nick},#{admin_email},sysdate)
  	</insert>
+ 	<select id="adminlist" resultType="com.kfi.ysy.admin.vo.AdminVo">
+		select * from admin
+	</select>
  </mapper>

@@ -7,6 +7,13 @@ body {
 	font-size: 15px;
 	line-height: 1.8;
 	color: #818181;
+	
+}
+.test[style] {
+	padding-right:0 !important;
+}
+.test.modal-open {
+	overflow: auto;
 }
 h2 {
    	font-size: 24px;
@@ -76,8 +83,7 @@ h4 {
     font-style: normal;
 }
 .panel {
-    border: 1px solid #f4511e; 
-    border-radius:0 !important;
+	text-align: center;
     transition: box-shadow 0.5s;
 }
 .panel:hover {
@@ -88,6 +94,7 @@ h4 {
     background-color: #fff !important;
     color: #f4511e;
 }
+/*
 .panel-heading {
     color: #fff !important;
     background-color: #f4511e !important;
@@ -98,6 +105,7 @@ h4 {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
+*/
 .panel-footer {
     background-color: white !important;
 }
@@ -149,11 +157,11 @@ h4 {
 .navbar-collapse .navbar-nav .btn-default {
 	border-color: white;
 }
-.navbar-collapse .navbar-nav .btn-default .glyphicon-search{
-	color: #00cee8 !important;
+.navbar-collapse .navbar-nav .btn-default .glyphicon-search {
+	color: white;
 }
-.navbar-collapse .navbar-nav .btn-default:hover .glyphicon-search{
-	color: #f4511e !important;
+.navbar-collapse .navbar-nav .btn-default:hover .glyphicon-search {
+	color: #f4511e;
 }
 footer .glyphicon {
     font-size: 20px;
@@ -217,28 +225,61 @@ footer .glyphicon {
 /*
 	mypage
 */
-/*
+#mypageJumbo{
+	height: 400px;
+	padding: 0px;
+	margin: 0px;
+}
+#mypageJumbo > div{
+	height: 100%;
+	background: url('../images/logo2.png');
+	background-attachment: fixed;
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: auto; 
+	opacity:0.8;
+}
 .affix {
 	top: 0;
 	width: 100%;
 	-webkit-transition: all .5s ease-in-out;
 	transition: all .5s ease-in-out;
-	background-color: #F44336;
-	border-color: #F44336;
+	background-color: #f4511e;
+	border-color: #f4511e;
 }
 .affix a {
     color: #fff !important;
     padding: 15px !important;
+    /*padding: 15px !important;*/
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 }
 .affix-top a {
     padding: 25px !important;
+    /*padding: 25px !important;*/
 }
 .affix + .container-fluid {
     padding-top: 95px;
 }
-*/
+.affix #search {
+	opacity: 1;
+	width: 50px;
+	height: 50px;
+	background-color: white;
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+.affix .glyphicon-search {
+	color: #f4511e !important;
+}
+.affix button:hover .glyphicon-search {
+	color: #00cee8 !important;
+}
+.affix #myNavbar {
+	opacity: 1;
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
 .sidenav {
     height: 100%;
     position: fixed;
@@ -246,17 +287,6 @@ footer .glyphicon {
     top: 50;
     left: 0;
     overflow-x: hidden;
-    padding-top: 20px;
-}
-.sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-}
-.sidenav a:hover {
-    color: #f1f1f1;
 }
 .dropdown-menu li a {
 	height: 50px;
@@ -269,6 +299,9 @@ footer .glyphicon {
 	margin-top: 49px;
 	height: 50px;
 	display: none;
+	opacity:0.8;
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
 }
 #headerSearch .row .container .input-group button {
 	background-color: #00cee8;
@@ -283,5 +316,44 @@ footer .glyphicon {
 #headerSearch .input-group .search_bar {
 	height: 50px;
 	border-radius: 0px;
-	border: 1px solid #00cee8
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+#headerSearch input.search_bar {
+	border: 1px solid #00cee8;
+}
+.search_big {
+	height: 70px !important;
+}
+.search_big_w {
+	width: 70px !important;
+}
+#search {
+	width: 70px;
+	height: 70px;
+	background-color: #00cee8;
+	border: 0px;
+}
+/*
+.modal-dialog {
+	width: 70%;
+}
+.modal-content {
+	margin-top: 13%;
+	width: 60%;
+	float: left;
+}
+*/
+.modal-content {
+	margin-top: 13%;
+}
+.btn-file{
+	position: relative;
+	overflow: hidden;
+}
+input[type='file'] {
+	display: none;
+}
+#myBoardList {
+	margin-top: 70px;
 }

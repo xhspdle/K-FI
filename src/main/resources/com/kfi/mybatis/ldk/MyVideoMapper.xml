@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.MyVideoMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(mv_num),0) maxnum from my_video
+	</select>
+	<select id="getCount" resultType="int">
+		select NVL(count(mv_num),0) cnt from my_video
+	</select>
+	<insert id="insert" parameterType="myvideo">
+		insert into my_video 
+		values(#{mv_num},#{mb_num},#{mv_orgvid},#{mv_savvid})
+	</insert>
+	<update id="update" parameterType="myvideo">
+		update my_video set mv_orgvid=#{mv_orgvid},mv_savvid=#{mv_savvid} where mv_num=#{mv_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_video where mv_num=#{mv_num}
+	</delete>
+	<select id="list" resultType="myvideo">
+		select * from my_video
+	</select>
+	<select id="select" parameterType="int" resultType="myvideo">
+		select * from my_video where mv_num=#{mv_num}
+	</select>
+</mapper>

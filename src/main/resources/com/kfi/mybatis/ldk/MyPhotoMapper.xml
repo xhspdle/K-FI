@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.MyPhotoMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(mp_num),0) maxnum from my_photo
+	</select>
+	<select id="getCount" resultType="int">
+		select NVL(count(mp_num),0) cnt from my_photo
+	</select>
+	<insert id="insert" parameterType="myphoto">
+		insert into my_photo 
+		values(#{mp_num},#{mb_num},#{mp_orgimg},#{mp_savimg})
+	</insert>
+	<update id="update" parameterType="myphoto">
+		update my_photo set mp_orgimg=#{mp_orgimg},mp_savimg=#{mp_savimg} where mp_num=#{mp_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_photo where mp_num=#{mp_num}
+	</delete>
+	<select id="list" resultType="myphoto">
+		select * from my_photo
+	</select>
+	<select id="select" parameterType="int" resultType="myphoto">
+		select * from my_photo where mp_num=#{mp_num}
+	</select>
+</mapper>

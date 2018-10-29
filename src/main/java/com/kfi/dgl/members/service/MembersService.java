@@ -1,6 +1,7 @@
 package com.kfi.dgl.members.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,11 @@ public class MembersService {
 	public void setDao(MembersDao dao) {
 		this.dao = dao;
 	}
-	public int insert(MembersVo vo	) {
+	
+	public int insert(MembersVo vo) {
 		return dao.insert(vo);
 	}
+	
 	public List<MembersVo> list(){
 		return dao.list();
 	}
@@ -29,5 +32,9 @@ public class MembersService {
 	}*/
 	public int update(MembersVo vo) {
 		return dao.update(vo);
+	}
+	public MembersVo login(HashMap<String, Object> map) {
+		return dao.login(map);
+		
 	}
 }

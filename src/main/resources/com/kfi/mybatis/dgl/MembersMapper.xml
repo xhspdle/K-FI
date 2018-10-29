@@ -4,4 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.dgl.MembersMapper">
 	
+	
+	<!--
+	 <insert id="insert" parameterType="logmembers">
+		insert into members values
+		(#{userNum}, #{userId},#{userNickname}, #{userPwd}, #{userEmail}, #{userRegdate},0,0)
+	</insert> -->
+	<update id="update" parameterType="logmembers">
+		update members set USER_NICKNAME=#{userNickname}, USER_PWD=#{userPwd}, USER_EMAIL=#{userEmail}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from members where USER_NUM=#{value}
+	</delete>
+	
+	<select id="select" parameterType="int" resultType="logmembers">
+		select * from members where USER_NUM=#{value}
+	</select>
+	<!--
+	 <select id="login" resultType="com.kfi.dgl.members.vo.MembersVo">
+		<![CDATA[select USER_NUM, USER_ID, USER_NICKNAME, USER_EMAIL, USER_STATUS from members where USER_ID = #{userId}]]>
+	</select> 
+	-->
+	<!-- 로그인 -->
+	<select id="login" resultType="logmembers" parameterType="hashmap" >
+		select * from members where USER_ID = #{userId} and  USER_PWD=#{userPwd}
+	</select>
+	
+	 <!-- <insert id="createKey">
+		insert into CERTI_MEMBERS values(#{})
+	</insert> -->
+	 
+	<!--  
+	사용자 인증상태 0->1 변경
+	<update id=""> 
+	 	<![CDATA[update members set USER_CERTI = 1 where (select count(*) from members where USER_EMAIL = #{userEmail}) > 0]]>
+	 </update> -->
 </mapper>
