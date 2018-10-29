@@ -18,8 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kfi.ldk.dao.MyBoardDao;
 import com.kfi.ldk.dao.MyPhotoDao;
 import com.kfi.ldk.dao.MyVideoDao;
-import com.kfi.ldk.util.ImgUtil;
-import com.kfi.ldk.util.VidUtil;
 import com.kfi.ldk.vo.MyBoardVo;
 import com.kfi.ldk.vo.MyPhotoVo;
 import com.kfi.ldk.vo.MyVideoVo;
@@ -54,6 +52,7 @@ public class MyBoardServiceImpl implements CommonService{
 		int mb_num=getMaxNum();
 		int mp_num=mpDao.getMaxNum();
 		int mv_num=mvDao.getMaxNum();
+		int copyProgress=0;
 		InputStream is=null;
 		FileOutputStream fos=null;
 		try {	
@@ -62,15 +61,10 @@ public class MyBoardServiceImpl implements CommonService{
 			if(!fileP[0].getOriginalFilename().isEmpty()) {
 				for(int i=0;i<fileP.length;i++) {
 					String mp_orgimg=fileP[i].getOriginalFilename();
-					String format=mp_orgimg.substring(mp_orgimg.lastIndexOf(".") + 1);
-					String mType=ImgUtil.getImgType(format);
-					if(mType==null) {
-						throw new Exception("*." + format + " is Unsupported img file types");
-					}
 					String mp_savimg=UUID.randomUUID() + "_" + mp_orgimg;
 					is=fileP[i].getInputStream();
 					fos=new FileOutputStream(uploadPathP + "\\" + mp_savimg);
-					FileCopyUtils.copy(is, fos);
+					copyProgress+=FileCopyUtils.copy(is, fos);
 					is.close();
 					fos.close();
 					System.out.println(uploadPathP + "경로에 사진 업로드 성공!");
@@ -80,22 +74,17 @@ public class MyBoardServiceImpl implements CommonService{
 			if(!fileV[0].getOriginalFilename().isEmpty()) {
 				for(int i=0;i<fileV.length;i++) {
 					String mv_orgvid=fileV[i].getOriginalFilename();
-					String format=mv_orgvid.substring(mv_orgvid.lastIndexOf(".") + 1);
-					String mType=VidUtil.getVidType(format);
-					if(mType==null) {
-						throw new Exception("*." + format + " is Unsupported vid file types");
-					}
 					String mv_savvid=UUID.randomUUID() + "_" + mv_orgvid;
 					is=fileV[i].getInputStream();
 					fos=new FileOutputStream(uploadPathV + "\\" + mv_savvid);
-					FileCopyUtils.copy(is, fos);
+					copyProgress+=FileCopyUtils.copy(is, fos);
 					is.close();
 					fos.close();
 					System.out.println(uploadPathV + "경로에 영상 업로드 성공!");
 					mvDao.insert(new MyVideoVo(mv_num + i +1, mb_num + 1, mv_orgvid, mv_savvid));
 				}				
 			}	
-			return 1;
+			return copyProgress;
 		}catch(Exception e) {
 			e.printStackTrace();
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

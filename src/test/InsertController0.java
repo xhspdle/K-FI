@@ -1,3 +1,4 @@
+/*
 package com.kfi.ldk.myboard.controller;
 
 import java.util.HashMap;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,7 +25,6 @@ public class InsertController {
 		return ".mypage.myboard.insert";
 	}
 	@RequestMapping(value="/mypage/myboard/insert",method=RequestMethod.POST)
-	@ResponseBody
 	public String insert(MultipartHttpServletRequest request,String[] tags,
 				MultipartFile[] fileP,MultipartFile[] fileV,HttpSession session) {
 		String mb_title=request.getParameter("mb_title");
@@ -39,13 +38,14 @@ public class InsertController {
 			//유저 가입, 로그인 미구현인관계로 유저넘버1번으로 테스트
 			int n=service.insert(map);
 			if(n>0) {
-				return "<span style='color:red;'>Post Success</span>";
+				return "success";
 			}else {
-				return "<span style='color:red;'>Post Fail</span>";
+				return "error";
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
-			return e.getMessage();
+			return "error";
 		}
 	}
 }
+*/

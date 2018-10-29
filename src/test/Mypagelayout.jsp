@@ -31,15 +31,6 @@
 	<div id="footer">
 		<tiles:insertAttribute name="footer"/>
 	</div>
-	
-	<!-- Calendar icon -->
-	<input type="hidden" id="url" value="${pageContext.request.contextPath }">
-	<input type="hidden" id="year" value="year">
-	<input type="hidden" id="month" value="month">
-	<div id="icon_calendar" class="glyphicon glyphicon-calendar" style="font-size:40px;"></div>
-	<div id="wrap_icon_calendar"><!--   class="well" style="width:320px;" -->
-	</div>
-	
 	<!-- Modal -->
 	<div class="modal fade" id="writeModal" role="dialog">
 		<div class="modal-dialog">
@@ -73,7 +64,7 @@
 							<input type="file" class="form-control" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
 							<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 						</div>
-						<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-ok"></span> Write</button>
+						<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
 					</form>
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped active" role="progressbar" 

@@ -1,3 +1,4 @@
+/*
 package com.kfi.ldk.myboard.controller;
 
 import java.util.HashMap;
@@ -6,10 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,11 +27,11 @@ public class InsertController {
 		return ".mypage.myboard.insert";
 	}
 	@RequestMapping(value="/mypage/myboard/insert",method=RequestMethod.POST)
-	@ResponseBody
-	public String insert(MultipartHttpServletRequest request,String[] tags,
+	public ResponseEntity<Object> insert(MultipartHttpServletRequest request,String[] tags,
 				MultipartFile[] fileP,MultipartFile[] fileV,HttpSession session) {
 		String mb_title=request.getParameter("mb_title");
 		String mb_content=request.getParameter("mb_content");
+		ResponseEntity<Object> entity=null;
 		try {
 			HashMap<String, Object> map=new HashMap<String, Object>();
 			map.put("session", session);
@@ -37,15 +39,23 @@ public class InsertController {
 			map.put("fileV", fileV);
 			map.put("mbVo", new MyBoardVo(0, 1, mb_title, mb_content, null, 0));	
 			//유저 가입, 로그인 미구현인관계로 유저넘버1번으로 테스트
-			int n=service.insert(map);
-			if(n>0) {
-				return "<span style='color:red;'>Post Success</span>";
+			long totalSize=0;
+			for(int i=0;i<fileP.length;i++) {
+				totalSize+=fileP[i].getSize();
+			}
+			for(int i=0;i<fileV.length;i++) {
+				totalSize+=fileV[i].getSize();
+			}
+			int copyProgress=service.insert(map);
+			if(totalSize!=0) {
+				return entity=new ResponseEntity<Object>(copyProgress/(double)totalSize, HttpStatus.OK);				
 			}else {
-				return "<span style='color:red;'>Post Fail</span>";
+				return entity=new ResponseEntity<Object>(copyProgress, HttpStatus.OK);
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
-			return e.getMessage();
+			return entity=new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 }
+*/

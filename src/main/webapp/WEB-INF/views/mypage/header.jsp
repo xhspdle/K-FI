@@ -3,7 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <div class="jumbotron text-center" id="mypageJumbo">
 	<div>
-		<p><strong style="border-bottom: 2px solid white;">자기상태글 블라블라블라</strong></p> 
+		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/images/default-profile.png'/>">
+		<h3><strong>유저닉네임</strong></h3>
+		<p><span style="border-bottom: 2px solid white;">자기상태글 블라블라블라</span></p> 
 	</div>
 </div>
 <nav class="navbar navbar-default" data-spy="affix" data-offset-top="500" id="navAffix"><!--  navbar-fixed-top  -->

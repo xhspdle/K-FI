@@ -78,7 +78,7 @@ $(document).ready(function(){
 	  var miniLogo=$(".miniLogo").offset();
 	  var max_width=search.left-miniLogo.left;
 	  $("#searchForm").css('position', 'absolute');
-	  $("#searchForm").css('left', miniLogo.left+2);
+	  $("#searchForm").css('left', miniLogo.left);
 	  $("#searchForm").css('top', miniLogo.top-400-hh);
 	  $("#searchForm").css('width', max_width+ww);
   }
@@ -147,6 +147,54 @@ $(document).ready(function(){
 		  });
 	  }
   });
+  $("#sendServer").click(function(e){
+	  var getPageContext=$("#getPageContext").val();
+	  e.preventDefault();
+	  $(this).prop('disabled',true);
+	  var form=document.frm;
+	  var formData=new FormData(form);
+	  var ajaxReq=$.ajax({
+		  url: getPageContext + "/mypage/myboard/insert",
+		  type: 'post',
+		  data: formData,
+		  cache: false,
+		  contentType: false,
+		  processData: false,
+		  xhr: function(){
+			  var xhr=$.ajaxSettings.xhr();
+			  xhr.upload.onprogress=function(event){
+				  var perc=Math.round((event.loaded/event.total) * 100);
+				  $(".progress").css('opacity','1');
+				  $(".progress-bar").css('width',perc + '%');
+				  $(".progress-bar").prop('aria-valuenow',perc);
+				  $(".progress-bar").text(perc + '%');
+			  };
+			  return xhr;
+		  },
+		  beforeSend: function(xhr){
+			  $("#uploadMsg").text('');
+			  $(".progress-bar").text('');
+			  $(".progress-bar").css('width','0%');
+			  $(".progress-bar").prop('aria-valuenow','0');
+		  }
+	  });
+	  ajaxReq.done(function(msg){
+		 $("#uploadMsg").text(msg);
+		 $("input[type='file']").each(function(){
+			 $(this).val('');
+		 });
+		 $("#sendServer").prop('disabled',false);
+		 setTimeout(function(){
+			 location.href=getPageContext + "/mypage/main";
+		 },1500);
+	  });
+	  ajaxReq.fail(function(jqXHR){
+		 $("#uploadMsg").text(jqXHR.responseText + '(' + jqXHR.status +
+				 ' - ' + jqXHR.statusText + ')');
+		 $("#sendServer").prop('disabled',false);
+	  });
+  });
+  
   $.getList=function(pageNum,keyword){
 	  	var getPageContext=$("#getPageContext").val();
 		$.getJSON(getPageContext + "/mypage/myboard/list",
@@ -193,10 +241,22 @@ $(document).ready(function(){
 						.appendTo("#myBoardList");
 					}
 				});
+				
 			});
+  }
+  $.footerBtn=function(){
+	  $("footer").before("<div class='container-fluid text-center'>" +
+			  			 "<h2><a class='btn btn-default href='javascript:$.getListMore()'>" +
+			  			 "<span class='glyphicon glyphicon-plus'></span> More </a></h2></div>");
   }
   if($("#getPageContext").val()!==undefined){
 	  $.getList();
+	  $.footerBtn();
   }
+  var more=2;
+  $.getListMore=function(){	  
+	  $.getList(more++);
+  }
+  
 });
 

@@ -33,7 +33,7 @@
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
+  <p>K-FI Web Project Made By <a href="https://github.com/xhspdle/K-FI" title="Visit Team 안경선배">Team 안경선배</a></p>
 </footer>
 </body>
 </html>
