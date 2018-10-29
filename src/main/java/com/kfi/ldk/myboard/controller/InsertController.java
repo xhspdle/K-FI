@@ -39,9 +39,9 @@ public class InsertController {
 			//유저 가입, 로그인 미구현인관계로 유저넘버1번으로 테스트
 			int n=service.insert(map);
 			if(n>0) {
-				return "<span style='color:red;'>Post Success</span>";
+				return "Post Success";
 			}else {
-				return "<span style='color:red;'>Post Fail</span>";
+				return "Post Failed: Invalid FileType";
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

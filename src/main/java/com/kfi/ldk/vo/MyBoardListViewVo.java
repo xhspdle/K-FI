@@ -9,13 +9,14 @@ public class MyBoardListViewVo {
 	private Date mb_date;
 	private int mb_views;
 	private int comment_cnt;
+	private int like_cnt;
 	private int mp_num;
 	private String mp_savimg;
 	private int mv_num;
 	private String mv_savvid;
 	public MyBoardListViewVo() {}
 	public MyBoardListViewVo(int mb_num, String mb_title, String mb_content, Date mb_date, int mb_views,
-			int comment_cnt, int mp_num, String mp_savimg, int mv_num, String mv_savvid) {
+			int comment_cnt, int like_cnt, int mp_num, String mp_savimg, int mv_num, String mv_savvid) {
 		super();
 		this.mb_num = mb_num;
 		this.mb_title = mb_title;
@@ -23,6 +24,7 @@ public class MyBoardListViewVo {
 		this.mb_date = mb_date;
 		this.mb_views = mb_views;
 		this.comment_cnt = comment_cnt;
+		this.like_cnt = like_cnt;
 		this.mp_num = mp_num;
 		this.mp_savimg = mp_savimg;
 		this.mv_num = mv_num;
@@ -64,6 +66,12 @@ public class MyBoardListViewVo {
 	public void setComment_cnt(int comment_cnt) {
 		this.comment_cnt = comment_cnt;
 	}
+	public int getLike_cnt() {
+		return like_cnt;
+	}
+	public void setLike_cnt(int like_cnt) {
+		this.like_cnt = like_cnt;
+	}
 	public int getMp_num() {
 		return mp_num;
 	}
@@ -91,7 +99,8 @@ public class MyBoardListViewVo {
 	@Override
 	public String toString() {
 		return "MyBoardListViewVo [mb_num=" + mb_num + ", mb_title=" + mb_title + ", mb_content=" + mb_content
-				+ ", mb_date=" + mb_date + ", mb_views=" + mb_views + ", comment_cnt=" + comment_cnt + ", mp_num="
-				+ mp_num + ", mp_savimg=" + mp_savimg + ", mv_num=" + mv_num + ", mv_savvid=" + mv_savvid + "]";
+				+ ", mb_date=" + mb_date + ", mb_views=" + mb_views + ", comment_cnt=" + comment_cnt + ", like_cnt="
+				+ like_cnt + ", mp_num=" + mp_num + ", mp_savimg=" + mp_savimg + ", mv_num=" + mv_num + ", mv_savvid="
+				+ mv_savvid + "]";
 	}
 }

@@ -184,9 +184,14 @@ $(document).ready(function(){
 			 $(this).val('');
 		 });
 		 $("#sendServer").prop('disabled',false);
-		 setTimeout(function(){
-			 location.href=getPageContext + "/mypage/main";
-		 },1500);
+		 if(msg=='Post Success'){
+			 setTimeout(function(){
+				 location.href=getPageContext + "/mypage/main";
+			 },1500);
+		 }else{
+			 $("#uploadMsg").css("color","red");
+			 $("#uploadMsg").css("font-weight","bold");
+		 }
 	  });
 	  ajaxReq.fail(function(jqXHR){
 		 $("#uploadMsg").text(jqXHR.responseText + '(' + jqXHR.status +
@@ -207,6 +212,7 @@ $(document).ready(function(){
 					var mb_date=json.mb_date;
 					var mb_views=json.mb_views;
 					var comment_cnt=json.comment_cnt;
+					var like_cnt=json.like_cnt;
 					var mp_savimg=json.mp_savimg;
 					var mv_savvid=json.mv_savvid;
 					var attachment='';
@@ -221,23 +227,29 @@ $(document).ready(function(){
 						$("<div class='panel-group'>" +
 						  "<div class='panel panel-default'>" +
 						  "<div class='panel-heading'>" +
-						  	"<h1>" + mb_title + "</h1></div>" +
+						    "<blockquote class='postBlock'>" +
+						  	"<h1 class='postTitle'>" + 
+						  	"<a href='#' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
 						  "<div class='panel-footer'><div>" +
-						  	"<h4>댓글 수: " + comment_cnt + "</h4></div></div></div></div>")
+						    "<h4 class='postLikeComment'>Likes: " + like_cnt + "</h4>" +
+						  	"<h4 class='postLikeComment'>Comments: " + comment_cnt + "</h4></div></div></div></div>")
 						.appendTo("#myBoardList");
 					}else{
 						$("<div class='panel-group slideanim'>" +
 						  "<div class='panel panel-default'>" +
 						  "<div class='panel-heading'>" +
-						  	"<h1>" + mb_title + "</h1></div>" +
+						    "<blockquote class='postBlock'>" +
+						  	"<h1 class='postTitle'>" + 
+						  	"<a href='#' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
 						  "<div class='panel-footer'><div>" +
-						  	"<h4>댓글 수: " + comment_cnt + "</h4></div></div></div></div>")
+						    "<h4 class='postLikeComment'>Likes: " + like_cnt + "</h4>" +
+						  	"<h4 class='postLikeComment'>Comments: " + comment_cnt + "</h4></div></div></div></div>")
 						.appendTo("#myBoardList");
 					}
 				});
@@ -246,7 +258,7 @@ $(document).ready(function(){
   }
   $.footerBtn=function(){
 	  $("footer").before("<div class='container-fluid text-center'>" +
-			  			 "<h2><a class='btn btn-default href='javascript:$.getListMore()'>" +
+			  			 "<h2><a class='btn btn-default' href='javascript:$.getListMore()'>" +
 			  			 "<span class='glyphicon glyphicon-plus'></span> More </a></h2></div>");
   }
   if($("#getPageContext").val()!==undefined){

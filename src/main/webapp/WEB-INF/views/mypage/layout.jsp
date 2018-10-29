@@ -73,7 +73,7 @@
 							<input type="file" class="form-control" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
 							<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 						</div>
-						<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-ok"></span> Write</button>
+						<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
 					</form>
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped active" role="progressbar" 
