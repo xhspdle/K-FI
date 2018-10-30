@@ -201,6 +201,11 @@ $(document).ready(function(){
 		 $("#sendServer").prop('disabled',false);
 	  });
   });
+  $.jsonDate=function(json){
+	  var dates=json.split("-");
+	  var day=parseInt(dates[2])+1
+	  return dates[0] + "-" + dates[1] + "-" + day.toString();
+  }
   var sameDate='';
   $.getList=function(pageNum,keyword){
 	  	var getPageContext=$("#getPageContext").val();
@@ -220,7 +225,7 @@ $(document).ready(function(){
 					var attachment='';
 					if(sameDate!==json.mb_date){
 						$("<h1 class='text-center' id='"+ json.mb_date +"' style='margin-bottom:30px;'>" +
-						  "<span style='border-bottom: 4px solid black'>" + json.mb_date +
+						  "<span style='border-bottom: 4px solid black'>" + $.jsonDate(json.mb_date) +
 						  "</span></h1>")
 						  .appendTo("#myBoardList");
 					}
@@ -235,7 +240,7 @@ $(document).ready(function(){
 					if(i==0){
 						$("<div class='panel-group'>" +
 						  "<div class='panel panel-default'>" +
-						  "<div class='panel-heading'>" +
+						  "<div class='panel-heading' id='"+ mb_num +"'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
 						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
@@ -249,7 +254,7 @@ $(document).ready(function(){
 					}else{
 						$("<div class='panel-group slideanim'>" +
 						  "<div class='panel panel-default'>" +
-						  "<div class='panel-heading'>" +
+						  "<div class='panel-heading' id='"+ mb_num +"'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
 						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
@@ -264,6 +269,9 @@ $(document).ready(function(){
 				});
 				
 			});
+		$("#myBoardList").on('click',".panel-heading",function(){
+			location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id") ;
+		})
   }
   $.footerBtn=function(){
 	  $("footer").before("<div class='container-fluid text-center'>" +
@@ -278,6 +286,8 @@ $(document).ready(function(){
   $.getListMore=function(){	  
 	  $.getList(more++);
   }
-  
+  $("#myBoardSelect .panel-heading").click(function(){
+	  location.reload();
+  });
 });
 

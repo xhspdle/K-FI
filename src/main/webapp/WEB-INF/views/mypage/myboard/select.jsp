@@ -62,6 +62,60 @@
 				</div>
 				</c:forEach>				
 			</div>
+			<div class="panel-footer text-left">
+				<h3 class="postLikeComment select">xx Likes</h3>
+				<div class="likes">
+					<a class="btn btn-default" href="#">
+					<span class="glyphicon glyphicon-heart"></span> Like</a>
+					<div class="likeUserList">
+						<img class="img-responsive img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="likerProfiles">
+						<img class="img-responsive img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="likerProfiles">
+						<img class="img-responsive img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="likerProfiles">
+					</div>
+				</div>
+				<h3 class="postLikeComment select">xx Comments</h3>
+				<div class="media">
+					<div class="media-left media-middle">
+						<img class="media-object img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="userProfile">
+					</div>
+					<div class="media-body media-middle form-group row">
+						<form id="commentForm" class="form-inline" action="">
+							<input type="text" class="form-control" placeholder="Say something!">
+							<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-comment"></span></button>
+						</form>
+					</div>
+				</div>
+				<div id="commentList">
+					<div class="media">
+						<div class="media-left">
+							<img class="media-object img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="commentProfile">
+						</div>
+						<div class="media-body">
+							<h3><strong><a href="">UserId</a></strong></h3>
+							<p>댓글내용 블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+							블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+							ㅁㄴㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㄴㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇㅁ
+							ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+							ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</p>
+							<i class="glyphicon glyphicon-thumbs-up"></i><span>추천수</span><small>댓글작성일</small>
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-left">
+							<img class="media-object img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="commentProfile">
+						</div>
+						<div class="media-body">
+							<h3><strong><a href="">UserId</a></strong></h3>
+							<p>댓글내용 블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+							블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+							ㅁㄴㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㄴㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇㅁ
+							ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+							ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</p>
+							<i class="glyphicon glyphicon-thumbs-up"></i><span>추천수</span><small>댓글작성일</small>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
