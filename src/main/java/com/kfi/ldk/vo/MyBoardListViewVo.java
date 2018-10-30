@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class MyBoardListViewVo {
 	private int mb_num;
+	private int user_num;
 	private String mb_title;
 	private String mb_content;
 	private Date mb_date;
@@ -15,10 +16,11 @@ public class MyBoardListViewVo {
 	private int mv_num;
 	private String mv_savvid;
 	public MyBoardListViewVo() {}
-	public MyBoardListViewVo(int mb_num, String mb_title, String mb_content, Date mb_date, int mb_views,
+	public MyBoardListViewVo(int mb_num, int user_num, String mb_title, String mb_content, Date mb_date, int mb_views,
 			int comment_cnt, int like_cnt, int mp_num, String mp_savimg, int mv_num, String mv_savvid) {
 		super();
 		this.mb_num = mb_num;
+		this.user_num = user_num;
 		this.mb_title = mb_title;
 		this.mb_content = mb_content;
 		this.mb_date = mb_date;
@@ -35,6 +37,12 @@ public class MyBoardListViewVo {
 	}
 	public void setMb_num(int mb_num) {
 		this.mb_num = mb_num;
+	}
+	public int getUser_num() {
+		return user_num;
+	}
+	public void setUser_num(int user_num) {
+		this.user_num = user_num;
 	}
 	public String getMb_title() {
 		return mb_title;
@@ -98,9 +106,9 @@ public class MyBoardListViewVo {
 	}
 	@Override
 	public String toString() {
-		return "MyBoardListViewVo [mb_num=" + mb_num + ", mb_title=" + mb_title + ", mb_content=" + mb_content
-				+ ", mb_date=" + mb_date + ", mb_views=" + mb_views + ", comment_cnt=" + comment_cnt + ", like_cnt="
-				+ like_cnt + ", mp_num=" + mp_num + ", mp_savimg=" + mp_savimg + ", mv_num=" + mv_num + ", mv_savvid="
-				+ mv_savvid + "]";
+		return "MyBoardListViewVo [mb_num=" + mb_num + ", user_num=" + user_num + ", mb_title=" + mb_title
+				+ ", mb_content=" + mb_content + ", mb_date=" + mb_date + ", mb_views=" + mb_views + ", comment_cnt="
+				+ comment_cnt + ", like_cnt=" + like_cnt + ", mp_num=" + mp_num + ", mp_savimg=" + mp_savimg
+				+ ", mv_num=" + mv_num + ", mv_savvid=" + mv_savvid + "]";
 	}
 }

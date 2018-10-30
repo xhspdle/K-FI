@@ -207,6 +207,7 @@ $(document).ready(function(){
 			function(data){
 				$(data.list).each(function(i,json){
 					var mb_num=json.mb_num;
+					var user_num=json.user_num;
 					var mb_title=json.mb_title;
 					var mb_content=json.mb_content;
 					var mb_date=json.mb_date;

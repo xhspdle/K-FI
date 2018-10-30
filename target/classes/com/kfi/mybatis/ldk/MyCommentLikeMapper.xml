@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.MyCommentLikeMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(mcl_num),0) maxnum from my_comment_like
+	</select>
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		select NVL(count(mcl_num),0) cnt from my_comment_like
+	</select>
+	<insert id="insert" parameterType="mycommentlike">
+		insert into my_comment_like 
+		values(#{mcl_num},#{myc_num},#{user_num})
+	</insert>
+	<update id="update" parameterType="mycommentlike">
+		update my_comment_like set user_num=#{user_num} where mcl_num=#{mcl_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_comment_like where mcl_num=#{mcl_num}
+	</delete>
+	<select id="list" parameterType="hashmap" resultType="mycommentlike">
+		select *
+		from
+		(
+	 	select aa.*,rownum rnum 
+	 	from
+	 	(
+	 		select *
+	 		from my_comment_like
+	 		order by mcl_num desc
+	 	)aa
+		)
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+	<select id="select" parameterType="int" resultType="mycommentlike">
+		select * from my_comment_like where mcl_num=#{mcl_num}
+	</select>
+</mapper>

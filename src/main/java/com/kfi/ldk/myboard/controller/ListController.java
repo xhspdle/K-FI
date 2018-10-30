@@ -2,6 +2,8 @@ package com.kfi.ldk.myboard.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,10 +21,11 @@ public class ListController {
 	@RequestMapping("/mypage/myboard/list")
 	@ResponseBody
 	public HashMap<String, Object> list(@RequestParam(value="pageNum",defaultValue="1")
-		int pageNum,String keyword) {
+		int pageNum,String keyword,HttpSession session) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("keyword", keyword);
-		
+//		map.put("user_num", session.getAttribute("user_num"));
+		map.put("user_num", 1);
 		int totalRowCount=service.getCount(map);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 5);
 		map.put("startRow", pu.getStartRow());

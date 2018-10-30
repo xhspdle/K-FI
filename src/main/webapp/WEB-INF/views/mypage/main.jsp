@@ -4,7 +4,7 @@
 
 <input type="hidden" id="getPageContext" value="<c:url value='/'/>">
 <div id="myBoardList" class="container">
-
+<!--  
 	<div class="panel-group">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -22,6 +22,6 @@
 			</div>
 		</div>	
 	</div>
-
+-->
 </div>
 
