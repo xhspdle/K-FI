@@ -47,6 +47,5 @@
 	<!-- 유저번호 -->
 	<select id="getCount" parameterType="hashmap" resultType="int">
 		select NVL(count(user_num),0) cnt from members
-		<include refid="search"/>
 	</select>
 </mapper>

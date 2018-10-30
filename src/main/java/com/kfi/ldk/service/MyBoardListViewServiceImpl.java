@@ -16,9 +16,11 @@ public class MyBoardListViewServiceImpl implements CommonViewService{
 	public int getMaxNum() {
 		return dao.getMaxNum();
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public int getCount(Object data) {
-		return dao.getCount();
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		return dao.getCount(map);
 	}
 	@SuppressWarnings("unchecked")
 	@Override
