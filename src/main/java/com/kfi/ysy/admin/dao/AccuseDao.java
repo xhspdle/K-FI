@@ -1,5 +1,6 @@
 package com.kfi.ysy.admin.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +16,10 @@ public class AccuseDao {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.kfi.mybatis.ysy.AccuseMapper.";
-	public List<AccuseVo> aclist(){
-		return sqlSession.selectList(NAMESPACE+"aclist");
+	public List<AccuseVo> aclist(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE+"aclist", map);
+	}
+	public int acgetcnt(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE+"acgetcnt" ,map);
 	}
 }

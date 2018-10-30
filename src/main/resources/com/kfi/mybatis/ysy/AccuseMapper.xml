@@ -3,7 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.ysy.AccuseMapper">
-	<select id="aclist" resultType="com.kfi.ysy.admin.vo.AccuseVo">
-		select * from accuse
+	<sql id="search">
+		<if test="field != null and field != ''">
+			where ${field} like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	<select id="aclist" parameterType="hashmap" resultType="com.kfi.ysy.admin.vo.AccuseVo">
+	select * from
+	(
+		select aclist.*,rownum rnum from 
+		(
+			select ac.*, user1.user_nickname user1_nickname, user2.user_nickname user2_nickname
+			from accuse ac 
+			left join members user1 on ac.user1_num=user1.user_num 
+			left join members user2 on ac.user2_num=user2.user_num 
+				<if test="field != null and field != ''">
+				where ac.${field} like '%'||#{keyword}||'%'
+				</if>
+			order by ac_num desc 
+		)aclist
+ 	)
+	<![CDATA[ where rnum>=#{startrow} and rnum<=#{endrow}]]>
+	</select>
+	<select id="acgetcnt" parameterType="hashmap" resultType="int">
+		select nvl(count(*),0) getcnt from accuse
+		<!-- <include refid="search"/>  -->
 	</select>
 </mapper>

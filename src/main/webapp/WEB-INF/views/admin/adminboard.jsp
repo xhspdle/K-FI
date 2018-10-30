@@ -45,7 +45,10 @@
 			$("#abmodifymodal").css("display", "block");
 		});
 	});
-</script>	
+</script>
+<c:set var="admin" value="${sessionScope.admininfo }" />	
+<c:choose>
+ <c:when test="${not empty admin}">
 <h1>공지사항</h1>
 <table class="table table-striped">
 	<tr>
@@ -153,5 +156,8 @@
 		<input type="submit" value="수정">
 	</form> --%>
 </div>
-
-	
+</c:when>
+<c:otherwise>
+	<meta http-equiv="refresh" content="0; url=<c:url value='/adlogin'/>"></meta>
+</c:otherwise>
+</c:choose>

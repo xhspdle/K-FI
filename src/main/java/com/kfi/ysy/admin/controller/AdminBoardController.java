@@ -42,7 +42,6 @@ public class AdminBoardController {
 			model.addAttribute("keyword",keyword);
 			return ".admin.adminboard";
 		}else{
-			System.out.println(ablist);
 			return ".main.error";
 		}
 	}

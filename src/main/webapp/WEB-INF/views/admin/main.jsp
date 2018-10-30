@@ -49,7 +49,7 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-				</div>
+				</div>		
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="mblist">회원관리</a></li>
