@@ -23,15 +23,16 @@
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
 <h1>Q and A</h1>
-<div>
+
 	<h2>Panels with Contextual Classes</h2>
 	<div class="panel-group">
 	<c:forEach var="faqlist" items="${faqlist }" varStatus="status">	
-		<div class="panel panel-warning">
+		<div class="panel panel-default">
 			<div class="panel-heading">
-				${faqlist.qa_title }<br>
+				<a href="#myPage"><img style="width:50px; height:50px;border-radius:50px;" class="miniLogo" alt="simpleLogo" src="<c:url value='/resources/images/1 (1).jpg'/>"></a>
 				${faqlist.user_num }
-				<h1>${status.index}</h1>
+				${faqlist.qa_title }
+				
 			</div>
 			<div class="panel-body">
 				${faqlist.qa_num}<br>
@@ -41,7 +42,7 @@
 				${faqlist.qa_date }
 				${faqlist.admin_num }
 			<div class="hidediv" >
-				<form>
+				<form action="faqcomm" method="post">
 					${admin.admin_nick }
 					<input class="form-group form-control" type="text">
 					<input type="submit" value="작성">
@@ -50,7 +51,7 @@
 	    </div>
 	</c:forEach>
 	</div>
-</div>
+
 <a href="faqinsert" class="btn btn-default">글작성</a>
 
 <!-- <div class="container">
