@@ -16,8 +16,8 @@ public class AdminDao {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.kfi.mybatis.ysy.AdminMapper.";
-	public int admaxcnt() {
-		return sqlSession.selectOne(NAMESPACE+"admaxcnt");
+	public int abmaxnum() {
+		return sqlSession.selectOne(NAMESPACE+"abmaxnum");
 	}
 	public AdminVo adlogin(HashMap<String, String> map) {
 		return sqlSession.selectOne(NAMESPACE+"adlogin", map);

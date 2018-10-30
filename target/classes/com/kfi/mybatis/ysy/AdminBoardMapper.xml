@@ -8,7 +8,7 @@
 			where ${field} like '%'||#{keyword}||'%'
 		</if>
 	</sql>
-	<select id="abmaxcnt" resultType="int">
+	<select id="abmaxnum" resultType="int">
 		select nvl(max(ab_num),1) maxnum from admin_board
 	</select>
 	<select id="abgetcnt" resultType="int" parameterType="hashmap">

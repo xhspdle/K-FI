@@ -53,7 +53,7 @@ public class AdminBoardController {
 	//관리자 게시글 등록
 	@RequestMapping(value="/abinsert", method=RequestMethod.POST)
 	public String abinsert(AdminBoardVo vo) {
-		int ab_num=abservice.abmaxcnt()+1;
+		int ab_num=abservice.abmaxnum()+1;
 		vo.setAb_num(ab_num);
 		int result=abservice.abinsert(vo);
 		if (result>0){

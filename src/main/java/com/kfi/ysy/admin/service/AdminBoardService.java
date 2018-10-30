@@ -18,8 +18,8 @@ public class AdminBoardService {
 	public List<AdminBoardVo> ablist(HashMap<String, Object> map){
 		return dao.ablist(map);
 	}
-	public int abmaxcnt() {
-		return dao.abmaxcnt();
+	public int abmaxnum() {
+		return dao.abmaxnum();
 	}
 	public int abinsert(AdminBoardVo vo) {
 		return dao.abinsert(vo);

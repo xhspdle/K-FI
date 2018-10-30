@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.kfi.mybatis.ysy.AdminMapper">
- 	<select id="admaxcnt" resultType="int">
+ 	<select id="abmaxnum" resultType="int">
  		select nvl(max(admin_num),1)maxnum from admin
  	</select>
  	<select id="adlogin" parameterType="hashmap" resultType="com.kfi.ysy.admin.vo.AdminVo">

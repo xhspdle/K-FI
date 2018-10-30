@@ -75,7 +75,7 @@ public class AdminController {
 //관리자 등록
 	@RequestMapping(value = "/adjoin", method = RequestMethod.POST)
 	public String adjoin(AdminVo vo) {
-		int admin_num=service.admaxcnt()+1;
+		int admin_num=service.abmaxnum()+1;
 		vo.setAdmin_num(admin_num);
 		int result=service.adjoin(vo);
 		if(result>0) {

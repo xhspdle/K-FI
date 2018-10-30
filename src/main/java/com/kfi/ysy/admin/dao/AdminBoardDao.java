@@ -18,8 +18,8 @@ public class AdminBoardDao {
 	public List<AdminBoardVo> ablist(HashMap<String, Object> map){
 		return sqlSession.selectList(NAMESPACE+"ablist", map);
 	}
-	public int abmaxcnt() {
-		return sqlSession.selectOne(NAMESPACE+"abmaxcnt");
+	public int abmaxnum() {
+		return sqlSession.selectOne(NAMESPACE+"abmaxnum");
 	}
 	public int abinsert(AdminBoardVo vo) {
 		return sqlSession.insert(NAMESPACE+"abinsert", vo);

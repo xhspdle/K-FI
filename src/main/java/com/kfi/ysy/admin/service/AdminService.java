@@ -15,8 +15,8 @@ import com.kfi.ysy.admin.vo.AdminVo;
 public class AdminService {
 	@Autowired
 	private AdminDao dao;
-	public int admaxcnt() {
-		return dao.admaxcnt();
+	public int abmaxnum() {
+		return dao.abmaxnum();
 	}
 	public AdminVo adlogin(HashMap<String, String> map) {
 		AdminVo vo= dao.adlogin(map);

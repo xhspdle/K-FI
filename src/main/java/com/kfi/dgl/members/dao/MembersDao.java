@@ -20,10 +20,7 @@ public class MembersDao {
 	public int insert(MembersVo vo) {
 		return sqlSession.insert(NAMESPACE +".insert", vo);
 	}
-	//admin에서 사용
-	public List<MembersVo> list() {
-		return sqlSession.selectList(NAMESPACE +".list");
-	}
+	
 	public int delete(int num) {
 		return sqlSession.delete(NAMESPACE +".delete",num);
 	}
@@ -37,5 +34,10 @@ public class MembersDao {
 	//로그인
 	public MembersVo login(HashMap<String,Object> map) {
 		return sqlSession.selectOne(NAMESPACE + ".login",map);
+	}
+	
+	////////////////////////////admin에서 사용
+	public List<MembersVo> list() {
+		return sqlSession.selectList(NAMESPACE +".list");
 	}
 }
