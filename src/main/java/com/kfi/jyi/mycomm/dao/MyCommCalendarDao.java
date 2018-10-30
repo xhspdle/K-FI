@@ -21,13 +21,18 @@ public class MyCommCalendarDao {
 		return session.selectList(NAMESPACE+".MyCommCalList",user_num);
 	}
 	
-	//유저가 속한 모임의 일별 일정 가져오기
-	public List<CommCalendarVo> findMyCommCal(HashMap<String, Object> hm){
-		return session.selectList(NAMESPACE+".findMyCommCal",hm);
-	}
 	
 	//유저가 가입한 모든 모임의 정보 가져오기
 	public List<CommunityVo> getMyCommunityList(int user_num){
 		return session.selectList(NAMESPACE+".myCommunityList",user_num);
 	}
+	
+	/* 유저가 속한 모든 커뮤니티 목록 불러오기 */
+	public List<CommCalendarVo> selectedCommCalList(int comm_num){
+		return session.selectList(NAMESPACE+".selectedCommCalList",comm_num);
+	}
+	
+	
+	
+	
 }

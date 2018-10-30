@@ -5,6 +5,7 @@
 <script>
 	$(function(){
 		var getPageContext=$('#getPageContext').val();
+	
 		$('#mypage_comm_calendar').fullCalendar({
 				header : {
 				left : '',
@@ -18,22 +19,25 @@
 			events : [ 
 				<c:forEach var="list" items='${monthlist }'> 
 				{
-						id:'${list.cc_num}', 
+						id:'${list.cc_info}', 
 					  title: '${list.cc_name}',  
 	                   start: '${list.cc_begin}',
 	                   end: '${list.cc_end}',
-	                   url: getPageContext+'/mypage/mycommcalendar',
-	                   <c:if test="${list.cc_begin === begin} ">color:'red'</c:if> 
+	                   url: getPageContext+'/mypage/mycommcalendar'
+	                   /* <c:if test='${begin==list.cc_begin}'>,color:'red'</c:if>
+	                   <c:set var="begin" value="${list.cc_begin}" /> */
 				}, 
-				<c:set var="begin" value="${list.cc_begin}"/>
 				</c:forEach>
 				],
 				eventMouseover:function(calEvent,jsEvent,view){
-					$(this).css('border-color','red');
-					$('<div class="calevent">'+calEvent.title+'</div>').appendTo(this).css({width:100,height:100,zIndex:999,'border':'lightpink 1px solid','backgroundColor':'lightpink',pageX:jsEvent.pageX,pageY:jsEvent.pageY});
+				/* 	$(this).parent().css({
+						"position":"absolute"
+					}); */
+					$('<div class="calevent">'+calEvent.id+'</div>')
+					.appendTo(this).parent().css({pageX:jsEvent.pageX,pageY:jsEvent.pageY});
 				},
-				eventMouseout:function(calEvent,jsEvent,view){
-					$(".calevent").empty();
+				eventMouseout:function(calEvent,jsEvent){
+					$(this).children('.calevent').css('display','none');
 				},
 				eventClick:function(event){
 					/* if(event.url){
@@ -41,11 +45,31 @@
 						// window.open(event.url);
 						return false;
 					} */
-				}, eventColor: '#00cee8'
+				}, eventColor: '#00cee8'/* ,
+				eventAfterAllRender:function(){
+					for (var i = 0; i < $("div.row").length; i++) {
+						   $(".row:eq(" + i + ")").css({"z-index":($("div.row").length - i),'position':'absolute'});
+						}
+				} */
 		})
+		$("#mypage_communitylist").on('change',function(){
+			var getPageContext=$("#getPageContext").val();
+			var comm_num=$('#mypage_communitylist option:selected').val();
+			var comm_name=$('#mypage_communitylist option:selected').text();
+			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num+"&comm_name="+comm_name;
+		});
 	});
 </script>
-<div id="mypage_comm_calendar_wrap"
-	style="width: 90%; margin: auto; margin-top: 30px;">
+<div id="mypage_comm_calendar_wrap" style="width: 90%; margin: auto; margin-top: 30px;">
+	<select id="mypage_communitylist" class="form-control" style="width:20%;" >
+	<option value="all">전체</option>
+	<c:forEach var="communitylist" items="${ communitylist}">
+	<option value="${communitylist.comm_num }" <c:if test="${communitylist.comm_name ==comm_name }"> selected="selected"</c:if>>${communitylist.comm_name }</option> 
+	</c:forEach>
+	</select>
+	<select id="attendant" class="form-control" style="width:10%;">
+		<option value="attend">참석</option>
+		<option value="not_attend">비참석</option>
+	</select>
 	<div id='mypage_comm_calendar'></div>
 </div>

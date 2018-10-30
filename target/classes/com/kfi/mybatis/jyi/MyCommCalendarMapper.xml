@@ -19,4 +19,9 @@
 		select * from community where comm_num in(<include refid="findUserCommNum"/>)
 	</select>
 
+	<!-- 유저가 달력에서 선택한 해당 커뮤니티의 일정목록 불러오기 -->
+	<select id="selectedCommCalList" parameterType="int" resultType="commcalendar">
+    	select * from comm_calendar where comm_num = #{comm_num}
+	</select>
+
 </mapper>
