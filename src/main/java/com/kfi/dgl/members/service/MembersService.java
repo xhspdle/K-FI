@@ -20,7 +20,7 @@ public class MembersService {
 	public int insert(MembersVo vo) {
 		return dao.insert(vo);
 	}
-	
+	//admin에서 사용
 	public List<MembersVo> list(){
 		return dao.list();
 	}

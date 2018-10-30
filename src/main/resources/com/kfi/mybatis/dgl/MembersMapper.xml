@@ -41,12 +41,12 @@
 	
 	<!-- 마지막유저번호 -->
 	<select id="getMaxNum" resultType="int">
-		select NVL(max(_num),0) maxnum from members
+		select NVL(max(user_num),0) maxnum from members
 	</select>
 	
 	<!-- 유저번호 -->
 	<select id="getCount" parameterType="hashmap" resultType="int">
-		select NVL(count(_num),0) cnt from members
+		select NVL(count(user_num),0) cnt from members
 		<include refid="search"/>
 	</select>
 </mapper>
