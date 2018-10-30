@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
 /* mycomm calendar */
-#jyi_mycomm_calendar {
+#mycomm_calendar_wrap {
 	width: 90%;
 	margin: auto;
 }
 
-#jyi_mycomm_calendar_sub {
+#mycomm_calendar_sub {
 	width: 90%;
 	margin: auto;
 }
@@ -34,7 +34,7 @@
 	border-radius: 30%;
 }
 
-.jyi_cal {
+.mycomm_cal_a {
 	width: 13%;
 	height: 150px;
 }
@@ -116,7 +116,7 @@
 	background-color: #00cee8;
 }
 
-.jyi_week {
+.mycomm_week {
 	text-align: center;
 	background-color: #00cee8;
 	color: white;
@@ -134,6 +134,9 @@
 	text-decoration: none;
 }
 
-.jyi_a:hover {
+
+
+
+.mycomm_a:hover {
 	color: white;
 }

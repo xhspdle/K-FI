@@ -5,7 +5,7 @@
 $(function() {
 	var url=$("#url").val();
 	
-	/* mypage calendar에 날짜넣기 */
+	/* mypage mini calendar에 날짜넣기 */
 	$("#icon_calendar").click(function(){
 		var calendarClass=$("#wrap_icon_calendar").prop("class");
 		if(calendarClass==='well'){
@@ -39,13 +39,13 @@ $(function() {
 				'October', 'November', 'December'];
 		$("#wrap_icon_calendar").append(
 				"<h4 id='miniym'><span><a id='prevmon' class='btn btn-default' role='button'> < </a>"
-				+"<select id='yearArr'><option value='"+year+"'>"+year+"</option></select>"+" "+monthEng[month]+" "
+				+"<select id='yearArr'></select>"+" "+monthEng[month]+" "
 				+"<a id='aftmon' class='btn btn-default' role='button'> > </a>"
 				+"</span></h4>");
 		for(var i=nowDateYear;i>=2000;i--){
 			$('#yearArr').append("<option value='"+i+"'>"+i+"</option>");
 		}
-		//$("#yearArr option:eq('"+ +"')").after("<option value='"+year+"'>"+year+"</option>");
+		$('#yearArr').val(year);
 		var week=['SUN','MON','TUE','WED','THU','FRI','SAT'];
 		for(var i=0;i<week.length;i++){
 			$("#wrap_icon_calendar").append("<div class='mini_cal_week'>"+week[i]+"</div>");
@@ -132,27 +132,62 @@ $(function() {
 		var d=day.slice(1,2);
 		if(d==='') day="0"+day;
 		alert("#"+year+month+day);
-		var top=$("#"+year+month+day).offset().top; 
+		var top=$("#"+year+"-"+month+"-"+day).offset().top; 
 		// 상단을 기준으로 #요소가 위치한 거리를 절대좌표로 반환
 		$("html, body").animate({
 			scrollTop:top
 		},1000);
 	});
+
+	//마이페이지 전체 일정
+	var now=new Date().getFullYear();
+	for(var i=now;i>=2000;i--){
+		$('#mycomm_year').append('<option>'+i+'</option>');
+	}
 	
-	//mycommcalendar의 calendar의 달력 mouseover시 일정보이기 
-	/*$(".jyi_a").hover(function(){
-		var year=$("#year").html();
-		var month=$("#month").html();
-		var day=$(this).prop("id");
+	$('#mycommunitylist').on('click',function(){
+		var url=$('#url').val();
+		$.getJSON(url+'/mycomm/mycommunitylist',function(data){
+			alert("??");			
+			/*for(var i=0;i<data.length;i++){
+				$("#mycommunitylist").append('<option>'+data[i].comm_name+'</option>');
+			}*/
+		});
+	});
+	
+	//마이페이지 전체일정 달력 mouseover하면 해당날짜 상세 일정보이기 
+	$(".mycomm_a").parent().hover(function(){
+		var year=$("#year").val().slice(2,4);
+		var month=$("#month").val();
+		if(month.slice(1,2)===''){
+			month='0'+month;
+		}
+		var day=$(this).children().prop("id");
+		if(day.slice(1,2)===''){
+			day='0'+day;
+		}
 		var url=$("#url").val();
 		$.getJSON(url+"/mycommCalendar/list",{year:year,month:month,day:day},function(data){
-			
-			
+			//$('#'+day).parent().empty();
+			var begin=data.list;
+			if(day===begin){
+				$('<div>'+data.cc_info+'</div>').appendTo('#'+day).parent().css({width:100,height:100,zIndex:999,backgroundcolor:'orange'});
+			}
 		});
 	},function(){
 		
 		
-	});*/
+	});
+	
+	$('#mycommunitylist').on('change',function(){
+		$(this).val();
+		
+		
+	});
+	
+	
+	
+	
 	
 	
 });
