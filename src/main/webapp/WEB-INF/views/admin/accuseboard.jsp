@@ -44,8 +44,8 @@
 		</tr>
 		<c:forEach var="accuse" items="${aclist }">
 			<tr>
-				<td>${accuse.ac_num}</td>
-				<td>${accuse.ac_reason}</td>
+				<td class="accusecontent">${accuse.ac_num}</td>
+				<td class="accusecontent">${accuse.ac_reason}</td>
 				<td><a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user1_num}">${accuse.user1_nickname}</a></td>
 				<td><a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}">${accuse.user2_nickname}</a></td>
 				<td><button class="btn btn-md btn-warning">확인</button></td>
@@ -130,8 +130,7 @@
 
 <script id="template-list-item" type="text/template">
 
-	<form class="form-horizontal" action="/action_page.php">
-		
+	<form class="form-horizontal" action="/action_page.php">		
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="pwd">ID:</label>
 		<div class="col-sm-10">

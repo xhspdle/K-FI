@@ -253,4 +253,7 @@ word-break:break-all;
 .hidediv {
 	display: none;
 }
+table tr td{
+	cursor:pointer;
+}
 

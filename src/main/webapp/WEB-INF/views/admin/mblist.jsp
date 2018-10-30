@@ -43,6 +43,12 @@
 			}
 		});
 	});
+	$(function() {
+		$(".usercontent").attr({'data-toggle':'modal','data-target':'#myModal'});
+		$(".usercontent").click(function(){
+			
+		});
+	});
 </script>
 
 <script id="adminlist-template" type="text/template">
@@ -72,18 +78,17 @@
 		</tr>
 		<c:forEach var="user" items="${mblist }">
 			<tr>
-				<td><a data-toggle="modal" data-target="#mbgetinfo_modal" id="mbgetinfo">${user.user_num}</a></td>
-				<td>${user.user_id }</td>
-				<td>${user.user_nickname }</td>
-				<td>${user.user_email }</td>
-				<td>${user.user_regdate }</td>
+				<td class="usercontent" >${user.user_num}</td>
+				<td class="usercontent">${user.user_id }</td>
+				<td class="usercontent">${user.user_nickname }</td>
+				<td class="usercontent">${user.user_email }</td>
+				<td class="usercontent">${user.user_regdate }</td>
 				<td><a href="mbdelete?user_num=${user.user_num }"><i class="glyphicon glyphicon-remove"></i></a></td>
 			</tr>
 		</c:forEach>
 	</table>		
 	<div class="btn-group">
-		<button class="btn btn-lg" data-toggle="modal" data-target="#myModal"
-			id="mbgetinfo">등록</button>
+		<button class="btn btn-lg" data-toggle="modal" data-target="#myModal">등록</button>
 		<button class="btn btn-lg">체크박스</button>
 	</div>
 </div>
