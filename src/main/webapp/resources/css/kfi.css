@@ -379,6 +379,9 @@ input[type='file'] {
 #myBoardList .panel-group .panel-body .img-responsive {
 	max-height: 500px;
 }
+#myBoardSelect .panel-group .panel-body .img-responsive {
+	max-height: 700px;
+}
 .panel-heading:hover {
 	background-color: silver !important;
 	cursor: pointer;

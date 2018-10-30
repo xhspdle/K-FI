@@ -17,10 +17,10 @@ public class MyBoardListViewDao {
 		return session.selectOne(NAMESPACE + ".getMaxNum");
 	}
 	public int getCount(HashMap<String, Object> map) {
-		return session.selectOne(NAMESPACE + ".getCount",map);
+		return session.selectOne(NAMESPACE + ".getCount", map);
 	}
 	public List<Object> list(HashMap<String, Object> map){
-		return session.selectList(NAMESPACE + ".list",map);
+		return session.selectList(NAMESPACE + ".list", map);
 	}
 	public MyBoardListViewVo select(int mb_num) {
 		return session.selectOne(NAMESPACE + ".select", mb_num);

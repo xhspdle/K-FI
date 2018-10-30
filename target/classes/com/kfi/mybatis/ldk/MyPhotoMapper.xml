@@ -28,6 +28,6 @@
 		select * from my_photo
 	</select>
 	<select id="select" parameterType="int" resultType="myphoto">
-		select * from my_photo where mp_num=#{mp_num}
+		select * from my_photo where mb_num=#{mb_num}
 	</select>
 </mapper>

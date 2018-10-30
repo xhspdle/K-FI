@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kfi.ldk.service.CommonViewService;
+import com.kfi.ldk.service.CommonService;
 import com.kfi.ldk.util.PageUtil;
 
 @Controller(value="MyBoardListController")
 public class ListController {
 	@Autowired 
-	@Qualifier("myBoardListViewServiceImpl") private CommonViewService service;//Qualifier("앞문자소문자")
+	@Qualifier("myBoardServiceImpl") private CommonService service;//Qualifier("앞문자소문자")
 	@RequestMapping("/mypage/myboard/list")
 	@ResponseBody
 	public HashMap<String, Object> list(@RequestParam(value="pageNum",defaultValue="1")

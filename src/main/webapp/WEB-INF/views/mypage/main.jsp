@@ -4,6 +4,7 @@
 
 <input type="hidden" id="getPageContext" value="<c:url value='/'/>">
 <div id="myBoardList" class="container">
+<input type="hidden" id="myBoardListHere" value="MBL">
 <!--  
 	<div class="panel-group">
 		<div class="panel panel-default">

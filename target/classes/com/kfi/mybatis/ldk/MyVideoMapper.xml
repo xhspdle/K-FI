@@ -28,6 +28,6 @@
 		select * from my_video
 	</select>
 	<select id="select" parameterType="int" resultType="myvideo">
-		select * from my_video where mv_num=#{mv_num}
+		select * from my_video where mb_num=#{mb_num}
 	</select>
 </mapper>

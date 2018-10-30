@@ -2,6 +2,7 @@
 	scroll : layout.jsp
  */
 $(document).ready(function(){
+  //var getPageContext=$("#getPageContext").val();
   $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
     if (this.hash !== "") {
       event.preventDefault();
@@ -153,6 +154,7 @@ $(document).ready(function(){
 	  $(this).prop('disabled',true);
 	  var form=document.frm;
 	  var formData=new FormData(form);
+	  console.log(getPageContext);
 	  var ajaxReq=$.ajax({
 		  url: getPageContext + "/mypage/myboard/insert",
 		  type: 'post',
@@ -199,7 +201,7 @@ $(document).ready(function(){
 		 $("#sendServer").prop('disabled',false);
 	  });
   });
-  
+  var sameDate='';
   $.getList=function(pageNum,keyword){
 	  	var getPageContext=$("#getPageContext").val();
 		$.getJSON(getPageContext + "/mypage/myboard/list",
@@ -210,13 +212,19 @@ $(document).ready(function(){
 					var user_num=json.user_num;
 					var mb_title=json.mb_title;
 					var mb_content=json.mb_content;
-					var mb_date=json.mb_date;
 					var mb_views=json.mb_views;
 					var comment_cnt=json.comment_cnt;
 					var like_cnt=json.like_cnt;
 					var mp_savimg=json.mp_savimg;
 					var mv_savvid=json.mv_savvid;
 					var attachment='';
+					if(sameDate!==json.mb_date){
+						$("<h1 class='text-center' id='"+ json.mb_date +"' style='margin-bottom:30px;'>" +
+						  "<span style='border-bottom: 4px solid black'>" + json.mb_date +
+						  "</span></h1>")
+						  .appendTo("#myBoardList");
+					}
+					sameDate=json.mb_date;
 					if(mv_savvid!=null && mv_savvid!=''){
 						attachment="<video class='img-responsive center-block' controls autoplay muted='muted' loop src='"+getPageContext +"/resources/upload/vid/" + mv_savvid + "'></video>";
 					}else if(mp_savimg!=null && mp_savimg!=''){
@@ -230,7 +238,7 @@ $(document).ready(function(){
 						  "<div class='panel-heading'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
-						  	"<a href='#' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -244,7 +252,7 @@ $(document).ready(function(){
 						  "<div class='panel-heading'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
-						  	"<a href='#' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -262,7 +270,7 @@ $(document).ready(function(){
 			  			 "<h2><a class='btn btn-default' href='javascript:$.getListMore()'>" +
 			  			 "<span class='glyphicon glyphicon-plus'></span> More </a></h2></div>");
   }
-  if($("#getPageContext").val()!==undefined){
+  if($("#myBoardListHere").val()!==undefined){
 	  $.getList();
 	  $.footerBtn();
   }

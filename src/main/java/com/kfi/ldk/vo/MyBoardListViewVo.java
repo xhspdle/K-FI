@@ -2,11 +2,14 @@ package com.kfi.ldk.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class MyBoardListViewVo {
 	private int mb_num;
 	private int user_num;
 	private String mb_title;
 	private String mb_content;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date mb_date;
 	private int mb_views;
 	private int comment_cnt;

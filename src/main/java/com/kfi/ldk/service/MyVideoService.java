@@ -29,8 +29,8 @@ public class MyVideoService {
 		return dao.delete(mp_num);
 	}
 	public Object select(Object data) {
-		int mp_num=(Integer)data;
-		return dao.select(mp_num);
+		int mb_num=(Integer)data;
+		return dao.select(mb_num);
 	}
 	public List<Object> list(Object data) {
 		return dao.list();
