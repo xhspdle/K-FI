@@ -131,7 +131,6 @@ $(function() {
 		var day=$(this).prop("id");
 		var d=day.slice(1,2);
 		if(d==='') day="0"+day;
-		alert("#"+year+month+day);
 		var top=$("#"+year+"-"+month+"-"+day).offset().top; 
 		// 상단을 기준으로 #요소가 위치한 거리를 절대좌표로 반환
 		$("html, body").animate({

@@ -22,15 +22,15 @@
 					  title: '${list.cc_name}',  
 	                   start: '${list.cc_begin}',
 	                   end: '${list.cc_end}',
-	                   url: getPageContext+'/mypage/mycommcalendar'
+	                   url: getPageContext+'/mypage/mycommcalendar',
+	                   <c:if test="${list.cc_begin === begin} ">color:'red'</c:if> 
 				}, 
+				<c:set var="begin" value="${list.cc_begin}"/>
 				</c:forEach>
 				],
 				eventMouseover:function(calEvent,jsEvent,view){
-					//alert("title: "+calEvent.title);
-					//alert("jsEvent: "+jsEvent.pageX);
 					$(this).css('border-color','red');
-					$('<div class="calevent">'+calEvent.title+'</div>').appendTo(this).css({zIndex:999,'border':'lightpink 1px solid','backgroundColor':'lightpink',pageX:jsEvent.pageX+100,pageY:jsEvent.pageY+100});
+					$('<div class="calevent">'+calEvent.title+'</div>').appendTo(this).css({width:100,height:100,zIndex:999,'border':'lightpink 1px solid','backgroundColor':'lightpink',pageX:jsEvent.pageX,pageY:jsEvent.pageY});
 				},
 				eventMouseout:function(calEvent,jsEvent,view){
 					$(".calevent").empty();
@@ -41,7 +41,7 @@
 						// window.open(event.url);
 						return false;
 					} */
-				}
+				}, eventColor: '#00cee8'
 		})
 	});
 </script>
