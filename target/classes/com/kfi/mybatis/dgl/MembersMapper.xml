@@ -48,4 +48,8 @@
 	<select id="getCount" parameterType="hashmap" resultType="int">
 		select NVL(count(user_num),0) cnt from members
 	</select>
+	
+	<select id="list" resultType="logmembers">
+		select * from members
+	</select>
 </mapper>

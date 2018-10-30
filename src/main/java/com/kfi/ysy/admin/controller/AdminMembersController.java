@@ -21,17 +21,16 @@ import com.kfi.ysy.admin.util.AdminPageUtil;
 public class AdminMembersController {
 	@Autowired private MembersService mbservice;
 	@RequestMapping(value = "/mblist", method = RequestMethod.GET)
-	public String mblist(@RequestParam(value="pagenum", defaultValue="1")int pagenum,String field,String keyword, Model model) {
-/*		
-		AdminPageUtil apu=new AdminPageUtil(totalrowcnt, pagenum, 5, 5);
+	public String mblist( Model model) {
+		
+
 		List<MembersVo> mblist = mbservice.list();
 		if(mblist!=null) {
 			model.addAttribute("mblist", mblist);
 			return ".admin.mblist";
 		}else {
 			return ".error";
-		}*/
-		return ".admin.mblist";
+		}
 	}
 /*	@RequestMapping(value="/mbdelete", method=RequestMethod.GET)
 	public String mbdelete(int user_num) {

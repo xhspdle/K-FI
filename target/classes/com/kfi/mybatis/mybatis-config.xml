@@ -30,6 +30,7 @@
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/FaqMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/dgl/MembersMapper.xml"/>
 	</mappers>
 </configuration>
