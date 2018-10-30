@@ -24,10 +24,6 @@
 		<![CDATA[select USER_NUM, USER_ID, USER_NICKNAME, USER_EMAIL, USER_STATUS from members where USER_ID = #{userId}]]>
 	</select> 
 	-->
-	<!-- 로그인 -->
-	<select id="login" resultType="logmembers" parameterType="hashmap" >
-		select * from members where USER_ID = #{userId} and  USER_PWD=#{userPwd}
-	</select>
 	
 	<!-- <insert id="createKey">
 		insert into CERTI_MEMBERS values(#{})
@@ -37,4 +33,20 @@
 	<update id=""> 
 	 	<![CDATA[update members set USER_CERTI = 1 where (select count(*) from members where USER_EMAIL = #{userEmail}) > 0]]>
 	 </update> -->
+	 
+	<!-- 로그인 -->
+	<select id="login" resultType="logmembers" parameterType="hashmap" >
+		select * from members where USER_ID = #{userId} and  USER_PWD=#{userPwd}
+	</select>
+	
+	<!-- 마지막유저번호 -->
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(_num),0) maxnum from members
+	</select>
+	
+	<!-- 유저번호 -->
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		select NVL(count(_num),0) cnt from members
+		<include refid="search"/>
+	</select>
 </mapper>
