@@ -1,16 +1,16 @@
 /*package com.kfi.dgl.members.controller;
 
-import java.io.UnsupportedEncodingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.Service;
 
-import javax.mail.MessagingException;
-
+import org.hibernate.validator.internal.util.logging.Log_.logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kfi.dgl.certiMembers.util.MailUtil;
 import com.kfi.dgl.members.service.MembersService;
 import com.kfi.dgl.members.vo.MembersVo;
 
@@ -23,10 +23,10 @@ public class MailController{
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	@RequestMapping("/mailpost")
-	public String insertmember(MembersVo vo) throws MessagingException, UnsupportedEncodingException{
-		membersService.insert(vo);
-		MailUtil sendMail = new MailController(MailSender);
+	@RequestMapping(value="/mailpost", method= RequestMethod.POST)
+	public String MailPost(MembersVo , HttpServletRequest request, HttpSession session ) throws Exception{
+		Service.create()
+		
 	}
 }
 */

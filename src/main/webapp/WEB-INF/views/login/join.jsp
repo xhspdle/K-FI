@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+	#
+</style>
 <script type="text/javascript">
 	function checkMail() {
 		var email = document.getElementById("email").value;
@@ -50,9 +53,10 @@
 		return false;
 	}
 	var idFlag = false;
+	var nickFlag = false;
 	var pwFlag = false;
 	var authFlag = false;
-	/* id체크 부분 */
+	/* id 중복 체크 부분 */
 	function checkId(event) {
 		if (idFlag)
 			return true;
@@ -73,7 +77,7 @@
 		idFlag = false;
 		$.ajax({
 			type : "GET",
-			url : "/" + id, /*  / 주소 입력 해야함 */
+			url : "<%=request.getContextPath()%>/login/join" + id, /*  / 주소 입력 해야함 */
 			success : function(data) {
 				var result = data.substr(4);
 				if (result == "Y") {
@@ -84,13 +88,33 @@
 					}
 					idFlag = true;
 				} else {
-					showErrorMsg(eMsg, "이미사용중인 아이디 에요!!");
+					showErrorMsg(eMsg, "이미사용중인 닉네임 이에요!!");
+				} else {
+					
 				}
 			}
 		});
 		return true;
 	}
-	/* 비번체크 부분 */
+	/* 닉네임 중복 체크 부분 */
+	function checkNickname(){
+		if(nickFlag) return true;
+		
+		var nickname = $("#nickname").val();
+		
+		if(nickname == ""){
+			showErrorMsg(eMsg, "반드시 입력해주세요.");
+			return false;
+		}
+		var isNick = /^[a-z0-9][가-힝]{4,19}$/;
+		if (!isNick.test(id)) {
+			showErrorMsg(eMsg, "영문(5~20자), 한글(2~10자) 로 이루어진 닉네임을 만들어 주세요.");
+			return false;
+		}
+		
+	}
+	
+	/* 비번 체크 부분 */
 	function checkPwd1(){
 		if(pwFlag) return true;
 		
@@ -101,18 +125,42 @@
 			showErrorMsg(eMsg, "반드시 입력해주세요!");
 			return false;
 		}
+	}
+		
+		
 		pwFlag =false;
 		$.ajax({
 			type:"GET",
 			url:"&id=" +escape(encodeURIComponent(id)) + "&pw=" + escape(encodeURIComponent(pw)), success :
 			success : function(data){
 				var result = data.substr(5);
-				if(result = 1){
-					showPw
-				})
-			} 
+				if(result == 1){
+					showErrorMsg(eMsg,"10~20자 대,소문자, 숫자, 특수문자를 사용하세요.");
+					return false;
+				
+				}else if(result == 2){
+					showErrorMsg(eMsg, "10~20자 대,소문자, 숫자, 특수문자를 사용하세요.");
+				}else if(result == 3){
+					eMsg.hide();
+				}else if(result == 4){
+					eMsg.hide();
+				}
+				pwFlag = true;
+				createRsaKey();s
+			});
 		});
-	});
+		return true;
+	}
+	
+	function checkPwd2() {
+		var pw1 = $("#pw1");
+		var pw2 = $("#pw2");
+		
+		if (pw2 == "") {
+			showErrorMsg(eMsg, "반드시 입력해주세요!");
+			return false;
+		}
+	
 </script>
 <title>회원가입</title>
 </head>
@@ -125,7 +173,7 @@
 	</a>
 	</h1>
 	</div>
-	<form action=""<c:url value='../'/>"" method="post">
+	<form action=""<c:url value='../'/> method="post">
 		<div>아이디 <input type="text" name="id" id="id">
 			<input type="button" value="ID중복체크" onclick="checkId()"><br>
 			<label id="id2" for="id"></label>

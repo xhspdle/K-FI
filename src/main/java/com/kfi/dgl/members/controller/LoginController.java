@@ -42,8 +42,8 @@ public class LoginController {
 		
 		//로그인 성공
 		if(vo!=null) { 
-			session.setAttribute("user_num", vo.getUser_Num());
-			session.setAttribute("user_id", vo.getUser_Id());
+			session.setAttribute("user_num", vo.getUser_num());
+			session.setAttribute("user_id", vo.getUser_id());
 			returnURL = "redirect:/mypage/main";
 		}else {
 			returnURL = "redirect:/login/login";
