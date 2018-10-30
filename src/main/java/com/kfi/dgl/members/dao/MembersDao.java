@@ -20,7 +20,7 @@ public class MembersDao {
 	public int insert(MembersVo vo) {
 		return sqlSession.insert(NAMESPACE +".insert", vo);
 	}
-	
+	//admin에서 사용
 	public List<MembersVo> list() {
 		return sqlSession.selectList(NAMESPACE +".list");
 	}

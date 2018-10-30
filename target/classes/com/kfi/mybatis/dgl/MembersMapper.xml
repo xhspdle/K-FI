@@ -37,4 +37,8 @@
 	<update id=""> 
 	 	<![CDATA[update members set USER_CERTI = 1 where (select count(*) from members where USER_EMAIL = #{userEmail}) > 0]]>
 	 </update> -->
+<!--/////////////////////////////////////////////////////////////////admin에서 사용 -->
+	 <select id="list" resultType="logmembers">
+		select * from members
+	</select>
 </mapper>
