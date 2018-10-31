@@ -16,12 +16,6 @@ public class MyCommCalendarDao {
 	@Autowired private SqlSession session;
 	private final static String NAMESPACE="com.kfi.mybatis.jyi.MyCommCalendarMapper";
 	
-	//유저가 속한 모임의 일정 가져오기 
-	public List<CommCalendarVo> myCommCalendar(HashMap<String, Object> hm){
-		return session.selectList(NAMESPACE+".MyCommCalList",hm);
-	}
-	
-	
 	//유저가 가입한 모든 모임의 정보 가져오기
 	public List<CommunityVo> getMyCommunityList(int user_num){
 		return session.selectList(NAMESPACE+".myCommunityList",user_num);

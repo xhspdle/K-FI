@@ -19,42 +19,36 @@ import com.kfi.jyi.vo.CommunityVo;
 
 @Controller(value = "MyCommCalendarController")
 public class MyCommCalendarController {
-	@Autowired private MyCommCalendarService service;
-	
+	@Autowired
+	private MyCommCalendarService service;
+
 	@RequestMapping(value = "/mypage/mycommcalendar", method = RequestMethod.GET)
-	public String mycommcalendar(Model model, HttpSession session, 
-			@RequestParam(defaultValue="all",required=false,value="comm_num") String comm_num, 
-			String comm_name, 
-			@RequestParam(defaultValue="gathering",required=false,value="gathering") String gathering) {
-	
-		MyCalendar mc=new MyCalendar();
-		List<CommCalendarVo> monthlist=null;
-		//int user_num=(Integer)session.getAttribute("user_num");
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("user_num", 1);	//user_num
-		hm.put("comm_num", null);
-		if(comm_num.equals("all") && gathering.equals("gathering")) {
-			 monthlist=service.myCommCalendar(hm);//user_num
-		}else{
-			if(!(comm_num.equals("all"))) {
-				int commNum=Integer.parseInt(comm_num);
-				hm.put("comm_num",commNum);
-				model.addAttribute("comm_name", comm_name);
-			}
-			hm.put("gatheringOk",null);
-			if(!(gathering.equals("gathering"))) {
-				hm.put("gatheringOk","gatheringOk");
-				model.addAttribute("gathering",gathering);
-			}
-			monthlist=service.getheringCalendar(hm);
+	public String mycommcalendar(Model model, HttpSession session,
+			@RequestParam(defaultValue = "all", required = false, value = "comm_num") String comm_num, String comm_name,
+			@RequestParam(defaultValue = "gathering", required = false, value = "gathering") String gathering) {
+
+		MyCalendar mc = new MyCalendar();
+		List<CommCalendarVo> monthlist = null;
+		// int user_num=(Integer)session.getAttribute("user_num");
+		HashMap<String, Object> hm = new HashMap<>();
+		hm.put("user_num", 1); // user_num
+		if (!(comm_num.equals("all"))) {
+			int commNum = Integer.parseInt(comm_num);
+			hm.put("comm_num", commNum);
+		}else {
+			hm.put("comm_num", null);
 		}
-		monthlist=mc.changeEnd(monthlist);
-		model.addAttribute("monthlist",monthlist);
+		hm.put("gatheringOk", gathering);
+		monthlist = service.getheringCalendar(hm);
+		monthlist = mc.changeEnd(monthlist);
+		model.addAttribute("monthlist", monthlist);
+		model.addAttribute("comm_name", comm_name);
+		model.addAttribute("gathering", gathering);
 
 		/* 유저가 속한 모든 커뮤니티 목록 불러오기 */
-		List<CommunityVo> communitylist =service.getMyCommunityList(1);
+		List<CommunityVo> communitylist = service.getMyCommunityList(1);
 		model.addAttribute("communitylist", communitylist);
-
+		
 		return ".mypage.mycommcalendar.calendar";
 	}
 }

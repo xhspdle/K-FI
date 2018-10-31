@@ -9,7 +9,7 @@
 		select comm_num from comm_user_list where user_num=#{user_num}
 	</sql>
 	
-	<!-- comm_num!=0 이면 선택한 커뮤니티 일정 불러오기 -->
+	<!-- comm_num!=null 이면 선택한 커뮤니티 일정 불러오기 -->
 	<sql id="find_comm_num">
 		<choose>
 			<when test="comm_num!=null">
@@ -22,30 +22,27 @@
 	</sql>
 	
 	<!-- 유저의 참석유무에 따른 모임 일정 번호 불러오기 -->
-	<!-- gatheringOk!=null이면 참석 -->
 	<sql id="gathering">
 		<choose>
-			<when test="gatheringOk!=null and gatheringOk!=''">
+			<when test="gatheringOk=='attend'">
               where cc_num in (select cc_num from comm_gathering
                 where cc_num in (
                         select cc_num 
                         from comm_calendar
                         <include refid="find_comm_num"/>))
 			</when>
-			<otherwise>
+			<when test="gatheringOk=='not_attend'">
 			 where cc_num != all (select cc_num from comm_gathering
                 where cc_num in (
                         select cc_num 
                         from comm_calendar
                         <include refid="find_comm_num"/>))
-			</otherwise>
+			</when>
+			<when test="gatheringOk=='gathering'">
+			where comm_num in(<include refid="findUserCommNum"/>)
+			</when>
 		</choose>
 	</sql>
-	
-	<!-- 유저의 참석유무 상관없이 유저가 속한 모든 커뮤니티의 일정 불러오기 -->
-	<select id="MyCommCalList" parameterType="hashmap" resultType="commcalendar">
-    	select * from comm_calendar <include refid="find_comm_num"/>
-	</select>
 
 	<!-- 유저가 속한 모든 커뮤니티 목록 불러오기 -->
 	<select id="myCommunityList" parameterType="int" resultType="community">
@@ -55,9 +52,7 @@
 	<!-- **모임에 참석하면 comm_gathering테이블 insert됨 -->
 	<!-- 유저의 참석유무 및 커뮤니티 선택에 따른 일정 불러오기 -->
 	<select id="getheringCalendar" parameterType="hashmap" resultType="commcalendar">
-		select * from comm_calendar
-		<include refid="gathering"/>
+		select * from comm_calendar <include refid="gathering"/>
 	</select>
-
 
 </mapper>

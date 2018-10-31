@@ -28,9 +28,9 @@
 				</c:forEach>
 				],
 				eventMouseover:function(calEvent,jsEvent,view){
-				/* 	$(this).parent().css({
-						"position":"absolute"
-					}); */
+					$(".fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead").css({
+						'overflow': 'visible'
+					}); 
 					$('<div class="calevent">'+calEvent.id+'</div>')
 					.appendTo(this).parent().css({pageX:jsEvent.pageX,pageY:jsEvent.pageY});
 				},
@@ -52,13 +52,16 @@
 		})
 		$("#mypage_communitylist").on('change',function(){
 			var comm_num=$('#mypage_communitylist option:selected').val();
+			var gathering=$('#comm_gathering option:selected').val();
 			var comm_name=$('#mypage_communitylist option:selected').text();
-			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num+"&comm_name="+comm_name;
+			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num
+					+"&comm_name="+comm_name+"&gathering="+gathering;
 		});
 		$("#comm_gathering").on('change',function(){
 			var comm_num=$('#mypage_communitylist option:selected').val();
 			var gathering=$('#comm_gathering option:selected').val();
 			var comm_name=$('#mypage_communitylist option:selected').text();
+			alert(comm_name);
 			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num
 					+"&comm_name="+comm_name+"&gathering="+gathering;
 		});

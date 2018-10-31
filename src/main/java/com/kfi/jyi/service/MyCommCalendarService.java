@@ -14,11 +14,6 @@ import com.kfi.jyi.vo.CommunityVo;
 public class MyCommCalendarService {
 	@Autowired private MyCommCalendarDao dao;
 	
-	//유저가 속한 모임의 일정 가져오기 
-	public List<CommCalendarVo> myCommCalendar(HashMap<String, Object> hm){
-		return dao.myCommCalendar(hm);
-	}
-	
 	//유저가 가입한 모든 모임의 정보 가져오기
 	public List<CommunityVo> getMyCommunityList(int user_num){
 		return dao.getMyCommunityList(user_num);
