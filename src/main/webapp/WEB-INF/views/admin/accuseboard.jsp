@@ -98,10 +98,10 @@
 	/* 		userinfobody.empty(); */
 			var user_num=event.target.id;
 			$.getJSON("<c:url value='/mbgetinfo'/>",{
-				user_num : user_num,
+				user_num : user_num, 
 			},function(data){
 				alert(data.acc_id);
- 				html=document.querySelector("#template-list-item").innerHTML;
+ 				html=document.querySelector("#userinfolist-temlpate").innerHTML;
 				alert(html)
  				var resultHTML=html.replace("{acc_id}", data.acc_id)
    					.replace("{acc_nick}", data.acc_nick)
@@ -128,8 +128,7 @@
 	
 </script>
 
-<script id="template-list-item" type="text/template">
-
+<script id="userinfolist-temlpate" type="text/template">
 	<form class="form-horizontal" action="/action_page.php">		
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="pwd">ID:</label>
@@ -158,9 +157,5 @@
 		<div class="col-sm-10">
 			<input type="text" class="form-control" value={acc_date}>
 		</div>
-
 	</form>
-					
-
-
 </script> 

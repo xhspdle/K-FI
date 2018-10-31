@@ -23,17 +23,27 @@
 									var admin_id='<c:out value="${sessionScope.admininfo.admin_id}"/>';				
 									$("#adminlist table tr:last").after(resultHTML);
 									if(admin_id==data[i].admin_id){
-										var admin_modify_btn='<th><button class="btn btn-sm btn-primary" id="adminmodifybtn"' 
-										+'>수정</button></th>';
+										var admin_modify_btn='<button class="btn btn-sm btn-primary" id="adminmodifybtn"' 
+										+'>수정</button>';
 										$("#adminlist table tr td:last").append(admin_modify_btn);					
 									}
-									$("#adminmodifybtn").attr({'data-toggle':'modal','data-target':'#myModal'});
+									$("#adminmodifybtn").attr({'data-toggle':'modal','data-target':'#admininfo-template'});
 									$("#adminmodifybtn").click(function(){
-										alert("이게버튼이냐?");
-										
-										
-									});
-								
+										alert("이게버튼이냐?");									
+										var admin_num=$(this).parent().parent().children().first().text();
+										$.getJSON("<c:url value='/addetail'/>",{
+											admin_num : admin_num
+										},function(data){
+											alert(data.admin_nick);
+											$("#admininfo_id").text(data.admin_id);								
+											$("#admininfo_pwd").val(data.admin_pwd);
+											$("#admininfo_nick").text(data.admin_nick);
+											$("#admininfo_email").val(data.admin_email);
+											$("#admininfo_regdate").text(data.admin_regdate);
+											admininfo_id
+											console.log($("#admin_nick").val());										
+										});							
+									});					
 								} 						
 							}
 						});
@@ -56,7 +66,6 @@
 			
 		});
 	});
-
 </script>
 
 <script id="adminlist-template" type="text/template">
@@ -113,19 +122,10 @@
 			<th>관리자EMAIL</th>
 			<th>가입일</th>
 			<th>관리자정보</th>
-<%-- 	<c:choose>
-			<c:when test="${admin.admin_id == admin_id}">
-				
-			</c:when>
-			<c:otherwise>
-				<td></td>
-			</c:otherwise>
-		</c:choose> --%>
 		</tr>
 	</table>
 </div>
 <div id="testinfo"></div>
-
 
 <div class="modal" id="myModal">
 	<div class="modal-dialog1">
@@ -178,3 +178,46 @@
 		</div>
 	</div>
 </div>
+
+<div class="container modal modal-dialog1 modal-content" id="admininfo-template" >
+	<form class="form-horizontal " action="/adupdate" method="post">
+		<div class="form-group">
+			<label class="control-label col-sm-2" >ID:</label>
+			<div class="col-sm-10">
+				<p class="form-control-static" id="admininfo_id"></p>
+			</div> 
+		</div>
+		<div class="form-group ">
+			<label class="control-label col-sm-2" >NICKNAME:</label>
+			<div class="col-sm-10">
+				<p class="form-control-static" id="admininfo_nick"></p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">Password:</label>
+			<div class="col-sm-10">          
+				<input type="text" class="form-control" id="admininfo_pwd">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">Email:</label>
+			<div class="col-sm-10">          
+				<input type="text" class="form-control" id="admininfo_email">
+			</div>
+		</div>
+		<div class="form-group ">
+			<label class="control-label col-sm-2">가입일:</label>
+			<div class="col-sm-10">
+				<p class="form-control-static" id="admininfo_regdate"></p>
+			</div>
+		</div>
+		<div class="form-group">        
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">Submit</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+

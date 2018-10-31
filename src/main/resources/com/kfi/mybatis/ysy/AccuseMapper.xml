@@ -8,7 +8,7 @@
 			where ${field} like '%'||#{keyword}||'%'
 		</if>
 	</sql>
-	<select id="aclist" parameterType="hashmap" resultType="com.kfi.ysy.admin.vo.AccuseVo">
+	<select id="aclist" parameterType="hashmap" resultType="accuse">
 	select * from
 	(
 		select aclist.*,rownum rnum from 

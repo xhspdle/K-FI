@@ -15,7 +15,7 @@
 		select nvl(count(*),0) getcnt from admin_board
 		<include refid="search"/>
 	</select>
-	<select id="ablist" parameterType="hashmap" resultType="com.kfi.ysy.admin.vo.AdminBoardVo">
+	<select id="ablist" parameterType="hashmap" resultType="adminboard">
 		select * from
 		(
 			select ablist.*,rownum rnum from 
@@ -27,10 +27,10 @@
 		)
 		<![CDATA[ where rnum>=#{startrow} and rnum<=#{endrow}]]>
 	</select>
-	<select id="abdetail" resultType="com.kfi.ysy.admin.vo.AdminBoardVo">
+	<select id="abdetail" resultType="adminboard">
 		select * from admin_board where ab_num=#{ab_num}
 	</select>
-	<insert id="abinsert" parameterType="com.kfi.ysy.admin.vo.AdminBoardVo">
+	<insert id="abinsert" parameterType="adminboard">
 		insert into admin_board values(#{ab_num},#{admin_num},0,#{ab_content},#{ab_title},sysdate)
 	</insert>
 	<delete id="abdelete" parameterType="int">
