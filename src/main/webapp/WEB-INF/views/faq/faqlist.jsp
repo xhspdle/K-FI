@@ -31,8 +31,7 @@
 			<div class="panel-heading">
 				<a href="#myPage"><img style="width:50px; height:50px;border-radius:50px;" class="miniLogo" alt="simpleLogo" src="<c:url value='/resources/images/1 (1).jpg'/>"></a>
 				${faqlist.user_num }
-				${faqlist.qa_title }
-				
+				${faqlist.qa_title }		
 			</div>
 			<div class="panel-body">
 				${faqlist.qa_num}<br>
@@ -42,7 +41,7 @@
 				${faqlist.qa_date }
 				${faqlist.admin_num }
 			<div class="hidediv" >
-				<form action="faqcomment" method="post">
+				<form action="faqinsert" method="post">
 					<input type="hidden" name="qa_num" value="${faqlist.qa_num}">
 					<input type="hidden" name="ref" value="${faqlist.ref}">
 					<input type="hidden" name="lev" value="${faqlist.lev}">

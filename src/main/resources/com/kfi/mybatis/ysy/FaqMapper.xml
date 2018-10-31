@@ -6,6 +6,9 @@
 	<select id="faqmaxnum" resultType="int">
 		select nvl(max(qa_num),1) maxnum from faq
 	</select>
+<!-- 	<select id="faqgetcnt" parameterType="hashmap" resultType="int">
+		select nvl(count(*),0) cnt from faq
+	</select> -->
 	<select id="faqlist" resultType="faq">
 		select * from faq
 	</select>
@@ -15,4 +18,5 @@
 	<select id="faqdetail" parameterType="int" resultType="faq">
 		select * from faq where qa_num=#{qa_num}
 	</select>
+	
 </mapper>

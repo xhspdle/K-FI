@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -85,7 +86,7 @@ public class AdminController {
 		}
 	}
 //관리자 목록
-	@RequestMapping(value="/adminlist", produces="application/json;charset=utf-8")
+/*	@RequestMapping(value="/adminlist", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String adminlist() {
 		List<AdminVo> adminlist=service.adminlist();
@@ -102,18 +103,18 @@ public class AdminController {
 			jsonarr.put(json);
 		}
 		return jsonarr.toString();	
-	}
-/*	
+	}*/
+	
 	@RequestMapping(value="/adminlist", method=RequestMethod.GET)
 	public String adminlist(Model model) {
 		List<AdminVo> adminlist=service.adminlist();
 		model.addAttribute("adminlist", adminlist);
 		if(adminlist!=null) {
-			return ".admin.mblist";
+			return ".admin.adminlist";
 		}else{
 			return ".admin";
 		}	
-	}*/
+	}
 //관리자 정보보기
 	@RequestMapping(value="/addetail", produces="application/json;charset=utf-8")
 	@ResponseBody
@@ -132,8 +133,11 @@ public class AdminController {
 	@RequestMapping(value="/admodify", method=RequestMethod.POST)
 	public String admodify(AdminVo vo) {
 		int result=service.admodify(vo);
+		
+		System.out.println(vo.getAdmin_id());
+		System.out.println(vo.getAdmin_pwd());
 		if(result>0) {
-			return null;
+			return "redirect:/addetail";
 		}else {
 			return ".main.error";
 		}

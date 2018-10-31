@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function() {
 		$("#adminlist_btn").click(
 				function() {
@@ -36,6 +36,7 @@
 										},function(data){
 											$("#admininfo_num").val(data.admin_num);
 											$("#admininfo_id").text(data.admin_id);
+											$("#admin_id").val(data.admin_id);
 											$("#admininfo_nick").val(data.admin_nick);
 											$("#admininfo_pwd").val(data.admin_pwd);
 											$("#admininfo_email").val(data.admin_email);
@@ -49,7 +50,7 @@
 						$("#adminlist").css("display", "block");
 					}
 				});
-	});
+	}); 
 	$(function() {
 		$("#memberslist_btn").click(function() {
 			if ($("#memberslist").css("display") == "none") {
@@ -63,8 +64,8 @@
 		$(".usercontent").click(function(){
 			
 		});
-	});
-</script>
+	}); 
+</script>-->
 
 <script id="adminlist-template" type="text/template">
 	<tr>	
@@ -80,7 +81,7 @@
 <div id="memberslist"> 
 	<h1>
 		회원정보
-		<button class="btn btn-md" id="adminlist_btn">관리자정보</button>
+		<button class="btn btn-md" onclick="location.href='/kfi/adminlist'">관리자정보</button>
 	</h1>
 	<table class="table table-striped">
 		<tr>
@@ -183,9 +184,10 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" >ID:</label>
 			<div class="col-sm-10">
-				<p class="form-control-static" id="admininfo_id" ></p>
+				<p class="form-control-static" id="admininfo_id"></p>
 			</div> 
 		</div>
+		<input type="hidden" id="admin_id" name="admin_id">
 		<div class="form-group ">
 			<label class="control-label col-sm-2" >NICKNAME:</label>
 			<div class="col-sm-10">
