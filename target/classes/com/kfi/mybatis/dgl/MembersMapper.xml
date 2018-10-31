@@ -16,10 +16,7 @@
 	private int user_certi; // 인증상태 USER_CERTI	 -->
 	
 	
-<!-- 	 <insert id="insert" parameterType="logmembers">
-		insert into members values
-		(#{userNum}, #{userId},#{userNickname}, #{userPwd}, #{userEmail}, #{userRegdate},0,0)
-	</insert> -->
+
 	<update id="update" parameterType="logmembers">
 		update members set USER_NICKNAME=#{userNickname}, USER_PWD=#{userPwd}, USER_EMAIL=#{userEmail}
 	</update>
@@ -29,12 +26,11 @@
 	</delete>
 	
 
-	<!--
-	 <select id="login" resultType="com.kfi.dgl.members.vo.MembersVo">
-		<![CDATA[select USER_NUM, USER_ID, USER_NICKNAME, USER_EMAIL, USER_STATUS from members where USER_ID = #{userId}]]>
-	</select> 
-	-->
-	
+	<!-- 가입 -->
+ 	 <insert id="join" parameterType="logmembers">
+		insert into members values
+		(#{user_num}, #{user_id},#{user_nickname}, #{user_pwd}, #{user_email}, sysdate,0,0)
+	</insert>
 	 
 	<!-- 로그인 -->
 	<select id="login" resultType="logmembers" parameterType="hashmap" >

@@ -17,8 +17,8 @@ public class MembersService {
 		this.dao = dao;
 	}
 
-	public int insert(MembersVo vo) {
-		return dao.insert(vo);
+	public int join(MembersVo vo) {
+		return dao.join(vo);
 	}
 	//admin에서 사용
 	public List<MembersVo> list(){
@@ -37,7 +37,7 @@ public class MembersService {
 		return dao.login(map);
 		
 	}
-	public int getMaxcnt() {
+	public int getMaxnum() {
 		return dao.getMaxnum();
 	}
 	public int getCnt() {

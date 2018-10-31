@@ -18,9 +18,6 @@ public class MembersDao {
 		this.sqlSession = sqlSession;
 	}
 	
-	public int insert(MembersVo vo) {
-		return sqlSession.insert(NAMESPACE +".insert", vo);
-	}
 	
 	public int delete(int num) {
 		return sqlSession.delete(NAMESPACE +".delete",num);
@@ -32,7 +29,10 @@ public class MembersDao {
 	public int update(MembersVo vo) {
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
-
+	//가입
+	public int join(MembersVo vo) {
+		return sqlSession.insert(NAMESPACE +".join", vo);
+	}
 	//로그인
 	public MembersVo login(HashMap<String,Object> map) {
 		return sqlSession.selectOne(NAMESPACE + ".login",map);

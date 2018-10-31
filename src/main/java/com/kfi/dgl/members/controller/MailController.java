@@ -1,4 +1,4 @@
-package com.kfi.dgl.members.controller;
+/*package com.kfi.dgl.members.controller;
 
 import java.io.UnsupportedEncodingException;
 
@@ -32,7 +32,7 @@ public class MailController{
 	@RequestMapping(value="/mailpost", method= RequestMethod.POST)
 	public String MailPost(MembersVo vo) throws MessagingException, UnsupportedEncodingException{
 		System.out.println("메일 보내요!");
-		int num = membersService.getMaxcnt()+1;
+		int num = membersService.getMaxnum()+1;
 		vo.setUser_num(num);
 		int result= membersService.insert(vo);
 		if(result>0) {
@@ -59,4 +59,4 @@ public class MailController{
 		return "/mypage/main";
 		
 	}
-}
+}*/

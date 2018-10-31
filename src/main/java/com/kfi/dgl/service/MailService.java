@@ -1,4 +1,4 @@
-package com.kfi.dgl.service;
+/*package com.kfi.dgl.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,8 +19,8 @@ public class MailService {
 	MembersDao dao;
 
 	@Transactional
-	public void insert(MembersVo vo) throws Exception {
-		dao.insert(vo);
+	public void createkey(MembersVo vo) throws Exception {
+		dao.createKey(vo);
 
 		String key = new Key().getKey(50, false); // 인증키 생성
 
@@ -37,3 +37,4 @@ public class MailService {
 		sendMail.send();
 	}
 }
+*/

@@ -26,12 +26,16 @@ public class joinController {
 
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
 	public ModelAndView join(MembersVo vo) {
-		int n = service.insert(vo);
-		ModelAndView mv = new ModelAndView("result");
+		int user_num = service.getMaxnum()+1;
+		vo.setUser_num(user_num);
+		System.out.println(vo.getUser_id());
+		System.out.println(vo.getUser_pwd());
+		int n = service.join(vo);
+		ModelAndView mv = new ModelAndView();
 		if (n > 0) {
-			mv.addObject("code", "success");
+			mv.setViewName("login.jsp");
 		} else {
-			mv.addObject("code", "fail");
+			mv.setViewName("join.jsp");
 		}
 		return mv;
 	}
