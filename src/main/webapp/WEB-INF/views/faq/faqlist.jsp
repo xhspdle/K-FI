@@ -42,8 +42,11 @@
 				${faqlist.qa_date }
 				${faqlist.admin_num }
 			<div class="hidediv" >
-				<form action="faqcomm" method="post">
-					${admin.admin_nick }
+				<form action="faqcomment" method="post">
+					<input type="hidden" name="qa_num" value="${faqlist.qa_num}">
+					<input type="hidden" name="ref" value="${faqlist.ref}">
+					<input type="hidden" name="lev" value="${faqlist.lev}">
+					<input type="hidden" name="step" value="${faqlist.step}">
 					<input class="form-group form-control" type="text">
 					<input type="submit" value="작성">
 				</form>
