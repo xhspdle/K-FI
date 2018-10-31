@@ -11,17 +11,17 @@
 		<div class="col-sm-4 col-xs-12">
 			<div class="panel panel-default text-center">
 				<div class="panel-heading">
-					<div>신고접수내용</div>
+				신고인 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user1_num}"> ${accuse.user1_nickname}</a>		
 				</div>
 				<div class="panel-body">
+					<h5>신고접수내용</h5>
 					<p><strong>${accuse.ac_reason}</strong></p>
 				</div>
 				<div class="panel-footer">
-					<h4>신고대상 : ${accuse.user1_nickname}</h4>
-					<h4>신고인 : ${accuse.user2_nickname}</h4>
+				신고대상 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}"> ${accuse.user2_nickname}</a>		
 				</div>
-				<button class="btn btn-md btn-warning">확인</button>
-				<button class="btn btn-md btn-danger">삭제</button>
+					<button class="btn btn-md btn-warning">확인</button>
+					<button class="btn btn-md btn-danger">삭제</button>
 				<br><br>
 			</div>
 		</div>
@@ -62,19 +62,15 @@
 
 <!--  /////////////////////////////신고된 사용자 정보 ////////////////////////////////////-->
 
-<div class="modal" id="accuse_user">
-	<div class="modal-dialog1">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">×</button>
-				<h4 class="modal-title">Question Editor</h4>
-			</div>
-			<div class="modal-body" id="userinfobody">
-				<select>
-				
-				</select>
-			</div>
+<div class="modal modal-dialog1 " id="accuse_user">
+	<div>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h4 class="modal-title">Question Editor</h4>
+		</div>
+		<div class="modal-body" id="userinfobody">
+		
 		</div>
 	</div>
 </div>
@@ -98,7 +94,7 @@
 	/* 		userinfobody.empty(); */
 			var user_num=event.target.id;
 			$.getJSON("<c:url value='/mbgetinfo'/>",{
-				user_num : user_num, 
+				user_num : user_num
 			},function(data){
 				alert(data.acc_id);
  				html=document.querySelector("#userinfolist-temlpate").innerHTML;
@@ -130,29 +126,29 @@
 
 <script id="userinfolist-temlpate" type="text/template">
 	<form class="form-horizontal" action="/action_page.php">		
-		<div class="form-group">
+		<div>
 			<label class="control-label col-sm-2" for="pwd">ID:</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control" value={acc_id}>
 		</div>
-		<div class="form-group">
+		<div>
 			<label class="control-label col-sm-2">NickName:</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control" value={acc_nick}>
 		</div>
-		<div class="form-group">
+		<div>
 			<label class="control-label col-sm-2">Status:</label>
 			<select class="form-control">
-				<option></option>
-				<option>{acc_stat}</option>
-				<option></option>
+				<option>정지</option>
+				<option>정상</option>
+				<option>경고</option>
 			</select>
-		<div class="form-group">
+		<div>
 			<label class="control-label col-sm-2">Email:</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control" value={acc_email}>
 		</div>
-		<div class="form-group">
+		<div>
 			<label class="control-label col-sm-2">가입일:</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control" value={acc_date}>

@@ -28,9 +28,7 @@
 		delete from members where USER_NUM=#{value}
 	</delete>
 	
-	<select id="select" parameterType="int" resultType="logmembers">
-		select * from members where USER_NUM=#{value}
-	</select>
+
 	<!--
 	 <select id="login" resultType="com.kfi.dgl.members.vo.MembersVo">
 		<![CDATA[select USER_NUM, USER_ID, USER_NICKNAME, USER_EMAIL, USER_STATUS from members where USER_ID = #{userId}]]>
@@ -72,9 +70,14 @@
 		select NVL(count(user_num),0) cnt from members
 	</select>
 	
-	
+	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->
 	<select id="list" resultType="logmembers">
 		select * from members
+	</select>
+	
+	<!-- 사용자 조회 -->
+	<select id="select" parameterType="int" resultType="logmembers">
+		select * from members where user_num=#{user_num}
 	</select>
 </mapper>

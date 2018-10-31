@@ -65,6 +65,8 @@ public class MembersDao {
 	public List<MembersVo> list() {
 		return sqlSession.selectList(NAMESPACE +".list");
 	}
-
+	public MembersVo select(int user_num) {
+		return sqlSession.selectOne(NAMESPACE+".select",user_num);
+	}
 
 }

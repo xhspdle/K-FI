@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.dgl.service.MembersService;
 import com.kfi.dgl.vo.MembersVo;
@@ -48,11 +49,11 @@ public class AdminMembersController {
 		MembersVo vo=mbservice.mbgetinfo(user_num);
 		model.addAttribute("mbinfo", vo);
 		return "redirect:/mblist";
-	}
+	}*/
 	@RequestMapping(value="/mbgetinfo", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String mbgetinfo(int user_num) {
-		MembersVo vo=mbservice.mbgetinfo(user_num);
+		MembersVo vo=mbservice.select(user_num);
 		JSONObject obj=new JSONObject();
 		obj.put("acc_id", vo.getUser_id());
 		obj.put("acc_nick", vo.getUser_nickname());
@@ -61,5 +62,5 @@ public class AdminMembersController {
 		obj.put("acc_date",vo.getUser_regdate());
 		System.out.println(obj.toString());
 		return obj.toString();
-	}*/
+	}
 }

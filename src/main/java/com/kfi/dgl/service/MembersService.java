@@ -53,4 +53,7 @@ public class MembersService {
 	public int idcheck(String user_id) {
 		return dao.idCheck();
 	}
+	public MembersVo select(int user_num) {
+		return dao.select(user_num);
+	}
 }
