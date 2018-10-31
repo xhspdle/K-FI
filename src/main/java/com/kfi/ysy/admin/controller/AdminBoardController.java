@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kfi.ysy.admin.service.AdminBoardService;
-import com.kfi.ysy.admin.util.AdminPageUtil;
-import com.kfi.ysy.admin.vo.AdminBoardVo;
+import com.kfi.ysy.service.AdminBoardService;
+import com.kfi.ysy.util.AdminPageUtil;
+import com.kfi.ysy.vo.AdminBoardVo;
 
 
 
@@ -42,7 +42,6 @@ public class AdminBoardController {
 			model.addAttribute("keyword",keyword);
 			return ".admin.adminboard";
 		}else{
-			System.out.println(ablist);
 			return ".main.error";
 		}
 	}
@@ -54,7 +53,7 @@ public class AdminBoardController {
 	//관리자 게시글 등록
 	@RequestMapping(value="/abinsert", method=RequestMethod.POST)
 	public String abinsert(AdminBoardVo vo) {
-		int ab_num=abservice.abmaxcnt()+1;
+		int ab_num=abservice.abmaxnum()+1;
 		vo.setAb_num(ab_num);
 		int result=abservice.abinsert(vo);
 		if (result>0){

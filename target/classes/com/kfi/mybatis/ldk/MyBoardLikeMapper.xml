@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.MyBoardLikeMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(mbl_num),0) maxnum from my_board_like
+	</select>
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		select NVL(count(mbl_num),0) cnt from my_board_like where mb_num=#{mb_num}
+	</select>
+	<insert id="insert" parameterType="myboardlike">
+		insert into my_board_like 
+		values(#{mbl_num},#{mb_num},#{user_num})
+	</insert>
+	<update id="update" parameterType="myboardlike">
+		update my_board_like set user_num=#{user_num} where mbl_num=#{mbl_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from my_board_like where mbl_num=#{mbl_num}
+	</delete>
+	<select id="list" parameterType="hashmap" resultType="myboardlike">
+		select *
+		from
+		(
+	 	select aa.*,rownum rnum 
+	 	from
+	 	(
+	 		select *
+	 		from my_board_like
+	 		where mb_num=#{mb_num}
+	 		order by mbl_num desc
+	 	)aa
+		)
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+	<select id="select" parameterType="int" resultType="myboardlike">
+		select * from my_board_like where mb_num=#{mb_num}
+	</select>
+</mapper>

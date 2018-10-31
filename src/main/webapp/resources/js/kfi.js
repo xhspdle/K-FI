@@ -2,6 +2,7 @@
 	scroll : layout.jsp
  */
 $(document).ready(function(){
+  //var getPageContext=$("#getPageContext").val();
   $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
     if (this.hash !== "") {
       event.preventDefault();
@@ -78,7 +79,7 @@ $(document).ready(function(){
 	  var miniLogo=$(".miniLogo").offset();
 	  var max_width=search.left-miniLogo.left;
 	  $("#searchForm").css('position', 'absolute');
-	  $("#searchForm").css('left', miniLogo.left+2);
+	  $("#searchForm").css('left', miniLogo.left);
 	  $("#searchForm").css('top', miniLogo.top-400-hh);
 	  $("#searchForm").css('width', max_width+ww);
   }
@@ -147,6 +148,64 @@ $(document).ready(function(){
 		  });
 	  }
   });
+  $("#sendServer").click(function(e){
+	  var getPageContext=$("#getPageContext").val();
+	  e.preventDefault();
+	  $(this).prop('disabled',true);
+	  var form=document.frm;
+	  var formData=new FormData(form);
+	  var ajaxReq=$.ajax({
+		  url: getPageContext + "/mypage/myboard/insert",
+		  type: 'post',
+		  data: formData,
+		  cache: false,
+		  contentType: false,
+		  processData: false,
+		  xhr: function(){
+			  var xhr=$.ajaxSettings.xhr();
+			  xhr.upload.onprogress=function(event){
+				  var perc=Math.round((event.loaded/event.total) * 100);
+				  $(".progress").css('opacity','1');
+				  $(".progress-bar").css('width',perc + '%');
+				  $(".progress-bar").prop('aria-valuenow',perc);
+				  $(".progress-bar").text(perc + '%');
+			  };
+			  return xhr;
+		  },
+		  beforeSend: function(xhr){
+			  $("#uploadMsg").text('');
+			  $(".progress-bar").text('');
+			  $(".progress-bar").css('width','0%');
+			  $(".progress-bar").prop('aria-valuenow','0');
+		  }
+	  });
+	  ajaxReq.done(function(msg){
+		 $("#uploadMsg").text(msg);
+		 $("input[type='file']").each(function(){
+			 $(this).val('');
+		 });
+		 $("#sendServer").prop('disabled',false);
+		 if(msg=='Post Success'){
+			 setTimeout(function(){
+				 location.href=getPageContext + "/mypage/main";
+			 },1500);
+		 }else{
+			 $("#uploadMsg").css("color","red");
+			 $("#uploadMsg").css("font-weight","bold");
+		 }
+	  });
+	  ajaxReq.fail(function(jqXHR){
+		 $("#uploadMsg").text(jqXHR.responseText + '(' + jqXHR.status +
+				 ' - ' + jqXHR.statusText + ')');
+		 $("#sendServer").prop('disabled',false);
+	  });
+  });
+  $.jsonDate=function(json){
+	  var dates=json.split("-");
+	  var day=parseInt(dates[2])+1
+	  return dates[0] + "-" + dates[1] + "-" + day.toString();
+  }
+  var sameDate='';
   $.getList=function(pageNum,keyword){
 	  	var getPageContext=$("#getPageContext").val();
 		$.getJSON(getPageContext + "/mypage/myboard/list",
@@ -154,14 +213,22 @@ $(document).ready(function(){
 			function(data){
 				$(data.list).each(function(i,json){
 					var mb_num=json.mb_num;
+					var user_num=json.user_num;
 					var mb_title=json.mb_title;
 					var mb_content=json.mb_content;
-					var mb_date=json.mb_date;
 					var mb_views=json.mb_views;
 					var comment_cnt=json.comment_cnt;
+					var like_cnt=json.like_cnt;
 					var mp_savimg=json.mp_savimg;
 					var mv_savvid=json.mv_savvid;
 					var attachment='';
+					if(sameDate!==json.mb_date){
+						$("<h1 class='text-center' id='"+ json.mb_date +"' style='margin-bottom:30px;'>" +
+						  "<span style='border-bottom: 4px solid black'>" + $.jsonDate(json.mb_date) +
+						  "</span></h1>")
+						  .appendTo("#myBoardList");
+					}
+					sameDate=json.mb_date;
 					if(mv_savvid!=null && mv_savvid!=''){
 						attachment="<video class='img-responsive center-block' controls autoplay muted='muted' loop src='"+getPageContext +"/resources/upload/vid/" + mv_savvid + "'></video>";
 					}else if(mp_savimg!=null && mp_savimg!=''){
@@ -172,31 +239,149 @@ $(document).ready(function(){
 					if(i==0){
 						$("<div class='panel-group'>" +
 						  "<div class='panel panel-default'>" +
-						  "<div class='panel-heading'>" +
-						  	"<h1>" + mb_title + "</h1></div>" +
+						  "<div class='panel-heading' id='"+ mb_num +"' data-comm-cnt='"+ comment_cnt +"' data-like-cnt='"+ like_cnt +"'>" +
+						    "<blockquote class='postBlock'>" +
+						  	"<h1 class='postTitle'>" + 
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +
+						  	"&comment_cnt="+ comment_cnt +
+						  	"&like_cnt="+ like_cnt +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
 						  "<div class='panel-footer'><div>" +
-						  	"<h4>댓글 수: " + comment_cnt + "</h4></div></div></div></div>")
+						    "<h4 class='postLikeComment'>Likes: " + like_cnt + "</h4>" +
+						  	"<h4 class='postLikeComment'>Comments: " + comment_cnt + "</h4></div></div></div></div>")
 						.appendTo("#myBoardList");
 					}else{
 						$("<div class='panel-group slideanim'>" +
 						  "<div class='panel panel-default'>" +
-						  "<div class='panel-heading'>" +
-						  	"<h1>" + mb_title + "</h1></div>" +
+						  "<div class='panel-heading' id='"+ mb_num +"' data-comm-cnt='"+ comment_cnt +"' data-like-cnt='"+ like_cnt +"'>" +
+						    "<blockquote class='postBlock'>" +
+						  	"<h1 class='postTitle'>" + 
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +
+						  	"&comment_cnt="+ comment_cnt +
+						  	"&like_cnt="+ like_cnt +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
 						  "<div class='panel-footer'><div>" +
-						  	"<h4>댓글 수: " + comment_cnt + "</h4></div></div></div></div>")
+						    "<h4 class='postLikeComment'>Likes: " + like_cnt + "</h4>" +
+						  	"<h4 class='postLikeComment'>Comments: " + comment_cnt + "</h4></div></div></div></div>")
 						.appendTo("#myBoardList");
 					}
 				});
+				
 			});
+		$("#myBoardList").on({
+			click: function(){
+				location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id") + 
+				"&comment_cnt=" + $(this).attr("data-comm-cnt") + 
+				"&like_cnt=" + $(this).attr("data-like-cnt");
+			}, mouseover: function(){
+				$(this).css("cursor","pointer");
+			}
+		});
   }
-  if($("#getPageContext").val()!==undefined){
+  $.footerBtn=function(){
+	  $("footer").before("<div class='container-fluid text-center'>" +
+			  			 "<h2><a class='btn btn-default' href='javascript:$.getListMore()'>" +
+			  			 "<span class='glyphicon glyphicon-plus'></span> More </a></h2></div>");
+  }
+  if($("#myBoardListHere").val()!==undefined){
 	  $.getList();
+	  $.footerBtn();
   }
+  var more=2;
+  $.getListMore=function(){	  
+	  $.getList(more++);
+  }
+  $("#myBoardSelect .postTitle > span").on({
+	  click: function(){
+		  location.reload();
+	  }, mouseover: function(){
+		  $(this).css("cursor","pointer");
+	  }
+  });
+  $("#commentForm > button[type='submit']").click(function(e){
+	  var getPageContext=$("#getPageContext").val();
+	  e.preventDefault();
+	  var mb_num=$("#commentForm > input[type='hidden']").val();
+	  var myc_content=$("#commentForm > input[type='text']").val();
+	  $.getJSON(getPageContext + "/mypage/mycomment/insert",
+			  {'mb_num':mb_num,'myc_content':myc_content},
+			  function(json){
+		  if(json.code=='success'){
+			  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-ok'></span>comment post succeded")
+			  $("#commentForm > .help-block").css("opacity","1");
+		  }else{
+			  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-remove'></span>comment post failed")
+			  $("#commentForm > .help-block").css("opacity","1");
+		  }
+		  $("#commentForm > input[type='text']").val('');
+		  $("#commentForm > input[type='text']").focus();
+		  $.getCommentList();
+		  setTimeout(function(){
+				 $("#commentForm > .help-block").css("opacity","0"); 
+		  },5000);
+	  });
+  });
+  $.getCommentList=function(pageNum){
+	  var getPageContext=$("#getPageContext").val();
+	  var mb_num=$("#commentForm > input[type='hidden']").val();
+	  $.getJSON(getPageContext + "/mypage/mycomment/list",
+		  {'pageNum':pageNum,'mb_num':parseInt(mb_num)},
+		  function(data){
+			  $("#commentList").empty();
+			  $(data.commentList).each(function(i,json){
+				  var myc_num=json.myc_num;
+				  var mb_num=json.mb_num;
+				  var user_num=json.user_num;
+				  var myc_content=json.myc_content;
+				  var myc_date=json.myc_date;
+				  var cnt=json.cnt;
+				  var user_id=json.user_id;
+				  html=document.querySelector("#commentTemplate").innerHTML;
+				  var resultHTML=html.replace("{msp_savimg}","kpop콘.gif")
+				  		.replace("{user_id}",user_id)
+				  		.replace("{myc_content}",myc_content)
+				  		.replace("{comment_likes}",cnt)
+				  		.replace("{myc_date}",$.jsonDate(myc_date));
+				  $("#commentList").append(resultHTML);
+			  });
+			  $(".pagination").empty();
+			  var startPageNum=data.pu.startPageNum;
+			  var endPageNum=data.pu.endPageNum;
+			  if(startPageNum>data.pu.pageBlockCount){
+				  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ (startPageNum-1) +")'>" +
+				  	"<span class='glyphicon glyphicon-chevron-left bPaging'></span></a></li>")
+				  .appendTo(".pagination");
+			  }else{
+				  $(".pagination")
+				  .append("<li><span class='glyphicon glyphicon-chevron-left bPaging'></span></li>");
+			  }
+			  for(var i=startPageNum;i<=endPageNum;i++){
+				  if(i==data.pu.pageNum){
+					  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ i +")'>" + i + "</a></li>")
+					  .appendTo(".pagination")
+					  .addClass("active")
+				  }else{
+					  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ i +")'>" + i + "</a></li>")
+					  .appendTo(".pagination")
+				  }
+			  }
+			  if(endPageNum<data.pu.totalPageCount){
+				  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ (startPageNum-1) +")'>" +
+				  	"<span class='glyphicon glyphicon-chevron-right bPaging'></span></a></li>")
+				  .appendTo(".pagination");
+			  }else{
+				  $(".pagination")
+				  .append("<li><span class='glyphicon glyphicon-chevron-right bPaging'></span></li>");
+			  }
+		  });
+  }
+  if($("#myCommentListHere").val()!==undefined){
+	  $.getCommentList();
+  }
+  $('[data-toggle="tooltip"]').tooltip();
 });
 

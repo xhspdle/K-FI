@@ -14,7 +14,12 @@
 		values(#{mp_num},#{mb_num},#{mp_orgimg},#{mp_savimg})
 	</insert>
 	<update id="update" parameterType="myphoto">
-		update my_photo set mp_orgimg=#{mp_orgimg},mp_savimg=#{mp_savimg} where mp_num=#{mp_num}
+		update my_photo 
+		<set>
+			<if test="mp_orgimg!=null and mp_orgimg!=''">mp_orgimg=#{mp_orgimg}</if>
+			<if test="mp_savimg!=null and mp_savimg!=''">mp_savimg=#{mp_savimg}</if>
+		</set>
+		where mp_num=#{mp_num}
 	</update>
 	<delete id="delete" parameterType="int">
 		delete from my_photo where mp_num=#{mp_num}
@@ -23,6 +28,6 @@
 		select * from my_photo
 	</select>
 	<select id="select" parameterType="int" resultType="myphoto">
-		select * from my_photo where mp_num=#{mp_num}
+		select * from my_photo where mb_num=#{mb_num}
 	</select>
 </mapper>

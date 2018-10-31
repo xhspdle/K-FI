@@ -5,25 +5,37 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.kfi.ldk.vo.MyBoardVo" alias="myboard"/>
+		<typeAlias type="com.kfi.ldk.vo.MyBoardLikeVo" alias="myboardlike"/>
 		<typeAlias type="com.kfi.ldk.vo.MyVideoVo" alias="myvideo"/>
 		<typeAlias type="com.kfi.ldk.vo.MyPhotoVo" alias="myphoto"/>
+		<typeAlias type="com.kfi.ldk.vo.MyCommentVo" alias="mycomment"/>
+		<typeAlias type="com.kfi.ldk.vo.MyCommentLikeVo" alias="mycommentlike"/>
+		<typeAlias type="com.kfi.ldk.vo.MyCommentListViewVo" alias="mycommentlist"/>
 		<typeAlias type="com.kfi.ldk.vo.MyBoardListViewVo" alias="myboardlist"/>
-		<typeAlias type="com.kfi.jyi.mycomm.vo.MembersVo" alias="members"/>
-		<typeAlias type="com.kfi.jyi.mycomm.vo.CommUserListVo" alias="commuserlist"/>
-		<typeAlias type="com.kfi.jyi.mycomm.vo.CommunityVo" alias="community"/>
-		<typeAlias type="com.kfi.jyi.mycomm.vo.CommGatheringVo" alias="commgathering"/>
-		<typeAlias type="com.kfi.jyi.mycomm.vo.CommCalendarVo" alias="commcalendar"/>
-		<typeAlias type="com.kfi.dgl.members.vo.MembersVo" alias="logmembers"/>
+		<typeAlias type="com.kfi.jyi.vo.MembersVo" alias="members"/>
+		<typeAlias type="com.kfi.jyi.vo.CommUserListVo" alias="commuserlist"/>
+		<typeAlias type="com.kfi.jyi.vo.CommunityVo" alias="community"/>
+		<typeAlias type="com.kfi.jyi.vo.CommGatheringVo" alias="commgathering"/>
+		<typeAlias type="com.kfi.jyi.vo.CommCalendarVo" alias="commcalendar"/>
+		<typeAlias type="com.kfi.dgl.vo.MembersVo" alias="logmembers"/>
+		<typeAlias type="com.kfi.ysy.vo.AdminVo" alias="admin"/>
+		<typeAlias type="com.kfi.ysy.vo.AccuseVo" alias="accuse"/>
+		<typeAlias type="com.kfi.ysy.vo.AdminBoardVo" alias="adminboard"/>
+		<typeAlias type="com.kfi.ysy.vo.FaqVo" alias="faq"/>
 	</typeAliases>
 	<mappers>	 
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/MyBoardLikeMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyPhotoMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyVideoMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/MyCommentMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardListViewMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/MyCommentListViewMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MyCommCalendarMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
-		<mapper resource="com/kfi/mybatis/ysy/MembersMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/FaqMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/dgl/MembersMapper.xml"/>
 	</mappers>
 </configuration>

@@ -3,19 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.kfi.mybatis.ysy.AdminMapper">
- 	<select id="admaxcnt" resultType="int">
+ 	<select id="abmaxnum" resultType="int">
  		select nvl(max(admin_num),1)maxnum from admin
  	</select>
- 	<select id="adlogin" parameterType="hashmap" resultType="com.kfi.ysy.admin.vo.AdminVo">
- 		select * from admin where admin_id=#{admin_id} and admin_pwd=#{admin_pwd}
+ 	<select id="adlogin" parameterType="hashmap" resultType="admin">
+ 		select admin_num,admin_id,admin_nick from admin where admin_id=#{admin_id} and admin_pwd=#{admin_pwd}
  	</select>
  	<select id="adcheckid" parameterType="string" resultType="int">
  		select count(*) from admin where admin_id=#{admin_id}
  	</select>
- 	<insert id="adjoin" parameterType="com.kfi.ysy.admin.vo.AdminVo">
+ 	<insert id="adjoin" parameterType="admin">
  		insert into admin values(#{admin_num},#{admin_id},#{admin_pwd},#{admin_nick},#{admin_email},sysdate)
  	</insert>
- 	<select id="adminlist" resultType="com.kfi.ysy.admin.vo.AdminVo">
+ 	<select id="adminlist" resultType="admin">
 		select * from admin
 	</select>
+	<select id="addetail" parameterType="int" resultType="admin">
+		select * from admin where admin_num=#{admin_num}
+	</select>
+	<update id="admodify" parameterType="admin">
+	 	update admin 
+		<set>
+			<if test="admin_nick!=null and admin_nick!=''">admin_nick=#{admin_nick},</if>
+			<if test="admin_pwd!=null and admin_pwd!=''">admin_pwd=#{admin_pwd},</if>
+			<if test="admin_email!=null and admin_email!=''">admin_email=#{admin_email}</if>
+		</set>
+		where admin_num=#{admin_num}
+	</update>
  </mapper>

@@ -2,27 +2,34 @@ package com.kfi.ldk.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class MyBoardListViewVo {
 	private int mb_num;
+	private int user_num;
 	private String mb_title;
 	private String mb_content;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date mb_date;
 	private int mb_views;
 	private int comment_cnt;
+	private int like_cnt;
 	private int mp_num;
 	private String mp_savimg;
 	private int mv_num;
 	private String mv_savvid;
 	public MyBoardListViewVo() {}
-	public MyBoardListViewVo(int mb_num, String mb_title, String mb_content, Date mb_date, int mb_views,
-			int comment_cnt, int mp_num, String mp_savimg, int mv_num, String mv_savvid) {
+	public MyBoardListViewVo(int mb_num, int user_num, String mb_title, String mb_content, Date mb_date, int mb_views,
+			int comment_cnt, int like_cnt, int mp_num, String mp_savimg, int mv_num, String mv_savvid) {
 		super();
 		this.mb_num = mb_num;
+		this.user_num = user_num;
 		this.mb_title = mb_title;
 		this.mb_content = mb_content;
 		this.mb_date = mb_date;
 		this.mb_views = mb_views;
 		this.comment_cnt = comment_cnt;
+		this.like_cnt = like_cnt;
 		this.mp_num = mp_num;
 		this.mp_savimg = mp_savimg;
 		this.mv_num = mv_num;
@@ -33,6 +40,12 @@ public class MyBoardListViewVo {
 	}
 	public void setMb_num(int mb_num) {
 		this.mb_num = mb_num;
+	}
+	public int getUser_num() {
+		return user_num;
+	}
+	public void setUser_num(int user_num) {
+		this.user_num = user_num;
 	}
 	public String getMb_title() {
 		return mb_title;
@@ -64,6 +77,12 @@ public class MyBoardListViewVo {
 	public void setComment_cnt(int comment_cnt) {
 		this.comment_cnt = comment_cnt;
 	}
+	public int getLike_cnt() {
+		return like_cnt;
+	}
+	public void setLike_cnt(int like_cnt) {
+		this.like_cnt = like_cnt;
+	}
 	public int getMp_num() {
 		return mp_num;
 	}
@@ -90,8 +109,9 @@ public class MyBoardListViewVo {
 	}
 	@Override
 	public String toString() {
-		return "MyBoardListViewVo [mb_num=" + mb_num + ", mb_title=" + mb_title + ", mb_content=" + mb_content
-				+ ", mb_date=" + mb_date + ", mb_views=" + mb_views + ", comment_cnt=" + comment_cnt + ", mp_num="
-				+ mp_num + ", mp_savimg=" + mp_savimg + ", mv_num=" + mv_num + ", mv_savvid=" + mv_savvid + "]";
+		return "MyBoardListViewVo [mb_num=" + mb_num + ", user_num=" + user_num + ", mb_title=" + mb_title
+				+ ", mb_content=" + mb_content + ", mb_date=" + mb_date + ", mb_views=" + mb_views + ", comment_cnt="
+				+ comment_cnt + ", like_cnt=" + like_cnt + ", mp_num=" + mp_num + ", mp_savimg=" + mp_savimg
+				+ ", mv_num=" + mv_num + ", mv_savvid=" + mv_savvid + "]";
 	}
 }

@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<input type="hidden" id="getPageContext" value="<c:url value='/'/>">
 <div id="myBoardList" class="container">
+<input type="hidden" id="myBoardListHere" value="MBL">
 <!--  
 	<div class="panel-group">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h1>글제목이 여기딱</h1>
+				<blockquote class="postBlock"><h1 class="postTitle"><a href="#" class="postA">Post Title</a></h1></blockquote>
 			</div>
 			<div class="panel-body">
 				<p>글 내용이 여기 딱 호롤로로로로로로로</p>
@@ -16,7 +16,8 @@
 			</div>
 			<div class="panel-footer">
 				<div>
-					<h4>댓글내용이 여기 후루루루루</h4>
+					<h4 class="postLikeComment">xx Likes</h4>
+					<h4 class="postLikeComment">xx Comments</h4>
 				</div>
 			</div>
 		</div>	

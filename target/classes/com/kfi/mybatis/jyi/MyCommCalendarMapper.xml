@@ -4,25 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.jyi.MyCommCalendarMapper">
 	
-	<!-- 해당 유저 아이디의 유저번호 불러오기 -->
-	<sql id="findUserNum">
-		select user_num from members where user_id=#{user_id}
-	</sql>
-	
 	<!-- 해당 유저 번호가 가입한 커뮤니티 번호 불러오기 -->
 	<sql id="findUserCommNum">
-		select comm_num from comm_user_list where user_num=(<include refid="findUserNum"/>)
+		select comm_num from comm_user_list where user_num=#{user_num}
 	</sql>
 	
-	<!-- 유저가 속한 모든 커뮤니티의 월별 일정 불러오기 -->
-	<select id="MyCommCalList" parameterType="hashmap" resultType="commcalendar">
-	select * from (
-    	select * from comm_calendar where comm_num in(
-				select comm_num from comm_user_list where user_num=#{user_num})) where cc_begin between #{begin} and #{end} and cc_end between #{begin} and #{end}
+	<!-- comm_num!=null 이면 선택한 커뮤니티 일정 불러오기 -->
+	<sql id="find_comm_num">
+		<choose>
+			<when test="comm_num!=null">
+			  where comm_num=#{comm_num}
+			</when>
+			<otherwise>
+			  where comm_num in(<include refid="findUserCommNum"/>)
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 유저의 참석유무에 따른 모임 일정 번호 불러오기 -->
+	<sql id="gathering">
+		<choose>
+			<when test="gatheringOk=='attend'">
+              where cc_num in (select cc_num from comm_gathering
+                where cc_num in (
+                        select cc_num 
+                        from comm_calendar
+                        <include refid="find_comm_num"/>))
+			</when>
+			<when test="gatheringOk=='not_attend'">
+			 where cc_num != all (select cc_num from comm_gathering
+                where cc_num in (
+                        select cc_num 
+                        from comm_calendar
+                        <include refid="find_comm_num"/>))
+			</when>
+			<when test="gatheringOk=='gathering'">
+			where comm_num in(<include refid="findUserCommNum"/>)
+			</when>
+		</choose>
+	</sql>
+
+	<!-- 유저가 속한 모든 커뮤니티 목록 불러오기 -->
+	<select id="myCommunityList" parameterType="int" resultType="community">
+		select * from community where comm_num in(<include refid="findUserCommNum"/>)
 	</select>
 
-	<!-- <select id="findMyCommCal" parameterType="" resultType=="">
-	
-	</select> -->
+	<!-- **모임에 참석하면 comm_gathering테이블 insert됨 -->
+	<!-- 유저의 참석유무 및 커뮤니티 선택에 따른 일정 불러오기 -->
+	<select id="getheringCalendar" parameterType="hashmap" resultType="commcalendar">
+		select * from comm_calendar <include refid="gathering"/>
+	</select>
 
 </mapper>

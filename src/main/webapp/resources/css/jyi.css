@@ -1,42 +1,15 @@
 @charset "UTF-8";
 
-/* mycomm calendar */
-#jyi_mycomm_calendar {
-	width: 90%;
-	margin: auto;
-}
-
-#jyi_mycomm_calendar_sub {
-	width: 90%;
-	margin: auto;
-}
-
-#mycomm_cal_profile {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-}
-
-#mycomm_cal_chat {
-	font-size: 45px;
-	color: #00cee8;
-}
-
-#prevcal {
-	width: 40px;
-	height: 40px;
-	border-radius: 30%;
-}
-
-#aftcal {
-	width: 40px;
-	height: 40px;
-	border-radius: 30%;
-}
-
-.jyi_cal {
-	width: 13%;
-	height: 150px;
+/* mypage 커뮤니티 일정 mouseover했을 때 */
+.calevent{
+	position:absolute;
+	width:500px;
+	height:500px;
+	z-index:3000;
+	border:lightgray 1px solid;
+	background-color: lavender;
+	color: black;
+	font-size: 20px;
 }
 
 /* mypate mini_Calendar */
@@ -116,7 +89,7 @@
 	background-color: #00cee8;
 }
 
-.jyi_week {
+.mycomm_week {
 	text-align: center;
 	background-color: #00cee8;
 	color: white;
@@ -134,6 +107,9 @@
 	text-decoration: none;
 }
 
-.jyi_a:hover {
+
+
+
+.mycomm_a:hover {
 	color: white;
 }

@@ -5,7 +5,134 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="<c:url value='/resources/css/kfi.css'/>">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<c:url value='/resources/js/kfi.js'/>"></script>
+<script>
+/* id 중복 체크 부분 */
+function()
+$(function(){
+	 
+		var idFlag = false;
+		var nickFlag = false;
+		var pwFlag = false;
+		var authFlag = false;
+	 $('#idck').click(function(){
+				
+		var id = $("#id").val();
+		var eMsg = $("#idMsg");
+		var isID = /^[a-z0-9]{4,19}$/;
+		
+		$.ajax({
+			async: true,
+			type : "POST",
+			url : "<%=request.getContextPath()%>/idCheck",
+			data : id,
+			dataType : "json",
+			success : function(data) {
+					if (data == "") {
+						alert("반드시 입력해주세요!");
+						$("#id").focus();
+						return false;
+					}
+					if (!isID.test(id)) {
+						alert("5~20자의 영문 소문자, 숫자만 사용가능 합니다!");
+						$("#id").focus();
+						return false;
+					}
+
+					if (data.cnt > 0) {
+						alert("이미 사용중인 아이디 입니다.");
+						$("#id").focus();
+						return false;
+					} else {
+						alert("cool ID~!!");
+						$("#pw").focus();
+						return true;
+					}
+				}
+			});
+		});
+	 
+	 
+		/* 닉네임 중복 체크 부분 */
+		$('#nickck').click(function(){
+			var nickname = $("#nickname").val();
+			var getContext=$("#getContext").val();
+			
+			$.ajax({
+				async: true,
+				type : "POST",
+				url : "<%=request.getContextPath()%>/nicCheck",
+				data : nickname,
+				dataType : "json",
+				success : function(data) {
+		
+			if(data == ""){
+				showErrorMsg(eMsg, "반드시 입력해주세요.");
+				return false;
+			}
+			var isNick = /^[a-z0-9][가-힝]{4,19}$/;
+			if (!isNick.test(nickname)) {
+				showErrorMsg("영문(5~20자), 한글(2~10자) 로 이루어진 닉네임을 만들어 주세요.");
+				return false;
+			}
+			
+		});
+		
+		/* 비번 체크 부분 */
+		function checkPwd1(){
+			if(pwFlag) return true;
+			var getContext=$("#getContext").val();
+			var id = $("#id").val();
+			var pw = $("#pw1").val();
+			
+			if (pw == "") {
+				showErrorMsg(eMsg, "반드시 입력해주세요!");
+				return false;
+			}
+		}
+			
+		
+				
+			pwFlag =false;
+			$.ajax({
+				type:"GET",
+				url:getContext+"/login/login&id=" +escape(encodeURIComponent(id)) + getContext+"/login/login&pw=" + escape(encodeURIComponent(pw)),
+				success : function(data){
+					var result = data.substr(5);
+					if(result == 1){
+						showErrorMsg(eMsg,"10~20자 대,소문자, 숫자, 특수문자를 사용하세요.");
+						return false;
+					}else if(result == 2){
+						showErrorMsg(eMsg, "10~20자 대,소문자, 숫자, 특수문자를 사용하세요.");
+					}else if(result == 3){
+						eMsg.hide();
+					}else if(result == 4){
+						eMsg.hide();
+					}
+					pwFlag = true;
+					createRsaKey();
+				}
+				});
+			});
+			return true;
+		}
+		
+		function checkPwd2() {
+			var pw1 = $("#pw1");
+			var pw2 = $("#pw2");
+			
+			if (pw2 == "") {
+				showErrorMsg(eMsg, "반드시 입력해주세요!");
+				return false;
+			}
+		 
+	});
 	function checkMail() {
 		var email = document.getElementById("email").value;
 
@@ -19,10 +146,10 @@
 				var data = JSON.parse(xhttp.responseText);
 				if (data != null) {
 					alert("이미 가입한 메일 입니다.");
-					$("#joincode").csss("display", "none");
+
 				} else {
 					sendMail(email);
-					$("#joincode").css("display", "");
+
 				}
 			}
 		};
@@ -48,108 +175,52 @@
 				"application/x-www-form-urlencoded;charset=UTF-8");
 		xhttp.send('email=' + email);
 		return false;
-	}
-	var idFlag = false;
-	var pwFlag = false;
-	var authFlag = false;
-	/* id체크 부분 */
-	function checkId(event) {
-		if (idFlag)
-			return true;
-
-		var id = $("#id").val();
-		var eMsg = $("#idMsg");
-
-		if (id == "") {
-			showErrorMsg(eMsg, "반드시 입력해주세요!");
-			return false;
-		}
-
-		var isID = /^[a-z0-9]{4,19}$/;
-		if (!isID.test(id)) {
-			showErrorMsg(eMsg, "5~20자의 영문 소문자, 숫자만 사용가능 합니다!");
-			return false;
-		}
-		idFlag = false;
-		$.ajax({
-			type : "GET",
-			url : "/" + id, /*  / 주소 입력 해야함 */
-			success : function(data) {
-				var result = data.substr(4);
-				if (result == "Y") {
-					if (event == "first") {
-						showSuccessMsg(eMsg, "cool ID~!!");
-					} else {
-						hideMsg(eMsg);
-					}
-					idFlag = true;
-				} else {
-					showErrorMsg(eMsg, "이미사용중인 아이디 에요!!");
-				}
-			}
-		});
-		return true;
-	}
-	/* 비번체크 부분 */
-	function checkPwd1(){
-		if(pwFlag) return true;
-		
-		var id = $("#id").val();
-		var pw = $("#pw1").val();
-		
-		if (pw == "") {
-			showErrorMsg(eMsg, "반드시 입력해주세요!");
-			return false;
-		}
-		pwFlag =false;
-		$.ajax({
-			type:"GET",
-			url:"&id=" +escape(encodeURIComponent(id)) + "&pw=" + escape(encodeURIComponent(pw)), success :
-			success : function(data){
-				var result = data.substr(5);
-				if(result = 1){
-					showPw
-				})
-			} 
-		});
-	});
-</script>
+	};
+</script>	
 <title>회원가입</title>
 </head>
 <body>
-	<input type="hidden" id="getContext" name="getContext" value="<c:url value=''/>">
+	<input type="hidden" id="getContext" name="getContext" value="<c:url value='/'/>">
 	<!-- 헤더 로고부분  class blind -> 블라인드 처리 해줘야함-->
 	<div id="header">
-	<h1><a href="<c:url value='../'/>" class="h_logo"> 
-	<span class="blind">K-FI</span>
-	</a>
-	</h1>
+		<h1>
+			<a href="<c:url value='/'/>" class="h_logo"> 
+			<span class="blind">K-FI</span>
+			</a>
+		</h1>
 	</div>
-	<form action=""<c:url value='../'/>"" method="post">
-		<div>아이디 <input type="text" name="id" id="id">
-			<input type="button" value="ID중복체크" onclick="checkId()"><br>
-			<label id="id2" for="id"></label>
-		</div>
-		<div>닉네임 <input type="text" name="nickname">
-			<input type="button" value="닉네임 중복체크" onclick="checkNick()"><br>
-			<label id="nickname2" for="nickname"></label>
-		</div>
-		<div>비밀번호 <input type="password" name="pw" id="pw" placeholder="비밀번호입력"><br>
-			<label id="pw2" for="pw"></label>
-		</div>
-		<div>비밀번호 재확인<input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인"><br>
-			<label id="pwCheck2" for="pwCheck">
-			<span class="pwChk_blind">비밀번호가 맞는지 확인을 위해 다시 입력 해주세요.</span>
-			</label><br>
-		</div>
-		<div>이메일 <input type="text" name="email">
-			<input type="button" value="인증" onclick="checkMail()"><br>
-		</div>
-		<div>인증번호 <input type="text" name="inputCode" id="inputCode" placeholder="인증번호를 입력하세요." disabled="disabled">
-			<input type="button" value="확인" onclick="checkJoinCode()"><br>
+	<form action="<c:url value='/login/join'/>" method="post">
+		<div>
+			<label for="id">아이디</label>
+			<input type="text" name="user_id" id="id"> 
+			<input type="button" value="ID중복체크" id="idck">
+			<label for="id"></label>
 		</div>
 		<div>
-			<input	type="submit" value="가입"> <input type="reset" value="취소">
+			<label for="nickname">닉네임</label>
+			<input type="text" name="user_nickname" id="nickname">
+			<input type="button" value="닉네임 중복체크" id="nickck">
+		</div>
+		<div>
+			<label for="pw">비밀번호</label>
+			<input type="password" name="user_pwd" id="pw" placeholder="비밀번호입력"><br>
+		
+		</div>
+		<div>
+			<label for="pwCheck">비밀번호 재확인</label>
+			<input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인"><br>
+			<span class="pwChk_blind">비밀번호가 맞는지 확인을 위해 다시 입력 해주세요.</span>
+			<br>
+		</div>
+		<div>
+			<label for="email">이메일</label> 
+			<input type="text" name="user_email" id="email">
+			<input type="button" value="이메일 중복 확인" id="emailck" >
+		</div>
+
+		<div>
+			<input type="submit" value="가입">
+			<input type="reset" value="취소">
 		</div>
 	</form>
 </body>

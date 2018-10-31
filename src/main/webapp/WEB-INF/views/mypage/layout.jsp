@@ -16,8 +16,14 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/jyi.css'/>">
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script src="<c:url value='/resources/js/jyi.js'/>"></script>
+<!-- full calendar 추가 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<link href="<c:url value='/resources/css/fullcalendar.min.css'/>" rel="stylesheet">
+<script src="<c:url value='/resources/js/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
+<!-- 추가끝 -->
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60"><!-- style="padding-top:60px;" -->
+<input type="hidden" id="getPageContext" value="<c:url value='/'/>">
 
 <div id="wrap">
 	<div id="header">
@@ -28,6 +34,18 @@
 			<tiles:insertAttribute name="content"/>
 		</div>
 	</div>
+	<div id="footer">
+		<tiles:insertAttribute name="footer"/>
+	</div>
+	
+	<!-- Calendar icon -->
+	<input type="hidden" id="url" value="${pageContext.request.contextPath }">
+	<input type="hidden" id="year" value="year">
+	<input type="hidden" id="month" value="month">
+	<div id="icon_calendar" class="glyphicon glyphicon-calendar" style="font-size:40px;"></div>
+	<div id="wrap_icon_calendar"><!--   class="well" style="width:320px;" -->
+	</div>
+	
 	<!-- Modal -->
 	<div class="modal fade" id="writeModal" role="dialog">
 		<div class="modal-dialog">
@@ -38,7 +56,7 @@
 					<h4><span class="glyphicon glyphicon-edit"></span> Write</h4>
 				</div>
 				<div class="modal-body" style="padding:40px 50px;">
-					<form method="post" action="<c:url value='/mypage/myboard/insert'/>" enctype="multipart/form-data">
+					<form method="post" action="<c:url value='/mypage/myboard/insert'/>" name="frm" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="mb_title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
 							<input type="text" class="form-control" id="mb_title" name="mb_title" placeholder="Enter Title">
@@ -53,7 +71,7 @@
 						</div>
 						<div class="form-group" id="imgUpload">
 							<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
-							<input type="file" class="form-control" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png">
+							<input type="file" class="form-control" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png .gif">
 							<img id="fimg1" src="" style="display:none;width:100%;">
 						</div>
 						<div class="form-group" id="vidUpload">
@@ -61,12 +79,16 @@
 							<input type="file" class="form-control" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
 							<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 						</div>
-						<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-ok"></span> Write</button>
+						<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
 					</form>
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped active" role="progressbar" 
+						aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+					</div>
 				</div>
 				<div class="modal-footer">
 				  <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-				  <p>upload photo and video!</p>
+				  <p id="uploadMsg">upload photo and video!</p>
 				</div>
 			</div> 
 		</div>
