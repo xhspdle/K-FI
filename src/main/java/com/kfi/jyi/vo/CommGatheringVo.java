@@ -1,4 +1,4 @@
-package com.kfi.jyi.mycomm.vo;
+package com.kfi.jyi.vo;
 
 //CommGathering 모임참여목록
 public class CommGatheringVo {

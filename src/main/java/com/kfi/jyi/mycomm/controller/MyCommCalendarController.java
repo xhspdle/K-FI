@@ -1,5 +1,6 @@
 package com.kfi.jyi.mycomm.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,29 +10,41 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kfi.jyi.mycomm.service.MyCommCalendarService;
-import com.kfi.jyi.mycomm.vo.CommCalendarVo;
-import com.kfi.jyi.mycomm.vo.CommunityVo;
+import com.kfi.jyi.service.MyCommCalendarService;
 import com.kfi.jyi.util.MyCalendar;
+import com.kfi.jyi.vo.CommCalendarVo;
+import com.kfi.jyi.vo.CommunityVo;
 
 @Controller(value = "MyCommCalendarController")
 public class MyCommCalendarController {
 	@Autowired private MyCommCalendarService service;
 	
 	@RequestMapping(value = "/mypage/mycommcalendar", method = RequestMethod.GET)
-	public String mycommcalendar(Model model, HttpSession session, String comm_num, String comm_name) {
+	public String mycommcalendar(Model model, HttpSession session, 
+			@RequestParam(defaultValue="all",required=false,value="comm_num") String comm_num, 
+			String comm_name, 
+			@RequestParam(defaultValue="gathering",required=false,value="gathering") String gathering) {
+	
 		MyCalendar mc=new MyCalendar();
 		List<CommCalendarVo> monthlist=null;
 		//int user_num=(Integer)session.getAttribute("user_num");
-		if(comm_num==null || comm_num.equals("all")) {
-			/* 유저가 속한 모든 커뮤니티의 월별 일정 불러오기 */
-			monthlist=service.myCommCalendar(1); 
-		}else {
-			/* 유저가 달력에서 선택한 해당 커뮤니티의 일정목록 불러오기  */
-			int commNum=Integer.parseInt(comm_num);
-			monthlist=service.selectedCommCalList(commNum);
-			model.addAttribute("comm_name",comm_name);
+		HashMap<String, Object> hm=new HashMap<>();
+		if(comm_num.equals("all") && gathering.equals("gathering")) {
+			 monthlist=service.myCommCalendar(1);//user_num
+		}else{
+			hm.put("user_num", 1);//user_num
+			hm.put("selected","");
+			if(!comm_num.equals("all")) {
+				hm.put("selected","selected");
+			}
+			hm.put("comm_num",comm_num);
+			hm.put("gatheringOk","");
+			if(!(gathering.equals("gathering"))) {
+				hm.put("gatheringOk","gatheringOk");
+			}
+			monthlist=service.getheringCalendar(hm);
 		}
 		monthlist=mc.changeEnd(monthlist);
 		model.addAttribute("monthlist",monthlist);

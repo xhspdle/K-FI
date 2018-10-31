@@ -9,9 +9,42 @@
 		select comm_num from comm_user_list where user_num=#{user_num}
 	</sql>
 	
-	<!-- 유저가 속한 모든 커뮤니티의 일정 불러오기 -->
-	<select id="MyCommCalList" parameterType="int" resultType="commcalendar">
-    	select * from comm_calendar where comm_num in(<include refid="findUserCommNum"/>)
+	<!-- selected==null 이면 모든 커뮤니티 일정 불러오기 -->
+	<sql id="find_comm_num">
+		<choose>
+			<when test="selected!=null and selected!=''">
+			  where comm_num=#{comm_num}
+			</when>
+			<otherwise>
+			  where comm_num in(<include refid="findUserCommNum"/>)
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 유저의 참석유무에 따른 모임 일정 번호 불러오기 -->
+	<!-- gatheringOk!=null이면 참석 -->
+	<sql id="gathering">
+		<choose>
+			<when test="gatheringOk!=null and gatheringOk!=''">
+              where cc_num in (select cc_num from comm_gathering
+                where cc_num in (
+                        select cc_num 
+                        from comm_calendar
+                        <include refid="find_comm_num"/>))
+			</when>
+			<otherwise>
+			 where cc_num != all (select cc_num from comm_gathering
+                where cc_num in (
+                        select cc_num 
+                        from comm_calendar
+                        <include refid="find_comm_num"/>))
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 유저의 참석유무 상관없이 유저가 속한 모든 커뮤니티의 일정 불러오기 -->
+	<select id="MyCommCalList" parameterType="hashmap" resultType="commcalendar">
+    	select * from comm_calendar <include refid="find_comm_num"/>
 	</select>
 
 	<!-- 유저가 속한 모든 커뮤니티 목록 불러오기 -->
@@ -19,9 +52,12 @@
 		select * from community where comm_num in(<include refid="findUserCommNum"/>)
 	</select>
 
-	<!-- 유저가 달력에서 선택한 해당 커뮤니티의 일정목록 불러오기 -->
-	<select id="selectedCommCalList" parameterType="int" resultType="commcalendar">
-    	select * from comm_calendar where comm_num = #{comm_num}
+	<!-- **모임에 참석하면 comm_gathering테이블 insert됨 -->
+	<!-- 유저의 참석유무 및 커뮤니티 선택에 따른 일정 불러오기 -->
+	<select id="getheringCalendar" parameterType="hashmap" resultType="commcalendar">
+		select * from comm_calendar
+		<include refid="gathering"/>
 	</select>
+
 
 </mapper>

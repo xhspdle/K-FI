@@ -1,13 +1,14 @@
-package com.kfi.jyi.mycomm.service;
+package com.kfi.jyi.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kfi.jyi.mycomm.dao.MyCommCalendarDao;
-import com.kfi.jyi.mycomm.vo.CommCalendarVo;
-import com.kfi.jyi.mycomm.vo.CommunityVo;
+import com.kfi.jyi.dao.MyCommCalendarDao;
+import com.kfi.jyi.vo.CommCalendarVo;
+import com.kfi.jyi.vo.CommunityVo;
 
 @Service
 public class MyCommCalendarService {
@@ -23,8 +24,9 @@ public class MyCommCalendarService {
 		return dao.getMyCommunityList(user_num);
 	}
 	
-	/* 유저가 속한 모든 커뮤니티 목록 불러오기 */
-	public List<CommCalendarVo> selectedCommCalList(int comm_num){
-		return dao.selectedCommCalList(comm_num);
+	//유저의 참석유무 및 커뮤니티 선택에 따른 일정 불러오기
+	public List<CommCalendarVo> getheringCalendar(HashMap<String, Object> hm){
+		return dao.getheringCalendar(hm);
 	}
+	
 }

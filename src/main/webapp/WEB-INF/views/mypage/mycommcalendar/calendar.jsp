@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<input type="hidden" id="getPageContext" value="<c:url value='/'/>" >
 <script>
 	$(function(){
 		var getPageContext=$('#getPageContext').val();
-	
 		$('#mypage_comm_calendar').fullCalendar({
 				header : {
 				left : '',
@@ -58,6 +56,13 @@
 			var comm_name=$('#mypage_communitylist option:selected').text();
 			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num+"&comm_name="+comm_name;
 		});
+		$("#comm_gathering").on('change',function(){
+			var getPageContext=$("#getPageContext").val();
+			var comm_num=$('#mypage_communitylist option:selected').val();
+			var gathering=$('#comm_gathering option:selected').val();
+			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num
+					+"&comm_name="+comm_name+"&gathering="+gathering;
+		});
 	});
 </script>
 <div id="mypage_comm_calendar_wrap" style="width: 90%; margin: auto; margin-top: 30px;">
@@ -67,9 +72,10 @@
 	<option value="${communitylist.comm_num }" <c:if test="${communitylist.comm_name ==comm_name }"> selected="selected"</c:if>>${communitylist.comm_name }</option> 
 	</c:forEach>
 	</select>
-	<select id="attendant" class="form-control" style="width:10%;">
+	<select id="comm_gathering" class="form-control" style="width:10%;">
+		<option value="gathering">전체</option>
 		<option value="attend">참석</option>
-		<option value="not_attend">비참석</option>
+		<option value="not_attend">불참</option>
 	</select>
 	<div id='mypage_comm_calendar'></div>
 </div>

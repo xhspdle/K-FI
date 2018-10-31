@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
-import com.kfi.jyi.mycomm.vo.CommCalendarVo;
+import com.kfi.jyi.vo.CommCalendarVo;
 
 public class MyCalendar {
 	Calendar cal = Calendar.getInstance();

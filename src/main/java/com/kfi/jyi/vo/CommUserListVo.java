@@ -1,4 +1,4 @@
-package com.kfi.jyi.mycomm.vo;
+package com.kfi.jyi.vo;
 
 //COMM_USER_LIST 모임유저목록
 public class CommUserListVo {

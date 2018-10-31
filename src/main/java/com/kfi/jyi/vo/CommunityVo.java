@@ -1,4 +1,4 @@
-package com.kfi.jyi.mycomm.vo;
+package com.kfi.jyi.vo;
 
 import java.sql.Date;
 
