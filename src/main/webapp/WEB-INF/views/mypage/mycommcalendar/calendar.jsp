@@ -51,13 +51,13 @@
 				} */
 		})
 		$("#mypage_communitylist").on('change',function(){
-			var getPageContext=$("#getPageContext").val();
+			//var getPageContext=$("#getPageContext").val();
 			var comm_num=$('#mypage_communitylist option:selected').val();
 			var comm_name=$('#mypage_communitylist option:selected').text();
 			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num+"&comm_name="+comm_name;
 		});
 		$("#comm_gathering").on('change',function(){
-			var getPageContext=$("#getPageContext").val();
+			//var getPageContext=$("#getPageContext").val();
 			var comm_num=$('#mypage_communitylist option:selected').val();
 			var gathering=$('#comm_gathering option:selected').val();
 			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num

@@ -33,14 +33,17 @@ public class MyCommCalendarController {
 		HashMap<String, Object> hm=new HashMap<>();
 		if(comm_num.equals("all") && gathering.equals("gathering")) {
 			 monthlist=service.myCommCalendar(1);//user_num
+			 System.out.println("??");
 		}else{
+			 System.out.println("!!");
 			hm.put("user_num", 1);//user_num
-			hm.put("selected","");
-			if(!comm_num.equals("all")) {
+			hm.put("selected","x");
+			if(!(comm_num.equals("all"))) {
 				hm.put("selected","selected");
 			}
-			hm.put("comm_num",comm_num);
-			hm.put("gatheringOk","");
+			int commNum=Integer.parseInt(comm_num);
+			hm.put("comm_num",commNum);
+			hm.put("gatheringOk","x");
 			if(!(gathering.equals("gathering"))) {
 				hm.put("gatheringOk","gatheringOk");
 			}

@@ -12,9 +12,9 @@
 	<!-- selected==null 이면 모든 커뮤니티 일정 불러오기 -->
 	<sql id="find_comm_num">
 		<choose>
-			<when test="selected!=null and selected!=''">
+		<!-- 	<when test="selected!='x'">
 			  where comm_num=#{comm_num}
-			</when>
+			</when> -->
 			<otherwise>
 			  where comm_num in(<include refid="findUserCommNum"/>)
 			</otherwise>
@@ -25,13 +25,13 @@
 	<!-- gatheringOk!=null이면 참석 -->
 	<sql id="gathering">
 		<choose>
-			<when test="gatheringOk!=null and gatheringOk!=''">
+		<!-- 	<when test="gatheringOk!='x'">
               where cc_num in (select cc_num from comm_gathering
                 where cc_num in (
                         select cc_num 
                         from comm_calendar
                         <include refid="find_comm_num"/>))
-			</when>
+			</when> -->
 			<otherwise>
 			 where cc_num != all (select cc_num from comm_gathering
                 where cc_num in (
