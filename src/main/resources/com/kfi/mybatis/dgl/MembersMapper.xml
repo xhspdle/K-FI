@@ -3,6 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.dgl.MembersMapper">
+
+
+<!-- vo 데이터 참고용
+	private int user_num; // 유저번호 USER_NUM
+	private String user_id; // 아이디 USER_ID
+	private String user_pwd; // 비밀번호 USER_PWD
+	private String user_nickname; // 닉네임 USER_NICKNAME
+	private String user_email; // 이메일 USER_EMAIL
+	private Date user_regdate; // 가입일 USER_REGDATE
+	private int user_status; // 아이디상태 USER_STATUS
+	private int user_certi; // 인증상태 USER_CERTI	 -->
+	
 	
 <!-- 	 <insert id="insert" parameterType="logmembers">
 		insert into members values
@@ -25,22 +37,33 @@
 	</select> 
 	-->
 	
-	<!-- <insert id="createKey">
-		insert into CERTI_MEMBERS values(#{})
-	</insert> -->
-	<!--  
-	사용자 인증상태 0->1 변경
-	<update id=""> 
-	 	<![CDATA[update members set USER_CERTI = 1 where (select count(*) from members where USER_EMAIL = #{userEmail}) > 0]]>
-	 </update> -->
 	 
 	<!-- 로그인 -->
 	<select id="login" resultType="logmembers" parameterType="hashmap" >
-		select * from members where USER_ID = #{userId} and  USER_PWD=#{userPwd}
+		select * from members where USER_ID = #{user_id} and  USER_PWD=#{user_pwd}
 	</select>
 	
+	<!-- id 체크 -->
+	<select id="idcheck" parameterType="String" resultType="int">
+		select count(*) from members where USER_ID = #{user_id}
+	</select>
+	<!-- 동일 이메일 찾기 -->
+	<select id="findEmail" parameterType="logmembers" resultType="logmembers">
+		select * from members where USER_EMAIL=#{user_email}
+	</select>
+	
+	<!-- 인증코드(키) 생성 -->
+	 <insert id="createKey">
+		insert into CERTI_MEMBERS values(#{cm_key})
+	</insert>
+	
+	<!-- 사용자 인증상태 0->1 변경 -->
+	<update id="userCerti"> 
+	 	<![CDATA[update members set USER_CERTI = 1 where (select count(*) from members where USER_EMAIL = #{user_email}) > 0]]>
+	 </update>
+
 	<!-- 마지막유저번호 -->
-	<select id="getMaxNum" resultType="int">
+	<select id="getMaxnum" resultType="int">
 		select NVL(max(user_num),0) maxnum from members
 	</select>
 	
@@ -49,6 +72,8 @@
 		select NVL(count(user_num),0) cnt from members
 	</select>
 	
+	
+	<!-- 목록 -->
 	<select id="list" resultType="logmembers">
 		select * from members
 	</select>

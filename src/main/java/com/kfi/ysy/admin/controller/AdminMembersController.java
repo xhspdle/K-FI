@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kfi.dgl.members.service.MembersService;
-import com.kfi.dgl.members.vo.MembersVo;
+import com.kfi.dgl.service.MembersService;
+import com.kfi.dgl.vo.MembersVo;
 import com.kfi.ysy.util.AdminPageUtil;
 
 

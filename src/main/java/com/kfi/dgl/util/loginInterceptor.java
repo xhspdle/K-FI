@@ -1,4 +1,4 @@
-package com.kfi.dgl.certiMembers.util;
+package com.kfi.dgl.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

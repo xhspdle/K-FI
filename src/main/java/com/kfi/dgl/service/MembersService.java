@@ -1,4 +1,4 @@
-package com.kfi.dgl.members.service;
+package com.kfi.dgl.service;
 
 
 import java.util.HashMap;
@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kfi.dgl.members.dao.MembersDao;
-import com.kfi.dgl.members.vo.MembersVo;
+import com.kfi.dgl.dao.MembersDao;
+import com.kfi.dgl.vo.MembersVo;
 
 @Service
 public class MembersService {
@@ -16,7 +16,7 @@ public class MembersService {
 	public void setDao(MembersDao dao) {
 		this.dao = dao;
 	}
-	
+
 	public int insert(MembersVo vo) {
 		return dao.insert(vo);
 	}
@@ -36,5 +36,21 @@ public class MembersService {
 	public MembersVo login(HashMap<String, Object> map) {
 		return dao.login(map);
 		
+	}
+	public int getMaxcnt() {
+		return dao.getMaxnum();
+	}
+	public int getCnt() {
+		return dao.getCtn();
+	}
+	public int getverify(MembersVo vo) {
+		return dao.verify(vo);
+	}
+	public int createKey(String user_email) {
+		return dao.createKey(user_email);
+	}
+
+	public int idcheck(String user_id) {
+		return dao.idCheck();
 	}
 }

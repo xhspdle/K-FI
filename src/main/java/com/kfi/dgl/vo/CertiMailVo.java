@@ -1,4 +1,4 @@
-package com.kfi.dgl.members.vo;
+package com.kfi.dgl.vo;
 
 public class CertiMailVo { //인증 테이블
 	private String cm_key; //인증 키 CM_KEY

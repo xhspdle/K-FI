@@ -1,4 +1,4 @@
-package com.kfi.dgl.certiMembers.util;
+package com.kfi.dgl.util;
 
 import java.io.UnsupportedEncodingException;
 
@@ -39,4 +39,5 @@ public class MailUtil { //메일 보내기
 	public void send() {
 		mailSender.send(message);
 	}
+	
 }

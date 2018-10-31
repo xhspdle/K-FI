@@ -1,4 +1,4 @@
-package com.kfi.dgl.certiMembers.util;
+package com.kfi.dgl.util;
 
 import java.util.Random;
 

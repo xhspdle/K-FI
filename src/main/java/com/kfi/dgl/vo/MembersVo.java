@@ -1,4 +1,4 @@
-package com.kfi.dgl.members.vo;
+package com.kfi.dgl.vo;
 
 import java.util.Date;
 

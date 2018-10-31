@@ -16,7 +16,7 @@
 		<typeAlias type="com.kfi.jyi.vo.CommunityVo" alias="community"/>
 		<typeAlias type="com.kfi.jyi.vo.CommGatheringVo" alias="commgathering"/>
 		<typeAlias type="com.kfi.jyi.vo.CommCalendarVo" alias="commcalendar"/>
-		<typeAlias type="com.kfi.dgl.members.vo.MembersVo" alias="logmembers"/>
+		<typeAlias type="com.kfi.dgl.vo.MembersVo" alias="logmembers"/>
 		<typeAlias type="com.kfi.ysy.vo.AdminVo" alias="admin"/>
 		<typeAlias type="com.kfi.ysy.vo.AccuseVo" alias="accuse"/>
 		<typeAlias type="com.kfi.ysy.vo.AdminBoardVo" alias="adminboard"/>

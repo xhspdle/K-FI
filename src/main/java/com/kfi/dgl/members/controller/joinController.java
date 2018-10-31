@@ -1,14 +1,18 @@
 package com.kfi.dgl.members.controller;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kfi.dgl.members.service.MembersService;
-import com.kfi.dgl.members.vo.MembersVo;
+import com.kfi.dgl.service.MembersService;
+import com.kfi.dgl.vo.MembersVo;
 
 @Controller(value = "MembersInsertController")
 public class joinController {
@@ -30,5 +34,15 @@ public class joinController {
 			mv.addObject("code", "fail");
 		}
 		return mv;
+	}
+	@RequestMapping("/idcheck")
+		public Map<Object, Object> idcheck(@RequestBody String user_id){
+		
+		int count = 0;
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		
+		count = service.idcheck(user_id);
+		map.put("cnt", count);
+		return map;
 	}
 }
