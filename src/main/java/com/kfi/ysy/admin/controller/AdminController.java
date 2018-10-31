@@ -114,6 +114,7 @@ public class AdminController {
 			return ".admin";
 		}	
 	}*/
+//관리자 정보보기
 	@RequestMapping(value="/addetail", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String addetail(int admin_num) {
@@ -126,6 +127,16 @@ public class AdminController {
 		json.put("admin_email", adminvo.getAdmin_email());
 		json.put("admin_regdate", adminvo.getAdmin_regdate());
 		return json.toString(); 
+	}
+//관리자 수정	
+	@RequestMapping(value="/admodify", method=RequestMethod.POST)
+	public String admodify(AdminVo vo) {
+		int result=service.admodify(vo);
+		if(result>0) {
+			return null;
+		}else {
+			return ".main.error";
+		}
 	}
 }
 	

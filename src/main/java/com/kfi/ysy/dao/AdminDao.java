@@ -34,4 +34,7 @@ public class AdminDao {
 	public AdminVo addetail(int admin_num) {
 		return sqlSession.selectOne(NAMESPACE+"addetail", admin_num);
 	}
+	public int admodify(AdminVo vo) {
+		return sqlSession.update(NAMESPACE+"admodify", vo);
+	}
 }

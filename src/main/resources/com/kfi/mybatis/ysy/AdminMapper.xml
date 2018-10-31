@@ -21,4 +21,13 @@
 	<select id="addetail" parameterType="int" resultType="admin">
 		select * from admin where admin_num=#{admin_num}
 	</select>
+	<update id="admodify" parameterType="admin">
+	 	update admin 
+		<set>
+			<if test="admin_nick!=null and admin_nick!=''">admin_nick=#{admin_nick},</if>
+			<if test="admin_pwd!=null and admin_pwd!=''">admin_pwd=#{admin_pwd},</if>
+			<if test="admin_email!=null and admin_email!=''">admin_email=#{admin_email}</if>
+		</set>
+		where admin_num=#{admin_num}
+	</update>
  </mapper>

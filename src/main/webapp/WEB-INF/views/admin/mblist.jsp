@@ -34,14 +34,12 @@
 										$.getJSON("<c:url value='/addetail'/>",{
 											admin_num : admin_num
 										},function(data){
-											alert(data.admin_nick);
-											$("#admininfo_id").text(data.admin_id);								
+											$("#admininfo_num").val(data.admin_num);
+											$("#admininfo_id").text(data.admin_id);
+											$("#admininfo_nick").val(data.admin_nick);
 											$("#admininfo_pwd").val(data.admin_pwd);
-											$("#admininfo_nick").text(data.admin_nick);
 											$("#admininfo_email").val(data.admin_email);
-											$("#admininfo_regdate").text(data.admin_regdate);
-											admininfo_id
-											console.log($("#admin_nick").val());										
+											$("#admininfo_regdate").text(data.admin_regdate);										
 										});							
 									});					
 								} 						
@@ -180,29 +178,30 @@
 </div>
 
 <div class="container modal modal-dialog1 modal-content" id="admininfo-template" >
-	<form class="form-horizontal " action="/adupdate" method="post">
+	<form class="form-horizontal " action="<c:url value='/admodify'/>" method="post">
+	 	<input type="hidden" id="admininfo_num" name="admin_num">
 		<div class="form-group">
 			<label class="control-label col-sm-2" >ID:</label>
 			<div class="col-sm-10">
-				<p class="form-control-static" id="admininfo_id"></p>
+				<p class="form-control-static" id="admininfo_id" ></p>
 			</div> 
 		</div>
 		<div class="form-group ">
 			<label class="control-label col-sm-2" >NICKNAME:</label>
 			<div class="col-sm-10">
-				<p class="form-control-static" id="admininfo_nick"></p>
+				<input type="text" class="form-control" id="admininfo_nick" name="admin_nick">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2">Password:</label>
 			<div class="col-sm-10">          
-				<input type="text" class="form-control" id="admininfo_pwd">
+				<input type="text" class="form-control" id="admininfo_pwd" name="admin_pwd">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2">Email:</label>
 			<div class="col-sm-10">          
-				<input type="text" class="form-control" id="admininfo_email">
+				<input type="text" class="form-control" id="admininfo_email" name="admin_email">
 			</div>
 		</div>
 		<div class="form-group ">
@@ -214,6 +213,7 @@
 		<div class="form-group">        
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-default">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</form>
