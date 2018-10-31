@@ -17,8 +17,8 @@ public class MyCommCalendarDao {
 	private final static String NAMESPACE="com.kfi.mybatis.jyi.MyCommCalendarMapper";
 	
 	//유저가 속한 모임의 일정 가져오기 
-	public List<CommCalendarVo> myCommCalendar(int user_num){
-		return session.selectList(NAMESPACE+".MyCommCalList",user_num);
+	public List<CommCalendarVo> myCommCalendar(HashMap<String, Object> hm){
+		return session.selectList(NAMESPACE+".MyCommCalList",hm);
 	}
 	
 	

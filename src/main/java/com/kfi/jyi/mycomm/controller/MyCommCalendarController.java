@@ -31,21 +31,20 @@ public class MyCommCalendarController {
 		List<CommCalendarVo> monthlist=null;
 		//int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> hm=new HashMap<>();
+		hm.put("user_num", 1);	//user_num
+		hm.put("comm_num", null);
 		if(comm_num.equals("all") && gathering.equals("gathering")) {
-			 monthlist=service.myCommCalendar(1);//user_num
-			 System.out.println("??");
+			 monthlist=service.myCommCalendar(hm);//user_num
 		}else{
-			 System.out.println("!!");
-			hm.put("user_num", 1);//user_num
-			hm.put("selected","x");
 			if(!(comm_num.equals("all"))) {
-				hm.put("selected","selected");
+				int commNum=Integer.parseInt(comm_num);
+				hm.put("comm_num",commNum);
+				model.addAttribute("comm_name", comm_name);
 			}
-			int commNum=Integer.parseInt(comm_num);
-			hm.put("comm_num",commNum);
-			hm.put("gatheringOk","x");
+			hm.put("gatheringOk",null);
 			if(!(gathering.equals("gathering"))) {
 				hm.put("gatheringOk","gatheringOk");
+				model.addAttribute("gathering",gathering);
 			}
 			monthlist=service.getheringCalendar(hm);
 		}

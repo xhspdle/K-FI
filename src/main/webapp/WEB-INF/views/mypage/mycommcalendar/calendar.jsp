@@ -51,15 +51,14 @@
 				} */
 		})
 		$("#mypage_communitylist").on('change',function(){
-			//var getPageContext=$("#getPageContext").val();
 			var comm_num=$('#mypage_communitylist option:selected').val();
 			var comm_name=$('#mypage_communitylist option:selected').text();
 			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num+"&comm_name="+comm_name;
 		});
 		$("#comm_gathering").on('change',function(){
-			//var getPageContext=$("#getPageContext").val();
 			var comm_num=$('#mypage_communitylist option:selected').val();
 			var gathering=$('#comm_gathering option:selected').val();
+			var comm_name=$('#mypage_communitylist option:selected').text();
 			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num
 					+"&comm_name="+comm_name+"&gathering="+gathering;
 		});
@@ -74,8 +73,8 @@
 	</select>
 	<select id="comm_gathering" class="form-control" style="width:10%;">
 		<option value="gathering">전체</option>
-		<option value="attend">참석</option>
-		<option value="not_attend">불참</option>
+		<option value="attend" <c:if test="${gathering =='attend' }"> selected="selected"</c:if>>참석</option>
+		<option value="not_attend" <c:if test="${gathering =='not_attend' }"> selected="selected"</c:if>>불참</option>
 	</select>
 	<div id='mypage_comm_calendar'></div>
 </div>
