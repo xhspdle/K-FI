@@ -125,9 +125,9 @@
 </div>
 <div id="testinfo"></div>
 
-<div class="modal" id="myModal">
-	<div class="modal-dialog1">
-		<div class="modal-content">
+<div class="modal modal-dialog1" id="myModal">
+	<div >
+		<div>
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">×</button>

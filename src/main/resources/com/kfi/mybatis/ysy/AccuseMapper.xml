@@ -29,4 +29,7 @@
 		select nvl(count(*),0) getcnt from accuse
 		<!-- <include refid="search"/>  -->
 	</select>
+	<delete id="acdelete" parameterType="int">
+		delete from accuse where ac_num=#{ac_num}
+	</delete>
 </mapper>

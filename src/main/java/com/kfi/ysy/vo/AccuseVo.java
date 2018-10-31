@@ -10,11 +10,12 @@ public class AccuseVo {
 	private int cb_num;
 	private int board_num;
 	private Date ac_date;
+	private int ac_status;
 	private String user1_nickname;
-	private String user2_nickname;
+	private String user2_nickname;	
 	public AccuseVo() {}
 	public AccuseVo(int ac_num, int user1_num, int user2_num, String ac_reason, int cb_num, int board_num, Date ac_date,
-			String user1_nickname, String user2_nickname) {
+			int ac_status, String user1_nickname, String user2_nickname) {
 		super();
 		this.ac_num = ac_num;
 		this.user1_num = user1_num;
@@ -23,6 +24,7 @@ public class AccuseVo {
 		this.cb_num = cb_num;
 		this.board_num = board_num;
 		this.ac_date = ac_date;
+		this.ac_status = ac_status;
 		this.user1_nickname = user1_nickname;
 		this.user2_nickname = user2_nickname;
 	}
@@ -68,6 +70,12 @@ public class AccuseVo {
 	public void setAc_date(Date ac_date) {
 		this.ac_date = ac_date;
 	}
+	public int getAc_status() {
+		return ac_status;
+	}
+	public void setAc_status(int ac_status) {
+		this.ac_status = ac_status;
+	}
 	public String getUser1_nickname() {
 		return user1_nickname;
 	}
@@ -80,6 +88,5 @@ public class AccuseVo {
 	public void setUser2_nickname(String user2_nickname) {
 		this.user2_nickname = user2_nickname;
 	}
-
 }
 

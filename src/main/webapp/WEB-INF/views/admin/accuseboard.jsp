@@ -4,8 +4,8 @@
 
 <!-- //////////////////신고관리 페이지	//////////////////////	 -->
 <div class="text-center">
-	<h1 id="convertform">신고관리</h1> 
-	</div><br>
+<h1 id="convertform">신고관리</h1> 
+</div><br>
 <div id="aclistview1">
 	<c:forEach var="accuse" items="${aclist }">
 		<div class="col-sm-4 col-xs-12">
@@ -19,7 +19,7 @@
 				</div>
 				<div class="panel-footer">
 				신고대상 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}"> ${accuse.user2_nickname}</a>		
-				</div>
+				</div >
 					<button class="btn btn-md btn-warning">확인</button>
 					<button class="btn btn-md btn-danger">삭제</button>
 				<br><br>
@@ -49,7 +49,7 @@
 				<td><a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user1_num}">${accuse.user1_nickname}</a></td>
 				<td><a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}">${accuse.user2_nickname}</a></td>
 				<td><button class="btn btn-md btn-warning">확인</button></td>
-				<td><button class="btn btn-md btn-danger">삭제</button></td>
+				<td><button class="btn btn-md btn-danger" onclick="location.href='acdelete?ac_num=${accuse.ac_num}'">삭제</button></td>
 			</tr>
 		</c:forEach>	
 	</table>
@@ -63,7 +63,7 @@
 <!--  /////////////////////////////신고된 사용자 정보 ////////////////////////////////////-->
 
 <div class="modal modal-dialog1 " id="accuse_user">
-	<div>
+	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
 				aria-hidden="true">×</button>
@@ -75,6 +75,46 @@
 	</div>
 </div>
 
+<script id="userinfolist-temlpate" type="text/template">
+	<form class="form-horizontal" action="/action_page.php">		
+		<div>
+			<label class="control-label col-sm-2" for="pwd">ID:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" readonly="readonly" value={acc_id}>
+			</div>
+		</div>
+
+
+		<div>
+			<label class="control-label col-sm-2">NickName:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" readonly="readonly" value={acc_nick}>
+			<div>
+		</div>
+
+		<div>
+			<label class="control-label col-sm-2">Status:</label>
+			<select class="form-control">
+				<option>정지</option>
+				<option>정상</option>
+				<option>경고</option>
+			</select>
+		</div>		
+		<div>
+			<label class="control-label col-sm-2">Email:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" value={acc_email}>
+			</div>
+		</div>
+		<div>
+			<label class="control-label col-sm-2">가입일:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" readonly="readonly" value={acc_date}>
+			</div>
+		</div>
+	</form>
+	
+</script>
 <script type="text/javascript">
 	$(function(){
 		$("#convertform").click(function(){
@@ -90,7 +130,7 @@
 	$(function(){
 		$(".accuse_user").click(function(event){
 			alert("aaa");
-			$("#userinfobody").empty();
+	 		$("#userinfobody").empty();
 	/* 		userinfobody.empty(); */
 			var user_num=event.target.id;
 			$.getJSON("<c:url value='/mbgetinfo'/>",{
@@ -120,38 +160,9 @@
 			});
 		});		
 	});
-	
+	$(function(){
+		$("accdelte").click
+	})
 	
 </script>
-
-<script id="userinfolist-temlpate" type="text/template">
-	<form class="form-horizontal" action="/action_page.php">		
-		<div>
-			<label class="control-label col-sm-2" for="pwd">ID:</label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" value={acc_id}>
-		</div>
-		<div>
-			<label class="control-label col-sm-2">NickName:</label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" value={acc_nick}>
-		</div>
-		<div>
-			<label class="control-label col-sm-2">Status:</label>
-			<select class="form-control">
-				<option>정지</option>
-				<option>정상</option>
-				<option>경고</option>
-			</select>
-		<div>
-			<label class="control-label col-sm-2">Email:</label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" value={acc_email}>
-		</div>
-		<div>
-			<label class="control-label col-sm-2">가입일:</label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" value={acc_date}>
-		</div>
-	</form>
-</script> 
+ 

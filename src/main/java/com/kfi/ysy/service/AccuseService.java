@@ -20,5 +20,7 @@ public class AccuseService {
 	public int acgetcnt(HashMap<String, Object> map) {
 		return dao.acgetcnt(map);
 	}
-	
+	public int acdelete(int ac_num) {
+		return dao.acdelete(ac_num);
+	}
 }

@@ -22,4 +22,7 @@ public class AccuseDao {
 	public int acgetcnt(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE+"acgetcnt" ,map);
 	}
+	public int acdelete(int ac_num) {
+		return sqlSession.delete(NAMESPACE+"acdelete", ac_num);
+	}
 }

@@ -20,7 +20,7 @@ public class AccuseController {
 	@Autowired 
 	private AccuseService acservice;
 	//신고게시판 리스트
-	@RequestMapping("/accuse")
+	@RequestMapping("/aclist")
 	public String aclist(@RequestParam(value="pagenum", defaultValue="1")int pagenum,String field, String keyword, Model model) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("field", field);
@@ -39,5 +39,14 @@ public class AccuseController {
 		}else {
 			return ".admin.error";
 		}
+	}
+	@RequestMapping(value="/acdelete", method=RequestMethod.GET)
+	public String acdelete(int ac_num) {
+		int result=acservice.acdelete(ac_num);
+		if(result>0) {
+			return "redirect:/aclist";
+		}else {
+			return null;
+		}	
 	}
 }

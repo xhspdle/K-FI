@@ -53,7 +53,7 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="mblist">회원관리</a></li>
-						<li><a href="accuse">신고관리</a></li>
+						<li><a href="aclist">신고관리</a></li>
 						<li><a href="">통계관리</a></li>
 						<li><a href="ablist">공지사항</a></li>
 						<li><a href="faqlist">Q&#38;A</a></li>
