@@ -1,7 +1,5 @@
 package com.kfi.ldk.service;
 
-import java.util.List;
-
 public interface CommonService {
 	int getMaxNum();
 	int getCount(Object data);
@@ -9,5 +7,5 @@ public interface CommonService {
 	int update(Object data);
 	int delete(Object data);
 	Object select(Object data);
-	List<Object> list(Object data);
+	Object list(Object data);
 }

@@ -13,9 +13,6 @@
 			</otherwise>
 		</choose>
 	</sql>
-	<select id="getMaxNum" resultType="int">
-		select NVL(max(mb_num),0) maxnum from myboardlist
-	</select>
 	<select id="getCount" parameterType="hashmap" resultType="int">
 		select NVL(count(mb_num),0) cnt from myboardlist
 		<include refid="search"/>

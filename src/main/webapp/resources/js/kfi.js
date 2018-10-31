@@ -239,10 +239,12 @@ $(document).ready(function(){
 					if(i==0){
 						$("<div class='panel-group'>" +
 						  "<div class='panel panel-default'>" +
-						  "<div class='panel-heading' id='"+ mb_num +"'>" +
+						  "<div class='panel-heading' id='"+ mb_num +"' data-comm-cnt='"+ comment_cnt +"' data-like-cnt='"+ like_cnt +"'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
-						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +
+						  	"&comment_cnt="+ comment_cnt +
+						  	"&like_cnt="+ like_cnt +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -253,10 +255,12 @@ $(document).ready(function(){
 					}else{
 						$("<div class='panel-group slideanim'>" +
 						  "<div class='panel panel-default'>" +
-						  "<div class='panel-heading' id='"+ mb_num +"'>" +
+						  "<div class='panel-heading' id='"+ mb_num +"' data-comm-cnt='"+ comment_cnt +"' data-like-cnt='"+ like_cnt +"'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
-						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +
+						  	"&comment_cnt="+ comment_cnt +
+						  	"&like_cnt="+ like_cnt +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -268,9 +272,15 @@ $(document).ready(function(){
 				});
 				
 			});
-		$("#myBoardList").on('click',".panel-heading",function(){
-			location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id") ;
-		})
+		$("#myBoardList").on({
+			click: function(){
+				location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id") + 
+				"&comment_cnt=" + $(this).attr("data-comm-cnt") + 
+				"&like_cnt=" + $(this).attr("data-like-cnt");
+			}, mouseover: function(){
+				$(this).css("cursor","pointer");
+			}
+		});
   }
   $.footerBtn=function(){
 	  $("footer").before("<div class='container-fluid text-center'>" +
@@ -285,8 +295,12 @@ $(document).ready(function(){
   $.getListMore=function(){	  
 	  $.getList(more++);
   }
-  $("#myBoardSelect .panel-heading").click(function(){
-	  location.reload();
+  $("#myBoardSelect .postTitle > span").on({
+	  click: function(){
+		  location.reload();
+	  }, mouseover: function(){
+		  $(this).css("cursor","pointer");
+	  }
   });
   $("#commentForm > button[type='submit']").click(function(e){
 	  var getPageContext=$("#getPageContext").val();
@@ -303,14 +317,71 @@ $(document).ready(function(){
 			  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-remove'></span>comment post failed")
 			  $("#commentForm > .help-block").css("opacity","1");
 		  }
-		  myc_content.val('');
-		  myc_content.focus();
+		  $("#commentForm > input[type='text']").val('');
+		  $("#commentForm > input[type='text']").focus();
+		  $.getCommentList();
+		  setTimeout(function(){
+				 $("#commentForm > .help-block").css("opacity","0"); 
+		  },5000);
 	  });
   });
-  $("#commentForm > input[type='text']").keyup(function(){
-	  setTimeout(function(){
-			 $("#commentForm > .help-block").css("opacity","0"); 
-		 },1500);	 
-  });
+  $.getCommentList=function(pageNum){
+	  var getPageContext=$("#getPageContext").val();
+	  var mb_num=$("#commentForm > input[type='hidden']").val();
+	  $.getJSON(getPageContext + "/mypage/mycomment/list",
+		  {'pageNum':pageNum,'mb_num':parseInt(mb_num)},
+		  function(data){
+			  $("#commentList").empty();
+			  $(data.commentList).each(function(i,json){
+				  var myc_num=json.myc_num;
+				  var mb_num=json.mb_num;
+				  var user_num=json.user_num;
+				  var myc_content=json.myc_content;
+				  var myc_date=json.myc_date;
+				  var cnt=json.cnt;
+				  var user_id=json.user_id;
+				  html=document.querySelector("#commentTemplate").innerHTML;
+				  var resultHTML=html.replace("{msp_savimg}","kpop콘.gif")
+				  		.replace("{user_id}",user_id)
+				  		.replace("{myc_content}",myc_content)
+				  		.replace("{comment_likes}",cnt)
+				  		.replace("{myc_date}",$.jsonDate(myc_date));
+				  $("#commentList").append(resultHTML);
+			  });
+			  $(".pagination").empty();
+			  var startPageNum=data.pu.startPageNum;
+			  var endPageNum=data.pu.endPageNum;
+			  if(startPageNum>data.pu.pageBlockCount){
+				  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ (startPageNum-1) +")'>" +
+				  	"<span class='glyphicon glyphicon-chevron-left bPaging'></span></a></li>")
+				  .appendTo(".pagination");
+			  }else{
+				  $(".pagination")
+				  .append("<li><span class='glyphicon glyphicon-chevron-left bPaging'></span></li>");
+			  }
+			  for(var i=startPageNum;i<=endPageNum;i++){
+				  if(i==data.pu.pageNum){
+					  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ i +")'>" + i + "</a></li>")
+					  .appendTo(".pagination")
+					  .addClass("active")
+				  }else{
+					  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ i +")'>" + i + "</a></li>")
+					  .appendTo(".pagination")
+				  }
+			  }
+			  if(endPageNum<data.pu.totalPageCount){
+				  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ (startPageNum-1) +")'>" +
+				  	"<span class='glyphicon glyphicon-chevron-right bPaging'></span></a></li>")
+				  .appendTo(".pagination");
+			  }else{
+				  $(".pagination")
+				  .append("<li><span class='glyphicon glyphicon-chevron-right bPaging'></span></li>");
+			  }
+		  });
+  }
+  if($("#myCommentListHere").val()!==undefined){
+	  $.getCommentList();
+  }
+  $('[data-toggle="tooltip"]').tooltip();
 });
 

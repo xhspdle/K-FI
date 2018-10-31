@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.MyCommentListViewMapper">
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		select NVL(count(mcl_num),0) cnt from mycommentlist where mb_num=#{mb_num}
+	</select>
+	<select id="list" parameterType="hashmap" resultType="mycommentlist">
+		select *
+		from
+		(
+	 	select aa.*,rownum rnum 
+	 	from
+	 	(
+	 		select *
+	 		from mycommentlist
+	 		where mb_num=#{mb_num}
+	 		order by myc_num desc
+	 	)aa
+		)
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+	<select id="select" parameterType="int" resultType="mycommentlist">
+		select * from mycommentlist where mb_num=#{mb_num}
+	</select>
+</mapper>

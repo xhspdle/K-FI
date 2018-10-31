@@ -6,7 +6,7 @@
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(mbl_num),0) maxnum from my_board_like
 	</select>
-	<select id="getCount" parameterType="int" resultType="int">
+	<select id="getCount" parameterType="hashmap" resultType="int">
 		select NVL(count(mbl_num),0) cnt from my_board_like where mb_num=#{mb_num}
 	</select>
 	<insert id="insert" parameterType="myboardlike">
@@ -35,6 +35,6 @@
 		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
 	<select id="select" parameterType="int" resultType="myboardlike">
-		select * from my_board_like where mbl_num=#{mbl_num}
+		select * from my_board_like where mb_num=#{mb_num}
 	</select>
 </mapper>

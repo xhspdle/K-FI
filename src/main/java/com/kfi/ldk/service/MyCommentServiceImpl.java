@@ -1,25 +1,27 @@
 package com.kfi.ldk.service;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kfi.ldk.dao.MyCommentDao;
+import com.kfi.ldk.dao.MyCommentListViewDao;
 import com.kfi.ldk.vo.MyCommentVo;
 
 @Service
 public class MyCommentServiceImpl implements CommonService{
 	@Autowired private MyCommentDao mcDao;
+	@Autowired private MyCommentListViewDao mcViewDao;
 	@Override
 	public int getMaxNum() {
 		return mcDao.getMaxNum();
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public int getCount(Object data) {
-		int mb_num=(Integer)data;
-		return mcDao.getCount(mb_num);
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		return mcDao.getCount(map);
 	}
 	@Override
 	public int insert(Object data) {
@@ -44,8 +46,9 @@ public class MyCommentServiceImpl implements CommonService{
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> list(Object data) {
+	public Object list(Object data) {
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
-		return mcDao.list(map);
+		map.put("commentList", mcViewDao.list(map));
+		return map;
 	}
 }
