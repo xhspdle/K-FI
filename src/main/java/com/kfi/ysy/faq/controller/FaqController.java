@@ -27,4 +27,8 @@ public class FaqController {
 		model.addAttribute("faqinfo", vo);
 		return ".faq.faqdetail";
 	}
+	public String faqinsert(FaqVo vo) {
+		
+		return "redirect:/faqlist";
+	}
 }
