@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<input type="hidden" id="getPageContext" value="<c:url value='/'/>">
 <div id="myBoardSelect" class="container">
 	<h1 class="text-center" style="margin-bottom:30px;"><span style="border-bottom: 4px solid tan">${boardVo.mb_date }</span></h1>
 	<div class="panel-group">
@@ -75,13 +74,15 @@
 				</div>
 				<h3 class="postLikeComment select">xx Comments</h3>
 				<div class="media">
-					<div class="media-left media-middle">
+					<div class="media-left media-top">
 						<img class="media-object img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="userProfile">
 					</div>
 					<div class="media-body media-middle form-group row">
-						<form id="commentForm" class="form-inline" action="">
-							<input type="text" class="form-control" placeholder="Say something!">
-							<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-comment"></span></button>
+						<form id="commentForm" name="frmComment" class="form-inline" action="<c:url value='/mypage/mycomment/insert'/>">
+							<input type="hidden" name="mb_num" value="${boardVo.mb_num }">
+							<input type="text" name="myc_content" class="form-control" placeholder="Say something!">
+							<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span></button>
+							<span class="help-block">asd</span>
 						</form>
 					</div>
 				</div>

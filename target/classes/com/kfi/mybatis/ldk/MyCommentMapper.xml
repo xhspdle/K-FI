@@ -6,8 +6,8 @@
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(myc_num),0) maxnum from my_comment
 	</select>
-	<select id="getCount" parameterType="hashmap" resultType="int">
-		select NVL(count(myc_num),0) cnt from my_comment
+	<select id="getCount" parameterType="int" resultType="int">
+		select NVL(count(myc_num),0) cnt from my_comment where mb_num=#{mb_num}
 	</select>
 	<insert id="insert" parameterType="mycomment">
 		insert into my_comment 
@@ -28,12 +28,13 @@
 	 	(
 	 		select *
 	 		from my_comment
+	 		where mb_num=#{mb_num}
 	 		order by myc_num desc
 	 	)aa
 		)
 		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
 	<select id="select" parameterType="int" resultType="mycomment">
-		select * from my_comment where myc_num=#{myc_num}
+		select * from my_comment where user_num=#{user_num}
 	</select>
 </mapper>

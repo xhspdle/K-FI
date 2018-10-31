@@ -23,6 +23,7 @@
 <!-- 추가끝 -->
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60"><!-- style="padding-top:60px;" -->
+<input type="hidden" id="getPageContext" value="<c:url value='/'/>">
 
 <div id="wrap">
 	<div id="header">

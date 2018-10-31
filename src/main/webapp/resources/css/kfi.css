@@ -449,8 +449,8 @@ img.media-object {
 	font-size: 18px;
 	height: 50px;
 	width: 90%;
-	border-radius: 20px;
 	float: left;
+	border-radius: 20px;
 	margin-right:10px;
 }
 #commentForm button[type='submit'] {
@@ -473,6 +473,15 @@ img.media-object {
 	margin-top: 10px;
 	font-size: 24px;
 }
+#commentList .media-body h3 strong > a {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+#commentList .media-body h3 strong > a:hover {
+	text-decoration: none;
+	color: lightblue;
+	text-shadow: 0 1px 7px rgba(0,0,0,0.25)
+}
 #commentList .media-body > p {
 	margin-top: 10px;
 	color: black;
@@ -488,4 +497,11 @@ img.media-object {
 #commentList div.media {
 	padding: 10px 0;
 	border-bottom: 1px solid #ddd;
+}
+.help-block {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    opacity: 0;
+    color: #f4511e;
+    text-shadow: 0 1px 7px rgba(0,0,0,0.25)
 }

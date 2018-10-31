@@ -154,7 +154,6 @@ $(document).ready(function(){
 	  $(this).prop('disabled',true);
 	  var form=document.frm;
 	  var formData=new FormData(form);
-	  console.log(getPageContext);
 	  var ajaxReq=$.ajax({
 		  url: getPageContext + "/mypage/myboard/insert",
 		  type: 'post',
@@ -288,6 +287,30 @@ $(document).ready(function(){
   }
   $("#myBoardSelect .panel-heading").click(function(){
 	  location.reload();
+  });
+  $("#commentForm > button[type='submit']").click(function(e){
+	  var getPageContext=$("#getPageContext").val();
+	  e.preventDefault();
+	  var mb_num=$("#commentForm > input[type='hidden']").val();
+	  var myc_content=$("#commentForm > input[type='text']").val();
+	  $.getJSON(getPageContext + "/mypage/mycomment/insert",
+			  {'mb_num':mb_num,'myc_content':myc_content},
+			  function(json){
+		  if(json.code=='success'){
+			  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-ok'></span>comment post succeded")
+			  $("#commentForm > .help-block").css("opacity","1");
+		  }else{
+			  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-remove'></span>comment post failed")
+			  $("#commentForm > .help-block").css("opacity","1");
+		  }
+		  myc_content.val('');
+		  myc_content.focus();
+	  });
+  });
+  $("#commentForm > input[type='text']").keyup(function(){
+	  setTimeout(function(){
+			 $("#commentForm > .help-block").css("opacity","0"); 
+		 },1500);	 
   });
 });
 
