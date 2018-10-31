@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kfi.ysy.faq.service.FaqService;
-import com.kfi.ysy.faq.vo.FaqVo;
+import com.kfi.ysy.service.FaqService;
+import com.kfi.ysy.vo.FaqVo;
 
 @Controller
 public class FaqController {

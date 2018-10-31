@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kfi.ysy.admin.service.AdminService;
-import com.kfi.ysy.admin.vo.AdminVo;
+import com.kfi.ysy.service.AdminService;
+import com.kfi.ysy.vo.AdminVo;
 
 
 @Controller
@@ -114,6 +114,19 @@ public class AdminController {
 			return ".admin";
 		}	
 	}*/
+	@RequestMapping(value="/addetail", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String addetail(int admin_num) {
+		AdminVo adminvo=service.addetail(admin_num);
+		JSONObject json=new JSONObject();
+		json.put("admin_num", adminvo.getAdmin_num());
+		json.put("admin_id", adminvo.getAdmin_id());
+		json.put("admin_pwd", adminvo.getAdmin_pwd());
+		json.put("admin_nick", adminvo.getAdmin_nick());
+		json.put("admin_email", adminvo.getAdmin_email());
+		json.put("admin_regdate", adminvo.getAdmin_regdate());
+		return json.toString(); 
+	}
 }
 	
 

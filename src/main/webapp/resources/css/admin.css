@@ -102,7 +102,7 @@ h4 {
 }
 
 .panel-heading {
-	color: #fff !important;
+	color: #333333 !important;
 	/* background-color: #333333 !important; */
 	padding: 15px;
 	border-bottom: 1px solid transparent;
@@ -256,4 +256,8 @@ table tr td{
 	width: auto;
 	height: auto;
 	
+}
+.modal-dialog1{
+	margin-left:25%;
+	margin-top:20%;
 }

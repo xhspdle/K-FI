@@ -23,10 +23,17 @@
 									var admin_id='<c:out value="${sessionScope.admininfo.admin_id}"/>';				
 									$("#adminlist table tr:last").after(resultHTML);
 									if(admin_id==data[i].admin_id){
-										var admin_modify_btn='<th><button class="btn btn-sm btn-primary"' 
+										var admin_modify_btn='<th><button class="btn btn-sm btn-primary" id="adminmodifybtn"' 
 										+'>수정</button></th>';
 										$("#adminlist table tr td:last").append(admin_modify_btn);					
-									}	 	
+									}
+									$("#adminmodifybtn").attr({'data-toggle':'modal','data-target':'#myModal'});
+									$("#adminmodifybtn").click(function(){
+										alert("이게버튼이냐?");
+										
+										
+									});
+								
 								} 						
 							}
 						});
@@ -49,6 +56,7 @@
 			
 		});
 	});
+
 </script>
 
 <script id="adminlist-template" type="text/template">
@@ -61,7 +69,7 @@
 		<td></td>
 	</tr>
 </script>
- <c:set var="admin" value="${sessionScope.admininfo}" /> 
+<c:set var="admin" value="${sessionScope.admininfo}" /> 
 <div id="memberslist"> 
 	<h1>
 		회원정보
@@ -141,12 +149,12 @@
 							<input type="password" class="form-control" placeholder="Enter password">
 						</div>
 					</div>
-					<div class="form-group">
+	<!-- 				<div class="form-group">
 						<label class="control-label col-sm-2">Password:</label>
 						<div class="col-sm-10">
 							<input type="password" class="form-control" placeholder="Enter password">
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<label class="control-label col-sm-2">NickName:</label>
 						<div class="col-sm-10">

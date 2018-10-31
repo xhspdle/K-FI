@@ -6,16 +6,19 @@
  	<select id="abmaxnum" resultType="int">
  		select nvl(max(admin_num),1)maxnum from admin
  	</select>
- 	<select id="adlogin" parameterType="hashmap" resultType="com.kfi.ysy.admin.vo.AdminVo">
- 		select * from admin where admin_id=#{admin_id} and admin_pwd=#{admin_pwd}
+ 	<select id="adlogin" parameterType="hashmap" resultType="admin">
+ 		select admin_num,admin_id,admin_nick from admin where admin_id=#{admin_id} and admin_pwd=#{admin_pwd}
  	</select>
  	<select id="adcheckid" parameterType="string" resultType="int">
  		select count(*) from admin where admin_id=#{admin_id}
  	</select>
- 	<insert id="adjoin" parameterType="com.kfi.ysy.admin.vo.AdminVo">
+ 	<insert id="adjoin" parameterType="admin">
  		insert into admin values(#{admin_num},#{admin_id},#{admin_pwd},#{admin_nick},#{admin_email},sysdate)
  	</insert>
- 	<select id="adminlist" resultType="com.kfi.ysy.admin.vo.AdminVo">
+ 	<select id="adminlist" resultType="admin">
 		select * from admin
+	</select>
+	<select id="addetail" parameterType="int" resultType="admin">
+		select * from admin where admin_num=#{admin_num}
 	</select>
  </mapper>

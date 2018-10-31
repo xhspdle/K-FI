@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kfi.dgl.members.service.MembersService;
 import com.kfi.dgl.members.vo.MembersVo;
-import com.kfi.ysy.admin.util.AdminPageUtil;
+import com.kfi.ysy.util.AdminPageUtil;
 
 
 

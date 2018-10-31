@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kfi.ysy.admin.service.AccuseService;
-import com.kfi.ysy.admin.util.AdminPageUtil;
-import com.kfi.ysy.admin.vo.AccuseVo;
+import com.kfi.ysy.service.AccuseService;
+import com.kfi.ysy.util.AdminPageUtil;
+import com.kfi.ysy.vo.AccuseVo;
 
 //신고게시판
 @Controller

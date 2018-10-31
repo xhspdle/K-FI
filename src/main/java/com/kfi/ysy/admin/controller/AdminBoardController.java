@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kfi.ysy.admin.service.AdminBoardService;
-import com.kfi.ysy.admin.util.AdminPageUtil;
-import com.kfi.ysy.admin.vo.AdminBoardVo;
+import com.kfi.ysy.service.AdminBoardService;
+import com.kfi.ysy.util.AdminPageUtil;
+import com.kfi.ysy.vo.AdminBoardVo;
 
 
 
