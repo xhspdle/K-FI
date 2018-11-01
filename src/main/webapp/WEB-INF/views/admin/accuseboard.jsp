@@ -61,58 +61,57 @@
 </div>
 
 <!--  /////////////////////////////신고된 사용자 정보 ////////////////////////////////////-->
-
-<div class="modal modal-dialog1 " id="accuse_user">
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">×</button>
-			<h4 class="modal-title">Question Editor</h4>
-		</div>
-		<div class="modal-body" id="userinfobody">
-		
+ 
+<div class="modal" id="accuse_user">
+	<div class="modal-dialog1">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4 class="modal-title">Question Editor</h4>
+			</div>
+			<div class="modal-body" id="userinfobody">
+			
+			</div>
 		</div>
 	</div>
 </div>
 
-<script id="userinfolist-temlpate" type="text/template">
-	<form class="form-horizontal" action="/action_page.php">		
-		<div>
-			<label class="control-label col-sm-2" for="pwd">ID:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" readonly="readonly" value={acc_id}>
-			</div>
+<script id="userinfotemlpate" type="text/template">
+<form class="form-horizontal" action="#" method="post">	
+	<div class="form-group">
+		<label class="control-label col-sm-2">ID:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" readonly="readonly" value={acc_id}>
 		</div>
-
-
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">NickName:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" readonly="readonly" value={acc_nick}>
 		<div>
-			<label class="control-label col-sm-2">NickName:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" readonly="readonly" value={acc_nick}>
-			<div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">Email:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" value={acc_email}>
 		</div>
-
-		<div>
-			<label class="control-label col-sm-2">Status:</label>
-			<select class="form-control">
-				<option>정지</option>
-				<option>정상</option>
-				<option>경고</option>
-			</select>
-		</div>		
-		<div>
-			<label class="control-label col-sm-2">Email:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" value={acc_email}>
-			</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">가입일:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" readonly="readonly" value={acc_date}>
 		</div>
-		<div>
-			<label class="control-label col-sm-2">가입일:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" readonly="readonly" value={acc_date}>
-			</div>
-		</div>
-	</form>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">Status:</label>
+		<select class="form-control">
+			<option>정지</option>
+			<option>정상</option>
+			<option>경고</option>
+		</select>
+	</div>		
+</form>
 </script>
 <script type="text/javascript">
 	$(function(){
@@ -136,25 +135,14 @@
 				user_num : user_num
 			},function(data){
 				alert(data.acc_id);
- 				html=document.querySelector("#userinfolist-temlpate").innerHTML;
+ 				html=document.querySelector("#userinfotemlpate").innerHTML;
 				alert(html)
  				var resultHTML=html.replace("{acc_id}", data.acc_id)
    					.replace("{acc_nick}", data.acc_nick)
 					.replace("{acc_stat}", data.acc_stat)
 					.replace("{acc_email}", data.acc_email)
 					.replace("{acc_date}",data.acc_date);
-				alert(resultHTML);  
-/* 				var acc_info=[
-					{data.acc_id},{data.acc_nick},{data.acc_stat},{data.acc_email},{data.acc_date}	
-				];
-					 */
-				/* 		<div class="form-group">
-						<label class="control-label col-sm-2" for="pwd">Email:</label>
-						<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="Enter Email">
-						</div>
-						</div> */
-				
+				alert(resultHTML);
 				$("#userinfobody").append(resultHTML);
 			});
 		});		

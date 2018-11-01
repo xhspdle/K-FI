@@ -83,6 +83,7 @@
 				$("#abupdate_content").val(data.ab_content);
 				$("#abupdate_adnum").val(data.admin_num);
 				$("#abupdate_notice").val(data.ab_notice);
+				$("#abupdate_date").val(data.ab_date);
 			}); 
 		});
 	});
@@ -141,14 +142,15 @@
 							<input type="text" class="form-control" name="admin_num" id="abupdate_adnum">
 						</div>
 					</div>
+
 					<div class="form-group">
-						<label class="control-label col-sm-2">Email:</label>
+						<label class="control-label col-sm-2">상태정보:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="ab_notice" id="abupdate_notice">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2">Email:</label>
+						<label class="control-label col-sm-2">등록일자:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="ab_date" id="abupdate_date">
 						</div>
