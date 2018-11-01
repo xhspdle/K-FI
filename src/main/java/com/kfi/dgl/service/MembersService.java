@@ -49,9 +49,11 @@ public class MembersService {
 	public int createKey(String user_email) {
 		return dao.createKey(user_email);
 	}
-
 	public int idcheck(String user_id) {
-		return dao.idCheck();
+		return dao.idCheck(user_id);
+	}
+	public int nickcheck(String user_nickname) {
+		return dao.nickCheck(user_nickname);
 	}
 	public MembersVo select(int user_num) {
 		return dao.select(user_num);

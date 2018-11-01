@@ -38,7 +38,7 @@
 	</select>
 	
 	<!-- id 체크 -->
-	<select id="idcheck" parameterType="String" resultType="int">
+	<select id="idCheck" parameterType="string" resultType="int">
 		select count(*) from members where USER_ID = #{user_id}
 	</select>
 	

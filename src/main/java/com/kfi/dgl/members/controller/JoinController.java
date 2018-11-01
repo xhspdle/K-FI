@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,7 +15,7 @@ import com.kfi.dgl.service.MembersService;
 import com.kfi.dgl.vo.MembersVo;
 
 @Controller(value = "MembersInsertController")
-public class joinController {
+public class JoinController {
 	@Autowired
 	private MembersService service;
 
@@ -42,14 +41,26 @@ public class joinController {
 		}
 		return returnURL;
 	}
-	@RequestMapping("/idcheck")
-		public Map<Object, Object> idcheck(@RequestBody String user_id){
-		
-		int count = 0;
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		
-		count = service.idcheck(user_id);
-		map.put("cnt", count);
+	@RequestMapping("/login/join/idcheck")
+		public Map<String, String> idcheck(String user_id){
+		int n = service.idcheck(user_id);
+		Map<String, String> map = new HashMap<>();
+		if(n == 0) {
+			map.put("msg", "true");
+		}else if(n == 1) {
+			map.put("msg", "false");
+		}
 		return map;
 	}
+	@RequestMapping("/login/join/nickcheck")
+	public Map<String, String> nickcheck(String user_nickname){
+	int n = service.nickcheck(user_nickname);
+	Map<String, String> map = new HashMap<>();
+	if(n == 0) {
+		map.put("msg", "true");
+	}else if(n == 1) {
+		map.put("msg", "false");
+	}
+	return map;
+}
 }

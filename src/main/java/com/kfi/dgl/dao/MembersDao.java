@@ -46,8 +46,12 @@ public class MembersDao {
 		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
 	}
 	//id 체크
-	public int idCheck() {
-		return sqlSession.selectOne(NAMESPACE + ".idCheck");
+	public int idCheck(String user_id) {
+		return sqlSession.selectOne(NAMESPACE + ".idCheck", user_id);
+	}
+	//닉네임 체크
+	public int nickCheck(String user_nickname) {
+		return sqlSession.selectOne(NAMESPACE + ".nickCheck", user_nickname);
 	}
 	//사용자 인증 상태 변경
 	public int verify(MembersVo vo) {
