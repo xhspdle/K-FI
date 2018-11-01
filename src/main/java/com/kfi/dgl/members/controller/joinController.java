@@ -25,19 +25,20 @@ public class joinController {
 	}
 
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
-	public ModelAndView join(MembersVo vo) {
+	public String join(MembersVo vo) {
 		int user_num = service.getMaxnum()+1;
 		vo.setUser_num(user_num);
+		
 		System.out.println(vo.getUser_id());
 		System.out.println(vo.getUser_pwd());
 		int n = service.join(vo);
-		ModelAndView mv = new ModelAndView();
+		String returnURL = "";
 		if (n > 0) {
-			mv.setViewName("login.jsp");
+			returnURL = "redirect:/login/login";
 		} else {
-			mv.setViewName("join.jsp");
+			returnURL="redirect:/login/join";
 		}
-		return mv;
+		return returnURL;
 	}
 	@RequestMapping("/idcheck")
 		public Map<Object, Object> idcheck(@RequestBody String user_id){

@@ -28,8 +28,8 @@ public class LoginController {
 		String user_id = request.getParameter("userId");
 		String user_pwd = request.getParameter("userPwd");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("userId", user_id);
-		map.put("userPwd", user_pwd);
+		map.put("user_id", user_id);
+		map.put("user_pwd", user_pwd);
 		String returnURL ="";
 
 		if ( session.getAttribute("user_id") != null ){
@@ -37,17 +37,18 @@ public class LoginController {
 			session.removeAttribute("user_num");
 			session.removeAttribute("user_id");
 	}	
-		
 		MembersVo vo =loginService.login(map);
 		
 		//로그인 성공
 		if(vo!=null) { 
-			if(vo.getUser_certi() =='1') {
-						
+			if(vo.getUser_certi() ==1) {
+				System.out.println(vo.getUser_id());
+				System.out.println(vo.getUser_pwd());
 			session.setAttribute("user_num", vo.getUser_num());
 			session.setAttribute("user_id", vo.getUser_id());
 			returnURL = "redirect:/mypage/main";
 		}else {
+			System.out.println(vo.getUser_email());
 			returnURL = "redirect:/login/login";
 		}
 		}
