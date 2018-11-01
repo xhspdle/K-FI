@@ -4,12 +4,13 @@ package com.kfi.dgl.members.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kfi.dgl.service.MembersService;
 import com.kfi.dgl.vo.MembersVo;
@@ -25,17 +26,17 @@ public class joinController {
 	}
 
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
-	public String join(MembersVo vo) {
-		int user_num = service.getMaxnum();
-		System.out.println(".////////////////////"+user_num);
+	public String join(MembersVo vo, HttpSession session) {
+		int user_num = service.getMaxnum()+1;
 		vo.setUser_num(user_num);
-		System.out.println(".////////////////////"+user_num);
-		System.out.println(vo.getUser_id());
-		System.out.println(vo.getUser_pwd());
 		int n = service.join(vo);
 		String returnURL = "";
 		if (n > 0) {
+			session.setAttribute("user_num", vo.getUser_num());
+			session.setAttribute("user_id", vo.getUser_id());
 			returnURL = "redirect:/login/login";
+			System.out.println(session.getAttribute("user_id"));
+
 		} else {
 			returnURL="redirect:/login/join";
 		}

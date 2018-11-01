@@ -41,7 +41,18 @@
 	<select id="idcheck" parameterType="String" resultType="int">
 		select count(*) from members where USER_ID = #{user_id}
 	</select>
-	<!-- 동일 이메일 찾기 -->
+	
+	<!-- 닉네임 체크 -->
+	<select id="nickCheck" parameterType="logmembers" resultType="logmembers">
+		select count(*) from members where USER_NICKNAME=#{user_nickname}
+	</select>
+	
+	<!-- 이메일 체크 -->
+	<select id="emilcheck" parameterType="logmembers" resultType="logmembers">
+		select count(*) from members where USER_EMAIL=#{user_email}
+	</select>
+	
+	<!-- 동일 이메일 검사 -->
 	<select id="findEmail" parameterType="logmembers" resultType="logmembers">
 		select * from members where USER_EMAIL=#{user_email}
 	</select>

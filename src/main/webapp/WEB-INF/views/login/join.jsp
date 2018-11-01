@@ -14,7 +14,7 @@
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script>
 /* id 중복 체크 부분 */
-function()
+function(){
 $(function(){
 	 
 		var idFlag = false;
@@ -81,7 +81,8 @@ $(function(){
 				showErrorMsg("영문(5~20자), 한글(2~10자) 로 이루어진 닉네임을 만들어 주세요.");
 				return false;
 			}
-			
+				}
+			});
 		});
 		
 		/* 비번 체크 부분 */
@@ -96,8 +97,6 @@ $(function(){
 				return false;
 			}
 		}
-			
-		
 				
 			pwFlag =false;
 			$.ajax({
@@ -119,7 +118,6 @@ $(function(){
 					createRsaKey();
 				}
 				});
-			});
 			return true;
 		}
 		
@@ -132,7 +130,7 @@ $(function(){
 				return false;
 			}
 		 
-	});
+	}
 	function checkMail() {
 		var email = document.getElementById("email").value;
 
@@ -176,6 +174,7 @@ $(function(){
 		xhttp.send('email=' + email);
 		return false;
 	};
+	)};
 </script>	
 <title>회원가입</title>
 </head>
