@@ -45,4 +45,7 @@
 		</set>
 		where ab_num=#{ab_num}
 	</update>
+	<select id="abpopup" resultType="adminboard">
+		select * from admin_board where ab_notice=1
+	</select>
 </mapper>

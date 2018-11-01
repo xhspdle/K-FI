@@ -33,4 +33,7 @@ public class AdminBoardDao {
 	public int abgetcnt(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE+"abgetcnt", map);
 	}
+	public List<AdminBoardVo> abpopup() {
+		return sqlSession.selectList(NAMESPACE+"abpopup");
+	}
 }

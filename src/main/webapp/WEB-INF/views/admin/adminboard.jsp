@@ -81,7 +81,7 @@
 				
 				console.log(data.ab_num);
 				$("#abupdate_title").val(data.ab_title);
-				$("#abupdate_content").val(data.ab_content);
+				$("#abupdate_comment").text(data.ab_content);
 				$("#abupdate_adnum").val(data.admin_num);
 				$("#abupdate_notice").val(data.ab_notice);
 				$("#abupdate_date").val(data.ab_date);
@@ -89,9 +89,18 @@
 		});
 	});
  	$(function(){
-		
-		 	$("#aaaaa").css("display","block"); 
-		
+		$.getJSON("<c:url value='/abpopup'/>", function(data){
+			for(var i=0;i<data.length;i++){
+				alert(data[i].admin_num)
+				console.log(data[i].admin_num);
+				console.log(data[i].ab_content);
+				console.log(data[i].ab_title);
+				var content=data[i].ab_content;
+				$("#aaaaa").css("display","block");
+				alert("aaaa");
+				$("#aaaaa").append(content);
+			}
+		});
 	}); 
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
@@ -140,7 +149,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">내용:</label>
 						<div class="col-sm-10">
-							  <textarea class="form-control" rows="5" id="comment"></textarea>
+							  <textarea class="form-control" rows="5" id="abupdate_comment"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -218,7 +227,7 @@
 		<a href="abinsert" class="btn btn-default">글작성</a>
 <div id="aaaaa">
 	
-	내용
+
 	<input type="button" value="닫기" onclick=""> 
 </div>
 <%-- 	</c:when>

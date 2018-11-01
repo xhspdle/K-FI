@@ -33,5 +33,8 @@ public class AdminBoardService {
 	public int abgetcnt(HashMap<String, Object> map) {
 		return dao.abgetcnt(map);
 	}
+	public List<AdminBoardVo> abpopup(){
+		return dao.abpopup();
+	}
 
 }

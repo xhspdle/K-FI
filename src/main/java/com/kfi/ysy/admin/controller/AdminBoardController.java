@@ -4,9 +4,11 @@ package com.kfi.ysy.admin.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +46,26 @@ public class AdminBoardController {
 		}else{
 			return ".main.error";
 		}
+	}
+	@RequestMapping(value="/abpopup",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String abpopup() {
+		List<AdminBoardVo> list=abservice.abpopup();
+		System.out.println("여기다다다다다다"+list);
+		JSONArray arr=new JSONArray();
+		for(AdminBoardVo vo:list){
+			if(vo.getAb_notice()==1) {
+				JSONObject obj=new JSONObject();
+				obj.put("admin_num", vo.getAdmin_num());
+				System.out.println(vo.getAdmin_num());
+				obj.put("ab_content", vo.getAb_content());
+				System.out.println(vo.getAb_content());
+				obj.put("ab_title", vo.getAb_title());
+				System.out.println(vo.getAb_title());
+				arr.put(obj);
+			}
+		}
+		return arr.toString();
 	}
 	//관리자 게시글 양식
 	@RequestMapping(value="/abinsert", method=RequestMethod.GET)
