@@ -63,4 +63,15 @@ public class AdminMembersController {
 		System.out.println(obj.toString());
 		return obj.toString();
 	}
+	@RequestMapping(value="/mbinsert",method=RequestMethod.POST)
+	public String mbinsert(MembersVo vo) {
+		int user_num = mbservice.getMaxnum()+1;
+		vo.setUser_num(user_num);
+		int result= mbservice.join(vo);
+		if(result>0) {
+			return "redirect:/mblist";
+		}else {
+			return null;
+		}
+	}
 }

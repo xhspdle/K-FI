@@ -26,9 +26,10 @@ public class joinController {
 
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
 	public String join(MembersVo vo) {
-		int user_num = service.getMaxnum()+1;
+		int user_num = service.getMaxnum();
+		System.out.println(".////////////////////"+user_num);
 		vo.setUser_num(user_num);
-		
+		System.out.println(".////////////////////"+user_num);
 		System.out.println(vo.getUser_id());
 		System.out.println(vo.getUser_pwd());
 		int n = service.join(vo);

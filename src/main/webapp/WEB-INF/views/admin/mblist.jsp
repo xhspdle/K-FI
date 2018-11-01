@@ -45,35 +45,29 @@
 				<h4 class="modal-title">Question Editor</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="/action_page.php">
+				<form class="form-horizontal" action="mbinsert" method="post">
 					<div class="form-group">
 						<label class="control-label col-sm-2">ID:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" placeholder="Enter ID">
+							<input type="text" class="form-control" name="user_id">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2">Password:</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" placeholder="Enter password">
+							<input type="password" class="form-control" name="user_pwd">
 						</div>
 					</div>
-	<!-- 				<div class="form-group">
-						<label class="control-label col-sm-2">Password:</label>
-						<div class="col-sm-10">
-							<input type="password" class="form-control" placeholder="Enter password">
-						</div>
-					</div> -->
 					<div class="form-group">
 						<label class="control-label col-sm-2">NickName:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" placeholder="Enter NickName">
+							<input type="text" class="form-control" name="user_nickname">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="pwd">Email:</label>
+						<label class="control-label col-sm-2">Email:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" placeholder="Enter Email">
+							<input type="text" class="form-control" name="user_email">
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -87,8 +81,7 @@
 		</div>
 	</div>
 </div>
-
-<div class="container modal modal-dialog1 modal-content" id="admininfo-template" >
+<%-- <div class="container modal modal-dialog1 modal-content" id="admininfo-template" >
 	<form class="form-horizontal " action="<c:url value='/admodify'/>" method="post">
 	 	<input type="hidden" id="admininfo_num" name="admin_num">
 		<div class="form-group">
@@ -130,6 +123,6 @@
 		</div>
 	</form>
 </div>
-
+ --%>
 
 
