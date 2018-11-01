@@ -13,33 +13,35 @@
 	<sql id="find_comm_num">
 		<choose>
 			<when test="comm_num!=null">
-			  where comm_num=#{comm_num}
+			select cc_num from comm_calendar where comm_num = #{comm_num}
 			</when>
-			<otherwise>
-			  where comm_num in(<include refid="findUserCommNum"/>)
-			</otherwise>
+			<when test="comm_num==null">
+			select cc_num from comm_calendar where comm_num in(<include refid="findUserCommNum"/>)
+			</when>
 		</choose>
+	</sql>
+	
+	<sql id="NotGathering">
+		<if test="comm_num!=null">
+		and comm_num=(<include refid="find_comm_num"/>)
+		</if>
 	</sql>
 	
 	<!-- 유저의 참석유무에 따른 모임 일정 번호 불러오기 -->
 	<sql id="gathering">
 		<choose>
 			<when test="gatheringOk=='attend'">
-              where cc_num in (select cc_num from comm_gathering
-                where cc_num in (
-                        select cc_num 
-                        from comm_calendar
-                        <include refid="find_comm_num"/>))
+              where cc_num in (
+                select cc_num from comm_gathering
+                where cc_num in ( <include refid="find_comm_num"/>))
 			</when>
 			<when test="gatheringOk=='not_attend'">
-			 where cc_num != all (select cc_num from comm_gathering
-                where cc_num in (
-                        select cc_num 
-                        from comm_calendar
-                        <include refid="find_comm_num"/>))
+			 where cc_num != all (
+			    select cc_num from comm_gathering
+                where cc_num in (<include refid="find_comm_num"/>)) <include refid="NotGathering"/>
 			</when>
 			<when test="gatheringOk=='gathering'">
-			where comm_num in(<include refid="findUserCommNum"/>)
+			where comm_num in(<include refid="find_comm_num"/>)
 			</when>
 		</choose>
 	</sql>

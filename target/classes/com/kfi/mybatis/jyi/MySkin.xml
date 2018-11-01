@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.MySkinMapper">
+
+	<select id="getMaxNum_myskin" resultType="int">
+		select NVL(count(ms_num),0) from my_skin
+	</select>
+	
+	<insert id="insert_myskin" parameterType="myskin">
+		insert into my_skin values(#{ms_num},#{user_num},#{ms_name},#{ms_color},#{ms_msg},#{ms_using})	
+	</insert>
+	
+
+
+
+</mapper>

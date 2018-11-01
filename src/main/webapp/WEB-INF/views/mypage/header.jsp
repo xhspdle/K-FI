@@ -27,7 +27,7 @@
 						<li><a href="#" data-toggle="modal" data-target="#writeModal">글쓰기</a></li>
 						<li><a href="#">마이커뮤니티</a></li>
 						<li><a href="<c:url value='/mypage/mycommcalendar'/>">일정보기</a></li>
-						<li><a href="#contact">MYSKIN</a></li>
+						<li><a href="<c:url value='/mypage/myskin'/>">MYSKIN</a></li>
 						<li><a href="#">회원정보</a></li>
 						<li><a href="#">로그아웃</a></li>
 					</ul>
