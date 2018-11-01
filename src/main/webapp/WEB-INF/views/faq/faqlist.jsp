@@ -27,7 +27,16 @@
 	<h2>Panels with Contextual Classes</h2>
 	<div class="panel-group">
 	<c:forEach var="faqlist" items="${faqlist }" varStatus="status">	
+				<c:if test="${faqlist.lev==0 }">
 		<div class="panel panel-default">
+		<%-- 	<div>
+				<c:if test="${faqlist.lev>0 }">
+					<c:forEach  var="i" begin="1" end="${faqlist.lev }">
+						${faqlist.qa_content}
+					</c:forEach>
+				</c:if>
+			</div> --%>
+	
 			<div class="panel-heading">
 				<a href="#myPage"><img style="width:50px; height:50px;border-radius:50px;" class="miniLogo" alt="simpleLogo" src="<c:url value='/resources/images/1 (1).jpg'/>"></a>
 				${faqlist.user_num }
@@ -40,6 +49,7 @@
 			</div>
 				${faqlist.qa_date }
 				${faqlist.admin_num }
+		
 			<div class="hidediv" >
 				<form action="faqinsert" method="post">
 					<input type="hidden" name="qa_num" value="${faqlist.qa_num}">
@@ -49,8 +59,10 @@
 					<input class="form-group form-control" type="text">
 					<input type="submit" value="작성">
 				</form>
-			</div>
+
+			</div>	
 	    </div>
+	</c:if>		
 	</c:forEach>
 	</div>
 

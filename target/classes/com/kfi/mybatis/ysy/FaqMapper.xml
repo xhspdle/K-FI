@@ -10,7 +10,7 @@
 		select nvl(count(*),0) cnt from faq
 	</select> -->
 	<select id="faqlist" resultType="faq">
-		select * from faq
+		SELECT * FROM  ( SELECT AA.*,ROWNUM RNUM FROM ( SELECT * FROM faq ORDER BY REF DESC,STEP ASC )AA )
 	</select>
 	<insert id="faqinsert" parameterType="faq">
 		insert into faq values(#{qa_num},#{user_num},#{qa_title},#{qa_content},sysdate,#{ref},#{lev},#{step},#{admin_num})

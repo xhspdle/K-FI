@@ -108,8 +108,8 @@ public class AdminController {
 	@RequestMapping(value="/adminlist", method=RequestMethod.GET)
 	public String adminlist(Model model) {
 		List<AdminVo> adminlist=service.adminlist();
-		model.addAttribute("adminlist", adminlist);
 		if(adminlist!=null) {
+			model.addAttribute("adminlist", adminlist);
 			return ".admin.adminlist";
 		}else{
 			return ".admin";
@@ -131,16 +131,26 @@ public class AdminController {
 	}
 //관리자 수정	
 	@RequestMapping(value="/admodify", method=RequestMethod.POST)
-	public String admodify(AdminVo vo) {
-		int result=service.admodify(vo);
-		
-		System.out.println(vo.getAdmin_id());
-		System.out.println(vo.getAdmin_pwd());
-		if(result>0) {
-			return "redirect:/addetail";
-		}else {
-			return ".main.error";
-		}
+	public String admodify(HttpServletRequest request, AdminVo vo) {	
+		HttpSession session=request.getSession();
+		AdminVo adminvo=(AdminVo)session.getAttribute("admininfo");
+		String admin_id=vo.getAdmin_id();
+		String admin_pwd=vo.getAdmin_pwd();
+		/*if(adminvo.getAdmin_id().equals(admin_id)) {*/
+			System.out.println(adminvo.getAdmin_id());
+			service.admodify(vo);
+			session.invalidate();
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("admin_id", admin_id);
+			map.put("admin_pwd", admin_pwd);
+			AdminVo newvo=service.adlogin(map);
+			if(newvo!=null) {
+				session.setAttribute("admininfo", newvo);
+				return ".admin.adminlist";
+			}else {
+				return ".admin.adminlist";
+			}
+		/*}*/
 	}
 }
 	
