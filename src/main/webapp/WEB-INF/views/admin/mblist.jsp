@@ -14,6 +14,24 @@
 			}
 		});
 	});
+	$(function(){
+		$(".usercontent").attr({'data-toggle':'modal','data-target':'#usermodify'});
+		$(".usercontent").click(function(){
+			alert("aaaa");
+			console.log($(this).parent().children().first().text());
+			var user_num=$(this).parent().children().first().text();
+		 	$.getJSON("<c:url value='/mbgetinfo'/>",{
+				user_num : user_num
+			},function(data){
+				alert(data.user_id);
+				console.log(data.user_id);
+				$("#modifyuser_id").val(data.user_id);
+				$("#modifyuser_pwd").val(data.user_pwd);
+				$("#modifyuser_nickname").val(data.user_nick);
+				$("#modifyuser_email").val(data.user_email);
+			}); 
+		});
+	});
 </script>
 <div id="memberslist"> 
 	<h1>
@@ -41,11 +59,10 @@
 		</c:forEach>
 	</table>		
 	<div class="btn-group">
-		<button class="btn btn-lg" data-toggle="modal" data-target="#myModal">등록</button>
+		<button class="btn btn-lg" data-toggle="modal" data-target="#userinsert">등록</button>
 		<button class="btn btn-lg">체크박스</button>
 	</div>
-</div>
-<div class="container">
+	<div class="container">
 	<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
 			<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
@@ -54,10 +71,11 @@
 		</ul>
 	</c:forEach>
 </div>
+</div>
 
-<div class="modal modal-dialog1" id="myModal">
-	<div >
-		<div>
+<div class="modal" id="userinsert">
+	<div class="modal-dialog1">
+		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">×</button>
@@ -100,48 +118,50 @@
 		</div>
 	</div>
 </div>
-<%-- <div class="container modal modal-dialog1 modal-content" id="admininfo-template" >
-	<form class="form-horizontal " action="<c:url value='/admodify'/>" method="post">
-	 	<input type="hidden" id="admininfo_num" name="admin_num">
-		<div class="form-group">
-			<label class="control-label col-sm-2" >ID:</label>
-			<div class="col-sm-10">
-				<p class="form-control-static" id="admininfo_id"></p>
-			</div> 
-		</div>
-		<input type="hidden" id="admin_id" name="admin_id">
-		<div class="form-group ">
-			<label class="control-label col-sm-2" >NICKNAME:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="admininfo_nick" name="admin_nick">
+<div class="modal" id="usermodify">
+	<div class="modal-dialog1">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4 class="modal-title">Question Editor</h4>
 			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" action="mbmodify" method="post">
+					<div class="form-group">
+						<label class="control-label col-sm-2">ID:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="user_id" readonly="readonly" id="modifyuser_id">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2">Password:</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" name="user_pwd" id="modifyuser_pwd">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2">NickName:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="user_nickname" id="modifyuser_nickname">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2">Email:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="user_email" id="modifyuser_email">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">Submit</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</form>
+			</div>		
 		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2">Password:</label>
-			<div class="col-sm-10">          
-				<input type="text" class="form-control" id="admininfo_pwd" name="admin_pwd">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2">Email:</label>
-			<div class="col-sm-10">          
-				<input type="text" class="form-control" id="admininfo_email" name="admin_email">
-			</div>
-		</div>
-		<div class="form-group ">
-			<label class="control-label col-sm-2">가입일:</label>
-			<div class="col-sm-10">
-				<p class="form-control-static" id="admininfo_regdate"></p>
-			</div>
-		</div>
-		<div class="form-group">        
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Submit</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</form>
+	</div>
 </div>
- --%>
 
 

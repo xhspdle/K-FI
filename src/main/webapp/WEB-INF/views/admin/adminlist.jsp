@@ -54,45 +54,49 @@
 	</table>		
 </div>
 
-<div class=" modal modal-content" id="admininfo-template" >
-	<form class="form-horizontal " action="<c:url value='/admodify'/>" method="post">
-	 	<input type="hidden" id="admininfo_num" name="admin_num">
-		<div class="form-group">
-			<label class="control-label col-sm-2" >ID:</label>
-			<div class="col-sm-10">
-				<p class="form-control-static" id="admininfo_id"></p>
-			</div> 
+<div class=" modal" id="admininfo-template" >
+	<div class="modal-dialog1">
+		<div class="modal-content">
+			<form class="form-horizontal " action="<c:url value='/admodify'/>" method="post">
+			 	<input type="hidden" id="admininfo_num" name="admin_num">
+				<div class="form-group">
+					<label class="control-label col-sm-2" >ID:</label>
+					<div class="col-sm-10">
+						<p class="form-control-static" id="admininfo_id"></p>
+					</div> 
+				</div>
+				<input type="hidden" id="admin_id" name="admin_id">
+				<div class="form-group ">
+					<label class="control-label col-sm-2" >NICKNAME:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="admininfo_nick" name="admin_nick">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Password:</label>
+					<div class="col-sm-10">          
+						<input type="text" class="form-control" id="admininfo_pwd" name="admin_pwd">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Email:</label>
+					<div class="col-sm-10">          
+						<input type="text" class="form-control" id="admininfo_email" name="admin_email">
+					</div>
+				</div>
+				<div class="form-group ">
+					<label class="control-label col-sm-2">가입일:</label>
+					<div class="col-sm-10">
+						<p class="form-control-static" id="admininfo_regdate"></p>
+					</div>
+				</div>
+				<div class="form-group">        
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</form>
 		</div>
-		<input type="hidden" id="admin_id" name="admin_id">
-		<div class="form-group ">
-			<label class="control-label col-sm-2" >NICKNAME:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="admininfo_nick" name="admin_nick">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2">Password:</label>
-			<div class="col-sm-10">          
-				<input type="text" class="form-control" id="admininfo_pwd" name="admin_pwd">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2">Email:</label>
-			<div class="col-sm-10">          
-				<input type="text" class="form-control" id="admininfo_email" name="admin_email">
-			</div>
-		</div>
-		<div class="form-group ">
-			<label class="control-label col-sm-2">가입일:</label>
-			<div class="col-sm-10">
-				<p class="form-control-static" id="admininfo_regdate"></p>
-			</div>
-		</div>
-		<div class="form-group">        
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Submit</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</form>
+	</div>
 </div>

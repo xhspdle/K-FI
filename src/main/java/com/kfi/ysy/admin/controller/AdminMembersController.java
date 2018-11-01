@@ -67,11 +67,12 @@ public class AdminMembersController {
 	public String mbgetinfo(int user_num) {
 		MembersVo vo=mbservice.select(user_num);
 		JSONObject obj=new JSONObject();
-		obj.put("acc_id", vo.getUser_id());
-		obj.put("acc_nick", vo.getUser_nickname());
-		obj.put("acc_stat",vo.getUser_status());
-		obj.put("acc_email", vo.getUser_email());
-		obj.put("acc_date",vo.getUser_regdate());
+		obj.put("user_id", vo.getUser_id());
+		obj.put("user_pwd", vo.getUser_pwd());
+		obj.put("user_nick", vo.getUser_nickname());
+		obj.put("user_stat",vo.getUser_status());
+		obj.put("user_email", vo.getUser_email());
+		obj.put("user_date",vo.getUser_regdate());
 		System.out.println(obj.toString());
 		return obj.toString();
 	}

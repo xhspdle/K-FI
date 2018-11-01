@@ -113,7 +113,6 @@
 			</div>
 		</div>
 	</form>
-	
 </script>
 <script type="text/javascript">
 	$(function(){
