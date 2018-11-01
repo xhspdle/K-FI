@@ -89,7 +89,7 @@
 		<label class="control-label col-sm-2">NickName:</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control" readonly="readonly" value={acc_nick}>
-		<div>
+		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-2">Email:</label>
@@ -104,12 +104,14 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-sm-2">Status:</label>
-		<select class="form-control">
-			<option>정지</option>
-			<option>정상</option>
-			<option>경고</option>
-		</select>
+		<label class="control-label col-sm-2">상태정보:</label>
+		<div class="col-sm-10">
+			<select class="form-control">
+				<option>정상</option>
+				<option>기간정지</option>
+				<option>정지</option>
+			</select>
+		</div>
 	</div>		
 </form>
 </script>
@@ -134,14 +136,14 @@
 			$.getJSON("<c:url value='/mbgetinfo'/>",{
 				user_num : user_num
 			},function(data){
-				alert(data.acc_id);
+				alert(data.user_id);
  				html=document.querySelector("#userinfotemlpate").innerHTML;
 				alert(html)
- 				var resultHTML=html.replace("{acc_id}", data.acc_id)
-   					.replace("{acc_nick}", data.acc_nick)
-					.replace("{acc_stat}", data.acc_stat)
-					.replace("{acc_email}", data.acc_email)
-					.replace("{acc_date}",data.acc_date);
+ 				var resultHTML=html.replace("{acc_id}", data.user_id)
+   					.replace("{acc_nick}", data.user_nick)
+					.replace("{acc_stat}", data.user_stat)
+					.replace("{acc_email}", data.user_email)
+					.replace("{acc_date}",data.user_date);
 				alert(resultHTML);
 				$("#userinfobody").append(resultHTML);
 			});

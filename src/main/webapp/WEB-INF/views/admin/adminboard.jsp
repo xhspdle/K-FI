@@ -5,6 +5,7 @@
 </style>
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>
+	
 <script type="text/javascript">
 /* 	$(function() {
 		$(".abcontent")
@@ -87,6 +88,11 @@
 			}); 
 		});
 	});
+ 	$(function(){
+		
+		 	$("#aaaaa").css("display","block"); 
+		
+	}); 
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
 <%-- <button class="btn btn-lg" data-toggle="modal"
@@ -94,6 +100,7 @@
 <c:choose>
 	<c:when test="${not empty admin}"> --%>
 <h1>공지사항</h1>
+<input type="button" value="aaa" id="popupbtn">
 <table class="table table-striped">
 	<tr>
 		<th>게시물번호</th>
@@ -133,7 +140,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">내용:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="ab_content" id="abupdate_content">
+							  <textarea class="form-control" rows="5" id="comment"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -142,11 +149,15 @@
 							<input type="text" class="form-control" name="admin_num" id="abupdate_adnum">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label class="control-label col-sm-2">상태정보:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="ab_notice" id="abupdate_notice">
+							<label class="radio-inline">
+								<input type="radio" name="optradio" checked>게시
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="optradio">미게시
+							</label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -205,7 +216,11 @@
 
 
 		<a href="abinsert" class="btn btn-default">글작성</a>
-
+<div id="aaaaa">
+	
+	내용
+	<input type="button" value="닫기" onclick=""> 
+</div>
 <%-- 	</c:when>
 	<c:otherwise>
 		<meta http-equiv="refresh" content="0; url=<c:url value='/adlogin'/>"></meta>

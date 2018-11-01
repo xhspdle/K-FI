@@ -22,7 +22,7 @@ public class JoinController {
 
 	@RequestMapping(value = "/login/join", method = RequestMethod.GET)
 	public String join() {
-		return "login/join";
+		return "/login/join";
 	}
 
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)

@@ -32,4 +32,7 @@
 	<delete id="acdelete" parameterType="int">
 		delete from accuse where ac_num=#{ac_num}
 	</delete>
+	<select id="acdetail" parameterType="int" resultType="accuse">
+		select * from accuse where ac_num=#{ac_num}
+	</select>
 </mapper>

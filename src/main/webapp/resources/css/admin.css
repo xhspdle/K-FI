@@ -245,3 +245,15 @@ footer .glyphicon {
 table tr td{
 	cursor:pointer;
 }
+
+#aaaaa{
+	margin: auto;
+	display : none;
+	background-color:green;
+	position: absolute;
+	width: 25%;
+	height: 25%;
+	border: 10px solid red;
+	top: 100px;
+    left: 80px;
+}

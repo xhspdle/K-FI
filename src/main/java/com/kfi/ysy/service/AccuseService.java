@@ -23,4 +23,7 @@ public class AccuseService {
 	public int acdelete(int ac_num) {
 		return dao.acdelete(ac_num);
 	}
+	public AccuseVo acdetail(int ac_num) {
+		return dao.acdetail(ac_num);
+	}
 }
