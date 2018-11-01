@@ -1,5 +1,6 @@
 package com.kfi.ysy.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -20,36 +21,47 @@ import com.kfi.ysy.util.AdminPageUtil;
 
 @Controller
 public class AdminMembersController {
+	//회원리스트 조회
 	@Autowired private MembersService mbservice;
 	@RequestMapping(value = "/mblist", method = RequestMethod.GET)
-	public String mblist( Model model) {
-		
-
-		List<MembersVo> mblist = mbservice.list();
+	public String mblist(@RequestParam(value="pagenum", defaultValue="1")int pagenum,Model model,String field, String keyword) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("field", field);
+		map.put("keyword",keyword);
+		int totalrowcnt=mbservice.getCnt(map);
+		AdminPageUtil apu=new AdminPageUtil(totalrowcnt, pagenum, 5, 5);
+		map.put("startrow",	apu.getStartrow());
+		map.put("endrow", apu.getEndrow());
+		List<MembersVo> mblist = mbservice.list(map);
 		if(mblist!=null) {
 			model.addAttribute("mblist", mblist);
+			model.addAttribute("apu", apu);
+			model.addAttribute("field",field);
+			model.addAttribute("keyword",keyword);
 			return ".admin.mblist";
 		}else {
 			return ".error";
 		}
 	}
-/*	@RequestMapping(value="/mbdelete", method=RequestMethod.GET)
+	//회원 삭제
+	@RequestMapping(value="/mbdelete", method=RequestMethod.GET)
 	public String mbdelete(int user_num) {
 		System.out.println(user_num);
-		int result=mbservice.mbdelete(user_num);
+		int result=mbservice.delete(user_num);
 		if(result>0) {
-			System.out.println("사용불가능한 아이디입니다!!!!");
+			System.out.println("삭제성공!!!!");
 		}else{
-			System.out.println("사용가능한 아이디입니다.");	
+			System.out.println("안돼.");	
 		}
 		return "redirect:/mblist";
 	}
-	@RequestMapping(value="/mbgetinfo", method=RequestMethod.GET)
+/*	@RequestMapping(value="/mbgetinfo", method=RequestMethod.GET)
 	public String mbgetinfo(int user_num, Model model) {
 		MembersVo vo=mbservice.mbgetinfo(user_num);
 		model.addAttribute("mbinfo", vo);
 		return "redirect:/mblist";
 	}*/
+	//사용자 정보확인
 	@RequestMapping(value="/mbgetinfo", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String mbgetinfo(int user_num) {
@@ -63,6 +75,7 @@ public class AdminMembersController {
 		System.out.println(obj.toString());
 		return obj.toString();
 	}
+	//사용자 추가
 	@RequestMapping(value="/mbinsert",method=RequestMethod.POST)
 	public String mbinsert(MembersVo vo) {
 		int user_num = mbservice.getMaxnum()+1;

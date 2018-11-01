@@ -52,10 +52,6 @@
 			</tr>
 		</c:forEach>
 	</table>		
-	<div class="btn-group">
-		<button class="btn btn-lg" data-toggle="modal" data-target="#admininfo-template">등록</button>
-		<button class="btn btn-lg">체크박스</button>
-	</div>
 </div>
 
 <div class=" modal modal-content" id="admininfo-template" >

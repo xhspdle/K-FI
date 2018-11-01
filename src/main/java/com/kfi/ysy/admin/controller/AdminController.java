@@ -107,6 +107,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/adminlist", method=RequestMethod.GET)
 	public String adminlist(Model model) {
+		
 		List<AdminVo> adminlist=service.adminlist();
 		if(adminlist!=null) {
 			model.addAttribute("adminlist", adminlist);

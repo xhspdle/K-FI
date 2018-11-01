@@ -42,8 +42,8 @@ public class MembersDao {
 		return sqlSession.selectOne(NAMESPACE + ".getMaxnum");
 	}
 	//유저번호
-	public int getCtn() {
-		return sqlSession.selectOne(NAMESPACE + ".getCount");
+	public int getCnt(HashMap<String, Object> map) {
+		return sqlSession.selectOne(NAMESPACE + ".getCount",map);
 	}
 	//id 체크
 	public int idCheck() {
@@ -62,8 +62,8 @@ public class MembersDao {
 		return sqlSession.selectOne(NAMESPACE + ".findEmail", vo);
 	}
 	////////////////////////////admin에서 사용
-	public List<MembersVo> list() {
-		return sqlSession.selectList(NAMESPACE +".list");
+	public List<MembersVo> list(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE +".list",map);
 	}
 	public MembersVo select(int user_num) {
 		return sqlSession.selectOne(NAMESPACE+".select",user_num);

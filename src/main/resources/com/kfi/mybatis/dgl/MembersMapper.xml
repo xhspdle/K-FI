@@ -79,8 +79,17 @@
 	
 	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->
-	<select id="list" resultType="logmembers">
-		select * from members
+	<select id="list" parameterType="hashmap" resultType="logmembers">
+		select * from
+		(
+			select mblist.*,rownum rnum from 
+			(
+			select * from members
+	<!-- 	 	<include refid="search"/>  -->
+			order by user_num desc 
+			)mblist
+		)
+		<![CDATA[ where rnum>=#{startrow} and rnum<=#{endrow}]]>
 	</select>
 	
 	<!-- 사용자 조회 -->

@@ -242,3 +242,6 @@ footer .glyphicon {
 	margin-left: 25%;
 
 }
+table tr td{
+	cursor:pointer;
+}

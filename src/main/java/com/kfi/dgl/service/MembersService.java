@@ -21,8 +21,8 @@ public class MembersService {
 		return dao.join(vo);
 	}
 	//admin에서 사용
-	public List<MembersVo> list(){
-		return dao.list();
+	public List<MembersVo> list(HashMap<String, Object> map){
+		return dao.list(map);
 	}
 	public int delete(int num) {
 		return dao.delete(num);
@@ -40,8 +40,8 @@ public class MembersService {
 	public int getMaxnum() {
 		return dao.getMaxnum();
 	}
-	public int getCnt() {
-		return dao.getCtn();
+	public int getCnt(HashMap<String, Object> map) {
+		return dao.getCnt(map);
 	}
 	public int getverify(MembersVo vo) {
 		return dao.verify(vo);

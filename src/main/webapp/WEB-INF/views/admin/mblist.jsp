@@ -2,7 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>
-
+<script type="text/javascript">
+	$(function(){
+		$(".userdelete").click(function(){
+			var result=confirm("정말로????");
+			var user_num=$(this).parent().parent().children().first().text();
+ 			if(result){
+				location.href="mbdelete?user_num="+user_num;
+			}else{
+				return;
+			}
+		});
+	});
+</script>
 <div id="memberslist"> 
 	<h1>
 		회원정보
@@ -24,7 +36,7 @@
 				<td class="usercontent">${user.user_nickname }</td>
 				<td class="usercontent">${user.user_email }</td>
 				<td class="usercontent">${user.user_regdate }</td>
-				<td><a href="mbdelete?user_num=${user.user_num }"><i class="glyphicon glyphicon-remove"></i></a></td>
+				<td><i class="glyphicon glyphicon-remove userdelete"></i></td>
 			</tr>
 		</c:forEach>
 	</table>		
@@ -33,8 +45,15 @@
 		<button class="btn btn-lg">체크박스</button>
 	</div>
 </div>
-
-
+<div class="container">
+	<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+			<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
+		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
+		<ul class="pagination">
+			<li><a href="<c:url value='/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+		</ul>
+	</c:forEach>
+</div>
 
 <div class="modal modal-dialog1" id="myModal">
 	<div >
