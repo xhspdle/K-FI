@@ -2,6 +2,10 @@
 /*
 	main
 */
+* {
+	margin: 0;
+	padding: 0;
+}
 body {
 	font: 400 15px Lato, sans-serif;
 	font-size: 15px;
@@ -483,10 +487,19 @@ img.media-object {
 	margin-top: 10px;
 	color: black;
 }
+/*
 #commentList .media-body > i {
 	cursor: pointer;
 	font-size: 20px;
 	margin-right: 10px;
+}
+*/
+.thumbsUp {
+	font-size: 20px;
+	margin-right: 10px;
+}
+.thumbsUp:hover {
+	text-decoration: none;
 }
 #commentList .media-body > span {
 	margin-right: 30px;
@@ -521,4 +534,22 @@ img.media-object {
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 	color: white;
+}
+/*
+	인접 요소 선택자 +
+*/
+#commentList small + span {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    opacity: 0;
+    color: #f4511e;
+    margin-left: 30px;
+}
+#likeCnt > span {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    opacity: 0;
+    font-size: 15px;
+    color: #f4511e;
+    margin-left: 30px;
 }

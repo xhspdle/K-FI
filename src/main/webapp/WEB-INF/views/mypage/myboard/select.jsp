@@ -8,13 +8,14 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<blockquote class="postBlock">
-				<h1 class="postTitle">
-				<span class="postA">${boardVo.mb_title }</span>
-				<a href="#">	
-				
-				<span class="glyphicon glyphicon-option-vertical pull-right" data-toggle="tooltip" title="option">
-				</span>
-				</a></h1></blockquote>
+					<h1 class="postTitle">
+						<span class="postA">${boardVo.mb_title }</span>
+						<a href="#">	
+							<span class="glyphicon glyphicon-option-vertical pull-right" data-toggle="tooltip" title="option">
+							</span>
+						</a>
+					</h1>
+				</blockquote>
 				<!--  
 				<div class="dropdown">
 				<span class="glyphicon glyphicon-option-vertical pull-right dropdown-toggle" data-toggle="dropdown">
@@ -80,9 +81,11 @@
 				</c:forEach>				
 			</div>
 			<div class="panel-footer text-left">
-				<h3 class="postLikeComment select" id="likeCnt">${like_cnt } Likes</h3>
+				<h3 class="postLikeComment select" id="likeCnt" data-like-cnt="${like_cnt }">
+				${like_cnt } Likes<span></span></h3>
 				<div class="likes">
-					<a class="btn btn-default" href="#">
+					<a class="btn btn-default" href="<c:url value='/mypage/myboardlike/insert?mb_num=${boardVo.mb_num }'/>" 
+					data-board-num="${boardVo.mb_num }">
 					<span class="glyphicon glyphicon-heart"></span> Like</a>
 					<div class="likeUserList">
 						<img class="img-responsive img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="likerProfiles">
@@ -130,14 +133,17 @@
 	</div>
 </div>
 <script id="commentTemplate" type="text/template">
-<div class="media">
+<div class="media slide">
 	<div class="media-left">
 		<img class="media-object img-circle" src="<c:url value='/resources/images/{msp_savimg}'/>" alt="commentProfile">
 	</div>
 	<div class="media-body">
 		<h3><strong><a href="">{user_id}</a></strong></h3>
 		<p>{myc_content}</p>
-		<i class="glyphicon glyphicon-thumbs-up"></i><span>{comment_likes}</span><small>{myc_date}</small>
+		<a class="thumbsUp" data-comm-num="{myc_num}" href="{path}/mypage/mycommentlike/insert?myc_num={myc_num}">
+			<i class="glyphicon glyphicon-thumbs-up"></i>
+		</a>
+		<span data-comm-num="{myc_num}">{comment_likes}</span><small>{myc_date}</small><span></span>
 	</div>
 </div>
 </script>

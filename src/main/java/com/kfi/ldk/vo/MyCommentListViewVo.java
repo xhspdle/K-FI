@@ -9,7 +9,7 @@ public class MyCommentListViewVo {
 	private int mb_num;
 	private int user_num;
 	private String myc_content;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date myc_date;
 	private int cnt;
 	private String user_id;

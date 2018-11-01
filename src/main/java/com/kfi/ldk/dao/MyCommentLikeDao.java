@@ -31,7 +31,7 @@ public class MyCommentLikeDao {
 	public List<Object> list(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".list", map);
 	}
-	public List<Object> select(int myc_num) {
-		return session.selectList(NAMESPACE + ".select", myc_num);
+	public MyCommentLikeVo select(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".select", map);
 	}
 }

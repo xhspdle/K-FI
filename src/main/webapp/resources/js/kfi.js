@@ -200,11 +200,6 @@ $(document).ready(function(){
 		 $("#sendServer").prop('disabled',false);
 	  });
   });
-  $.jsonDate=function(json){
-	  var dates=json.split("-");
-	  var day=parseInt(dates[2])+1
-	  return dates[0] + "-" + dates[1] + "-" + day.toString();
-  }
   var sameDate='';
   $.getList=function(pageNum,keyword){
 	  	var getPageContext=$("#getPageContext").val();
@@ -224,7 +219,7 @@ $(document).ready(function(){
 					var attachment='';
 					if(sameDate!==json.mb_date){
 						$("<h1 class='text-center' id='"+ json.mb_date +"' style='margin-bottom:30px;'>" +
-						  "<span style='border-bottom: 4px solid black'>" + $.jsonDate(json.mb_date) +
+						  "<span style='border-bottom: 4px solid black'>" + json.mb_date +
 						  "</span></h1>")
 						  .appendTo("#myBoardList");
 					}
@@ -272,14 +267,13 @@ $(document).ready(function(){
 				});
 				
 			});
-		$("#myBoardList").on({
-			click: function(){
-				location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id") + 
-				"&comment_cnt=" + $(this).attr("data-comm-cnt") + 
-				"&like_cnt=" + $(this).attr("data-like-cnt");
-			}, mouseover: function(){
-				$(this).css("cursor","pointer");
-			}
+		$("#myBoardList").on('click',".panel-heading",function(){
+			location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id") + 
+			"&comment_cnt=" + $(this).attr("data-comm-cnt") + 
+			"&like_cnt=" + $(this).attr("data-like-cnt");
+		});
+		$("#myBoardList").on('mouseover',".panel-heading",function(){
+			$(this).css("cursor","pointer");
 		});
   }
   $.footerBtn=function(){
@@ -303,27 +297,27 @@ $(document).ready(function(){
 	  }
   });
   $("#commentForm > button[type='submit']").click(function(e){
-	  var getPageContext=$("#getPageContext").val();
 	  e.preventDefault();
+	  var getPageContext=$("#getPageContext").val();
 	  var mb_num=$("#commentForm > input[type='hidden']").val();
 	  var myc_content=$("#commentForm > input[type='text']").val();
 	  $.getJSON(getPageContext + "/mypage/mycomment/insert",
 			  {'mb_num':mb_num,'myc_content':myc_content},
 			  function(json){
-		  if(json.code=='success'){
-			  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-ok'></span>comment post succeded")
-			  $("#commentForm > .help-block").css("opacity","1");
-		  }else{
-			  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-remove'></span>comment post failed")
-			  $("#commentForm > .help-block").css("opacity","1");
-		  }
-		  $("#commentForm > input[type='text']").val('');
-		  $("#commentForm > input[type='text']").focus();
-		  $.getCommentList();
-		  setTimeout(function(){
-				 $("#commentForm > .help-block").css("opacity","0"); 
-		  },5000);
-	  });
+				  if(json.code=='success'){
+					  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-ok'></span>comment post succeded")
+					  $("#commentForm > .help-block").css("opacity","1");
+				  }else{
+					  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-remove'></span>comment post failed")
+					  $("#commentForm > .help-block").css("opacity","1");
+				  }
+				  $("#commentForm > input[type='text']").val('');
+				  $("#commentForm > input[type='text']").focus();
+				  $.getCommentList();
+				  setTimeout(function(){
+						 $("#commentForm > .help-block").css("opacity","0"); 
+				  },5000);
+			  });
   });
   $.getCommentList=function(pageNum){
 	  var getPageContext=$("#getPageContext").val();
@@ -331,6 +325,7 @@ $(document).ready(function(){
 	  $.getJSON(getPageContext + "/mypage/mycomment/list",
 		  {'pageNum':pageNum,'mb_num':parseInt(mb_num)},
 		  function(data){
+			  $("#commentCnt").html(data.commentCnt + " Comments");
 			  $("#commentList").empty();
 			  $(data.commentList).each(function(i,json){
 				  var myc_num=json.myc_num;
@@ -341,11 +336,13 @@ $(document).ready(function(){
 				  var cnt=json.cnt;
 				  var user_id=json.user_id;
 				  html=document.querySelector("#commentTemplate").innerHTML;
-				  var resultHTML=html.replace("{msp_savimg}","kpop콘.gif")
-				  		.replace("{user_id}",user_id)
-				  		.replace("{myc_content}",myc_content)
-				  		.replace("{comment_likes}",cnt)
-				  		.replace("{myc_date}",$.jsonDate(myc_date));
+				  var resultHTML=html.replace("{msp_savimg}", "kpop콘.gif")
+				  		.replace("{path}", getPageContext)
+				  		.replace(/{myc_num}/gi, myc_num)
+				  		.replace("{user_id}", user_id)
+				  		.replace("{myc_content}", myc_content)
+				  		.replace("{comment_likes}", cnt)
+				  		.replace("{myc_date}", myc_date);
 				  $("#commentList").append(resultHTML);
 			  });
 			  $(".pagination").empty();
@@ -383,5 +380,51 @@ $(document).ready(function(){
 	  $.getCommentList();
   }
   $('[data-toggle="tooltip"]').tooltip();
+  $("#commentList").on('click',".thumbsUp",function(e){
+	  e.preventDefault();
+	  var getPageContext=$("#getPageContext").val();
+	  var myc_num=parseInt($(this).attr("data-comm-num"));
+	  $.getJSON(getPageContext + "/mypage/mycommentlike/insert",
+			  {'myc_num':myc_num},
+			  function(json){
+				  var msgSpan=$("span[data-comm-num='"+ myc_num +"'").next().next();
+				  if(json.code=='success'){
+					  var commentLikes=$("span[data-comm-num='"+ myc_num +"'").text();
+					  $("span[data-comm-num='"+ myc_num +"'").text(parseInt(commentLikes)+1);
+					  $(msgSpan).text("Thumbs Up!");
+				  }else if(json.code=='duplicated'){
+					  $(msgSpan).text("You've already clicked Likes");
+				  }else{
+					  $(msgSpan).text("error...");
+				  }
+				  $(msgSpan).css("opacity","1");
+				  setTimeout(function(){
+					  $(msgSpan).css("opacity","0"); 
+				  },3000);
+			  });
+  });
+  $("div.likes > a").click(function(e){
+	  e.preventDefault();
+	  var getPageContext=$("#getPageContext").val();
+	  var mb_num=parseInt($(this).attr("data-board-num"));
+	  $.getJSON(getPageContext + "/mypage/myboardlike/insert",
+			  {'mb_num':mb_num},
+			  function(json){
+				  var msgSpan=$("#likeCnt > span");
+				  if(json.code=='success'){
+					  var boardLikes=parseInt($("#likeCnt").attr("data-like-cnt")) + 1;
+					  $("#likeCnt").text(boardLikes + " Likes");
+					  $(msgSpan).text("Like it!");
+				  }else if(json.code=='duplicated'){
+					  $(msgSpan).text("You've already clicked Likes");
+				  }else{
+					  $(msgSpan).text("error...");
+				  }
+				  $(msgSpan).css("opacity","1");
+				  setTimeout(function(){
+					  $(msgSpan).css("opacity","0"); 
+				  },3000);
+			  });
+  });
 });
 

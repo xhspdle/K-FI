@@ -73,7 +73,7 @@ public class MyBoardServiceImpl implements CommonService{
 					String format=mp_orgimg.substring(mp_orgimg.lastIndexOf(".") + 1);
 					String mType=ImgUtil.getImgType(format);
 					if(mType==null) {
-						throw new Exception("*." + format + " is Unsupported img file types");
+						throw new Exception("*." + format + " is unsupported img file types");
 					}
 					String mp_savimg=UUID.randomUUID() + "_" + mp_orgimg;
 					is=fileP[i].getInputStream();
@@ -92,7 +92,7 @@ public class MyBoardServiceImpl implements CommonService{
 					String format=mv_orgvid.substring(mv_orgvid.lastIndexOf(".") + 1);
 					String mType=VidUtil.getVidType(format);
 					if(mType==null) {
-						throw new Exception("*." + format + " is Unsupported vid file types");
+						throw new Exception("*." + format + " is unsupported vid file types");
 					}
 					String mv_savvid=UUID.randomUUID() + "_" + mv_orgvid;
 					is=fileV[i].getInputStream();
