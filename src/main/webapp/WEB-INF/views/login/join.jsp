@@ -29,7 +29,6 @@ $(function(){
 		var id = $("#id").val();
 		var eMsg = $("#idMsg");
 		var isID = /^[a-z0-9]{5,15}$/;
-		
 		if (id == "") {
 		    $(eMsg).text("반드시 입력해주세요!");
 			$("#id").focus();
@@ -68,22 +67,22 @@ $(function(){
 	$('#nickck').click(function(){
 		var nickname = $("#nickname").val();
 		var eMsg = $("#nickMsg");
+		var isNick = /^[a-zA-Z0-9가-힣]{4,15}$/;
 		if (nickname == "") {
 		    $(eMsg).text("반드시 입력해주세요!");
 			$("#nickname").focus();
 			return false;
-			
+		}
 		$.ajax({
 			async: true,
 			type : "GET",
-			url : getContext+'/login/join/nicknamecheck',
+			url : getContext+'/login/join/nickcheck',
 			data : {'user_nickname':nickname},
 			dataType : "json",
 			success : function(data) {
 				console.log(data)
-				var isNick = /^[a-z0-9][가-힝]{4,19}$/;
 				if (!isNick.test(nickname)) {
-					showErrorMsg("영문(5~20자), 한글(2~10자) 로 이루어진 닉네임을 만들어 주세요.");
+					$(eMsg).text("영문,한글,숫자포함 4~15자의 닉네임을 만들어 주세요.");
 					$("#nickname").focus();
 					return false;
 				}else if(data.msg == 'false'){
@@ -91,13 +90,15 @@ $(function(){
 					$("#nickname").focus();
 					return false;
 				}else if(data.msg == 'true'){
-					$(eMsg)
-				}
+					$(eMsg).text("좋은 닉네임이에요~^^");
+					$("#pwd").focus();
+					return true;
+					}
 				}
 			});
-		}
+		});
 	});
-}); 
+
 		<%--
 		/* 비번 체크 부분 */
 		function checkPwd1(){
@@ -203,10 +204,10 @@ $(function(){
 	</div>
 	<form action="<c:url value='/login/join'/>" method="post">
 		<div>
-			<label for="id">아이디</label> <input type="text" name="user_id" id="id">
+			<label for="id">아이디</label> 
+			<input type="text" name="user_id" id="id">
 			<input type="button" value="ID중복체크" id="idck"> <br>
 			<span id="idMsg"></span> 
-			<label for="id"></label>
 		</div>
 
 		<div>

@@ -41,12 +41,12 @@
 	</select>
 	
 	<!-- 닉네임 체크 -->
-	<select id="nickCheck" parameterType="logmembers" resultType="logmembers">
-		select count(*) from members where USER_NICKNAME=#{user_nickname}
+	<select id="nickCheck" parameterType="String" resultType="int">
+		select count(*) from members where USER_NICKNAME = #{user_nickname}
 	</select>
 	
 	<!-- 이메일 체크 -->
-	<select id="emilcheck" parameterType="logmembers" resultType="logmembers">
+	<select id="emilcheck" parameterType="String" resultType="int">
 		select count(*) from members where USER_EMAIL=#{user_email}
 	</select>
 	

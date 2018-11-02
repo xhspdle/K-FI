@@ -50,7 +50,7 @@ public class JoinController {
 		}
 		return returnURL;
 	}
-	@RequestMapping("/login/join/idcheck")
+	@RequestMapping(value="/login/join/idcheck")
 	@ResponseBody
 		public Map<String, String> idcheck(String user_id){
 		int n = service.idCheck(user_id);
@@ -62,10 +62,10 @@ public class JoinController {
 		}
 		return map;
 	}
-	@RequestMapping("/login/join/nickcheck")
+	@RequestMapping(value="/login/join/nickcheck")
 	@ResponseBody
 	public Map<String, String> nickcheck(String user_nickname){
-	int n = service.nickcheck(user_nickname);
+	int n = service.nickCheck(user_nickname);
 	Map<String, String> map = new HashMap<>();
 	if(n == 0) {
 		map.put("msg", "true");
@@ -75,10 +75,10 @@ public class JoinController {
 	return map;
 	}
 	
-	@RequestMapping("/login/join/emailcheck")
+	@RequestMapping(value="/login/join/emailcheck")
 	@ResponseBody
 	public Map<String, String> emailcheck(String user_email){
-	int n = service.emailcheck(user_email);
+	int n = service.emailCheck(user_email);
 	Map<String, String> map = new HashMap<>();
 	if(n == 0) {
 		map.put("msg", "true");

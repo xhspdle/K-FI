@@ -61,11 +61,11 @@ public class MembersService {
 		return dao.idCheck(user_id);
 	}
 
-	public int nickcheck(String user_nickname) {
+	public int nickCheck(String user_nickname) {
 		return dao.nickCheck(user_nickname);
 	}
 	
-	public int emailcheck(String user_email) {
+	public int emailCheck(String user_email) {
 		return dao.emailCheck(user_email);
 	}
 	// admin에서 사용
