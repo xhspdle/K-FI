@@ -25,6 +25,7 @@
 			},function(data){
 				alert(data.user_id);
 				console.log(data.user_id);
+				$("#modifyuser_num").val(user_num);
 				$("#modifyuser_id").val(data.user_id);
 				$("#modifyuser_pwd").val(data.user_pwd);
 				$("#modifyuser_nickname").val(data.user_nick);
@@ -136,6 +137,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="modal" id="usermodify">
 	<div class="modal-dialog1">
 		<div class="modal-content">
@@ -145,7 +147,8 @@
 				<h4 class="modal-title">Question Editor</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="mbmodify" method="post">
+				<form class="form-horizontal" action="mbupdate" method="post">
+					<input type="hidden" class="form-control" name="user_num" id="modifyuser_num">
 					<div class="form-group">
 						<label class="control-label col-sm-2">ID:</label>
 						<div class="col-sm-10">

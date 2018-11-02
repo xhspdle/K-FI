@@ -108,7 +108,7 @@
 	<div class="form-group">
 		<label class="control-label col-sm-2">상태정보:</label>
 		<div class="col-sm-10">
-			<select class="form-control" name="user_stat">
+			<select class="form-control" name="user_status">
 				<option>정상</option>
 				<option>기간정지</option>
 				<option>정지</option>
@@ -147,21 +147,18 @@
 				alert(data.user_id);
  				html=document.querySelector("#userinfotemlpate").innerHTML;
 				alert(html)
- 				var resultHTML=html.replace("{acc_id}", data.user_id)
+ 				var resultHTML=html.replace("{mburl}",<c:url value='/mbupdate'/>)
+ 					.replace("{acc_id}", data.user_id)
    					.replace("{user_num}", user_num)
  					.replace("{acc_nick}", data.user_nick)
 					.replace("{acc_stat}", data.user_stat)
 					.replace("{acc_email}", data.user_email)
-					.replace("{acc_date}",data.user_date)
-					.replace("{mburl}","<c:url value='/mbupdate'/>");
+					.replace("{acc_date}",data.user_date);				
 				alert(resultHTML);
 				$("#userinfobody").append(resultHTML);
 			});
 		});		
 	});
-	$(function(){
-		$("accdelte").click
-	})
-	
+
 </script>
  

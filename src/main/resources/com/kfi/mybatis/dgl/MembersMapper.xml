@@ -19,9 +19,7 @@
 
 	
 	
-	<delete id="delete" parameterType="int">
-		delete from members where USER_NUM=#{value}
-	</delete>
+
 	
 
 	<!-- 가입 -->
@@ -97,6 +95,16 @@
 	</select>
 	<!-- 사용자 정보 변경 -->
 	<update id="update" parameterType="logmembers">
-		update members set USER_NICKNAME=#{user_nickname}, USER_PWD=#{user_pwd}, USER_EMAIL=#{user_email} where USER_NUM=#{user_num}
+		update members
+		<set>
+		 	<if test="user_nickname!=null and user_nickname!=''">user_nickname=#{user_nickname},</if>
+		 	<if test="user_pwd!=null and user_pwd!=''">user_pwd=#{user_pwd},</if>
+		 	<if test="user_email!=null and user_email=''">user_email=#{user_email},</if>
+		 	<if test="user_status!=null and user_status=''">user_status=#{user_status}</if> 
+		</set>
+		where user_num=#{user_num}
 	</update>
+	<delete id="delete" parameterType="int">
+		delete from members where user_num=#{user_num}
+	</delete>
 </mapper>

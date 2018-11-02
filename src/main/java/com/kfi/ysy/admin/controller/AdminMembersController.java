@@ -88,9 +88,15 @@ public class AdminMembersController {
 			return null;
 		}
 	}
-	@RequestMapping(value="/mbupdate",method=RequestMethod.GET)
+	@RequestMapping(value="/mbupdate",method=RequestMethod.POST)
 	public String mbupdate(MembersVo vo) {
-		/*mbservice.update(vo)*/
-		return null;
+		System.out.println("pwd"+vo.getUser_pwd());
+		System.out.println("num"+vo.getUser_num());
+		System.out.println("id"+vo.getUser_id());
+		System.out.println("nick"+vo.getUser_nickname());
+		System.out.println("mail"+vo.getUser_email());
+		int result=mbservice.update(vo);
+		System.out.println(result);
+		return "redirect:/mblist";
 	}
 }
