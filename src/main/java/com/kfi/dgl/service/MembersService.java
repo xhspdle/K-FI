@@ -64,48 +64,39 @@ public class MembersService {
 	public int nickCheck(String user_nickname) {
 		return dao.nickCheck(user_nickname);
 	}
-	
+
 	public int emailCheck(String user_email) {
 		return dao.emailCheck(user_email);
 	}
+
 	// admin에서 사용
 	public MembersVo select(int user_num) {
 		return dao.select(user_num);
 	}
+
 	public List<MembersVo> list(HashMap<String, Object> map) {
 		return dao.list(map);
 	}
+
 	public int update(MembersVo vo) {
 		return dao.update(vo);
 	}
+
 	public int delete(int user_num) {
 		return dao.delete(user_num);
 	}
-
 
 ////////////////////////////회원가입 정상완료 후 myskin테이블에 디폴트값 넣기
 	@Transactional
 	public int insertMyskin(MySkinVo msvo) {
 		try {
 			int ms_num = msdao.getMaxNum();
-			if (ms_num < 0)
-				throw new Exception("error: myskin's getMaxNum");
 			msvo.setMs_num(ms_num + 1);
-			int myskinOk = msdao.insert(msvo);
-			if (myskinOk < 0)
-				throw new Exception("error: myskin's insert");
+			msdao.insert(msvo);
 			int msc_num = mscdao.getMaxNum();
-			if (msc_num < 0)
-				throw new Exception("error: myskinCover's getMaxNum");
-			int myskincoverOk = mscdao.insert(new MySkinCoverVo(msc_num + 1, ms_num + 1, "", ""));
-			if (myskincoverOk < 0)
-				throw new Exception("error: myskinCover's insert");
+			mscdao.insert(new MySkinCoverVo(msc_num + 1, ms_num + 1, "logo2.png", "logo2.png"));
 			int msp_num = mspdao.getMaxNum();
-			if (msp_num < 0)
-				throw new Exception("error: myskinProfile's getMaxNum");
-			int myskinprofileOk = mspdao.insert(new MySkinProfileVo(msp_num + 1, ms_num + 1, "", ""));
-			if (myskinprofileOk < 0)
-				throw new Exception("error: myskinProfile's insert");
+			mspdao.insert(new MySkinProfileVo(msp_num + 1, ms_num + 1, "", ""));
 			return 1;
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());

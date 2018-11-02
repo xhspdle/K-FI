@@ -10,7 +10,7 @@ import com.kfi.jyi.dao.MySkinViewDao;
 import com.kfi.ldk.service.CommonService;
 
 @Service
-public class MySkinImpl implements CommonService {
+public class MySkinServiceImpl implements CommonService {
 	@Autowired
 	private MySkinDao msdao;
 	@Autowired
