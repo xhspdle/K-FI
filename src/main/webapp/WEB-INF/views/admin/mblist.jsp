@@ -24,7 +24,7 @@
 				user_num : user_num
 			},function(data){
 				alert(data.user_id);
-				console.log(data.user_id);
+				console.log(data.user_email);
 				$("#modifyuser_num").val(user_num);
 				$("#modifyuser_id").val(data.user_id);
 				$("#modifyuser_pwd").val(data.user_pwd);
