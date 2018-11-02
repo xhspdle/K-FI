@@ -81,7 +81,7 @@
 				
 				console.log(data.ab_num);
 				$("#abupdate_title").val(data.ab_title);
-				$("#abupdate_comment").text(data.ab_content);
+				$("#abupdate_content").text(data.ab_content);
 				$("#abupdate_adnum").val(data.admin_num);
 				$("#abupdate_notice").val(data.ab_notice);
 				$("#abupdate_date").val(data.ab_date);
@@ -89,18 +89,9 @@
 		});
 	});
  	$(function(){
-		$.getJSON("<c:url value='/abpopup'/>", function(data){
-			for(var i=0;i<data.length;i++){
-				alert(data[i].admin_num)
-				console.log(data[i].admin_num);
-				console.log(data[i].ab_content);
-				console.log(data[i].ab_title);
-				var content=data[i].ab_content;
-				$("#aaaaa").css("display","block");
-				alert("aaaa");
-				$("#aaaaa").append(content);
-			}
-		});
+		
+		 	$("#aaaaa").css("display","block"); 
+		
 	}); 
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
@@ -149,7 +140,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">내용:</label>
 						<div class="col-sm-10">
-							  <textarea class="form-control" rows="5" id="abupdate_comment"></textarea>
+							  <textarea class="form-control" rows="5" name="ab_content" id="abupdate_content"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -188,19 +179,25 @@
 </div>
 
 		<div class="container">
-			<c:forEach var="i" begin="${apu.startpagenum }"
-				end="${apu.endpagenum }">
+		
+				
 				<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 			<button type="button" class="btn btn-primary ">${i }</button></a> --%>
-				<ul class="pagination">
+	<%-- 			<ul class="pagination">
 					<li><a
 						href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 							${i }</a></li>
 				</ul>
-
+				 --%>
+			<ul class="pagination">
+				<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
+			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+				<li><a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
 			</c:forEach>
+			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+			<li><button class="btn btn-default btn-md" data-toggle="modal" data-target="#userinsert" id="userinsert_btn">등록</button></li>
+		</ul>	
 		</div>
-
 		<div class="container">
 			<form method="post" action="<c:url value='/ablist'/>">
 				<div class="form-group row">
@@ -227,7 +224,7 @@
 		<a href="abinsert" class="btn btn-default">글작성</a>
 <div id="aaaaa">
 	
-
+	내용
 	<input type="button" value="닫기" onclick=""> 
 </div>
 <%-- 	</c:when>

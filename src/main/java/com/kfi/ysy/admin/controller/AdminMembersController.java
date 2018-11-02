@@ -88,4 +88,9 @@ public class AdminMembersController {
 			return null;
 		}
 	}
+	@RequestMapping(value="/mbupdate",method=RequestMethod.GET)
+	public String mbupdate(MembersVo vo) {
+		/*mbservice.update(vo)*/
+		return null;
+	}
 }

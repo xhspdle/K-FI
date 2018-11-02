@@ -73,12 +73,14 @@
 			<div class="modal-body" id="userinfobody">
 			
 			</div>
+	
 		</div>
 	</div>
 </div>
 
 <script id="userinfotemlpate" type="text/template">
-<form class="form-horizontal" action="#" method="post">	
+<form class="form-horizontal" action="{mburl}" method="post">	
+	<input type="hidden" class="form-control" value={user_num} name="user_num">
 	<div class="form-group">
 		<label class="control-label col-sm-2">ID:</label>
 		<div class="col-sm-10">
@@ -94,7 +96,7 @@
 	<div class="form-group">
 		<label class="control-label col-sm-2">Email:</label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" value={acc_email}>
+			<input type="text" class="form-control" readonly="readonly" value={acc_email}>
 		</div>
 	</div>
 	<div class="form-group">
@@ -106,14 +108,20 @@
 	<div class="form-group">
 		<label class="control-label col-sm-2">상태정보:</label>
 		<div class="col-sm-10">
-			<select class="form-control">
+			<select class="form-control" name="user_stat">
 				<option>정상</option>
 				<option>기간정지</option>
 				<option>정지</option>
 			</select>
 		</div>
-	</div>		
-</form>
+	</div>
+		<div class="modal-footer">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>				
+	</form>
 </script>
 <script type="text/javascript">
 	$(function(){
@@ -140,10 +148,12 @@
  				html=document.querySelector("#userinfotemlpate").innerHTML;
 				alert(html)
  				var resultHTML=html.replace("{acc_id}", data.user_id)
-   					.replace("{acc_nick}", data.user_nick)
+   					.replace("{user_num}", user_num)
+ 					.replace("{acc_nick}", data.user_nick)
 					.replace("{acc_stat}", data.user_stat)
 					.replace("{acc_email}", data.user_email)
-					.replace("{acc_date}",data.user_date);
+					.replace("{acc_date}",data.user_date)
+					.replace("{mburl}","<c:url value='/mbupdate'/>");
 				alert(resultHTML);
 				$("#userinfobody").append(resultHTML);
 			});

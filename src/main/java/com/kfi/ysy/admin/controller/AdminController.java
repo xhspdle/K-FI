@@ -131,13 +131,13 @@ public class AdminController {
 		return json.toString(); 
 	}
 //관리자 수정	
-	@RequestMapping(value="/admodify", method=RequestMethod.POST)
+/*	@RequestMapping(value="/admodify", method=RequestMethod.POST)
 	public String admodify(HttpServletRequest request, AdminVo vo) {	
 		HttpSession session=request.getSession();
 		AdminVo adminvo=(AdminVo)session.getAttribute("admininfo");
 		String admin_id=vo.getAdmin_id();
 		String admin_pwd=vo.getAdmin_pwd();
-		/*if(adminvo.getAdmin_id().equals(admin_id)) {*/
+		if(adminvo.getAdmin_id().equals(admin_id)) {
 			System.out.println(adminvo.getAdmin_id());
 			service.admodify(vo);
 			session.invalidate();
@@ -151,7 +151,16 @@ public class AdminController {
 			}else {
 				return ".admin.adminlist";
 			}
-		/*}*/
+		}
+	}*/
+	@RequestMapping(value="/admodify", method=RequestMethod.POST)
+	public String admodify(AdminVo vo) {
+		int result=service.admodify(vo);
+		if(result>0) {
+			return "redirect:/adminlist";
+		}else {
+			return null;
+		}
 	}
 }
 	

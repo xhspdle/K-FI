@@ -32,6 +32,22 @@
 			}); 
 		});
 	});
+	
+	$(function() { 
+		if ($.cookie('hnnpop') == undefined) { 
+			$("#pop-wrap").show(); 
+			} 
+		$("#pop-close-btn").bind("click",function(){ 
+			if ($("#pop-day").is(":checked")){ 
+				$.cookie('hnnpop', '1', { expires: 1, path : '/' }); 
+				} 
+			$("#pop-wrap").slideUp(200); return false; 
+			}); 
+		}); 
+
+	
+
+
 </script>
 <div id="memberslist"> 
 	<h1>
@@ -58,19 +74,21 @@
 			</tr>
 		</c:forEach>
 	</table>		
-	<div class="btn-group">
-		<button class="btn btn-lg" data-toggle="modal" data-target="#userinsert">등록</button>
-		<button class="btn btn-lg">체크박스</button>
-	</div>
-	<div class="container">
-	<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+
+	<div class="container"  >
 			<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
+
+ 
 		<ul class="pagination">
-			<li><a href="<c:url value='/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
-		</ul>
-	</c:forEach>
-</div>
+			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
+			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+				<li><a href="<c:url value='/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
+			</c:forEach>
+			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+			<li><button class="btn btn-md" data-toggle="modal" data-target="#userinsert" id="userinsert_btn">등록</button></li>
+		</ul>			
+	</div>
 </div>
 
 <div class="modal" id="userinsert">
