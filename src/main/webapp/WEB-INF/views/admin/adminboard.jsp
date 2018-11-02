@@ -191,12 +191,12 @@
 				 --%>
 			<ul class="pagination">
 				<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
-			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-				<li><a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
-			</c:forEach>
-			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
-			<li><button class="btn btn-default btn-md" data-toggle="modal" data-target="#userinsert" id="userinsert_btn">등록</button></li>
-		</ul>	
+				<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+					<li><a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
+				</c:forEach>
+				<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+				<li><button class="btn btn-default btn-md" data-toggle="modal" data-target="#userinsert" id="userinsert_btn">등록</button></li>
+			</ul>	
 		</div>
 		<div class="container">
 			<form method="post" action="<c:url value='/ablist'/>">

@@ -73,11 +73,9 @@
 			<div class="modal-body" id="userinfobody">
 			
 			</div>
-	
 		</div>
 	</div>
 </div>
-
 <script id="userinfotemlpate" type="text/template">
 <form class="form-horizontal" action="{mburl}" method="post">	
 	<input type="hidden" class="form-control" value={user_num} name="user_num">
@@ -139,7 +137,6 @@
 		$(".accuse_user").click(function(event){
 			alert("aaa");
 	 		$("#userinfobody").empty();
-	/* 		userinfobody.empty(); */
 			var user_num=event.target.id;
 			$.getJSON("<c:url value='/mbgetinfo'/>",{
 				user_num : user_num
@@ -147,7 +144,7 @@
 				alert(data.user_id);
  				html=document.querySelector("#userinfotemlpate").innerHTML;
 				alert(html)
- 				var resultHTML=html.replace("{mburl}",<c:url value='/mbupdate'/>)
+ 				var resultHTML=html.replace("{mburl}","<c:url value='/mbupdate'/>")
  					.replace("{acc_id}", data.user_id)
    					.replace("{user_num}", user_num)
  					.replace("{acc_nick}", data.user_nick)
@@ -159,6 +156,5 @@
 			});
 		});		
 	});
-
 </script>
  

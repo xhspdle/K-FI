@@ -17,23 +17,36 @@
 	$(function(){
 		$(".usercontent").attr({'data-toggle':'modal','data-target':'#usermodify'});
 		$(".usercontent").click(function(){
-			alert("aaaa");
-			console.log($(this).parent().children().first().text());
 			var user_num=$(this).parent().children().first().text();
 		 	$.getJSON("<c:url value='/mbgetinfo'/>",{
 				user_num : user_num
 			},function(data){
-				alert(data.user_id);
-				console.log(data.user_email);
 				$("#modifyuser_num").val(user_num);
 				$("#modifyuser_id").val(data.user_id);
 				$("#modifyuser_pwd").val(data.user_pwd);
 				$("#modifyuser_nickname").val(data.user_nick);
 				$("#modifyuser_email").val(data.user_email);
+		/* 		$("#modifyuser_stat").val(data.user_stat);
+				$("#modifyuser_stat").css() */
+				alert(data.user_nick);
+				$("select[name=user_status] option").each(function(index, item){		
+					if(data.user_stat==$(this).val()){
+						console.log($(this));
+						var result = ''; 
+						result += index +' : '+item; 
+						console.log($(this).val());
+						console.log(result);
+						alert(data.user_nick);
+					}
+				});
+
+				/* $("#modifyuser_stat option:selected").val(data.user_stat); */
+
+
 			}); 
 		});
 	});
-	
+/* 	
 	$(function() { 
 		if ($.cookie('hnnpop') == undefined) { 
 			$("#pop-wrap").show(); 
@@ -46,8 +59,7 @@
 			}); 
 		}); 
 
-	
-
+	 */
 
 </script>
 <div id="memberslist"> 
@@ -171,6 +183,16 @@
 						<label class="control-label col-sm-2">Email:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="user_email" id="modifyuser_email">
+						</div>
+					</div>
+						<div class="form-group">
+						<label class="control-label col-sm-2">상태정보:</label>
+						<div class="col-sm-10">
+							<select class="form-control" name="user_status">
+								<option value="2">정상</option>
+								<option value="1">기간정지</option>
+								<option value="0">정지</option>
+							</select>
 						</div>
 					</div>
 					<div class="modal-footer">
