@@ -17,9 +17,7 @@
 	
 	
 
-	<update id="update" parameterType="logmembers">
-		update members set USER_NICKNAME=#{userNickname}, USER_PWD=#{userPwd}, USER_EMAIL=#{userEmail}
-	</update>
+	
 	
 	<delete id="delete" parameterType="int">
 		delete from members where USER_NUM=#{value}
@@ -77,6 +75,7 @@
 		select NVL(count(user_num),0) cnt from members
 	</select>
 	
+	
 	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->
 	<select id="list" parameterType="hashmap" resultType="logmembers">
@@ -96,4 +95,8 @@
 	<select id="select" parameterType="int" resultType="logmembers">
 		select * from members where user_num=#{user_num}
 	</select>
+	<!-- 사용자 정보 변경 -->
+	<update id="update" parameterType="logmembers">
+		update members set USER_NICKNAME=#{user_nickname}, USER_PWD=#{user_pwd}, USER_EMAIL=#{user_email} where USER_NUM=#{user_num}
+	</update>
 </mapper>

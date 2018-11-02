@@ -84,6 +84,9 @@ public class MembersService {
 	public MembersVo select(int user_num) {
 		return dao.select(user_num);
 	}
+	public int update(int user_num) {
+		return dao.update(user_num);
+	}
 
 ////////////////////////////회원가입 정상완료 후 myskin테이블에 디폴트값 넣기
 	@Transactional

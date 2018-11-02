@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.dgl.service.MembersService;
 import com.kfi.dgl.vo.MembersVo;
@@ -49,6 +50,7 @@ public class JoinController {
 		}
 		return returnURL;
 	}
+	@ResponseBody
 	@RequestMapping("/login/join/idcheck")
 		public Map<String, String> idcheck(String user_id){
 		int n = service.idcheck(user_id);

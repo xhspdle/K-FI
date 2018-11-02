@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kfi.dgl.vo.CertiMailVo;
 import com.kfi.dgl.vo.MembersVo;
 @Repository
 public class MembersDao {
@@ -71,6 +70,9 @@ public class MembersDao {
 	}
 	public MembersVo select(int user_num) {
 		return sqlSession.selectOne(NAMESPACE+".select",user_num);
+	}
+	public int update(int user_num) {
+		return sqlSession.update(NAMESPACE + ".update",user_num);
 	}
 
 }
