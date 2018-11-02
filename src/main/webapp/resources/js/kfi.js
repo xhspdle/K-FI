@@ -234,18 +234,15 @@ $(document).ready(function(){
 						attachment="<video class='img-responsive center-block' controls autoplay muted='muted' loop src='"+getPageContext +"/resources/upload/vid/" + mv_savvid + "'></video>";
 					}else if(mp_savimg!=null && mp_savimg!=''){
 						attachment="<img class='img-responsive center-block' src='"+getPageContext +"/resources/upload/img/" + mp_savimg + "'>";
-					}else{
-						attachment="<img class='img-responsive center-block' src='"+getPageContext +"/resources/images/logo2.png'>";
 					}
 					if(i==0){
 						$("<div class='panel-group'>" +
 						  "<div class='panel panel-default'>" +
-						  "<div class='panel-heading' id='"+ mb_num +"' data-comm-cnt='"+ comment_cnt +"' data-like-cnt='"+ like_cnt +"'>" +
+						  "<div class='panel-heading' id='"+ mb_num +"'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
-						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +
-						  	"&comment_cnt="+ comment_cnt +
-						  	"&like_cnt="+ like_cnt +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + 
+						  	mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -256,12 +253,11 @@ $(document).ready(function(){
 					}else{
 						$("<div class='panel-group slideanim'>" +
 						  "<div class='panel panel-default'>" +
-						  "<div class='panel-heading' id='"+ mb_num +"' data-comm-cnt='"+ comment_cnt +"' data-like-cnt='"+ like_cnt +"'>" +
+						  "<div class='panel-heading' id='"+ mb_num +"'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
-						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +
-						  	"&comment_cnt="+ comment_cnt +
-						  	"&like_cnt="+ like_cnt +"' class='postA'>" + mb_title + "</a></h1></blockquote></div>" +
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + 
+						  	mb_title + "</a></h1></blockquote></div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -274,9 +270,7 @@ $(document).ready(function(){
 				
 			});
 		$("#myBoardList").on('click',".panel-heading",function(){
-			location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id") + 
-			"&comment_cnt=" + $(this).attr("data-comm-cnt") + 
-			"&like_cnt=" + $(this).attr("data-like-cnt");
+			location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id");
 		});
 		$("#myBoardList").on('mouseover',".panel-heading",function(){
 			$(this).css("cursor","pointer");
@@ -329,7 +323,7 @@ $(document).ready(function(){
 	  var getPageContext=$("#getPageContext").val();
 	  var getSession=$("#getSession").val();
 	  var boardWriter=$("#boardWriter").val();
-	  var mb_num=$("#commentForm > input[type='hidden']").val();
+	  var mb_num=$("#boardNum").val();
 	  $.getJSON(getPageContext + "/mypage/mycomment/list",
 		  {'pageNum':pageNum,'mb_num':parseInt(mb_num)},
 		  function(data){
@@ -347,10 +341,10 @@ $(document).ready(function(){
 				  var optionBtn='';
 				  var dropDowns='';
 				  if(user_num==getSession){
-					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/mypage/mycomment/delete?myc_num="+ myc_num +"'>삭제</a></li>" +
+					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/mypage/mycomment/delete?myc_num="+ myc_num +"' data-comm-num='"+ myc_num +"'>삭제</a></li>" +
 					  			"<li><a class='dropDownUpDate' href='javascript:updateCommentForm("+ myc_num +")'>수정</a></li>";
 				  }else if(boardWriter==getSession){
-					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/mypage/mycomment/delete?myc_num="+ myc_num +"'>삭제</a></li>";
+					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/mypage/mycomment/delete?myc_num="+ myc_num +"' data-comm-num='"+ myc_num +"'>삭제</a></li>";
 				  }else{
 					  optionBtn=" disabled";
 				  }
@@ -446,5 +440,36 @@ $(document).ready(function(){
 				  },3000);
 			  });
   });
+  $("#commentList").on('click',".dropDownDelete",function(e){
+	  e.preventDefault();
+	  var getPageContext=$("#getPageContext").val();
+	  var myc_num=parseInt($(this).attr("data-comm-num"));
+	  $("#deleteMsg").modal();
+	  var ok='';
+	  $("#ok").click(function(){
+		 ok="ok"; 
+	  });
+	  $("#deleteMsg").on('hidden.bs.modal',function(){
+		  if(ok!=''){
+			  $.commentDelete(getPageContext, myc_num);
+		  }
+	  });
+	  
+  });
+  $.commentDelete=function(getPageContext, myc_num){
+	  $.getJSON(getPageContext + "/mypage/mycomment/delete",
+			  {'myc_num':myc_num},
+			  function(json){
+				  if(json.code=='success'){
+					  $.getCommentList();
+				  }else{
+					  alert("삭제실패");
+					  /*
+					   * 여기 할차례~~~
+					   *
+					   */
+				  }
+			  });
+  }
 });
 

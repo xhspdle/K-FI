@@ -24,8 +24,12 @@ public class ListController {
 		int pageNum,String keyword,HttpSession session) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("keyword", keyword);
-//		map.put("user_num", session.getAttribute("user_num"));
-		map.put("user_num", 1);
+		int user_num=0;
+		Object session_num=session.getAttribute("user_num");
+		if(session_num!=null && session_num!="") {
+			user_num=(Integer)session_num;
+		}
+		map.put("user_num", user_num);
 		int totalRowCount=service.getCount(map);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 5);
 		map.put("startRow", pu.getStartRow());

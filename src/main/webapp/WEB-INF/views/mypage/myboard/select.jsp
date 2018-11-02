@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <input type="hidden" id="myCommentListHere" value="MCLH">
 <input type="hidden" id="boardWriter" value="${boardVo.user_num }">
+<input type="hidden" id="boardNum" value="${boardVo.mb_num }">
 <div id="myBoardSelect" class="container">
 	<h1 class="text-center" style="margin-bottom:30px;"><span style="border-bottom: 4px solid tan">${boardVo.mb_date }</span></h1>
 	<div class="panel-group">
@@ -102,6 +103,8 @@
 				</div>
 				<h3 class="postLikeComment select" id="commentCnt">${comment_cnt } Comments</h3>
 				<div class="media">
+				<c:choose>
+					<c:when test="${!empty user_num }">
 					<div class="media-left media-top">
 						<img class="media-object img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="userProfile">
 					</div>
@@ -112,7 +115,17 @@
 							<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span></button>
 							<span class="help-block">asd</span>
 						</form>
+					</div>	
+					</c:when>
+					<c:otherwise>
+					<div class="media-left media-top">
+						<img class="media-object img-circle" src="<c:url value='/resources/images/default-profile.png'/>" alt="userProfile">
 					</div>
+					<div class="media-body media-middle form-group row">
+						<p>Login first, if you wanna post comment!</p>
+					</div>
+					</c:otherwise>
+				</c:choose>
 				</div>
 				<div id="commentList">
 				<!--  
@@ -135,6 +148,21 @@
 				<div class="text-center">
 					<ul class="pagination"></ul>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteMsg" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<p>Are you sure!?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="ok">Okay</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
