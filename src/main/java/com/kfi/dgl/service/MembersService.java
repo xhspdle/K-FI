@@ -36,22 +36,6 @@ public class MembersService {
 		return dao.join(vo);
 	}
 
-	// admin에서 사용
-	public List<MembersVo> list(HashMap<String, Object> map) {
-		return dao.list(map);
-	}
-
-	public int delete(int num) {
-		return dao.delete(num);
-	}
-
-	/*
-	 * public MembersVo select(vo) { return dao.select(vo); }
-	 */
-	public int update(MembersVo vo) {
-		return dao.update(vo);
-	}
-
 	public MembersVo login(HashMap<String, Object> map) {
 		return dao.login(map);
 
@@ -73,20 +57,31 @@ public class MembersService {
 		return dao.createKey(user_email);
 	}
 
-	public int idcheck(String user_id) {
+	public int idCheck(String user_id) {
 		return dao.idCheck(user_id);
 	}
 
 	public int nickcheck(String user_nickname) {
 		return dao.nickCheck(user_nickname);
 	}
-
+	
+	public int emailcheck(String user_email) {
+		return dao.emailCheck(user_email);
+	}
+	// admin에서 사용
 	public MembersVo select(int user_num) {
 		return dao.select(user_num);
 	}
-	public int update(int user_num) {
-		return dao.update(user_num);
+	public List<MembersVo> list(HashMap<String, Object> map) {
+		return dao.list(map);
 	}
+	public int update(MembersVo vo) {
+		return dao.update(vo);
+	}
+	public int delete(int user_num) {
+		return dao.delete(user_num);
+	}
+
 
 ////////////////////////////회원가입 정상완료 후 myskin테이블에 디폴트값 넣기
 	@Transactional

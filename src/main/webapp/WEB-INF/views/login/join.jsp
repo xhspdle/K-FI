@@ -23,49 +23,48 @@ $(function(){
 		var nickFlag = false;
 		var pwFlag = false;
 		var authFlag = false;
-		
+		var getContext=$('#getContext').val();
 		
 	 $('#idck').click(function(){
 		var id = $("#id").val();
 		var eMsg = $("#idMsg");
-		var isID = /^[a-z0-9]{4,19}$/;
+		var isID = /^[a-z0-9]{5,15}$/;
 		
 		if (id == "") {
 		    $(eMsg).text("반드시 입력해주세요!");
 			$("#id").focus();
 			return false;
 		}
+		
+		
 		$.ajax({
 			async: true,
 			type : "GET",
-			url : "<c:url value='/login/join/idcheck'/>",
+			url : getContext+'/login/join/idcheck',
 			data : {'user_id':id},
 			dataType : "json",
 			success : function(data) {
-					console.log(data.msg);
-					if(data.msg == 'true')
+				console.log(data)
 					if (!isID.test(id)) {
-						alert("5~20자의 영문 소문자, 숫자만 사용가능 합니다!");
+						$(eMsg).text("5~15자의 영문 소문자, 숫자만 사용가능 합니다!");
+						$("#id").focus();
+						return false;
+					}else if (data.msg == 'false') {
 						$(eMsg).text("이미 사용중인 아이디 입니다.");
 						$("#id").focus();
 						return false;
-					}if (id) {
-						alert("이미 사용중인 아이디 입니다.");
-						 $(eMsg).text("이미 사용중인 아이디 입니다.");
-						$("#id").focus();
-						return false;
-					} else {
-						alert("cool ID~!!");
-						 $(eMsg).text("cool ID~!!");
-						$("#pw").focus();
+					} else if(data.msg == 'true') {
+						$(eMsg).text("cool ID~!!");
+						$("#nickname").focus();
 						return true;
 					}
 				}
+					
 			});
 		});
 
 	 
-		 // 닉네임 중복 체크 부분 
+	 // 닉네임 중복 체크 부분 
 	$('#nickck').click(function(){
 		var nickname = $("#nickname").val();
 		var eMsg = $("#nickMsg");
@@ -76,22 +75,29 @@ $(function(){
 			
 		$.ajax({
 			async: true,
-			type : "POST",
-			url : "<c:url value='/login/join/idcheck'/>",
-			data : {'user_id':id},
+			type : "GET",
+			url : getContext+'/login/join/nicknamecheck',
+			data : {'user_nickname':nickname},
 			dataType : "json",
 			success : function(data) {
-					console.log(data.msg);
+				console.log(data)
 				var isNick = /^[a-z0-9][가-힝]{4,19}$/;
 				if (!isNick.test(nickname)) {
 					showErrorMsg("영문(5~20자), 한글(2~10자) 로 이루어진 닉네임을 만들어 주세요.");
+					$("#nickname").focus();
 					return false;
+				}else if(data.msg == 'false'){
+					$(eMsg).text("이미 사용중인 닉네임 입니다.");
+					$("#nickname").focus();
+					return false;
+				}else if(data.msg == 'true'){
+					$(eMsg)
 				}
 				}
 			});
 		}
 	});
-});
+}); 
 		<%--
 		/* 비번 체크 부분 */
 		function checkPwd1(){
@@ -138,6 +144,7 @@ $(function(){
 			}
 		 
 	}
+	<%--
 	function checkMail() {
 		var email = document.getElementById("email").value;
 
@@ -185,9 +192,8 @@ $(function(){
 </script>
 <title>회원가입</title>
 </head>
-<body>
-	<input type="hidden" id="getContext" name="getContext"
-		value="<c:url value='/'/>">
+<body> 
+	<input type="hidden" id="getContext" name="getContext" value="<c:url value='/'/>">
 	<!-- 헤더 로고부분  class blind -> 블라인드 처리 해줘야함-->
 	<div id="header">
 		<h1>
@@ -199,7 +205,8 @@ $(function(){
 		<div>
 			<label for="id">아이디</label> <input type="text" name="user_id" id="id">
 			<input type="button" value="ID중복체크" id="idck"> <br>
-			<span id="idMsg"></span> <label for="id"></label>
+			<span id="idMsg"></span> 
+			<label for="id"></label>
 		</div>
 
 		<div>
@@ -209,21 +216,21 @@ $(function(){
 			<span id="nickMsg"></span>
 		</div>
 		<div>
-			<label for="pwd">비밀번호</label> <input type="password" name="user_pwd"
-				id="pwd" placeholder="비밀번호입력"><br> <br>
+			<label for="pwd">비밀번호</label> 
+			<input type="password" name="user_pwd" id="pwd" placeholder="비밀번호 입력"><br>
 			<span id="pwdMsg"></span>
 		</div>
 		<div>
 			<label for="pwdCheck">비밀번호 재확인</label>
-			 <input type="password" name="pwdCheck" id="pwCheck" placeholder="비밀번호 확인"><br>
+			<input type="password" name="pwdCheck" id="pwCheck" placeholder="비밀번호 확인"><br>
 			<span class="pwdChk_blind">비밀번호가 맞는지 확인을 위해 다시 입력 해주세요.</span> <br>
 			<span id="pwdMsg"></span>
 		</div>
 		<div>
-			<label for="email">이메일</label> <input type="text" name="user_email"
-				id="email"> <input type="button" value="이메일 중복 확인"
-				id="emailck"> <br>
-			<span id="idMsg"></span>
+			<label for="email">이메일</label> 
+			<input type="text" name="user_email" id="email" placeholder="ex)xxx@kfi.com">
+			<input type="button" value="이메일 중복 확인" name="user_email" id="emailck"> <br>
+			<span id="emailMsg"></span>
 		</div>
 
 		<div>

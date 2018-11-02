@@ -17,17 +17,6 @@ public class MembersDao {
 		this.sqlSession = sqlSession;
 	}
 	
-	
-	public int delete(int num) {
-		return sqlSession.delete(NAMESPACE +".delete",num);
-	}
-	
-	/*public MembersVo select(int num) {
-		return sqlSession.selectList(NAMESPACE + ".select");
-	}*/
-	public int update(MembersVo vo) {
-		return sqlSession.update(NAMESPACE + ".update", vo);
-	}
 	//가입
 	public int join(MembersVo vo) {
 		return sqlSession.insert(NAMESPACE +".join", vo);
@@ -52,6 +41,10 @@ public class MembersDao {
 	public int nickCheck(String user_nickname) {
 		return sqlSession.selectOne(NAMESPACE + ".nickCheck", user_nickname);
 	}
+	//이메일 체크
+	public int emailCheck(String user_email) {
+		return sqlSession.selectOne(NAMESPACE + ".emailCheck", user_email);
+	}
 	//사용자 인증 상태 변경
 	public int verify(MembersVo vo) {
 		return sqlSession.update(NAMESPACE + ".getVerify");
@@ -71,8 +64,10 @@ public class MembersDao {
 	public MembersVo select(int user_num) {
 		return sqlSession.selectOne(NAMESPACE+".select",user_num);
 	}
-	public int update(int user_num) {
-		return sqlSession.update(NAMESPACE + ".update",user_num);
+	public int update(MembersVo vo) {
+		return sqlSession.update(NAMESPACE + ".update",vo);
 	}
-
+	public int delete(int user_num) {
+		return sqlSession.delete(NAMESPACE +".delete",user_num);
+	}
 }
