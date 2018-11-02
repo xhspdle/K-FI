@@ -12,4 +12,7 @@
 		insert into my_skin_profile values(#{msp_num},#{ms_num},#{msp_orgimg},#{msp_savimg})	
 	</insert>
 	
+
+	
+	
 </mapper>

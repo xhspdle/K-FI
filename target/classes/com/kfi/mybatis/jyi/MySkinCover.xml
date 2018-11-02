@@ -12,4 +12,6 @@
 		insert into my_skin_cover values(#{msc_num},#{ms_num},#{msc_orgimg},#{msc_savimg})	
 	</insert>
 
+
+
 </mapper>

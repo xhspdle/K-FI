@@ -1,5 +1,7 @@
 package com.kfi.jyi.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,5 +21,6 @@ public class MySkinProfileDao {
 	public int insert(MySkinProfileVo vo) {
 		return session.insert(NAMESPACE + ".insert_myskin_profile", vo);
 	}
-
+	
+	
 }
