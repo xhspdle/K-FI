@@ -25,7 +25,7 @@ $(document).ready(function(){
         }
     });
   });
-  $(".dropdown").hover(function(){
+  $(".nav > .dropdown").hover(function(){
 	  $(this).find("ul").stop().slideDown(); 
   },function(){
 	  $(this).find("ul").stop().slideUp();
@@ -109,7 +109,7 @@ $(document).ready(function(){
 			  }else{
 				  $("<label for='fileP"+ n +"' class='btn btn-primary btn-block btn-file'>" +
 				  	"<span class='glyphicon glyphicon-picture'></span> Upload Photo"+n +"</label>" +
-				  	"<input type='file' class='form-control' id='fileP"+n +"' name='fileP' accept='.jpg, .jpeg, .png'>" +
+				  	"<input type='file' class='form-control' id='fileP"+n +"' name='fileP' accept='.jpg, .jpeg, .png, .gif'>" +
 				  	"<img id='fimg"+ n +"' src='' style='display:none;width:100%'>")
 				  .appendTo(imgUpload);
 				  $("#imgUpload").on('change','#fileP' + n, function(event1){
@@ -192,6 +192,12 @@ $(document).ready(function(){
 		 }else{
 			 $("#uploadMsg").css("color","red");
 			 $("#uploadMsg").css("font-weight","bold");
+			 setTimeout(function(){
+				 $("#writeModal").modal("hide");
+				 html=document.querySelector("#modalForm").innerHTML;
+				 $(".modal-body").empty();
+				 $(".modal-body").append(html);
+			 },2500);
 		 }
 	  });
 	  ajaxReq.fail(function(jqXHR){
@@ -321,11 +327,14 @@ $(document).ready(function(){
   });
   $.getCommentList=function(pageNum){
 	  var getPageContext=$("#getPageContext").val();
+	  var getSession=$("#getSession").val();
+	  var boardWriter=$("#boardWriter").val();
 	  var mb_num=$("#commentForm > input[type='hidden']").val();
 	  $.getJSON(getPageContext + "/mypage/mycomment/list",
 		  {'pageNum':pageNum,'mb_num':parseInt(mb_num)},
 		  function(data){
 			  $("#commentCnt").html(data.commentCnt + " Comments");
+			  $("#likeCnt").html(data.boardLikeCnt + " Likes<span class='msgSpan'></span>");
 			  $("#commentList").empty();
 			  $(data.commentList).each(function(i,json){
 				  var myc_num=json.myc_num;
@@ -335,6 +344,16 @@ $(document).ready(function(){
 				  var myc_date=json.myc_date;
 				  var cnt=json.cnt;
 				  var user_id=json.user_id;
+				  var optionBtn='';
+				  var dropDowns='';
+				  if(user_num==getSession){
+					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/mypage/mycomment/delete?myc_num="+ myc_num +"'>삭제</a></li>" +
+					  			"<li><a class='dropDownUpDate' href='javascript:updateCommentForm("+ myc_num +")'>수정</a></li>";
+				  }else if(boardWriter==getSession){
+					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/mypage/mycomment/delete?myc_num="+ myc_num +"'>삭제</a></li>";
+				  }else{
+					  optionBtn=" disabled";
+				  }
 				  html=document.querySelector("#commentTemplate").innerHTML;
 				  var resultHTML=html.replace("{msp_savimg}", "kpop콘.gif")
 				  		.replace("{path}", getPageContext)
@@ -342,7 +361,9 @@ $(document).ready(function(){
 				  		.replace("{user_id}", user_id)
 				  		.replace("{myc_content}", myc_content)
 				  		.replace("{comment_likes}", cnt)
-				  		.replace("{myc_date}", myc_date);
+				  		.replace("{myc_date}", myc_date)
+				  		.replace("{dropDowns}", dropDowns)
+				  		.replace("{optionBtn}", optionBtn);
 				  $("#commentList").append(resultHTML);
 			  });
 			  $(".pagination").empty();
@@ -410,10 +431,9 @@ $(document).ready(function(){
 	  $.getJSON(getPageContext + "/mypage/myboardlike/insert",
 			  {'mb_num':mb_num},
 			  function(json){
-				  var msgSpan=$("#likeCnt > span");
+				  $("#likeCnt").html(json.boardLikeCnt + " Likes<span class='msgSpan'></span>");
+				  var msgSpan=$("#likeCnt > span.msgSpan");
 				  if(json.code=='success'){
-					  var boardLikes=parseInt($("#likeCnt").attr("data-like-cnt")) + 1;
-					  $("#likeCnt").text(boardLikes + " Likes");
 					  $(msgSpan).text("Like it!");
 				  }else if(json.code=='duplicated'){
 					  $(msgSpan).text("You've already clicked Likes");

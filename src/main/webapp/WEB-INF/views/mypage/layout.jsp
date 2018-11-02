@@ -24,7 +24,7 @@
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60"><!-- style="padding-top:60px;" -->
 <input type="hidden" id="getPageContext" value="<c:url value='/'/>">
-
+<input type="hidden" id="getSession" value="${user_num }">
 <div id="wrap">
 	<div id="header">
 		<tiles:insertAttribute name="header"/>
@@ -71,7 +71,7 @@
 						</div>
 						<div class="form-group" id="imgUpload">
 							<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
-							<input type="file" class="form-control" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png .gif">
+							<input type="file" class="form-control" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
 							<img id="fimg1" src="" style="display:none;width:100%;">
 						</div>
 						<div class="form-group" id="vidUpload">
@@ -94,3 +94,34 @@
 		</div>
 	</div> 
 </div>
+<script id="modalForm" type="text/template">
+<form method="post" action="<c:url value='/mypage/myboard/insert'/>" name="frm" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="mb_title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
+		<input type="text" class="form-control" id="mb_title" name="mb_title" placeholder="Enter Title">
+	</div>
+	<div class="form-group">
+		<label for="mb_content"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
+		<textarea class="form-control" rows="5" id="mb_content" name="mb_content"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
+		<input type="text" class="form-control" id="tags" name="tags" placeholder="#blabla #blabla">
+	</div>
+	<div class="form-group" id="imgUpload">
+		<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
+		<input type="file" class="form-control" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
+		<img id="fimg1" src="" style="display:none;width:100%;">
+	</div>
+	<div class="form-group" id="vidUpload">
+		<label for="fileV1" class="btn btn-info btn-block btn-file"><span class="glyphicon glyphicon-facetime-video"></span> Upload Video</label>
+		<input type="file" class="form-control" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
+		<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
+	</div>
+	<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
+</form>
+<div class="progress">
+	<div class="progress-bar progress-bar-striped active" role="progressbar" 
+	aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+</div>
+</script>

@@ -16,7 +16,7 @@
 	<update id="update" parameterType="myphoto">
 		update my_photo 
 		<set>
-			<if test="mp_orgimg!=null and mp_orgimg!=''">mp_orgimg=#{mp_orgimg}</if>
+			<if test="mp_orgimg!=null and mp_orgimg!=''">mp_orgimg=#{mp_orgimg},</if>
 			<if test="mp_savimg!=null and mp_savimg!=''">mp_savimg=#{mp_savimg}</if>
 		</set>
 		where mp_num=#{mp_num}

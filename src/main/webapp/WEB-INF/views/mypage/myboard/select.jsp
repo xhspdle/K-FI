@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <input type="hidden" id="myCommentListHere" value="MCLH">
+<input type="hidden" id="boardWriter" value="${boardVo.user_num }">
 <div id="myBoardSelect" class="container">
 	<h1 class="text-center" style="margin-bottom:30px;"><span style="border-bottom: 4px solid tan">${boardVo.mb_date }</span></h1>
 	<div class="panel-group">
@@ -10,20 +11,26 @@
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
 						<span class="postA">${boardVo.mb_title }</span>
-						<a href="#">	
-							<span class="glyphicon glyphicon-option-vertical pull-right" data-toggle="tooltip" title="option">
-							</span>
-						</a>
 					</h1>
 				</blockquote>
+				<div class="dropdown boardOption">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-option-vertical"></span>
+					</button>
+					<ul class="dropdown-menu rightOption">
+						<li><a href="#">수정</a></li>
+						<li><a href="#">삭제</a></li>
+					</ul>
+				</div>
 				<!--  
-				<div class="dropdown">
-				<span class="glyphicon glyphicon-option-vertical pull-right dropdown-toggle" data-toggle="dropdown">
-				</span>
-				<ul class="dropdown-menu">
-					<li><a href="#">글 수정</a></li>
-					<li><a href="#">글 삭제</a></li>
-				</ul>
+				<div class="dropdown commentOption">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-option-vertical"></span>
+					</button>
+					<ul class="dropdown-menu rightOption">
+						<li><a href="#">수정</a></li>
+						<li><a href="#">삭제</a></li>
+					</ul>
 				</div>
 				-->
 			</div>
@@ -82,7 +89,7 @@
 			</div>
 			<div class="panel-footer text-left">
 				<h3 class="postLikeComment select" id="likeCnt" data-like-cnt="${like_cnt }">
-				${like_cnt } Likes<span></span></h3>
+				${like_cnt } Likes<span class="msgSpan"></span></h3>
 				<div class="likes">
 					<a class="btn btn-default" href="<c:url value='/mypage/myboardlike/insert?mb_num=${boardVo.mb_num }'/>" 
 					data-board-num="${boardVo.mb_num }">
@@ -139,11 +146,17 @@
 	</div>
 	<div class="media-body">
 		<h3><strong><a href="">{user_id}</a></strong></h3>
+		<div class="dropdown commentOption">
+			<button class="btn btn-primary dropdown-toggle{optionBtn}" type="button" data-toggle="dropdown">
+				<span class="glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu rightOption">{dropDowns}</ul>
+		</div>
 		<p>{myc_content}</p>
 		<a class="thumbsUp" data-comm-num="{myc_num}" href="{path}/mypage/mycommentlike/insert?myc_num={myc_num}">
 			<i class="glyphicon glyphicon-thumbs-up"></i>
 		</a>
-		<span data-comm-num="{myc_num}">{comment_likes}</span><small>{myc_date}</small><span></span>
+		<span data-comm-num="{myc_num}">{comment_likes}</span><small>{myc_date}</small><span class="msgSpan"></span>
 	</div>
 </div>
 </script>

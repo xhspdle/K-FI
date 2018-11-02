@@ -25,7 +25,7 @@
 	<update id="update" parameterType="myboard">
 		update my_board 
 		<set>
-			<if test="mb_title!=null and mb_title!=''">mb_title=#{mb_title}</if>
+			<if test="mb_title!=null and mb_title!=''">mb_title=#{mb_title},</if>
 			<if test="mb_content!=null and mb_content!=''">mb_content=#{mb_content}</if>
 		</set>
 		where mb_num=#{mb_num}

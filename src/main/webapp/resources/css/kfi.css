@@ -537,7 +537,6 @@ img.media-object {
 }
 /*
 	인접 요소 선택자 +
-*/
 #commentList small + span {
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
@@ -545,11 +544,49 @@ img.media-object {
     color: #f4511e;
     margin-left: 30px;
 }
-#likeCnt > span {
+*/
+.msgSpan {
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
     opacity: 0;
     font-size: 15px;
     color: #f4511e;
     margin-left: 30px;
+}
+.boardOption {
+	position: relative;
+	top: -70px;
+	left: 46%;
+	margin-bottom: -53px;
+}
+.boardOption > button {
+	background-color: transparent !important;
+	color: #f4511e !important;
+	border: 0 !important;
+}
+.boardOption .rightOption {
+	left: 360px;
+	top: -3px;
+}
+.boardOption button .glyphicon {
+	font-size: 38px;
+}
+.commentOption {
+	position: relative;
+	top: -38px;
+	left: 95%;
+}
+.commentOption + p {
+	position: relative;
+	top: -38px;
+	margin-bottom: -30px;
+}
+.commentOption > button {
+	background-color: white !important;
+	color: #818181 !important;
+	border: 0 !important;
+}
+.commentOption .rightOption {
+	left: -162px;
+	top: -3px;
 }

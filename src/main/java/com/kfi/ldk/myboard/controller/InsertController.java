@@ -35,13 +35,17 @@ public class InsertController {
 			map.put("session", session);
 			map.put("fileP", fileP);
 			map.put("fileV", fileV);
-			map.put("mbVo", new MyBoardVo(0, 1, mb_title, mb_content, null, 0));	
-			//유저 가입, 로그인 미구현인관계로 유저넘버1번으로 테스트
+			int user_num=0;
+			Object session_num=session.getAttribute("user_num");
+			if(session_num!=null && session_num!="") {
+				user_num=(Integer)session_num;
+			}
+			map.put("mbVo", new MyBoardVo(0, user_num, mb_title, mb_content, null, 0));	
 			int n=service.insert(map);
 			if(n>0) {
 				return "Post Success";
 			}else {
-				return "Post Failed: Invalid FileType";
+				return "Post Failed";
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

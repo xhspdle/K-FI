@@ -22,8 +22,11 @@ public class InsertController {
 	public HashMap<String, Object> insert(int mb_num,
 			String myc_content,HttpSession session) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
-//		int user_num=(Integer)session.getAttribute("user_num");
-		int user_num=1;
+		int user_num=0;
+		Object session_num=session.getAttribute("user_num");
+		if(session_num!=null && session_num!="") {
+			user_num=(Integer)session_num;
+		}
 		int n=service.insert(new MyCommentVo(0, mb_num, user_num, myc_content, null));
 		if(n>0) {
 			map.put("code", "success");

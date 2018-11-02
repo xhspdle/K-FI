@@ -16,7 +16,7 @@
 	<update id="update" parameterType="myvideo">
 		update my_video 
 		<set>
-			<if test="mv_orgvid!=null and mv_orgvid!=''">mv_orgvid=#{mv_orgvid}</if>
+			<if test="mv_orgvid!=null and mv_orgvid!=''">mv_orgvid=#{mv_orgvid},</if>
 			<if test="mv_savvid!=null and mv_savvid!=''">mv_savvid=#{mv_savvid}</if>
 		</set>
 		where mv_num=#{mv_num}
