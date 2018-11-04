@@ -66,33 +66,50 @@
  			if(result){
 				location.href="abdelete?ab_num="+ab_num;
 			}else{
-				return;
+				return false;
 			}
 		});
 	});
 	$(function(){
 		$(".abcontent").attr({'data-toggle':'modal','data-target':'#adminboardupdate'});
 		$(".abcontent").click(function(){
-			console.log($(this).parent().children().first().text());
 			var ab_num=$(this).parent().children().first().text();
 		 	$.getJSON("<c:url value='/abdetail'/>",{
 		 		ab_num : ab_num
 			},function(data){
-				
-				console.log(data.ab_num);
+				$("#abupdate_num").val(ab_num);
 				$("#abupdate_title").val(data.ab_title);
 				$("#abupdate_content").text(data.ab_content);
 				$("#abupdate_adnum").val(data.admin_num);
 				$("#abupdate_notice").val(data.ab_notice);
-				$("#abupdate_date").val(data.ab_date);
+				$("#abupdate_date").text(data.ab_date);
 			}); 
 		});
 	});
- 	$(function(){
-		
-		 	$("#aaaaa").css("display","block"); 
-		
+	$(function(){
+ /* 		abpopup
+		 	$("#aaaaa").css("display","block");  */
+	
+			$.getJSON("<c:url value='/abpopup'/>",function(data){
+				for(var i=0;i<data.length;i++){
+					console.log(data[i].ab_title);
+					console.log(data[i].ab_num);
+					console.log(data[i].ab_content);
+					var html=template(data[i].ab_title,data[i].ab_content);
+					$("#aaaaa").append(html);
+					$("#aaaaa").css("display","block");
+				}
+	
+		});
 	}); 
+ 	
+ 	function template(ab_title,ab_content){
+ 		var html="<div>"+ab_title+"</div><div>"+ab_content+"</div>";
+		return html;
+ 	}
+ 	
+ 	
+ 	
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
 <%-- <button class="btn btn-lg" data-toggle="modal"
@@ -100,7 +117,6 @@
 <c:choose>
 	<c:when test="${not empty admin}"> --%>
 <h1>공지사항</h1>
-<input type="button" value="aaa" id="popupbtn">
 <table class="table table-striped">
 	<tr>
 		<th>게시물번호</th>
@@ -131,10 +147,11 @@
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal" action="abupdate" method="post">
+					<input type="hidden" class="form-control" name="ab_num" id="abupdate_num">
 					<div class="form-group">
 						<label class="control-label col-sm-2">제목:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="ab_title" readonly="readonly" id="abupdate_title">
+							<input type="text" class="form-control" name="ab_title" id="abupdate_title">
 						</div>
 					</div>
 					<div class="form-group">
@@ -146,25 +163,23 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">NickName:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="admin_num" id="abupdate_adnum">
+							<input type="text" class="form-control" name="admin_num" readonly="readonly" id="abupdate_adnum">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2">상태정보:</label>
 						<div class="col-sm-10">
 							<label class="radio-inline">
-								<input type="radio" name="optradio" checked>게시
+								<input type="radio" name="ab_notice" value="1">게시
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="optradio">미게시
+								<input type="radio" name="ab_notice" value="2" checked>미게시
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2">등록일자:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="ab_date" id="abupdate_date">
-						</div>
+						<div class="col-sm-10" id="abupdate_date"></div>
 					</div>
 					<div class="modal-footer">
 						<div class="col-sm-offset-2 col-sm-10">
@@ -195,7 +210,6 @@
 					<li><a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
 				</c:forEach>
 				<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
-				<li><button class="btn btn-default btn-md" data-toggle="modal" data-target="#userinsert" id="userinsert_btn">등록</button></li>
 			</ul>	
 		</div>
 		<div class="container">
@@ -225,7 +239,7 @@
 <div id="aaaaa">
 	
 	내용
-	<input type="button" value="닫기" onclick=""> 
+	<input type="button" value="닫기" onclick="$('#aaaaa').css('display','none')"> 
 </div>
 <%-- 	</c:when>
 	<c:otherwise>

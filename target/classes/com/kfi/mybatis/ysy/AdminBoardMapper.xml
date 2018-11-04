@@ -36,12 +36,12 @@
 	<delete id="abdelete" parameterType="int">
 		delete from admin_board where ab_num=#{ab_num}
 	</delete>
-	<update id="abupdate" parameterType="int">
-		update from admin_board
+	<update id="abupdate" parameterType="adminboard">
+		update admin_board
 		<set>
-			<if test="ab_notice!=null and ab_notice!=''"></if>
-			<if test="ad_content!=null and ad_content!=''"></if>
-			<if test="ab_title!=null and ab_title!=''"></if>
+			<if test="ab_notice!=null and ab_notice!=''">ab_notice=#{ab_notice},</if>
+			<if test="ab_content!=null and ab_content!=''">ab_content=#{ab_content},</if>
+			<if test="ab_title!=null and ab_title!=''">ab_title=#{ab_title}</if>
 		</set>
 		where ab_num=#{ab_num}
 	</update>

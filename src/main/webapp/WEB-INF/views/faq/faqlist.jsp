@@ -11,12 +11,17 @@
 	$(function(){	
 		$(".faqcommbtn").click(function(){
 			alert("aaaa");
-			var faqcomm = $(this).parent().parent().children().last();
+/* 			var faqcomm = $(this).parent().parent().children().last();
 			if(faqcomm.css("display")=="none"){
 				faqcomm.css("display","block");
 			}else{
 				faqcomm.css("display","none");
-			}
+			} */
+			/* console.log($(this).parent().siblings('div').text()); */
+		/* 	console.log($(".bbb").text()); */
+			console.log($(this).siblings('p').text());
+			if($(this).siblings('p').text())
+			$(".faq_comment").css("display","block");
 		});
 	});
 	
@@ -26,8 +31,23 @@
 
 	<h2>Panels with Contextual Classes</h2>
 	<div class="panel-group">
+	
+	
 	<c:forEach var="faqlist" items="${faqlist }" varStatus="status">	
-				<c:if test="${faqlist.lev==0 }">
+	<c:choose>
+		<c:when test="${faqlist.qa_num != faqlist.ref}">		
+			<div class="hidediv faq_comment" id="faq_comments">
+				<form action="faqinsert" method="post">
+					<input type="hidden" name="qa_num" value="${faqlist.qa_num}">
+					<input type="hidden" name="ref" value="${faqlist.ref}">
+					<input type="hidden" name="lev" value="${faqlist.lev}">
+					<input type="hidden" name="step" value="${faqlist.step}">
+					${faqlist.qa_title }
+					${faqlist.qa_content}				
+				</form>
+			</div>	
+		</c:when>	
+		<c:otherwise>			
 		<div class="panel panel-default">
 		<%-- 	<div>
 				<c:if test="${faqlist.lev>0 }">
@@ -36,34 +56,24 @@
 					</c:forEach>
 				</c:if>
 			</div> --%>
-	
-			<div class="panel-heading">
+			<div class="panel-heading" >
+			
 				<a href="#myPage"><img style="width:50px; height:50px;border-radius:50px;" class="miniLogo" alt="simpleLogo" src="<c:url value='/resources/images/1 (1).jpg'/>"></a>
 				${faqlist.user_num }
 				${faqlist.qa_title }		
 			</div>
 			<div class="panel-body">
-				${faqlist.qa_num}<br>
+				<p class="bbb">${faqlist.qa_num}</p><br>
 				${faqlist.qa_content}<br>
 				<button class="btn btn-default faqcommbtn">댓글</button>
 			</div>
 				${faqlist.qa_date }
 				${faqlist.admin_num }
-		
-			<div class="hidediv" >
-				<form action="faqinsert" method="post">
-					<input type="hidden" name="qa_num" value="${faqlist.qa_num}">
-					<input type="hidden" name="ref" value="${faqlist.ref}">
-					<input type="hidden" name="lev" value="${faqlist.lev}">
-					<input type="hidden" name="step" value="${faqlist.step}">
-					<input class="form-group form-control" type="text">
-					<input type="submit" value="작성">
-				</form>
-
-			</div>	
-	    </div>
-	</c:if>		
+	    	</div>
+		</c:otherwise>
+		</c:choose>	
 	</c:forEach>
+
 	</div>
 
 <a href="faqinsert" class="btn btn-default">글작성</a>

@@ -36,4 +36,7 @@ public class AdminBoardDao {
 	public List<AdminBoardVo> abpopup() {
 		return sqlSession.selectList(NAMESPACE+"abpopup");
 	}
+	public int abupdate(AdminBoardVo vo) {
+		return sqlSession.update(NAMESPACE+"abupdate", vo);
+	}
 }

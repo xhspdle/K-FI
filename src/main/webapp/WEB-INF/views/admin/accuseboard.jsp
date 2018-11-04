@@ -91,12 +91,21 @@
 			<input type="text" class="form-control" readonly="readonly" value={acc_nick}>
 		</div>
 	</div>
+
 	<div class="form-group">
+<div class="input-group">  
 		<label class="control-label col-sm-2">Email:</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control" readonly="readonly" value={acc_email}>
 		</div>
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default">
+   				<span class="glyphicon glyphicon-envelope"></span>
+    		</button>
+		</div>	
+</div>
 	</div>
+
 	<div class="form-group">
 		<label class="control-label col-sm-2">가입일:</label>
 		<div class="col-sm-10">

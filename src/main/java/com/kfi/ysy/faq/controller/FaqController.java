@@ -62,7 +62,7 @@ public class FaqController {
 	}
 	//Q&A 게시글 답글
 	@RequestMapping(value="/faqcomment",produces="application/json;charset=utf-8")
-	@ResponseBody
+	@ResponseBody()
 	public String faqcomment(FaqVo vo) {
 		
 		return "redirect:/faqlist";

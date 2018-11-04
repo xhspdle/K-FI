@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,11 +57,13 @@ public class AdminBoardController {
 		for(AdminBoardVo vo:list){
 			if(vo.getAb_notice()==1) {
 				JSONObject obj=new JSONObject();
+				obj.put("ab_num", vo.getAb_num());
 				obj.put("admin_num", vo.getAdmin_num());
 				System.out.println(vo.getAdmin_num());
 				obj.put("ab_content", vo.getAb_content());
 				System.out.println(vo.getAb_content());
 				obj.put("ab_title", vo.getAb_title());
+				obj.put("ab_date", vo.getAb_date());
 				System.out.println(vo.getAb_title());
 				arr.put(obj);
 			}
@@ -111,13 +114,22 @@ public class AdminBoardController {
 			obj.put("ab_num", ab_num);
 			obj.put("ab_title", vo.getAb_title());
 			obj.put("ab_content", vo.getAb_content());
-			obj.put("ab_admin_num", vo.getAdmin_num());
+			obj.put("admin_num", vo.getAdmin_num());
 			obj.put("ab_notice", vo.getAb_notice());
 			obj.put("ab_date", vo.getAb_date());		
 		}else {
-			obj.put("msg","사용가능한 아이디입니다.");	
+			obj.put("msg","fail");	
 		}
 		return obj.toString();
+	}
+	@RequestMapping(value="/abupdate",method=RequestMethod.POST)
+	public String abupdate(AdminBoardVo vo) {
+		int result=abservice.abupdate(vo);
+		if(result>0) {
+			return "redirect:/ablist";		
+		}else {
+			return ".admin.error";
+		}
 	}
 }
 

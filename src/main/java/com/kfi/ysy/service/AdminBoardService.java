@@ -36,5 +36,8 @@ public class AdminBoardService {
 	public List<AdminBoardVo> abpopup(){
 		return dao.abpopup();
 	}
+	public int abupdate(AdminBoardVo vo) {
+		return dao.abupdate(vo);
+	}
 
 }

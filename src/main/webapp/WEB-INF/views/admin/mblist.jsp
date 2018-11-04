@@ -97,7 +97,7 @@
 		</c:forEach>
 	</table>		
 
-	<div class="container"  >
+	<div>
 			<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
 
@@ -108,9 +108,11 @@
 				<li><a href="<c:url value='/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
 			</c:forEach>
 			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
-			<li><button class="btn btn-md" data-toggle="modal" data-target="#userinsert" id="userinsert_btn">등록</button></li>
-		</ul>			
+			<li></li>
+		</ul>	
+				
 	</div>
+	<button class="btn btn-md pull-right" data-toggle="modal" data-target="#userinsert" id="userinsert_btn">등록</button>
 </div>
 
 <div class="modal" id="userinsert">
@@ -140,7 +142,7 @@
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="user_nickname">
 						</div>
-					</div>
+					</div>					
 					<div class="form-group">
 						<label class="control-label col-sm-2">Email:</label>
 						<div class="col-sm-10">
