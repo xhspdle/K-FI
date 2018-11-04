@@ -95,6 +95,7 @@ public class AdminMembersController {
 		System.out.println("id"+vo.getUser_id());
 		System.out.println("nick"+vo.getUser_nickname());
 		System.out.println("mail"+vo.getUser_email());
+		System.out.println("status"+vo.getUser_status());
 		int result=mbservice.update(vo);
 		System.out.println(result);
 		return "redirect:/mblist";

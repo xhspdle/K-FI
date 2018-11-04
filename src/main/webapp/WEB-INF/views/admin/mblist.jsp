@@ -20,29 +20,36 @@
 			var user_num=$(this).parent().children().first().text();
 		 	$.getJSON("<c:url value='/mbgetinfo'/>",{
 				user_num : user_num
-			},function(data){
+			},function(data){			
 				$("#modifyuser_num").val(user_num);
 				$("#modifyuser_id").val(data.user_id);
 				$("#modifyuser_pwd").val(data.user_pwd);
 				$("#modifyuser_nickname").val(data.user_nick);
 				$("#modifyuser_email").val(data.user_email);
-		/* 		$("#modifyuser_stat").val(data.user_stat);
-				$("#modifyuser_stat").css() */
-				alert(data.user_nick);
-				$("select[name=user_status] option").each(function(index, item){		
-					if(data.user_stat==$(this).val()){
-						console.log($(this));
-						var result = ''; 
-						result += index +' : '+item; 
-						console.log($(this).val());
-						console.log(result);
-						alert(data.user_nick);
-					}
-				});
-
+				console.log(data.user_stat);
+				
+/* 				console.log($("select[name=user_status] option[value="+data.user_stat+"]"));
+				$("select[name=user_status] option[value="+data.user_stat+"]").attr("selected",true); */
+				
+/* 				var aaa = data.user_stat
+				var userstat=userStat();
+			
+ 				function userStat(){
+					var userstatus;
+					$("select[name=user_status] option").each(function(){
+						 var userstat;
+						if(aaa==$(this).val()){
+							console.log(aaa);
+							userstatus=$(this);
+							console.log($(this));
+						}					
+					});
+					return userstatus;
+				}	
+				console.log(userstat);
+				userstat.attr("selected","selected");  */
+				/* $(this).attr("selected","selected");	 */
 				/* $("#modifyuser_stat option:selected").val(data.user_stat); */
-
-
 			}); 
 		});
 	});
@@ -73,6 +80,7 @@
 			<th>회원ID</th>
 			<th>회원NICKNAME</th>
 			<th>회원EMAIL</th>
+			<th>회원등급</th>
 			<th>가입일</th>
 			<th>삭제</th>
 		</tr>
@@ -82,6 +90,7 @@
 				<td class="usercontent">${user.user_id }</td>
 				<td class="usercontent">${user.user_nickname }</td>
 				<td class="usercontent">${user.user_email }</td>
+				<td class="usercontent">${user.user_status }</td>
 				<td class="usercontent">${user.user_regdate }</td>
 				<td><i class="glyphicon glyphicon-remove userdelete"></i></td>
 			</tr>
@@ -189,9 +198,9 @@
 						<label class="control-label col-sm-2">상태정보:</label>
 						<div class="col-sm-10">
 							<select class="form-control" name="user_status">
-								<option value="2">정상</option>
-								<option value="1">기간정지</option>
-								<option value="0">정지</option>
+								<option value="1">1번 정상</option>
+								<option value="2">2번 기간정지</option>
+								<option value="3">3번 정지</option>
 							</select>
 						</div>
 					</div>
