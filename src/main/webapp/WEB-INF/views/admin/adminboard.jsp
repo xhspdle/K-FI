@@ -86,29 +86,49 @@
 			}); 
 		});
 	});
+	
 	$(function(){
- /* 		abpopup
-		 	$("#aaaaa").css("display","block");  */
-	
+			alert("aaa");
+			console.log(document.cookie);
 			$.getJSON("<c:url value='/abpopup'/>",function(data){
-				for(var i=0;i<data.length;i++){
-					console.log(data[i].ab_title);
-					console.log(data[i].ab_num);
-					console.log(data[i].ab_content);
-					var html=template(data[i].ab_title,data[i].ab_content);
-					$("#aaaaa").append(html);
-					$("#aaaaa").css("display","block");
-				}
-	
+			for(var i=0;i<data.length;i++){
+				console.log(data[i].ab_title);
+				console.log(data[i].ab_num);
+				console.log(data[i].ab_content);
+				var html=template(data[i].ab_title,data[i].ab_content);
+				$("#aaaaa").append(html);
+				$("#aaaaa").css("display","block");
+			    setCookie( "sa", "aaa" , 1);
+			    getCookie();
+				};
+			});
+			
 		});
-	}); 
+
+
+	/* 
+	setTimeout("abpopup()", 5000); */
  	
  	function template(ab_title,ab_content){
  		var html="<div>"+ab_title+"</div><div>"+ab_content+"</div>";
 		return html;
  	}
  	
- 	
+	function setCookie (name, value, expiredays ) {
+	    var todayDate = new Date();
+	    todayDate.setDate( todayDate.getDate() + expiredays );
+	    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+	}
+	function getCookie () {
+	    var cookiedata = document.cookie;
+	    if ( cookiedata.indexOf("todayCookier=done") < 0 ){
+	         $("#aaaaa").css("display","block");
+	    }
+	    else {
+	    	$("#aaaaa").css("display","none");
+	    }
+	}
+
  	
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
@@ -193,7 +213,7 @@
 	</div>
 </div>
 
-		<div class="container">
+		<div>
 		
 				
 				<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
@@ -210,32 +230,36 @@
 					<li><a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
 				</c:forEach>
 				<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
-			</ul>	
+				
+			</ul>
+
 		</div>
-		<div class="container">
-			<form method="post" action="<c:url value='/ablist'/>">
-				<div class="form-group row">
-					<select name="field" class="dropdown-menu">
-						<option value="ab_title">글제목</option>
-						<option value="admin_num">작성자</option>
-						<option value="ab_content">내용</option>
-						<option value="ab_notice">게시</option>
-					</select>
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search"
-							name="keyword">
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
+	
+		<form method="post" action="<c:url value='/ablist'/>">
+			<div class="form-group row">
+				<select name="field" class="dropdown-menu">
+					<option value="ab_title">글제목</option>
+					<option value="admin_num">작성자</option>
+					<option value="ab_content">내용</option>
+					<option value="ab_notice">게시</option>
+				</select>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search"
+						name="keyword">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>	
 					</div>
+					<a href="abinsert" class="btn btn-default pull-right">글작성</a>	
 				</div>
-			</form>
-		</div>
+				
+			</div>
+		</form>
+	
 
 
-		<a href="abinsert" class="btn btn-default">글작성</a>
+		
 <div id="aaaaa">
 	
 	내용

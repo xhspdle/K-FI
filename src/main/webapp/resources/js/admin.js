@@ -2,14 +2,14 @@
 	scroll : layout.jsp
  */
 
-function hidePopup() {
+/*function hidePopup() {
 	var popup = document.getElementById("popup");
 	popup.style.display = "none";// 화면에서 숨기기
 }
 $(document).ready(function() {
 	var popup = document.getElementById("popup");
 	popup.style.display = "block";// 화면에서 숨기기
-});
+});*/
 
 $(document).ready(function() {
 	// Add smooth scrolling to all links in navbar + footer link

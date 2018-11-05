@@ -57,6 +57,12 @@
 <div class=" modal" id="admininfo-template" >
 	<div class="modal-dialog1">
 		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4 class="modal-title">Question Editor</h4>
+			</div>
+			<div class="modal-body">
 			<form class="form-horizontal " action="<c:url value='/admodify'/>" method="post">
 			 	<input type="hidden" id="admininfo_num" name="admin_num">
 				<div class="form-group">
@@ -90,13 +96,15 @@
 						<p class="form-control-static" id="admininfo_regdate"></p>
 					</div>
 				</div>
-				<div class="form-group">        
+				<div class="modal-footer">       
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="submit" class="btn btn-default">수정</button>
+						<button type="submit" class="btn btn-danger">삭제</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</form>
+			</div>
 		</div>
 	</div>
 </div>

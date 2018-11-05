@@ -24,4 +24,7 @@ public class FaqDao {
 	public int faqinsert(FaqVo vo) {
 		return sqlSession.insert(NAMESPACE+"faqinsert", vo);
 	}
+	public List<FaqVo> faqcomment(int qa_num){
+		return sqlSession.selectList(NAMESPACE+"faqcomment",qa_num);
+	};
 }

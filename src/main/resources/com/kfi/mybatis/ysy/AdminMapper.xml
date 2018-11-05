@@ -30,4 +30,7 @@
 		</set>
 		where admin_num=#{admin_num}
 	</update>
+	<delete id="addelete" parameterType="int">
+		delete from admin where admin_num=#{admin_num}
+	</delete>
  </mapper>

@@ -36,4 +36,7 @@ public class AdminService {
 	public int admodify(AdminVo vo) {
 		return dao.admodify(vo);
 	}
+	public int addelete(int admin_num) {
+		return dao.addelete(admin_num);
+	}
 }

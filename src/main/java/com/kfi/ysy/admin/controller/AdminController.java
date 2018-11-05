@@ -162,6 +162,11 @@ public class AdminController {
 			return null;
 		}
 	}
+	//관리자 삭제
+	public String addelete(int admin_num) {
+		int result = service.addelete(admin_num);
+		return null;
+	}
 }
 	
 

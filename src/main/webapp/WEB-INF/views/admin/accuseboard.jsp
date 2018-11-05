@@ -92,18 +92,12 @@
 		</div>
 	</div>
 
+
 	<div class="form-group">
-<div class="input-group">  
-		<label class="control-label col-sm-2">Email:</label>
+		<label class="control-label col-sm-2">Email:</label> 
 		<div class="col-sm-10">
 			<input type="text" class="form-control" readonly="readonly" value={acc_email}>
 		</div>
-		<div class="input-group-btn">
-			<button type="button" class="btn btn-default">
-   				<span class="glyphicon glyphicon-envelope"></span>
-    		</button>
-		</div>	
-</div>
 	</div>
 
 	<div class="form-group">
@@ -151,7 +145,7 @@
 				user_num : user_num
 			},function(data){
 				alert(data.user_id);
- 				html=document.querySelector("#userinfotemlpate").innerHTML;
+ 				var html=document.querySelector("#userinfotemlpate").innerHTML;
 				alert(html)
  				var resultHTML=html.replace("{mburl}","<c:url value='/mbupdate'/>")
  					.replace("{acc_id}", data.user_id)
