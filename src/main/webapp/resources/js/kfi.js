@@ -109,7 +109,7 @@ $(document).ready(function(){
 			  }else{
 				  $("<label for='fileP"+ n +"' class='btn btn-primary btn-block btn-file'>" +
 				  	"<span class='glyphicon glyphicon-picture'></span> Upload Photo"+n +"</label>" +
-				  	"<input type='file' class='form-control' id='fileP"+n +"' name='fileP' accept='.jpg, .jpeg, .png, .gif'>" +
+				  	"<input type='file' class='form-control myboardFile' id='fileP"+n +"' name='fileP' accept='.jpg, .jpeg, .png, .gif'>" +
 				  	"<img id='fimg"+ n +"' src='' style='display:none;width:100%'>")
 				  .appendTo(imgUpload);
 				  $("#imgUpload").on('change','#fileP' + n, function(event1){
@@ -136,7 +136,7 @@ $(document).ready(function(){
 			  }else{
 				  $("<label for='fileV"+ nn +"' class='btn btn-info btn-block btn-file'>" +
 				  	"<span class='glyphicon glyphicon-facetime-video'></span> Upload Video"+nn +"</label>" +
-				  	"<input type='file' class='form-control' id='fileV"+nn +"' name='fileV' accept='.avi, .wmv, .mp4'>" +
+				  	"<input type='file' class='form-control myboardFile' id='fileV"+nn +"' name='fileV' accept='.avi, .wmv, .mp4'>" +
 				  	"<video id='fvid"+ nn +"' controls autoplay muted='muted' loop src='' style='display:none;width:100%'>")
 				  .appendTo(vidUpload);
 				  $("#vidUpload").on('change','#fileV' + nn, function(event2){
@@ -444,26 +444,21 @@ $(document).ready(function(){
 	  e.preventDefault();
 	  var getPageContext=$("#getPageContext").val();
 	  var myc_num=parseInt($(this).attr("data-comm-num"));
-	  $("#deleteMsg").modal();
-	  var ok='';
-	  $("#ok").click(function(){
-		 ok="ok"; 
+	  $("#deleteMsg").modal("show");
+	  $("#okBtn").click(function(){
+		  $.commentDelete(getPageContext, myc_num);
+		  $("#deleteMsg").modal("hide");
 	  });
-	  $("#deleteMsg").on('hidden.bs.modal',function(){
-		  if(ok!=''){
-			  $.commentDelete(getPageContext, myc_num);
-		  }
-	  });
-	  
   });
   $.commentDelete=function(getPageContext, myc_num){
 	  $.getJSON(getPageContext + "/mypage/mycomment/delete",
 			  {'myc_num':myc_num},
 			  function(json){
-				  if(json.code=='success'){
+				  if(json.code==='success'){
+					  console.log("삭제성공")
 					  $.getCommentList();
 				  }else{
-					  alert("삭제실패");
+					  console.log("삭제실패");
 					  /*
 					   * 여기 할차례~~~
 					   *

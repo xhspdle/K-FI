@@ -360,7 +360,7 @@ footer .glyphicon {
 	position: relative;
 	overflow: hidden;
 }
-input[type='file'] {
+input[type='file'].myboardFile {
 	display: none;
 }
 .progress {

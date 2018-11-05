@@ -71,12 +71,12 @@
 						</div>
 						<div class="form-group" id="imgUpload">
 							<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
-							<input type="file" class="form-control" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
+							<input type="file" class="form-control myboardFile" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
 							<img id="fimg1" src="" style="display:none;width:100%;">
 						</div>
 						<div class="form-group" id="vidUpload">
 							<label for="fileV1" class="btn btn-info btn-block btn-file"><span class="glyphicon glyphicon-facetime-video"></span> Upload Video</label>
-							<input type="file" class="form-control" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
+							<input type="file" class="form-control myboardFile" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
 							<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 						</div>
 						<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
@@ -110,12 +110,12 @@
 	</div>
 	<div class="form-group" id="imgUpload">
 		<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
-		<input type="file" class="form-control" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
+		<input type="file" class="form-control myboardFile" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
 		<img id="fimg1" src="" style="display:none;width:100%;">
 	</div>
 	<div class="form-group" id="vidUpload">
 		<label for="fileV1" class="btn btn-info btn-block btn-file"><span class="glyphicon glyphicon-facetime-video"></span> Upload Video</label>
-		<input type="file" class="form-control" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
+		<input type="file" class="form-control myboardFile" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
 		<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 	</div>
 	<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
