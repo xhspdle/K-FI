@@ -22,6 +22,12 @@ public class MySkinCoverDao {
 		return session.insert(NAMESPACE + ".insert_myskin_cover", vo);
 	}
 	
-	
+	public int delete(int ms_num) {
+		return session.delete(NAMESPACE+".delete_myskin_cover",ms_num);
+	}
 
+	public int update(MySkinCoverVo vo) {
+		return session.update(NAMESPACE+".update_myskin_cover",vo);
+	}
+	
 }

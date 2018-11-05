@@ -18,6 +18,8 @@ public class MySkinViewDao {
 		return session.selectList(NAMESPACE+".list",user_num);
 	}
 	
-	
+	public MySkinViewVo select(int ms_num){
+		return session.selectOne(NAMESPACE+".select",ms_num);
+	}
 	
 }

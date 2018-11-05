@@ -21,7 +21,6 @@ public class ListController {
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService service;
 	
-	
 	@RequestMapping(value="/mypage/myskin/list",method=RequestMethod.GET)
 	public String getMySkin(HttpSession session, Model model) {
 		/*Object user_num=session.getAttribute("user_num");

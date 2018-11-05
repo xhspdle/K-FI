@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kfi.jyi.vo.MySkinCoverVo;
 import com.kfi.jyi.vo.MySkinVo;
 
 @Repository
@@ -20,6 +21,13 @@ public class MySkinDao {
 		return session.insert(NAMESPACE + ".insert_myskin", vo);
 	}
 
-
+	public int delete(int ms_num) {
+		return session.delete(NAMESPACE+".delete_myskin",ms_num);
+	}
+	
+	public int update(MySkinVo vo) {
+		return session.update(NAMESPACE+".update_myskin",vo);
+	}
+	
 
 }

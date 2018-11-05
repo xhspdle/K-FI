@@ -8,5 +8,9 @@
 		select * from my_skin_view where user_num=#{user_num}
 	</select>
 
+	<select id="select" parameterType="int" resultType="myskinview">
+		select * from my_skin_view where ms_num=#{ms_num}
+	</select>
+
 
 </mapper>

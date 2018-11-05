@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/kfi.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/jyi.css'/>">
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
-<script src="<c:url value='/resources/js/jyi.js'/>"></script>
+<script src="<c:url value='/resources/js/kfi2.js'/>"></script>
 <!-- full calendar 추가 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <link href="<c:url value='/resources/css/fullcalendar.min.css'/>" rel="stylesheet">

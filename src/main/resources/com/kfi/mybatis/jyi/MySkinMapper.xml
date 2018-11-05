@@ -12,8 +12,12 @@
 		insert into my_skin values(#{ms_num},#{user_num},#{ms_name},#{ms_color},#{ms_msg},#{ms_using})	
 	</insert>
 	
-
+	<delete id="delete_myskin" parameterType="int">
+		delete from my_skin where ms_num=#{ms_num}
+	</delete>
 	
-	
+	<update id="update_myskin" parameterType="myskin">
+		update my_skin set ms_name=#{ms_name}, ms_color=#{ms_color}, ms_msg=#{ms_msg}, ms_using=#{ms_using} where ms_num=#{ms_num}
+	</update>
 
 </mapper>

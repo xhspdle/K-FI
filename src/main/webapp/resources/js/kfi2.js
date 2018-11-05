@@ -1,6 +1,8 @@
 /**
- * jyi.js
+ * kfi2.js
  */
+
+////////////////////////////////////////////////////////////mini calendar 
 
 $(function() {
 	var url=$("#url").val();
@@ -138,51 +140,42 @@ $(function() {
 		},1000);
 	});
 
-	//마이페이지 전체 일정
-	var now=new Date().getFullYear();
-	for(var i=now;i>=2000;i--){
-		$('#mycomm_year').append('<option>'+i+'</option>');
-	}
 	
-	$('#mycommunitylist').on('click',function(){
-		var url=$('#url').val();
-		$.getJSON(url+'/mycomm/mycommunitylist',function(data){
-			alert("??");			
-			/*for(var i=0;i<data.length;i++){
-				$("#mycommunitylist").append('<option>'+data[i].comm_name+'</option>');
-			}*/
-		});
+	
+//////////////////////////////////////////////////////////myskin
+	
+	/* myskin insert 미리보기 */
+	$('#ms_color').on('change',function(){
+		var color=$(this).val();
+		$("#preview_navbar").css('background-color',color);
+		$("#preview_cover button").css('background-color',color);
 	});
-	
-	//마이페이지 전체일정 달력 mouseover하면 해당날짜 상세 일정보이기 
-	$(".mycomm_a").parent().hover(function(){
-		var year=$("#year").val().slice(2,4);
-		var month=$("#month").val();
-		if(month.slice(1,2)===''){
-			month='0'+month;
-		}
-		var day=$(this).children().prop("id");
-		if(day.slice(1,2)===''){
-			day='0'+day;
-		}
-		var url=$("#url").val();
-		$.getJSON(url+"/mycommCalendar/list",{year:year,month:month,day:day},function(data){
-			//$('#'+day).parent().empty();
-			var begin=data.list;
-			if(day===begin){
-				$('<div>'+data.cc_info+'</div>').appendTo('#'+day).parent().css({width:100,height:100,zIndex:999,backgroundcolor:'orange'});
+
+	var once=0;
+	$('#ms_msg').on('keyup',function(){
+		++once;
+		if(once==1){
+			$("#preview_msg").setTimer=function(){
+				$(this).html('');
 			}
-		});
-	},function(){
-		
-		
+		}
+		var msg=$('#ms_msg').val();
+		$("#preview_msg").html(msg);
+	});
+
+	$('#ms_profile').on('change',function(event){
+		var file=event.target.files[0];
+		var filePath=URL.createObjectURL(file);
+		$("#profile_preview").prop('src',filePath);
 	});
 	
-	$('#mycommunitylist').on('change',function(){
-		$(this).val();
-		
-		
+
+	$('#ms_cover').on('change',function(event){
+		var file=event.target.files[0];
+		var filePath=URL.createObjectURL(file);
+		$("#preview_cover").css('background','url('+filePath+')');
 	});
+	
 	
 	
 	

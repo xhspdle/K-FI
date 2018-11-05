@@ -12,7 +12,13 @@
 		insert into my_skin_profile values(#{msp_num},#{ms_num},#{msp_orgimg},#{msp_savimg})	
 	</insert>
 	
-
+	<delete id="delete_myskin_profile" parameterType="int">
+		delete from my_skin_profile where ms_num=#{ms_num}
+	</delete>
+	
+	<update id="update_myskin_profile" parameterType="myskinprofile">
+		update my_skin_profile set msp_orgimg=#{msp_orgimg}, msp_savimg=#{msp_savimg} where ms_num=#{ms_num}
+	</update>
 	
 	
 </mapper>

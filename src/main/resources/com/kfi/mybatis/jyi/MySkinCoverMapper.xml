@@ -12,6 +12,14 @@
 		insert into my_skin_cover values(#{msc_num},#{ms_num},#{msc_orgimg},#{msc_savimg})	
 	</insert>
 
+	<delete id="delete_myskin_cover" parameterType="int">
+		delete from my_skin_cover where ms_num=#{ms_num}
+	</delete>
+	
+	<update id="update_myskin_cover" parameterType="myskincover">
+		update my_skin_cover set msc_orgimg=#{msc_orgimg}, msc_savimg=#{msc_savimg} where ms_num=#{ms_num}
+	</update>
+
 
 
 </mapper>
