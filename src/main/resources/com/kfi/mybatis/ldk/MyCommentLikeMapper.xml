@@ -17,7 +17,7 @@
 		update my_comment_like set user_num=#{user_num} where mcl_num=#{mcl_num}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from my_comment_like where mcl_num=#{mcl_num}
+		delete from my_comment_like where myc_num=#{myc_num}
 	</delete>
 	<select id="list" parameterType="hashmap" resultType="mycommentlike">
 		select *

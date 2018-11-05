@@ -50,7 +50,7 @@
 	<div class="modal fade" id="writeModal" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content writeModal">
 				<div class="modal-header" style="padding:35px 50px;">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4><span class="glyphicon glyphicon-edit"></span> Write</h4>

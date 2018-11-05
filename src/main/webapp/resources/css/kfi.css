@@ -210,6 +210,13 @@ footer .glyphicon {
 	#commentForm input[type='text'] {
 		width: 70% !important;
 	}
+	.deleteModal {
+		margin-top: 100% !important;
+	}
+	.modal-sm {
+		width: 300px;
+		margin: auto;
+	}
 }
 @media screen and (max-width: 480px) {
 	.logo {
@@ -218,6 +225,9 @@ footer .glyphicon {
 	.logoImg {
 		width: 212.4px;
 		height: 158.4px;
+	}
+	.commentOption {
+		left: 90% !important;
 	}
 }
 /*
@@ -353,7 +363,7 @@ footer .glyphicon {
 	float: left;
 }
 */
-.modal-content {
+.writeModal {
 	margin-top: 13%;
 }
 .btn-file{
@@ -589,4 +599,18 @@ img.media-object {
 .commentOption .rightOption {
 	left: -162px;
 	top: -3px;
+}
+.deleteModal {
+	margin-top: 100%;
+}
+.msgBox {
+	display: none;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index:9999;
+	
+}
+.alert-danger {
+	box-shadow: 5px 8px 10px rgba(0,0,0, .2);
 }

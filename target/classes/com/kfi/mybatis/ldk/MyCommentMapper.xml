@@ -14,7 +14,7 @@
 		values(#{myc_num},#{mb_num},#{user_num},#{myc_content},sysdate)
 	</insert>
 	<update id="update" parameterType="mycomment">
-		update my_comment set myc_content=#{myc_content} where mb_num=#{mb_num}
+		update my_comment set myc_content=#{myc_content} where myc_num=#{myc_num}
 	</update>
 	<delete id="delete" parameterType="int">
 		delete from my_comment where myc_num=#{myc_num}

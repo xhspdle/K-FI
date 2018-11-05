@@ -153,10 +153,10 @@
 	</div>
 </div>
 
-<!-- Modal -->
+<!-- DeleteMsg Modal -->
 <div class="modal fade" id="deleteMsg" role="dialog">
 	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
+		<div class="modal-content deleteModal">
 			<div class="modal-body">
 				<p>Are you sure!?</p>
 			</div>
@@ -167,13 +167,19 @@
 		</div>
 	</div>
 </div>
+
+<!-- Alert Msg Box -->
+<div class="container msgBox">
+	<div class="alert alert-danger"></div>
+</div>
+
 <script id="commentTemplate" type="text/template">
-<div class="media slide">
+<div class="media slide" data-comm-pagenum="{pageNum}">
 	<div class="media-left">
 		<img class="media-object img-circle" src="<c:url value='/resources/images/{msp_savimg}'/>" alt="commentProfile">
 	</div>
 	<div class="media-body">
-		<h3><strong><a href="">{user_id}</a></strong></h3>
+		<h3><strong><a href="">{user_id}</a></strong><span class="msgSpan"></span></h3>
 		<div class="dropdown commentOption">
 			<button class="btn btn-primary dropdown-toggle{optionBtn}" type="button" data-toggle="dropdown">
 				<span class="glyphicon glyphicon-option-vertical"></span>

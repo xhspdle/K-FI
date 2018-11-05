@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.kfi.ldk.dao.MyBoardLikeDao;
 import com.kfi.ldk.dao.MyCommentDao;
@@ -17,6 +19,7 @@ public class MyCommentServiceImpl implements CommonService{
 	@Autowired private MyCommentDao mcDao;
 	@Autowired private MyCommentListViewDao mcViewDao;
 	@Autowired private MyBoardLikeDao mblDao;
+	@Autowired private MyCommentLikeDao mclDao;
 	@Override
 	public int getMaxNum() {
 		return mcDao.getMaxNum();
@@ -38,10 +41,19 @@ public class MyCommentServiceImpl implements CommonService{
 		MyCommentVo vo=(MyCommentVo)data;
 		return mcDao.update(vo);
 	}
+	@Transactional
 	@Override
 	public int delete(Object data) {
 		int myc_num=(Integer)data;
-		return mcDao.delete(myc_num);
+		try {
+			mclDao.delete(myc_num);
+			mcDao.delete(myc_num);
+			return 1;
+		}catch(Exception e) {
+			e.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return -1;
+		}
 	}
 	@Override
 	public Object select(Object data) {

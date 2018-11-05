@@ -25,8 +25,8 @@ public class MyCommentLikeDao {
 	public int update(MyCommentLikeVo vo) {
 		return session.update(NAMESPACE + ".update", vo);
 	}
-	public int delete(int mcl_num) {
-		return session.delete(NAMESPACE + ".delete", mcl_num);
+	public int delete(int myc_num) {
+		return session.delete(NAMESPACE + ".delete", myc_num);
 	}
 	public List<Object> list(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".list", map);

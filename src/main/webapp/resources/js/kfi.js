@@ -230,12 +230,12 @@ $(document).ready(function(){
 						  .appendTo("#myBoardList");
 					}
 					sameDate=json.mb_date;
-					if(mv_savvid!=null && mv_savvid!=''){
+					if(mv_savvid!==null && mv_savvid!==''){
 						attachment="<video class='img-responsive center-block' controls autoplay muted='muted' loop src='"+getPageContext +"/resources/upload/vid/" + mv_savvid + "'></video>";
-					}else if(mp_savimg!=null && mp_savimg!=''){
+					}else if(mp_savimg!==null && mp_savimg!==''){
 						attachment="<img class='img-responsive center-block' src='"+getPageContext +"/resources/upload/img/" + mp_savimg + "'>";
 					}
-					if(i==0){
+					if(i===0){
 						$("<div class='panel-group'>" +
 						  "<div class='panel panel-default'>" +
 						  "<div class='panel-heading' id='"+ mb_num +"'>" +
@@ -304,7 +304,7 @@ $(document).ready(function(){
 	  $.getJSON(getPageContext + "/mypage/mycomment/insert",
 			  {'mb_num':mb_num,'myc_content':myc_content},
 			  function(json){
-				  if(json.code=='success'){
+				  if(json.code==='success'){
 					  $("#commentForm > .help-block").html("<span class='glyphicon glyphicon-ok'></span>comment post succeded")
 					  $("#commentForm > .help-block").css("opacity","1");
 				  }else{
@@ -324,6 +324,9 @@ $(document).ready(function(){
 	  var getSession=$("#getSession").val();
 	  var boardWriter=$("#boardWriter").val();
 	  var mb_num=$("#boardNum").val();
+	  if(pageNum===undefined){
+		  pageNum=1;
+	  }
 	  $.getJSON(getPageContext + "/mypage/mycomment/list",
 		  {'pageNum':pageNum,'mb_num':parseInt(mb_num)},
 		  function(data){
@@ -342,7 +345,7 @@ $(document).ready(function(){
 				  var dropDowns='';
 				  if(user_num==getSession){
 					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/mypage/mycomment/delete?myc_num="+ myc_num +"' data-comm-num='"+ myc_num +"'>삭제</a></li>" +
-					  			"<li><a class='dropDownUpDate' href='javascript:updateCommentForm("+ myc_num +")'>수정</a></li>";
+					  			"<li><a class='dropDownUpdate' href='#' data-comm-num='"+ myc_num +"'>수정</a></li>";
 				  }else if(boardWriter==getSession){
 					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/mypage/mycomment/delete?myc_num="+ myc_num +"' data-comm-num='"+ myc_num +"'>삭제</a></li>";
 				  }else{
@@ -350,6 +353,7 @@ $(document).ready(function(){
 				  }
 				  html=document.querySelector("#commentTemplate").innerHTML;
 				  var resultHTML=html.replace("{msp_savimg}", "kpop콘.gif")
+				  		.replace("{pageNum}",pageNum)
 				  		.replace("{path}", getPageContext)
 				  		.replace(/{myc_num}/gi, myc_num)
 				  		.replace("{user_id}", user_id)
@@ -372,7 +376,7 @@ $(document).ready(function(){
 				  .append("<li><span class='glyphicon glyphicon-chevron-left bPaging'></span></li>");
 			  }
 			  for(var i=startPageNum;i<=endPageNum;i++){
-				  if(i==data.pu.pageNum){
+				  if(i===data.pu.pageNum){
 					  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ i +")'>" + i + "</a></li>")
 					  .appendTo(".pagination")
 					  .addClass("active")
@@ -403,14 +407,14 @@ $(document).ready(function(){
 			  {'myc_num':myc_num},
 			  function(json){
 				  var msgSpan=$("span[data-comm-num='"+ myc_num +"'").next().next();
-				  if(json.code=='success'){
+				  if(json.code==='success'){
 					  var commentLikes=$("span[data-comm-num='"+ myc_num +"'").text();
 					  $("span[data-comm-num='"+ myc_num +"'").text(parseInt(commentLikes)+1);
 					  $(msgSpan).text("Thumbs Up!");
-				  }else if(json.code=='duplicated'){
+				  }else if(json.code==='duplicated'){
 					  $(msgSpan).text("You've already clicked Likes");
 				  }else{
-					  $(msgSpan).text("error...");
+					  $.msgBox(json.code);
 				  }
 				  $(msgSpan).css("opacity","1");
 				  setTimeout(function(){
@@ -427,9 +431,9 @@ $(document).ready(function(){
 			  function(json){
 				  $("#likeCnt").html(json.boardLikeCnt + " Likes<span class='msgSpan'></span>");
 				  var msgSpan=$("#likeCnt > span.msgSpan");
-				  if(json.code=='success'){
+				  if(json.code==='success'){
 					  $(msgSpan).text("Like it!");
-				  }else if(json.code=='duplicated'){
+				  }else if(json.code==='duplicated'){
 					  $(msgSpan).text("You've already clicked Likes");
 				  }else{
 					  $(msgSpan).text("error...");
@@ -445,7 +449,12 @@ $(document).ready(function(){
 	  var getPageContext=$("#getPageContext").val();
 	  var myc_num=parseInt($(this).attr("data-comm-num"));
 	  $("#deleteMsg").modal("show");
-	  $("#okBtn").click(function(){
+	  /*
+	   * okBtn에 이벤트 등록할때 .click이나 .on 으로 하면
+	   * 댓글 달린 갯수(dropDownDelete)만큼 이벤트가 실행되어버린다
+	   * 이벤트 한번만 실행되게 하는 .one으로 등록해줘야 한번만 실행된다!
+	   */
+	  $("#okBtn").one('click',function(){
 		  $.commentDelete(getPageContext, myc_num);
 		  $("#deleteMsg").modal("hide");
 	  });
@@ -455,16 +464,91 @@ $(document).ready(function(){
 			  {'myc_num':myc_num},
 			  function(json){
 				  if(json.code==='success'){
-					  console.log("삭제성공")
 					  $.getCommentList();
 				  }else{
-					  console.log("삭제실패");
-					  /*
-					   * 여기 할차례~~~
-					   *
-					   */
+					  $.msgBox(json.code);
 				  }
 			  });
+  }
+  var updateCnt=0;
+  $("#commentList").on('click',".dropDownUpdate",function(e){
+	  e.preventDefault();
+	  var getPageContext=$("#getPageContext").val();
+	  var myc_num=parseInt($(this).attr("data-comm-num"));
+	  var p=$(this).parent().parent().parent().parent().find("p");
+	  var myc_content=$(p).text();
+	  console.log($(p).parent().children().length);
+	  if($(p).parent().children().length>=8){
+		  return;
+	  }
+	  $("<form class='form-horizontal updateFrm' style='width:95%;' action='"+ getPageContext +"/mypage/mycomment/update'>" +
+		"<div class='input-group'>" +
+		"<input type='hidden' name='myc_num' value='"+ myc_num +"'>" +
+		"<input type='text' class='form-control' name='myc_content' value='"+ myc_content +"'>" +
+		"<div class='input-group-btn'>" +
+		"<button class='btn btn-default commentUpdateBtn' type='submit'>" +
+		"<i class='glyphicon glyphicon-check'></i></button></div></div></form>").insertAfter(p);
+  });
+  $("#commentList").on('submit',".updateFrm",function(e){
+	  e.preventDefault();
+	  var getPageContext=$("#getPageContext").val();
+	  /*
+	   * [ new FormData() ]
+	   * FormData takes the dom reference as the argument, not jQuery wrapper.
+	   * new FormData($(this)); [ X ]
+	   * new FormData($(this).get(0)); [ O ]
+	   */
+	  var formData=new FormData($(this).get(0));
+	  /*
+	   * [ formData.entries() ]
+	   * formData 객체에 들어간 값 확인할 수 있는 함수(크롬/파이어폭스최신버전에서확인가능)
+	   */
+	  for(var pair of formData.entries()){
+		  console.log(pair[0]+ ', ' + pair[1]);
+	  }
+	  var pageNum=$(this).parents("div[data-comm-pagenum]").attr("data-comm-pagenum");
+	  /*
+	   * [ formData를 쓰려면... ]
+	   * $.getJSON은 사용 못함
+	   * $.ajax/contentType: false/processData: false 해줘야함 
+	   */
+	  $.ajax({
+		  url: getPageContext + "/mypage/mycomment/update",
+		  type: 'post',
+		  dataType:'json',
+		  data: formData,
+		  cache: false,
+		  contentType: false,
+		  processData: false,
+		  success: function(json){
+			  if(json.code==='success'){
+				  $.getCommentList(pageNum);
+			  }else{
+				  $.msgBox(json.code);
+			  }
+		  }
+	  })
+  });
+  $.msgBox=function(msg){
+	  var showMsg='';
+	  if(msg==='fail'){
+		  showMsg="<strong>Failed!</strong> Server processing request failed..";
+	  }else {
+		  showMsg="<string>Server Msg</strong> "+ msg;
+	  }
+	  $(".alert-danger").html(showMsg);
+	  $(".msgBox").show();
+	  $(".msgBox").animate({
+		  "top": ($(window).height()-$(".msgBox").outerHeight())/2 + $(window).scrollTop(),
+		  }, 1500,function(){
+			  setTimeout(function(){
+				  $(".msgBox").css("transition","1s");
+				  $(".msgBox").css("top",$(document).height());
+				  setTimeout(function(){
+					  $(".msgBox").css("display","none");
+				  },500);
+			  },2500);
+		  });
   }
 });
 
