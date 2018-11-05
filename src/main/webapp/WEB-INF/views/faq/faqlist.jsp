@@ -12,8 +12,12 @@
 		$(".faqcommbtn").click(function(){
  			var qa_num=$(this).siblings('input').val()
  			console.log($(this).parent().parent().children().last());
- 			var faqcomm = $(this).parent().parent().children().last();
- 			faqcomm.css("display","block");
+ 			var faqcomm = $(this).parent().parent().children().last();				
+ 			if(faqcomm.css("display")=="none"){
+ 				faqcomm.css("display","block");
+			}else{
+				faqcomm.css("display","none");
+			} 
  			$.getJSON("<c:url value='/faqcomment'/>",{
  				qa_num : qa_num
  			},function(data){

@@ -207,6 +207,11 @@
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 					</div>
+					
+					
+					
+					
+					
 				</form>
 			</div>		
 		</div>
@@ -230,20 +235,43 @@
 					<li><a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
 				</c:forEach>
 				<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
-				
+			
 			</ul>
 
 		</div>
-	
-		<form method="post" action="<c:url value='/ablist'/>">
-			<div class="form-group row">
-				<select name="field" class="dropdown-menu">
-					<option value="ab_title">글제목</option>
-					<option value="admin_num">작성자</option>
-					<option value="ab_content">내용</option>
-					<option value="ab_notice">게시</option>
-				</select>
-				<div class="input-group">
+<div class="container">
+	<div class="row">
+		<div class="col-md-2 form-group">
+			<select class="form-control" name="field">
+				<option value="ab_title">글제목</option>
+				<option value="admin_num">작성자</option>
+				<option value="ab_content">내용</option>
+				<option value="ab_notice">게시</option>
+			</select>		
+		</div>
+		<div class="col-md-4 input-group">
+			<input type="text" class="form-control" placeholder="Search"name="keyword">
+			<div class="input-group-btn">
+				<button class="btn btn-default" type="submit">
+					<i class="glyphicon glyphicon-search"></i>
+				</button>	
+			</div>
+					<a href="abinsert" class="btn btn-default pull-right">글작성</a>	
+		</div>
+
+	</div>
+</div>
+<%-- 		<form method="post" action="<c:url value='/ablist'/>">
+			<div class="row">
+				<div class="form-group">
+					<select name="field">
+						<option value="ab_title">글제목</option>
+						<option value="admin_num">작성자</option>
+						<option value="ab_content">내용</option>
+						<option value="ab_notice">게시</option>
+					</select>
+				</div>
+				<div class="form-group ">
 					<input type="text" class="form-control" placeholder="Search"
 						name="keyword">
 					<div class="input-group-btn">
@@ -252,10 +280,9 @@
 						</button>	
 					</div>
 					<a href="abinsert" class="btn btn-default pull-right">글작성</a>	
-				</div>
-				
+				</div>	
 			</div>
-		</form>
+		</form> --%>
 	
 
 
