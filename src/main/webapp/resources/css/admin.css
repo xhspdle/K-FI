@@ -257,12 +257,10 @@ table tr td{
 	top: 100px;
     left: 80px;
 }
-.pagination{
-	
-}
+
 #userinsert_btn{
 	float: right;
 }
-#content{
-	background-image: url("../resources/images/adminimg.jpg");
+#bbb{
+
 }

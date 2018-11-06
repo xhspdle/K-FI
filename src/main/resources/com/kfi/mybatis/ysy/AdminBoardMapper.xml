@@ -9,7 +9,7 @@
 		</if>
 	</sql>
 	<select id="abmaxnum" resultType="int">
-		select nvl(max(ab_num),1) maxnum from admin_board
+		select nvl(max(ab_num),0) maxnum from admin_board
 	</select>
 	<select id="abgetcnt" resultType="int" parameterType="hashmap">
 		select nvl(count(*),0) getcnt from admin_board
@@ -31,7 +31,7 @@
 		select * from admin_board where ab_num=#{ab_num}
 	</select>
 	<insert id="abinsert" parameterType="adminboard">
-		insert into admin_board values(#{ab_num},#{admin_num},0,#{ab_content},#{ab_title},sysdate)
+		insert into admin_board values(#{ab_num},#{admin_num},#{ab_notice},#{ab_content},#{ab_title},sysdate)
 	</insert>
 	<delete id="abdelete" parameterType="int">
 		delete from admin_board where ab_num=#{ab_num}

@@ -97,7 +97,8 @@
 				var html=template(data[i].ab_title,data[i].ab_content);
 				$("#aaaaa").append(html);
 				$("#aaaaa").css("display","block");
-			 
+ 				setCookie( "Notice", "done" , 1);
+				 self.close();  
 				};
 			});
 			
@@ -112,12 +113,12 @@
 		return html;
  	}
  	
-	function setCookie (name, value, expiredays ) {
+/* 	function setCookie (name, value, expiredays ) {
 	    var todayDate = new Date();
 	    todayDate.setDate( todayDate.getDate() + expiredays );
 	    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
-	}
-	function getCookie () {
+	}  */
+/* 	function getCookie () {
 	    var cookiedata = document.cookie;
 	    if ( cookiedata.indexOf("todayCookier=done") < 0 ){
 	         $("#aaaaa").css("display","block");
@@ -125,7 +126,7 @@
 	    else {
 	    	$("#aaaaa").css("display","none");
 	    }
-	}
+	} */
 
  	
 </script>

@@ -21,17 +21,18 @@
 				신고대상 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}"> ${accuse.user2_nickname}</a>		
 				</div >
 					<button class="btn btn-md btn-warning">확인</button>
-					<button class="btn btn-md btn-danger" onclick="return acdeletecheck()">삭제</button>
+					<button class="btn btn-md btn-danger" onclick="return acdeletecheck(${accuse.ac_num})">삭제</button>
 				<br><br>
 			</div>
 		</div>
 	</c:forEach>
 	<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-			<ul class="pagination">
-				<li> <a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
-			</ul>		
+		<ul class="pagination">
+			<li> <a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
+		</ul>		
 	</c:forEach>
 </div>
+
 <div id="aclistview2" class="hidediv">
 	<table class="table table-striped">
 		<tr>
@@ -49,7 +50,7 @@
 				<td><a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user1_num}">${accuse.user1_nickname}</a></td>
 				<td><a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}">${accuse.user2_nickname}</a></td>
 				<td><button class="btn btn-md btn-warning">확인</button></td>
-				<td><button class="btn btn-md btn-danger" onclick="location.href='acdelete?ac_num=${accuse.ac_num}'">삭제</button></td>
+				<td><button class="btn btn-md btn-danger" onclick="return acdeletecheck(${accuse.ac_num})">삭제</button></td>
 			</tr>
 		</c:forEach>	
 	</table>
@@ -159,10 +160,10 @@
 			});
 		});		
 	});
-	function acdeletecheck(){
-		alert("aaa");
+	function acdeletecheck(ac_num){
 		var result=confirm("정말로????");
 		if(result==true){
+			location.href="acdelete?ac_num="+ac_num;
 			return true;
 		}else{
 			return false;

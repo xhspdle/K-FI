@@ -89,12 +89,28 @@
 					title="Visit w3schools">www.w3schools.com</a>
 			</p>
 		</footer>
-<!-- 	<div id="popup">
-			<a href="javascript:hidePopup()">닫기</a>
-			<h1>공지사항</h1>
-			<div>ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</div>
-		</div> -->
+	 	<div id="bbb" style="position: fixed;bottom: 20px;right: 20px;">
+			<a onclick="chat()"><span class="glyphicon glyphicon-heart"></span></a>
+			
+		</div>
+		<div id="chater" class="hidediv" style="position: fixed;bottom: 20px; margin-right: 20px; left:20px; width:100%; height:200px;">
+		
+		</div>
 	</div>
 
 </body>
+<script type="text/javascript">
+	function chat(){
+		alert("chat");
+		chatform();
+	}
+ 	function chatform(){
+		var html="<div>chat</div>"
+				+"<div>내용</div>"
+				+"<input type='text'>";
+		$("#chater").css("display","block");
+		$("#chater").append(html);
+	}
+ 
+</script>
 </html>

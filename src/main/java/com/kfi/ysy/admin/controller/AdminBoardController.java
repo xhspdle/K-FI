@@ -48,23 +48,20 @@ public class AdminBoardController {
 			return ".main.error";
 		}
 	}
+	//팝업 게시물
 	@RequestMapping(value="/abpopup",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String abpopup() {
 		List<AdminBoardVo> list=abservice.abpopup();
-		System.out.println("여기다다다다다다"+list);
 		JSONArray arr=new JSONArray();
 		for(AdminBoardVo vo:list){
 			if(vo.getAb_notice()==1) {
 				JSONObject obj=new JSONObject();
 				obj.put("ab_num", vo.getAb_num());
 				obj.put("admin_num", vo.getAdmin_num());
-				System.out.println(vo.getAdmin_num());
 				obj.put("ab_content", vo.getAb_content());
-				System.out.println(vo.getAb_content());
 				obj.put("ab_title", vo.getAb_title());
 				obj.put("ab_date", vo.getAb_date());
-				System.out.println(vo.getAb_title());
 				arr.put(obj);
 			}
 		}
@@ -80,6 +77,9 @@ public class AdminBoardController {
 	public String abinsert(AdminBoardVo vo) {
 		int ab_num=abservice.abmaxnum()+1;
 		vo.setAb_num(ab_num);
+		
+		System.out.println("//////////////////////////"+ab_num);
+		System.out.println(vo.getAb_notice());
 		int result=abservice.abinsert(vo);
 		if (result>0){
 			return "redirect:/ablist";		
