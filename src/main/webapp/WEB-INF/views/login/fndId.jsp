@@ -6,9 +6,7 @@
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
 <script type="text/javascript">
-$("#submit").on("click", function(e){
-    $("#submit").show();
-});
+
 </script>
 </head>
 <body>

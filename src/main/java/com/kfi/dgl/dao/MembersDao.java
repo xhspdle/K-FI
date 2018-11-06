@@ -46,7 +46,7 @@ public class MembersDao {
 		return sqlSession.selectOne(NAMESPACE + ".emailCheck", user_email);
 	}
 	//사용자 인증 상태 변경
-	public int verify(MembersVo vo) {
+	public int verify(String user_email) {
 		return sqlSession.update(NAMESPACE + ".getVerify");
 	}
 	//인증코드(키) 생성

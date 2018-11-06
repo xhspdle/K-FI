@@ -49,9 +49,10 @@ public class LoginController {
 			System.out.println(vo.getUser_pwd());
 			System.out.println((String)session.getAttribute("user_id"));
 			returnURL = "redirect:/mypage/main";
-		}else {
-			
-			returnURL = "redirect:/login/login";
+			}else if(vo.getUser_certi() == 0){
+				returnURL = "redirect:/login/login";
+			}else {
+				returnURL = "redirect:/login/login";
 		}
 		}
 		return returnURL;
