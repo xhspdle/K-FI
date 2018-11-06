@@ -8,15 +8,12 @@
 			where ${field} like '%'||#{keyword}||'%'
 		</if>
 	</sql>
-	<select id="aclist" parameterType="hashmap" resultType="accuse">
+	<select id="aclist" parameterType="hashmap" resultType="accuselist">
 	select * from
 	(
 		select aclist.*,rownum rnum from 
 		(
-			select ac.*, user1.user_nickname user1_nickname, user2.user_nickname user2_nickname
-			from accuse ac 
-			left join members user1 on ac.user1_num=user1.user_num 
-			left join members user2 on ac.user2_num=user2.user_num 
+			select  * from  accuselistview
 				<if test="field != null and field != ''">
 				where ac.${field} like '%'||#{keyword}||'%'
 				</if>

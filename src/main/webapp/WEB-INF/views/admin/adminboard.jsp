@@ -149,7 +149,7 @@
 	<c:forEach var="ablist" items="${ablist }">
 		<tr>
 			<td class="abcontent">${ablist.ab_num}</td>
-			<td class="abcontent">${ablist.admin_num }</td>
+			<td class="abcontent">${ablist.admin_nick }</td>
 			<td class="abcontent">${ablist.ab_notice }</td>
 			<td class="abcontent">${ablist.ab_title }</td>
 			<td class="abcontent">${ablist.ab_date }</td>

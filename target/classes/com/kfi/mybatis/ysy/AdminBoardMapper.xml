@@ -15,12 +15,12 @@
 		select nvl(count(*),0) getcnt from admin_board
 		<include refid="search"/>
 	</select>
-	<select id="ablist" parameterType="hashmap" resultType="adminboard">
+	<select id="ablist" parameterType="hashmap" resultType="adminboardlist">
 		select * from
 		(
 			select ablist.*,rownum rnum from 
 			(
-			select * from admin_board 
+			select * from adminboardlistview 
 			<include refid="search"/>
 			order by ab_num desc 
 			)ablist
