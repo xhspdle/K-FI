@@ -22,7 +22,7 @@
 		where mv_num=#{mv_num}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from my_video where mv_num=#{mv_num}
+		delete from my_video where mb_num=#{mb_num}
 	</delete>
 	<select id="list" resultType="myvideo">
 		select * from my_video

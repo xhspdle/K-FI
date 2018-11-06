@@ -97,6 +97,7 @@ $(document).ready(function(){
   $("#fileP1").change(function(event){
 	  var tmppath=URL.createObjectURL(event.target.files[0]);
 	  $("#fimg1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
+	  URL.revokeObjectURL(event.target.files[0]);
 	  if($("#imgUpload").children().length<=3){
 		  $("<button type='button' class='btn btn-default btn-block' id='addImg'>" +
 	  		"추가 업로드</button>").appendTo(imgUpload);
@@ -110,21 +111,26 @@ $(document).ready(function(){
 				  $("<label for='fileP"+ n +"' class='btn btn-primary btn-block btn-file'>" +
 				  	"<span class='glyphicon glyphicon-picture'></span> Upload Photo"+n +"</label>" +
 				  	"<input type='file' class='form-control myboardFile' id='fileP"+n +"' name='fileP' accept='.jpg, .jpeg, .png, .gif'>" +
-				  	"<img id='fimg"+ n +"' src='' style='display:none;width:100%'>")
+				  	"<img id='fimg"+ n++ +"' src='' style='display:none;width:100%'>")
 				  .appendTo(imgUpload);
-				  $("#imgUpload").on('change','#fileP' + n, function(event1){
+				  $("#imgUpload").on('change', ".myboardFile", function(event1){
 					  var tmppath1=URL.createObjectURL(event1.target.files[0]);
-					  let imgTag="#fimg" + n++;
-					  $(imgTag).fadeIn("fast").prop("src",URL.createObjectURL(event1.target.files[0]));
+					  $(this).next().fadeIn("fast").prop("src",URL.createObjectURL(event1.target.files[0]));
+					  URL.revokeObjectURL(event1.target.files[0]);
 				  });
-			  }  
+			  }
 		  });
+		  
 	  }
+/*	  $("#imgUpload").on('change',".myboardFile",function(event){
+		  
+	  });*/
   });
   var vidUpload=$("#vidUpload");
   $("#fileV1").change(function(event){
 	  var tmppath=URL.createObjectURL(event.target.files[0]);
 	  $("#fvid1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
+	  URL.revokeObjectURL(event.target.files[0]);
 	  if($("#vidUpload").children().length<=3){
 		  $("<button type='button' class='btn btn-default btn-block' id='addVid'>" +
 	  		"추가 업로드</button>").appendTo(vidUpload);
@@ -137,12 +143,12 @@ $(document).ready(function(){
 				  $("<label for='fileV"+ nn +"' class='btn btn-info btn-block btn-file'>" +
 				  	"<span class='glyphicon glyphicon-facetime-video'></span> Upload Video"+nn +"</label>" +
 				  	"<input type='file' class='form-control myboardFile' id='fileV"+nn +"' name='fileV' accept='.avi, .wmv, .mp4'>" +
-				  	"<video id='fvid"+ nn +"' controls autoplay muted='muted' loop src='' style='display:none;width:100%'>")
+				  	"<video id='fvid"+ nn++ +"' controls autoplay muted='muted' loop src='' style='display:none;width:100%'>")
 				  .appendTo(vidUpload);
-				  $("#vidUpload").on('change','#fileV' + nn, function(event2){
+				  $("#vidUpload").on('change','.myboardFile' + nn, function(event2){
 					  var tmppath2=URL.createObjectURL(event2.target.files[0]);
-					  let vidTag="#fvid" + nn++;
-					  $(vidTag).fadeIn("fast").prop("src",URL.createObjectURL(event2.target.files[0]));
+					  $(this).next().fadeIn("fast").prop("src",URL.createObjectURL(event2.target.files[0]));
+					  URL.revokeObjectURL(event2.target.files[0]);
 				  });
 			  }  
 		  });
@@ -194,9 +200,7 @@ $(document).ready(function(){
 			 $("#uploadMsg").css("font-weight","bold");
 			 setTimeout(function(){
 				 $("#writeModal").modal("hide");
-				 html=document.querySelector("#modalForm").innerHTML;
-				 $(".modal-body").empty();
-				 $(".modal-body").append(html);
+				 location.href=getPageContext + "/mypage/main";
 			 },2500);
 		 }
 	  });
@@ -209,6 +213,7 @@ $(document).ready(function(){
   var sameDate='';
   $.getList=function(pageNum,keyword){
 	  	var getPageContext=$("#getPageContext").val();
+	  	var getSession=$("#getSession").val();
 		$.getJSON(getPageContext + "/mypage/myboard/list",
 			{"pageNum":pageNum,"keyword":keyword},
 			function(data){
@@ -223,9 +228,10 @@ $(document).ready(function(){
 					var mp_savimg=json.mp_savimg;
 					var mv_savvid=json.mv_savvid;
 					var attachment='';
+					var boardOption='';
 					if(sameDate!==json.mb_date){
 						$("<h1 class='text-center' id='"+ json.mb_date +"' style='margin-bottom:30px;'>" +
-						  "<span style='border-bottom: 4px solid black'>" + json.mb_date +
+						  "<span style='border-bottom: 4px solid tan'>" + json.mb_date +
 						  "</span></h1>")
 						  .appendTo("#myBoardList");
 					}
@@ -235,6 +241,21 @@ $(document).ready(function(){
 					}else if(mp_savimg!==null && mp_savimg!==''){
 						attachment="<img class='img-responsive center-block' src='"+getPageContext +"/resources/upload/img/" + mp_savimg + "'>";
 					}
+					if(user_num==getSession){
+						boardOption="<div class='dropdown boardOption'>" +
+									"<button class='btn dropdown-toggle' type='button' data-toggle='dropdown'>" +
+									"<span class='glyphicon glyphicon-option-vertical'></span></button>" +
+									"<ul class='dropdown-menu rightOption'>" +
+									"<li><a href='#'>수정</a></li>" +
+									"<li><a href='#'>삭제</a></li></ul></div>";
+					}else{
+						boardOption="<div class='dropdown boardOption'>" +
+									"<button class='btn dropdown-toggle disabled' type='button' data-toggle='dropdown'>" +
+									"<span class='glyphicon glyphicon-option-vertical'></span></button>" +
+									"<ul class='dropdown-menu rightOption'>" +
+									"<li><a href='#'>수정</a></li>" +
+									"<li><a href='#'>삭제</a></li></ul></div>";
+					}
 					if(i===0){
 						$("<div class='panel-group'>" +
 						  "<div class='panel panel-default'>" +
@@ -242,7 +263,9 @@ $(document).ready(function(){
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
 						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + 
-						  	mb_title + "</a></h1></blockquote></div>" +
+						  	mb_title + "</a></h1></blockquote>"+
+						  	boardOption +
+						  "</div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -257,7 +280,9 @@ $(document).ready(function(){
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
 						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + 
-						  	mb_title + "</a></h1></blockquote></div>" +
+						  	mb_title + "</a></h1></blockquote>"+
+						  	boardOption +
+						  "</div>" +
 						  "<div class='panel-body'>" + 
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -269,7 +294,10 @@ $(document).ready(function(){
 				});
 				
 			});
-		$("#myBoardList").on('click',".panel-heading",function(){
+		$("#myBoardList").on('click',".panel-heading",function(event){
+			if(event.target.className==="btn dropdown-toggle" || event.target.className==="glyphicon glyphicon-option-vertical"){
+				return;
+			}
 			location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id");
 		});
 		$("#myBoardList").on('mouseover',".panel-heading",function(){
@@ -510,7 +538,7 @@ $(document).ready(function(){
 	  /*
 	   * [ formData를 쓰려면... ]
 	   * $.getJSON은 사용 못함
-	   * $.ajax/contentType: false/processData: false 해줘야함 
+	   * $.ajax // contentType: false/processData: false 해줘야함 
 	   */
 	  $.ajax({
 		  url: getPageContext + "/mypage/mycomment/update",

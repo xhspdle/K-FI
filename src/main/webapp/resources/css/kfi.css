@@ -229,6 +229,9 @@ footer .glyphicon {
 	.commentOption {
 		left: 90% !important;
 	}
+	.boardOption {
+		left: 92% !important;
+	}
 }
 /*
 	mypage
@@ -400,7 +403,7 @@ input[type='file'].myboardFile {
 	color: #f4511e !important;
 }
 .postBlock {
-	margin-bottom: 0 !important;
+	margin-bottom: 10px !important;
 	border-color: #f4511e !important;
 }
 .postLikeComment {
@@ -566,8 +569,9 @@ img.media-object {
 .boardOption {
 	position: relative;
 	top: -70px;
-	left: 46%;
+	left: 95%;
 	margin-bottom: -53px;
+	text-align: left !important;
 }
 .boardOption > button {
 	background-color: transparent !important;
@@ -575,11 +579,11 @@ img.media-object {
 	border: 0 !important;
 }
 .boardOption .rightOption {
-	left: 360px;
+	left: -162px;
 	top: -3px;
 }
 .boardOption button .glyphicon {
-	font-size: 38px;
+	font-size: 28px;
 }
 .commentOption {
 	position: relative;
@@ -613,4 +617,7 @@ img.media-object {
 }
 .alert-danger {
 	box-shadow: 5px 8px 10px rgba(0,0,0, .2);
+}
+.disabled {
+	cursor: default !important;
 }

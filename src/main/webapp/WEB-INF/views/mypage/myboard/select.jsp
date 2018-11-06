@@ -15,7 +15,9 @@
 					</h1>
 				</blockquote>
 				<div class="dropdown boardOption">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+					<button class="btn dropdown-toggle 
+					<c:if test="${sessionScope.user_num!=boardVo.user_num }">disabled</c:if>" 
+					type="button" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
@@ -24,8 +26,8 @@
 					</ul>
 				</div>
 				<!--  
-				<div class="dropdown commentOption">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+				<div class="dropdown boardOption">
+					<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
@@ -181,7 +183,7 @@
 	<div class="media-body">
 		<h3><strong><a href="">{user_id}</a></strong><span class="msgSpan"></span></h3>
 		<div class="dropdown commentOption">
-			<button class="btn btn-primary dropdown-toggle{optionBtn}" type="button" data-toggle="dropdown">
+			<button class="btn dropdown-toggle{optionBtn}" type="button" data-toggle="dropdown">
 				<span class="glyphicon glyphicon-option-vertical"></span>
 			</button>
 			<ul class="dropdown-menu rightOption">{dropDowns}</ul>

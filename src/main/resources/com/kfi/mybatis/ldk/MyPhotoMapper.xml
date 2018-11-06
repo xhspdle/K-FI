@@ -22,7 +22,7 @@
 		where mp_num=#{mp_num}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from my_photo where mp_num=#{mp_num}
+		delete from my_photo where mb_num=#{mb_num}
 	</delete>
 	<select id="list" resultType="myphoto">
 		select * from my_photo
