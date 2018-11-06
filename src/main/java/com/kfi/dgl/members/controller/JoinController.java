@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,14 +28,14 @@ public class JoinController {
 	}
 
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
-	public String join(MembersVo vo, HttpSession session) {
+	public String join(MembersVo vo, HttpSession session,Model model) {
 		int user_num = service.getMaxnum()+1;
 		vo.setUser_num(user_num);
 		int n = service.join(vo);
 		String returnURL = "";
 		if (n > 0) {
-			session.setAttribute("user_num", vo.getUser_num());
-			session.setAttribute("user_id", vo.getUser_id());
+			/*session.setAttribute("user_num", vo.getUser_num());
+			session.setAttribute("user_id", vo.getUser_id());*/
 			
 			// myskin 디폴트 테이블 추가
 			int myskinOk = service.insertMyskin(new MySkinVo(0, user_num, "기본스킨", "#00cee8", null, 1));
@@ -44,7 +45,6 @@ public class JoinController {
 			
 			returnURL = "redirect:/login/login";
 			System.out.println(session.getAttribute("user_id"));
-
 		} else {
 			returnURL="redirect:/login/join";
 		}
@@ -79,6 +79,7 @@ public class JoinController {
 	@ResponseBody
 	public Map<String, String> emailcheck(String user_email){
 	int n = service.emailCheck(user_email);
+	System.out.println(user_email);
 	Map<String, String> map = new HashMap<>();
 	if(n == 0) {
 		map.put("msg", "true");
