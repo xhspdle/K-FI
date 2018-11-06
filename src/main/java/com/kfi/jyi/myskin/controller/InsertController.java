@@ -25,11 +25,12 @@ public class InsertController {
 	}
 
 	@RequestMapping(value = "/mypage/myskin/insert", method = RequestMethod.POST)
-	public String insert(HttpSession session, MultipartFile[] ms_file, 
+	public String insert(HttpSession session, MultipartFile ms_cover, MultipartFile ms_profile, 
 			String ms_name, String ms_color, String ms_msg) {
 		HashMap<String, Object> hm = new HashMap<>();
 		hm.put("session", session);
-		hm.put("ms_file", ms_file);
+		hm.put("ms_profile", ms_profile);
+		hm.put("ms_cover", ms_cover);
 		hm.put("ms_name", ms_name);
 		hm.put("ms_color", ms_color);
 		hm.put("ms_msg", ms_msg);

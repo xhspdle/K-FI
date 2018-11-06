@@ -147,8 +147,16 @@ $(function() {
 	/* myskin insert 미리보기 */
 	$('#ms_color').on('change',function(){
 		var color=$(this).val();
-		$("#preview_navbar").css('background-color',color);
-		$("#preview_cover button").css('background-color',color);
+		$("#preview_navbar").css({
+			'background-color':color,
+			'zIndex':1
+		});
+		$("#preview_cover button").css({
+			'background-color':color,
+			'zIndex':2
+		});
+		
+		
 	});
 
 	var once=0;

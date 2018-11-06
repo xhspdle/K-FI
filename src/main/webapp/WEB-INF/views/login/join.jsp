@@ -37,9 +37,9 @@
 		var emailFlag = false;
 		
 		var getContext = $('#getContext').val();
-		var joinbtn = $("#joinbtn");
-		joinbtn.attr("disabled", "disabled");
-
+		/* var joinbtn = $("#joinbtn");
+		joinbtn.attr("disabled", "disabled");*/
+ 
 		$('#idck').click(function() {
 			var id = $("#id").val();
 			var eMsg = $("#idMsg");
@@ -299,7 +299,7 @@
 		</div>
 
 		<div>
-			<input type="submit" value="가입" id="joinbtn" disabled="disabled"> <input type="reset" value="취소">
+			<input type="submit" value="가입" id="joinbtn"> <input type="reset" value="취소">
 		</div>
 	</form>
 </body>

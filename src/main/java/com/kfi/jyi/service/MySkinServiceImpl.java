@@ -55,43 +55,58 @@ public class MySkinServiceImpl implements CommonService {
 	@Override
 	@Transactional
 	public int insert(Object data) {
-			HashMap<String, Object> hm = (HashMap<String, Object>) data;
-			HttpSession session=(HttpSession)hm.get("session");
-			int user_num=(Integer)session.getAttribute("user_num");
-			MultipartFile[] ms_file=(MultipartFile[])hm.get("ms_file");
-			String ms_name=(String)hm.get("ms_name");
-			String ms_color=(String)hm.get("ms_color");
-			String ms_msg=(String)hm.get("ms_msg");
-			
-			String uploadPath=session.getServletContext().getRealPath("/resources/upload/img");
-			
+		HashMap<String, Object> hm = (HashMap<String, Object>) data;
+		HttpSession session = (HttpSession) hm.get("session");
+		int user_num = (Integer) session.getAttribute("user_num");
+		MultipartFile ms_profile = (MultipartFile) hm.get("ms_profile");
+		MultipartFile ms_cover = (MultipartFile) hm.get("ms_cover");
+		String ms_name = (String) hm.get("ms_name");
+		String ms_color = (String) hm.get("ms_color");
+		String ms_msg = (String) hm.get("ms_msg");
+
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload/img");
+		String[] savimg = new String[2];
 		try {
-			int ms_num=msdao.getMaxNum();
-			msdao.insert(new MySkinVo(ms_num+1, user_num, ms_name, ms_color, ms_msg, 0));
-			
-			for(int i=0;i<ms_file.length;i++) {
-				InputStream is=ms_file[i].getInputStream();
-				FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+UUID.randomUUID()+"_"+ms_file[i].getOriginalFilename());
+			int ms_num = msdao.getMaxNum();
+			msdao.insert(new MySkinVo(ms_num + 1, user_num, ms_name, ms_color, ms_msg, 0));
+			if (ms_profile == null && ms_cover == null) {
+				// 파일 없음
+				return 1;
+			}
+			String msp_orgimg = "default-profile.png";
+			String msp_savimg = "default-profile.png";
+			int msp_num = mspdao.getMaxNum();
+			if (ms_profile != null) {
+				msp_orgimg = ms_profile.getOriginalFilename();
+				msp_savimg = UUID.randomUUID() + "_" + msp_orgimg;
+				savimg[0] = msp_savimg;
+				InputStream is = ms_profile.getInputStream();
+				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savimg[0]);
 				FileCopyUtils.copy(is, fos);
 				is.close();
 				fos.close();
-				System.out.println(uploadPath + " 경로에 파일업로드 성공");
 			}
-			
-			int msp_num=mspdao.getMaxNum();
-			String msp_orgimg=ms_file[0].getOriginalFilename();
-			String msp_savimg=UUID.randomUUID()+"_"+msp_orgimg;
-			mspdao.insert(new MySkinProfileVo(msp_num+1, ms_num+1, msp_orgimg, msp_savimg));
-			
-			int msc_num=mscdao.getMaxNum();
-			String msc_orgimg=ms_file[1].getOriginalFilename();
-			String msc_savimg=UUID.randomUUID()+"_"+msc_orgimg;
-			mscdao.insert(new MySkinCoverVo(msc_num+1, ms_num+1, msc_orgimg, msc_savimg));
+			mspdao.insert(new MySkinProfileVo(msp_num + 1, ms_num + 1, msp_orgimg, msp_savimg));
+			String msc_orgimg = "logo2.png";
+			String msc_savimg = "logo2.png";
+			int msc_num = mscdao.getMaxNum();
+			if (ms_cover != null) {
+				msc_orgimg = ms_cover.getOriginalFilename();
+				msc_savimg = UUID.randomUUID() + "_" + msc_orgimg;
+				savimg[1] = msc_savimg;
+				InputStream is = ms_cover.getInputStream();
+				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + savimg[1]);
+				FileCopyUtils.copy(is, fos);
+				is.close();
+				fos.close();
+			}
+			mscdao.insert(new MySkinCoverVo(msc_num + 1, ms_num + 1, msc_orgimg, msc_savimg));
 			return 1;
 		} catch (Exception e) {
-			for(int i=0;i<ms_file.length;i++) {
-				File file=new File(uploadPath+"\\"+UUID.randomUUID()+"_"+ms_file[i].getOriginalFilename());
-				if(file.delete()) System.out.println("파일 삭제 성공");;
+			for (int i = 0; i < savimg.length; i++) {
+				File file = new File(uploadPath + "\\" + savimg[i]);
+				if (file.delete())
+					System.out.println("파일 삭제 성공");
 			}
 			System.out.println(e.getMessage());
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -102,64 +117,64 @@ public class MySkinServiceImpl implements CommonService {
 	@Override
 	public int update(Object data) {
 		HashMap<String, Object> hm = (HashMap<String, Object>) data;
-		HttpSession session=(HttpSession)hm.get("session");
-		int user_num=(Integer)session.getAttribute("user_num");
-		int ms_num=(Integer)hm.get("ms_num");
-		String ms_name=(String)hm.get("ms_name");
-		String ms_color=(String)hm.get("ms_color");
-		String ms_msg=(String)hm.get("ms_msg");		
-		
-		MySkinViewVo  msvVo = (MySkinViewVo)select(ms_num);
+		HttpSession session = (HttpSession) hm.get("session");
+		int user_num = (Integer) session.getAttribute("user_num");
+		int ms_num = (Integer) hm.get("ms_num");
+		String ms_name = (String) hm.get("ms_name");
+		String ms_color = (String) hm.get("ms_color");
+		String ms_msg = (String) hm.get("ms_msg");
+		MultipartFile ms_profile = (MultipartFile) hm.get("ms_profile");
+		MultipartFile ms_cover = (MultipartFile) hm.get("ms_cover");
 
-		MultipartFile[] ms_file=(MultipartFile[])hm.get("ms_file");
-		String uploadPath=session.getServletContext().getRealPath("/resources/upload/img");
-		int update=0;
-		for(int i=0;i<ms_file.length;i++) {
-			//파일 수정 없을 때
-			if(ms_file[i].isEmpty()) {
+		MySkinViewVo msvVo = (MySkinViewVo) select(ms_num);
+
+		msdao.update(new MySkinVo(ms_num, user_num, ms_name, ms_color, ms_msg, 0));
+		int update = 0;
+		for (int i = 0; i < 2; i++) {
+			// 파일 수정 없을 때
+			if (!ms_profile.isEmpty())
 				++update;
-			}
+			if (!ms_cover.isEmpty())
+				++update;
 		}
-		if(update==0) {
-			msdao.update(new MySkinVo(ms_num, user_num, ms_name, ms_color, ms_msg, 0));
+		if (update == 0) {
 			return 1;
 		}
-
-		try {			
-			String msp_orgimg=msvVo.getMsp_orgimg();
-			String msp_savimg=msvVo.getMsp_savimg();
-			String msc_orgimg=msvVo.getMsc_orgimg();
-			String msc_savimg=msvVo.getMsc_savimg();
-			for(int i=0;i<ms_file.length;i++) {
-				if(!ms_file[i].isEmpty()) {
-					if(i==0) {
-						File mspFile=new File(uploadPath+"\\"+msvVo.getMsp_savimg());
-						if(mspFile.delete()) System.out.println("프로필 사진 삭제 성공");
-						msp_orgimg=ms_file[0].getOriginalFilename();
-						msp_savimg=UUID.randomUUID()+"_"+msp_orgimg;
-					}else if(i==1){
-						File mscFile=new File(uploadPath+"\\"+msvVo.getMsc_savimg());
-						if(mscFile.delete()) System.out.println("커버 사진 삭제 성공");
-						msc_orgimg=ms_file[1].getOriginalFilename();
-						msc_savimg=UUID.randomUUID()+"_"+msc_orgimg;
-					}
-					InputStream is=ms_file[i].getInputStream();
-					FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+UUID.randomUUID()+"_"+ms_file[i].getOriginalFilename());
-					FileCopyUtils.copy(is, fos);
-					is.close();
-					fos.close();
-					System.out.println(uploadPath + " 경로에 파일 수정업로드 성공");
-				}
+		try {
+			String uploadPath = session.getServletContext().getRealPath("/resources/upload/img");
+			String msp_orgimg = msvVo.getMsp_orgimg();
+			String msp_savimg = msvVo.getMsp_savimg();
+			String msc_orgimg = msvVo.getMsc_orgimg();
+			String msc_savimg = msvVo.getMsc_savimg();
+			if (ms_profile != null) {
+				File file = new File(uploadPath + "\\" + msp_savimg);
+				if (file.delete())
+					System.out.println("이전 사진 삭제 성공");
+				msp_orgimg = ms_profile.getOriginalFilename();
+				msp_savimg = UUID.randomUUID() + "_" + msp_orgimg;
+				InputStream is = ms_profile.getInputStream();
+				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + msp_savimg);
+				FileCopyUtils.copy(is, fos);
+				is.close();
+				fos.close();
+				System.out.println(uploadPath + " 경로에 파일 수정업로드 성공");
 			}
 			mspdao.update(new MySkinProfileVo(msvVo.getMsp_num(), ms_num, msp_orgimg, msp_savimg));
+			if (ms_cover != null) {
+				File file = new File(uploadPath + "\\" + msc_savimg);
+				if (file.delete())
+					System.out.println("이전 사진 삭제 성공");
+				msc_orgimg = ms_cover.getOriginalFilename();
+				msc_savimg = UUID.randomUUID() + "_" + msc_orgimg;
+				InputStream is = ms_cover.getInputStream();
+				FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + msc_savimg);
+				FileCopyUtils.copy(is, fos);
+				is.close();
+				fos.close();
+			}
 			mscdao.update(new MySkinCoverVo(msvVo.getMsc_num(), ms_num, msc_orgimg, msc_savimg));
-			msdao.update(new MySkinVo(ms_num, user_num, ms_name, ms_color, ms_msg, 0));
-			
 			return 1;
-		}catch(Exception e) {
-			//파일 지우고 DB 에러났을 때...?
-			
-			
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return -1;
@@ -167,21 +182,43 @@ public class MySkinServiceImpl implements CommonService {
 	}
 
 	@Override
+	@Transactional
 	public int delete(Object data) {
-		//on delete cascade 주기 
-		int ms_num=(Integer)data;
-		return msdao.delete(ms_num);
+		HashMap<String, Object> hm = (HashMap<String, Object>) data;
+		int ms_num = (Integer) hm.get("ms_num");
+		HttpSession session = (HttpSession) hm.get("session");
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload/img");
+		MySkinViewVo list = (MySkinViewVo) select(ms_num);
+		String[] img = new String[2];
+		img[0] = list.getMsp_savimg();
+		img[1] = list.getMsc_savimg();
+		try {
+			for (int i = 0; i < img.length; i++) {
+				File file = new File(uploadPath + "\\" + img[i]);
+				if (file.delete())
+					System.out.println("파일 삭제 성공");
+			}
+			mspdao.delete(ms_num);
+			mscdao.delete(ms_num);
+			msdao.delete(ms_num);
+			return 1;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return -1;
+		}
 	}
 
 	@Override
 	public Object select(Object data) {
-		int ms_num=(Integer)data;
+		int ms_num = (Integer) data;
 		return msvdao.select(ms_num);
 	}
 
 	@Override
 	public Object list(Object data) {
-		return msvdao.list((Integer) data);
+		int user_num = (Integer) data;
+		return msvdao.list(user_num);
 	}
 
 }

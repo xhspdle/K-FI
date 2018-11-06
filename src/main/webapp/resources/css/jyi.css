@@ -5,9 +5,10 @@
 	margin: auto;
 	width: 90%;
 	padding-left: 10%;
+	margin-top:20px;
 }
 
-.profile_preview {
+#profile_preview {
 	background-color: white;
 	display: block;
 	margin-left: auto;
@@ -16,6 +17,17 @@
 }
 
 #preview_cover {
+	width: 80%;
+    margin: auto;
+	font-family: Montserrat, sans-serif;
+	background-color: #00cee8;
+	color: #fff;
+	padding: 1px 1px;
+}
+
+.pre_cover{
+	width: 80%;
+    margin: auto;
 	font-family: Montserrat, sans-serif;
 	background-color: #00cee8;
 	color: #fff;
@@ -38,6 +50,21 @@
 	background-color: #00cee8;
 }
 
+#ms_color{
+    width: 75px;
+    height: 32px;
+    border-radius: 10%;
+}
+
+.myskin_ud{
+	background-color:#00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 70px;
+	color:white;
+	font-weight: 700;
+}
+
 /* mypage 커뮤니티 일정 mouseover했을 때 */
 .calevent {
 	position: absolute;
@@ -50,6 +77,7 @@
 	font-size: 20px;
 	overflow: visible;
 }
+
 
 /* mypate mini_Calendar */
 .mini_cal_week {

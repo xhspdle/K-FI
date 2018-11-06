@@ -21,15 +21,16 @@ public class ListController {
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService service;
 	
-	@RequestMapping(value="/mypage/myskin/list",method=RequestMethod.GET)
-	public String getMySkin(HttpSession session, Model model) {
-		/*Object user_num=session.getAttribute("user_num");
-		List<MySkinViewVo> msvlist=(List<MySkinViewVo>)service.list(user_num);
-		model.addAttribute("msvlist",msvlist);*/
+	@RequestMapping(value="/mypage/myskin/list")
+	public String getMySkin(HttpSession session, Model model) { 
+		System.out.println("session: "+session.getAttribute("user_num"));
+		session.setAttribute("user_num", 1);
+		int user_num=(Integer)session.getAttribute("user_num");
+		List<MySkinViewVo> msvlist=(List<MySkinViewVo>)service.list(1);
+		model.addAttribute("msvlist",msvlist);
+		System.out.println(msvlist.toString()); 
+		
 		return ".mypage.myskin.list";
 	}
-	
-	
-	
 	
 }

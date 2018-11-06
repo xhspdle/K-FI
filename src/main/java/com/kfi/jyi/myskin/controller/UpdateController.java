@@ -23,30 +23,31 @@ public class UpdateController {
 	@Qualifier("mySkinServiceImpl")
 	private CommonService service;
 
-	@RequestMapping(value = "/mypage/myskin/updateForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/myskin/updateform", method = RequestMethod.GET)
 	public String updateForm(Model model, String ms_num) {
 		int msNum = Integer.parseInt(ms_num);
-		MySkinViewVo  mslist = (MySkinViewVo) service.select(msNum);
-		model.addAttribute("mslist", mslist);
+		MySkinViewVo  msvlist = (MySkinViewVo) service.select(msNum);
+		model.addAttribute("msvlist", msvlist);
 		return ".mypage.myskin.update";
 	}
 
 	@RequestMapping(value = "/mypage/myskin/update", method = RequestMethod.POST)
-	public String update(HttpSession session, MultipartFile[] ms_file, String ms_name, String ms_color, String ms_msg,
-			String ms_num) {
+	public String update(HttpSession session, MultipartFile ms_cover, MultipartFile ms_profile, 
+			String ms_name, String ms_color, String ms_msg, String ms_num) {
 		HashMap<String, Object> hm = new HashMap<>();
 		hm.put("session", session);
 		hm.put("ms_num", Integer.parseInt(ms_num));
-		hm.put("ms_file", ms_file);
+		hm.put("ms_profile", ms_profile);
+		hm.put("ms_cover", ms_cover);
 		hm.put("ms_name", ms_name);
 		hm.put("ms_color", ms_color);
 		hm.put("ms_msg", ms_msg);
 
 		int result = service.update(hm);
 		if (result > 0) {
-			return "redirect: /mypage/myskin/list";
+			return "redirect:/mypage/myskin/list";
 		} else {
-			return "redirect: /mypage/myskin/list"; // 에러페이지 이동
+			return "redirect:/mypage/myskin/list"; // 에러페이지 이동
 		}
 	}
 }

@@ -3,11 +3,11 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container w3-panel w3-border w3-round-xlarge"  >
-	<div class="col-sm-offset-2" style="background-color: white;width:20%;height:10%;">
+	<div class="col-sm" style="background-color: white;width:20%;height:10%;">
 	<h2>My Skin</h2>
 	</div>
 	<!-- 미리보기 설정(js) -->
-	<div class="jumbotron col-sm-offset-2" id="preview_cover">
+	<div class="jumbotron col-sm" id="preview_cover" style="margin:auto;width:80%;">
 		<div>
 			<img src="<c:url value='/resources/images/default-profile.png'/>" alt="new profile" 
 			class="img-circle" id="profile_preview" style="margin-top: 60px;width: 150px;height: 150px;background-color: white;
@@ -34,14 +34,14 @@
 		</div>
 	</div>
 	<!-- 등록 -->
-  	<form class="form-horizontal" enctype="multipart/form-data" method="post" action="<c:url value='/mypage/myskin/insert'/>">
-    	<div class="form-group">
+  	<form class="form-horizontal col-sm" enctype="multipart/form-data" method="post" action="<c:url value='/mypage/myskin/insert'/>" style="width: 85%;margin:50px;">
+    	<div class="form-group" >
     		<label class="control-label col-sm-2" for="skinname">스킨명:</label>
-    		<div class="col-sm-5"> 
+    		<div class="col-sm-6"> 
     		  <input type="text" class="form-control" id="ms_name" name="ms_name">
       		</div>
-      		<label class="control-label col-sm-2" for="color">배경색:</label>
-      		<div class="col-sm-3"> 
+      		<label class="control-label col-sm-1" for="color">배경색:</label>
+      		<div class="col-sm-2"> 
       			<input type="color" id="ms_color" name="ms_color">
         	</div>
     	</div>
@@ -54,13 +54,13 @@
         <div class="form-group">
 	      <label class="control-label col-sm-2" for="msg">프로필 사진:</label>
 	      <div class="col-sm-10">   
-	        <input type="file" class="form-control" id="ms_profile" name="ms_file">
+	        <input type="file" class="form-control" id="ms_profile" name="ms_profile">
 	      </div>
    		</div>
         <div class="form-group">
 	      <label class="control-label col-sm-2" for="msg">커버 사진:</label>
 	      <div class="col-sm-10">          
-	        <input type="file" class="form-control"  id="ms_cover" name="ms_file">
+	        <input type="file" class="form-control"  id="ms_cover" name="ms_cover">
 	      </div>
     	</div>
 	    <div class="form-group">        

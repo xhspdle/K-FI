@@ -38,7 +38,7 @@ public class JoinController {
 			session.setAttribute("user_id", vo.getUser_id());*/
 			
 			// myskin 디폴트 테이블 추가
-			int myskinOk = service.insertMyskin(new MySkinVo(0, user_num, "기본스킨", "#00cee8", null, 1));
+			int myskinOk = service.insertMyskin(new MySkinVo(0, user_num, "기본스킨", "#00cee8", "", 1));
 			if (myskinOk < 0) {
 				//returnURL="error"; 에러나면 오류페이지로 이동하기
 			}
