@@ -621,3 +621,6 @@ img.media-object {
 .disabled {
 	cursor: default !important;
 }
+div.popover.left {
+	left: -280px !important;
+}

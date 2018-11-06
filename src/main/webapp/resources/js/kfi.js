@@ -2,7 +2,7 @@
 	scroll : layout.jsp
  */
 $(document).ready(function(){
-  //var getPageContext=$("#getPageContext").val();
+  var documentPageContext=$("#getPageContext").val();
   $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
     if (this.hash !== "") {
       event.preventDefault();
@@ -555,7 +555,7 @@ $(document).ready(function(){
 				  $.msgBox(json.code);
 			  }
 		  }
-	  })
+	  });
   });
   $.msgBox=function(msg){
 	  var showMsg='';
@@ -578,5 +578,46 @@ $(document).ready(function(){
 			  },2500);
 		  });
   }
+  $("[data-toggle='popover']").popover({
+	  title: "<h3><strong>Wanna delete?</strong></h3>" + 
+	  		 "<p>please enter your password</p>",
+	  content: "<form class='form-horizontal boardDelete' method='post' " + 
+	  		   "action='"+ documentPageContext +"/mypage/myboard/delete'>" +
+	  		   "<div class='input-group input-group-lg'>" +
+	  		   "<input type='hidden' name='mb_num' value='"+ $("[data-toggle='popover']").attr("data-mb-num") +"'>" +
+	  		   "<input type='password' name='user_pwd' class='form-control' >" + //style='height:100%;'
+	  		   "<div class='input-group-btn'>" +
+	  		   "<button class='btn btn-warning' type='submit'>" +
+	  		   "<i class='glyphicon glyphicon-lock'></i></button></div></div></form>",
+	  html: true,
+	  placement: "left"
+  });
+  $(document).on('focus',"[data-toggle='popover']",function(){
+	  $("button.dropdown-toggle").attr("data-toggle","off");
+  });
+  $(document).on('focusout',"[data-toggle='popover']",function(){
+	  $("button.dropdown-toggle").attr("data-toggle","dropdown");
+  });
+  $(document).on('submit',".boardDelete",function(e){
+	  e.preventDefault();
+	  var getPageContext=$("#getPageContext").val();
+	  var formData=new FormData($(this).get(0));
+	  $.ajax({
+		  url: getPageContext + "/mypage/myboard/delete",
+		  type: 'post',
+		  dataType: 'json',
+		  data: formData,
+		  cache: false,
+		  contentType: false,
+		  processData: false,
+		  success: function(json){
+			  if(json.code==='success'){
+				  location.href=getPageContext + "/mypage/main";
+			  }else{
+				  $.msgBox(json.code);
+			  }
+		  }
+	  });
+  });
 });
 

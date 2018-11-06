@@ -1,2 +1,2 @@
-INSERT INTO MEMBERS VALUES(1,'test','테스트',1234,'test@test.com',sysdate,1,1);
+INSERT INTO MEMBERS VALUES(1,'test',1234,'테스트','test@test.com',sysdate,1,1);
 commit;

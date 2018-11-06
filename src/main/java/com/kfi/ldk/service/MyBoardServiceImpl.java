@@ -23,6 +23,7 @@ import com.kfi.ldk.dao.MyPhotoDao;
 import com.kfi.ldk.dao.MyVideoDao;
 import com.kfi.ldk.util.ImgUtil;
 import com.kfi.ldk.util.VidUtil;
+import com.kfi.ldk.vo.MyBoardConfirmDelVo;
 import com.kfi.ldk.vo.MyBoardVo;
 import com.kfi.ldk.vo.MyPhotoVo;
 import com.kfi.ldk.vo.MyVideoVo;
@@ -127,11 +128,49 @@ public class MyBoardServiceImpl implements CommonService{
 		MyBoardVo vo=(MyBoardVo)data;
 		return mbDao.update(vo);
 	}
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public int delete(Object data) {
-		int mb_num=(Integer)data;
-		return mbDao.delete(mb_num);
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		HttpSession session=(HttpSession)map.get("session");
+		String uploadPathP=session.getServletContext().getRealPath("/resources/upload/img");
+		String uploadPathV=session.getServletContext().getRealPath("/resources/upload/vid");
+		map.remove("session");
+		int mb_num=(Integer)map.get("mb_num");
+		try {
+			MyBoardConfirmDelVo vo=mbDao.confirmDel(map);
+			if(vo!=null) {
+				List<Object> photoList=mpDao.select(mb_num);
+				List<Object> videoList=mvDao.select(mb_num);
+				for(int i=0;i<photoList.size();i++) {
+					MyPhotoVo mpVo=(MyPhotoVo)photoList.get(i);
+					File f=new File(uploadPathP + "\\" + mpVo.getMp_savimg());
+					if(!f.delete()) {
+						throw new Exception("[사진삭제오류]" +photoList.size()+1 + "개 중 " + i+1 +"번째 파일에서 오류 발생");
+					}
+					System.out.println(uploadPathP + "경로에 사진 삭제 성공!");
+				}
+				for(int i=0;i<videoList.size();i++) {
+					MyVideoVo mvVo=(MyVideoVo)videoList.get(i);
+					File f=new File(uploadPathV + "\\" + mvVo.getMv_savvid());
+					if(!f.delete()) {
+						throw new Exception("[영상삭제오류]" +videoList.size()+1 + "개 중 " + i+1 +"번째 파일에서 오류 발생");
+					}
+					System.out.println(uploadPathV + "경로에 영상 삭제 성공!");
+				}
+				mpDao.delete(mb_num);
+				mvDao.delete(mb_num);
+				mbDao.delete(mb_num);
+				return 1;
+			}else {
+				return -1;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return -2;
+		}
 	}
 	@Override
 	public Object select(Object data) {

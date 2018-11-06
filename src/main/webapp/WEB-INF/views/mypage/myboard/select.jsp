@@ -21,8 +21,8 @@
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
-						<li><a href="#">수정</a></li>
-						<li><a href="#">삭제</a></li>
+						<li><a href="#updateModal" data-toggle="modal">수정</a></li>
+						<li><a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">삭제</a></li>
 					</ul>
 				</div>
 				<!--  

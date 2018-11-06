@@ -51,4 +51,9 @@
 	<select id="select" parameterType="int" resultType="myboard">
 		select * from my_board where mb_num=#{mb_num}
 	</select>
+	<select id="confirmDel" parameterType="hashmap" resultType="com.kfi.ldk.vo.MyBoardConfirmDelVo">
+		select mem.user_num,mem.user_id,mem.user_pwd,mb.mb_num
+		from members mem,my_board mb
+		where mem.user_num=mb.user_num and user_pwd=#{user_pwd} and mb_num=#{mb_num}
+	</select>
 </mapper>
