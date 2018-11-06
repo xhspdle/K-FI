@@ -263,3 +263,6 @@ table tr td{
 #userinsert_btn{
 	float: right;
 }
+#content{
+	background-image: url("../resources/images/adminimg.jpg");
+}

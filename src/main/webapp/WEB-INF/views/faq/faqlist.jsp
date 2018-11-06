@@ -62,6 +62,7 @@
 				<div class="media-body">
 				<h4 class="media-heading">Media Top</h4>
 				{qa_content}
+				<div>댓글</div>
 			</div>
 		</div>				
 	</form>
@@ -85,12 +86,13 @@
 				${faqlist.admin_num }
 				<button class="btn btn-default faqcommbtn">댓글</button>
 			</div>
-			<form class="hidediv" action="">
+			<form class="hidediv" action="faqcomminsert">
 				<div class="media">
 					<div class="media-left media-top">
 						<img src="2.png" class="media-object" style="width:60px">
 					</div>
 					<div class="media-body panel-body">
+						<input type="hidden" name="qa_num" value=${faqlist.qa_num }>
 						<input type="hidden" name="ref" value=${faqlist.ref }>
 						<input type="hidden" name="lev" value=${faqlist.lev }>
 						<input type="hidden" name="step" value=${faqlist.step }>

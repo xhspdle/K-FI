@@ -21,7 +21,7 @@
 				신고대상 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}"> ${accuse.user2_nickname}</a>		
 				</div >
 					<button class="btn btn-md btn-warning">확인</button>
-					<button class="btn btn-md btn-danger">삭제</button>
+					<button class="btn btn-md btn-danger" onclick="return acdeletecheck()">삭제</button>
 				<br><br>
 			</div>
 		</div>
@@ -91,15 +91,12 @@
 			<input type="text" class="form-control" readonly="readonly" value={acc_nick}>
 		</div>
 	</div>
-
-
 	<div class="form-group">
 		<label class="control-label col-sm-2">Email:</label> 
 		<div class="col-sm-10">
 			<input type="text" class="form-control" readonly="readonly" value={acc_email}>
 		</div>
 	</div>
-
 	<div class="form-group">
 		<label class="control-label col-sm-2">가입일:</label>
 		<div class="col-sm-10">
@@ -110,9 +107,9 @@
 		<label class="control-label col-sm-2">상태정보:</label>
 		<div class="col-sm-10">
 			<select class="form-control" name="user_status">
-				<option>정상</option>
-				<option>기간정지</option>
-				<option>정지</option>
+				<option value="1">1번 정상</option>
+				<option value="2">2번 기간정지</option>
+				<option value="3">3번 정지</option>
 			</select>
 		</div>
 	</div>
@@ -151,13 +148,25 @@
  					.replace("{acc_id}", data.user_id)
    					.replace("{user_num}", user_num)
  					.replace("{acc_nick}", data.user_nick)
+ 					
 					.replace("{acc_stat}", data.user_stat)
 					.replace("{acc_email}", data.user_email)
 					.replace("{acc_date}",data.user_date);				
 				alert(resultHTML);
 				$("#userinfobody").append(resultHTML);
+				console.log(data.user_stat)
+				$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
 			});
 		});		
 	});
+	function acdeletecheck(){
+		alert("aaa");
+		var result=confirm("정말로????");
+		if(result==true){
+			return true;
+		}else{
+			return false;
+		}
+	}
 </script>
  

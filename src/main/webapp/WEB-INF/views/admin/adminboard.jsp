@@ -80,16 +80,15 @@
 				$("#abupdate_num").val(ab_num);
 				$("#abupdate_title").val(data.ab_title);
 				$("#abupdate_content").text(data.ab_content);
-				$("#abupdate_adnum").val(data.admin_num);
-				$("#abupdate_notice").val(data.ab_notice);
+				$("#abupdate_adnum").val(data.admin_num);	
+				$("input:radio[name='ab_notice']:radio[value="+ data.ab_notice +"]").prop("checked","checked"); 
 				$("#abupdate_date").text(data.ab_date);
 			}); 
 		});
 	});
 	
 	$(function(){
-			alert("aaa");
-			console.log(document.cookie);
+			alert("aaa");	
 			$.getJSON("<c:url value='/abpopup'/>",function(data){
 			for(var i=0;i<data.length;i++){
 				console.log(data[i].ab_title);
@@ -98,8 +97,7 @@
 				var html=template(data[i].ab_title,data[i].ab_content);
 				$("#aaaaa").append(html);
 				$("#aaaaa").css("display","block");
-			    setCookie( "sa", "aaa" , 1);
-			    getCookie();
+			 
 				};
 			});
 			
@@ -150,7 +148,14 @@
 		<tr>
 			<td class="abcontent">${ablist.ab_num}</td>
 			<td class="abcontent">${ablist.admin_nick }</td>
-			<td class="abcontent">${ablist.ab_notice }</td>
+			<c:choose>
+				<c:when test="${ablist.ab_notice==1 }">
+					<td class="abcontent">게시</td>
+				</c:when>
+				<c:otherwise>
+					<td class="abcontent">미게시</td>
+				</c:otherwise>
+			</c:choose>
 			<td class="abcontent">${ablist.ab_title }</td>
 			<td class="abcontent">${ablist.ab_date }</td>
 			<td><i class="glyphicon glyphicon-remove abdelete"></i></td>
@@ -190,10 +195,10 @@
 						<label class="control-label col-sm-2">상태정보:</label>
 						<div class="col-sm-10">
 							<label class="radio-inline">
-								<input type="radio" name="ab_notice" value="1">게시
+								<input type="radio" name="ab_notice" value="1" >게시
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="ab_notice" value="2" checked>미게시
+								<input type="radio" name="ab_notice" value="2">미게시
 							</label>
 						</div>
 					</div>
@@ -206,12 +211,7 @@
 							<button type="submit" class="btn btn-default">Submit</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
-					</div>
-					
-					
-					
-					
-					
+					</div>		
 				</form>
 			</div>		
 		</div>
@@ -235,9 +235,7 @@
 					<li><a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
 				</c:forEach>
 				<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
-			
 			</ul>
-
 		</div>
 <div class="container">
 	<div class="row">
@@ -256,9 +254,8 @@
 					<i class="glyphicon glyphicon-search"></i>
 				</button>	
 			</div>
-					<a href="abinsert" class="btn btn-default pull-right">글작성</a>	
+			<a href="abinsert" class="btn btn-default pull-right">글작성</a>	
 		</div>
-
 	</div>
 </div>
 <%-- 		<form method="post" action="<c:url value='/ablist'/>">

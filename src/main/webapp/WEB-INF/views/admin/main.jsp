@@ -89,7 +89,7 @@
 					title="Visit w3schools">www.w3schools.com</a>
 			</p>
 		</footer>
-<!-- 		<div id="popup">
+<!-- 	<div id="popup">
 			<a href="javascript:hidePopup()">닫기</a>
 			<h1>공지사항</h1>
 			<div>ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</div>

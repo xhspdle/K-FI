@@ -27,29 +27,7 @@
 				$("#modifyuser_nickname").val(data.user_nick);
 				$("#modifyuser_email").val(data.user_email);
 				console.log(data.user_stat);
-				
-/* 				console.log($("select[name=user_status] option[value="+data.user_stat+"]"));
-				$("select[name=user_status] option[value="+data.user_stat+"]").attr("selected",true); */
-				
-/* 				var aaa = data.user_stat
-				var userstat=userStat();
-			
- 				function userStat(){
-					var userstatus;
-					$("select[name=user_status] option").each(function(){
-						 var userstat;
-						if(aaa==$(this).val()){
-							console.log(aaa);
-							userstatus=$(this);
-							console.log($(this));
-						}					
-					});
-					return userstatus;
-				}	
-				console.log(userstat);
-				userstat.attr("selected","selected");  */
-				/* $(this).attr("selected","selected");	 */
-				/* $("#modifyuser_stat option:selected").val(data.user_stat); */
+				$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
 			}); 
 		});
 	});
@@ -100,8 +78,6 @@
 	<div>
 			<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
-
- 
 		<ul class="pagination">
 			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
 			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">

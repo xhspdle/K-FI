@@ -48,13 +48,13 @@ public class FaqController {
 	//Q&A 게시물 작성
 	@RequestMapping(value="/faqinsert",method=RequestMethod.POST)
 	public String faqinsert(FaqVo vo) {		
+		int qa_num = faqservice.faqmaxnum()+1;
+		vo.setQa_num(qa_num);
 		if(vo.getQa_num()==0) {
-			int qa_num = faqservice.faqmaxnum()+1;
-			vo.setQa_num(qa_num);
 			vo.setRef(qa_num);
 		}else {
 			vo.setRef(vo.getRef());
-			vo.setLev(vo.getLev());
+			vo.setLev(vo.getLev()+1);
 			vo.setStep(vo.getStep());
 
 			System.out.println("ref1///"+vo.getRef());
@@ -71,9 +71,9 @@ public class FaqController {
 			return ".faq.error";
 		}
 	}
-	//Q&A 게시글 답글
+	//Q&A 게시글 답글 리스트
 	@RequestMapping(value="/faqcomment",produces="application/json;charset=utf-8")
-	@ResponseBody()
+	@ResponseBody
 	public String faqcomment(int qa_num) {
 		List<FaqVo> list=faqservice.faqcomment(qa_num);
 		JSONArray arr=new JSONArray();
@@ -92,5 +92,26 @@ public class FaqController {
 		}
 		System.out.println(arr);
 		return arr.toString();
+	}
+	@RequestMapping(value="/faqcomminsert", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String faqcomminsert(FaqVo vo) {			
+
+		vo.setLev(vo.getLev()+1);
+		vo.setStep(vo.getStep()+1);
+
+		System.out.println("ref1///"+vo.getRef());
+		System.out.println("lev1///"+vo.getLev());
+		System.out.println("step1///"+vo.getStep());
+	
+		System.out.println("ref"+vo.getRef());
+		System.out.println("lev"+vo.getLev());
+		System.out.println("step"+vo.getStep());
+		int result=faqservice.faqinsert(vo);
+		if(result>0) {
+			return "aaa";
+		}else {
+			return "bbb";
+		}
 	}
 }
