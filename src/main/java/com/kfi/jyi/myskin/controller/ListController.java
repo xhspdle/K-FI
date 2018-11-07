@@ -25,9 +25,10 @@ public class ListController {
 	
 	@RequestMapping(value="/mypage/myskin/list")
 	public String getMySkin(HttpSession session, Model model) { 
-		session.setAttribute("user_num", 1);
+		//session.setAttribute("user_num", 1);
 		int user_num=(Integer)session.getAttribute("user_num");
-		List<MySkinViewVo> msvlist=(List<MySkinViewVo>)service.list(1);
+		List<MySkinViewVo> msvlist=(List<MySkinViewVo>)service.list(user_num);
+		
 		model.addAttribute("msvlist",msvlist);
 		return ".mypage.myskin.list";
 	}

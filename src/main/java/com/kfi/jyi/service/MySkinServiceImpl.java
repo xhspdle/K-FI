@@ -76,7 +76,7 @@ public class MySkinServiceImpl implements CommonService {
 			msdao.insert(new MySkinVo(ms_num + 1, user_num, ms_name, ms_color, ms_msg, 0));
 			if (ms_profile == null && ms_cover == null) return 1;
 			//프로필 사진 있을 때
-			if (ms_profile.getOriginalFilename().equals("") && ms_profile !=null) {
+			if (!(ms_profile.getOriginalFilename().equals("")) && ms_profile !=null) {
 				int msp_num = mspdao.getMaxNum();
 				String msp_orgimg = ms_profile.getOriginalFilename();
 				String msp_savimg = UUID.randomUUID() + "_" + msp_orgimg;
@@ -89,7 +89,7 @@ public class MySkinServiceImpl implements CommonService {
 				mspdao.insert(new MySkinProfileVo(msp_num + 1, ms_num + 1, msp_orgimg, msp_savimg));
 			}
 			//커버 사진 있을 때
-			if ( ms_cover.getOriginalFilename().equals("") && ms_cover != null) {
+			if (!(ms_cover.getOriginalFilename().equals("")) && ms_cover != null) {
 				int msc_num = mscdao.getMaxNum();
 				String msc_orgimg = ms_cover.getOriginalFilename();
 				String msc_savimg = UUID.randomUUID() + "_" + msc_orgimg;
@@ -105,8 +105,7 @@ public class MySkinServiceImpl implements CommonService {
 		} catch (Exception e) {
 			for (int i = 0; i < savimg.length; i++) {
 				File file = new File(uploadPath + "\\" + savimg[i]);
-				if (file.delete())
-					System.out.println("파일 삭제 성공");
+				if (file.delete()) System.out.println("파일 삭제 성공");
 			}
 			System.out.println(e.getMessage());
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
