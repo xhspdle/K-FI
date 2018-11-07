@@ -246,16 +246,18 @@ table tr td{
 	cursor:pointer;
 }
 
-#aaaaa{
+#abpopup{
 	margin: auto;
 	display : none;
-	background-color:green;
-	position: absolute;
+	position: fixed;
 	width: 25%;
-	height: 25%;
-	border: 10px solid red;
+	height: 45%;
 	top: 100px;
     left: 80px;
+    border-radius: 10px;
+    padding: 10px;
+  /*   background-color: red; */
+    background-image: url("../resources/images/1.png");
 }
 
 #userinsert_btn{

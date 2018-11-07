@@ -86,49 +86,90 @@
 			}); 
 		});
 	});
-	
+/* 	
 	$(function(){
-			alert("aaa");	
-			$.getJSON("<c:url value='/abpopup'/>",function(data){
-			for(var i=0;i<data.length;i++){
-				console.log(data[i].ab_title);
-				console.log(data[i].ab_num);
-				console.log(data[i].ab_content);
-				var html=template(data[i].ab_title,data[i].ab_content);
-				$("#aaaaa").append(html);
-				$("#aaaaa").css("display","block");
- 				setCookie( "Notice", "done" , 1);
-				 self.close();  
+		if(checkpopup("close")){
+			$("#abpopup").css("display","none");
+		}else{
+			$.getJSON("<c:url value='/abpopup'/>",function(data){	
+				for(var i=0;i<data.length;i++){
+					console.log(data[i].ab_title);
+					console.log(data[i].ab_num);
+					console.log(data[i].ab_content);
+					var html=template(data[i].ab_title,data[i].ab_content);
+					$("#abpopupcontent").append(html);
+					$("#abpopup").css("display","block");		 
 				};
 			});
-			
-		});
-
-
-	/* 
-	setTimeout("abpopup()", 5000); */
- 	
- 	function template(ab_title,ab_content){
- 		var html="<div>"+ab_title+"</div><div>"+ab_content+"</div>";
+		};
+	});*/
+	function template(ab_title,ab_content){
+ 		var html="<div class='well'>Basic Well"
+ 				+"<div>"+ab_title+"</div>"
+ 				+"<div>"+ab_content+"</div>"
+ 				+"</div>"
 		return html;
  	}
- 	
-/* 	function setCookie (name, value, expiredays ) {
-	    var todayDate = new Date();
-	    todayDate.setDate( todayDate.getDate() + expiredays );
-	    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
-	}  */
-/* 	function getCookie () {
-	    var cookiedata = document.cookie;
-	    if ( cookiedata.indexOf("todayCookier=done") < 0 ){
-	         $("#aaaaa").css("display","block");
-	    }
-	    else {
-	    	$("#aaaaa").css("display","none");
-	    }
-	} */
 
- 	
+	 
+	$(function(){
+		if(checkpopup("close")){
+			$("#bbb").css("display","none");
+		}else{
+			$.getJSON("<c:url value='/abpopup'/>",function(data){	
+				if(data!=null && data!=""){
+					$("#bbb").css("display","block");
+				}
+				$("#popupbtn").click(function(){
+					$("#abpopupcontent").empty();
+					alert("시작");
+					console.log("시작");
+					for(var i=0;i<data.length;i++){
+						console.log(data[i].ab_title);
+						console.log(data[i].ab_num);
+						console.log(data[i].ab_content);
+						var html=template(data[i].ab_title,data[i].ab_content);
+						$("#abpopupcontent").append(html);					
+					};
+				});
+			});
+		};
+	});
+	 
+
+	
+ 	function setCookie(name, value, expiredays){
+ 		var today=new Date();
+ 		alert(today);
+ 		today.setDate(today.getDate()+expiredays);
+ 		document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + today.toGMTString() + ";"
+ 	}	
+ 	function checkpopup(cookiename){
+ 		var cookie= document.cookie;
+ 		alert(cookie);
+  		if(cookie.length>0){
+ 			startIndex=cookie.indexOf(cookiename);
+ 			alert(startIndex)
+ 			if(startIndex != -1){
+ 				return true;
+ 			}else{
+ 				return false;
+ 			}
+ 		}else{
+ 			return false;
+ 		}	
+ 		return false;
+ 	}
+ 	function closepopup(){
+ 		setCookie("close","close",1);
+ 		$("#bbb").css("display","none");
+ 		$("#abpopup").css("display","none");
+ 	}
+	function deletecookie(){
+		setCookie("close","",-1);
+	}
+
+
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
 <%-- <button class="btn btn-lg" data-toggle="modal"
@@ -136,6 +177,7 @@
 <c:choose>
 	<c:when test="${not empty admin}"> --%>
 <h1>공지사항</h1>
+<input type="button" onclick="deletecookie()" value="삭제">
 <table class="table table-striped">
 	<tr>
 		<th>게시물번호</th>
@@ -283,12 +325,15 @@
 		</form> --%>
 	
 
-
 		
-<div id="aaaaa">
-	
-	내용
-	<input type="button" value="닫기" onclick="$('#aaaaa').css('display','none')"> 
+<div id="abpopup">
+	<h4>공지사항</h4>		
+	<div id="abpopupcontent"></div>
+	<input class="pull-right btn btn-default" value="하루닫기" onclick="closepopup()"> 
+	<input class="pull-right btn btn-default" value="닫기"  onclick="$('#abpopup').css('display','none')">
+</div>
+<div id="bbb" style="position: fixed;bottom: 20px;right: 20px; height: 30px;width: 30px">
+	<span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:red; " onclick="$('#abpopup').css('display','block')"></span> 
 </div>
 <%-- 	</c:when>
 	<c:otherwise>

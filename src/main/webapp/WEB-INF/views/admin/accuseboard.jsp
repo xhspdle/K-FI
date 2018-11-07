@@ -161,6 +161,7 @@
 		});		
 	});
 	function acdeletecheck(ac_num){
+
 		var result=confirm("정말로????");
 		if(result==true){
 			location.href="acdelete?ac_num="+ac_num;
