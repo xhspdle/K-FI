@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-</style>
+<script src="<c:url value='/resources/js/admin.js'/>"></script>
+
 <script type="text/javascript"
 	src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>
 	
@@ -117,8 +117,12 @@
 			$("#bbb").css("display","none");
 		}else{
 			$.getJSON("<c:url value='/abpopup'/>",function(data){	
+				console.log(data);
 				if(data!=null && data!=""){
 					$("#bbb").css("display","block");
+				}else{
+					$("#bbb").css("display","none");
+					return false;
 				}
 				$("#popupbtn").click(function(){
 					$("#abpopupcontent").empty();
@@ -332,7 +336,7 @@
 	<input class="pull-right btn btn-default" value="하루닫기" onclick="closepopup()"> 
 	<input class="pull-right btn btn-default" value="닫기"  onclick="$('#abpopup').css('display','none')">
 </div>
-<div id="bbb" style="position: fixed;bottom: 20px;right: 20px; height: 30px;width: 30px">
+<div id="bbb" style="position: fixed;bottom: 20px;right: 20px; height: 30px;width: 30px   background-image: url("<c:url value='/resources/images/2.gif'/>")>
 	<span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:red; " onclick="$('#abpopup').css('display','block')"></span> 
 </div>
 <%-- 	</c:when>

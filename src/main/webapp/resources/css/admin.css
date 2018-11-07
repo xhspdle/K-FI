@@ -256,8 +256,8 @@ table tr td{
     left: 80px;
     border-radius: 10px;
     padding: 10px;
-  /*   background-color: red; */
-    background-image: url("../resources/images/1.png");
+	background-color: red;
+/*     background-image: url("../resources/images/1.png");  */
 }
 
 #userinsert_btn{
