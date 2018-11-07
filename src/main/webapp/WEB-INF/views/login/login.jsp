@@ -20,8 +20,8 @@
 		비밀번호<input type="password" name="userPwd" id="userPwd">
 		<input type="submit" value="로그인"><br>
 		<a href="<c:url value='/login/join'/>">회원가입</a>
-		<a href="<c:url value='/login/findId'/>">아이디 찾기</a>
-		<a href="<c:url value='/login/findPwd'/>">비밀번호 찾기</a>
+		<a href="<c:url value='/login/findid'/>">아이디 찾기</a>
+		<a href="<c:url value='/login/findpwd'/>">비밀번호 찾기</a>
 	</form>
 </body>
 </html>

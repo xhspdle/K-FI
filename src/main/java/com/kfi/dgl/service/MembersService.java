@@ -73,7 +73,12 @@ public class MembersService {
 	public int emailCheck(String user_email) {
 		return dao.emailCheck(user_email);
 	}
-
+	public String findId(String user_email) {
+		return dao.findId(user_email);
+	}
+	public int findPwd(String user_id) {
+		return dao.findPwd(user_id);
+	}
 	// admin에서 사용
 	public MembersVo select(int user_num) {
 		return dao.select(user_num);

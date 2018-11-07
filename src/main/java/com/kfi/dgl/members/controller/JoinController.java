@@ -57,7 +57,6 @@ public class JoinController {
 			sendMail.setSubject("[이메일 인증]");
 			sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
 					.append("<a href='http://localhost:8082/kfi/mailcert?user_email="+vo.getUser_email())
-					
 					.append("' target='_blenk'>이메일 인증 확인</a>").toString());
 			sendMail.setFrom("tester241192@gmail.com", "인증인증~!");
 			sendMail.setTo(vo.getUser_email());
@@ -115,6 +114,8 @@ public class JoinController {
 		MembersVo vo = new MembersVo();
 		vo.setUser_email(user_email);
 		service.getverify(user_email);
+		System.out.println(user_email);
+		System.out.println(vo.getUser_certi());
 		return "redirect:/login/login";
 	}
 }

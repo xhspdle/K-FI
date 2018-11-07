@@ -21,8 +21,8 @@
 
 	<!-- 가입 -->
  	 <insert id="join" parameterType="logmembers">
-		insert into members values
-		(#{user_num}, #{user_id},#{user_nickname}, #{user_pwd}, #{user_email}, sysdate,0,0)
+		insert into members values 
+		(#{user_num}, #{user_id}, #{user_pwd}, #{user_nickname}, #{user_email}, sysdate,0,0)
 	</insert>
 	 
 	<!-- 로그인 -->
@@ -69,8 +69,14 @@
 	<select id="getCount" parameterType="hashmap" resultType="int">
 		select NVL(count(user_num),0) cnt from members
 	</select>
-	
-	
+	 <!-- 아이디 찾기
+	<select id="findId" parameterType="string" resultType="string">
+		select user_id from members where user_email= #{user_email}
+	</select>
+	비밀번호 찾기(재설정)
+	<update id="findId" parameterType="logmembers" >
+		update members set user_pwd=#{user_pwd} where user_id=#{user_id}
+	</update> -->
 	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->
 	<select id="list" parameterType="hashmap" resultType="logmembers">

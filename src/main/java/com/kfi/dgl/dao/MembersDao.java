@@ -57,6 +57,14 @@ public class MembersDao {
 	public int findEmail(MembersVo vo) {
 		return sqlSession.selectOne(NAMESPACE + ".findEmail", vo);
 	}
+	//아이디 찾기
+	public String findId(String user_email) {
+		return sqlSession.selectOne(NAMESPACE + ".findId", user_email);
+	}
+	//비밀번호 찾기 (재설정)
+	public int findPwd(String user_id) {
+		return sqlSession.update(NAMESPACE + ".findPWD", user_id);
+	}
 	////////////////////////////admin에서 사용
 	public List<MembersVo> list(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE +".list",map);
