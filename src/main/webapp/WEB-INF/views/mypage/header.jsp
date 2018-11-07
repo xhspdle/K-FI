@@ -8,7 +8,7 @@
 		<p><span style="border-bottom: 2px solid white;">자기상태글 블라블라블라</span></p> 
 	</div>
 </div>
-<nav class="navbar navbar-default" data-spy="affix" data-offset-top="500" id="navAffix"><!--  navbar-fixed-top  -->
+<nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">

@@ -28,6 +28,6 @@
 		select * from my_video
 	</select>
 	<select id="select" parameterType="int" resultType="myvideo">
-		select * from my_video where mb_num=#{mb_num}
+		select * from my_video where mb_num=#{mb_num} order by mv_num asc
 	</select>
 </mapper>

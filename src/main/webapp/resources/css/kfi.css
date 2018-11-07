@@ -377,6 +377,8 @@ input[type='file'].myboardFile {
 	display: none;
 }
 .progress {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
 	margin-bottom: 0 !important;
 	opacity: 0;
 }

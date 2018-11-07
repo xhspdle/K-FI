@@ -2,7 +2,7 @@
 	scroll : layout.jsp
  */
 $(document).ready(function(){
-  var documentPageContext=$("#getPageContext").val();
+  var getPageContext=$("#getPageContext").val();
   $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
     if (this.hash !== "") {
       event.preventDefault();
@@ -25,11 +25,13 @@ $(document).ready(function(){
         }
     });
   });
+  
   $(".nav > .dropdown").hover(function(){
 	  $(this).find("ul").stop().slideDown(); 
   },function(){
 	  $(this).find("ul").stop().slideUp();
   });
+  
   $("#search").on('click',function(){
 	  $.searchBig();
 	  $("#headerSearch").fadeIn('slow',function(){
@@ -87,91 +89,68 @@ $(document).ready(function(){
 	  event.preventDefault();
 	  $("#headerSearch").css('display','none');
   });
+  
   $("#writeBtn").click(function(){
 	 $("#writeModal").modal();
   });
   $("#writeModal").on('show.bs.modal',function(){
 	  $('body').addClass('test');
   });
-  var imgUpload=$("#imgUpload");
-  $("#fileP1").change(function(event){
+  
+  $(document).on('change',"[name='fileP']",function(event){
 	  if(event.target.files[0]!==undefined){
 		  var tmppath=URL.createObjectURL(event.target.files[0]);
-		  $("#fimg1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
+		  $(this).next().fadeIn("fast").attr("src", URL.createObjectURL(event.target.files[0]));
 		  URL.revokeObjectURL(event.target.files[0]);
 	  }else{
-		  $("#fimg1").fadeOut("slow");
+		  $(this).next().fadeOut("slow");
 	  }
-	  if($("#imgUpload").children().length<=3){
-		  $("<button type='button' class='btn btn-default btn-block' id='addImg'>" +
-	  		"추가 업로드</button>").appendTo(imgUpload);
+	  if($(".imgUpload").children().length<=3){
+		  $("<button type='button' class='btn btn-default btn-block addImg'>" +
+	  		"Upload More?</button>").appendTo(".imgUpload");
 		  var n=2;
-		  $("#imgUpload").on('click',"#addImg",function(){
-			  //시간되면 추가버튼 눌렀을때 나타나는 버튼 위치로 스크롤바 이동시키기
+		  $(".imgUpload").on('click',".addImg",function(){
 			  if(n>=6){
-				  $(this).css('color','red');
-				  $(this).html("사진은 5장까지 업로드 가능합니다");
+				  $(this).css('color',"red");
+				  $(this).html("Up to 5 photos can be uploaded")
 			  }else{
-				  $("<label for='fileP"+ n +"' class='btn btn-primary btn-block btn-file'>" +
-				  	"<span class='glyphicon glyphicon-picture'></span> Upload Photo"+n +"</label>" +
-				  	"<input type='file' class='form-control myboardFile' id='fileP"+n +"' name='fileP' accept='.jpg, .jpeg, .png, .gif'>" +
-				  	"<img id='fimg"+ n++ +"' src='' style='display:none;width:100%'>")
-				  .appendTo(imgUpload);
-				  $("#imgUpload").on('change', ".myboardFile", function(event1){
-					  if(event1.target.files[0]!==undefined){
-						  var tmppath1=URL.createObjectURL(event1.target.files[0]);
-						  $(this).next().fadeIn("fast").prop("src",URL.createObjectURL(event1.target.files[0]));
-						  URL.revokeObjectURL(event1.target.files[0]);
-					  }else{
-						  $(this).next().fadeOut("slow");
-					  }
-				  });
+				  fileImgTemplate=document.querySelector("#fileImgTemplate").innerHTML;
+				  let attachImg=fileImgTemplate.replace("{mp_savimg}", '')
+				  			.replace(/{i}/gi, n)
+				  			.replace("{label}", "Upload Photo" + n++);
+				  $(".imgUpload").append(attachImg);
 			  }
 		  });
-		  
 	  }
-/*	  $("#imgUpload").on('change',".myboardFile",function(event){
-		  
-	  });*/
   });
-  var vidUpload=$("#vidUpload");
-  $("#fileV1").change(function(event){
+  $(document).on('change',"[name='fileV']",function(event){
 	  if(event.target.files[0]!==undefined){
 		  var tmppath=URL.createObjectURL(event.target.files[0]);
-		  $("#fvid1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
+		  $(this).next().fadeIn("fast").attr("src", URL.createObjectURL(event.target.files[0]));
 		  URL.revokeObjectURL(event.target.files[0]);
 	  }else{
-		  $("#fvid1").fadeOut("slow");
+		  $(this).next().fadeOut("slow");
 	  }
-	  if($("#vidUpload").children().length<=3){
-		  $("<button type='button' class='btn btn-default btn-block' id='addVid'>" +
-	  		"추가 업로드</button>").appendTo(vidUpload);
-		  var nn=2;
-		  $("#vidUpload").on('click',"#addVid",function(){
-			  if(nn>=3){
-				  $(this).css('color','red');
-				  $(this).html("영상은 2개까지 업로드 가능합니다");
+	  if($(".vidUpload").children().length<=3){
+		  $("<button type='button' class='btn btn-default btn-block addVid'>" +
+		  "Upload More?</button>").appendTo(".vidUpload");
+		  var n=2;
+		  $(".vidUpload").on('click',".addVid",function(){
+			  if(n>=3){
+				  $(this).css('color',"red");
+				  $(this).html("Up to 2 videos can be uploaded")
 			  }else{
-				  $("<label for='fileV"+ nn +"' class='btn btn-info btn-block btn-file'>" +
-				  	"<span class='glyphicon glyphicon-facetime-video'></span> Upload Video"+nn +"</label>" +
-				  	"<input type='file' class='form-control myboardFile' id='fileV"+nn +"' name='fileV' accept='.avi, .wmv, .mp4'>" +
-				  	"<video id='fvid"+ nn++ +"' controls autoplay muted='muted' loop src='' style='display:none;width:100%'>")
-				  .appendTo(vidUpload);
-				  $("#vidUpload").on('change','.myboardFile' + nn, function(event2){
-					  if(event2.target.files[0]!==undefined){
-						  var tmppath2=URL.createObjectURL(event2.target.files[0]);
-						  $(this).next().fadeIn("fast").prop("src",URL.createObjectURL(event2.target.files[0]));
-						  URL.revokeObjectURL(event2.target.files[0]);
-					  }else{
-						  $(this).next().fadeOut("slow");
-					  }
-				  });
-			  }  
+				  fileVidTemplate=document.querySelector("#fileVidTemplate").innerHTML;
+				  let attachVid=fileVidTemplate.replace("{mv_savvid}", '')
+				  .replace(/{i}/gi, n)
+				  .replace("{label}", "Upload Video" + n++);
+				  $(".vidUpload").append(attachVid);
+			  }
 		  });
 	  }
   });
+  
   $("#sendServer").click(function(e){
-	  var getPageContext=$("#getPageContext").val();
 	  e.preventDefault();
 	  $(this).prop('disabled',true);
 	  var form=document.frm;
@@ -226,9 +205,9 @@ $(document).ready(function(){
 		 $("#sendServer").prop('disabled',false);
 	  });
   });
+  
   var sameDate='';
   $.getList=function(pageNum,keyword){
-	  	var getPageContext=$("#getPageContext").val();
 	  	var getSession=$("#getSession").val();
 		$.getJSON(getPageContext + "/mypage/myboard/list",
 			{"pageNum":pageNum,"keyword":keyword},
@@ -336,6 +315,7 @@ $(document).ready(function(){
   $.getListMore=function(){	  
 	  $.getList(more++);
   }
+  
   $("#myBoardSelect .postTitle > span").on({
 	  click: function(){
 		  location.reload();
@@ -343,9 +323,9 @@ $(document).ready(function(){
 		  $(this).css("cursor","pointer");
 	  }
   });
+  
   $("#commentForm > button[type='submit']").click(function(e){
 	  e.preventDefault();
-	  var getPageContext=$("#getPageContext").val();
 	  var mb_num=$("#commentForm > input[type='hidden']").val();
 	  var myc_content=$("#commentForm > input[type='text']").val();
 	  $.getJSON(getPageContext + "/mypage/mycomment/insert",
@@ -366,8 +346,8 @@ $(document).ready(function(){
 				  },5000);
 			  });
   });
+  
   $.getCommentList=function(pageNum){
-	  var getPageContext=$("#getPageContext").val();
 	  var getSession=$("#getSession").val();
 	  var boardWriter=$("#boardWriter").val();
 	  var mb_num=$("#boardNum").val();
@@ -445,10 +425,9 @@ $(document).ready(function(){
   if($("#myCommentListHere").val()!==undefined){
 	  $.getCommentList();
   }
-  $('[data-toggle="tooltip"]').tooltip();
+  
   $("#commentList").on('click',".thumbsUp",function(e){
 	  e.preventDefault();
-	  var getPageContext=$("#getPageContext").val();
 	  var myc_num=parseInt($(this).attr("data-comm-num"));
 	  $.getJSON(getPageContext + "/mypage/mycommentlike/insert",
 			  {'myc_num':myc_num},
@@ -469,9 +448,9 @@ $(document).ready(function(){
 				  },3000);
 			  });
   });
+  
   $("div.likes > a").click(function(e){
 	  e.preventDefault();
-	  var getPageContext=$("#getPageContext").val();
 	  var mb_num=parseInt($(this).attr("data-board-num"));
 	  $.getJSON(getPageContext + "/mypage/myboardlike/insert",
 			  {'mb_num':mb_num},
@@ -491,9 +470,9 @@ $(document).ready(function(){
 				  },3000);
 			  });
   });
+  
   $("#commentList").on('click',".dropDownDelete",function(e){
 	  e.preventDefault();
-	  var getPageContext=$("#getPageContext").val();
 	  var myc_num=parseInt($(this).attr("data-comm-num"));
 	  $("#deleteMsg").modal("show");
 	  /*
@@ -506,6 +485,7 @@ $(document).ready(function(){
 		  $("#deleteMsg").modal("hide");
 	  });
   });
+  
   $.commentDelete=function(getPageContext, myc_num){
 	  $.getJSON(getPageContext + "/mypage/mycomment/delete",
 			  {'myc_num':myc_num},
@@ -517,14 +497,13 @@ $(document).ready(function(){
 				  }
 			  });
   }
+  
   var updateCnt=0;
   $("#commentList").on('click',".dropDownUpdate",function(e){
 	  e.preventDefault();
-	  var getPageContext=$("#getPageContext").val();
 	  var myc_num=parseInt($(this).attr("data-comm-num"));
 	  var p=$(this).parent().parent().parent().parent().find("p");
 	  var myc_content=$(p).text();
-	  console.log($(p).parent().children().length);
 	  if($(p).parent().children().length>=8){
 		  return;
 	  }
@@ -538,7 +517,6 @@ $(document).ready(function(){
   });
   $("#commentList").on('submit',".updateFrm",function(e){
 	  e.preventDefault();
-	  var getPageContext=$("#getPageContext").val();
 	  /*
 	   * [ new FormData() ]
 	   * FormData takes the dom reference as the argument, not jQuery wrapper.
@@ -576,6 +554,7 @@ $(document).ready(function(){
 		  }
 	  });
   });
+  
   $.msgBox=function(msg){
 	  var showMsg='';
 	  if(msg==='fail'){
@@ -605,22 +584,20 @@ $(document).ready(function(){
 		  },3500);
 	  },500);
   }
-  $(document).on('click',"[data-toggle='popover']",function(){
-	  
-  });
+  
   $(document).on('focus',"[data-toggle='popover']",function(){
 	  $("button.dropdown-toggle").attr("data-toggle","off");
 	  $("[data-toggle='popover']").popover({
 		  title: "<h3><strong>Wanna delete?</strong></h3>" + 
 		  		 "<p>please enter your password</p>",
 		  content: "<form class='form-horizontal boardDelete' method='post' " + 
-		  		   "action='"+ documentPageContext +"/mypage/myboard/delete'>" +
+		  		   "action='"+ getPageContext +"/mypage/myboard/delete'>" +
 		  		   "<div class='input-group input-group-lg'>" +
 		  		   "<input type='hidden' name='mb_num' value='"+ $("[data-toggle='popover']").attr("data-mb-num") +"'>" +
 		  		   "<input type='password' name='user_pwd' class='form-control' >" + 
 		  		   "<div class='input-group-btn'>" +
-		  		   "<button class='btn btn-warning' type='submit'>" +
-		  		   "<i class='glyphicon glyphicon-lock'></i></button></div></div></form>",
+		  		   "<button class='btn btn-danger' type='submit'>" +
+		  		   "<i class='glyphicon glyphicon-lock' style='font-size:24px;'></i></button></div></div></form>",
 		  html: true,
 		  placement: "left"
 	  });
@@ -628,9 +605,9 @@ $(document).ready(function(){
   $(document).on('focusout',"[data-toggle='popover']",function(){
 	  $("button.dropdown-toggle").attr("data-toggle","dropdown");
   });
+  
   $(document).on('submit',".boardDelete",function(e){
 	  e.preventDefault();
-	  var getPageContext=$("#getPageContext").val();
 	  var formData=new FormData($(this).get(0));
 	  $.ajax({
 		  url: getPageContext + "/mypage/myboard/delete",
@@ -649,21 +626,100 @@ $(document).ready(function(){
 		  }
 	  });
   });
+  
   $(document).on('click',"[href='#updateModal']",function(event){
-	  console.log("업데이트모달뿅");
 	  var mb_num=$(this).attr("data-mb-num");
-	  $.getJSON(documentPageContext + "/mypage/myboard/updateModal",
+	  $("#updateBody").empty();
+	  $.getJSON(getPageContext + "/mypage/myboard/updateModal",
 			  {"mb_num":mb_num},
 			  function(data){
 				  var boardVo=data.boardVo;
 				  var user_num=boardVo.user_num;
+				  var mb_num=boardVo.mb_num;
 				  var mb_title=boardVo.mb_title;
 				  var mb_content=boardVo.mb_content;
 				  var mb_date=boardVo.mb_date;
-				  html=document.querySelector("#commentTemplate").innerHTML;
-				  var resultHTML=html.replace("{mb_title}");
-				  
+				  var attachImgList=document.createElement("div");
+				  $(data.imgList).each(function(i,json){
+					  html=document.querySelector("#fileImgTemplate").innerHTML;
+					  var attachImg=html.replace("{mp_savimg}", getPageContext+"/resources/upload/img/" +json.mp_savimg)
+					  			.replace(/{i}/gi, i+1)
+					  			.replace("{label}", "Click, if you want change")
+					  			.replace("display:none", "display:block");
+					  $(attachImgList).append(attachImg);
+				  });
+				  var attachVidList=document.createElement("div");
+				  $(data.vidList).each(function(i,json){
+					  html=document.querySelector("#fileVidTemplate").innerHTML;
+					  var attachVid=html.replace("{mv_savvid}", getPageContext+"/resources/upload/vid/" +json.mv_savvid)
+					  			.replace(/{i}/gi, i+1)
+					  			.replace("{label}", "Click, if you want change")
+					  			.replace("display:none", "display:block");
+					  $(attachVidList).append(attachVid);
+				  });				  
+				  html=document.querySelector("#updateTemplate").innerHTML;
+				  var resultHTML=html.replace("{mb_num}", mb_num)
+				  		.replace("{mb_title}", mb_title)
+				  		.replace("{mb_content}", mb_content)
+				  		.replace("{attachImgList}", $(attachImgList).html())
+				  		.replace("{attachVidList}", $(attachVidList).html());
+				  $("#updateBody").append(resultHTML);
 			  });
+  });
+  
+  $(document).on('submit',"[name='frmUpdate']",function(event){
+	  event.preventDefault();
+	  $("#sendServer_up").prop('disabled', true);
+	  var formData=new FormData($(this).get(0));
+	  var ajaxReq=$.ajax({
+		 url: getPageContext + "/mypage/myboard/update",
+		 type: 'post',
+		 data: formData,
+		 cache: false,
+		 contentType: false,
+		 processData: false,
+		 xhr: function(){
+			 var xhr=$.ajaxSettings.xhr();
+			 xhr.upload.onprogress=function(event){
+				 var perc=Math.round((event.loaded/event.total) * 100);
+				 $(".progress").css("opacity", "1");
+				 $(".progress-bar").css("width", perc + "%");
+				 $(".progress-bar").prop("aria-valuenow", perc);
+				 $(".progress-bar").text(perc + "%");
+			 }
+			 return xhr;
+		 },
+		 beforeSend: function(xhr){
+			 $("#updateMsg").text("");
+			 $(".progress-bar").text("");
+			 $(".progress-bar").css("width", "0%");
+			 $(".progress-bar").prop("aria-valuenow", "0");
+		 }
+	  });
+	  ajaxReq.done(function(msg){
+		  $("#updateMsg").text(msg);
+		  $("input[type='file']").each(function(){
+				 $(this).val('');
+		  });
+		  $("#sendServer_up").prop("disabled", false);
+		  if(msg=='Edit Success'){
+			  setTimeout(function(){
+				  location.href=getPageContext + "/mypage/main";
+			  },1500);
+		  }else{
+			  $("#updateMsg").css("color","red");
+			  $("#updateMsg").css("font-weight","bold");
+			  setTimeout(function(){
+				  $("#updateModal").modal("hide");
+				  location.href=getPageContext + "/mypage/main";
+			  },2500);
+		  }
+	  });
+	  ajaxReq.fail(function(jqXHR){
+		  $("#updateMsg").text(jqXHR.responseText + '(' + jqXHR.status +
+				  ' - ' + jqXHR.statusText + ')');
+		  $("#sendServer_up").prop('disabled',false);
+	  });
   });
 });
 

@@ -132,14 +132,94 @@ public class MyBoardServiceImpl implements CommonService{
 			return -1;
 		}
 	}
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public int update(Object data) {
-		MyBoardVo vo=(MyBoardVo)data;
-		return mbDao.update(vo);
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		MyBoardVo mbVo=(MyBoardVo)map.get("mbVo");
+		MultipartFile[] fileP=(MultipartFile[])map.get("fileP");
+		MultipartFile[] fileV=(MultipartFile[])map.get("fileV");
+		HttpSession session=(HttpSession)map.get("session");
+		String uploadPathP=session.getServletContext().getRealPath("/resources/upload/img");
+		String uploadPathV=session.getServletContext().getRealPath("/resources/upload/vid");
+		InputStream is=null;
+		FileOutputStream fos=null;
+		ArrayList<String> updatedPhoto=new ArrayList<String>();
+		ArrayList<String> updatedVideo=new ArrayList<String>();
+		List<Object> photoList=(List<Object>)mpDao.select(mbVo.getMb_num());
+		List<Object> videoList=(List<Object>)mvDao.select(mbVo.getMb_num());
+		try {
+			mbDao.update(mbVo);
+			for(int i=0;i<fileP.length;i++) {
+				String mp_orgimg=fileP[i].getOriginalFilename();
+				String format=mp_orgimg.substring(mp_orgimg.lastIndexOf(".") + 1);
+				String mType=ImgUtil.getImgType(format);
+				System.out.println("mp_orgimg:" + mp_orgimg);
+				if(mp_orgimg=="") continue;
+				if(mType==null) {
+					throw new Exception("*." + format + " is unsupported img file types");
+				}
+				String mp_savimg=UUID.randomUUID() + "_" + mp_orgimg;
+				is=fileP[i].getInputStream();
+				fos=new FileOutputStream(uploadPathP + "\\" + mp_savimg);
+				FileCopyUtils.copy(is, fos);
+				is.close();
+				fos.close();
+				System.out.println(uploadPathP + "경로에 사진 업로드 성공!");
+				updatedPhoto.add(mp_savimg);
+				MyPhotoVo mpVo=(MyPhotoVo)photoList.get(i);
+				mpDao.update(new MyPhotoVo(mpVo.getMp_num(), 0, mp_orgimg, mp_savimg));
+				
+				File f=new File(uploadPathP + "\\" + mpVo.getMp_savimg());
+				if(!f.delete()) {
+					throw new Exception("[사진삭제오류]" +photoList.size()+1 + "개 중 " + i+1 +"번째 파일에서 오류 발생");
+				}
+				System.out.println(uploadPathP + "경로에 사진 삭제 성공!");
+			}
+			for(int i=0;i<fileV.length;i++) {
+				String mv_orgvid=fileV[i].getOriginalFilename();
+				String format=mv_orgvid.substring(mv_orgvid.lastIndexOf(".") + 1);
+				String mType=VidUtil.getVidType(format);
+				if(mv_orgvid=="") continue;
+				if(mType==null) {
+					throw new Exception("*." + format + " is unsupported vid file types");
+				}
+				String mv_savvid=UUID.randomUUID() + "_" + mv_orgvid;
+				is=fileV[i].getInputStream();
+				fos=new FileOutputStream(uploadPathV + "\\" + mv_savvid);
+				FileCopyUtils.copy(is, fos);
+				is.close();
+				fos.close();
+				System.out.println(uploadPathV + "경로에 영상 업로드 성공!");
+				updatedVideo.add(mv_savvid);
+				MyVideoVo mvVo=(MyVideoVo)videoList.get(i);
+				mvDao.update(new MyVideoVo(mvVo.getMv_num(), 0, mv_orgvid, mv_savvid));
+				
+				File f=new File(uploadPathV + "\\" + mvVo.getMv_savvid());
+				if(!f.delete()) {
+					throw new Exception("[영상삭제오류]" +videoList.size()+1 + "개 중 " + i+1 +"번째 파일에서 오류 발생");
+				}
+				System.out.println(uploadPathV + "경로에 영상 삭제 성공!");
+			}
+		}catch(Exception e) {
+			File f=null;
+			for(String delPhoto: updatedPhoto) {
+				f=new File(uploadPathP + "\\" + delPhoto);
+				if(f.delete()) System.out.println(delPhoto + "파일 DB업데이트 실패, 서버에서 삭제 완료!"); 
+			}
+			for(String delVideo: updatedVideo) {
+				f=new File(uploadPathV + "\\" + delVideo);
+				if(f.delete()) System.out.println(delVideo + "파일 DB업데이트 실패, 서버에서 삭제 완료!");
+			}
+			e.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return -1;
+		}
+		return 1;
 	}
 	@SuppressWarnings("unchecked")
-	@Transactional
+	//@Transactional : on delete cascade
 	@Override
 	public int delete(Object data) {
 		HashMap<String, Object> map=(HashMap<String, Object>)data;

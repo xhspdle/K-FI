@@ -28,7 +28,7 @@
 			<if test="mb_title!=null and mb_title!=''">mb_title=#{mb_title},</if>
 			<if test="mb_content!=null and mb_content!=''">mb_content=#{mb_content}</if>
 		</set>
-		where mb_num=#{mb_num}
+		where mb_num=#{mb_num} and user_num=#{user_num}
 	</update>
 	<delete id="delete" parameterType="int">
 		delete from my_board where mb_num=#{mb_num}
