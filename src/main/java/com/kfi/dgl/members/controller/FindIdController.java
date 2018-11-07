@@ -1,4 +1,4 @@
-/*package com.kfi.dgl.members.controller;
+package com.kfi.dgl.members.controller;
 
 import java.io.UnsupportedEncodingException;
 
@@ -20,16 +20,15 @@ public class FindIdController {
 		MembersService service;
 		@Autowired
 		JavaMailSender Mailsender;
-		@RequestMapping(value="/findId", method=RequestMethod.GET)
+		@RequestMapping(value="/login/findid", method=RequestMethod.GET)
 		public String findId() {
-			return "/findId";
+			return "/login/findId";
 		}
 		
-		@RequestMapping(value="/findId", method=RequestMethod.POST)
+	/*	@RequestMapping(value="/login/findid", method=RequestMethod.POST)
 		public String findId(MembersVo vo, HttpSession session, String user_email) throws MessagingException, UnsupportedEncodingException {
 			service.findId(user_email);
 				
-			return "/findId";
-		}
+			return "/login/findId";
+		}*/
 }
-*/
