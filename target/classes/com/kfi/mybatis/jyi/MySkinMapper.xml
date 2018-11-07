@@ -20,4 +20,9 @@
 		update my_skin set ms_name=#{ms_name}, ms_color=#{ms_color}, ms_msg=#{ms_msg}, ms_using=#{ms_using} where ms_num=#{ms_num}
 	</update>
 
+	<select id="getCount_myskin" parameterType="int" resultType="int">
+		select NVL(count(ms_num),0) from my_skin where user_num=#{user_num}
+	</select>
+	
+
 </mapper>

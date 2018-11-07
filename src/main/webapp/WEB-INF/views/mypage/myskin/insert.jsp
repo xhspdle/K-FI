@@ -11,9 +11,9 @@
 		<div>
 			<img src="<c:url value='/resources/images/default-profile.png'/>" alt="new profile" 
 			class="img-circle" id="profile_preview" style="margin-top: 60px;width: 150px;height: 150px;background-color: white;
-			display: block;margin-left: auto;margin-right: auto;"><br>
+			display: block;margin-left: auto;margin-right: auto;">
 			<p><span id="preview_msg" style="width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;">상태메세지 미리보기</span></p> 
-			<div class="collapse navbar-collapse" id="preview_navbar" >
+			<div class="collapse navbar-collapse" id="preview_navbar" style="border-radius:10px;">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#contact">COMMUNITY</a></li>
 					<li class="dropdown">
@@ -27,7 +27,7 @@
 							<li><a href="#contact">로그아웃</a></li>
 						</ul>
 					</li>
-					<li><button type="button" class="btn btn-default btn-lg">
+					<li><button type="button" class="btn btn-default btn-lg" style="border-radius:10px;">
 					<span class="glyphicon glyphicon-search"></span></button></li>
 				</ul>
 			</div>
@@ -42,7 +42,7 @@
       		</div>
       		<label class="control-label col-sm-1" for="color">배경색:</label>
       		<div class="col-sm-2"> 
-      			<input type="color" id="ms_color" name="ms_color">
+      			<input type="color" id="ms_color" name="ms_color" value="#00cee8">
         	</div>
     	</div>
 	    <div class="form-group">

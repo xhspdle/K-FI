@@ -6,12 +6,18 @@
 	<div class="col-sm" style="background-color: white;width:20%;height:10%;">
 	<h2>My Skin Update</h2>
 	</div>
-	<!-- 미리보기 설정(js) -->
+	<!-- 미리보기 설정(js) -->'
+	<c:if test="${msvlist.msc_orgimg eq null }">
+		<c:set var="background" value="background-color:#00cee8;"/>
+	</c:if>		
+	<c:if test="${msvlist.msc_orgimg ne null}">
+		<c:set var="background" value="background: url('${pageContext.request.contextPath }/resources/upload/img/${msvlist.msc_savimg }');"/>
+	</c:if>
 	<div class="jumbotron col-sm" id="preview_cover" 
-	style="margin:auto;width:80%;background:url('${pageContext.request.contextPath}/resources/upload/img/${msvlist.msc_savimg }')">
+	style="margin:auto;width:80%;${background}')">
 		<div>
 			<c:choose>
-					<c:when test="${msvlist.msp_orgimg =='default-profile.png' }">
+					<c:when test="${msvlist.msp_orgimg eq null }">
 					<img id="profile_preview" src="<c:url value='/resources/images/default-profile.png'/>" class="img-circle"
 						style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
 						margin-left: auto;margin-right: auto;">
@@ -23,21 +29,13 @@
 					</c:otherwise>
 				</c:choose>
 			<p><span id="preview_msg" style="width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;">${msvlist.ms_msg }</span></p> 
-			<div class="collapse navbar-collapse" id="preview_navbar"  style="background-color: ${msvlist.ms_color}" >
+			<div class="collapse navbar-collapse" id="preview_navbar"  style="background-color: ${msvlist.ms_color};border-radius:10px;" >
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#contact">COMMUNITY</a></li>
 					<li class="dropdown">
 						<a href="#contact">MYPAGE</a>
-						<ul class="dropdown-menu">
-							<li><a href="#contact">글쓰기</a></li>
-							<li><a href="#contact">마이커뮤니티</a></li>
-							<li><a href="#contact">일정보기</a></li>
-							<li><a href="#contact">MYSKIN</a></li>
-							<li><a href="#contact">회원정보</a></li>
-							<li><a href="#contact">로그아웃</a></li>
-						</ul>
 					</li>
-					<li><button type="button" class="btn btn-default btn-lg" style="border:${msvlist.ms_color} ;background-color: ${msvlist.ms_color}">
+					<li><button type="button" class="btn btn-default btn-lg" style="border:${msvlist.ms_color} ;background-color: ${msvlist.ms_color};border-radius:10px;">
 					<span class="glyphicon glyphicon-search"></span></button></li>
 				</ul>
 			</div>

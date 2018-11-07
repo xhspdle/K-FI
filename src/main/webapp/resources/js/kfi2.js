@@ -185,9 +185,15 @@ $(function() {
 	});
 	
 	
-	
-	
-	
-	
-	
 });
+
+/* 해당 스킨 적용하기 */
+function mySkinApply(num){
+	var getPageContext=$("#getPageContext").val();
+	$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:num},function(data){
+		var vo=data[0];
+		alert(vo);
+		$("#profileImg").prop('src',getPageContext+'/resources/upload/img/'+vo.msp_savimg);
+		$("#mypageJumbo > div:after").css('background','url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')');
+	});
+}

@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.jyi.service.MySkinServiceImpl;
 import com.kfi.jyi.vo.MySkinViewVo;
@@ -23,13 +25,20 @@ public class ListController {
 	
 	@RequestMapping(value="/mypage/myskin/list")
 	public String getMySkin(HttpSession session, Model model) { 
-		//session.setAttribute("user_num", 1);
-		//int user_num=(Integer)session.getAttribute("user_num");
+		session.setAttribute("user_num", 1);
+		int user_num=(Integer)session.getAttribute("user_num");
 		List<MySkinViewVo> msvlist=(List<MySkinViewVo>)service.list(1);
 		model.addAttribute("msvlist",msvlist);
-		System.out.println(msvlist.toString()); 
-		
 		return ".mypage.myskin.list";
 	}
 	
+	@RequestMapping(value="/mypage/myskin/select",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String selectMySkin(String ms_num) {
+		int msNum=Integer.parseInt(ms_num);
+		MySkinViewVo vo=(MySkinViewVo)service.select(msNum);
+		JSONObject json=new JSONObject();
+		json.put("vo", vo);
+		return json.toString();
+	}
 }

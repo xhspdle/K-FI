@@ -26,6 +26,7 @@
 }
 
 .pre_cover{
+	border-radius:10px;
 	width: 80%;
     margin: auto;
 	font-family: Montserrat, sans-serif;
