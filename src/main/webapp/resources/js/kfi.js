@@ -95,9 +95,13 @@ $(document).ready(function(){
   });
   var imgUpload=$("#imgUpload");
   $("#fileP1").change(function(event){
-	  var tmppath=URL.createObjectURL(event.target.files[0]);
-	  $("#fimg1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
-	  URL.revokeObjectURL(event.target.files[0]);
+	  if(event.target.files[0]!==undefined){
+		  var tmppath=URL.createObjectURL(event.target.files[0]);
+		  $("#fimg1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
+		  URL.revokeObjectURL(event.target.files[0]);
+	  }else{
+		  $("#fimg1").fadeOut("slow");
+	  }
 	  if($("#imgUpload").children().length<=3){
 		  $("<button type='button' class='btn btn-default btn-block' id='addImg'>" +
 	  		"추가 업로드</button>").appendTo(imgUpload);
@@ -114,9 +118,13 @@ $(document).ready(function(){
 				  	"<img id='fimg"+ n++ +"' src='' style='display:none;width:100%'>")
 				  .appendTo(imgUpload);
 				  $("#imgUpload").on('change', ".myboardFile", function(event1){
-					  var tmppath1=URL.createObjectURL(event1.target.files[0]);
-					  $(this).next().fadeIn("fast").prop("src",URL.createObjectURL(event1.target.files[0]));
-					  URL.revokeObjectURL(event1.target.files[0]);
+					  if(event1.target.files[0]!==undefined){
+						  var tmppath1=URL.createObjectURL(event1.target.files[0]);
+						  $(this).next().fadeIn("fast").prop("src",URL.createObjectURL(event1.target.files[0]));
+						  URL.revokeObjectURL(event1.target.files[0]);
+					  }else{
+						  $(this).next().fadeOut("slow");
+					  }
 				  });
 			  }
 		  });
@@ -128,9 +136,13 @@ $(document).ready(function(){
   });
   var vidUpload=$("#vidUpload");
   $("#fileV1").change(function(event){
-	  var tmppath=URL.createObjectURL(event.target.files[0]);
-	  $("#fvid1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
-	  URL.revokeObjectURL(event.target.files[0]);
+	  if(event.target.files[0]!==undefined){
+		  var tmppath=URL.createObjectURL(event.target.files[0]);
+		  $("#fvid1").fadeIn("fast").attr("src",URL.createObjectURL(event.target.files[0]));
+		  URL.revokeObjectURL(event.target.files[0]);
+	  }else{
+		  $("#fvid1").fadeOut("slow");
+	  }
 	  if($("#vidUpload").children().length<=3){
 		  $("<button type='button' class='btn btn-default btn-block' id='addVid'>" +
 	  		"추가 업로드</button>").appendTo(vidUpload);
@@ -146,9 +158,13 @@ $(document).ready(function(){
 				  	"<video id='fvid"+ nn++ +"' controls autoplay muted='muted' loop src='' style='display:none;width:100%'>")
 				  .appendTo(vidUpload);
 				  $("#vidUpload").on('change','.myboardFile' + nn, function(event2){
-					  var tmppath2=URL.createObjectURL(event2.target.files[0]);
-					  $(this).next().fadeIn("fast").prop("src",URL.createObjectURL(event2.target.files[0]));
-					  URL.revokeObjectURL(event2.target.files[0]);
+					  if(event2.target.files[0]!==undefined){
+						  var tmppath2=URL.createObjectURL(event2.target.files[0]);
+						  $(this).next().fadeIn("fast").prop("src",URL.createObjectURL(event2.target.files[0]));
+						  URL.revokeObjectURL(event2.target.files[0]);
+					  }else{
+						  $(this).next().fadeOut("slow");
+					  }
 				  });
 			  }  
 		  });
@@ -246,15 +262,17 @@ $(document).ready(function(){
 									"<button class='btn dropdown-toggle' type='button' data-toggle='dropdown'>" +
 									"<span class='glyphicon glyphicon-option-vertical'></span></button>" +
 									"<ul class='dropdown-menu rightOption'>" +
-									"<li><a href='#'>수정</a></li>" +
-									"<li><a href='#'>삭제</a></li></ul></div>";
+									"<li><a href='#updateModal' data-toggle='modal' data-mb-num='"+ mb_num +"'>" +
+									"<span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;Edit</a></li>" +
+									"<li><a href='#' onclick='return false;' data-toggle='popover' data-mb-num='"+ mb_num +"'>" +
+									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li></ul></div>";
 					}else{
 						boardOption="<div class='dropdown boardOption'>" +
 									"<button class='btn dropdown-toggle disabled' type='button' data-toggle='dropdown'>" +
 									"<span class='glyphicon glyphicon-option-vertical'></span></button>" +
 									"<ul class='dropdown-menu rightOption'>" +
-									"<li><a href='#'>수정</a></li>" +
-									"<li><a href='#'>삭제</a></li></ul></div>";
+									"<li><a href='#'>Edit</a></li>" +
+									"<li><a href='#'>Delete</a></li></ul></div>";
 					}
 					if(i===0){
 						$("<div class='panel-group'>" +
@@ -295,7 +313,8 @@ $(document).ready(function(){
 				
 			});
 		$("#myBoardList").on('click',".panel-heading",function(event){
-			if(event.target.className==="btn dropdown-toggle" || event.target.className==="glyphicon glyphicon-option-vertical"){
+			let clName=event.target.className;
+			if(clName!=='postTitle' && clName!=='postBlock' && clName!=='panel-heading'){
 				return;
 			}
 			location.href=getPageContext + "/mypage/myboard/select?mb_num=" +$(this).prop("id");
@@ -562,38 +581,49 @@ $(document).ready(function(){
 	  if(msg==='fail'){
 		  showMsg="<strong>Failed!</strong> Server processing request failed..";
 	  }else {
-		  showMsg="<string>Server Msg</strong> "+ msg;
+		  showMsg="<strong>Server Msg</strong> "+ msg;
 	  }
 	  $(".alert-danger").html(showMsg);
-	  $(".msgBox").show();
-	  $(".msgBox").animate({
+	  $("#content").css({
+		  "transition": "1s",
+		  "opacity": "0.5"
+	  });
+	  $(".msgBox").css({
 		  "top": ($(window).height()-$(".msgBox").outerHeight())/2 + $(window).scrollTop(),
-		  }, 1500,function(){
+		  "display": "block"
+	  });
+	  setTimeout(function(){
+		  $(".msgBox").css("opacity","1");
+		  setTimeout(function(){
+			  $("#content").css("opacity","1");
+			  $(".msgBox").css({
+				 "opacity": "0",
+			  });
 			  setTimeout(function(){
-				  $(".msgBox").css("transition","1s");
-				  $(".msgBox").css("top",$(document).height());
-				  setTimeout(function(){
-					  $(".msgBox").css("display","none");
-				  },500);
-			  },2500);
-		  });
+				  $(".msgBox").css("display","none");
+			  },1000);
+		  },3500);
+	  },500);
   }
-  $("[data-toggle='popover']").popover({
-	  title: "<h3><strong>Wanna delete?</strong></h3>" + 
-	  		 "<p>please enter your password</p>",
-	  content: "<form class='form-horizontal boardDelete' method='post' " + 
-	  		   "action='"+ documentPageContext +"/mypage/myboard/delete'>" +
-	  		   "<div class='input-group input-group-lg'>" +
-	  		   "<input type='hidden' name='mb_num' value='"+ $("[data-toggle='popover']").attr("data-mb-num") +"'>" +
-	  		   "<input type='password' name='user_pwd' class='form-control' >" + //style='height:100%;'
-	  		   "<div class='input-group-btn'>" +
-	  		   "<button class='btn btn-warning' type='submit'>" +
-	  		   "<i class='glyphicon glyphicon-lock'></i></button></div></div></form>",
-	  html: true,
-	  placement: "left"
+  $(document).on('click',"[data-toggle='popover']",function(){
+	  
   });
   $(document).on('focus',"[data-toggle='popover']",function(){
 	  $("button.dropdown-toggle").attr("data-toggle","off");
+	  $("[data-toggle='popover']").popover({
+		  title: "<h3><strong>Wanna delete?</strong></h3>" + 
+		  		 "<p>please enter your password</p>",
+		  content: "<form class='form-horizontal boardDelete' method='post' " + 
+		  		   "action='"+ documentPageContext +"/mypage/myboard/delete'>" +
+		  		   "<div class='input-group input-group-lg'>" +
+		  		   "<input type='hidden' name='mb_num' value='"+ $("[data-toggle='popover']").attr("data-mb-num") +"'>" +
+		  		   "<input type='password' name='user_pwd' class='form-control' >" + 
+		  		   "<div class='input-group-btn'>" +
+		  		   "<button class='btn btn-warning' type='submit'>" +
+		  		   "<i class='glyphicon glyphicon-lock'></i></button></div></div></form>",
+		  html: true,
+		  placement: "left"
+	  });
   });
   $(document).on('focusout',"[data-toggle='popover']",function(){
 	  $("button.dropdown-toggle").attr("data-toggle","dropdown");
@@ -618,6 +648,22 @@ $(document).ready(function(){
 			  }
 		  }
 	  });
+  });
+  $(document).on('click',"[href='#updateModal']",function(event){
+	  console.log("업데이트모달뿅");
+	  var mb_num=$(this).attr("data-mb-num");
+	  $.getJSON(documentPageContext + "/mypage/myboard/updateModal",
+			  {"mb_num":mb_num},
+			  function(data){
+				  var boardVo=data.boardVo;
+				  var user_num=boardVo.user_num;
+				  var mb_title=boardVo.mb_title;
+				  var mb_content=boardVo.mb_content;
+				  var mb_date=boardVo.mb_date;
+				  html=document.querySelector("#commentTemplate").innerHTML;
+				  var resultHTML=html.replace("{mb_title}");
+				  
+			  });
   });
 });
 

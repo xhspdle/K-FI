@@ -400,7 +400,6 @@ input[type='file'].myboardFile {
 .postTitle {
 	font-size: 36px !important;
 	font-weight: 600;
-	color: #f4511e !important;
 }
 .postBlock {
 	margin-bottom: 10px !important;
@@ -412,7 +411,7 @@ input[type='file'].myboardFile {
 	color: #f4511e !important;
 }
 .postA {
-	color: #f4511e;
+	color: #f4511e;/* #818181 */
 	text-decoration: none;
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
@@ -608,12 +607,20 @@ img.media-object {
 	margin-top: 100%;
 }
 .msgBox {
+	-webkit-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
 	display: none;
+	opacity: 0;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index:9999;
+	text-align: center;
 	
+}
+.msgBox:after {
+	position: absolute;
+	z-index: 9998;
 }
 .alert-danger {
 	box-shadow: 5px 8px 10px rgba(0,0,0, .2);

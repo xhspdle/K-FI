@@ -18,7 +18,10 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kfi.ldk.dao.MyBoardDao;
+import com.kfi.ldk.dao.MyBoardLikeDao;
 import com.kfi.ldk.dao.MyBoardListViewDao;
+import com.kfi.ldk.dao.MyCommentDao;
+import com.kfi.ldk.dao.MyCommentLikeDao;
 import com.kfi.ldk.dao.MyPhotoDao;
 import com.kfi.ldk.dao.MyVideoDao;
 import com.kfi.ldk.util.ImgUtil;
@@ -73,6 +76,12 @@ public class MyBoardServiceImpl implements CommonService{
 					String mp_orgimg=fileP[i].getOriginalFilename();
 					String format=mp_orgimg.substring(mp_orgimg.lastIndexOf(".") + 1);
 					String mType=ImgUtil.getImgType(format);
+					/*
+					 * 브라우저에서 여러개의 파일을 업로드시, 등록했던 파일중 하나를 취소했을 경우 ""값이 넘어온다
+					 * 이때 해당하는 ""값이 들어있는 fileP 배열을 건너뛰는 코드 필요
+					 * --> continue 사용
+					 */
+					if(mp_orgimg=="") continue;
 					if(mType==null) {
 						throw new Exception("*." + format + " is unsupported img file types");
 					}
@@ -92,6 +101,7 @@ public class MyBoardServiceImpl implements CommonService{
 					String mv_orgvid=fileV[i].getOriginalFilename();
 					String format=mv_orgvid.substring(mv_orgvid.lastIndexOf(".") + 1);
 					String mType=VidUtil.getVidType(format);
+					if(mv_orgvid=="") continue;
 					if(mType==null) {
 						throw new Exception("*." + format + " is unsupported vid file types");
 					}
@@ -159,8 +169,8 @@ public class MyBoardServiceImpl implements CommonService{
 					}
 					System.out.println(uploadPathV + "경로에 영상 삭제 성공!");
 				}
-				mpDao.delete(mb_num);
-				mvDao.delete(mb_num);
+				//mpDao.delete(mb_num); on delete cascade
+				//mvDao.delete(mb_num); on delete cascade
 				mbDao.delete(mb_num);
 				return 1;
 			}else {

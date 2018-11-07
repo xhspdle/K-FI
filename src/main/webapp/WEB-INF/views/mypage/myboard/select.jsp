@@ -21,8 +21,9 @@
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
-						<li><a href="#updateModal" data-toggle="modal">수정</a></li>
-						<li><a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">삭제</a></li>
+						<li><a href="#updateModal" data-toggle="modal" data-mb-num="${boardVo.mb_num }"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit</a></li>
+						<li><a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">
+						<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a></li>
 					</ul>
 				</div>
 				<!--  
@@ -115,7 +116,7 @@
 							<input type="hidden" name="mb_num" value="${boardVo.mb_num }">
 							<input type="text" name="myc_content" class="form-control" placeholder="Say something!">
 							<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span></button>
-							<span class="help-block">asd</span>
+							<span class="help-block"></span>
 						</form>
 					</div>	
 					</c:when>
@@ -168,11 +169,6 @@
 			</div>
 		</div>
 	</div>
-</div>
-
-<!-- Alert Msg Box -->
-<div class="container msgBox">
-	<div class="alert alert-danger"></div>
 </div>
 
 <script id="commentTemplate" type="text/template">
