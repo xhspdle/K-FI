@@ -102,7 +102,7 @@
 		 	<if test="user_nickname!=null and user_nickname!=''">user_nickname=#{user_nickname},</if>
 		 	<if test="user_pwd!=null and user_pwd!=''">user_pwd=#{user_pwd},</if>
 		 	<if test="user_email!=null and user_email!=''">user_email=#{user_email},</if>
-		 	<if test="user_status!=null and user_status!=''">user_status=#{user_status}</if> 
+		 	<if test="user_status!=null and user_status!='' or user_status!=0">user_status=#{user_status}</if> 
 		</set>
 		where user_num=#{user_num}
 	</update>

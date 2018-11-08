@@ -185,6 +185,102 @@ $(function() {
 	});
 	
 	
+	/////////////////////////회원정보 확인
+	$('#myinfo_pwd_submit').on('click',function(){
+		var password=$('#myinfo_pwd').val();
+		if(password==''){
+			$('#myinfo_pwd_result').text('비밀번호를 입력해주세요').css('color','red');
+			return false;
+		}
+	});
+	
+	$('#myinfo_pwdChk_frm').submit(function(event){
+		event.preventDefault();
+		$('#myinfo_pwd_result').text('');
+		var getPageContext=$('#getPageContext').val();
+		var password=$('#myinfo_pwd').val();
+		if(password==''){
+			$('#myinfo_pwd_result').text('비밀번호를 입력해주세요').css('color','red');
+			return false;
+		}
+		$.getJSON(getPageContext+'/mypage/myinfo/passwordChk',{password:password},function(data){
+			if(eval(data.code)){
+				location.href=getPageContext+"/mypage/myinfo/list";
+			}else{
+				$('#myinfo_pwd_result').text('비밀번호가 올바르지 않습니다').css('color','red');
+			}
+		});
+	});
+	
+	//수정하기
+	$("#myinfo_update_submit").on('click',function(){
+		var user_pwd=$("input[name=user_pwd]").val();
+		if(user_pwd==''){
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+		var user_nickname=$("input[name=user_nickname]").val();
+		if(user_nickname==''){
+			alert('닉네임을 입력해주세요');
+			return false;
+		}
+		var user_email=$("input[name=user_email]").val();
+		if(user_email==''){
+			alert('이메일을 입력해주세요');
+			return false;
+		}
+		return true;
+	});
+	
+	$("#myinfo_list").submit(function(event){
+		event.preventDefault();
+		var getPageContext=$('#getPageContext').val();
+		var user_pwd=$("input[name=user_pwd]").val();
+		if(user_pwd==''){
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+		var user_nickname=$("input[name=user_nickname]").val();
+		if(user_nickname==''){
+			alert('닉네임을 입력해주세요');
+			return false;
+		}
+		var user_email=$("input[name=user_email]").val();
+		if(user_email==''){
+			alert('이메일을 입력해주세요');
+			return false;
+		}
+		$.getJSON(getPageContext+'/mypage/myinfo/updateJSON',{user_pwd:user_pwd,user_nickname:user_nickname,user_email:user_email},
+				function(data){
+			
+			
+			
+		});
+		
+	});
+	
+	//탈퇴하기
+	$("#myinfo_delete").on('click',function(){
+		var myinfo_delete_user_pwd=$("input[name=myinfo_delete_user_pwd]").val();
+		if(myinfo_delete_user_pwd==''){
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+		return true;
+	});
+	
+	$("#myinfo_delete_frm").submit(function(event){
+		event.preventDefault();
+		var getPageContext=$('#getPageContext').val();
+		var myinfo_delete_user_pwd=$("input[name=myinfo_delete_user_pwd]").val();
+		$.getJSON(getPageContext+'/mypage/myinfo/deleteJSON',{user_pwd:myinfo_delete_user_pwd},function(data){
+			if(data.result==0){
+				location.href=".main";
+			}else{
+				alert("비밀번호가 일치하지 않아요");
+			}
+		});
+	});
 });
 
 /* 해당 스킨 적용하기 */

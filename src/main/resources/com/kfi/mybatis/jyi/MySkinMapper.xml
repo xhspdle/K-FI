@@ -4,8 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.jyi.MySkinMapper">
 
+	<sql id="user_num">
+		where user_num=#{user_num}
+	</sql>
+
 	<select id="getMaxNum_myskin" resultType="int">
-		select NVL(count(ms_num),0) from my_skin
+		select NVL(count(ms_num),0) from my_skin 
 	</select>
 	
 	<insert id="insert_myskin" parameterType="myskin">
@@ -21,7 +25,7 @@
 	</update>
 
 	<select id="getCount_myskin" parameterType="int" resultType="int">
-		select NVL(count(ms_num),0) from my_skin where user_num=#{user_num}
+		select NVL(count(ms_num),0) from my_skin <include refid="user_num"/>
 	</select>
 	
 

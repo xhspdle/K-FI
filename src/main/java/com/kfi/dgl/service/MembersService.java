@@ -131,4 +131,16 @@ public class MembersService {
 			return -1;
 		}
 	}
+	
+////////////////////////////마이페이지 회원정보 불러오기
+	public String passwordOk(int user_num, String password) {
+		MembersVo vo=dao.select(user_num);
+		if(vo.getUser_pwd().equals(password)) {
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+	
+	
 }
