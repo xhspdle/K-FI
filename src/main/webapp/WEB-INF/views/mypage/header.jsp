@@ -41,7 +41,7 @@
 <div id="headerSearch">
 	<div class="row">
 		<div class="container search_con">
-			<form id="searchForm">
+			<form id="searchForm" name="searchForm" action="<c:url value='/mypage/myboard/list'/>">
 				<div class="input-group">
 					<div class="input-group-btn">
 						<button class="btn btn-default btn-lg search_bar"><i class="glyphicon glyphicon-search"></i></button>
