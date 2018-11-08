@@ -2,6 +2,7 @@ package com.kfi.ysy.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,13 @@ public class AdminBoardService {
 	public int abgetcnt(HashMap<String, Object> map) {
 		return dao.abgetcnt(map);
 	}
-
+	public List<AdminBoardVo> abpopup(){
+		return dao.abpopup();
+	}
+	public int abupdate(AdminBoardVo vo) {
+		return dao.abupdate(vo);
+	}
+	public Map<String, Object> selectab(){
+		return dao.selectab();
+	}
 }

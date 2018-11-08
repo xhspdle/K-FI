@@ -54,7 +54,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="mblist">회원관리</a></li>
 						<li><a href="aclist">신고관리</a></li>
-						<li><a href="">통계관리</a></li>
+						<li><a href="adminwrite">통계관리</a></li>
 						<li><a href="ablist">공지사항</a></li>
 						<li><a href="faqlist">Q&#38;A</a></li>
 					</ul>
@@ -76,7 +76,7 @@
 			</c:otherwise>
 		</c:choose>
 
-		<div id="content" class="container-fluid bg-grey">
+		<div id="content">
 			<tiles:insertAttribute name="content" />
 		</div>
 
@@ -89,12 +89,28 @@
 					title="Visit w3schools">www.w3schools.com</a>
 			</p>
 		</footer>
-<!-- 		<div id="popup">
-			<a href="javascript:hidePopup()">닫기</a>
-			<h1>공지사항</h1>
-			<div>ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</div>
+<!-- 	 	<div id="bbb" style="position: fixed;bottom: 20px;right: 20px;">
+			<a onclick="chat()"><span class="glyphicon glyphicon-heart"></span></a>
+			<span class="glyphicon glyphicon-exclamation-sign" style="color:red"></span> 
 		</div> -->
+		<div id="chater" class="hidediv" style="position: fixed;bottom: 20px; margin-right: 20px; left:20px; width:100%; height:200px;">
+		
+		</div>
 	</div>
 
 </body>
+<script type="text/javascript">
+	function chat(){
+		alert("chat");
+		chatform();
+	}
+ 	function chatform(){
+		var html="<div>chat</div>"
+				+"<div>내용</div>"
+				+"<input type='text'>";
+		$("#chater").css("display","block");
+		$("#chater").append(html);
+	}
+ 
+</script>
 </html>

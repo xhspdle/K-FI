@@ -24,8 +24,8 @@ public class MyVideoDao {
 	public int update(MyVideoVo vo) {
 		return session.update(NAMESPACE + ".update", vo);
 	}
-	public int delete(int mv_num) {
-		return session.delete(NAMESPACE + ".delete", mv_num);
+	public int delete(int mb_num) {
+		return session.delete(NAMESPACE + ".delete", mb_num);
 	}
 	public List<Object> list() {
 		return session.selectList(NAMESPACE + ".list");

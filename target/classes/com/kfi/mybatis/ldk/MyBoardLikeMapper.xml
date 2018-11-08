@@ -34,7 +34,7 @@
 		)
 		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
-	<select id="select" parameterType="int" resultType="myboardlike">
-		select * from my_board_like where mb_num=#{mb_num}
+	<select id="select" parameterType="hashmap" resultType="myboardlike">
+		select * from my_board_like where user_num=#{user_num} and mb_num=#{mb_num}
 	</select>
 </mapper>

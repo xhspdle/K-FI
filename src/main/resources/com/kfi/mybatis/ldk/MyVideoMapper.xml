@@ -16,18 +16,18 @@
 	<update id="update" parameterType="myvideo">
 		update my_video 
 		<set>
-			<if test="mv_orgvid!=null and mv_orgvid!=''">mv_orgvid=#{mv_orgvid}</if>
+			<if test="mv_orgvid!=null and mv_orgvid!=''">mv_orgvid=#{mv_orgvid},</if>
 			<if test="mv_savvid!=null and mv_savvid!=''">mv_savvid=#{mv_savvid}</if>
 		</set>
 		where mv_num=#{mv_num}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from my_video where mv_num=#{mv_num}
+		delete from my_video where mb_num=#{mb_num}
 	</delete>
 	<select id="list" resultType="myvideo">
 		select * from my_video
 	</select>
 	<select id="select" parameterType="int" resultType="myvideo">
-		select * from my_video where mb_num=#{mb_num}
+		select * from my_video where mb_num=#{mb_num} order by mv_num asc
 	</select>
 </mapper>

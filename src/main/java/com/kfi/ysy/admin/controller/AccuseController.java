@@ -3,12 +3,14 @@ package com.kfi.ysy.admin.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.ysy.service.AccuseService;
 import com.kfi.ysy.util.AdminPageUtil;
@@ -49,4 +51,19 @@ public class AccuseController {
 			return null;
 		}	
 	}
+//신고 내용보기
+/*	@RequestMapping(value="/acdetail", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String acdetail(int ac_num) {
+		AccuseVo vo=acservice.acdetail(ac_num);
+		JSONObject obj=new JSONObject();
+		if(vo!=null) {
+			obj.put("user_id", vo.getUser_id());
+			obj.put("user_pwd", vo.getUser_pwd());
+			obj.put("user_nick", vo.getUser_nickname());
+			obj.put("user_stat",vo.getUser_status());
+			obj.put("user_email", vo.getUser_email());
+			obj.put("user_date",vo.getUser_regdate());
+		}
+	}*/
 }

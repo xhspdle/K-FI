@@ -25,10 +25,10 @@
 	<update id="update" parameterType="myboard">
 		update my_board 
 		<set>
-			<if test="mb_title!=null and mb_title!=''">mb_title=#{mb_title}</if>
+			<if test="mb_title!=null and mb_title!=''">mb_title=#{mb_title},</if>
 			<if test="mb_content!=null and mb_content!=''">mb_content=#{mb_content}</if>
 		</set>
-		where mb_num=#{mb_num}
+		where mb_num=#{mb_num} and user_num=#{user_num}
 	</update>
 	<delete id="delete" parameterType="int">
 		delete from my_board where mb_num=#{mb_num}
@@ -50,5 +50,10 @@
 	</select>
 	<select id="select" parameterType="int" resultType="myboard">
 		select * from my_board where mb_num=#{mb_num}
+	</select>
+	<select id="confirmDel" parameterType="hashmap" resultType="com.kfi.ldk.vo.MyBoardConfirmDelVo">
+		select mem.user_num,mem.user_id,mem.user_pwd,mb.mb_num
+		from members mem,my_board mb
+		where mem.user_num=mb.user_num and user_pwd=#{user_pwd} and mb_num=#{mb_num}
 	</select>
 </mapper>

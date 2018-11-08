@@ -1,0 +1,13 @@
+CREATE OR REPLACE VIEW adminboardlistview as
+select admin.admin_id, admin.admin_nick, admin_board.* from admin_board, admin  where admin.admin_num=admin_board.admin_num;
+
+
+        
+  CREATE OR REPLACE VIEW accuselistview as      
+
+			select ac.*, user1.user_nickname user1_nickname, user2.user_nickname user2_nickname
+			from accuse ac 
+			left join members user1 on ac.user1_num=user1.user_num 
+			left join members user2 on ac.user2_num=user2.user_num 
+
+ac_status Ãß°¡ accuse

@@ -34,7 +34,7 @@ public class MyCalendar {
 	public List<CommCalendarVo> changeEnd(List<CommCalendarVo> list) {
 		for (CommCalendarVo vo : list) {
 			Date end = vo.getCc_end();
-			System.out.println(end);
+		
 			int year = Integer.parseInt(String.valueOf(end).substring(0, 4));
 			int month = Integer.parseInt(String.valueOf(end).substring(5, 7));
 			int date = Integer.parseInt(String.valueOf(end).substring(8, 10));
@@ -54,7 +54,7 @@ public class MyCalendar {
 			String dd=String.valueOf(date);
 			if (date < 10) dd="0"+dd;
 			if (month < 10) mm="0"+mm;
-			System.out.println(yyyy + "-" + mm + "-" + dd);
+			
 			end = Date.valueOf(yyyy + "-" + mm + "-" + dd);
 			vo.setCc_end(end);
 		}

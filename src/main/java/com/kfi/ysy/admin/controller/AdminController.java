@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -85,7 +86,7 @@ public class AdminController {
 		}
 	}
 //관리자 목록
-	@RequestMapping(value="/adminlist", produces="application/json;charset=utf-8")
+/*	@RequestMapping(value="/adminlist", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String adminlist() {
 		List<AdminVo> adminlist=service.adminlist();
@@ -102,18 +103,19 @@ public class AdminController {
 			jsonarr.put(json);
 		}
 		return jsonarr.toString();	
-	}
-/*	
+	}*/
+	
 	@RequestMapping(value="/adminlist", method=RequestMethod.GET)
 	public String adminlist(Model model) {
+		
 		List<AdminVo> adminlist=service.adminlist();
-		model.addAttribute("adminlist", adminlist);
 		if(adminlist!=null) {
-			return ".admin.mblist";
+			model.addAttribute("adminlist", adminlist);
+			return ".admin.adminlist";
 		}else{
 			return ".admin";
 		}	
-	}*/
+	}
 //관리자 정보보기
 	@RequestMapping(value="/addetail", produces="application/json;charset=utf-8")
 	@ResponseBody
@@ -129,14 +131,41 @@ public class AdminController {
 		return json.toString(); 
 	}
 //관리자 수정	
+/*	@RequestMapping(value="/admodify", method=RequestMethod.POST)
+	public String admodify(HttpServletRequest request, AdminVo vo) {	
+		HttpSession session=request.getSession();
+		AdminVo adminvo=(AdminVo)session.getAttribute("admininfo");
+		String admin_id=vo.getAdmin_id();
+		String admin_pwd=vo.getAdmin_pwd();
+		if(adminvo.getAdmin_id().equals(admin_id)) {
+			System.out.println(adminvo.getAdmin_id());
+			service.admodify(vo);
+			session.invalidate();
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("admin_id", admin_id);
+			map.put("admin_pwd", admin_pwd);
+			AdminVo newvo=service.adlogin(map);
+			if(newvo!=null) {
+				session.setAttribute("admininfo", newvo);
+				return ".admin.adminlist";
+			}else {
+				return ".admin.adminlist";
+			}
+		}
+	}*/
 	@RequestMapping(value="/admodify", method=RequestMethod.POST)
 	public String admodify(AdminVo vo) {
 		int result=service.admodify(vo);
 		if(result>0) {
-			return null;
+			return "redirect:/adminlist";
 		}else {
-			return ".main.error";
+			return null;
 		}
+	}
+	//관리자 삭제
+	public String addelete(int admin_num) {
+		int result = service.addelete(admin_num);
+		return null;
 	}
 }
 	

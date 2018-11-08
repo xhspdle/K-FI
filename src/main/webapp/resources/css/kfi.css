@@ -2,6 +2,10 @@
 /*
 	main
 */
+* {
+	margin: 0;
+	padding: 0;
+}
 body {
 	font: 400 15px Lato, sans-serif;
 	font-size: 15px;
@@ -206,6 +210,13 @@ footer .glyphicon {
 	#commentForm input[type='text'] {
 		width: 70% !important;
 	}
+	.deleteModal {
+		margin-top: 100% !important;
+	}
+	.modal-sm {
+		width: 300px;
+		margin: auto;
+	}
 }
 @media screen and (max-width: 480px) {
 	.logo {
@@ -214,6 +225,12 @@ footer .glyphicon {
 	.logoImg {
 		width: 212.4px;
 		height: 158.4px;
+	}
+	.commentOption {
+		left: 90% !important;
+	}
+	.boardOption {
+		left: 92% !important;
 	}
 }
 /*
@@ -349,17 +366,19 @@ footer .glyphicon {
 	float: left;
 }
 */
-.modal-content {
+.writeModal {
 	margin-top: 13%;
 }
 .btn-file{
 	position: relative;
 	overflow: hidden;
 }
-input[type='file'] {
+input[type='file'].myboardFile {
 	display: none;
 }
 .progress {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
 	margin-bottom: 0 !important;
 	opacity: 0;
 }
@@ -383,10 +402,9 @@ input[type='file'] {
 .postTitle {
 	font-size: 36px !important;
 	font-weight: 600;
-	color: #f4511e !important;
 }
 .postBlock {
-	margin-bottom: 0 !important;
+	margin-bottom: 10px !important;
 	border-color: #f4511e !important;
 }
 .postLikeComment {
@@ -395,7 +413,7 @@ input[type='file'] {
 	color: #f4511e !important;
 }
 .postA {
-	color: #f4511e;
+	color: #f4511e;/* #818181 */
 	text-decoration: none;
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
@@ -483,10 +501,19 @@ img.media-object {
 	margin-top: 10px;
 	color: black;
 }
+/*
 #commentList .media-body > i {
 	cursor: pointer;
 	font-size: 20px;
 	margin-right: 10px;
+}
+*/
+.thumbsUp {
+	font-size: 20px;
+	margin-right: 10px;
+}
+.thumbsUp:hover {
+	text-decoration: none;
 }
 #commentList .media-body > span {
 	margin-right: 30px;
@@ -521,4 +548,88 @@ img.media-object {
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 	color: white;
+}
+/*
+	인접 요소 선택자 +
+#commentList small + span {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    opacity: 0;
+    color: #f4511e;
+    margin-left: 30px;
+}
+*/
+.msgSpan {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    opacity: 0;
+    font-size: 15px;
+    color: #f4511e;
+    margin-left: 30px;
+}
+.boardOption {
+	position: relative;
+	top: -70px;
+	left: 95%;
+	margin-bottom: -53px;
+	text-align: left !important;
+}
+.boardOption > button {
+	background-color: transparent !important;
+	color: #f4511e !important;
+	border: 0 !important;
+}
+.boardOption .rightOption {
+	left: -162px;
+	top: -3px;
+}
+.boardOption button .glyphicon {
+	font-size: 28px;
+}
+.commentOption {
+	position: relative;
+	top: -38px;
+	left: 95%;
+}
+.commentOption + p {
+	position: relative;
+	top: -38px;
+	margin-bottom: -30px;
+}
+.commentOption > button {
+	background-color: white !important;
+	color: #818181 !important;
+	border: 0 !important;
+}
+.commentOption .rightOption {
+	left: -162px;
+	top: -3px;
+}
+.deleteModal {
+	margin-top: 100%;
+}
+.msgBox {
+	-webkit-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+	display: none;
+	opacity: 0;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index:9999;
+	text-align: center;
+	
+}
+.msgBox:after {
+	position: absolute;
+	z-index: 9998;
+}
+.alert-danger {
+	box-shadow: 5px 8px 10px rgba(0,0,0, .2);
+}
+.disabled {
+	cursor: default !important;
+}
+div.popover.left {
+	left: -280px !important;
 }

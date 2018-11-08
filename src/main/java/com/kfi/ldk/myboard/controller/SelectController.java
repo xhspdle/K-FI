@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.ldk.service.CommonService;
 
@@ -19,13 +20,11 @@ public class SelectController {
 	@Qualifier("myBoardServiceImpl") private CommonService service;
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/mypage/myboard/select",method=RequestMethod.GET)
-	public String select(int mb_num,int comment_cnt,int like_cnt,HttpSession session,Model model) {
+	public String select(int mb_num,Model model) {
 		HashMap<String, Object> map=(HashMap<String, Object>)service.select(mb_num);
 		model.addAttribute("boardVo", map.get("boardVo"));
 		model.addAttribute("imgList", map.get("imgList"));
 		model.addAttribute("vidList", map.get("vidList"));
-		model.addAttribute("comment_cnt", comment_cnt);
-		model.addAttribute("like_cnt", like_cnt);
 		return ".mypage.myboard.select";
 	}
 }

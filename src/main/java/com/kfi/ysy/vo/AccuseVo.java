@@ -11,11 +11,12 @@ public class AccuseVo {
 	private int board_num;
 	private Date ac_date;
 	private int ac_status;
-	private String user1_nickname;
-	private String user2_nickname;	
-	public AccuseVo() {}
+	public AccuseVo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public AccuseVo(int ac_num, int user1_num, int user2_num, String ac_reason, int cb_num, int board_num, Date ac_date,
-			int ac_status, String user1_nickname, String user2_nickname) {
+			int ac_status) {
 		super();
 		this.ac_num = ac_num;
 		this.user1_num = user1_num;
@@ -25,8 +26,6 @@ public class AccuseVo {
 		this.board_num = board_num;
 		this.ac_date = ac_date;
 		this.ac_status = ac_status;
-		this.user1_nickname = user1_nickname;
-		this.user2_nickname = user2_nickname;
 	}
 	public int getAc_num() {
 		return ac_num;
@@ -75,18 +74,6 @@ public class AccuseVo {
 	}
 	public void setAc_status(int ac_status) {
 		this.ac_status = ac_status;
-	}
-	public String getUser1_nickname() {
-		return user1_nickname;
-	}
-	public void setUser1_nickname(String user1_nickname) {
-		this.user1_nickname = user1_nickname;
-	}
-	public String getUser2_nickname() {
-		return user2_nickname;
-	}
-	public void setUser2_nickname(String user2_nickname) {
-		this.user2_nickname = user2_nickname;
 	}
 }
 

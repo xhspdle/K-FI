@@ -4,15 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.ysy.FaqMapper">
 	<select id="faqmaxnum" resultType="int">
-		select nvl(max(qa_num),1) maxnum from faq
+		select nvl(max(qa_num),0) maxnum from faq
 	</select>
+<!-- 	<select id="faqgetcnt" parameterType="hashmap" resultType="int">
+		select nvl(count(*),0) cnt from faq
+	</select> -->
+<!-- 	<select id="faqlist" resultType="faq">
+		SELECT * FROM  ( SELECT AA.*,ROWNUM RNUM FROM ( SELECT * FROM faq ORDER BY REF DESC,STEP ASC )AA )
+	</select> -->
 	<select id="faqlist" resultType="faq">
-		select * from faq
+		SELECT * FROM  (SELECT AA.*,ROWNUM RNUM FROM ( SELECT * FROM FAQ WHERE QA_NUM=REF ORDER BY REF DESC,STEP ASC )AA )		 
 	</select>
+	
+	<select id="faqcomment" resultType="faq">
+		SELECT * FROM  (SELECT AA.*,ROWNUM RNUM FROM ( SELECT * FROM FAQ WHERE QA_NUM!=REF AND REF=#{qa_num} ORDER BY REF DESC,STEP ASC )AA )	
+	</select>
+	
 	<insert id="faqinsert" parameterType="faq">
 		insert into faq values(#{qa_num},#{user_num},#{qa_title},#{qa_content},sysdate,#{ref},#{lev},#{step},#{admin_num})
 	</insert>
 	<select id="faqdetail" parameterType="int" resultType="faq">
 		select * from faq where qa_num=#{qa_num}
 	</select>
+	
 </mapper>

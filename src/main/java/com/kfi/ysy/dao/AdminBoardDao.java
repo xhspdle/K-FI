@@ -2,6 +2,7 @@ package com.kfi.ysy.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,14 @@ public class AdminBoardDao {
 	}
 	public int abgetcnt(HashMap<String, Object> map) {
 		return sqlSession.selectOne(NAMESPACE+"abgetcnt", map);
+	}
+	public List<AdminBoardVo> abpopup() {
+		return sqlSession.selectList(NAMESPACE+"abpopup");
+	}
+	public int abupdate(AdminBoardVo vo) {
+		return sqlSession.update(NAMESPACE+"abupdate", vo);
+	}
+	public Map<String , Object> selectab(){
+		return sqlSession.selectMap(NAMESPACE+"selectab", null);
 	}
 }

@@ -21,4 +21,10 @@ public class FaqDao {
 	public FaqVo faqdetail(int qa_num) {
 		return sqlSession.selectOne(NAMESPACE+"faqdetail", qa_num);
 	};
+	public int faqinsert(FaqVo vo) {
+		return sqlSession.insert(NAMESPACE+"faqinsert", vo);
+	}
+	public List<FaqVo> faqcomment(int qa_num){
+		return sqlSession.selectList(NAMESPACE+"faqcomment",qa_num);
+	};
 }

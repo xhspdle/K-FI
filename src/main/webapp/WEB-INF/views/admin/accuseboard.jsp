@@ -21,17 +21,18 @@
 				신고대상 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}"> ${accuse.user2_nickname}</a>		
 				</div >
 					<button class="btn btn-md btn-warning">확인</button>
-					<button class="btn btn-md btn-danger">삭제</button>
+					<button class="btn btn-md btn-danger" onclick="return acdeletecheck(${accuse.ac_num})">삭제</button>
 				<br><br>
 			</div>
 		</div>
 	</c:forEach>
 	<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-			<ul class="pagination">
-				<li> <a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
-			</ul>		
+		<ul class="pagination">
+			<li> <a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
+		</ul>		
 	</c:forEach>
 </div>
+
 <div id="aclistview2" class="hidediv">
 	<table class="table table-striped">
 		<tr>
@@ -49,7 +50,7 @@
 				<td><a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user1_num}">${accuse.user1_nickname}</a></td>
 				<td><a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}">${accuse.user2_nickname}</a></td>
 				<td><button class="btn btn-md btn-warning">확인</button></td>
-				<td><button class="btn btn-md btn-danger" onclick="location.href='acdelete?ac_num=${accuse.ac_num}'">삭제</button></td>
+				<td><button class="btn btn-md btn-danger" onclick="return acdeletecheck(${accuse.ac_num})">삭제</button></td>
 			</tr>
 		</c:forEach>	
 	</table>
@@ -61,59 +62,65 @@
 </div>
 
 <!--  /////////////////////////////신고된 사용자 정보 ////////////////////////////////////-->
-
-<div class="modal modal-dialog1 " id="accuse_user">
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">×</button>
-			<h4 class="modal-title">Question Editor</h4>
-		</div>
-		<div class="modal-body" id="userinfobody">
-		
+ 
+<div class="modal" id="accuse_user">
+	<div class="modal-dialog1">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4 class="modal-title">Question Editor</h4>
+			</div>
+			<div class="modal-body" id="userinfobody">
+			
+			</div>
 		</div>
 	</div>
 </div>
-
-<script id="userinfolist-temlpate" type="text/template">
-	<form class="form-horizontal" action="/action_page.php">		
-		<div>
-			<label class="control-label col-sm-2" for="pwd">ID:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" readonly="readonly" value={acc_id}>
-			</div>
+<script id="userinfotemlpate" type="text/template">
+<form class="form-horizontal" action="{mburl}" method="post">	
+	<input type="hidden" class="form-control" value={user_num} name="user_num">
+	<div class="form-group">
+		<label class="control-label col-sm-2">ID:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" readonly="readonly" value={acc_id}>
 		</div>
-
-
-		<div>
-			<label class="control-label col-sm-2">NickName:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" readonly="readonly" value={acc_nick}>
-			<div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">NickName:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" readonly="readonly" value={acc_nick}>
 		</div>
-
-		<div>
-			<label class="control-label col-sm-2">Status:</label>
-			<select class="form-control">
-				<option>정지</option>
-				<option>정상</option>
-				<option>경고</option>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">Email:</label> 
+		<div class="col-sm-10">
+			<input type="text" class="form-control" readonly="readonly" value={acc_email}>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">가입일:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" readonly="readonly" value={acc_date}>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">상태정보:</label>
+		<div class="col-sm-10">
+			<select class="form-control" name="user_status">
+				<option value="1">1번 정상</option>
+				<option value="2">2번 기간정지</option>
+				<option value="3">3번 정지</option>
 			</select>
-		</div>		
-		<div>
-			<label class="control-label col-sm-2">Email:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" value={acc_email}>
-			</div>
 		</div>
-		<div>
-			<label class="control-label col-sm-2">가입일:</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" readonly="readonly" value={acc_date}>
+	</div>
+		<div class="modal-footer">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
-		</div>
+		</div>				
 	</form>
-	
 </script>
 <script type="text/javascript">
 	$(function(){
@@ -131,38 +138,37 @@
 		$(".accuse_user").click(function(event){
 			alert("aaa");
 	 		$("#userinfobody").empty();
-	/* 		userinfobody.empty(); */
 			var user_num=event.target.id;
 			$.getJSON("<c:url value='/mbgetinfo'/>",{
 				user_num : user_num
 			},function(data){
-				alert(data.acc_id);
- 				html=document.querySelector("#userinfolist-temlpate").innerHTML;
+				alert(data.user_id);
+ 				var html=document.querySelector("#userinfotemlpate").innerHTML;
 				alert(html)
- 				var resultHTML=html.replace("{acc_id}", data.acc_id)
-   					.replace("{acc_nick}", data.acc_nick)
-					.replace("{acc_stat}", data.acc_stat)
-					.replace("{acc_email}", data.acc_email)
-					.replace("{acc_date}",data.acc_date);
-				alert(resultHTML);  
-/* 				var acc_info=[
-					{data.acc_id},{data.acc_nick},{data.acc_stat},{data.acc_email},{data.acc_date}	
-				];
-					 */
-				/* 		<div class="form-group">
-						<label class="control-label col-sm-2" for="pwd">Email:</label>
-						<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="Enter Email">
-						</div>
-						</div> */
-				
+ 				var resultHTML=html.replace("{mburl}","<c:url value='/mbupdate'/>")
+ 					.replace("{acc_id}", data.user_id)
+   					.replace("{user_num}", user_num)
+ 					.replace("{acc_nick}", data.user_nick)
+ 					
+					.replace("{acc_stat}", data.user_stat)
+					.replace("{acc_email}", data.user_email)
+					.replace("{acc_date}",data.user_date);				
+				alert(resultHTML);
 				$("#userinfobody").append(resultHTML);
+				console.log(data.user_stat)
+				$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
 			});
 		});		
 	});
-	$(function(){
-		$("accdelte").click
-	})
-	
+	function acdeletecheck(ac_num){
+
+		var result=confirm("정말로????");
+		if(result==true){
+			location.href="acdelete?ac_num="+ac_num;
+			return true;
+		}else{
+			return false;
+		}
+	}
 </script>
  

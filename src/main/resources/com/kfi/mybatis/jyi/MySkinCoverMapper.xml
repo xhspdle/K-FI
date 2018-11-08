@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.MySkinCoverMapper">
+
+	<select id="getMaxNum_myskincover" resultType="int">
+		select NVL(count(msc_num),0) from my_skin_cover
+	</select>
+	
+	<insert id="insert_myskin_cover" parameterType="myskincover" >
+		insert into my_skin_cover values(#{msc_num},#{ms_num},#{msc_orgimg},#{msc_savimg})	
+	</insert>
+
+	<delete id="delete_myskin_cover" parameterType="int">
+		delete from my_skin_cover where ms_num=#{ms_num}
+	</delete>
+	
+	<update id="update_myskin_cover" parameterType="myskincover">
+		update my_skin_cover set msc_orgimg=#{msc_orgimg}, msc_savimg=#{msc_savimg} where ms_num=#{ms_num}
+	</update>
+
+
+
+</mapper>

@@ -9,7 +9,7 @@ public class MyBoardListViewVo {
 	private int user_num;
 	private String mb_title;
 	private String mb_content;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date mb_date;
 	private int mb_views;
 	private int comment_cnt;

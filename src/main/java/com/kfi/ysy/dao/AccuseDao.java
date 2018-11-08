@@ -25,4 +25,7 @@ public class AccuseDao {
 	public int acdelete(int ac_num) {
 		return sqlSession.delete(NAMESPACE+"acdelete", ac_num);
 	}
+	public AccuseVo acdetail(int ac_num)	{
+		return sqlSession.selectOne(NAMESPACE+"acdetail", ac_num);
+	}
 }

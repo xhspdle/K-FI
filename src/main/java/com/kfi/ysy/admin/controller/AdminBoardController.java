@@ -4,10 +4,13 @@ package com.kfi.ysy.admin.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +48,25 @@ public class AdminBoardController {
 			return ".main.error";
 		}
 	}
+	//팝업 게시물
+	@RequestMapping(value="/abpopup",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String abpopup() {
+		List<AdminBoardVo> list=abservice.abpopup();
+		JSONArray arr=new JSONArray();
+		for(AdminBoardVo vo:list){
+			if(vo.getAb_notice()==1) {
+				JSONObject obj=new JSONObject();
+				obj.put("ab_num", vo.getAb_num());
+				obj.put("admin_num", vo.getAdmin_num());
+				obj.put("ab_content", vo.getAb_content());
+				obj.put("ab_title", vo.getAb_title());
+				obj.put("ab_date", vo.getAb_date());
+				arr.put(obj);
+			}
+		}
+		return arr.toString();
+	}
 	//관리자 게시글 양식
 	@RequestMapping(value="/abinsert", method=RequestMethod.GET)
 	public String abinsertForm() {
@@ -55,6 +77,9 @@ public class AdminBoardController {
 	public String abinsert(AdminBoardVo vo) {
 		int ab_num=abservice.abmaxnum()+1;
 		vo.setAb_num(ab_num);
+		
+		System.out.println("//////////////////////////"+ab_num);
+		System.out.println(vo.getAb_notice());
 		int result=abservice.abinsert(vo);
 		if (result>0){
 			return "redirect:/ablist";		
@@ -89,13 +114,22 @@ public class AdminBoardController {
 			obj.put("ab_num", ab_num);
 			obj.put("ab_title", vo.getAb_title());
 			obj.put("ab_content", vo.getAb_content());
-			obj.put("ab_admin_num", vo.getAdmin_num());
+			obj.put("admin_num", vo.getAdmin_num());
 			obj.put("ab_notice", vo.getAb_notice());
 			obj.put("ab_date", vo.getAb_date());		
 		}else {
-			obj.put("msg","사용가능한 아이디입니다.");	
+			obj.put("msg","fail");	
 		}
 		return obj.toString();
+	}
+	@RequestMapping(value="/abupdate",method=RequestMethod.POST)
+	public String abupdate(AdminBoardVo vo) {
+		int result=abservice.abupdate(vo);
+		if(result>0) {
+			return "redirect:/ablist";		
+		}else {
+			return ".admin.error";
+		}
 	}
 }
 

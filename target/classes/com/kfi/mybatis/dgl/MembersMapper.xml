@@ -17,19 +17,10 @@
 	
 	
 
-	<update id="update" parameterType="logmembers">
-		update members set USER_NICKNAME=#{userNickname}, USER_PWD=#{userPwd}, USER_EMAIL=#{userEmail}
-	</update>
-	
-	<delete id="delete" parameterType="int">
-		delete from members where USER_NUM=#{value}
-	</delete>
-	
-
 	<!-- 가입 -->
  	 <insert id="join" parameterType="logmembers">
-		insert into members values
-		(#{user_num}, #{user_id},#{user_nickname}, #{user_pwd}, #{user_email}, sysdate,0,0)
+		insert into members values 
+		(#{user_num}, #{user_id}, #{user_pwd}, #{user_nickname}, #{user_email}, sysdate,0,0)
 	</insert>
 	 
 	<!-- 로그인 -->
@@ -38,10 +29,21 @@
 	</select>
 	
 	<!-- id 체크 -->
-	<select id="idcheck" parameterType="String" resultType="int">
+	<select id="idCheck" parameterType="string" resultType="int">
 		select count(*) from members where USER_ID = #{user_id}
 	</select>
-	<!-- 동일 이메일 찾기 -->
+	
+	<!-- 닉네임 체크 -->
+	<select id="nickCheck" parameterType="string" resultType="int">
+		select count(*) from members where USER_NICKNAME = #{user_nickname}
+	</select>
+	
+	<!-- 이메일 체크 -->
+	<select id="emailCheck" parameterType="string" resultType="int">
+		select count(*) from members where USER_EMAIL=#{user_email}
+	</select>
+	
+	<!-- 동일 이메일 검사 -->
 	<select id="findEmail" parameterType="logmembers" resultType="logmembers">
 		select * from members where USER_EMAIL=#{user_email}
 	</select>
@@ -65,15 +67,46 @@
 	<select id="getCount" parameterType="hashmap" resultType="int">
 		select NVL(count(user_num),0) cnt from members
 	</select>
-	
+	 <!-- 아이디 찾기 -->
+	<select id="findId" parameterType="string" resultType="string">
+		select user_id from members where user_email=#{user_email}
+	</select>
+
+	<!-- 비밀번호 찾기(재설정) -->
+	<update id="findPwd" parameterType="logmembers" >
+		update members set user_pwd=#{user_pwd} where user_id=#{user_id}
+	</update>
 	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->
-	<select id="list" resultType="logmembers">
-		select * from members
+	<select id="list" parameterType="hashmap" resultType="logmembers">
+		select * from
+		(
+			select mblist.*,rownum rnum from 
+			(
+			select * from members
+	<!-- 	 	<include refid="search"/>  -->
+			order by user_num desc 
+			)mblist
+		)
+		<![CDATA[ where rnum>=#{startrow} and rnum<=#{endrow}]]>
 	</select>
 	
 	<!-- 사용자 조회 -->
 	<select id="select" parameterType="int" resultType="logmembers">
 		select * from members where user_num=#{user_num}
 	</select>
+	<!-- 사용자 정보 변경 -->
+	<update id="update" parameterType="logmembers">
+		update members
+		<set>
+		 	<if test="user_nickname!=null and user_nickname!=''">user_nickname=#{user_nickname},</if>
+		 	<if test="user_pwd!=null and user_pwd!=''">user_pwd=#{user_pwd},</if>
+		 	<if test="user_email!=null and user_email!=''">user_email=#{user_email},</if>
+		 	<if test="user_status!=null and user_status!=''">user_status=#{user_status}</if> 
+		</set>
+		where user_num=#{user_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from members where user_num=#{user_num}
+	</delete>
 </mapper>

@@ -22,33 +22,25 @@
 	                   start: '${list.cc_begin}',
 	                   end: '${list.cc_end}',
 	                   url: getPageContext+'/mypage/mycommcalendar'
-	                   /* <c:if test='${begin==list.cc_begin}'>,color:'red'</c:if>
-	                   <c:set var="begin" value="${list.cc_begin}" /> */
 				}, 
 				</c:forEach>
 				],
 				eventMouseover:function(calEvent,jsEvent,view){
-					$(".fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead").css({
+				 	$(".fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead").css({
 						'overflow': 'visible'
 					}); 
 					$('<div class="calevent">'+calEvent.id+'</div>')
-					.appendTo(this).parent().css({pageX:jsEvent.pageX,pageY:jsEvent.pageY});
+					.appendTo(this).parent().css({pageX:jsEvent.pageX,pageY:jsEvent.pageY,'overflow': 'visible'});
 				},
 				eventMouseout:function(calEvent,jsEvent){
 					$(this).children('.calevent').css('display','none');
 				},
 				eventClick:function(event){
-					/* if(event.url){
+					if(event.url){
 						location.href=event.url;
-						// window.open(event.url);
 						return false;
-					} */
-				}, eventColor: '#00cee8'/* ,
-				eventAfterAllRender:function(){
-					for (var i = 0; i < $("div.row").length; i++) {
-						   $(".row:eq(" + i + ")").css({"z-index":($("div.row").length - i),'position':'absolute'});
-						}
-				} */
+					}
+				}, eventColor: '#00cee8'
 		})
 		$("#mypage_communitylist").on('change',function(){
 			var comm_num=$('#mypage_communitylist option:selected').val();
@@ -61,7 +53,6 @@
 			var comm_num=$('#mypage_communitylist option:selected').val();
 			var gathering=$('#comm_gathering option:selected').val();
 			var comm_name=$('#mypage_communitylist option:selected').text();
-			alert(comm_name);
 			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num
 					+"&comm_name="+comm_name+"&gathering="+gathering;
 		});

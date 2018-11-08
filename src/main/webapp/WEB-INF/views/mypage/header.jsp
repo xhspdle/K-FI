@@ -8,7 +8,7 @@
 		<p><span style="border-bottom: 2px solid white;">자기상태글 블라블라블라</span></p> 
 	</div>
 </div>
-<nav class="navbar navbar-default" data-spy="affix" data-offset-top="500" id="navAffix"><!--  navbar-fixed-top  -->
+<nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -27,7 +27,7 @@
 						<li><a href="#" data-toggle="modal" data-target="#writeModal">글쓰기</a></li>
 						<li><a href="#">마이커뮤니티</a></li>
 						<li><a href="<c:url value='/mypage/mycommcalendar'/>">일정보기</a></li>
-						<li><a href="#contact">MYSKIN</a></li>
+						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
 						<li><a href="#">회원정보</a></li>
 						<li><a href="#">로그아웃</a></li>
 					</ul>
@@ -41,7 +41,7 @@
 <div id="headerSearch">
 	<div class="row">
 		<div class="container search_con">
-			<form id="searchForm">
+			<form id="searchForm" name="searchForm" action="<c:url value='/mypage/myboard/list'/>">
 				<div class="input-group">
 					<div class="input-group-btn">
 						<button class="btn btn-default btn-lg search_bar"><i class="glyphicon glyphicon-search"></i></button>

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kfi.ldk.vo.MyBoardConfirmDelVo;
 import com.kfi.ldk.vo.MyBoardVo;
 
 @Repository
@@ -36,5 +37,8 @@ public class MyBoardDao {
 	}
 	public MyBoardVo select(int mb_num) {
 		return session.selectOne(NAMESPACE + ".select", mb_num);
+	}
+	public MyBoardConfirmDelVo confirmDel(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".confirmDel", map);
 	}
 }

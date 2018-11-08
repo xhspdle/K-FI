@@ -31,7 +31,7 @@ public class MyBoardLikeDao {
 	public List<Object> list(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".list", map);
 	}
-	public List<Object> select(int mb_num) {
-		return session.selectList(NAMESPACE + ".select", mb_num);
+	public MyBoardLikeVo select(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".select", map);
 	}
 }

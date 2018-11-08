@@ -4,7 +4,7 @@
 body {
 	font: 400 15px Lato, sans-serif;
 	line-height: 1.8;
- 	color: #818181;  
+	color: #818181;
 }
 
 h2 {
@@ -86,8 +86,8 @@ h4 {
 }
 
 .panel {
- 	border: 1px solid #333333; 
-	border-radius: 80 !important;
+	border: 1px solid #333333;
+	border-radius: 10 !important;
 	transition: box-shadow 0.5s;
 }
 
@@ -102,12 +102,12 @@ h4 {
 }
 
 .panel-heading {
-	color: #333333 !important;
-	/* background-color: #333333 !important; */
+	color: #fff !important;
+	background-color: #333333 !important;
 	padding: 15px;
 	border-bottom: 1px solid transparent;
- 	border-top-left-radius: 80;
-	border-top-right-radius: 80;
+ 	border-top-left-radius: 10;
+	border-top-right-radius: 10;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px; 
 }
@@ -154,17 +154,7 @@ h4 {
 	border-color: transparent;
 	color: #fff !important;
 }
-/* ///////////////////////////////////////////////////////////// */
-.navbar-header a i {
-	color: #fff !important;
-	padding: 15px 15px;
-}
 
-.navbar-header a i:hover {
-	color: #333333 !important;
-	background-color: #fff !important;
-}
-/* //////////////////////////////////////////////////////////////////////// */
 footer .glyphicon {
 	font-size: 20px;
 	margin-bottom: 20px;
@@ -182,7 +172,15 @@ footer .glyphicon {
 	-webkit-animation-duration: 1s;
 	visibility: visible;
 }
-
+#mainimg{
+	margin: 0px;
+	padding: 0px;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	
+}
 @keyframes slide { 0% {
 		opacity: 0;
 		transform: translateY(70%);
@@ -215,48 +213,56 @@ footer .glyphicon {
 		font-size: 150px;
 	}
 }
-.modal {
-	width: 50%;
-	height: 50%;
-	margin: auto;
-	overflow: none;
-}
-#popup {
-	width: 200px;
-	height: 200px;
-	background-color: white;
-	border: 2px solid red;
-	position: absolute;
-	top: 100px;
-	left: 10%;
-	display: none;
-}
-/* #popup div{
-word-break:break-all;
-} */
-/* #abmodifymodal {
+
+
+#abmodifymodal {
 	display: none;
 	position: absolute;
 	width: 50%;
 	height: 50%;
 	margin: auto;
-}  */
+} 
 .hidediv {
 	display: none;
+}
+
+.navbar-header a i {
+	color: #fff !important;
+	padding: 15px 15px;
+}
+
+.navbar-header a i:hover {
+	color: #333333 !important;
+	background-color: #fff !important;
+}
+.modal-dialog1{
+    margin-top: 10%;
+	width: 50%;
+	height: 50%; 
+	margin-left: 25%;
+
 }
 table tr td{
 	cursor:pointer;
 }
 
-#mainimg{
-	margin: 0px;
-	padding: 0px;
-	min-width: 100%;
-	min-height: 100%;
-	width: auto;
-	height: auto;
-	
+#abpopup{
+	margin: auto;
+	display : none;
+	position: fixed;
+	width: 25%;
+	height: 45%;
+	top: 100px;
+    left: 80px;
+    border-radius: 10px;
+    padding: 10px;
+	background-color: red;
+/*     background-image: url("../resources/images/1.png");  */
 }
-.modal-dialog1{
-	margin-left:25%;
+
+#userinsert_btn{
+	float: right;
+}
+#bbb{
+
 }

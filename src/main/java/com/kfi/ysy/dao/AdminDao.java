@@ -37,4 +37,7 @@ public class AdminDao {
 	public int admodify(AdminVo vo) {
 		return sqlSession.update(NAMESPACE+"admodify", vo);
 	}
+	public int addelete(int admin_num) {
+		return sqlSession.delete(NAMESPACE+"addelete", admin_num);
+	}
 }

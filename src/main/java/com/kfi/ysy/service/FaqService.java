@@ -20,4 +20,10 @@ public class FaqService {
 	public FaqVo faqdetail(int qa_num) {
 		return dao.faqdetail(qa_num);
 	}
+	public int faqinsert(FaqVo vo) {
+		return dao.faqinsert(vo);
+	}
+	public List<FaqVo> faqcomment(int qa_num){
+		return dao.faqcomment(qa_num);
+	}
 }
