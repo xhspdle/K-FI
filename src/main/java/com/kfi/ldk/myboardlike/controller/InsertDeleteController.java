@@ -1,4 +1,4 @@
-package com.kfi.ldk.mycommentlike.controller;
+package com.kfi.ldk.myboardlike.controller;
 
 import java.util.HashMap;
 
@@ -11,22 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.ldk.service.CommonService;
-import com.kfi.ldk.vo.MyCommentLikeVo;
+import com.kfi.ldk.vo.MyBoardLikeVo;
 
-@Controller(value="MyCommentLikeInsertController")
-public class InsertController {
+@Controller(value="MyBoardLikeInsertDeleteController")
+public class InsertDeleteController {
 	@Autowired
-	@Qualifier("myCommentLikeServiceImpl") private CommonService service;
-	@RequestMapping("/mypage/mycommentlike/insert")
+	@Qualifier("myBoardLikeServiceImpl") private CommonService service;
+	@RequestMapping("/mypage/myboardlike/insert")
 	@ResponseBody
-	public HashMap<String, Object> insert(int myc_num,HttpSession session){
+	public HashMap<String, Object> insert(int mb_num,HttpSession session){
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		int user_num=0;
 		Object session_num=session.getAttribute("user_num");
 		if(session_num!=null && session_num!="") {
 			user_num=(Integer)session_num;
 		}
-		int n=service.insert(new MyCommentLikeVo(0, myc_num, user_num));
+		int n=service.insert(new MyBoardLikeVo(0, mb_num, user_num));
+		map.put("mb_num", mb_num);
+		map.put("boardLikeCnt", service.getCount(map));
 		if(n>0) {
 			map.put("code", "success");
 		}else if(n==-1) {

@@ -207,14 +207,21 @@ $(document).ready(function(){
   });
   
   var sameDate='';
-  $.getList=function(pageNum,keyword){
+  $.getList=function(pageNum,keyword,appendWhere){
 	  	var getSession=$("#getSession").val();
+	  	var append="#myBoardList";
+	  	if(appendWhere!==undefined){
+	  		append=appendWhere;
+	  	}
 		$.getJSON(getPageContext + "/mypage/myboard/list",
 			{"pageNum":pageNum,"keyword":keyword},
 			function(data){
 				$(data.list).each(function(i,json){
 					var mb_num=json.mb_num;
 					var user_num=json.user_num;
+					var user_id=json.user_id;
+					var user_nickname=json.user_nickname;
+					var user_email=json.user_email;
 					var mb_title=json.mb_title;
 					var mb_content=json.mb_content;
 					var mb_views=json.mb_views;
@@ -228,13 +235,13 @@ $(document).ready(function(){
 						$("<h1 class='text-center' id='"+ json.mb_date +"' style='margin-bottom:30px;'>" +
 						  "<span style='border-bottom: 4px solid tan'>" + json.mb_date +
 						  "</span></h1>")
-						  .appendTo("#myBoardList");
+						  .appendTo(append);
 					}
 					sameDate=json.mb_date;
 					if(mv_savvid!==null && mv_savvid!==''){
 						attachment="<video class='img-responsive center-block' controls autoplay muted='muted' loop src='"+getPageContext +"/resources/upload/vid/" + mv_savvid + "'></video>";
 					}else if(mp_savimg!==null && mp_savimg!==''){
-						attachment="<img class='img-responsive center-block' src='"+getPageContext +"/resources/upload/img/" + mp_savimg + "'>";
+						attachment="<img class='img-responsive center-block' src='"+getPageContext +"/resources/upload/img/" + mp_savimg + "' alt='board image'>";
 					}
 					if(user_num==getSession){
 						boardOption="<div class='dropdown boardOption'>" +
@@ -244,14 +251,16 @@ $(document).ready(function(){
 									"<li><a href='#updateModal' data-toggle='modal' data-mb-num='"+ mb_num +"'>" +
 									"<span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;Edit</a></li>" +
 									"<li><a href='#' onclick='return false;' data-toggle='popover' data-mb-num='"+ mb_num +"'>" +
-									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li></ul></div>";
+									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li>" +
+									"<li><a href='#'>Report bad contents</a></li></ul></div>";
 					}else{
 						boardOption="<div class='dropdown boardOption'>" +
 									"<button class='btn dropdown-toggle disabled' type='button' data-toggle='dropdown'>" +
 									"<span class='glyphicon glyphicon-option-vertical'></span></button>" +
 									"<ul class='dropdown-menu rightOption'>" +
 									"<li><a href='#'>Edit</a></li>" +
-									"<li><a href='#'>Delete</a></li></ul></div>";
+									"<li><a href='#'>Delete</a></li> +" +
+									"<li><a href='#'>Report bad contents</a></li></ul></div>";
 					}
 					if(i===0){
 						$("<div class='panel-group'>" +
@@ -259,34 +268,50 @@ $(document).ready(function(){
 						  "<div class='panel-heading' id='"+ mb_num +"'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
-						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + 
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"&keyword="+ keyword +"' class='postA'>" + 
 						  	mb_title + "</a></h1></blockquote>"+
 						  	boardOption +
 						  "</div>" +
 						  "<div class='panel-body'>" + 
+						  	"<div class='media'>" +
+						  		"<div class='media-left media-top'>" +
+						  		"<img src='"+ getPageContext +"/resources/images/kpop콘.gif' " +
+						  		"class='media-object img-circle' style='width:50px;height:50px;'></div>" +
+						  		"<div class='media-body' style='padding-left:5px;'>" +
+						  		"<h4 class='media-body' style='text-align:left;margin-bottom:-5px;'>" +
+						  		"<strong>"+ user_nickname +"</strong></h4>" +
+						  		"<p style='text-align:left;'><small>"+ json.mb_date + "</small></p></div>" +
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
 						  "<div class='panel-footer'><div>" +
 						    "<h4 class='postLikeComment'>Likes: " + like_cnt + "</h4>" +
 						  	"<h4 class='postLikeComment'>Comments: " + comment_cnt + "</h4></div></div></div></div>")
-						.appendTo("#myBoardList");
+						.appendTo(append);
 					}else{
 						$("<div class='panel-group slideanim'>" +
 						  "<div class='panel panel-default'>" +
 						  "<div class='panel-heading' id='"+ mb_num +"'>" +
 						    "<blockquote class='postBlock'>" +
 						  	"<h1 class='postTitle'>" + 
-						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"' class='postA'>" + 
+						  	"<a href='"+getPageContext +"/mypage/myboard/select?mb_num="+ mb_num +"&keyword="+ keyword +"' class='postA'>" + 
 						  	mb_title + "</a></h1></blockquote>"+
 						  	boardOption +
 						  "</div>" +
 						  "<div class='panel-body'>" + 
+						  	"<div class='media'>" +
+						  		"<div class='media-left media-top'>" +
+					  			"<img src='"+ getPageContext +"/resources/images/kpop콘.gif' " +
+					  			"class='media-object img-circle' style='width:50px;height:50px;'></div>" +
+					  			"<div class='media-body' style='padding-left:5px;'>" +
+					  			"<h4 class='media-body' style='text-align:left;margin-bottom:-5px;'>" +
+					  			"<strong>"+ user_nickname +"</strong></h4>" +
+					  			"<p style='text-align:left;'><small>"+ json.mb_date + "</small></p></div>" +
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
 						  "<div class='panel-footer'><div>" +
 						    "<h4 class='postLikeComment'>Likes: " + like_cnt + "</h4>" +
 						  	"<h4 class='postLikeComment'>Comments: " + comment_cnt + "</h4></div></div></div></div>")
-						.appendTo("#myBoardList");
+						.appendTo(append);
 					}
 				});
 				
@@ -312,8 +337,8 @@ $(document).ready(function(){
 	  $.footerBtn();
   }
   var more=2;
-  $.getListMore=function(){	  
-	  $.getList(more++);
+  $.getListMore=function(keyword,appendWhere){	  
+	  $.getList(more++,keyword,appendWhere);
   }
   
   $("#myBoardSelect .postTitle > span").on({
@@ -368,6 +393,7 @@ $(document).ready(function(){
 				  var myc_date=json.myc_date;
 				  var cnt=json.cnt;
 				  var user_id=json.user_id;
+				  var msp_savimg=json.msp_savimg;
 				  var optionBtn='';
 				  var dropDowns='';
 				  if(user_num==getSession){
@@ -379,7 +405,7 @@ $(document).ready(function(){
 					  optionBtn=" disabled";
 				  }
 				  html=document.querySelector("#commentTemplate").innerHTML;
-				  var resultHTML=html.replace("{msp_savimg}", "kpop콘.gif")
+				  var resultHTML=html.replace("{msp_savimg}", msp_savimg)
 				  		.replace("{pageNum}",pageNum)
 				  		.replace("{path}", getPageContext)
 				  		.replace(/{myc_num}/gi, myc_num)
@@ -422,9 +448,6 @@ $(document).ready(function(){
 			  }
 		  });
   }
-  if($("#myCommentListHere").val()!==undefined){
-	  $.getCommentList();
-  }
   
   $("#commentList").on('click',".thumbsUp",function(e){
 	  e.preventDefault();
@@ -432,13 +455,12 @@ $(document).ready(function(){
 	  $.getJSON(getPageContext + "/mypage/mycommentlike/insert",
 			  {'myc_num':myc_num},
 			  function(json){
+				  $("span[data-comm-num='"+ myc_num +"'").text(json.commentLikeCnt);
 				  var msgSpan=$("span[data-comm-num='"+ myc_num +"'").next().next();
 				  if(json.code==='success'){
-					  var commentLikes=$("span[data-comm-num='"+ myc_num +"'").text();
-					  $("span[data-comm-num='"+ myc_num +"'").text(parseInt(commentLikes)+1);
 					  $(msgSpan).text("Thumbs Up!");
 				  }else if(json.code==='duplicated'){
-					  $(msgSpan).text("You've already clicked Likes");
+					  $(msgSpan).text("cancled");
 				  }else{
 					  $.msgBox(json.code);
 				  }
@@ -460,10 +482,11 @@ $(document).ready(function(){
 				  if(json.code==='success'){
 					  $(msgSpan).text("Like it!");
 				  }else if(json.code==='duplicated'){
-					  $(msgSpan).text("You've already clicked Likes");
+					  $(msgSpan).text("cancled");
 				  }else{
-					  $(msgSpan).text("error...");
+					  $.msgBox(json.code);
 				  }
+				  $.getMyBoardLikeList();
 				  $(msgSpan).css("opacity","1");
 				  setTimeout(function(){
 					  $(msgSpan).css("opacity","0"); 
@@ -721,5 +744,48 @@ $(document).ready(function(){
 		  $("#sendServer_up").prop('disabled',false);
 	  });
   });
+  
+  if($("#myBoardSearchListHere").val()!==undefined){
+	  var keyword=$("#myBoardSearchListHere").val();
+	  $.footerBtn();
+	  $(document).on('focus',"[href='javascript:$.getListMore()']",function(event){
+		  event.preventDefault();
+		  $.getListMore(keyword,"#myBoardSearchList");
+	  });
+  }
+  
+  /*
+   * 동적으로 생성된 요소에 부트스트랩 툴팁 바인딩하기
+   * $('[data-toggle="tooltip"]').tooltip(); 으로 하면 작동안함
+   */
+  $("body").tooltip({
+	 selector: '[data-toggle="tooltip"]' 
+  });
+  $.getMyBoardLikeList=function(pageNum){
+	  var mb_num=$("#boardNum").val();
+	  $.getJSON(getPageContext + "/mypage/myboardlike/list",
+			  {'pageNum':pageNum,'mb_num':parseInt(mb_num)},
+			  function(data){
+				  $(".likeUserList").empty();
+				  $(data.list).each(function(i,json){
+					  var mbl_num=json.mbl_num;
+					  var mb_num=json.mb_num;
+					  var user_num=json.user_num;
+					  var user_id=json.user_id;
+					  var user_nickname=json.user_nickname;
+					  var user_email=json.user_email;
+					  var msp_savimg=json.msp_savimg;
+					  $("<img class='img-responsive img-circle' " +
+					  	"src='"+ getPageContext +"/resources/upload/img/"+ msp_savimg +"' alt='likerProfiles' " +
+					  	"data-toggle='tooltip' title='"+ user_nickname +"'>")
+					  .appendTo(".likeUserList");
+				  });
+			  });
+  }
+  if($("#myCommentListHere").val()!==undefined){
+	  $.getCommentList();
+	  $.getMyBoardLikeList();
+  }
+  
 });
 

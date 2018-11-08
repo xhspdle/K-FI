@@ -17,7 +17,7 @@
 		update my_board_like set user_num=#{user_num} where mbl_num=#{mbl_num}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from my_board_like where mbl_num=#{mbl_num}
+		delete from my_board_like where user_num=#{user_num}
 	</delete>
 	<select id="list" parameterType="hashmap" resultType="myboardlike">
 		select *

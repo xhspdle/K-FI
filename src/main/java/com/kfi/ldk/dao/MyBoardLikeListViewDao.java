@@ -7,25 +7,17 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kfi.ldk.vo.MyBoardListViewVo;
-
 @Repository
-public class MyBoardListViewDao {
+public class MyBoardLikeListViewDao {
 	@Autowired private SqlSession session;
-	private static final String NAMESPACE="com.kfi.mybatis.ldk.MyBoardListViewMapper";
+	private static final String NAMESPACE="com.kfi.mybatis.ldk.MyBoardLikeListViewMapper";
 	public int getCount(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE + ".getCount", map);
 	}
 	public List<Object> list(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE + ".list", map);
 	}
-	public MyBoardListViewVo select(int mb_num) {
-		return session.selectOne(NAMESPACE + ".select", mb_num);
-	}
-	public MyBoardListViewVo prev(HashMap<String, Object> map) {
-		return session.selectOne(NAMESPACE + ".prev", map);
-	}
-	public MyBoardListViewVo next(HashMap<String, Object> map) {
-		return session.selectOne(NAMESPACE + ".next", map);
+	public List<Object> select(int mb_num) {
+		return session.selectList(NAMESPACE + ".select", mb_num);
 	}
 }

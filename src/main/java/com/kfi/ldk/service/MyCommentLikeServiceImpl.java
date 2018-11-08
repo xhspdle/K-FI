@@ -28,6 +28,7 @@ public class MyCommentLikeServiceImpl implements CommonService{
 		map.put("user_num", vo.getUser_num());
 		map.put("myc_num", vo.getMyc_num());
 		if(mclDao.select(map)!=null) {
+			delete(vo.getUser_num());
 			return -1;//ม฿บน
 		}else {
 			return mclDao.insert(new MyCommentLikeVo(getMaxNum()+1, vo.getMyc_num(), vo.getUser_num()));
@@ -40,8 +41,8 @@ public class MyCommentLikeServiceImpl implements CommonService{
 	}
 	@Override
 	public int delete(Object data) {
-		int mcl_num=(Integer)data;
-		return mclDao.delete(mcl_num);
+		int user_num=(Integer)data;
+		return mclDao.delete(user_num);
 	}
 	@SuppressWarnings("unchecked")
 	@Override

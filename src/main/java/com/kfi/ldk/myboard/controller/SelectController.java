@@ -20,11 +20,17 @@ public class SelectController {
 	@Qualifier("myBoardServiceImpl") private CommonService service;
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/mypage/myboard/select",method=RequestMethod.GET)
-	public String select(int mb_num,Model model) {
-		HashMap<String, Object> map=(HashMap<String, Object>)service.select(mb_num);
+	public String select(int mb_num,String keyword,Model model) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("mb_num", mb_num);
+		map.put("keyword", keyword);
+		map=(HashMap<String, Object>)service.select(map);
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("boardVo", map.get("boardVo"));
 		model.addAttribute("imgList", map.get("imgList"));
 		model.addAttribute("vidList", map.get("vidList"));
+		model.addAttribute("prev", map.get("prev"));
+		model.addAttribute("next", map.get("next"));
 		return ".mypage.myboard.select";
 	}
 }

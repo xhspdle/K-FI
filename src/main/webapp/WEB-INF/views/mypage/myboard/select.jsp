@@ -39,6 +39,16 @@
 				-->
 			</div>
 			<div class="panel-body">
+				<div class="media">
+					<div class="media-left media-top">
+						<img src="<c:url value='/resources/images/kpop콘.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
+					</div>
+					<div class="media-body" style="padding-left:5px;">
+						<h4 class="media-heading" style="text-align:left;margin-bottom:-5px;"><strong>${boardVo.user_nickname }</strong></h4>
+						<p style="text-align:left;"><small>${boardVo.mb_date }</small></p>
+					</div>
+				</div>
+				
 				<p>${boardVo.mb_content }</p>
 				
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -99,9 +109,7 @@
 					data-board-num="${boardVo.mb_num }">
 					<span class="glyphicon glyphicon-heart"></span> Like</a>
 					<div class="likeUserList">
-						<img class="img-responsive img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="likerProfiles">
-						<img class="img-responsive img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="likerProfiles">
-						<img class="img-responsive img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="likerProfiles">
+					
 					</div>
 				</div>
 				<h3 class="postLikeComment select" id="commentCnt">${comment_cnt } Comments</h3>
@@ -131,25 +139,36 @@
 				</c:choose>
 				</div>
 				<div id="commentList">
-				<!--  
-					<div class="media">
-						<div class="media-left">
-							<img class="media-object img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="commentProfile">
-						</div>
-						<div class="media-body">
-							<h3><strong><a href="">UserId</a></strong></h3>
-							<p>댓글내용 블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
-							블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
-							ㅁㄴㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㄴㅇㄴㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇㅁ
-							ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
-							ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</p>
-							<i class="glyphicon glyphicon-thumbs-up"></i><span>추천수</span><small>댓글작성일</small>
-						</div>
-					</div>
-				-->	
+				
 				</div>
+				
 				<div class="text-center">
 					<ul class="pagination"></ul>
+					<a <c:if test="${!empty prev.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${prev.mb_num }&keyword=${keyword }'/>"</c:if>>
+						<span data-toggle="tooltip" 
+						<c:choose>
+							<c:when test="${!empty prev.mb_num }">
+							title="Prev"
+							</c:when>
+							<c:otherwise>
+							title="end of line"
+							</c:otherwise>
+						</c:choose> 
+						class="pull-left glyphicon glyphicon-step-backward prev"></span>
+					</a>
+					
+					<a <c:if test="${!empty next.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${next.mb_num }&keyword=${keyword }'/>"</c:if>>
+						<span data-toggle="tooltip" 
+						<c:choose>
+							<c:when test="${!empty next.mb_num }">
+							title="Next"
+							</c:when>
+							<c:otherwise>
+							title="end of line"
+							</c:otherwise>
+						</c:choose>
+						class="pull-right glyphicon glyphicon-step-forward next"></span>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -174,7 +193,7 @@
 <script id="commentTemplate" type="text/template">
 <div class="media slide" data-comm-pagenum="{pageNum}">
 	<div class="media-left">
-		<img class="media-object img-circle" src="<c:url value='/resources/images/{msp_savimg}'/>" alt="commentProfile">
+		<img class="media-object img-circle" src="<c:url value='/resources/upload/img/{msp_savimg}'/>" alt="commentProfile">
 	</div>
 	<div class="media-body">
 		<h3><strong><a href="">{user_id}</a></strong><span class="msgSpan"></span></h3>

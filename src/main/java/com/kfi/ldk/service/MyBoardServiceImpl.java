@@ -18,15 +18,13 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kfi.ldk.dao.MyBoardDao;
-import com.kfi.ldk.dao.MyBoardLikeDao;
 import com.kfi.ldk.dao.MyBoardListViewDao;
-import com.kfi.ldk.dao.MyCommentDao;
-import com.kfi.ldk.dao.MyCommentLikeDao;
 import com.kfi.ldk.dao.MyPhotoDao;
 import com.kfi.ldk.dao.MyVideoDao;
 import com.kfi.ldk.util.ImgUtil;
 import com.kfi.ldk.util.VidUtil;
 import com.kfi.ldk.vo.MyBoardConfirmDelVo;
+import com.kfi.ldk.vo.MyBoardListViewVo;
 import com.kfi.ldk.vo.MyBoardVo;
 import com.kfi.ldk.vo.MyPhotoVo;
 import com.kfi.ldk.vo.MyVideoVo;
@@ -37,9 +35,6 @@ public class MyBoardServiceImpl implements CommonService{
 	@Autowired private MyPhotoDao mpDao;
 	@Autowired private MyVideoDao mvDao;
 	@Autowired private MyBoardListViewDao mbViewDao;
-	public int addHit(int mb_num) {
-		return mbDao.addHit(mb_num);
-	}
 	@Override
 	public int getMaxNum() {
 		return mbDao.getMaxNum();
@@ -262,13 +257,23 @@ public class MyBoardServiceImpl implements CommonService{
 			return -2;
 		}
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object select(Object data) {
-		int mb_num=(Integer)data;
-		HashMap<String, Object> map=new HashMap<String, Object>();
-		map.put("boardVo", mbDao.select(mb_num));
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		int mb_num=(Integer)map.get("mb_num");
+		MyBoardListViewVo vo=mbViewDao.select(mb_num);
+		String content=vo.getMb_content();
+		if(content!=null && content!="") {
+			vo.setMb_content(content.replaceAll("\n", "<br>"));
+		}
+		mbDao.addHit(mb_num);
+		map.put("user_num", vo.getUser_num());
+		map.put("boardVo", vo);
 		map.put("imgList", mpDao.select(mb_num));
 		map.put("vidList", mvDao.select(mb_num));
+		map.put("prev", mbViewDao.prev(map));
+		map.put("next", mbViewDao.next(map));
 		return map;
 	}
 	@SuppressWarnings("unchecked")

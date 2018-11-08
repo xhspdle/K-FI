@@ -37,6 +37,7 @@
 		<mapper resource="com/kfi/mybatis/ldk/MyCommentMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyCommentLikeMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardListViewMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/MyBoardLikeListViewMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyCommentListViewMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MyCommCalendarMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinMapper.xml"/>

@@ -13,6 +13,23 @@
 			</otherwise>
 		</choose>
 	</sql>
+	<!-- 
+	[ 검색조건 중첩 주의!!! ]   
+	where mb_num>#{mb_num} and 이거 다음에 
+	괄호 안넣고 mb_title like '%'||#{keyword}||'%' or mb_content like '%'||#{keyword}||'%' 
+	요렇게 바로 넣으면 조건이 중첩돼서 쿼리 결과가 이상하게 나온다
+	문자열 조건을 먼저 수행하기 위하여, 괄호를 꼭 주도록 하자!!!
+	-->
+	<sql id="searchPrevNext">
+		<choose>
+			<when test="keyword!=null and keyword!=''">
+				(mb_title like '%'||#{keyword}||'%' or mb_content like '%'||#{keyword}||'%')
+			</when>
+			<otherwise>
+				(user_num=#{user_num})
+			</otherwise>
+		</choose>
+	</sql>
 	<select id="getCount" parameterType="hashmap" resultType="int">
 		select NVL(count(mb_num),0) cnt from myboardlist
 		<include refid="search"/>
@@ -33,6 +50,28 @@
 		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
 	<select id="select" parameterType="int" resultType="myboardlist">
-		select * from my_board where mb_num=#{mb_num}
+		select * from myboardlist where mb_num=#{mb_num}
+	</select>
+	<select id="prev" parameterType="hashmap" resultType="myboardlist">
+		select *
+		from
+		(
+			select *
+			from myboardlist
+			<![CDATA[where mb_num<#{mb_num}]]> and <include refid="searchPrevNext"/>
+			order by mb_num desc
+		)
+		where rownum=1
+	</select>
+	<select id="next" parameterType="hashmap" resultType="myboardlist">
+		select *
+		from
+		(
+			select *
+			from myboardlist
+			where mb_num>#{mb_num} and <include refid="searchPrevNext"/>
+			order by mb_num asc
+		)
+		where rownum=1
 	</select>
 </mapper>
