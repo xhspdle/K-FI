@@ -7,8 +7,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
-.redText{display: block;color: red;margin-left:10px;}
-.greenText{display: block;color: green;margin-left:10px;}
+
+.form-group input{width: 25%;}
+
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,20 +21,33 @@
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script type="text/javascript">
  $(function(){
+	var btn = $("#submit");
+	btn.disabled = true;
 	var idflag = false;
 	var emailflag = false;
 	var getContext = $('#getContext').val();
 	
-	$('#fnid').keyup(function() {
-		var id = $("#fnid").val();
-		var eMsg = $("#idMsg");
+	$('#submit').click(function() {
+		var form = $("#form-control");
+		var id = $("#fpid").val();
+		var email = $("#fpemail").val();
+		var iMsg = $("#idMsg");
+		var eMsg = $("#emailMsg");
 		var nullck = " ";
 		
-		if (id.valueOf(nullck) > -1 || id.length < 1 || id==""){
-			$(eMsg).text("아이디에 공백이 있습니다.");
-			eMsg.removeClass('greenText');
-			eMsg.addClass('redText');
-			return false;
+		if (id.valueOf(nullck) > -1 || id.length < 1 || id== ""){
+			$(iMsg).text("아이디에 공백이 있습니다.");
+		/* 	iMsg.show(); 
+			iMsg.removeClass('greenText'); 
+			iMsg.addClass('redText'); */
+			return idflag = false ;
+			//return false;
+		}
+		if (email.valueOf(nullck) > -1 || email.length < 1 || id== ""){
+			$(eMsg).text("이메일 형식에 맞지않습니다.");
+			return emailflag = false ;
+			//return false;
+		}
 			$.ajax({
 				async : true,
 				type : "GET",
@@ -41,43 +55,103 @@
 				data : {'user_id' : id},
 				dataType : "json",
 				success : function(data){
+					console.log(data)
 					if(data.msg == 'false') {
-						eMsg.show();
-						eMsg.removeClass('redText'); 
-						eMsg.addClass('greenText'); 
-						$("#fnemail").focus();
-						return false;
+						$(iMsg).text("통과");
+						$("#fpemail").focus();
+					/* 	iMsg.show(); 
+						iMsg.removeClass('redText'); 
+						iMsg.addClass('greenText'); */
+						return idflag = true;
+					//	return true;
 					}else if (data.msg == 'true') {
-						$(eMsg).text("아이디가 존재하지 않습니다.");
-						$("#fnid").focus();
-						eMsg.show();
-						eMsg.removeClass('greenText'); 
-						eMsg.addClass('redText'); 
-						return idFlag = 1;
-						return true;
+						$(iMsg).text("아이디가 존재하지 않습니다.");
+						$("#fpid").focus();
+					/* 	iMsg.show(); 
+						iMsg.removeClass('greenText'); 
+						iMsg.addClass('redText'); */
+						return idflag = false;
+					//	return false;
+					}else{
+					$(iMsg).text("에러에러에러");
+					$("#fpid").focus();
+				/* 	iMsg.show(); 
+					iMsg.removeClass('greenText'); 
+					iMsg.addClass('redText'); */
+					return idflag = false;
+					//return false;
 					}
-		}
+				}
+			});
+			
+			$.ajax({
+				async : true,
+				type : "GET",
+				url : getContext + '/login/join/emailcheck',
+				data : {'user_email' : email},
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				dataType : "json",
+				success : function(data){
+					if (data.msg == 'true') {
+					$(eMsg).text("이메일 형식을 확인해주세요.");
+					/* eMsg.show();
+					eMsg.removeClass('greenText'); 
+					eMsg.addClass('redText');  */
+					$("#id").focus();
+					return emailflag = false;
+					//return false;
+					
+				} else if (data.msg == 'false') {
+					$(eMsg).text("이메일을 확인했습니다.");
+					$("#email").focus();
+					/* eMsg.show();
+					eMsg.removeClass('redText');
+					eMsg.addClass('greenText'); */
+					return emailflag = true;
+					//return true;
+				}else{
+					$(eMsg).text("오류");
+					return emailflag = false;
+					//return false;
+				}
+			}
+		});
+			$('#submit').click(function(){
+				if(idflag == true && emailflag == true){
+					btn.disabled =false;
+					console.log("ididididi");
+					
+				}else{
+					btn.disabled ='disabled';
+					console.log("asdfsdafasd");
+				}
+			});
 	});
-}); 
+ });
 </script>
 </head>
 <body>
 <input type="hidden" id="getContext" name="getContext" value="<c:url value='/'/>">
-	
-	<form action="<c:url value='/findpwd'/>" method="post">
-			<div>
-			<label for="fnid">아이디</label><br>
-				<input type="text" name="user_id" id="fnid" placeholder="아이디"><br>
-				<span class=""  id="idMsg"></span>
-			</div>
-			<div>
-			<label for="fnemail">이메일</label><br>
-				<input type="text" name="user_email" id="fnemail"placeholder="이메일"><br>
-			</div>
-
-			<div>
-				<input type="submit" value="다음" id="pwdbtn">
-			</div>
-	</form>
+<div class="container">
+  <label>비밀번호찾기</label>
+  <form class="" action="<c:url value='/findpwd'/>" method="post">
+  <div class="form-group">
+    <label class="form-control-label" for="fpid">ID</label>
+    <input type="text" class="form-control" id="fpid" name="fpid" placeholder="Enter ID">
+  <span id="idMsg" class="help-block" style="opacity:1;"></span>
+  </div>
+  <div class="form-group">
+    <label class="form-control-label" for="fpemail">Email</label>
+    <input type="email" class="form-control" id="fpemail" name="fpemail" placeholder="Enter Email">
+  </div>
+  <span id="emailMsg" class="help-block" style="opacity:1;"></span>
+    <div class="form-group">        
+      <div class="submitbox" >
+        <button type="submit" class="btn btn-default" id="submit" name="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+  
+</div>
 </body>
 </html>

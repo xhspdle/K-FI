@@ -102,7 +102,7 @@
 				success : function(data) {
 					console.log(data)
 					if (!isNick.test(nickname)) {
-						$(eMsg).text("영문,한글,숫자포함 4~15자의 닉네임을 만들어 주세요.");
+						$(eMsg).text("영문,한글,숫자를 이용한 4~15자의 닉네임을 만들어 주세요.");
 						$("#nickname").focus();
 						eMsg.show(); 
 						eMsg.removeClass('greenText'); 

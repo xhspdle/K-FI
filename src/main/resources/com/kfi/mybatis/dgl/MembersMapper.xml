@@ -74,7 +74,7 @@
 
 	<!-- 비밀번호 찾기(재설정) -->
 	<update id="findPwd" parameterType="logmembers" >
-		update members set user_pwd=#{user_pwd} where user_id=#{user_id}
+		update members set user_pwd=#{user_pwd} where user_id=#{user_id} 
 	</update>
 	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->
