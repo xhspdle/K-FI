@@ -335,8 +335,8 @@
 	<input class="pull-right btn btn-default" value="하루닫기" onclick="closepopup()"> 
 	<input class="pull-right btn btn-default" value="닫기"  onclick="$('#abpopup').css('display','none')">
 </div>
-<div id="bbb" class="hidediv" style="position: fixed;bottom: 20px;right: 20px; height: 30px;width: 30px;">
-	<span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:red; " onclick="$('#abpopup').css('display','block')"></span> 
+<div id="bbb" class="hidediv" style="position: fixed;bottom: 20px;right: 20px;">
+	<h1><span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:red; " onclick="$('#abpopup').css('display','block')"></span></h1> 
 </div>
 <%-- 	</c:when>
 	<c:otherwise>
