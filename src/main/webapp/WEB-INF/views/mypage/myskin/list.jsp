@@ -3,32 +3,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="myskin">
-	<%--  <a class="myskin_ud" href="<c:url value='/mypage/myskin/selectProfile' />">확인</a>  --%>
-	<a class="myskin_ud" href="<c:url value='/mypage/myskin/insertForm' />">스킨 추가하기</a>
-	<a class="myskin_ud" href="<c:url value='#' />">기본 이미지로 변경하기</a><br>
-	<c:forEach var="list" items="${msvlist }">
-		<br><br>
-		<div class="col-sm-2">
-			<h1>${list.ms_name }</h1>
-			<span> 
-				<a class="myskin_ud" href="javascript:mySkinApply(1)">적용하기</a> 
-				<a class="myskin_ud" href="<c:url value='/mypage/myskin/updateform?ms_num=${list.ms_num }' />">수정</a> 
-				<a class="myskin_ud" href="<c:url value='/mypage/myskin/delete?ms_num=${list.ms_num }' />">삭제</a>
-			</span>
-		</div>
-		<div class="pre_cover" style="background: url('${pageContext.request.contextPath }/resources/upload/img/${list.msc_savimg }');">
-			<img src="<c:url value='/resources/upload/img/${list.msp_savimg }'/>" class="img-circle"
+	<div style="width: 126.5%;background-color: cornflowerblue;height: 80px; margin: -2% 0% 0% -21%; padding: 2% 0% 0% 50%;">
+    <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="padding: 6px 78px;">My Skin
+    <span class="caret"></span></button>
+    <ul id="myskin_dropmenu" class="dropdown-menu" style="width: 19%;">
+     	<c:forEach var="list" items="${msvlist }">
+	    	 <li id="${list.ms_num }"><a href="#contact">${list.ms_name }</a></li>
+	    </c:forEach>
+      <li class="divider"></li>
+    </ul>
+   	<a class="myskin_ud_add" href="<c:url value='/mypage/myskin/insertForm' />">스킨 추가</a>
+	<a class="myskin_ud_default" href="<c:url value='#' />">기본 이미지로 변경</a>
+  </div>
+	</div>
+		<a class="myskin_ud_apply" href="#">적용</a>
+		<a class="myskin_ud_update" href="#">수정</a> 
+		<a class="myskin_ud_del" href="#">삭제</a>
+		<div class="pre_cover" id="myskin_list_cover" style="margin-top: 2%;background-size: cover !important;">
+			<img src="" class="img-circle"
 				style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
-				margin-left: auto;margin-right: auto;">
+				margin-left: auto;margin-right: auto; border: white 4px solid">
 			<br>
-			<p><span style="width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;">${ list.ms_msg}</span></p> 
-			<div class="collapse navbar-collapse" style="background-color: ${list.ms_color};border-radius:10px;">
+			<p><span id="myskin_list_msg" style="width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;"></span></p> 
+			<div class="collapse navbar-collapse" style="border-radius:10px;" id="myskin_list_nav">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#contact">COMMUNITY</a></li>
 					<li class="dropdown"><a href="#contact">MYPAGE</a></li>
-					<li><button type="button" class="btn btn-default btn-lg"style="border:${list.ms_color} ;background-color: ${list.ms_color};border-radius:10px;" ><span class="glyphicon glyphicon-search"></span></button></li>
+					<li><button type="button" id="myskin_list_icon" class="btn btn-default btn-lg" style="border-radius:10px;" ><span class="glyphicon glyphicon-search"></span></button></li>
 				</ul>
 			</div>
 		</div>
-	</c:forEach>
 </div>

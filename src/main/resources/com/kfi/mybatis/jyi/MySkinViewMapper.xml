@@ -5,11 +5,11 @@
 <mapper namespace="com.kfi.mybatis.jyi.MySkinViewMapper">
 
 	<select id="list" parameterType="int" resultType="myskinview">
-		select * from my_skin_view where user_num=#{user_num} order by ms_num DESC
+		select * from my_skin_view where user_num=#{user_num} order by ms_num
 	</select>
 
 	<select id="select" parameterType="int" resultType="myskinview">
-		select * from my_skin_view where ms_num=#{ms_num} order by ms_num DESC
+		select * from my_skin_view where ms_num=#{ms_num} order by ms_num
 	</select>
 
 

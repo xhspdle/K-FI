@@ -1,5 +1,6 @@
 package com.kfi.jyi.myskin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,13 +33,12 @@ public class ListController {
 		return ".mypage.myskin.list";
 	}
 	
-	@RequestMapping(value="/mypage/myskin/select",produces="application/json;charset=utf-8")
+	@RequestMapping(value="/mypage/myskin/select")
 	@ResponseBody
-	public String selectMySkin(String ms_num) {
+	public HashMap<String, Object> selectMySkin(String ms_num) {
 		int msNum=Integer.parseInt(ms_num);
-		MySkinViewVo vo=(MySkinViewVo)service.select(msNum);
-		JSONObject json=new JSONObject();
-		json.put("vo", vo);
-		return json.toString();
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("vo", service.select(msNum));
+		return map;
 	}
 }

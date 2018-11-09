@@ -19,12 +19,12 @@
 			<c:choose>
 					<c:when test="${msvlist.msp_orgimg eq null }">
 					<img id="profile_preview" src="<c:url value='/resources/images/default-profile.png'/>" class="img-circle"
-						style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
+						style="border: white 4px solid !important;margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
 						margin-left: auto;margin-right: auto;">
 					</c:when>
 					<c:otherwise>
 					<img id="profile_preview" src="<c:url value='/resources/upload/img/${msvlist.msp_savimg }'/>" class="img-circle"
-						style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
+						style="border: white 4px solid !important;margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
 						margin-left: auto;margin-right: auto;">
 					</c:otherwise>
 				</c:choose>

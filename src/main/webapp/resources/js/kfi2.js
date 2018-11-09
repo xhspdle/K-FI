@@ -307,15 +307,43 @@ $(function() {
 			}
 		});
 	});
+	
+	$('.myskin li').on('click',function(){
+		var ms_num=$(this).prop('id');
+		var getPageContext=$('#getPageContext').val();
+		$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:ms_num},function(data){
+			var vo=data.vo;
+			$('.myskin_ud_apply')
+			.prop('href','javascript:mySkinApply('+vo.ms_num+')')
+			.css({
+				'display':'block',
+				'background-color':vo.ms_color
+			}); 
+			$('.myskin_ud_update').prop('href',getPageContext+'/mypage/myskin/updateform?ms_num='+vo.ms_num).css({'display':'block','background-color':vo.ms_color});
+			$('.myskin_ud_del').prop('href',getPageContext+'/mypage/myskin/delete?ms_num='+vo.ms_num).css({'display':'block','background-color':vo.ms_color});
+			$('#myskin_list_cover').css({
+				'display':'block',
+				'background': 'url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')'
+			});
+			$('.pre_cover img').prop('src',getPageContext+'/resources/upload/img/'+vo.msp_savimg);
+			$('#myskin_list_nav').css('background-color',vo.ms_color);
+			$('#myskin_list_icon').css({
+				'border':vo.ms_color,
+				'background-color':vo.ms_color
+			});
+			$('#myskin_list_msg').text(vo.ms_msg);
+		});
+	});
 });
 
 /* 해당 스킨 적용하기 */
 function mySkinApply(num){
 	var getPageContext=$("#getPageContext").val();
 	$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:num},function(data){
-		var vo=data[0];
-		alert(vo);
+		var vo=data.vo;
+		$('#mypageJumbo span').val(vo.ms_msg);
 		$("#profileImg").prop('src',getPageContext+'/resources/upload/img/'+vo.msp_savimg);
-		$("#mypageJumbo > div:after").css('background','url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')');
+		$("#mypageJumbo div").css('background','url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')');
+		$('#profileImg').fadeOut(100).fadeIn(200);
 	});
 }

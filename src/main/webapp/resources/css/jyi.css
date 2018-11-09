@@ -12,7 +12,8 @@
 	width: 160%;
 }
 
-#myinfo .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group{
+#myinfo .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group
+	{
 	z-index: 2;
 	margin-left: 112px;
 }
@@ -21,7 +22,6 @@
 	margin-left: 100px;
 	padding: 7px 30px 5px 15px;
 } */
-
 .container_borderInset {
 	margin: 5% 0% 5% 25%;
 	border-radius: 50px;
@@ -45,7 +45,7 @@
 }
 
 #myinfo_delete_user_pwd {
-	    width: 84%;
+	width: 84%;
 }
 
 .container_borderInset .modal-content {
@@ -53,12 +53,18 @@
 }
 
 /* myskin */
-
 .myskin {
 	margin: auto;
 	width: 90%;
 	padding-left: 10%;
 	margin-top: 20px;
+}
+
+.myskin_list_nav {
+	width: 74.5%;
+	background-color: #00cee8;
+	height: 80px;
+	margin: -2% 0% 0% 6%;
 }
 
 #profile_preview {
@@ -78,7 +84,7 @@
 	padding: 1px 1px;
 }
 
-.pre_cover {
+/* .pre_cover {
 	border-radius: 10px;
 	width: 80%;
 	margin: auto;
@@ -86,7 +92,30 @@
 	background-color: #00cee8;
 	color: #fff;
 	padding: 1px 1px;
+	
 }
+ */
+.pre_cover {
+	background-size: cover !important;
+	padding: 1% 0% 0% 0%;
+	margin: -3% 0% 0% 6%;
+	width: 75%;
+	background-repeat: no-repeat !important;
+	border-radius: 10px;
+	display: none;
+	/* position: relative; */
+}
+/* .pre_cover:before{
+	top:0;
+	left:0;
+	position: absolute;
+	width:100%;
+	height: 100%;
+	display: block;
+	content: '';
+	background-color: rgba(0,0,0,0.5);
+	z-index: -1;
+} */
 
 #preview_navbar .navbar-nav>li>a {
 	padding-top: 25px;
@@ -110,13 +139,73 @@
 	border-radius: 10%;
 }
 
-.myskin_ud {
+/* 수정 */
+.myskin_ud_update {
+	display: none;
+	margin-left: 59%;
+	margin-top: 40px;
+	position: absolute;
 	background-color: #00cee8;
 	border-radius: 10px;
 	padding: 5px 10px;
-	min-width: 70px;
+	min-width: 53px;
 	color: white;
 	font-weight: 700;
+	text-decoration-line: none !important;
+}
+/* 스킨 추가 */
+.myskin_ud_add {
+	margin-left: 1%;
+	margin-top: -1px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
+}
+/* 기본값으로 적용 */
+.myskin_ud_default {
+	margin-left: 9%;
+	margin-top: -1px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
+}
+/* 적용 */
+.myskin_ud_apply {
+	display: none;
+	margin-left: 56%;
+	margin-top: 40px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
+}
+/* 삭제 */
+.myskin_ud_del {
+	display: none;
+	margin-left: 62%;
+	margin-top: 40px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
 }
 
 /* mypage 커뮤니티 일정 mouseover했을 때 */

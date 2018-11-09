@@ -46,12 +46,4 @@ public class InsertController {
 			return "redirect:/mypage/myskin/list"; //에러페이지로 가기
 		}
 	}
-
-	/* 공부용 -> 커밋전에 지우기
-	 * @RequestMapping(value="/mypage/myskin/selectProfile",method=RequestMethod.GET)
-	public String selectProfile(Model model) {
-		int n=service.getMaxNum();
-		model.addAttribute("n",n);
-		return ".mypage.myskin.selectProfile";
-	}	*/
 }

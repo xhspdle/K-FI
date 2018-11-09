@@ -13,7 +13,7 @@
 		<div>
 			<img src="<c:url value='/resources/images/default-profile.png'/>"
 				alt="new profile" class="img-circle" id="profile_preview"
-				style="margin-top: 60px; width: 150px; height: 150px; background-color: white; display: block; margin-left: auto; margin-right: auto;">
+				style="border: white 4px solid !important;margin-top: 60px; width: 150px; height: 150px; background-color: white; display: block; margin-left: auto; margin-right: auto;">
 			<p>
 				<span id="preview_msg"
 					style="width: max-content; color: black; border-bottom: 2px solid white; display: block; margin-left: auto; margin-right: auto;">상태메세지
