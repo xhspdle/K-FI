@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kfi.ldk.dao.MyBoardLikeDao;
+import com.kfi.ldk.dao.MyBoardLikeListViewDao;
 import com.kfi.ldk.vo.MyBoardLikeVo;
 
 @Service
 public class MyBoardLikeServiceImpl implements CommonService{
 	@Autowired private MyBoardLikeDao mblDao;
+	@Autowired private MyBoardLikeListViewDao mblViewDao;
 	@Override
 	public int getMaxNum() {
 		return mblDao.getMaxNum();
@@ -28,6 +30,7 @@ public class MyBoardLikeServiceImpl implements CommonService{
 		map.put("user_num", vo.getUser_num());
 		map.put("mb_num", vo.getMb_num());
 		if(mblDao.select(map)!=null) {
+			delete(vo.getUser_num());
 			return -1;//ม฿บน
 		}else {
 			return mblDao.insert(new MyBoardLikeVo(getMaxNum() + 1, vo.getMb_num(), vo.getUser_num()));
@@ -40,8 +43,8 @@ public class MyBoardLikeServiceImpl implements CommonService{
 	}
 	@Override
 	public int delete(Object data) {
-		int mcl_num=(Integer)data;
-		return mblDao.delete(mcl_num);
+		int user_num=(Integer)data;
+		return mblDao.delete(user_num);
 	}
 	@SuppressWarnings("unchecked")
 	@Override
@@ -53,6 +56,6 @@ public class MyBoardLikeServiceImpl implements CommonService{
 	@Override
 	public Object list(Object data) {
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
-		return mblDao.list(map);
+		return mblViewDao.list(map);
 	}
 }

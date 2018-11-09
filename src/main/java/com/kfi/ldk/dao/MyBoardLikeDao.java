@@ -25,8 +25,8 @@ public class MyBoardLikeDao {
 	public int update(MyBoardLikeVo vo) {
 		return session.update(NAMESPACE + ".update", vo);
 	}
-	public int delete(int mbl_num) {
-		return session.delete(NAMESPACE + ".delete", mbl_num);
+	public int delete(int user_num) {
+		return session.delete(NAMESPACE + ".delete", user_num);
 	}
 	public List<Object> list(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".list", map);

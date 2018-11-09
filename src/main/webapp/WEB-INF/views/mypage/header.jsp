@@ -28,7 +28,7 @@
 						<li><a href="#">마이커뮤니티</a></li>
 						<li><a href="<c:url value='/mypage/mycommcalendar'/>">일정보기</a></li>
 						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
-						<li><a href="#">회원정보</a></li>
+						<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
 						<li><a href="#">로그아웃</a></li>
 					</ul>
 				</li>
@@ -41,10 +41,10 @@
 <div id="headerSearch">
 	<div class="row">
 		<div class="container search_con">
-			<form id="searchForm" name="searchForm" action="<c:url value='/mypage/myboard/list'/>">
+			<form id="searchForm" name="mySearchForm" method="post" action="<c:url value='/mypage/myboard/list'/>">
 				<div class="input-group">
 					<div class="input-group-btn">
-						<button class="btn btn-default btn-lg search_bar"><i class="glyphicon glyphicon-search"></i></button>
+						<button type="submit" class="btn btn-default btn-lg search_bar"><i class="glyphicon glyphicon-search"></i></button>
 					</div>
 					<input type="text" class="form-control search_bar" name="keyword" placeholder="search anything!">
 					<div class="input-group-btn">

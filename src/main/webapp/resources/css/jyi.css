@@ -1,11 +1,64 @@
 @charset "UTF-8";
 
+/* myinfo */
+#myinfo .navbar-form {
+	width: auto;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin-left: -15px;
+}
+
+#myinfo_pwd {
+	width: 160%;
+}
+
+#myinfo .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group{
+	z-index: 2;
+	margin-left: 112px;
+}
+/* #myinfo_pwd_submit .btn .btn-default{
+	z-index: 2;
+	margin-left: 100px;
+	padding: 7px 30px 5px 15px;
+} */
+
+.container_borderInset {
+	margin: 5% 0% 5% 25%;
+	border-radius: 50px;
+	width: 50%;
+	padding: 5px 5px 5px 20px;
+}
+
+}
+.container_borderInset .form-group {
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.container_borderInset .form-horizontal {
+	width: 110%;
+}
+
+#myinfo_delete {
+	margin-left: 10%;
+	margin-top: 0%;
+}
+
+#myinfo_delete_user_pwd {
+	    width: 84%;
+}
+
+.container_borderInset .modal-content {
+	width: 80%;
+}
+
 /* myskin */
+
 .myskin {
 	margin: auto;
 	width: 90%;
 	padding-left: 10%;
-	margin-top:20px;
+	margin-top: 20px;
 }
 
 #profile_preview {
@@ -18,17 +71,17 @@
 
 #preview_cover {
 	width: 80%;
-    margin: auto;
+	margin: auto;
 	font-family: Montserrat, sans-serif;
 	background-color: #00cee8;
 	color: #fff;
 	padding: 1px 1px;
 }
 
-.pre_cover{
-	border-radius:10px;
+.pre_cover {
+	border-radius: 10px;
 	width: 80%;
-    margin: auto;
+	margin: auto;
 	font-family: Montserrat, sans-serif;
 	background-color: #00cee8;
 	color: #fff;
@@ -36,33 +89,33 @@
 }
 
 #preview_navbar .navbar-nav>li>a {
-    padding-top: 25px;
-    padding-bottom: 25px;
+	padding-top: 25px;
+	padding-bottom: 25px;
 }
 
-#preview_cover button{
+#preview_cover button {
 	width: 70px;
-    height: 70px;
-    background-color: #00cee8;
-    border: 0px;
+	height: 70px;
+	background-color: #00cee8;
+	border: 0px;
 }
 
-#preview_navbar{
+#preview_navbar {
 	background-color: #00cee8;
 }
 
-#ms_color{
-    width: 75px;
-    height: 32px;
-    border-radius: 10%;
+#ms_color {
+	width: 75px;
+	height: 32px;
+	border-radius: 10%;
 }
 
-.myskin_ud{
-	background-color:#00cee8;
+.myskin_ud {
+	background-color: #00cee8;
 	border-radius: 10px;
 	padding: 5px 10px;
 	min-width: 70px;
-	color:white;
+	color: white;
 	font-weight: 700;
 }
 
@@ -78,7 +131,6 @@
 	font-size: 20px;
 	overflow: visible;
 }
-
 
 /* mypate mini_Calendar */
 .mini_cal_week {

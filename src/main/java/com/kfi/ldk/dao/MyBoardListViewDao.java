@@ -22,4 +22,10 @@ public class MyBoardListViewDao {
 	public MyBoardListViewVo select(int mb_num) {
 		return session.selectOne(NAMESPACE + ".select", mb_num);
 	}
+	public MyBoardListViewVo prev(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".prev", map);
+	}
+	public MyBoardListViewVo next(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".next", map);
+	}
 }

@@ -121,7 +121,6 @@
 				if(data!=null && data!=""){
 					$("#bbb").css("display","block");
 				}else{
-					$("#bbb").css("display","none");
 					return false;
 				}
 				$("#popupbtn").click(function(){
@@ -336,7 +335,7 @@
 	<input class="pull-right btn btn-default" value="하루닫기" onclick="closepopup()"> 
 	<input class="pull-right btn btn-default" value="닫기"  onclick="$('#abpopup').css('display','none')">
 </div>
-<div id="bbb" style="position: fixed;bottom: 20px;right: 20px; height: 30px;width: 30px   background-image: url("<c:url value='/resources/images/2.gif'/>")>
+<div id="bbb" class="hidediv" style="position: fixed;bottom: 20px;right: 20px; height: 30px;width: 30px;">
 	<span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:red; " onclick="$('#abpopup').css('display','block')"></span> 
 </div>
 <%-- 	</c:when>

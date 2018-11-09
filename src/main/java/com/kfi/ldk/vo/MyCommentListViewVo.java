@@ -13,9 +13,10 @@ public class MyCommentListViewVo {
 	private Date myc_date;
 	private int cnt;
 	private String user_id;
+	private String msp_savimg;
 	public MyCommentListViewVo() {}
 	public MyCommentListViewVo(int myc_num, int mb_num, int user_num, String myc_content, Date myc_date, int cnt,
-			String user_id) {
+			String user_id, String msp_savimg) {
 		super();
 		this.myc_num = myc_num;
 		this.mb_num = mb_num;
@@ -24,6 +25,7 @@ public class MyCommentListViewVo {
 		this.myc_date = myc_date;
 		this.cnt = cnt;
 		this.user_id = user_id;
+		this.msp_savimg = msp_savimg;
 	}
 	public int getMyc_num() {
 		return myc_num;
@@ -67,10 +69,16 @@ public class MyCommentListViewVo {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
+	public String getMsp_savimg() {
+		return msp_savimg;
+	}
+	public void setMsp_savimg(String msp_savimg) {
+		this.msp_savimg = msp_savimg;
+	}
 	@Override
 	public String toString() {
 		return "MyCommentListViewVo [myc_num=" + myc_num + ", mb_num=" + mb_num + ", user_num=" + user_num
 				+ ", myc_content=" + myc_content + ", myc_date=" + myc_date + ", cnt=" + cnt + ", user_id=" + user_id
-				+ "]";
+				+ ", msp_savimg=" + msp_savimg + "]";
 	}
 }

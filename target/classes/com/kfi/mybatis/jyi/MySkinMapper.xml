@@ -5,11 +5,11 @@
 <mapper namespace="com.kfi.mybatis.jyi.MySkinMapper">
 
 	<select id="getMaxNum_myskin" resultType="int">
-		select NVL(count(ms_num),0) from my_skin
+		select NVL(max(ms_num),0) from my_skin
 	</select>
 	
 	<insert id="insert_myskin" parameterType="myskin">
-		insert into my_skin values(#{ms_num},#{user_num},#{ms_name},#{ms_color},#{ms_msg},#{ms_using})	
+		insert into my_skin values(#{ms_num},#{user_num},#{ms_name},#{ms_color},#{ms_msg},0)	
 	</insert>
 	
 	<delete id="delete_myskin" parameterType="int">
@@ -20,8 +20,8 @@
 		update my_skin set ms_name=#{ms_name}, ms_color=#{ms_color}, ms_msg=#{ms_msg}, ms_using=#{ms_using} where ms_num=#{ms_num}
 	</update>
 
-	<select id="getCount_myskin" parameterType="int" resultType="int">
-		select NVL(count(ms_num),0) from my_skin where user_num=#{user_num}
+	<select id="getCount_like_Skin" parameterType="int" resultType="int">
+		select NVL(count(ms_num),0) from my_skin where user_num=#{user_num} and ms_name like '%스킨%'
 	</select>
 	
 

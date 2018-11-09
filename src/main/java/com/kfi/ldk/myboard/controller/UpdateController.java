@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kfi.ldk.service.CommonService;
+import com.kfi.ldk.vo.MyBoardListViewVo;
 import com.kfi.ldk.vo.MyBoardVo;
 
 @Controller(value="MyBoardUpdateController")
@@ -24,7 +25,16 @@ public class UpdateController {
 	@RequestMapping(value="/mypage/myboard/updateModal",method=RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> updateModal(int mb_num){
-		HashMap<String, Object> map=(HashMap<String, Object>)service.select(mb_num);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("mb_num", mb_num);
+		map=(HashMap<String, Object>)service.select(map);
+		MyBoardListViewVo vo=(MyBoardListViewVo)map.get("boardVo");
+		String content=vo.getMb_content();
+		if(content!=null && content!="") {
+			vo.setMb_content(content.replaceAll("<br>", "\n"));
+		}else {
+			vo.setMb_content("");
+		}
 		return map;
 	}
 	@RequestMapping(value="/mypage/myboard/update",method=RequestMethod.POST)

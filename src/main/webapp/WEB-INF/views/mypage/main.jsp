@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div id="myBoardList" class="container">
 <input type="hidden" id="myBoardListHere" value="MBL">
+<div id="myBoardList" class="container">
 <!--  
 	<div class="panel-group">
 		<div class="panel panel-default">

@@ -25,10 +25,10 @@ public class FindIdController {
 			return "/login/findId";
 		}
 		
-	/*	@RequestMapping(value="/login/findid", method=RequestMethod.POST)
+		@RequestMapping(value="/login/findid", method=RequestMethod.POST)
 		public String findId(MembersVo vo, HttpSession session, String user_email) throws MessagingException, UnsupportedEncodingException {
 			service.findId(user_email);
 				
 			return "/login/findId";
-		}*/
+		}
 }

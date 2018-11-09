@@ -185,6 +185,128 @@ $(function() {
 	});
 	
 	
+	/////////////////////////회원정보 확인
+	$('#myinfo_pwd_submit').on('click',function(){
+		var password=$('#myinfo_pwd').val();
+		if(password==''){
+			$('#myinfo_pwd_result').text('비밀번호를 입력해주세요').css('color','red');
+			return false;
+		}
+	});
+	
+	$('#myinfo_pwdChk_frm').submit(function(event){
+		event.preventDefault();
+		$('#myinfo_pwd_result').text('');
+		var getPageContext=$('#getPageContext').val();
+		var password=$('#myinfo_pwd').val();
+		if(password==''){
+			$('#myinfo_pwd_result').text('비밀번호를 입력해주세요').css('color','red');
+			return false;
+		}
+		$.getJSON(getPageContext+'/mypage/myinfo/passwordChk',{password:password},function(data){
+			if(eval(data.code)){
+				location.href=getPageContext+"/mypage/myinfo/list";
+			}else{
+				$('#myinfo_pwd_result').text('비밀번호가 올바르지 않습니다').css('color','red');
+			}
+		});
+	});
+	
+	//수정하기
+	$("#myinfo_update_submit").on('click',function(){
+		var user_pwd=$("input[name=user_pwd]").val();
+		if(user_pwd==''){
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+		var user_nickname=$("input[name=user_nickname]").val();
+		if(user_nickname==''){
+			alert('닉네임을 입력해주세요');
+			return false;
+		}
+		var user_email=$("input[name=user_email]").val();
+		if(user_email==''){
+			alert('이메일을 입력해주세요');
+			return false;
+		}
+		return true;
+	});
+	
+	$("#myinfo_list").submit(function(event){
+		event.preventDefault();
+		var getPageContext=$('#getPageContext').val();
+		var user_pwd=$("input[name=user_pwd]").val();
+		if(user_pwd==''){
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+		// 비밀번호 체크 
+		var pwdck =/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; 
+		if(!pwdck.test(user_pwd)){
+			alert('영문, 숫자, 특수문자 포함해야합니다. (8~15자)');
+			return false;	
+		}
+		if(user_pwd.search(/\s/) != -1) { 
+			alert('비밀번호에 공백을 제거해주세요');
+			return false; 
+		}
+		// 닉네임 체크
+		var user_nickname=$("input[name=user_nickname]").val();
+		if(user_nickname==''){
+			alert('닉네임을 입력해주세요');
+			return false;
+		}
+		var isNick = /^[a-zA-Z0-9가-힣]{4,15}$/; 
+		if(user_nickname.search(/\s/) != -1){
+			alert('닉네임에 공백을 제거해주세요');
+			return false;
+		}
+		if(!isNick.test(user_nickname)){
+			alert('영문,한글,숫자를 사용한 4~15자의 닉네임을 만들어 주세요');
+			return false;
+		}
+		var user_email=$("input[name=user_email]").val();
+		if(user_email==''){
+			alert('이메일을 입력해주세요');
+			return false;
+		}
+		$.getJSON(getPageContext+'/mypage/myinfo/updateJSON',{user_pwd:user_pwd,user_nickname:user_nickname,user_email:user_email},
+				function(data){
+			if(data.nickOk>1){
+				alert('사용 중인 닉네임입니다');
+			}else{
+				if(data.result<0){
+					alert("오류로 인해 회원정보 수정에 실패했습니다");
+				}else{
+					alert("회원정보 수정에 성공했습니다");
+				}
+				location.href=getPageContext+"/mypage/myinfo/list";
+			}
+		});
+	});
+	
+	//탈퇴하기
+	$("#myinfo_delete").on('click',function(){
+		var myinfo_delete_user_pwd=$("input[name=myinfo_delete_user_pwd]").val();
+		if(myinfo_delete_user_pwd==''){
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+		return true;
+	});
+	
+	$("#myinfo_delete_frm").submit(function(event){
+		event.preventDefault();
+		var getPageContext=$('#getPageContext').val();
+		var user_pwd=$("input[name=myinfo_delete_user_pwd]").val();
+		$.getJSON(getPageContext+'/mypage/myinfo/deleteJSON',{user_pwd:user_pwd},function(data){
+			if(data.result>0){
+				location.href=getPageContext+"/";
+			}else{
+				alert("비밀번호가 일치하지 않아요");
+			}
+		});
+	});
 });
 
 /* 해당 스킨 적용하기 */

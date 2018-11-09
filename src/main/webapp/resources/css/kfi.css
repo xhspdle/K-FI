@@ -89,6 +89,7 @@ h4 {
 .panel {
 	text-align: center;
     transition: box-shadow 0.5s;
+    border-radius: 20px !important;
 }
 .panel:hover {
     box-shadow: 5px 0px 40px rgba(0,0,0, .2);
@@ -104,6 +105,7 @@ h4 {
 
 .panel-footer {
     background-color: white !important;
+    border-radius: 20px;
 }
 .panel-footer h3 {
     font-size: 32px;
@@ -111,6 +113,7 @@ h4 {
 .panel-footer h4 {
     color: #aaa;
     font-size: 14px;
+    /*margin-bottom: 15px;*/
 }
 .panel-footer .btn {
     background-color: #f4511e;
@@ -395,8 +398,13 @@ input[type='file'].myboardFile {
 #myBoardSelect .panel-group .panel-body .img-responsive {
 	max-height: 700px;
 }
+.panel-heading {
+	background-color: transparent !important;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
 .panel-heading:hover {
-	background-color: silver !important;
+	background-color: #f5f5f5 !important;
 	/*cursor: pointer;*/
 }
 .postTitle {
@@ -412,6 +420,11 @@ input[type='file'].myboardFile {
 	font-weight: 400;
 	color: #f4511e !important;
 }
+.badge {
+	background-color: #f4511e;
+	font-size: 16px;
+	margin-bottom: 2px;
+}
 .postA {
 	color: #f4511e;/* #818181 */
 	text-decoration: none;
@@ -420,8 +433,8 @@ input[type='file'].myboardFile {
 }
 .postA:hover {
 	text-decoration: none;
-	color: white;
-	font-size: 38px;
+	color: #f4511e;
+	text-shadow: 0 5px 5px rgba(0,0,0,0.3);
 }
 .select {
 	border-left: 5px solid #f4511e;
@@ -632,4 +645,14 @@ img.media-object {
 }
 div.popover.left {
 	left: -280px !important;
+}
+.prev, .next {
+	-webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+	font-size: 30px;
+	margin: 15px;
+	color: #800000;
+}
+.prev:hover, .next:hover {
+	color: #337ab7;
 }

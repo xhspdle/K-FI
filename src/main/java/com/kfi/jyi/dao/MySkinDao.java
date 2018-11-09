@@ -29,7 +29,7 @@ public class MySkinDao {
 		return session.update(NAMESPACE+".update_myskin",vo);
 	}
 	
-	public int getCountNum(int user_num) {
-		return session.selectOne(NAMESPACE+".getCount_myskin",user_num);
+	public int getCount_like_Skin(int user_num) {
+		return session.selectOne(NAMESPACE+".getCount_like_Skin",user_num);
 	}
 }
