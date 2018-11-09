@@ -26,8 +26,8 @@
 		<typeAlias type="com.kfi.ysy.vo.AccuseVo" alias="accuse"/>
 		<typeAlias type="com.kfi.ysy.vo.AdminBoardVo" alias="adminboard"/>
 		<typeAlias type="com.kfi.ysy.vo.FaqVo" alias="faq"/>
-		<typeAlias type="com.kfi.ysy.vo.AdminBoardListView" alias="adminboardlist"/>
-		<typeAlias type="com.kfi.ysy.vo.AccuseListView" alias="accuselist"/>
+		<typeAlias type="com.kfi.ysy.vo.AdminBoardListViewVo" alias="adminboardlist"/>
+		<typeAlias type="com.kfi.ysy.vo.AccuseListViewVo" alias="accuselist"/>
 	</typeAliases>
 	<mappers>	 
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardMapper.xml"/>

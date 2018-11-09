@@ -54,7 +54,7 @@
 }
 .board-content-img {
     width: 100%;
-    max-width: 700px;
+    max-width: 600px;
     left: 0;
     top: 0;
 }
@@ -62,7 +62,6 @@
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -126,20 +125,25 @@
 $(function(){	
 	$(".flexcolumn").empty();
 	var length=($(".flexrow").children().length);
+	console.log(length+"length")
 	var j=0;
-	do{
-		for(var i=1;i<40;i++){	
-			var flaxcol=$(".flexrow").children().eq(j);
-			var html=$("#testboardlist").html();
-		 	var resulthtml=html.replace("{imgnum}",i);		 	
-			/* $("#flexcontent").append(resulthtml); */
-			flaxcol.append(resulthtml);
-			var last=flaxcol.children().last().offset();
-			if(last.top > 3000){
-				j++;			
-			}
+	
+	for(var i=1;i<=20;i++){	//6 10 14
+		var flaxcol=$(".flexrow").children().eq(j);
+		var html=$("#testboardlist").html();
+	 	var resulthtml=html.replace("{imgnum}",i);
+		flaxcol.append(resulthtml);
+		console.log("그냥 j"+j);
+/*  		var last=flaxcol.children().last().offset();  나중에 사용*/
+		console.log(flaxcol.children().length);
+		console.log(flaxcol.children());
+		if(j<length-1){ 		//다나옴
+			j++;
+		}else{		
+			j=0;
+			console.log("if문 j"+j);
 		}
-	}while(j<length);	
+	};
 });
 $(function(){
 	$(".board_content_ad img").click(function(){
