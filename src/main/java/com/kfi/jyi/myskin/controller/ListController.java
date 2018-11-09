@@ -29,8 +29,6 @@ public class ListController {
 		int user_num=(Integer)session.getAttribute("user_num");
 		List<MySkinViewVo> msvlist=(List<MySkinViewVo>)service.list(user_num);
 		model.addAttribute("msvlist",msvlist);
-		
-		
 		return ".mypage.myskin.list";
 	}
 	

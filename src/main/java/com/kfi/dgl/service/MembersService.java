@@ -121,9 +121,9 @@ public class MembersService {
 			msvo.setMs_num(ms_num + 1);
 			msdao.insert(msvo);
 			int msc_num = mscdao.getMaxNum();
-			mscdao.insert(new MySkinCoverVo(msc_num + 1, ms_num + 1, "", ""));
+			mscdao.insert(new MySkinCoverVo(msc_num + 1, ms_num + 1, "logo2.png", "logo2.png"));
 			int msp_num = mspdao.getMaxNum();
-			mspdao.insert(new MySkinProfileVo(msp_num + 1, ms_num + 1, "", ""));
+			mspdao.insert(new MySkinProfileVo(msp_num + 1, ms_num + 1, "default-profile.png", "default-profile.png"));
 			return 1;
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());

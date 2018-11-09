@@ -7,10 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kfi.jyi.service.MySkinServiceImpl;
+import com.kfi.jyi.vo.MySkinProfileVo;
 import com.kfi.ldk.service.CommonService;
 
 @Controller(value = "myskininsertController")
@@ -36,10 +39,19 @@ public class InsertController {
 		hm.put("ms_msg", ms_msg);
 		int result = service.insert(hm);
 		if (result > 0) {
+			System.out.println("myskin insert 성공");
 			return "redirect:/mypage/myskin/list";
 		} else {
+			System.out.println("myskin insert 실패");
 			return "redirect:/mypage/myskin/list"; //에러페이지로 가기
 		}
 	}
 
+	/* 공부용 -> 커밋전에 지우기
+	 * @RequestMapping(value="/mypage/myskin/selectProfile",method=RequestMethod.GET)
+	public String selectProfile(Model model) {
+		int n=service.getMaxNum();
+		model.addAttribute("n",n);
+		return ".mypage.myskin.selectProfile";
+	}	*/
 }

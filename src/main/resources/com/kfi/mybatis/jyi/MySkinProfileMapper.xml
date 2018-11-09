@@ -20,5 +20,8 @@
 		update my_skin_profile set msp_orgimg=#{msp_orgimg}, msp_savimg=#{msp_savimg} where ms_num=#{ms_num}
 	</update>
 	
-	
+	<!-- 공부용 커밋전에 지우기 -->
+	<select id="select_myskin_profile" parameterType="int" resultType="myskinprofile">
+		select * from my_skin_view where ms_num=#{ms_num}
+	</select>
 </mapper>

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="myskin">
+	<%--  <a class="myskin_ud" href="<c:url value='/mypage/myskin/selectProfile' />">확인</a>  --%>
 	<a class="myskin_ud" href="<c:url value='/mypage/myskin/insertForm' />">스킨 추가하기</a>
 	<a class="myskin_ud" href="<c:url value='#' />">기본 이미지로 변경하기</a><br>
 	<c:forEach var="list" items="${msvlist }">
@@ -15,25 +16,10 @@
 				<a class="myskin_ud" href="<c:url value='/mypage/myskin/delete?ms_num=${list.ms_num }' />">삭제</a>
 			</span>
 		</div>
-		<c:if test="${list.msc_orgimg eq null }">
-			<c:set var="background" value="background-color:#00cee8;"/>
-		</c:if>		
-		<c:if test="${list.msc_orgimg ne null}">
-			<c:set var="background" value="background: url('${pageContext.request.contextPath }/resources/upload/img/${list.msc_savimg }');"/>
-		</c:if>
-		<div class="pre_cover" style="${background}">
-			<c:choose>
-				<c:when test="${list.msp_orgimg eq null }">
-					<img src="<c:url value='/resources/images/default-profile.png'/>" class="img-circle"
-						style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
-						margin-left: auto;margin-right: auto;">
-				</c:when>
-				<c:otherwise>
-					<img src="<c:url value='/resources/upload/img/${list.msp_savimg }'/>" class="img-circle"
-						style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
-						margin-left: auto;margin-right: auto;">
-				</c:otherwise>
-			</c:choose>
+		<div class="pre_cover" style="background: url('${pageContext.request.contextPath }/resources/upload/img/${list.msc_savimg }');">
+			<img src="<c:url value='/resources/upload/img/${list.msp_savimg }'/>" class="img-circle"
+				style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
+				margin-left: auto;margin-right: auto;">
 			<br>
 			<p><span style="width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;">${ list.ms_msg}</span></p> 
 			<div class="collapse navbar-collapse" style="background-color: ${list.ms_color};border-radius:10px;">

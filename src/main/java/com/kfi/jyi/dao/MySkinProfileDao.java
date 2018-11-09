@@ -31,4 +31,7 @@ public class MySkinProfileDao {
 		return session.update(NAMESPACE+".update_myskin_profile",vo);
 	}
 
+	public MySkinProfileVo select(int ms_num) {
+		return session.selectOne(NAMESPACE+".select__myskin_profile",ms_num);
+	}
 }
