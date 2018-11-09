@@ -229,6 +229,7 @@ $(document).ready(function(){
 					var like_cnt=json.like_cnt;
 					var mp_savimg=json.mp_savimg;
 					var mv_savvid=json.mv_savvid;
+					var msp_savimg=json.msp_savimg;
 					var attachment='';
 					var boardOption='';
 					if(sameDate!==json.mb_date){
@@ -275,17 +276,21 @@ $(document).ready(function(){
 						  "<div class='panel-body'>" + 
 						  	"<div class='media'>" +
 						  		"<div class='media-left media-top'>" +
-						  		"<img src='"+ getPageContext +"/resources/images/kpop콘.gif' " +
+						  		"<img src='"+ getPageContext +"/resources/upload/img/"+ msp_savimg +"' " +
 						  		"class='media-object img-circle' style='width:50px;height:50px;'></div>" +
 						  		"<div class='media-body' style='padding-left:5px;'>" +
-						  		"<h4 class='media-body' style='text-align:left;margin-bottom:-5px;'>" +
+						  		"<h4 class='media-body' style='text-align:left;'>" +
 						  		"<strong>"+ user_nickname +"</strong></h4>" +
-						  		"<p style='text-align:left;'><small>"+ json.mb_date + "</small></p></div>" +
+						  		"<p style='text-align:left;margin:0px;margin-top:-5px;'><small>"+ user_email + "</small></p></div>" +
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
 						  "<div class='panel-footer'><div>" +
-						    "<h4 class='postLikeComment'>Likes: " + like_cnt + "</h4>" +
-						  	"<h4 class='postLikeComment'>Comments: " + comment_cnt + "</h4></div></div></div></div>")
+						  "<h4 class='postLikeComment slideanim'><span class='glyphicon glyphicon-heart-empty'></span>&nbsp;Likes " + 
+						   "<span class='badge'>" +like_cnt + "</span></h4>" +
+						   "<h4 class='postLikeComment slideanim'><span class='glyphicon glyphicon-comment'></span>&nbsp;Comments " + 
+						   "<span class='badge'>" +comment_cnt + "</span></h4>" +
+						   "<h4 class='postLikeComment slideanim'><span class='glyphicon glyphicon-signal'></span>&nbsp;Views " + 
+						    mb_views + "</h4></div></div></div></div>")
 						.appendTo(append);
 					}else{
 						$("<div class='panel-group slideanim'>" +
@@ -300,7 +305,7 @@ $(document).ready(function(){
 						  "<div class='panel-body'>" + 
 						  	"<div class='media'>" +
 						  		"<div class='media-left media-top'>" +
-					  			"<img src='"+ getPageContext +"/resources/images/kpop콘.gif' " +
+					  			"<img src='"+ getPageContext +"/resources/upload/img/"+ msp_savimg +"' " +
 					  			"class='media-object img-circle' style='width:50px;height:50px;'></div>" +
 					  			"<div class='media-body' style='padding-left:5px;'>" +
 					  			"<h4 class='media-body' style='text-align:left;margin-bottom:-5px;'>" +
@@ -309,8 +314,12 @@ $(document).ready(function(){
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
 						  "<div class='panel-footer'><div>" +
-						    "<h4 class='postLikeComment'>Likes: " + like_cnt + "</h4>" +
-						  	"<h4 class='postLikeComment'>Comments: " + comment_cnt + "</h4></div></div></div></div>")
+						    "<h4 class='postLikeComment slideanim'><span class='glyphicon glyphicon-heart-empty'></span>&nbsp;Likes " + 
+						    "<span class='badge'>" +like_cnt + "</span></h4>" +
+						    "<h4 class='postLikeComment slideanim'><span class='glyphicon glyphicon-comment'></span>&nbsp;Comments " + 
+						    "<span class='badge'>" +comment_cnt + "</span></h4>" +
+						    "<h4 class='postLikeComment slideanim'><span class='glyphicon glyphicon-signal'></span>&nbsp;Views " + 
+						    mb_views + "</h4></div></div></div></div>")
 						.appendTo(append);
 					}
 				});
@@ -788,4 +797,3 @@ $(document).ready(function(){
   }
   
 });
-

@@ -21,10 +21,11 @@ public class MyBoardListViewVo {
 	private String mp_savimg;
 	private int mv_num;
 	private String mv_savvid;
+	private String msp_savimg;
 	public MyBoardListViewVo() {}
 	public MyBoardListViewVo(int mb_num, int user_num, String user_id, String user_nickname, String user_email,
 			String mb_title, String mb_content, Date mb_date, int mb_views, int comment_cnt, int like_cnt, int mp_num,
-			String mp_savimg, int mv_num, String mv_savvid) {
+			String mp_savimg, int mv_num, String mv_savvid, String msp_savimg) {
 		super();
 		this.mb_num = mb_num;
 		this.user_num = user_num;
@@ -41,6 +42,7 @@ public class MyBoardListViewVo {
 		this.mp_savimg = mp_savimg;
 		this.mv_num = mv_num;
 		this.mv_savvid = mv_savvid;
+		this.msp_savimg = msp_savimg;
 	}
 	public int getMb_num() {
 		return mb_num;
@@ -132,12 +134,18 @@ public class MyBoardListViewVo {
 	public void setMv_savvid(String mv_savvid) {
 		this.mv_savvid = mv_savvid;
 	}
+	public String getMsp_savimg() {
+		return msp_savimg;
+	}
+	public void setMsp_savimg(String msp_savimg) {
+		this.msp_savimg = msp_savimg;
+	}
 	@Override
 	public String toString() {
 		return "MyBoardListViewVo [mb_num=" + mb_num + ", user_num=" + user_num + ", user_id=" + user_id
 				+ ", user_nickname=" + user_nickname + ", user_email=" + user_email + ", mb_title=" + mb_title
 				+ ", mb_content=" + mb_content + ", mb_date=" + mb_date + ", mb_views=" + mb_views + ", comment_cnt="
 				+ comment_cnt + ", like_cnt=" + like_cnt + ", mp_num=" + mp_num + ", mp_savimg=" + mp_savimg
-				+ ", mv_num=" + mv_num + ", mv_savvid=" + mv_savvid + "]";
+				+ ", mv_num=" + mv_num + ", mv_savvid=" + mv_savvid + ", msp_savimg=" + msp_savimg + "]";
 	}
 }

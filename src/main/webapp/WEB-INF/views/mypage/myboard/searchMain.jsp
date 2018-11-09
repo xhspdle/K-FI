@@ -40,11 +40,11 @@
 			<div class="panel-body">
 				<div class="media">
 					<div class="media-left media-top">
-						<img src="<c:url value='/resources/images/kpop콘.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
+						<img src="<c:url value='/resources/upload/img/${vo.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
 					</div>
 					<div class="media-body" style="padding-left:5px;">
-						<h4 class="media-heading" style="text-align:left;margin-bottom:-5px;"><strong>${vo.user_nickname }</strong></h4>
-						<p style="text-align:left;"><small>${vo.mb_date }</small></p>
+						<h4 class="media-heading" style="text-align:left;"><strong>${vo.user_nickname }</strong></h4>
+						<p style="text-align:left;margin:0px;margin-top:-5px;"><small>${vo.user_email }</small></p>
 					</div>
 				</div>
 				<p>${vo.mb_content }</p>
@@ -60,8 +60,9 @@
 				</c:choose>
 			</div>
 			<div class="panel-footer">
-				<h4 class="postLikeComment">Likes: ${vo.like_cnt }</h4>
-				<h4 class="postLikeComment">Comments: ${vo.comment_cnt }</h4>
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-heart-empty"></span>&nbsp;Likes <span class="badge">${vo.like_cnt }</span></h4>
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments <span class="badge">${vo.comment_cnt }</span></h4>
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${vo.mb_views }</h4>
 			</div>	
 		</div>
 	</div>

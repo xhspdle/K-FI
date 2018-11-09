@@ -150,7 +150,6 @@ public class MyBoardServiceImpl implements CommonService{
 				String mp_orgimg=fileP[i].getOriginalFilename();
 				String format=mp_orgimg.substring(mp_orgimg.lastIndexOf(".") + 1);
 				String mType=ImgUtil.getImgType(format);
-				System.out.println("mp_orgimg:" + mp_orgimg);
 				if(mp_orgimg=="") continue;
 				if(mType==null) {
 					throw new Exception("*." + format + " is unsupported img file types");
@@ -266,6 +265,8 @@ public class MyBoardServiceImpl implements CommonService{
 		String content=vo.getMb_content();
 		if(content!=null && content!="") {
 			vo.setMb_content(content.replaceAll("\n", "<br>"));
+		}else {
+			vo.setMb_content("");
 		}
 		mbDao.addHit(mb_num);
 		map.put("user_num", vo.getUser_num());
@@ -280,6 +281,16 @@ public class MyBoardServiceImpl implements CommonService{
 	@Override
 	public List<Object> list(Object data) {	
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
-		return mbViewDao.list(map);
+		List<Object> list=mbViewDao.list(map);
+		for(int i=0;i<list.size();i++) {
+			MyBoardListViewVo vo=(MyBoardListViewVo)list.get(i);
+			String content=vo.getMb_content();
+			if(content!=null && content!="") {
+				vo.setMb_content(content.replaceAll("\n", "<br>"));
+			}else {
+				vo.setMb_content("");
+			}
+		}
+		return list;
 	}
 }

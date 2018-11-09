@@ -41,59 +41,62 @@
 			<div class="panel-body">
 				<div class="media">
 					<div class="media-left media-top">
-						<img src="<c:url value='/resources/images/kpop콘.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
+						<img src="<c:url value='/resources/upload/img/${boardVo.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
 					</div>
 					<div class="media-body" style="padding-left:5px;">
-						<h4 class="media-heading" style="text-align:left;margin-bottom:-5px;"><strong>${boardVo.user_nickname }</strong></h4>
-						<p style="text-align:left;"><small>${boardVo.mb_date }</small></p>
+						<h4 class="media-heading" style="text-align:left;"><strong>${boardVo.user_nickname }</strong>
+						<span class="pull-right" style="color:#f4511e;"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${boardVo.mb_views}</span></h4>
+						<p style="text-align:left;margin:0px;margin-top:-5px;"><small>${boardVo.user_email }</small></p>
 					</div>
 				</div>
 				
 				<p>${boardVo.mb_content }</p>
 				
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<c:forEach var="vo" items="${imgList }" varStatus="vs">
-					<c:choose>
-						<c:when test="${vs.index==0 }">
-						<li data-target="#myCarousel" data-slide-to="${vs.index }" class="active"></li>
-						</c:when>
-						<c:otherwise>
-						<li data-target="#myCarousel" data-slide-to="${vs.index }"></li>
-						</c:otherwise>
-					</c:choose>
-					</c:forEach>
-				</ol>
-				<div class="carousel-inner">
-					<c:forEach var="vo" items="${imgList }" varStatus="vs">
-					<c:choose>
-						<c:when test="${vs.index==0 }">
-						<div class="item active">
-							<img class="img-responsive center-block" 
-							src="<c:url value='/resources/upload/img/${vo.mp_savimg }'/>" 
-							alt="MyBoard Photos"><!-- style="width:100%;" -->
-						</div>
-						</c:when>
-						<c:otherwise>
-						<div class="item">
-							<img class="img-responsive center-block" 
-							src="<c:url value='/resources/upload/img/${vo.mp_savimg }'/>" 
-							alt="MyBoard Photos"><!-- style="width:100%;" -->
-						</div>
-						</c:otherwise>
-					</c:choose>
-					</c:forEach>
-				</div>
-				
-				<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#myCarousel" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-					<span class="sr-only">Next</span>
-				</a>
-				</div>
+				<c:if test="${!empty imgList }">
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<c:forEach var="vo" items="${imgList }" varStatus="vs">
+						<c:choose>
+							<c:when test="${vs.index==0 }">
+							<li data-target="#myCarousel" data-slide-to="${vs.index }" class="active"></li>
+							</c:when>
+							<c:otherwise>
+							<li data-target="#myCarousel" data-slide-to="${vs.index }"></li>
+							</c:otherwise>
+						</c:choose>
+						</c:forEach>
+					</ol>
+					<div class="carousel-inner">
+						<c:forEach var="vo" items="${imgList }" varStatus="vs">
+						<c:choose>
+							<c:when test="${vs.index==0 }">
+							<div class="item active">
+								<img class="img-responsive center-block" 
+								src="<c:url value='/resources/upload/img/${vo.mp_savimg }'/>" 
+								alt="MyBoard Photos"><!-- style="width:100%;" -->
+							</div>
+							</c:when>
+							<c:otherwise>
+							<div class="item">
+								<img class="img-responsive center-block" 
+								src="<c:url value='/resources/upload/img/${vo.mp_savimg }'/>" 
+								alt="MyBoard Photos"><!-- style="width:100%;" -->
+							</div>
+							</c:otherwise>
+						</c:choose>
+						</c:forEach>
+					</div>
+					
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#myCarousel" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+						<span class="sr-only">Next</span>
+					</a>
+					</div>
+				</c:if>
 				<c:forEach var="vo" items="${vidList }">
 				<div>
 					<video class="img-responsive center-block slideanim" controls autoplay muted="muted" loop 
@@ -117,7 +120,7 @@
 				<c:choose>
 					<c:when test="${!empty user_num }">
 					<div class="media-left media-top">
-						<img class="media-object img-circle" src="<c:url value='/resources/images/kpop콘.gif'/>" alt="userProfile">
+						<img class="media-object img-circle" src="<c:url value='/resources/upload/img/${boardVo.msp_savimg }'/>" alt="userProfile">
 					</div>
 					<div class="media-body media-middle form-group row">
 						<form id="commentForm" name="frmComment" class="form-inline" action="<c:url value='/mypage/mycomment/insert'/>">
