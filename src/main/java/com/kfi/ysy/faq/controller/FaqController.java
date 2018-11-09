@@ -3,6 +3,10 @@ package com.kfi.ysy.faq.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.ysy.service.FaqService;
+import com.kfi.ysy.vo.AdminVo;
 import com.kfi.ysy.vo.FaqVo;
 
 @Controller
@@ -45,32 +50,7 @@ public class FaqController {
 	public String faqinsertForm() {
 		return ".faq.faqinsert";
 	}
-	//Q&A 게시물 작성
-	@RequestMapping(value="/faqinsert",method=RequestMethod.POST)
-	public String faqinsert(FaqVo vo) {		
-		int qa_num = faqservice.faqmaxnum()+1;
-		vo.setQa_num(qa_num);
-		if(vo.getQa_num()==0) {
-			vo.setRef(qa_num);
-		}else {
-			vo.setRef(vo.getRef());
-			vo.setLev(vo.getLev()+1);
-			vo.setStep(vo.getStep());
 
-			System.out.println("ref1///"+vo.getRef());
-			System.out.println("lev1///"+vo.getLev());
-			System.out.println("step1///"+vo.getStep());
-		}
-		System.out.println("ref"+vo.getRef());
-		System.out.println("lev"+vo.getLev());
-		System.out.println("step"+vo.getStep());
-		int result=faqservice.faqinsert(vo);
-		if(result>0) {
-			return "redirect:/faqlist";
-		}else {
-			return ".faq.error";
-		}
-	}
 	//Q&A 게시글 답글 리스트
 	@RequestMapping(value="/faqcomment",produces="application/json;charset=utf-8")
 	@ResponseBody
@@ -95,23 +75,35 @@ public class FaqController {
 	}
 	@RequestMapping(value="/faqcomminsert", produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String faqcomminsert(FaqVo vo) {			
-
+	public String faqcomminsert(FaqVo vo,HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		AdminVo adminvo=(AdminVo)session.getAttribute("admininfo");
+		int qa_num = faqservice.faqmaxnum()+1;
+		vo.setQa_num(qa_num);
+		vo.setAdmin_num(adminvo.getAdmin_num());
 		vo.setLev(vo.getLev()+1);
-		vo.setStep(vo.getStep()+1);
-
-		System.out.println("ref1///"+vo.getRef());
-		System.out.println("lev1///"+vo.getLev());
-		System.out.println("step1///"+vo.getStep());
-	
-		System.out.println("ref"+vo.getRef());
-		System.out.println("lev"+vo.getLev());
-		System.out.println("step"+vo.getStep());
+		vo.setStep(vo.getStep());
 		int result=faqservice.faqinsert(vo);
 		if(result>0) {
 			return "aaa";
 		}else {
 			return "bbb";
+		}
+	}
+	//Q&A 게시물 작성
+	@RequestMapping(value="/faqinsert",method=RequestMethod.POST)
+	public String faqinsert(FaqVo vo) {		
+		int qa_num = faqservice.faqmaxnum()+1;
+		vo.setQa_num(qa_num);
+		vo.setRef(qa_num);
+		vo.setRef(vo.getRef());
+		vo.setLev(vo.getLev());
+		vo.setStep(vo.getStep());
+		int result=faqservice.faqinsert(vo);
+		if(result>0) {
+			return "redirect:/faqlist";
+		}else {
+			return ".faq.error";
 		}
 	}
 }

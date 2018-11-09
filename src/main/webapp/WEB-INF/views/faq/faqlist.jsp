@@ -96,6 +96,8 @@
 						<input type="hidden" name="ref" value=${faqlist.ref }>
 						<input type="hidden" name="lev" value=${faqlist.lev }>
 						<input type="hidden" name="step" value=${faqlist.step }>
+						<input type="hidden" name="user_num" value=${faqlist.user_num }>
+						<input type="hidden" name="qa_title" value=${faqlist.qa_title }>
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">

@@ -70,7 +70,7 @@
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
-.close {
+.closeimg {
     position: absolute;
     top: 15px;
     right: 35px;
@@ -79,8 +79,8 @@
     font-weight: bold;
     transition: 0.3s;
 }
-.close:hover,
-.close:focus {
+.closeimg:hover,
+.closeimg:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
@@ -89,7 +89,7 @@
 </style>
 <h1>리스트</h1>
 <div id="boardcontentimg" class="modal">
-	<span class="close">&times;</span>
+	<span class="closeimg">&times;</span>
 	<img class="board-content-img" id="contentimg">
 	<div id="caption"></div>
 </div>
@@ -155,10 +155,10 @@ $(function(){
 		$('.modal').off();
 	})
 });
-var span = document.getElementsByClassName("close")[0];
+var closeimg = document.getElementsByClassName("closeimg")[0];
 
 //When the user clicks on <span> (x), close the modal
-span.onclick = function() { 
+closeimg.onclick = function() { 
 	$(".modal").css("display","none");
 	$(".navbar").css("display","block");
 }
