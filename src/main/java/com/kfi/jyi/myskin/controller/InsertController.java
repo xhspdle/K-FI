@@ -23,7 +23,7 @@ public class InsertController {
 	private CommonService service;
 
 	@RequestMapping(value = "/mypage/myskin/insertForm", method = RequestMethod.GET)
-	public String insertForm() {
+	public String insertForm(HttpSession session) {
 		return ".mypage.myskin.insert";
 	}
 

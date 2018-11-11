@@ -93,8 +93,7 @@
 	color: #fff;
 	padding: 1px 1px;
 	
-}
- */
+} */
 .pre_cover {
 	background-size: cover !important;
 	padding: 1% 0% 0% 0%;
@@ -103,7 +102,7 @@
 	background-repeat: no-repeat !important;
 	border-radius: 10px;
 	display: none;
-	/* position: relative; */
+	/*position: relative;*/
 }
 /* .pre_cover:before{
 	top:0;
@@ -116,7 +115,6 @@
 	background-color: rgba(0,0,0,0.5);
 	z-index: -1;
 } */
-
 #preview_navbar .navbar-nav>li>a {
 	padding-top: 25px;
 	padding-bottom: 25px;
@@ -142,7 +140,7 @@
 /* 수정 */
 .myskin_ud_update {
 	display: none;
-	margin-left: 59%;
+	margin-left: 58%;
 	margin-top: 40px;
 	position: absolute;
 	background-color: #00cee8;
@@ -168,7 +166,7 @@
 }
 /* 기본값으로 적용 */
 .myskin_ud_default {
-	margin-left: 9%;
+	margin-left: 11%;
 	margin-top: -1px;
 	position: absolute;
 	background-color: #00cee8;
@@ -182,7 +180,7 @@
 /* 적용 */
 .myskin_ud_apply {
 	display: none;
-	margin-left: 56%;
+	margin-left: 54%;
 	margin-top: 40px;
 	position: absolute;
 	background-color: #00cee8;
@@ -206,6 +204,16 @@
 	color: white;
 	font-weight: 700;
 	text-decoration-line: none !important;
+}
+
+#myskin_list_nickname {
+	width: max-content;
+    color: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 700;
+    font-size: xx-large;
 }
 
 /* mypage 커뮤니티 일정 mouseover했을 때 */

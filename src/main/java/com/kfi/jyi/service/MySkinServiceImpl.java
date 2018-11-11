@@ -134,20 +134,32 @@ public class MySkinServiceImpl implements CommonService {
 		HashMap<String, Object> hm = (HashMap<String, Object>) data;
 		HttpSession session = (HttpSession) hm.get("session");
 		int user_num = (Integer) session.getAttribute("user_num");
-		int ms_num = (Integer) hm.get("ms_num");
+		int ms_num=(Integer) hm.get("ms_num");
+		if(ms_num==-1) {
+			msdao.update_defalt(user_num); 
+			return 1;
+		}
+		int ms_using=(Integer) hm.get("ms_using");
+		MySkinViewVo msvVo=(MySkinViewVo)select(ms_num);
+		if(ms_using==1) {
+			msdao.update(new MySkinVo(ms_num, user_num, msvVo.getMs_name(), msvVo.getMs_color(), msvVo.getMs_msg(),ms_using));
+			HashMap<String, Object> updateElse=new HashMap<>();
+			updateElse.put("user_num", user_num);
+			updateElse.put("ms_num", ms_num);
+			msdao.update_not_using(updateElse); 
+			return 1;
+		}
 		String ms_name = (String) hm.get("ms_name");
 		String ms_color = (String) hm.get("ms_color");
 		String ms_msg = (String) hm.get("ms_msg");
 		MultipartFile ms_profile = (MultipartFile) hm.get("ms_profile");
 		MultipartFile ms_cover = (MultipartFile) hm.get("ms_cover");
-		MySkinViewVo msvVo = (MySkinViewVo) select(ms_num);
-
 		if (ms_name == null || ms_name.equals(""))
 			ms_name = msvVo.getMs_name(); 
 		if (ms_msg == null || ms_msg.equals(""))
 			ms_msg = "";
 
-		msdao.update(new MySkinVo(ms_num, user_num, ms_name, ms_color, ms_msg, 0));
+		msdao.update(new MySkinVo(ms_num, user_num, ms_name, ms_color, ms_msg, ms_using));
 		int update = 0;
 		for (int i = 0; i < 2; i++) {
 			// 파일 수정 없을 때
@@ -207,7 +219,7 @@ public class MySkinServiceImpl implements CommonService {
 		HttpSession session = (HttpSession) hm.get("session");
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload/img");
 		try {
-			MySkinViewVo list = (MySkinViewVo) select(ms_num);
+			MySkinViewVo list=(MySkinViewVo)select(ms_num);
 			mspdao.delete(ms_num);
 			if(!(list.getMsp_savimg().equals("default-profile.png"))) {
 				File file = new File(uploadPath + "\\" + list.getMsp_savimg());
@@ -235,8 +247,8 @@ public class MySkinServiceImpl implements CommonService {
 
 	@Override
 	public Object list(Object data) {
-		int user_num = (Integer) data;
-		return msvdao.list(user_num);
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		return msvdao.list(map);
 	}
 
 }

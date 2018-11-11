@@ -314,7 +314,7 @@ $(function() {
 		$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:ms_num},function(data){
 			var vo=data.vo;
 			$('.myskin_ud_apply')
-			.prop('href','javascript:mySkinApply('+vo.ms_num+')')
+			.prop('href',getPageContext+'/mypage/myskin/applySkin?ms_num='+vo.ms_num)
 			.css({
 				'display':'block',
 				'background-color':vo.ms_color
@@ -337,13 +337,18 @@ $(function() {
 });
 
 /* 해당 스킨 적용하기 */
-function mySkinApply(num){
+/*function mySkinApply(num){
 	var getPageContext=$("#getPageContext").val();
-	$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:num},function(data){
+	$.getJSON(getPageContext+'/mypage/myskin/selectApply',{ms_num:num},function(data){
 		var vo=data.vo;
-		$('#mypageJumbo span').val(vo.ms_msg);
 		$("#profileImg").prop('src',getPageContext+'/resources/upload/img/'+vo.msp_savimg);
-		$("#mypageJumbo div").css('background','url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')');
-		$('#profileImg').fadeOut(100).fadeIn(200);
+		$("#mypageJumbo div").css({
+			'background':'url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')',
+			'background-size':'cover !important',
+			'background-repeat':'no-repeat !important'
+		});
+		$('#mypageJumbo p span').text(vo.ms_msg);
+		$('.navbar').css('background-color',vo.ms_color);
+		$('#search').css('background-color',vo.ms_color);
 	});
-}
+}*/

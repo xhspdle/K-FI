@@ -14,7 +14,7 @@
       <li class="divider"></li>
     </ul>
    	<a class="myskin_ud_add" href="<c:url value='/mypage/myskin/insertForm' />">스킨 추가</a>
-	<a class="myskin_ud_default" href="<c:url value='#' />">기본 이미지로 변경</a>
+	<a class="myskin_ud_default" href="<c:url value='/mypage/myskin/default' />">기본 이미지로 변경</a>
   </div>
 	</div>
 		<a class="myskin_ud_apply" href="#">적용</a>
@@ -24,8 +24,8 @@
 			<img src="" class="img-circle"
 				style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
 				margin-left: auto;margin-right: auto; border: white 4px solid">
-			<br>
-			<p><span id="myskin_list_msg" style="width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;"></span></p> 
+			<h4><span id="myskin_list_nickname">${user_nickname}</span></h4> 
+			<p><span id="myskin_list_msg" style="width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;margin-top: -25px;"></span></p> 
 			<div class="collapse navbar-collapse" style="border-radius:10px;" id="myskin_list_nav">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#contact">COMMUNITY</a></li>

@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <div class="jumbotron text-center" id="mypageJumbo">
-	<div>
-		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/images/default-profile.png'/>">
-		<h3><strong>User NickName</strong></h3>
-		<p><span style="border-bottom: 2px solid white;">자기상태글 블라블라블라</span></p> 
+	<div style="background:url(${pageContext.request.contextPath}/resources/upload/img/${msv.msc_savimg })"> 
+		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>">
+		<h3><strong>${user_nickname }</strong></h3>
+		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p> 
 	</div>
 </div>
-<nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix">
+<nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix" style="background-color:${msv.ms_color};">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -32,7 +32,7 @@
 						<li><a href="#">로그아웃</a></li>
 					</ul>
 				</li>
-				<li><button type="button" class="btn btn-default btn-lg" id="search">
+				<li><button type="button" class="btn btn-default btn-lg" id="search" style="background-color:${msv.ms_color};">
 				<span class="glyphicon glyphicon-search"></span></button></li>
 			</ul>
 		</div>

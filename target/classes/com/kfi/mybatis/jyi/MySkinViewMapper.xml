@@ -4,13 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.jyi.MySkinViewMapper">
 
-	<select id="list" parameterType="int" resultType="myskinview">
-		select * from my_skin_view where user_num=#{user_num} order by ms_num
+	<select id="list" parameterType="hashmap" resultType="myskinview">
+		select * from my_skin_view where user_num=#{user_num} 
+		<if test="ms_using==1">
+			and ms_using=1
+		</if>
+		order by ms_num
 	</select>
 
 	<select id="select" parameterType="int" resultType="myskinview">
 		select * from my_skin_view where ms_num=#{ms_num} order by ms_num
 	</select>
-
 
 </mapper>
