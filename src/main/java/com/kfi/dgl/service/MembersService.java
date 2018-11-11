@@ -58,10 +58,6 @@ public class MembersService {
 		return dao.verify(user_email);
 	}
 
-	public int createKey(String user_email) {
-		return dao.createKey(user_email);
-	}
-
 	public int idCheck(String user_id) {
 		return dao.idCheck(user_id);
 	}
@@ -73,8 +69,8 @@ public class MembersService {
 	public int emailCheck(String user_email) {
 		return dao.emailCheck(user_email);
 	}
-	public String findId(String user_email) {
-		return dao.findId(user_email);
+	public void findId(String user_email) {
+		dao.findId(user_email);
 	}
 	public int findPwd(String user_id) {
 		return dao.findPwd(user_id);
@@ -97,18 +93,19 @@ public class MembersService {
 	}
 	//인증키
 	@Transactional
-	public void createkey(MembersVo vo) throws Exception {
-
+	public void createkey(MembersVo vo, String user_email) throws Exception {
+		dao.emailCheck(user_email);
+		
 		String key = new Key().getKey(50, false); // 인증키 생성
 
-		dao.createKey(vo.getUser_email()); // 인증키 DB 저장
+		dao.createKey(user_email, key); // 인증키 DB 저장
 
 		MailUtil sendMail = new MailUtil(mailSender);
 
 		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-				.append("<a href='http://localhost:9090/kfi/mailcert?user_email=" + vo.getUser_email())
+				.append("<a href='http://localhost:8082/kfi/mailcert?user_email=")
+				.append(vo.getUser_email()).append("&key=").append(key)
 				.append("' target='_blenk'>이메일 인증 확인</a>").toString());
-
 		sendMail.setFrom("tester112492@gmail.com", "관리자");
 		sendMail.setTo(vo.getUser_email());
 		sendMail.send();
@@ -141,6 +138,4 @@ public class MembersService {
 			return "false";
 		}
 	}
-	
-	
 }

@@ -34,7 +34,7 @@ public class JoinController {
 	}
 
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
-	public String join(MembersVo vo, HttpSession session,Model model) throws MessagingException, UnsupportedEncodingException {
+	public String join(MembersVo vo, HttpSession session) throws MessagingException, UnsupportedEncodingException {
 		int user_num = service.getMaxnum()+1;
 		vo.setUser_num(user_num);
 		int n = service.join(vo);
@@ -42,6 +42,7 @@ public class JoinController {
 		if (n > 0) {
 			session.setAttribute("user_num", vo.getUser_num());
 			session.setAttribute("user_id", vo.getUser_id());
+			session.setAttribute("user_nickname", vo.getUser_nickname());
 			
 			
 			// myskin 디폴트 테이블 추가
@@ -49,8 +50,6 @@ public class JoinController {
 			if (myskinOk < 0) {
 				//returnURL="error"; 에러나면 오류페이지로 이동하기
 			}
-			
-			//service.createKey(vo);
 			
 			System.out.println(session.getAttribute("user_id"));
 			MailUtil sendMail = new MailUtil(MailSender);
@@ -101,8 +100,10 @@ public class JoinController {
 	System.out.println(user_email);
 	Map<String, String> map = new HashMap<>();
 	if(n == 0) {
+		System.out.println("11"+user_email);
 		map.put("msg", "true");
 	}else if(n == 1) {
+		System.out.println("22"+user_email);
 		map.put("msg", "false");
 	}
 	return map;

@@ -22,20 +22,17 @@ public class FindPwdController {
 	@Autowired
 	MembersService service;
 	@Autowired
-	JavaMailSender Mailsender;
+	JavaMailSender MailSender;
 	@RequestMapping(value="/login/findpwd", method=RequestMethod.GET)
 	public String findPwd() {
 		return "/login/findPwd";
 	}
 	
 	@RequestMapping(value="/login/findPwd", method=RequestMethod.POST)
-	public Map<String, String> findPwd(String user_id) throws MessagingException, UnsupportedEncodingException{
+	public Map<String, String> findPwd(String user_id, String user_email ) throws MessagingException, UnsupportedEncodingException{
 		int n = service.findPwd(user_id); 
 		String returnURL = "";
 		if (n > 0) {
-			
-			
-			System.out.println(session.getAttribute("user_id"));
 			MailUtil sendMail = new MailUtil(MailSender);
 			sendMail.setSubject("[이메일 인증]");
 			sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")

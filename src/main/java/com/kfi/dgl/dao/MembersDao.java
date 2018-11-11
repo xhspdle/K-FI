@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kfi.dgl.vo.CertiMailVo;
 import com.kfi.dgl.vo.MembersVo;
 @Repository
 public class MembersDao {
@@ -50,16 +51,19 @@ public class MembersDao {
 		return sqlSession.update(NAMESPACE + ".getVerify");
 	}
 	//인증코드(키) 생성
-	public int createKey(String user_email) {
-		return sqlSession.insert(NAMESPACE + ".createKey", user_email);
+	public int createKey(String user_email, String cm_key) {
+		CertiMailVo vo = new CertiMailVo();
+		vo.setCm_key(cm_key);
+		vo.setUser_email(user_email);
+		return sqlSession.selectOne(NAMESPACE + ".createKey", vo);
 	}
 	//동일 이메일 찾기
 	public int findEmail(MembersVo vo) {
 		return sqlSession.selectOne(NAMESPACE + ".findEmail", vo);
 	}
 	//아이디 찾기
-	public String findId(String user_email) {
-		return sqlSession.selectOne(NAMESPACE + ".findId", user_email);
+	public void findId(String user_email) {
+		sqlSession.update(NAMESPACE + ".findId", user_email);
 	}
 	//비밀번호 찾기 (재설정)
 	public int findPwd(String user_id) {

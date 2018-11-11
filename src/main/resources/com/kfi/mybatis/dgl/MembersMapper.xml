@@ -48,11 +48,6 @@
 		select * from members where USER_EMAIL=#{user_email}
 	</select>
 	
-	<!-- 인증코드(키) 생성 -->
-	 <insert id="createKey">
-		insert into CERTI_MEMBERS values(#{cm_key})
-	</insert>
-	
 	<!-- 사용자 인증상태 0->1 변경 -->
 	<update id="userCerti"> 
 	 	<![CDATA[update members set USER_CERTI = 1 where (select count(*) from members where USER_EMAIL = #{user_email}) > 0]]>
@@ -74,7 +69,7 @@
 
 	<!-- 비밀번호 찾기(재설정) -->
 	<update id="findPwd" parameterType="logmembers" >
-		update members set user_pwd=#{user_pwd} where user_id=#{user_id} 
+		update members set user_pwd=#{user_pwd} where user_id=#{user_id} and user_email=#{user_email}
 	</update>
 	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->
