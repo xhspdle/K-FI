@@ -73,7 +73,8 @@ public class FaqController {
 		System.out.println(arr);
 		return arr.toString();
 	}
-	@RequestMapping(value="/faqcomminsert", produces="application/json;charset=utf-8")
+	@RequestMapping(value="/faqcomminsert", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+/*	@RequestMapping(value="/faqcomminsert", method=RequestMethod.POST)*/
 	@ResponseBody
 	public String faqcomminsert(FaqVo vo,HttpServletRequest request) {
 		HttpSession session=request.getSession();
@@ -83,11 +84,16 @@ public class FaqController {
 		vo.setAdmin_num(adminvo.getAdmin_num());
 		vo.setLev(vo.getLev()+1);
 		vo.setStep(vo.getStep());
+		vo.setQa_content("이거되냐?");
+		System.out.println("////////////content"+vo.getQa_content());
+		System.out.println("////////////admin_num"+vo.getAdmin_num());
+		System.out.println("////////////qa_num"+vo.getQa_num());
 		int result=faqservice.faqinsert(vo);
+		System.out.println("////////////////////"+result);
 		if(result>0) {
-			return "aaa";
+			return "success";
 		}else {
-			return "bbb";
+			return "fail";		
 		}
 	}
 	//Q&A 게시물 작성
