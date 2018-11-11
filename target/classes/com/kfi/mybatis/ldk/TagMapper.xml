@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.TagMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(tag_num),0) maxnum from tag
+	</select>
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		select NVL(count(tag_num),0) cnt from tag
+	</select>
+	<insert id="insert" parameterType="tag">
+		insert into tag values(#{tag_num},#{tag_name})
+	</insert>
+	<update id="update" parameterType="tag">
+		update tag set tag_name=#{tag_name} where tag_num=#{tag_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from tag where tag_num=#{tag_num}
+	</delete>
+	<select id="list" parameterType="hashmap" resultType="tag">
+		select * from tag
+	</select>
+	<select id="select" parameterType="int" resultType="tag">
+		select * from tag where tag_num=#{tag_num}
+	</select>
+</mapper>

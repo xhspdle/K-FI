@@ -66,8 +66,12 @@
 							<textarea class="form-control" rows="5" id="mb_content" name="mb_content"></textarea>
 						</div>
 						<div class="form-group">
+							<!--  
 							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
-							<input type="text" class="form-control" id="tags" name="tags" placeholder="#blabla #blabla">
+							<textarea class="form-control" rows="1" id="tags" name="tags" placeholder="#blabla #blabla"></textarea>
+							-->
+							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
+							<div class="editableDiv" id="tags"></div>							
 						</div>
 						<div class="form-group imgUpload">
 							<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>

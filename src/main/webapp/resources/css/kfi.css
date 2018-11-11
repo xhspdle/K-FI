@@ -656,3 +656,13 @@ div.popover.left {
 .prev:hover, .next:hover {
 	color: #337ab7;
 }
+.editableDiv {
+	width: 100%;
+	height: 34px;
+	padding: 6px 12px;
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 4px;
+}
+.tagSpan {
+	
+}

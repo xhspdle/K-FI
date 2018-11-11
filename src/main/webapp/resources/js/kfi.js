@@ -253,7 +253,7 @@ $(document).ready(function(){
 									"<span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;Edit</a></li>" +
 									"<li><a href='#' onclick='return false;' data-toggle='popover' data-mb-num='"+ mb_num +"'>" +
 									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li>" +
-									"<li><a href='#'>Report bad contents</a></li></ul></div>";
+									"<li><a href='#'><span class='glyphicon glyphicon-exclamation-sign'></span>&nbsp;&nbsp;Report bad contents</a></li></ul></div>";
 					}else{
 						boardOption="<div class='dropdown boardOption'>" +
 									"<button class='btn dropdown-toggle disabled' type='button' data-toggle='dropdown'>" +
@@ -795,5 +795,23 @@ $(document).ready(function(){
 	  $.getCommentList();
 	  $.getMyBoardLikeList();
   }
-  
+  $(".editableDiv").each(function(){
+	  this.contentEditable=true;
+  });
+  var tagSpan=document.createElement('span');
+  $("#tags").on({
+	  'keydown': function(event){
+		  var key=event.keyCode;
+		  if(key===51){
+			  $(tagSpan).css("border","1px solid black");
+			  $(tagSpan).addClass("tagSpan");
+			  
+		  }
+	  },'keyup': function(event){
+		  event.preventDefault();
+		  if(event.keyCode===32)
+		  tagSpan.innerHTML=$("#tags").text();
+		  $(tagSpan).appendTo("#tags");
+	  }
+  });
 });

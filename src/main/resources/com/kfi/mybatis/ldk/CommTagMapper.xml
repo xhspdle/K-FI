@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.CommTagMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(ctag_num),0) maxnum from comm_tag
+	</select>
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		select NVL(count(ctag_num),0) cnt from comm_tag
+	</select>
+	<insert id="insert" parameterType="commtag">
+		insert into comm_tag values(#{ctag_num},#{tag_num},#{cb_num})
+	</insert>
+	<update id="update" parameterType="commtag">
+		update comm_tag 
+		<set>
+			<if test="tag_num!=null and tag_num!=''">tag_num=#{tag_num},</if>
+			<if test="cb_num!=null and cb_num!=''">cb_num=#{cb_num}</if>
+		</set>
+		where ctag_num=#{ctag_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from comm_tag where ctag_num=#{ctag_num}
+	</delete>
+	<select id="list" parameterType="hashmap" resultType="commtag">
+		select * from comm_tag
+	</select>
+	<select id="select" parameterType="int" resultType="commtag">
+		select * from comm_tag where ctag_num=#{ctag_num}
+	</select>
+</mapper>
