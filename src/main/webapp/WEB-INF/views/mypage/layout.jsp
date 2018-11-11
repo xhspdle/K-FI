@@ -63,15 +63,15 @@
 						</div>
 						<div class="form-group">
 							<label for="mb_content"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
-							<textarea class="form-control" rows="5" id="mb_content" name="mb_content"></textarea>
+							<textarea class="form-control" rows="5" id="mb_content" name="mb_content" placeholder="Write something!"></textarea>
 						</div>
-						<div class="form-group">
+						<div class="form-group tagParent" style="margin-bottom:-11.4px;">
 							<!--  
 							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
 							<textarea class="form-control" rows="1" id="tags" name="tags" placeholder="#blabla #blabla"></textarea>
 							-->
 							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
-							<div class="editableDiv" id="tags"></div>							
+							<div class="editableDiv" id="tags"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
 						</div>
 						<div class="form-group imgUpload">
 							<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>

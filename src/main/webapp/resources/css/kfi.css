@@ -672,7 +672,7 @@ div.popover.left {
 	white-space: nowrap;
 	overflow: auto;
 	-ms-overflow-style: none;
-	z-index: 1;
+	z-index: 2;
 	background-color: transparent;
 }
 .editableDiv:focus {
@@ -693,7 +693,7 @@ body.modal-open::-webkit-scrollbar {
 	position: relative;
 	top: -31px;
 	left: 13px;
-	z-index: 2;
+	z-index: 3;
 	font-size: 14px;
 	opacity: 1;
 }

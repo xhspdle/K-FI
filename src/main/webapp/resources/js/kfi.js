@@ -798,20 +798,82 @@ $(document).ready(function(){
   $(".editableDiv").each(function(){
 	  this.contentEditable=true;
   });
-  var tagSpan=document.createElement('span');
+  var tagSpan='';
+  $(".tagsPlaceholder").click(function(){
+	  $("#tags").focus();
+  });
+  var tagSpanAttached=false;
+  var tagSpanNumbering=0;
   $("#tags").on({
 	  'keydown': function(event){
-		  var key=event.keyCode;
-		  if(key===51){
-			  $(tagSpan).css("border","1px solid black");
+		  if(event.keyCode===51){
+			  tagSpanAttached=false;
+			  tagSpan=document.createElement('span');
+			  tagSpan.setAttribute("data-tag-num",tagSpanNumbering++);
 			  $(tagSpan).addClass("tagSpan");
-			  
+			  $(".tagsPlaceholder").css("opacity","0");
 		  }
 	  },'keyup': function(event){
 		  event.preventDefault();
-		  if(event.keyCode===32)
-		  tagSpan.innerHTML=$("#tags").text();
-		  $(tagSpan).appendTo("#tags");
+		  if(tagSpanAttached===false){
+			  let tag_name=$("#tags").text().trim();
+			  if(tag_name.lastIndexOf(" ")===-1){
+				  tag_name=tag_name.substring(tag_name.lastIndexOf("#"));
+			  }else{
+				  tag_name=tag_name.split(" ")[0].substring(tag_name.lastIndexOf("#"));
+			  }
+			  if(tag_name.lastIndexOf("#")!==-1){
+				  tagSpan.innerHTML=tag_name + "<span class='glyphicon glyphicon-remove-circle'></span>";
+			  }
+		  }
+		  if(event.keyCode===32) {
+			  let tag_name=$("#tags").text().trim();
+			  if(tag_name!==""){
+				  if(tag_name.lastIndexOf(" ")===-1){
+					  tag_name=tag_name.substring(tag_name.lastIndexOf("#") + 1);
+				  }else{
+					  tag_name=tag_name.split(" ")[0].substring(tag_name.lastIndexOf("#") + 1);
+				  }
+				  $(tagSpan).appendTo("label[for='tags']");
+				  $("[for='tags']").after("<input type='hidden' name='tag_name' id='tag"+ 
+						  $(tagSpan).attr("data-tag-num") +"' value='"+ tag_name +"'>");
+				  $("#tags").empty();
+				  tagSpanAttached=true;
+				  setTimeout(function(){
+					  $(tagSpan).css("opacity","1");
+				  },100);
+				  /*
+				   * 여기 처리해야댐
+				  if(tag_name.lastIndexOf("#")!==-1){
+					  $(tagSpan).appendTo("label[for='tags']");
+					  $("[for='tags']").after("<input type='hidden' name='tag_name' id='tag"+ 
+							  $(tagSpan).attr("data-tag-num") +"' value='"+ tag_name +"'>");
+					  $("#tags").empty();
+					  tagSpanAttached=true;
+					  setTimeout(function(){
+						  $(tagSpan).css("opacity","1");
+					  },100);
+				  }else{
+					  $("#tags").empty();
+				  }
+				  */
+			  }
+		  }
+		  if($("#tags").text()===""){
+			  $(".tagsPlaceholder").css("opacity","1");
+		  }else{
+			  $(".tagsPlaceholder").css("opacity","0");
+		  }
 	  }
+  });
+  $("label[for='tags']").on('click',".glyphicon-remove-circle",function(){
+	  var tagSpanNum=$(this).parent().attr("data-tag-num");
+	  console.log(tagSpanNum);
+	  $("input[type='hidden']").remove("#tag" + tagSpanNum);
+	  let removeSpan=$(this).parent().css("opacity","0")
+	  setTimeout(function(){
+		  $(removeSpan).remove();
+	  },500);
+	  
   });
 });
