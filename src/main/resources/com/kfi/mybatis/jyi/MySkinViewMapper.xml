@@ -6,7 +6,7 @@
 
 	<select id="list" parameterType="hashmap" resultType="myskinview">
 		select * from my_skin_view where user_num=#{user_num} 
-		<if test="ms_using==1">
+		<if test="ms_using!=null and ms_using==1">
 			and ms_using=1
 		</if>
 		order by ms_num

@@ -5,7 +5,7 @@
 <mapper namespace="com.kfi.mybatis.ysy.CommSkinCoverMapper">
 	
 	<select id="getMaxNum" resultType="int">
-		select NVL(max(csp_num),0) from comm_skin_cover
+		select NVL(max(csc_num),0) from comm_skin_cover
 	</select>
 	
 	<insert id="insert" parameterType="commskincover">
