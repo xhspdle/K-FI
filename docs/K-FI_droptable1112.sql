@@ -15,7 +15,6 @@ DROP TABLE "KFI"."COMM_COMMENT_LIKE" cascade constraints;
 DROP TABLE "KFI"."COMM_GATHERING" cascade constraints;
 DROP TABLE "KFI"."COMM_PHOTO" cascade constraints;
 DROP TABLE "KFI"."COMM_REFUSE" cascade constraints;
-DROP TABLE "KFI"."COMM_SKIN_COLOR" cascade constraints;
 DROP TABLE "KFI"."COMM_SKIN_COVER" cascade constraints;
 DROP TABLE "KFI"."COMM_SKIN_PROFILE" cascade constraints;
 DROP TABLE "KFI"."COMM_TAG" cascade constraints;

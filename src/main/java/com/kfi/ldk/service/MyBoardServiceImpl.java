@@ -29,6 +29,7 @@ import com.kfi.ldk.vo.MyBoardConfirmDelVo;
 import com.kfi.ldk.vo.MyBoardListViewVo;
 import com.kfi.ldk.vo.MyBoardVo;
 import com.kfi.ldk.vo.MyPhotoVo;
+import com.kfi.ldk.vo.MyTagVo;
 import com.kfi.ldk.vo.MyVideoVo;
 import com.kfi.ldk.vo.TagVo;
 
@@ -62,17 +63,15 @@ public class MyBoardServiceImpl implements CommonService{
 		String[] tag_name=(String[])map.get("tag_name");
 		String uploadPathP=session.getServletContext().getRealPath("/resources/upload/img");
 		String uploadPathV=session.getServletContext().getRealPath("/resources/upload/vid");
-		int mb_num=getMaxNum();
-		int mp_num=mpDao.getMaxNum();
-		int mv_num=mvDao.getMaxNum();
-		int tag_num=tagDao.getMaxNum();
-		int mtag_num=myTagDao.getMaxNum();
+		int mb_num=getMaxNum() + 1;
+		int mp_num=mpDao.getMaxNum() + 1;
+		int mv_num=mvDao.getMaxNum() + 1;
 		InputStream is=null;
 		FileOutputStream fos=null;
 		ArrayList<String> uploadedPhoto=new ArrayList<String>();
 		ArrayList<String> uploadedVideo=new ArrayList<String>();
 		try {	
-			mbDao.insert(new MyBoardVo(mb_num + 1, mbVo.getUser_num(),
+			mbDao.insert(new MyBoardVo(mb_num, mbVo.getUser_num(),
 					mbVo.getMb_title(), mbVo.getMb_content(), null, 0));
 			if(!fileP[0].getOriginalFilename().isEmpty()) {
 				for(int i=0;i<fileP.length;i++) {
@@ -96,7 +95,7 @@ public class MyBoardServiceImpl implements CommonService{
 					fos.close();
 					System.out.println(uploadPathP + "경로에 사진 업로드 성공!");
 					uploadedPhoto.add(mp_savimg);
-					mpDao.insert(new MyPhotoVo(mp_num + i +1, mb_num + 1, mp_orgimg, mp_savimg));
+					mpDao.insert(new MyPhotoVo(mp_num + i, mb_num, mp_orgimg, mp_savimg));
 				}
 			}
 			if(!fileV[0].getOriginalFilename().isEmpty()) {
@@ -116,16 +115,18 @@ public class MyBoardServiceImpl implements CommonService{
 					fos.close();
 					System.out.println(uploadPathV + "경로에 영상 업로드 성공!");
 					uploadedVideo.add(mv_savvid);
-					mvDao.insert(new MyVideoVo(mv_num + i +1, mb_num + 1, mv_orgvid, mv_savvid));
+					mvDao.insert(new MyVideoVo(mv_num + i, mb_num, mv_orgvid, mv_savvid));
 				}				
 			}
 			for(int i=0;i<tag_name.length;i++) {
-				if(tagDao.select(tag_name[i])==null) {
-					tagDao.insert(new TagVo(tag_num + i + 1, tag_name[i]));
-					/*
-					 *  여기할차례
-					 */
-					
+				TagVo vo=tagDao.select(tag_name[i]);
+				if(vo==null) {
+					int tag_num=tagDao.getMaxNum() + 1;
+					tagDao.insert(new TagVo(tag_num, tag_name[i]));
+					myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
+				}else {
+					int tag_num=vo.getTag_num();
+					myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
 				}
 			}
 			return 1;
