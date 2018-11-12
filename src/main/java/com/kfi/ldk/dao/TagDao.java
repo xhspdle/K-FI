@@ -31,7 +31,7 @@ public class TagDao {
 	public List<Object> list(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".list", map);
 	}
-	public TagVo select(HashMap<String, Object> map) {
-		return session.selectOne(NAMESPACE + ".select", map);
+	public TagVo select(String tag_name) {
+		return session.selectOne(NAMESPACE + ".select", tag_name);
 	}
 }

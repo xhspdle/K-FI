@@ -65,7 +65,7 @@
 							<label for="mb_content"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
 							<textarea class="form-control" rows="5" id="mb_content" name="mb_content" placeholder="Write something!"></textarea>
 						</div>
-						<div class="form-group tagParent" style="margin-bottom:-11.4px;">
+						<div class="form-group" style="margin-bottom:-11.4px;">
 							<!--  
 							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
 							<textarea class="form-control" rows="1" id="tags" name="tags" placeholder="#blabla #blabla"></textarea>

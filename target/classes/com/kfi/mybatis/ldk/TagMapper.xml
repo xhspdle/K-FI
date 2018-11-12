@@ -21,7 +21,7 @@
 	<select id="list" parameterType="hashmap" resultType="tag">
 		select * from tag
 	</select>
-	<select id="select" parameterType="int" resultType="tag">
-		select * from tag where tag_num=#{tag_num}
+	<select id="select" parameterType="string" resultType="tag">
+		select * from tag where tag_name=#{tag_name}
 	</select>
 </mapper>

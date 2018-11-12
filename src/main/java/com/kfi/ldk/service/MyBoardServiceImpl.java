@@ -20,7 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kfi.ldk.dao.MyBoardDao;
 import com.kfi.ldk.dao.MyBoardListViewDao;
 import com.kfi.ldk.dao.MyPhotoDao;
+import com.kfi.ldk.dao.MyTagDao;
 import com.kfi.ldk.dao.MyVideoDao;
+import com.kfi.ldk.dao.TagDao;
 import com.kfi.ldk.util.ImgUtil;
 import com.kfi.ldk.util.VidUtil;
 import com.kfi.ldk.vo.MyBoardConfirmDelVo;
@@ -28,12 +30,15 @@ import com.kfi.ldk.vo.MyBoardListViewVo;
 import com.kfi.ldk.vo.MyBoardVo;
 import com.kfi.ldk.vo.MyPhotoVo;
 import com.kfi.ldk.vo.MyVideoVo;
+import com.kfi.ldk.vo.TagVo;
 
 @Service
 public class MyBoardServiceImpl implements CommonService{
 	@Autowired private MyBoardDao mbDao;
 	@Autowired private MyPhotoDao mpDao;
 	@Autowired private MyVideoDao mvDao;
+	@Autowired private TagDao tagDao;
+	@Autowired private MyTagDao myTagDao;
 	@Autowired private MyBoardListViewDao mbViewDao;
 	@Override
 	public int getMaxNum() {
@@ -54,11 +59,14 @@ public class MyBoardServiceImpl implements CommonService{
 		MultipartFile[] fileP=(MultipartFile[])map.get("fileP");
 		MultipartFile[] fileV=(MultipartFile[])map.get("fileV");
 		HttpSession session=(HttpSession)map.get("session");
+		String[] tag_name=(String[])map.get("tag_name");
 		String uploadPathP=session.getServletContext().getRealPath("/resources/upload/img");
 		String uploadPathV=session.getServletContext().getRealPath("/resources/upload/vid");
 		int mb_num=getMaxNum();
 		int mp_num=mpDao.getMaxNum();
 		int mv_num=mvDao.getMaxNum();
+		int tag_num=tagDao.getMaxNum();
+		int mtag_num=myTagDao.getMaxNum();
 		InputStream is=null;
 		FileOutputStream fos=null;
 		ArrayList<String> uploadedPhoto=new ArrayList<String>();
@@ -110,7 +118,15 @@ public class MyBoardServiceImpl implements CommonService{
 					uploadedVideo.add(mv_savvid);
 					mvDao.insert(new MyVideoVo(mv_num + i +1, mb_num + 1, mv_orgvid, mv_savvid));
 				}				
-			}	
+			}
+			for(int i=0;i<tag_name.length;i++) {
+				if(tagDao.select(tag_name[i])==null) {
+					tagDao.insert(new TagVo(tag_num + i + 1, tag_name[i]));
+					/*
+					 *  ¿©±âÇÒÂ÷·Ê
+					 */
+				}
+			}
 			return 1;
 		}catch(Exception e) {
 			File f=null;

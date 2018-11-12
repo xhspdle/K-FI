@@ -26,15 +26,17 @@ public class InsertController {
 	}
 	@RequestMapping(value="/mypage/myboard/insert",method=RequestMethod.POST)
 	@ResponseBody
-	public String insert(MultipartHttpServletRequest request,String[] tags,
+	public String insert(MultipartHttpServletRequest request,
 				MultipartFile[] fileP,MultipartFile[] fileV,HttpSession session) {
 		String mb_title=request.getParameter("mb_title");
 		String mb_content=request.getParameter("mb_content");
+		String[] tag_name=request.getParameterValues("tag_name");
 		try {
 			HashMap<String, Object> map=new HashMap<String, Object>();
 			map.put("session", session);
 			map.put("fileP", fileP);
 			map.put("fileV", fileV);
+			map.put("tag_name", tag_name);
 			int user_num=0;
 			Object session_num=session.getAttribute("user_num");
 			if(session_num!=null && session_num!="") {

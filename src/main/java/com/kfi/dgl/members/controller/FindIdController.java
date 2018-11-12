@@ -34,31 +34,32 @@ public class FindIdController {
 		
 		@RequestMapping(value="/login/findid", method=RequestMethod.POST)
 		@ResponseBody
-		public String findId(MembersVo vo,Model model, RedirectAttributes rttr, HttpServletRequest request, HttpSession session, String user_email) throws Exception {
-			int n=service.findEmail(user_email);
-			if (n > 0) {
+		public String findId(String user_email) throws Exception {
+			System.out.println("user_email:" +user_email);//aaaaaaaaaaaaaaaaaaaa
+			MembersVo vo=service.emailCheck(user_email);
+			if (vo != null) {
 				System.out.println("성공");
-			service.createkey(vo, user_email);
-			return "redirect:/";
-		}else {
-			System.out.println("실패");
-			return "redirect:/login/login";
-		}
+				service.createkey(user_email);
+				return "redirect:/";
+			}else {
+				System.out.println("실패");
+				return "redirect:/login/login";
+			}
 		}
 		
 		@RequestMapping(value="/login/findEmail")
 		@ResponseBody
 		public Map<String, String> findEmail(String user_email){
-		int n = service.findEmail(user_email);
-		Map<String, String> map = new HashMap<>();
-		if(n == 0) {
-			System.out.println(user_email);
-			map.put("msg", "true");
-		}else if(n == 1) {
-			System.out.println(user_email);
-			map.put("msg", "false");
-		}
-		return map;
+			MembersVo vo = service.emailCheck(user_email);
+			Map<String, String> map = new HashMap<>();
+			if(vo != null) {
+				System.out.println(user_email);
+				map.put("msg", "true");
+			}else {
+				System.out.println(user_email);
+				map.put("msg", "false");
+			}
+			return map;
 		}
 		
 		@RequestMapping(value="/login/emailConfirm", method=RequestMethod.GET)

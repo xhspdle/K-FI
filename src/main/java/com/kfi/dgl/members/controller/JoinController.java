@@ -95,12 +95,12 @@ public class JoinController {
 	@RequestMapping(value="/login/join/emailcheck")
 	@ResponseBody
 	public Map<String, String> emailcheck(String user_email){
-	int n = service.emailCheck(user_email);
+	MembersVo vo = service.emailCheck(user_email);
 	Map<String, String> map = new HashMap<>();
-	if(n == 0) {
+	if(vo != null) {
 		System.out.println(user_email);
 		map.put("msg", "true");
-	}else if(n == 1) {
+	}else {
 		System.out.println(user_email);
 		map.put("msg", "false");
 	}

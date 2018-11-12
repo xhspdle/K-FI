@@ -829,22 +829,12 @@ $(document).ready(function(){
 		  if(event.keyCode===32) {
 			  let tag_name=$("#tags").text().trim();
 			  if(tag_name!==""){
-				  if(tag_name.lastIndexOf(" ")===-1){
-					  tag_name=tag_name.substring(tag_name.lastIndexOf("#") + 1);
-				  }else{
-					  tag_name=tag_name.split(" ")[0].substring(tag_name.lastIndexOf("#") + 1);
-				  }
-				  $(tagSpan).appendTo("label[for='tags']");
-				  $("[for='tags']").after("<input type='hidden' name='tag_name' id='tag"+ 
-						  $(tagSpan).attr("data-tag-num") +"' value='"+ tag_name +"'>");
-				  $("#tags").empty();
-				  tagSpanAttached=true;
-				  setTimeout(function(){
-					  $(tagSpan).css("opacity","1");
-				  },100);
-				  /*
-				   * 여기 처리해야댐
 				  if(tag_name.lastIndexOf("#")!==-1){
+					  if(tag_name.lastIndexOf(" ")===-1){
+						  tag_name=tag_name.substring(tag_name.lastIndexOf("#") + 1);
+					  }else{
+						  tag_name=tag_name.split(" ")[0].substring(tag_name.lastIndexOf("#") + 1);
+					  }
 					  $(tagSpan).appendTo("label[for='tags']");
 					  $("[for='tags']").after("<input type='hidden' name='tag_name' id='tag"+ 
 							  $(tagSpan).attr("data-tag-num") +"' value='"+ tag_name +"'>");
@@ -856,7 +846,8 @@ $(document).ready(function(){
 				  }else{
 					  $("#tags").empty();
 				  }
-				  */
+			  }else{
+				  $("#tags").empty();
 			  }
 		  }
 		  if($("#tags").text()===""){

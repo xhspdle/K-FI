@@ -39,8 +39,8 @@
 	</select>
 	
 	<!-- 이메일 체크 -->
-	<select id="emailCheck" parameterType="string" resultType="int">
-		select count(*) from members where USER_EMAIL=#{user_email}
+	<select id="emailCheck" parameterType="string" resultType="logmembers">
+		select * from members where USER_EMAIL=#{user_email}
 	</select>
 	
 	<!-- 사용자 인증상태 0->1 변경 -->

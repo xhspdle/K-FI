@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.kfi.dgl.dao.CertiMembersDao;
 import com.kfi.dgl.dao.MembersDao;
 import com.kfi.dgl.util.Key;
 import com.kfi.dgl.util.MailUtil;
+import com.kfi.dgl.vo.CertiMembersVo;
 import com.kfi.dgl.vo.MembersVo;
 import com.kfi.jyi.dao.MySkinCoverDao;
 import com.kfi.jyi.dao.MySkinDao;
@@ -32,6 +34,8 @@ public class MembersService {
 	private MySkinCoverDao mscdao;
 	@Autowired
 	private MySkinProfileDao mspdao;
+	@Autowired
+	private CertiMembersDao certiDao;
 	
 	public void setDao(MembersDao dao) {
 		this.dao = dao;
@@ -66,12 +70,12 @@ public class MembersService {
 		return dao.nickCheck(user_nickname);
 	}
 
-	public int emailCheck(String user_email) {
+	public MembersVo emailCheck(String user_email) {
 		return dao.emailCheck(user_email);
 	}
-	public int findEmail(String user_email) {
+/*	public int findEmail(String user_email) {
 		return dao.emailCheck(user_email);
-	}
+	}*/
 	public void findId(String user_email) {
 		dao.findId(user_email);
 	}
@@ -95,23 +99,22 @@ public class MembersService {
 		return dao.delete(user_num);
 	}
 	//인증키
-	@Transactional
-	public void createkey(MembersVo vo, String user_email) throws Exception {
-		dao.emailCheck(user_email);
+	public void createkey(String user_email) throws Exception {
+		MembersVo vo=dao.emailCheck(user_email);
 		
-		String key = new Key().getKey(50, false); // 인증키 생성
-
-		dao.createKey(user_email, key); // 인증키 DB 저장
-
+		String cm_key = new Key().getKey(25, false); // 인증키 생성
+		certiDao.insert(new CertiMembersVo(certiDao.getMaxNum() + 1, vo.getUser_num(), cm_key)); // 인증키 DB 저장
+		System.out.println("메일객체만들기전");
 		MailUtil sendMail = new MailUtil(mailSender);
-
+		System.out.println("메일객체맹금");
 		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
 				.append("<a href='http://localhost:8082/kfi/mailcert?user_email=")
-				.append(vo.getUser_email()).append("&key=").append(key)
+				.append(user_email).append("&key=").append(cm_key)
 				.append("' target='_blenk'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("tester112492@gmail.com", "관리자");
-		sendMail.setTo(vo.getUser_email());
+		sendMail.setTo(user_email);
 		sendMail.send();
+		System.out.println("메일보냄");
 	}
 ////////////////////////////회원가입 정상완료 후 myskin테이블에 디폴트값 넣기
 	@Transactional

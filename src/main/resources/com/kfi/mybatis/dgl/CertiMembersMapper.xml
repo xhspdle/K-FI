@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.dgl.CertiMembersMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(cm_num),0) maxnum from certi_members
+	</select>
+	<insert id="insert" parameterType="certimembers">
+		insert into certi_members values(#{cm_num},#{user_num},#{cm_key})
+	</insert>
+	<delete id="delete" parameterType="int">
+		delete from certi_members where cm_num=#{cm_num}
+	</delete>
+	<select id="select" parameterType="int" resultType="certimembers">
+		select * from certi_members where user_num=#{user_num}
+	</select>
+</mapper>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kfi.mybatis.dgl.mailMapper">
+<mapper namespace="com.kfi.mybatis.dgl.MailMapper">
 
 
 <!-- vo 데이터 참고용
@@ -20,8 +20,8 @@
 		insert into CERTI_MEMBERS values(#{cm_num}, #{user_num}, #{cm_key})
 	</insert>
 	
-		<!-- 동일 이메일 검사 -->
+		<!-- 동일 이메일 검사 
 	<select id="findEmail" parameterType="string" resultType="int">
 		select count(*) from members where USER_EMAIL=#{user_email}
-	</select>
+	</select>-->
 </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +44,7 @@
 <script type="text/javascript">
 $(function() {
 	var emailflag = false;
-	$('#btn1').click(function(){
+/* 	$('#btn1').click(function(){
 		 var email = $("#fiemail").val();
 		 var eMsg = $("#emailMsg");
 		 var isEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
@@ -78,7 +79,7 @@ $(function() {
 		}
 			}
 			});
-	});
+	}); */
 	$('#btn2')
 });
 </script>
@@ -86,11 +87,11 @@ $(function() {
 <body>
 <div class="col-sm-4">
 	<div class="container">
-		<form class="navbar-form navbar-left" action="/login/findid" method="post">
+		<form class="navbar-form navbar-left" action="<c:url value='/login/findid'/>" method="post">
 			
 			<div class="form-group">
 				<label class="form-control-label" for="fpemail">Email</label><br>
-				 <input type="email" class="form-control" id="fiemail" name="fiemail"
+				 <input type="email" class="form-control" id="fiemail" name="user_email"
 					placeholder="Enter Email">
 					<button type="submit" class="btn btn-default" id="btn1">인증번호보내기</button>
 				 <span id="emailMsg"class="help-block" style="opacity: 1;"></span>
