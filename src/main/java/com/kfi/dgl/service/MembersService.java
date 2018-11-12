@@ -1,7 +1,10 @@
 package com.kfi.dgl.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -73,14 +76,11 @@ public class MembersService {
 	public MembersVo emailCheck(String user_email) {
 		return dao.emailCheck(user_email);
 	}
-/*	public int findEmail(String user_email) {
-		return dao.emailCheck(user_email);
-	}*/
 	public void findId(String user_email) {
 		dao.findId(user_email);
 	}
-	public int findPwd(String user_id) {
-		return dao.findPwd(user_id);
+	public void findPwd(MembersVo vo) {
+		dao.findPwd(vo);
 	}
 	// admin에서 사용
 	public MembersVo select(int user_num) {
@@ -98,10 +98,21 @@ public class MembersService {
 	public int delete(int user_num) {
 		return dao.delete(user_num);
 	}
+	
+	public void joinsendmail(String user_email) throws MessagingException, UnsupportedEncodingException{
+		MailUtil sendMail = new MailUtil(mailSender);
+		sendMail.setSubject("[이메일 인증]");
+		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
+				.append("<a href='http://localhost:8082/kfi/mailcert?user_email="+(user_email))
+				.append("' target='_blenk'>회원가입 이메일 인증 확인</a>").toString());
+		sendMail.setFrom("tester241192@gmail.com", "인증인증~!");
+		sendMail.setTo(user_email);
+		sendMail.send();
+		System.out.println("회원가입 이메일 보냄");
+	}
 	//인증키
 	public void createkey(String user_email) throws Exception {
 		MembersVo vo=dao.emailCheck(user_email);
-		
 		String cm_key = new Key().getKey(25, false); // 인증키 생성
 		certiDao.insert(new CertiMembersVo(certiDao.getMaxNum() + 1, vo.getUser_num(), cm_key)); // 인증키 DB 저장
 		System.out.println("메일객체만들기전");
@@ -116,6 +127,8 @@ public class MembersService {
 		sendMail.send();
 		System.out.println("메일보냄");
 	}
+
+/*	public void tempemail()*/
 ////////////////////////////회원가입 정상완료 후 myskin테이블에 디폴트값 넣기
 	@Transactional
 	public int insertMyskin(MySkinVo msvo) {

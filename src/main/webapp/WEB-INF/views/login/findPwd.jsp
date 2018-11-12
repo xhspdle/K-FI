@@ -145,6 +145,8 @@
     <input type="email" class="form-control" id="fpemail" name="fpemail" placeholder="Enter Email">
   </div>
   <span id="emailMsg" class="help-block" style="opacity:1;"></span>
+    <button type="submit" class="btn btn-default" id="btn1">인증번호보내기</button>
+				 <span id="emailMsg"class="help-block" style="opacity: 1;"></span>
     <div class="form-group">        
       <div class="submitbox" >
         <button type="submit" class="btn btn-default" id="submit" name="submit">Submit</button>

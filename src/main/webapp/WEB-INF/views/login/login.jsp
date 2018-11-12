@@ -18,7 +18,7 @@ margin-top: 50px;
 }
 body {
 	padding-top: 15rem;
-	padding-bottom: 15rem;
+	pad ding-bottom: 15rem;
 	margin: auto;
 	width: 50%;
 	padding: 10px;
@@ -105,7 +105,7 @@ form .error {
 </style>
 <title>회원 로그인</title>
 </head>
-<body>
+ <body>
 	<h1>로그인</h1>
 	<form action="<c:url value='/login/login'/>" method="post">
 		아이디 <input type="text" name="userId" id="userId" value="${membersVo.id }"><br>
@@ -115,8 +115,7 @@ form .error {
 		<a href="<c:url value='/login/findid'/>">아이디 찾기</a>
 		<a href="<c:url value='/login/findpwd'/>">비밀번호 찾기</a>
 	</form>
-
-<%-- <body>    
+<body>    
 <div class="row">
     <div class="col-md-3"></div>
     <div class="container">
@@ -285,7 +284,7 @@ form .error {
         	   });
         	 });
 
-         </script> --%>
+         </script>
 </body>
 </body>
 </html>

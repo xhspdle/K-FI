@@ -56,7 +56,6 @@
 		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/FaqMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/dgl/MembersMapper.xml"/>
-		<mapper resource="com/kfi/mybatis/dgl/MailMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/dgl/CertiMembersMapper.xml"/>
 	</mappers>
 </configuration>

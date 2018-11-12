@@ -19,10 +19,6 @@ import com.kfi.dgl.vo.MembersVo;
 @Controller
 public class MailController{
 	
-	
-	@Autowired
-	private MailService mailService;
-	
 	@Autowired
 	private MembersService membersService;
 	
@@ -55,8 +51,9 @@ public class MailController{
 		System.out.println("이메일 인증처리!");
 		MembersVo vo = new MembersVo();
 		vo.setUser_email(user_email);
-		membersService.getverify(vo);
+		membersService.getverify(user_email);
 		return "/mypage/main";
 		
 	}
-}*/
+}
+*/
