@@ -20,28 +20,24 @@ import com.kfi.ldk.service.CommonService;
 
 
 @Controller(value="myskinlistController")
-@SessionAttributes("msv")
 public class ListController {
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService service;
 	
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		/*session.setAttribute("user_num", 1);
+		session.setAttribute("user_num", 1);
 		int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
 		map.put("ms_using",1);
-		List<MySkinViewVo> list=(List<MySkinViewVo>)service.list(map);*/
-		MySkinViewVo msv=null;
-		
-/*		if(list!=null) {
+		List<MySkinViewVo> list=(List<MySkinViewVo>)service.list(map);
+		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
+		if(list!=null) {
 			for(MySkinViewVo vo: list) {
 				msv=vo;
 			}
-		}else {*/
-			msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
-	/*	}*/
+		}
 		return msv;
 	}
 
@@ -73,7 +69,7 @@ public class ListController {
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("session", session);
 		map.put("ms_num", msNum);
-		map.put("ms_using",1);
+		map.put("ms_using",2);
 		int result=service.update(map);
 		if(result>0) {
 			return "redirect:/mypage/myskin/list";

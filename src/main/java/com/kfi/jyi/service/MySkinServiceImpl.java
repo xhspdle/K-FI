@@ -135,13 +135,16 @@ public class MySkinServiceImpl implements CommonService {
 		HttpSession session = (HttpSession) hm.get("session");
 		int user_num = (Integer) session.getAttribute("user_num");
 		int ms_num=(Integer) hm.get("ms_num");
+		//기본 이미지로 적용하기
 		if(ms_num==-1) {
 			msdao.update_defalt(user_num); 
 			return 1;
 		}
 		int ms_using=(Integer) hm.get("ms_using");
 		MySkinViewVo msvVo=(MySkinViewVo)select(ms_num);
-		if(ms_using==1) {
+		//선택한 스킨 적용하기
+		if(ms_using==2) {
+			ms_using=1;
 			msdao.update(new MySkinVo(ms_num, user_num, msvVo.getMs_name(), msvVo.getMs_color(), msvVo.getMs_msg(),ms_using));
 			HashMap<String, Object> updateElse=new HashMap<>();
 			updateElse.put("user_num", user_num);

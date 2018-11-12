@@ -19,9 +19,8 @@ import com.kfi.ldk.service.CommonService;
 
 
 @Controller
-@SessionAttributes("msv")
 public class MyPageController {
-	/*@Autowired
+	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService service;
 
 	@ModelAttribute("msv")
@@ -32,18 +31,14 @@ public class MyPageController {
 		map.put("user_num", user_num);
 		map.put("ms_using",1);
 		List<MySkinViewVo> list=(List<MySkinViewVo>)service.list(map);
-		MySkinViewVo msv=null;
+		MySkinViewVo msv=new MySkinViewVo(0,user_num, "기본", "#00cee8","", 0, 0, "default-profile.png", "default-profile.png", 0,"logo2.png", "logo2.png");
 		if(list!=null) {
 			for(MySkinViewVo vo: list) {
 				msv=vo;
-				System.out.println(vo.toString()+"??????????");
 			}
 		}
-		if(list==null){
-			msv=new MySkinViewVo(0,user_num, "기본", "#00cee8","", 0, 0, "default-profile.png", "default-profile.png", 0,"logo2.png", "logo2.png");
-		}
 		return msv;
-	}*/
+	}
 	
 	@RequestMapping(value = "/mypage/main", method = RequestMethod.GET)
 	public String myPage() {
