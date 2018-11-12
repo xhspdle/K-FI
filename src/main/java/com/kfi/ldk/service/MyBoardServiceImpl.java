@@ -125,6 +125,7 @@ public class MyBoardServiceImpl implements CommonService{
 					/*
 					 *  여기할차례
 					 */
+					
 				}
 			}
 			return 1;
