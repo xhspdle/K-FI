@@ -266,3 +266,8 @@ table tr td{
 #bbb{
 
 }
+/* 모달 사이드바 없애기  */
+body.modal-open::-webkit-scrollbar {
+	display: none;
+}
+

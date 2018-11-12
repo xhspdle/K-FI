@@ -26,7 +26,6 @@
 				$("#modifyuser_pwd").val(data.user_pwd);
 				$("#modifyuser_nickname").val(data.user_nick);
 				$("#modifyuser_email").val(data.user_email);
-				console.log(data.user_stat);
 				$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
 			}); 
 		});

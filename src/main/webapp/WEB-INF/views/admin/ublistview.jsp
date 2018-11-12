@@ -144,8 +144,6 @@ $(function(){
 			console.log("if문 j"+j);
 		}
 	};
-});
-$(function(){
 	$(".board_content_ad img").click(function(){
 		alert("이미지 클릭");
 		var src=$(this).prop("src");
@@ -155,6 +153,7 @@ $(function(){
 		$('.modal').off();
 	})
 });
+
 var closeimg = document.getElementsByClassName("closeimg")[0];
 
 //When the user clicks on <span> (x), close the modal

@@ -21,24 +21,47 @@
 			}		
 		});
 	
-		$("#faqcomminsert").click(function(){
+		$("#faq_list").on("submit",".faqcommform",function(event){
+			console.log(event.target);
+			console.log($(this).get(0)+"///////////");
+			alert($(this));
+			alert($(this).get(0));
 			alert("제발나와");
-/* 			console.log($(this));
-			$.ajax({   
+ 		
+ 			var formData=new FormData($(this).get(0));
+			console.log(formData);
+ 			alert(formData);
+ 	/* 		  $.ajax({
+ 				  url: "<c:url value='/faqcomminsert'/>",
+ 				  type: 'post',
+ 				  dataType:'json',
+ 				  data: formData,
+ 				  cache: false,
+ 				  contentType: false,
+ 				  processData: false,
+ 				  success: function(json){
+ 					  alert("됐다.")
+ 					  if(json.code==='success'){
+ 						  $.getCommentList(pageNum);
+ 					  }else{
+ 						  $.msgBox(json.code);
+ 					  }
+ 				  }
+ 			  }); */
+/* 			$.ajax({   
 				type: "post",
 				url: "<c:url value='/faqcomminsert'/>",
 				success:function(data){
 					alert("wowowo");
 					alert(data);
-				} */
+				}
+			}); */
 				
-		 	$.postJSON("<c:url value='/faqcomminsert'/>",function(data){
+/*	 		 	$.postJSON("<c:url value='/faqcomminsert'/>",function(data){
 		 		console.log("안보내지나?");
 				alert(data);
 				alert("aaaa");
-			}); 
-/* 			});  */
-			 
+			});  */			 
 		});
 
 	 	function faqcommlist(qa_num,faqcomm){	 		
@@ -92,9 +115,10 @@
 </div>	 
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
-<h1>Q and A</h1>
+
+<div class="panel-group container" id="faq_list">
+	<h1>Q and A</h1>
 	<h2>Panels with Contextual Classes</h2>
-	<div class="panel-group">
 	<c:forEach var="faqlist" items="${faqlist }" varStatus="status">	
 		<div class="panel panel-default">
 			<div class="panel-heading" >	
@@ -109,7 +133,7 @@
 				${faqlist.admin_num }
 				<button class="btn btn-default faqcommbtn">댓글</button>
 			</div>
-			<form class="hidediv" method="post">
+			<form class="hidediv faqcommform" method="post">
 				<div class="media">
 					<div class="media-left media-top">
 						<!-- <img src="2.png" class="media-object" style="width:60px"> -->
@@ -124,7 +148,7 @@
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit" id="faqcomminsert">
+								<button class="btn btn-default" type="submit">
 									<i class="glyphicon glyphicon-pencil"></i>
 								</button>
 							</div>
@@ -134,10 +158,11 @@
 			</form>	
 		</div>
 	</c:forEach>
+	<a href="faqinsert" class="btn btn-default">글작성</a>
 </div>	
 
 
-<a href="faqinsert" class="btn btn-default">글작성</a>
+
 <!--  		 	if($(".faq_comment").css("display")=="none"){
 		 		$(".faq_comment").css("display","block");
 			}else{

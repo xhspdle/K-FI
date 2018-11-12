@@ -57,6 +57,7 @@
 						<li><a href="userboardlistview">통계관리</a></li>
 						<li><a href="ablist">공지사항</a></li>
 						<li><a href="faqlist">Q&#38;A</a></li>
+						<li><a href="communityskin">skin</a></li>
 					</ul>
 				</div>
 			</div>
@@ -64,11 +65,20 @@
 		<c:choose>
 			<c:when test="${empty admin}">
 				<div class="topheader text-center">
-					<h1>Company</h1>
+					<h1>WOW</h1>
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="topheader text-center">
+				<div class="topheader text-center" id="admindetail">
+<!-- 					<div class="media">
+					<div class="media-left">
+					<img src="img_avatar1.png" class="media-object" style="width:60px">
+					</div>
+					<div class="media-body">
+					<h4 class="media-heading">John Doe</h4>
+					 <p>Lorem ipsum...</p>
+					</*-/div>
+					</div> -->
 					<img src="<c:url value='/resources/images/1 (1).jpg'/>"
 						style="width: 200px; heigh =150px; border: 3px solid gold; border-radius: 150px;">
 					${admin.admin_id } ${admin.admin_nick }
@@ -97,20 +107,11 @@
 		
 		</div>
 	</div>
-
 </body>
 <script type="text/javascript">
-	function chat(){
-		alert("chat");
-		chatform();
-	}
- 	function chatform(){
-		var html="<div>chat</div>"
-				+"<div>내용</div>"
-				+"<input type='text'>";
-		$("#chater").css("display","block");
-		$("#chater").append(html);
-	}
- 
+$("#admindetail").click(function(){
+	location.href="<c:url value='/admindetail'/>"; 
+});
+
 </script>
 </html>
