@@ -249,6 +249,10 @@ footer .glyphicon {
 	z-index: 1;
 	height: 400px;
 	background-color: #00cee8;
+	/* 추가 */
+	background-repeat: no-repeat !important;
+    background-position-x: 50% !important;
+    background-position-y: 50% !important;
 }
 #mypageJumbo > div:after {
 	position: absolute;
@@ -258,12 +262,12 @@ footer .glyphicon {
 	content:"";
 	height: 100%;
 	width: 100%;
-	background: url('../images/logo2.png');
+	/*background: url('../images/logo2.png');
 	background-attachment: fixed;
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-size: auto;
-	opacity: 0.7 !important;
+	opacity: 0.7 !important;*/
 }
 #mypageJumbo #profileImg {
 	width: 150px;

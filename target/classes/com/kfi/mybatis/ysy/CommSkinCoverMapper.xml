@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ysy.CommSkinCoverMapper">
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(csp_num),0) from comm_skin_cover
+	</select>
+	
+	<insert id="insert" parameterType="commskincover">
+		insert into comm_skin_cover values(#{csc_num},#{comm_num},#{csc_orgimg},#{csc_savimg},#{csc_using})
+	</insert>
+
+</mapper>

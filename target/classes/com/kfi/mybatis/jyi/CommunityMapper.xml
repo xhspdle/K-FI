@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.CommunityMapper">
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(comm_num),0) from community
+	</select>
+
+	<insert id="insert" parameterType="community">
+		insert into community values(#{comm_num},#{user_num},#{comm_name},#{comm_content},#{cs_color},sysdate)
+	</insert>
+	
+
+</mapper>

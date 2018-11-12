@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<div class="jumbotron text-center" id="mypageJumbo">
-	<div style="background:url(${pageContext.request.contextPath}/resources/upload/img/${msv.msc_savimg })"> 
-		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>">
-		<h3><strong>${user_nickname }</strong></h3>
-		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p> 
-	</div>
-</div>
 <nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix" style="background-color:${msv.ms_color};">
 	<div class="container">
 		<div class="navbar-header">
@@ -20,7 +13,14 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<c:url value='/community'/>">COMMUNITY</a></li>
+				<li class="dropdown">
+					<a href="<c:url value='/community'/>">COMMUNITY</a>
+					<ul class="dropdown-menu">
+						<li><a href="<c:url value='/community/newComm/insertForm'/>">커뮤니티 등록(가제)</a></li>
+						<li><a href="#">마이커뮤니티</a></li>
+						<li><a href="#">일정보기</a></li>
+					</ul>
+				</li>
 				<li class="dropdown">
 					<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
 					<ul class="dropdown-menu">

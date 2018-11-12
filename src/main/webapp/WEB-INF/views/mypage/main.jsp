@@ -24,4 +24,11 @@
 	</div>
 -->
 </div>
-
+<!-- Calendar icon -->
+	<input type="hidden" id="url" value="${pageContext.request.contextPath }">
+	<input type="hidden" id="year" value="year">
+	<input type="hidden" id="month" value="month">
+	<div id="icon_calendar" class="glyphicon glyphicon-calendar"></div>
+	<div id="wrap_icon_calendar">
+	</div>
+	

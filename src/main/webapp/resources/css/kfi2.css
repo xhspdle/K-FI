@@ -1,5 +1,32 @@
 @charset "UTF-8";
 
+/* community */
+#pre_newComm_content{
+    overflow: hidden;
+}
+
+#new_community .form-horizontal {
+	padding: 1% 0% 3% -1%;
+}
+
+#new_community .w3-col.m4, .w3-third {
+	width: 25%;
+}
+
+#new_community .col-sm-2 {
+	width: 11%;
+}
+
+#new_community_submit {
+	width: 50%;
+	margin-left: 27%;
+}
+
+#new_community_cover {
+	width: 60% !important;
+	margin-left: 20%;
+}
+
 /* myinfo */
 #myinfo .navbar-form {
 	width: auto;
@@ -166,7 +193,7 @@
 }
 /* 기본값으로 적용 */
 .myskin_ud_default {
-	margin-left: 11%;
+	margin-left: 10%;
 	margin-top: -1px;
 	position: absolute;
 	background-color: #00cee8;
@@ -208,12 +235,12 @@
 
 #myskin_list_nickname {
 	width: max-content;
-    color: white;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: 700;
-    font-size: xx-large;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	font-weight: 700;
+	font-size: xx-large;
 }
 
 /* mypage 커뮤니티 일정 mouseover했을 때 */
@@ -230,10 +257,30 @@
 }
 
 /* mypate mini_Calendar */
+#icon_calendar {
+	margin: 0% 0% 0% 70%;
+	margin-top: 0%;
+	margin-right: 0%;
+	margin-bottom: 0%;
+	margin-left: 70%;
+	color: #00cee8;
+	font-size: 40px;
+	border-radius: 50%;
+	background: orange;
+	padding: 0.5% 0.5% 0.5% 0.5%;
+	border: 1px red solid;
+}
+
+#wrap_icon_calendar {
+	width: 17%;
+	margin: -1% 0% 0% 63.5%;
+	height: 340px !important;
+}
+
 .mini_cal_week {
 	float: left;
 	width: 40px;
-	height: 20px;
+	height: 28px;
 	font-size: 15px;
 	text-align: center;
 	border: 1px solid #00cee8;
@@ -267,10 +314,14 @@
 
 #prevmon {
 	font-size: 10px;
+	position: absolute;
+	margin-left: -46px;
 }
 
 #aftmon {
 	font-size: 10px;
+	position: absolute;
+	margin-left: 19px;
 }
 
 .jyi_cal_sc {
