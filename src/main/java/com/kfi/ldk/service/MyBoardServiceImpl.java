@@ -118,15 +118,17 @@ public class MyBoardServiceImpl implements CommonService{
 					mvDao.insert(new MyVideoVo(mv_num + i, mb_num, mv_orgvid, mv_savvid));
 				}				
 			}
-			for(int i=0;i<tag_name.length;i++) {
-				TagVo vo=tagDao.select(tag_name[i]);
-				if(vo==null) {
-					int tag_num=tagDao.getMaxNum() + 1;
-					tagDao.insert(new TagVo(tag_num, tag_name[i]));
-					myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
-				}else {
-					int tag_num=vo.getTag_num();
-					myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
+			if(tag_name.length>0) {
+				for(int i=0;i<tag_name.length;i++) {
+					TagVo vo=tagDao.select(tag_name[i]);
+					if(vo==null) {
+						int tag_num=tagDao.getMaxNum() + 1;
+						tagDao.insert(new TagVo(tag_num, tag_name[i]));
+						myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
+					}else {
+						int tag_num=vo.getTag_num();
+						myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
+					}
 				}
 			}
 			return 1;
@@ -289,6 +291,7 @@ public class MyBoardServiceImpl implements CommonService{
 		mbDao.addHit(mb_num);
 		map.put("user_num", vo.getUser_num());
 		map.put("boardVo", vo);
+		map.put("tagList", tagDao.listMyTagJoin(mb_num));
 		map.put("imgList", mpDao.select(mb_num));
 		map.put("vidList", mvDao.select(mb_num));
 		map.put("prev", mbViewDao.prev(map));

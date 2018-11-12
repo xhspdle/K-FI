@@ -25,6 +25,7 @@ public class SelectController {
 		map=(HashMap<String, Object>)service.select(map);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("boardVo", map.get("boardVo"));
+		model.addAttribute("tagList", map.get("tagList"));
 		model.addAttribute("imgList", map.get("imgList"));
 		model.addAttribute("vidList", map.get("vidList"));
 		model.addAttribute("prev", map.get("prev"));

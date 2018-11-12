@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="jumbotron text-center" id="communityJumbo">
+	<div> 
+		<h3 class="communityHeader"><strong>K-Fi's Community World</strong></h3>
+		<p class="communityHeader"><span class="">Meet likeminded people around the world.</span></p> 
+	</div>
+</div>  
 <nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix" style="background-color:${msv.ms_color};">
 	<div class="container">
 		<div class="navbar-header">

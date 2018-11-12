@@ -859,7 +859,6 @@ $(document).ready(function(){
   });
   $("label[for='tags']").on('click',".glyphicon-remove-circle",function(){
 	  var tagSpanNum=$(this).parent().attr("data-tag-num");
-	  console.log(tagSpanNum);
 	  $("input[type='hidden']").remove("#tag" + tagSpanNum);
 	  let removeSpan=$(this).parent().css("opacity","0")
 	  setTimeout(function(){

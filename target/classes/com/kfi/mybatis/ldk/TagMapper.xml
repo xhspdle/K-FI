@@ -24,4 +24,28 @@
 	<select id="select" parameterType="string" resultType="tag">
 		select * from tag where tag_name=#{tag_name}
 	</select>
+	<!-- 
+	<select id="listMyTagJoin" resultType="com.kfi.ldk.vo.MyTagListJoinVo">
+		SELECT T.TAG_NUM,T.TAG_NAME,AA.TAG_CNT,MT.MB_NUM
+		FROM TAG T,MY_TAG MT,
+		(
+		    SELECT TT.TAG_NAME,COUNT(TT.TAG_NAME) TAG_CNT
+		    FROM TAG TT,MY_TAG MT,COMM_TAG CT
+		    WHERE MT.TAG_NUM(+)=TT.TAG_NUM AND CT.TAG_NUM(+)=TT.TAG_NUM
+		    GROUP BY TT.TAG_NAME
+		)AA
+		WHERE MT.TAG_NUM(+)=T.TAG_NUM AND AA.TAG_NAME=T.TAG_NAME
+	</select>
+	-->
+	<select id="listMyTagJoin" parameterType="int" resultType="com.kfi.ldk.vo.MyTagListJoinVo">
+		SELECT T.TAG_NUM,T.TAG_NAME,AA.TAG_CNT
+		FROM TAG T,MY_TAG MT,
+		(
+		    SELECT TT.TAG_NAME,COUNT(TT.TAG_NAME) TAG_CNT
+		    FROM TAG TT,MY_TAG MT,COMM_TAG CT
+		    WHERE MT.TAG_NUM(+)=TT.TAG_NUM AND CT.TAG_NUM(+)=TT.TAG_NUM
+		    GROUP BY TT.TAG_NAME
+		)AA
+		WHERE MT.TAG_NUM(+)=T.TAG_NUM AND AA.TAG_NAME=T.TAG_NAME AND MT.MB_NUM=#{mb_num}
+	</select>
 </mapper>

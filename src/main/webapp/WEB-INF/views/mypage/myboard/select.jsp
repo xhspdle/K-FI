@@ -106,6 +106,11 @@
 				</c:forEach>				
 			</div>
 			<div class="panel-footer text-left">
+				<h3 class="postListComment select">
+				<c:forEach var="tags" items="${tagList }">
+					<span style="font-size: 24px;">#${tags.tag_name }&nbsp;</span>
+				</c:forEach>
+				</h3>
 				<h3 class="postLikeComment select" id="likeCnt" data-like-cnt="${like_cnt }">
 				${like_cnt } Likes<span class="msgSpan"></span></h3>
 				<div class="likes">

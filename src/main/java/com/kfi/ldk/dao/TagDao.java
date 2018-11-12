@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kfi.ldk.vo.MyTagListJoinVo;
 import com.kfi.ldk.vo.TagVo;
 
 @Repository
@@ -33,5 +34,8 @@ public class TagDao {
 	}
 	public TagVo select(String tag_name) {
 		return session.selectOne(NAMESPACE + ".select", tag_name);
+	}
+	public List<MyTagListJoinVo> listMyTagJoin(int mb_num) {
+		return session.selectList(NAMESPACE + ".listMyTagJoin", mb_num);
 	}
 }

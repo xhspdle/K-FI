@@ -719,3 +719,45 @@ body.modal-open::-webkit-scrollbar {
 .glyphicon-remove-circle {
 	cursor: pointer;
 }
+/*
+	community
+*/
+#communityJumbo {
+	height: 400px;
+	padding: 0px;
+	margin: 0px;
+}
+#communityJumbo > div {
+	position: relative;
+	z-index: 1;
+	height: 400px;
+	background-color: #00cee8;
+}
+#communityJumbo > div:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	content: "";
+	height: 100%;
+	width: 100%;
+	opacity: 0.7 !important;
+}
+#communityJumbo .communityHeader {
+	position: relative;
+	margin: auto;
+	top: 50%;
+}
+#communityJumbo h3.communityHeader {
+	font-size: 46px;
+}
+#communityJumbo p.communityHeader {
+	margin-top: 3%;
+}
+#communityList .communitySlide {
+	overflow: hidden;
+	
+}
+#communityList {
+	margin-top: 70px;
+}
