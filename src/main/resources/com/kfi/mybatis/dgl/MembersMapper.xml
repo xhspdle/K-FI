@@ -43,11 +43,6 @@
 		select count(*) from members where USER_EMAIL=#{user_email}
 	</select>
 	
-	<!-- 동일 이메일 검사 -->
-	<select id="findEmail" parameterType="logmembers" resultType="logmembers">
-		select * from members where USER_EMAIL=#{user_email}
-	</select>
-	
 	<!-- 사용자 인증상태 0->1 변경 -->
 	<update id="userCerti"> 
 	 	<![CDATA[update members set USER_CERTI = 1 where (select count(*) from members where USER_EMAIL = #{user_email}) > 0]]>

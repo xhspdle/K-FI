@@ -46,6 +46,10 @@ public class MembersDao {
 	public int emailCheck(String user_email) {
 		return sqlSession.selectOne(NAMESPACE + ".emailCheck", user_email);
 	}
+	//동일 이메일 검사
+	public int findEmail(String user_email) {
+		return sqlSession.selectOne(NAMESPACE + ".findEmail", user_email);
+	}
 	//사용자 인증 상태 변경
 	public int verify(String user_email) {
 		return sqlSession.update(NAMESPACE + ".getVerify");

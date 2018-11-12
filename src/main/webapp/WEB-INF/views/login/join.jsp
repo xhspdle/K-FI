@@ -198,6 +198,9 @@
 			console.log(data)
 		 if(!isEmail.test(email)){
 			$(eMsg).text("이메일 형식이 맞지않습니다.");
+			eMsg.show();
+			eMsg.removeClass('greenText'); 
+			eMsg.addClass('redText'); 
 			return false;
 			
 		} else if (data.msg == 'false') {

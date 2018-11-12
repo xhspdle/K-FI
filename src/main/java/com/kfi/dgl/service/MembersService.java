@@ -69,6 +69,9 @@ public class MembersService {
 	public int emailCheck(String user_email) {
 		return dao.emailCheck(user_email);
 	}
+	public int findEmail(String user_email) {
+		return dao.emailCheck(user_email);
+	}
 	public void findId(String user_email) {
 		dao.findId(user_email);
 	}

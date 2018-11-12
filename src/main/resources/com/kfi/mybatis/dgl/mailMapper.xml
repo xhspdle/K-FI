@@ -20,4 +20,8 @@
 		insert into CERTI_MEMBERS values(#{cm_num}, #{user_num}, #{cm_key})
 	</insert>
 	
+		<!-- 동일 이메일 검사 -->
+	<select id="findEmail" parameterType="string" resultType="int">
+		select count(*) from members where USER_EMAIL=#{user_email}
+	</select>
 </mapper>
