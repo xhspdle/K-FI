@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 /* community */
-#pre_newComm_content{
-    overflow: hidden;
+#pre_newComm_content {
+	overflow: hidden;
 }
 
 #new_community .form-horizontal {
@@ -257,24 +257,50 @@
 }
 
 /* mypate mini_Calendar */
+
+.sidenav {
+      width: 37%;
+    position: fixed;
+    z-index: 1;
+    top: 55%;
+    left: 81%;
+    overflow-x: hidden;
+    height: 52%;
+}
+
+.sidenav #icon_calendar {
+       padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2196F3;
+    display: block;
+    color: #00cee8;
+    width: 10%;
+    font-size: 40px;
+    border-radius: 50%;
+    background: lightcyan;
+    padding: 2% 7% 2% 2%;
+    border: 2px #00cee8 solid;
+}
+/* 
 #icon_calendar {
-	margin: 0% 0% 0% 70%;
-	margin-top: 0%;
-	margin-right: 0%;
-	margin-bottom: 0%;
-	margin-left: 70%;
-	color: #00cee8;
+		position: absolute;
+      margin-left: 89%;
+    margin-top: 36%;
+   	color: #00cee8;
 	font-size: 40px;
 	border-radius: 50%;
 	background: orange;
 	padding: 0.5% 0.5% 0.5% 0.5%;
 	border: 1px red solid;
-}
+} */
+
 
 #wrap_icon_calendar {
-	width: 17%;
-	margin: -1% 0% 0% 63.5%;
 	height: 340px !important;
+	position: absolute;
+	width: 320px;
+	margin-top: 2px;
 }
 
 .mini_cal_week {

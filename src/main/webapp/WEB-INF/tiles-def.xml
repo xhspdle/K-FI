@@ -31,6 +31,9 @@
 	<definition name=".community.*.*" extends=".community">
 		<put-attribute name="content" value="/WEB-INF/views/community/{1}/{2}.jsp"></put-attribute>
 	</definition>	
+	<definition name=".community.*" extends=".community">
+		<put-attribute name="content" value="/WEB-INF/views/community/{1}.jsp"></put-attribute>
+	</definition>	
 	<definition name=".mypage.*.*" extends=".mypage">
 		<put-attribute name="content" value="/WEB-INF/views/mypage/{1}/{2}.jsp"></put-attribute>
 	</definition>	

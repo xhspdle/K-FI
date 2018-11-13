@@ -137,7 +137,17 @@ public class MySkinServiceImpl implements CommonService {
 		int ms_num=(Integer) hm.get("ms_num");
 		//기본 이미지로 적용하기
 		if(ms_num==-1) {
-			msdao.update_defalt(user_num); 
+			//msdao.update_defalt(user_num); 
+			ms_num = msdao.getMaxNum() +1;
+			msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", "", 1));	
+			int msp_num=mspdao.getMaxNum()+1;
+			int msc_num=mscdao.getMaxNum()+1;
+			mspdao.insert(new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));
+			mscdao.insert(new MySkinCoverVo(msc_num, ms_num, "logo2.png", "logo2.png"));
+			HashMap<String, Object> updateElse=new HashMap<>();
+			updateElse.put("user_num", user_num);
+			updateElse.put("ms_num", ms_num);
+			msdao.update_not_using(updateElse); 
 			return 1;
 		}
 		int ms_using=(Integer) hm.get("ms_using");

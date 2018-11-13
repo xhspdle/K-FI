@@ -24,6 +24,7 @@
 		<typeAlias type="com.kfi.jyi.vo.MySkinCoverVo" alias="myskincover"/>
 		<typeAlias type="com.kfi.jyi.vo.MySkinProfileVo" alias="myskinprofile"/>
 		<typeAlias type="com.kfi.jyi.vo.MySkinViewVo" alias="myskinview"/>
+		<typeAlias type="com.kfi.jyi.vo.CommBoardViewVo" alias="commboardview"/>
 		<typeAlias type="com.kfi.dgl.vo.MembersVo" alias="logmembers"/>
 		<typeAlias type="com.kfi.dgl.vo.CertiMembersVo" alias="certimembers"/>
 		<typeAlias type="com.kfi.ysy.vo.AdminVo" alias="admin"/>
@@ -53,6 +54,7 @@
 		<mapper resource="com/kfi/mybatis/jyi/MySkinCoverMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinProfileMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinViewMapper.xml"/>	
+		<mapper resource="com/kfi/mybatis/jyi/CommBoardViewMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/CommunityMapper.xml"/>	
 		<mapper resource="com/kfi/mybatis/jyi/CommUserListMapper.xml"/>	
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>

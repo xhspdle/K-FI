@@ -62,10 +62,11 @@ $(function() {
 			$("#wrap_icon_calendar").append("<div class='mini_cal'></div>");
 			total+=1;
 		}
+
 		var m=['4','6','9','11'];
 		var end=31;
 		for(var i=0;i<m.length;i++){
-			if((month+1)==m[i]) {
+			if((parseInt(month)+1)==m[i]) {
 				end=30;
 			}
 		}
@@ -142,7 +143,6 @@ $(function() {
 			scrollTop:top
 		},1000);
 	});
-
 	
 	
 //////////////////////////////////////////////////////////myskin

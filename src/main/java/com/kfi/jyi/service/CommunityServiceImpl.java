@@ -17,8 +17,10 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.InputSource;
 
+import com.kfi.jyi.dao.CommBoardViewDao;
 import com.kfi.jyi.dao.CommUserListDao;
 import com.kfi.jyi.dao.CommunityDao;
+import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.jyi.vo.CommUserListVo;
 import com.kfi.jyi.vo.CommunityVo;
 import com.kfi.ldk.service.CommonService;
@@ -33,6 +35,7 @@ public class CommunityServiceImpl implements CommonService{
 	@Autowired private CommSkinCoverDao cscdao;
 	@Autowired private CommSkinProfileDao cspdao;
 	@Autowired private CommUserListDao culdao;
+	@Autowired private CommBoardViewDao cbvdao;
 	
 	@Override
 	public int getMaxNum() {
@@ -128,8 +131,8 @@ public class CommunityServiceImpl implements CommonService{
 
 	@Override
 	public Object select(Object data) {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		return cbvdao.select(map);
 	}
 
 	@Override

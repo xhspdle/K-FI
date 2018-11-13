@@ -19,9 +19,8 @@
 					<c:forEach var="csplist" items="${csplist }">
 						<c:if test="${list.comm_num == csplist.comm_num }">
 							<!-- 해당 커뮤니티 페이지로 이동하기 -->
-							<a href="#"> <img
-								src="<c:url value='/resources/upload/img/${csplist.csp_savimg}'/>"
-								style="width: 100%">
+							<a href="<c:url value='/community/selectComm?comm_num=${list.comm_num }'/>"> 
+								<img src="<c:url value='/resources/upload/img/${csplist.csp_savimg}'/>" style="width: 100%">
 							</a>
 						</c:if>
 					</c:forEach>

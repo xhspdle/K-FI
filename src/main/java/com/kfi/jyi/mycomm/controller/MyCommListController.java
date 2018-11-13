@@ -24,8 +24,8 @@ public class MyCommListController {
 	@Autowired 
 	@Qualifier("communityServiceImpl") private CommonService service;
 	
-	/*@Autowired
-	@Qualifier("mySkinServiceImpl") private CommonService service;
+	@Autowired
+	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
 
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
@@ -34,7 +34,7 @@ public class MyCommListController {
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
 		map.put("ms_using",1);
-		List<MySkinViewVo> list=(List<MySkinViewVo>)service.list(map);
+		List<MySkinViewVo> list=(List<MySkinViewVo>)mySkinService.list(map);
 		MySkinViewVo msv=new MySkinViewVo(0, 0, "±âº»", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
 		if(list!=null) {
 			for(MySkinViewVo vo: list) {
@@ -43,7 +43,7 @@ public class MyCommListController {
 		}
 		return msv;
 	}
-	*/
+	
 
 	
 	@RequestMapping(value="/mypage/mycomm/list")
