@@ -36,8 +36,8 @@ public class ListController {
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 5);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-		map.put("list", service.list(map));
 		map.put("pu", pu);
+		map.put("list", service.list(map));
 		return map;
 	}
 	@RequestMapping(value="/mypage/myboard/list",method=RequestMethod.POST)
@@ -49,9 +49,9 @@ public class ListController {
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 5);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
-		model.addAttribute("list", service.list(map));
 		model.addAttribute("pu", pu);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("list", service.list(map));
 		return ".mypage.myboard.searchMain";
 	}
 }

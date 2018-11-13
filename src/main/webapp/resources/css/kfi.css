@@ -754,20 +754,44 @@ body.modal-open::-webkit-scrollbar {
 #communityJumbo p.communityHeader {
 	margin-top: 3%;
 }
-#communityMainList {
-	margin-top: 70px;
+#best {
+	margin-top: 100px;
 	overflow: hidden;
-	height: 685px;
+	height: 844px;/*685px;*/
 	padding: 0px;
 }
-#communityMainList .communitySlide {
-	/*-webkit-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;*/
+#best .communitySlide {
 	float: left;
 	margin: 2px;
 	position: relative;
 	width: 288.5px;
 }
-#communityMainList .communitySlideImg {
-	/*width: 229px;*/
+.bigTitle {
+	font-weight: 600;
+}
+#issue-img {
+	margin-top: 50px;
+	color: black;
+}
+#issue-img img {
+	-webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+#issue-img img:hover {
+	transform: scale(1.05);
+	-webkit-transform:scale(1.05);  
+}
+#issue-vid {
+	margin-top: 50px;
+}
+#issue-vid video {
+	-webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+#issue-vid video:hover {
+	transform: scale(1.05);
+	-webkit-transform:scale(1.05); 
+}
+#build {
+	color: black;
 }

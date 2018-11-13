@@ -19,6 +19,10 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#best">BEST</a></li>
+				<li><a href="#issue-img">ISSUE-IMG</a></li>
+				<li><a href="#issue-vid">ISSUE-VID</a></li>
+				<li><a href="#build">BUILD</a></li>
 				<li class="dropdown">
 					<a href="<c:url value='/community'/>">COMMUNITY</a>
 					<ul class="dropdown-menu">
