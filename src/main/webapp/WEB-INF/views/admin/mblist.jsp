@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>
+
 <script type="text/javascript">
 	$(function(){
 		$(".userdelete").click(function(){
@@ -67,7 +67,18 @@
 				<td class="usercontent">${user.user_id }</td>
 				<td class="usercontent">${user.user_nickname }</td>
 				<td class="usercontent">${user.user_email }</td>
-				<td class="usercontent">${user.user_status }</td>
+<%-- 				<c:choose>
+					<c:when test="${user.user_status==1}">
+						<td>정상</td>
+					</c:when>
+					<c:when test="${user.user_status==2}">
+						<td>정지</td>
+					</c:when>
+					<c:otherwise>
+						<td>확인바람</td>
+					</c:otherwise>	 --%>		
+				<td class="usercontent">${user.user_status }</td> 
+				<%-- </c:choose> --%>
 				<td class="usercontent">${user.user_regdate }</td>
 				<td><i class="glyphicon glyphicon-remove userdelete"></i></td>
 			</tr>

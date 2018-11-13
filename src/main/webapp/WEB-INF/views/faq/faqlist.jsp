@@ -21,7 +21,8 @@
 			}		
 		});
 	
-		$("#faq_list").on("submit",".faqcommform",function(event){
+		$("#faqcomminsert").on("submit",function(event){
+			alert("aawoowow");
 			console.log(event.target);
 			console.log($(this).get(0)+"///////////");
 			alert($(this));
@@ -148,7 +149,7 @@
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit">
+								<button class="btn btn-default" type="submit"  id="faqcomminsert">
 									<i class="glyphicon glyphicon-pencil"></i>
 								</button>
 							</div>

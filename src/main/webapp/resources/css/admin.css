@@ -251,20 +251,20 @@ table tr td{
 	display : none;
 	position: fixed;
 	width: 25%;
-	height: 45%;
+	max-height:100%;
 	top: 100px;
     left: 80px;
     border-radius: 10px;
     padding: 10px;
-	background-color: red;
+	background-color: #efffd7;
 /*     background-image: url("../resources/images/1.png");  */
 }
 
 #userinsert_btn{
 	float: right;
 }
-#bbb{
-
+.glyphicon-remove{
+	color: red;
 }
 /* 모달 사이드바 없애기  */
 body.modal-open::-webkit-scrollbar {
