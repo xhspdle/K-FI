@@ -1,31 +1,23 @@
 package com.kfi.jyi.dao;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kfi.jyi.vo.CommunityVo;
+import com.kfi.jyi.vo.CommUserListVo;
 
 @Repository
-public class CommunityDao {
+public class CommUserListDao {
 	@Autowired private SqlSession session;
-	private final static String NAMESPACE="com.kfi.mybatis.jyi.CommunityMapper";
+	private final static String NAMESPACE="com.kfi.mybatis.jyi.CommUserListMapper";
 	
 	public int getMaxNum() {
 		return session.selectOne(NAMESPACE+".getMaxNum");
 	}
 	
-	public int insert(CommunityVo vo) {
+	public int insert(CommUserListVo vo) {
 		return session.insert(NAMESPACE+".insert",vo);
 	}
-
-	public List<CommunityVo> select_mycommlist(HashMap<String, Object> map){
-		return session.selectList(NAMESPACE+".select_mycommlist",map);
-	}
-	
 	
 	
 }

@@ -1,5 +1,7 @@
 package com.kfi.ysy.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,10 @@ public class CommSkinProfileDao {
 	
 	public int insert(CommSkinProfileVo vo) {
 		return session.insert(NAMESPACE+".insert",vo);
+	}
+
+	public CommSkinProfileVo select_usingProfile(int comm_num) {
+		return session.selectOne(NAMESPACE+".select_usingProfile",comm_num);
 	}
 
 	

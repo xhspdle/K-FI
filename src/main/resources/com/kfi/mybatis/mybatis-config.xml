@@ -54,7 +54,7 @@
 		<mapper resource="com/kfi/mybatis/jyi/MySkinProfileMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinViewMapper.xml"/>	
 		<mapper resource="com/kfi/mybatis/jyi/CommunityMapper.xml"/>	
-			
+		<mapper resource="com/kfi/mybatis/jyi/CommUserListMapper.xml"/>	
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>

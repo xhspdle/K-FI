@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,9 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.InputSource;
 
+import com.kfi.jyi.dao.CommUserListDao;
 import com.kfi.jyi.dao.CommunityDao;
+import com.kfi.jyi.vo.CommUserListVo;
 import com.kfi.jyi.vo.CommunityVo;
 import com.kfi.ldk.service.CommonService;
 import com.kfi.ysy.dao.CommSkinCoverDao;
@@ -29,7 +32,7 @@ public class CommunityServiceImpl implements CommonService{
 	@Autowired private CommunityDao cdao;
 	@Autowired private CommSkinCoverDao cscdao;
 	@Autowired private CommSkinProfileDao cspdao;
-	
+	@Autowired private CommUserListDao culdao;
 	
 	@Override
 	public int getMaxNum() {
@@ -62,6 +65,9 @@ public class CommunityServiceImpl implements CommonService{
 		try {
 			int result=cdao.insert(cvo);
 			if(result>0) {
+				int cul_num=culdao.getMaxNum()+1;
+				CommUserListVo culvo=new CommUserListVo(cul_num, comm_num, user_num, 1);
+				culdao.insert(culvo);
 				int csp_num=cspdao.getMaxNum()+1;
 				String csp_orgimg="default-profile.png";
 				String csp_savimg="default-profile.png";
@@ -128,7 +134,27 @@ public class CommunityServiceImpl implements CommonService{
 
 	@Override
 	public Object list(Object data) {
-		// TODO Auto-generated method stub
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		String listType=(String)map.get("listType");
+		HttpSession session=(HttpSession)map.get("session");
+		int user_num=(Integer)session.getAttribute("user_num");
+		if(listType.equals("myPageMyCommunity")) {
+			/* mypage의 mycommunity 불러오기*/
+			map.put("user_num", user_num);
+			List<CommunityVo> list=cdao.select_mycommlist(map);
+			
+			/* 해당 커뮤니티의 스킨 프로필 불러오기 */
+			List<CommSkinProfileVo> csplist=new ArrayList<>();
+			for(CommunityVo cv:list) {
+				int comm_num=cv.getComm_num();
+				CommSkinProfileVo cspvo=cspdao.select_usingProfile(comm_num);
+				csplist.add(cspvo);
+			}
+			HashMap<String, Object> result=new HashMap<>();
+			result.put("list", list);
+			result.put("csplist",csplist);
+			return result;
+		}
 		return null;
 	}
 	

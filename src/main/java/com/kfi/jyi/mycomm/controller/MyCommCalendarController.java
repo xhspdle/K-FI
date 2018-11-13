@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,13 +17,15 @@ import com.kfi.jyi.service.MyCommCalendarService;
 import com.kfi.jyi.util.MyCalendar;
 import com.kfi.jyi.vo.CommCalendarVo;
 import com.kfi.jyi.vo.CommunityVo;
+import com.kfi.jyi.vo.MySkinViewVo;
+import com.kfi.ldk.service.CommonService;
 
 @Controller(value = "MyCommCalendarController")
 public class MyCommCalendarController {
 	@Autowired
 	private MyCommCalendarService service;
-
-	@RequestMapping(value = "/mypage/mycommcalendar", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/mypage/mycomm/calendar", method = RequestMethod.GET)
 	public String mycommcalendar(Model model, HttpSession session,
 			@RequestParam(defaultValue = "all", required = false, value = "comm_num") String comm_num, String comm_name,
 			@RequestParam(defaultValue = "gathering", required = false, value = "gathering") String gathering) {
