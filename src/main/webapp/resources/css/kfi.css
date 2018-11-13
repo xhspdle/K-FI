@@ -754,10 +754,20 @@ body.modal-open::-webkit-scrollbar {
 #communityJumbo p.communityHeader {
 	margin-top: 3%;
 }
-#communityList .communitySlide {
-	overflow: hidden;
-	
-}
-#communityList {
+#communityMainList {
 	margin-top: 70px;
+	overflow: hidden;
+	height: 685px;
+	padding: 0px;
+}
+#communityMainList .communitySlide {
+	/*-webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;*/
+	float: left;
+	margin: 2px;
+	position: relative;
+	width: 288.5px;
+}
+#communityMainList .communitySlideImg {
+	/*width: 229px;*/
 }

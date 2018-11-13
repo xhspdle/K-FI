@@ -118,7 +118,7 @@ public class MyBoardServiceImpl implements CommonService{
 					mvDao.insert(new MyVideoVo(mv_num + i, mb_num, mv_orgvid, mv_savvid));
 				}				
 			}
-			if(tag_name.length>0) {
+			if(tag_name!=null) {
 				for(int i=0;i<tag_name.length;i++) {
 					TagVo vo=tagDao.select(tag_name[i]);
 					if(vo==null) {
