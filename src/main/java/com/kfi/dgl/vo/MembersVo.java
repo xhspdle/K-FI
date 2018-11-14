@@ -93,4 +93,11 @@ public class MembersVo {
 	public void setUser_certi(int user_certi) {
 		this.user_certi = user_certi;
 	}
+
+	@Override
+	public String toString() {
+		return "MembersVo [user_num=" + user_num + ", user_id=" + user_id + ", user_pwd=" + user_pwd
+				+ ", user_nickname=" + user_nickname + ", user_email=" + user_email + ", user_regdate=" + user_regdate
+				+ ", user_status=" + user_status + ", user_certi=" + user_certi + "]";
+	}
 }

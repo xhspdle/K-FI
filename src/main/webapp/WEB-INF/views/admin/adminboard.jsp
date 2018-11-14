@@ -114,12 +114,12 @@
 	 
 	$(function(){
 		if(checkpopup("close")){
-			$("#bbb").css("display","none");
+			$("#noticebtn").css("display","none");
 		}else{
 			$.getJSON("<c:url value='/abpopup'/>",function(data){	
 				console.log(data);
 				if(data!=null && data!=""){
-					$("#bbb").css("display","block");
+					$("#noticebtn").css("display","block");
 				}else{
 					return false;
 				}
@@ -165,7 +165,7 @@
  	}
  	function closepopup(){
  		setCookie("close","close",1);
- 		$("#bbb").css("display","none");
+ 		$("#noticebtn").css("display","none");
  		$("#abpopup").css("display","none");
  	}
 	function deletecookie(){
@@ -329,14 +329,18 @@
 	
 
 		
-<div id="abpopup">
-	<h4>공지사항</h4>		
+<div id="abpopup">	
+	<div class="modal-header">
+		<h4>공지사항</h4>	
+	</div>
 	<div id="abpopupcontent"></div>
-	<input class="pull-right btn btn-default" value="하루닫기" onclick="closepopup()"> 
-	<input class="pull-right btn btn-default" value="닫기"  onclick="$('#abpopup').css('display','none')">
+	<div class="modal-footer">
+		<input class="pull-right btn btn-default" value="하루닫기" onclick="closepopup()"> 
+		<input class="pull-right btn btn-default" value="닫기"  onclick="$('#abpopup').css('display','none')">
+	</div>
 </div>
-<div id="bbb" class="hidediv" style="position: fixed;bottom: 20px;right: 20px; height: 30px;width: 30px;">
-	<span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:red; " onclick="$('#abpopup').css('display','block')"></span> 
+<div id="noticebtn" class="hidediv" style="position: fixed;bottom: 20px;right: 20px;">
+	<h1><span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:red; " onclick="$('#abpopup').css('display','block')"></span></h1> 
 </div>
 <%-- 	</c:when>
 	<c:otherwise>

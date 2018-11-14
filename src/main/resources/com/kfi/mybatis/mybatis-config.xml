@@ -12,6 +12,9 @@
 		<typeAlias type="com.kfi.ldk.vo.MyCommentLikeVo" alias="mycommentlike"/>
 		<typeAlias type="com.kfi.ldk.vo.MyCommentListViewVo" alias="mycommentlist"/>
 		<typeAlias type="com.kfi.ldk.vo.MyBoardListViewVo" alias="myboardlist"/>
+		<typeAlias type="com.kfi.ldk.vo.TagVo" alias="tag"/>
+		<typeAlias type="com.kfi.ldk.vo.MyTagVo" alias="mytag"/>
+		<typeAlias type="com.kfi.ldk.vo.CommTagVo" alias="commtag"/>
 		<typeAlias type="com.kfi.jyi.vo.MembersVo" alias="members"/>
 		<typeAlias type="com.kfi.jyi.vo.CommUserListVo" alias="commuserlist"/>
 		<typeAlias type="com.kfi.jyi.vo.CommunityVo" alias="community"/>
@@ -21,13 +24,17 @@
 		<typeAlias type="com.kfi.jyi.vo.MySkinCoverVo" alias="myskincover"/>
 		<typeAlias type="com.kfi.jyi.vo.MySkinProfileVo" alias="myskinprofile"/>
 		<typeAlias type="com.kfi.jyi.vo.MySkinViewVo" alias="myskinview"/>
+		<typeAlias type="com.kfi.jyi.vo.CommBoardViewVo" alias="commboardview"/>
 		<typeAlias type="com.kfi.dgl.vo.MembersVo" alias="logmembers"/>
+		<typeAlias type="com.kfi.dgl.vo.CertiMembersVo" alias="certimembers"/>
 		<typeAlias type="com.kfi.ysy.vo.AdminVo" alias="admin"/>
 		<typeAlias type="com.kfi.ysy.vo.AccuseVo" alias="accuse"/>
 		<typeAlias type="com.kfi.ysy.vo.AdminBoardVo" alias="adminboard"/>
 		<typeAlias type="com.kfi.ysy.vo.FaqVo" alias="faq"/>
 		<typeAlias type="com.kfi.ysy.vo.AdminBoardListViewVo" alias="adminboardlist"/>
 		<typeAlias type="com.kfi.ysy.vo.AccuseListViewVo" alias="accuselist"/>
+		<typeAlias type="com.kfi.ysy.vo.CommSkinCoverVo" alias="commskincover"/>
+		<typeAlias type="com.kfi.ysy.vo.CommSkinProfileVo" alias="commskinprofile"/>
 	</typeAliases>
 	<mappers>	 
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardMapper.xml"/>
@@ -39,15 +46,24 @@
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardListViewMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardLikeListViewMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyCommentListViewMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/TagMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/MyTagMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/CommTagMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MyCommCalendarMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinCoverMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinProfileMapper.xml"/>
-		<mapper resource="com/kfi/mybatis/jyi/MySkinViewMapper.xml"/>		
+		<mapper resource="com/kfi/mybatis/jyi/MySkinViewMapper.xml"/>	
+		<mapper resource="com/kfi/mybatis/jyi/CommBoardViewMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/jyi/CommunityMapper.xml"/>	
+		<mapper resource="com/kfi/mybatis/jyi/CommUserListMapper.xml"/>	
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/FaqMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/CommSkinCoverMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/CommSkinProfileMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/dgl/MembersMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/dgl/CertiMembersMapper.xml"/>
 	</mappers>
 </configuration>

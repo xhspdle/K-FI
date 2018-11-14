@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.CommunityMapper">
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(comm_num),0) from community
+	</select>
+
+	<insert id="insert" parameterType="community">
+		insert into community values(#{comm_num},#{user_num},#{comm_name},#{comm_content},#{cs_color},SYSDATE)
+	</insert>
+
+	<!-- if) 해당 user가 관리자가 아닌(false)/맞는(true) 커뮤니티 목록 -->
+	<select id="select_mycommlist" parameterType="hashmap" resultType="community">
+		select * from community 
+		where comm_num in (select comm_num from comm_user_list where user_num=#{user_num} and cul_status=1) 
+		<if test="commAdmin != null and commAdmin == 'false' ">
+			and user_num != #{user_num}
+		</if>
+		<if test="commAdmin != null and commAdmin == 'true' ">
+			and user_num = #{user_num}
+		</if>
+	</select>
+	
+
+</mapper>

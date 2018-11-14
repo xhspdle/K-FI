@@ -39,19 +39,9 @@
 	</select>
 	
 	<!-- 이메일 체크 -->
-	<select id="emailCheck" parameterType="string" resultType="int">
-		select count(*) from members where USER_EMAIL=#{user_email}
-	</select>
-	
-	<!-- 동일 이메일 검사 -->
-	<select id="findEmail" parameterType="logmembers" resultType="logmembers">
+	<select id="emailCheck" parameterType="string" resultType="logmembers">
 		select * from members where USER_EMAIL=#{user_email}
 	</select>
-	
-	<!-- 인증코드(키) 생성 -->
-	 <insert id="createKey">
-		insert into CERTI_MEMBERS values(#{cm_key})
-	</insert>
 	
 	<!-- 사용자 인증상태 0->1 변경 -->
 	<update id="userCerti"> 
@@ -74,7 +64,7 @@
 
 	<!-- 비밀번호 찾기(재설정) -->
 	<update id="findPwd" parameterType="logmembers" >
-		update members set user_pwd=#{user_pwd} where user_id=#{user_id} 
+		update members set user_pwd=#{user_pwd} where user_id=#{user_id} and user_email=#{user_email}
 	</update>
 	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->

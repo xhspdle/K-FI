@@ -37,6 +37,9 @@ $(function() {
 			month = 0;
 		}
 		var nowDateYear=new Date().getFullYear();
+		if(year > nowDateYear ){
+			nowDateYear=year;
+		}
 		var monthEng=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
 				'October', 'November', 'December'];
 		$("#wrap_icon_calendar").append(
@@ -59,10 +62,11 @@ $(function() {
 			$("#wrap_icon_calendar").append("<div class='mini_cal'></div>");
 			total+=1;
 		}
+
 		var m=['4','6','9','11'];
 		var end=31;
 		for(var i=0;i<m.length;i++){
-			if((month+1)==m[i]) {
+			if((parseInt(month)+1)==m[i]) {
 				end=30;
 			}
 		}
@@ -133,13 +137,13 @@ $(function() {
 		var day=$(this).prop("id");
 		var d=day.slice(1,2);
 		if(d==='') day="0"+day;
-		var top=$("#"+year+"-"+month+"-"+day).offset().top; 
+		console.log("#"+parseInt(year)+"-"+(parseInt(month)+1)+"-"+parseInt(day));
+		var top=$("#"+parseInt(year)+"-"+(parseInt(month)+1)+"-"+parseInt(day)).offset().top; 
 		// 상단을 기준으로 #요소가 위치한 거리를 절대좌표로 반환
 		$("html, body").animate({
 			scrollTop:top
 		},1000);
 	});
-
 	
 	
 //////////////////////////////////////////////////////////myskin
@@ -307,15 +311,97 @@ $(function() {
 			}
 		});
 	});
+	
+	$('.myskin li').on('click',function(){
+		var ms_num=$(this).prop('id');
+		var getPageContext=$('#getPageContext').val();
+		$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:ms_num},function(data){
+			var vo=data.vo;
+			$('.myskin_ud_apply')
+			.prop('href',getPageContext+'/mypage/myskin/applySkin?ms_num='+vo.ms_num)
+			.css({
+				'display':'block',
+				'background-color':vo.ms_color
+			}); 
+			$('.myskin_ud_update').prop('href',getPageContext+'/mypage/myskin/updateform?ms_num='+vo.ms_num).css({'display':'block','background-color':vo.ms_color});
+			$('.myskin_ud_del').prop('href',getPageContext+'/mypage/myskin/delete?ms_num='+vo.ms_num).css({'display':'block','background-color':vo.ms_color});
+			$('#myskin_list_cover').css({
+				'display':'block',
+				'background': 'url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')'
+			});
+			$('.pre_cover img').prop('src',getPageContext+'/resources/upload/img/'+vo.msp_savimg);
+			$('#myskin_list_nav').css('background-color',vo.ms_color);
+			$('#myskin_list_icon').css({
+				'border':vo.ms_color,
+				'background-color':vo.ms_color
+			});
+			$('#myskin_list_msg').text(vo.ms_msg);
+		});
+	});
+	
+	/////////////////////////새 커뮤니티 등록하기
+	
+	/* 미리보기 */
+	$('input[name=comm_name]').on('keyup',function(){
+		var comm_name=$(this).val();
+		$('#pre_newComm_name').html('');
+		$('#pre_newComm_name').html('<b>'+comm_name+'</b>');
+	});
+	
+	$('input[name=comm_content]').on('keyup',function(){
+		var comm_content=$(this).val();
+		$('#pre_newComm_content').text('');
+		$('#pre_newComm_content').text(comm_content);
+	});
+	
+	$('input[name=comm_skin_profile]').on('change',function(event){
+		var file=event.target.files[0];
+		var filePath=URL.createObjectURL(file);
+		$("#new_community_profile").prop('src',filePath);
+	});
+
+	$('input[name=comm_skin_cover]').on('change',function(event){
+		var file=event.target.files[0];
+		var filePath=URL.createObjectURL(file);
+		$("#new_community_cover").prop('src',filePath);
+	});
+	
+	$('#new_community .form-horizontal').on('submit',function(){
+		var comm_name=$('input[name=comm_name]').val();
+		if(comm_name===''){
+			alert('커뮤니티명을 입력해주세요');
+			return false;
+		}
+		var comm_content=$('input[name=comm_content]').val();
+		if(comm_content===''){
+			alert('커뮤니티 소개 문구를 입력해주세요');
+			return false;
+		}
+		return true;
+	});
+	
+	
+	
 });
 
+
+
+
+
+
 /* 해당 스킨 적용하기 */
-function mySkinApply(num){
+/*function mySkinApply(num){
 	var getPageContext=$("#getPageContext").val();
-	$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:num},function(data){
-		var vo=data[0];
-		alert(vo);
+	$.getJSON(getPageContext+'/mypage/myskin/selectApply',{ms_num:num},function(data){
+		var vo=data.vo;
 		$("#profileImg").prop('src',getPageContext+'/resources/upload/img/'+vo.msp_savimg);
-		$("#mypageJumbo > div:after").css('background','url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')');
+		$("#mypageJumbo div").css({
+			'background':'url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')',
+			'background-size':'cover !important',
+			'background-repeat':'no-repeat !important'
+		});
+		$('#mypageJumbo p span').text(vo.ms_msg);
+		$('.navbar').css('background-color',vo.ms_color);
+		$('#search').css('background-color',vo.ms_color);
 	});
-}
+}*/

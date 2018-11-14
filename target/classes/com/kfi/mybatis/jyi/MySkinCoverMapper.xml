@@ -5,7 +5,7 @@
 <mapper namespace="com.kfi.mybatis.jyi.MySkinCoverMapper">
 
 	<select id="getMaxNum_myskincover" resultType="int">
-		select NVL(count(msc_num),0) from my_skin_cover
+		select NVL(max(msc_num),0) from my_skin_cover
 	</select>
 	
 	<insert id="insert_myskin_cover" parameterType="myskincover" >

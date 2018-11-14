@@ -149,7 +149,7 @@
  					.replace("{acc_id}", data.user_id)
    					.replace("{user_num}", user_num)
  					.replace("{acc_nick}", data.user_nick)
- 					
+				
 					.replace("{acc_stat}", data.user_stat)
 					.replace("{acc_email}", data.user_email)
 					.replace("{acc_date}",data.user_date);				

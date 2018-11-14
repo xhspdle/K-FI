@@ -20,20 +20,26 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kfi.ldk.dao.MyBoardDao;
 import com.kfi.ldk.dao.MyBoardListViewDao;
 import com.kfi.ldk.dao.MyPhotoDao;
+import com.kfi.ldk.dao.MyTagDao;
 import com.kfi.ldk.dao.MyVideoDao;
+import com.kfi.ldk.dao.TagDao;
 import com.kfi.ldk.util.ImgUtil;
 import com.kfi.ldk.util.VidUtil;
 import com.kfi.ldk.vo.MyBoardConfirmDelVo;
 import com.kfi.ldk.vo.MyBoardListViewVo;
 import com.kfi.ldk.vo.MyBoardVo;
 import com.kfi.ldk.vo.MyPhotoVo;
+import com.kfi.ldk.vo.MyTagVo;
 import com.kfi.ldk.vo.MyVideoVo;
+import com.kfi.ldk.vo.TagVo;
 
 @Service
 public class MyBoardServiceImpl implements CommonService{
 	@Autowired private MyBoardDao mbDao;
 	@Autowired private MyPhotoDao mpDao;
 	@Autowired private MyVideoDao mvDao;
+	@Autowired private TagDao tagDao;
+	@Autowired private MyTagDao myTagDao;
 	@Autowired private MyBoardListViewDao mbViewDao;
 	@Override
 	public int getMaxNum() {
@@ -54,17 +60,18 @@ public class MyBoardServiceImpl implements CommonService{
 		MultipartFile[] fileP=(MultipartFile[])map.get("fileP");
 		MultipartFile[] fileV=(MultipartFile[])map.get("fileV");
 		HttpSession session=(HttpSession)map.get("session");
+		String[] tag_name=(String[])map.get("tag_name");
 		String uploadPathP=session.getServletContext().getRealPath("/resources/upload/img");
 		String uploadPathV=session.getServletContext().getRealPath("/resources/upload/vid");
-		int mb_num=getMaxNum();
-		int mp_num=mpDao.getMaxNum();
-		int mv_num=mvDao.getMaxNum();
+		int mb_num=getMaxNum() + 1;
+		int mp_num=mpDao.getMaxNum() + 1;
+		int mv_num=mvDao.getMaxNum() + 1;
 		InputStream is=null;
 		FileOutputStream fos=null;
 		ArrayList<String> uploadedPhoto=new ArrayList<String>();
 		ArrayList<String> uploadedVideo=new ArrayList<String>();
 		try {	
-			mbDao.insert(new MyBoardVo(mb_num + 1, mbVo.getUser_num(),
+			mbDao.insert(new MyBoardVo(mb_num, mbVo.getUser_num(),
 					mbVo.getMb_title(), mbVo.getMb_content(), null, 0));
 			if(!fileP[0].getOriginalFilename().isEmpty()) {
 				for(int i=0;i<fileP.length;i++) {
@@ -88,7 +95,7 @@ public class MyBoardServiceImpl implements CommonService{
 					fos.close();
 					System.out.println(uploadPathP + "경로에 사진 업로드 성공!");
 					uploadedPhoto.add(mp_savimg);
-					mpDao.insert(new MyPhotoVo(mp_num + i +1, mb_num + 1, mp_orgimg, mp_savimg));
+					mpDao.insert(new MyPhotoVo(mp_num + i, mb_num, mp_orgimg, mp_savimg));
 				}
 			}
 			if(!fileV[0].getOriginalFilename().isEmpty()) {
@@ -108,9 +115,22 @@ public class MyBoardServiceImpl implements CommonService{
 					fos.close();
 					System.out.println(uploadPathV + "경로에 영상 업로드 성공!");
 					uploadedVideo.add(mv_savvid);
-					mvDao.insert(new MyVideoVo(mv_num + i +1, mb_num + 1, mv_orgvid, mv_savvid));
+					mvDao.insert(new MyVideoVo(mv_num + i, mb_num, mv_orgvid, mv_savvid));
 				}				
-			}	
+			}
+			if(tag_name!=null) {
+				for(int i=0;i<tag_name.length;i++) {
+					TagVo vo=tagDao.select(tag_name[i]);
+					if(vo==null) {
+						int tag_num=tagDao.getMaxNum() + 1;
+						tagDao.insert(new TagVo(tag_num, tag_name[i]));
+						myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
+					}else {
+						int tag_num=vo.getTag_num();
+						myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
+					}
+				}
+			}
 			return 1;
 		}catch(Exception e) {
 			File f=null;
@@ -271,6 +291,7 @@ public class MyBoardServiceImpl implements CommonService{
 		mbDao.addHit(mb_num);
 		map.put("user_num", vo.getUser_num());
 		map.put("boardVo", vo);
+		map.put("tagList", tagDao.listMyTagJoin(mb_num));
 		map.put("imgList", mpDao.select(mb_num));
 		map.put("vidList", mvDao.select(mb_num));
 		map.put("prev", mbViewDao.prev(map));

@@ -9,11 +9,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/kfi.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/css/jyi.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/kfi2.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/miniCalendar.css'/>">
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script src="<c:url value='/resources/js/kfi2.js'/>"></script>
 <!-- full calendar 추가 -->
@@ -38,14 +40,6 @@
 		<tiles:insertAttribute name="footer"/>
 	</div>
 	
-	<!-- Calendar icon -->
-	<input type="hidden" id="url" value="${pageContext.request.contextPath }">
-	<input type="hidden" id="year" value="year">
-	<input type="hidden" id="month" value="month">
-	<div id="icon_calendar" class="glyphicon glyphicon-calendar" style="font-size:40px;"></div>
-	<div id="wrap_icon_calendar"><!--   class="well" style="width:320px;" -->
-	</div>
-	
 	<!-- write Modal -->
 	<div class="modal fade" id="writeModal" role="dialog">
 		<div class="modal-dialog">
@@ -63,11 +57,15 @@
 						</div>
 						<div class="form-group">
 							<label for="mb_content"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
-							<textarea class="form-control" rows="5" id="mb_content" name="mb_content"></textarea>
+							<textarea class="form-control" rows="5" id="mb_content" name="mb_content" placeholder="Write something!"></textarea>
 						</div>
-						<div class="form-group">
+						<div class="form-group" style="margin-bottom:-11.4px;">
+							<!--  
 							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
-							<input type="text" class="form-control" id="tags" name="tags" placeholder="#blabla #blabla">
+							<textarea class="form-control" rows="1" id="tags" name="tags" placeholder="#blabla #blabla"></textarea>
+							-->
+							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
+							<div class="editableDiv" id="tags"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
 						</div>
 						<div class="form-group imgUpload">
 							<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>

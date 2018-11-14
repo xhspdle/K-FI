@@ -1,0 +1,407 @@
+@charset "UTF-8";
+
+/* community */
+#pre_newComm_content {
+	overflow: hidden;
+}
+
+#new_community .form-horizontal {
+	padding: 1% 0% 3% -1%;
+}
+
+#new_community .w3-col.m4, .w3-third {
+	width: 25%;
+}
+
+#new_community .col-sm-2 {
+	width: 11%;
+}
+
+#new_community_submit {
+	width: 50%;
+	margin-left: 27%;
+}
+
+#new_community_cover {
+	width: 60% !important;
+	margin-left: 20%;
+}
+
+/* myinfo */
+#myinfo .navbar-form {
+	width: auto;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin-left: -15px;
+}
+
+#myinfo_pwd {
+	width: 160%;
+}
+
+#myinfo .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group
+	{
+	z-index: 2;
+	margin-left: 112px;
+}
+/* #myinfo_pwd_submit .btn .btn-default{
+	z-index: 2;
+	margin-left: 100px;
+	padding: 7px 30px 5px 15px;
+} */
+.container_borderInset {
+	margin: 5% 0% 5% 25%;
+	border-radius: 50px;
+	width: 50%;
+	padding: 5px 5px 5px 20px;
+}
+
+}
+.container_borderInset .form-group {
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.container_borderInset .form-horizontal {
+	width: 110%;
+}
+
+#myinfo_delete {
+	margin-left: 10%;
+	margin-top: 0%;
+}
+
+#myinfo_delete_user_pwd {
+	width: 84%;
+}
+
+.container_borderInset .modal-content {
+	width: 80%;
+}
+
+/* myskin */
+.myskin {
+	margin: auto;
+	width: 90%;
+	padding-left: 10%;
+	margin-top: 20px;
+}
+
+.myskin_list_nav {
+	width: 74.5%;
+	background-color: #00cee8;
+	height: 80px;
+	margin: -2% 0% 0% 6%;
+}
+
+#profile_preview {
+	background-color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+#preview_cover {
+	width: 80%;
+	margin: auto;
+	font-family: Montserrat, sans-serif;
+	background-color: #00cee8;
+	color: #fff;
+	padding: 1px 1px;
+}
+
+/* .pre_cover {
+	border-radius: 10px;
+	width: 80%;
+	margin: auto;
+	font-family: Montserrat, sans-serif;
+	background-color: #00cee8;
+	color: #fff;
+	padding: 1px 1px;
+	
+} */
+.pre_cover {
+	background-size: cover !important;
+	padding: 1% 0% 0% 0%;
+	margin: -3% 0% 0% 6%;
+	width: 75%;
+	background-repeat: no-repeat !important;
+	border-radius: 10px;
+	display: none;
+	/*position: relative;*/
+}
+/* .pre_cover:before{
+	top:0;
+	left:0;
+	position: absolute;
+	width:100%;
+	height: 100%;
+	display: block;
+	content: '';
+	background-color: rgba(0,0,0,0.5);
+	z-index: -1;
+} */
+#preview_navbar .navbar-nav>li>a {
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
+#preview_cover button {
+	width: 70px;
+	height: 70px;
+	background-color: #00cee8;
+	border: 0px;
+}
+
+#preview_navbar {
+	background-color: #00cee8;
+}
+
+#ms_color {
+	width: 75px;
+	height: 32px;
+	border-radius: 10%;
+}
+
+/* 수정 */
+.myskin_ud_update {
+	display: none;
+	margin-left: 58%;
+	margin-top: 40px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
+}
+/* 스킨 추가 */
+.myskin_ud_add {
+	margin-left: 1%;
+	margin-top: -1px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
+}
+/* 기본값으로 적용 */
+.myskin_ud_default {
+	margin-left: 10%;
+	margin-top: -1px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
+}
+/* 적용 */
+.myskin_ud_apply {
+	display: none;
+	margin-left: 54%;
+	margin-top: 40px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
+}
+/* 삭제 */
+.myskin_ud_del {
+	display: none;
+	margin-left: 62%;
+	margin-top: 40px;
+	position: absolute;
+	background-color: #00cee8;
+	border-radius: 10px;
+	padding: 5px 10px;
+	min-width: 53px;
+	color: white;
+	font-weight: 700;
+	text-decoration-line: none !important;
+}
+
+#myskin_list_nickname {
+	width: max-content;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	font-weight: 700;
+	font-size: xx-large;
+}
+
+/* mypage 커뮤니티 일정 mouseover했을 때 */
+.calevent {
+	position: absolute;
+	width: 250px;
+	height: 100px;
+	z-index: 999;
+	border: lightgray 1px solid;
+	background-color: lavender;
+	color: black;
+	font-size: 20px;
+	overflow: visible;
+}
+
+/* mypate mini_Calendar */
+
+.sidenav {
+      width: 37%;
+    position: fixed;
+    z-index: 1;
+    top: 55%;
+    left: 81%;
+    overflow-x: hidden;
+    height: 52%;
+}
+
+.sidenav #icon_calendar {
+       padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2196F3;
+    display: block;
+    color: #00cee8;
+    width: 10%;
+    font-size: 40px;
+    border-radius: 50%;
+    background: lightcyan;
+    padding: 2% 7% 2% 2%;
+    border: 2px #00cee8 solid;
+}
+/* 
+#icon_calendar {
+		position: absolute;
+      margin-left: 89%;
+    margin-top: 36%;
+   	color: #00cee8;
+	font-size: 40px;
+	border-radius: 50%;
+	background: orange;
+	padding: 0.5% 0.5% 0.5% 0.5%;
+	border: 1px red solid;
+} */
+
+
+#wrap_icon_calendar {
+	height: 340px !important;
+	position: absolute;
+	width: 320px;
+	margin-top: 2px;
+}
+
+.mini_cal_week {
+	float: left;
+	width: 40px;
+	height: 28px;
+	font-size: 15px;
+	text-align: center;
+	border: 1px solid #00cee8;
+	color: white;
+	background-color: #00cee8;
+}
+
+.mini_cal {
+	float: left;
+	width: 40px;
+	height: 40px;
+	font-size: x-large;
+	text-align: center;
+	border: 1px solid lightgray;
+}
+
+.mini_cal:hover {
+	background-color: #00cee8;
+}
+
+#ym {
+	color: black;
+	text-align: center;
+	font-size: 25px;
+}
+
+#miniym {
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+#prevmon {
+	font-size: 10px;
+	position: absolute;
+	margin-left: -46px;
+}
+
+#aftmon {
+	font-size: 10px;
+	position: absolute;
+	margin-left: 19px;
+}
+
+.jyi_cal_sc {
+	width: 13%;
+	height: 50px;
+}
+
+#jyi_calendar {
+	width: 100px;
+}
+
+#prevcal_left {
+	width: 40px;
+	height: 40px;
+	border-radius: 30%;
+}
+
+#aftcal_left {
+	width: 40px;
+	height: 40px;
+	border-radius: 30%;
+}
+
+#jyi_main {
+	background-color: #00cee8;
+}
+
+.jyi_cal_left {
+	width: 13%;
+	height: 50px;
+}
+
+.jyi_cal:hover {
+	background-color: #00cee8;
+}
+
+.mycomm_week {
+	text-align: center;
+	background-color: #00cee8;
+	color: white;
+	font-size: 25px;
+}
+
+.mini_cal_a {
+	font-size: 25px;
+	color: black;
+	text-decoration: none;
+}
+
+.mini_cal_a:link {
+	color: black;
+	text-decoration: none;
+}
+
+.mycomm_a:hover {
+	color: white;
+}

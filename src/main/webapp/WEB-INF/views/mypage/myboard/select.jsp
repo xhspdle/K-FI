@@ -24,6 +24,7 @@
 						<li><a href="#updateModal" data-toggle="modal" data-mb-num="${boardVo.mb_num }"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit</a></li>
 						<li><a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">
 						<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
 					</ul>
 				</div>
 				<!--  
@@ -105,6 +106,11 @@
 				</c:forEach>				
 			</div>
 			<div class="panel-footer text-left">
+				<h3 class="postListComment select">
+				<c:forEach var="tags" items="${tagList }">
+					<span style="font-size: 24px;">#${tags.tag_name }&nbsp;</span>
+				</c:forEach>
+				</h3>
 				<h3 class="postLikeComment select" id="likeCnt" data-like-cnt="${like_cnt }">
 				${like_cnt } Likes<span class="msgSpan"></span></h3>
 				<div class="likes">

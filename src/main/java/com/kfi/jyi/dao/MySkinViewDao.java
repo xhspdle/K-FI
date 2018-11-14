@@ -1,5 +1,6 @@
 package com.kfi.jyi.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,12 +15,17 @@ public class MySkinViewDao {
 	private SqlSession session;
 	private final static String NAMESPACE="com.kfi.mybatis.jyi.MySkinViewMapper";
 
-	public List<MySkinViewVo> list(int user_num){
-		return session.selectList(NAMESPACE+".list",user_num);
+	public List<MySkinViewVo> list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".list",map);
 	}
 	
 	public MySkinViewVo select(int ms_num){
 		return session.selectOne(NAMESPACE+".select",ms_num);
 	}
+	
+	public MySkinViewVo applySkin(int user_num){
+		return session.selectOne(NAMESPACE+".applySkin",user_num);
+	}
+	
 	
 }

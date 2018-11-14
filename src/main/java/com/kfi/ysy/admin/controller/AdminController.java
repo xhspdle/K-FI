@@ -167,6 +167,11 @@ public class AdminController {
 		int result = service.addelete(admin_num);
 		return null;
 	}
+	//관리자 정보 및 스킨
+	@RequestMapping(value="/admindetail", method=RequestMethod.GET)
+	public String admindetailForm() {
+		return ".admin.admindetail";
+	}
 }
 	
 

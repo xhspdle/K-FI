@@ -1,5 +1,7 @@
 package com.kfi.jyi.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,5 +33,13 @@ public class MySkinDao {
 	
 	public int getCount_like_Skin(int user_num) {
 		return session.selectOne(NAMESPACE+".getCount_like_Skin",user_num);
+	}
+	
+	public int update_not_using(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".update_not_using", map);
+	}
+	
+	public int update_defalt(int user_num) {
+		return session.update(NAMESPACE+".update_defalt",user_num);
 	}
 }

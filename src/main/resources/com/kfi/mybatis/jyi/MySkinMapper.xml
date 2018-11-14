@@ -9,7 +9,7 @@
 	</select>
 	
 	<insert id="insert_myskin" parameterType="myskin">
-		insert into my_skin values(#{ms_num},#{user_num},#{ms_name},#{ms_color},#{ms_msg},0)	
+		insert into my_skin values(#{ms_num},#{user_num},#{ms_name},#{ms_color},#{ms_msg},1)	
 	</insert>
 	
 	<delete id="delete_myskin" parameterType="int">
@@ -17,7 +17,23 @@
 	</delete>
 	
 	<update id="update_myskin" parameterType="myskin">
-		update my_skin set ms_name=#{ms_name}, ms_color=#{ms_color}, ms_msg=#{ms_msg}, ms_using=#{ms_using} where ms_num=#{ms_num}
+		<choose>
+			<when test="ms_using==1">
+				update my_skin set ms_using=1 where ms_num=#{ms_num} 
+			</when>
+			<otherwise>
+				update my_skin set ms_name=#{ms_name}, ms_color=#{ms_color}, ms_msg=#{ms_msg}, ms_using=#{ms_using} where ms_num=#{ms_num}
+			</otherwise>
+		</choose>
+	</update>
+
+	<update id="update_not_using" parameterType="hashmap">
+		update my_skin set ms_using=0 
+		where ms_num in (select ms_num from my_skin where user_num=#{user_num} and ms_num != #{ms_num})
+	</update>
+
+	<update id="update_defalt" parameterType="int">
+		update my_skin set ms_using=0 where user_num=#{user_num}
 	</update>
 
 	<select id="getCount_like_Skin" parameterType="int" resultType="int">

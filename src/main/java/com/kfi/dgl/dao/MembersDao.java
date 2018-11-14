@@ -42,28 +42,20 @@ public class MembersDao {
 		return sqlSession.selectOne(NAMESPACE + ".nickCheck", user_nickname);
 	}
 	//이메일 체크
-	public int emailCheck(String user_email) {
+	public MembersVo emailCheck(String user_email) {
 		return sqlSession.selectOne(NAMESPACE + ".emailCheck", user_email);
 	}
 	//사용자 인증 상태 변경
 	public int verify(String user_email) {
 		return sqlSession.update(NAMESPACE + ".getVerify");
 	}
-	//인증코드(키) 생성
-	public int createKey(String user_email) {
-		return sqlSession.insert(NAMESPACE + ".createKey", user_email);
-	}
-	//동일 이메일 찾기
-	public int findEmail(MembersVo vo) {
-		return sqlSession.selectOne(NAMESPACE + ".findEmail", vo);
-	}
 	//아이디 찾기
-	public String findId(String user_email) {
-		return sqlSession.selectOne(NAMESPACE + ".findId", user_email);
+	public void findId(String user_email) {
+		sqlSession.update(NAMESPACE + ".findId", user_email);
 	}
 	//비밀번호 찾기 (재설정)
-	public int findPwd(String user_id) {
-		return sqlSession.update(NAMESPACE + ".findPWD", user_id);
+	public void findPwd(MembersVo vo) {
+		sqlSession.update(NAMESPACE + ".findPwd", vo);
 	}
 	////////////////////////////admin에서 사용
 	public List<MembersVo> list(HashMap<String, Object> map) {

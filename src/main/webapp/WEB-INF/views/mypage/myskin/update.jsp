@@ -7,28 +7,14 @@
 	<h2>My Skin Update</h2>
 	</div>
 	<!-- 미리보기 설정(js) -->'
-	<c:if test="${msvlist.msc_orgimg eq null }">
-		<c:set var="background" value="background-color:#00cee8;"/>
-	</c:if>		
-	<c:if test="${msvlist.msc_orgimg ne null}">
-		<c:set var="background" value="background: url('${pageContext.request.contextPath }/resources/upload/img/${msvlist.msc_savimg }');"/>
-	</c:if>
 	<div class="jumbotron col-sm" id="preview_cover" 
-	style="margin:auto;width:80%;${background}')">
+	style="background-size: cover !important;margin:auto;width:80%;background: url('${pageContext.request.contextPath }/resources/upload/img/${msvlist.msc_savimg }');">
 		<div>
-			<c:choose>
-					<c:when test="${msvlist.msp_orgimg eq null }">
-					<img id="profile_preview" src="<c:url value='/resources/images/default-profile.png'/>" class="img-circle"
-						style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
-						margin-left: auto;margin-right: auto;">
-					</c:when>
-					<c:otherwise>
-					<img id="profile_preview" src="<c:url value='/resources/upload/img/${msvlist.msp_savimg }'/>" class="img-circle"
-						style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
-						margin-left: auto;margin-right: auto;">
-					</c:otherwise>
-				</c:choose>
-			<p><span id="preview_msg" style="width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;">${msvlist.ms_msg }</span></p> 
+			<img id="profile_preview" src="<c:url value='/resources/upload/img/${msvlist.msp_savimg }'/>" class="img-circle"
+				style="border: white 4px solid !important;margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
+				margin-left: auto;margin-right: auto;">
+			<h4><span id="myskin_list_nickname">${user_nickname}</span></h4> 
+			<p><span id="preview_msg" style="margin-top: -25px;width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;">${msvlist.ms_msg }</span></p> 
 			<div class="collapse navbar-collapse" id="preview_navbar"  style="background-color: ${msvlist.ms_color};border-radius:10px;" >
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#contact">COMMUNITY</a></li>
@@ -44,6 +30,7 @@
 	<!-- 등록 -->
   	<form class="form-horizontal col-sm" enctype="multipart/form-data" method="post" action="<c:url value='/mypage/myskin/update'/>" style="width: 85%;margin:50px;">
     	<input type="hidden" name="ms_num" value="${msvlist.ms_num }">
+    	<input type="hidden" name="ms_using" value="${msvlist.ms_using }">
     	<div class="form-group">
     		<label class="control-label col-sm-2" for="skinname">스킨명:</label>
     		<div class="col-sm-6"> 

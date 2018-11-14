@@ -195,8 +195,12 @@
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			dataType : "json",
 			success : function(data) {
+			console.log(data)
 		 if(!isEmail.test(email)){
 			$(eMsg).text("이메일 형식이 맞지않습니다.");
+			eMsg.show();
+			eMsg.removeClass('greenText'); 
+			eMsg.addClass('redText'); 
 			return false;
 			
 		} else if (data.msg == 'false') {
@@ -204,7 +208,7 @@
 			eMsg.show();
 			eMsg.removeClass('greenText'); 
 			eMsg.addClass('redText'); 
-			$("#id").focus();
+			$("#email").focus();
 			return false;
 			
 		} else if (data.msg == 'true') {
@@ -220,41 +224,6 @@
 			});
 	 });
 	});
-	
-	
-	
- /* 	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (xhttp.readyState == 4) {
-			var data = JSON.parse(xhttp.responseText);
-
-			} else {
-				sendMail(email);
-				
-			}
-		}
-	};
-	xhttp.open("POST", 'checkMail/', true);
-	xhttp.setRequestHeader("Content-type",
-			"application/x-www-form-urlencoded;charset=UTF-8");
-	xhttp.send('email=' + email);
-	return false;
-	});
-	});
-	
-	 function sendMail(email) {
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (xhttp.readyState == 4) {
-			if (xhttp.status == 200)
-				alert("메일을 정상적으로 보냈습니다.");
-	};
-	xhttp.open("POST", 'sendMail/', true);
-	xhttp.setRequestHeader("Content-type",
-			"application/x-www-form-urlencoded;charset=UTF-8");
-	xhttp.send('email=' + email);
-	return false;
-	};  */
 	
 </script>
 <title>회원가입</title>

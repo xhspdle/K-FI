@@ -16,11 +16,14 @@
 				$("#admininfo_nick").val(data.admin_nick);
 				$("#admininfo_pwd").val(data.admin_pwd);
 				$("#admininfo_email").val(data.admin_email);
-				$("#admininfo_regdate").text(data.admin_regdate);										
+				$("#admininfo_regdate").text(data.admin_regdate);
+				alert(data.admin_regdate);
 			});							
 		});
 	});
 </script>
+<input type="button" value="jam" onClick="style='width=320,height=240;')"> 
+
 <div id="adminlist">
 	<h1>
 		관리자정보<button class="btn btn-md" onclick="location.href='/kfi/mblist'">회원정보</button>

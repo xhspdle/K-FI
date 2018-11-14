@@ -33,7 +33,7 @@
 								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 							</a>
 						</li>
-						<li><a href="#">Report bad contents</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
 					</ul>
 				</div>
 			</div>

@@ -10,51 +10,98 @@
 	});
 	$(function(){	
 		$(".faqcommbtn").click(function(){
- 			var qa_num=$(this).siblings('input').val()
- 			console.log($(this).parent().parent().children().last());
- 			var faqcomm = $(this).parent().parent().children().last();				
+ 			var qa_num=$(this).siblings('input').val();
+ 			var faqcomm = $(this).parent().parent().children().last();
  			if(faqcomm.css("display")=="none"){
  				faqcomm.css("display","block");
+ 				faqcommlist(qa_num,faqcomm);
 			}else{
+	/* 			$(this).parent().parent().children().empty(); */
 				faqcomm.css("display","none");
-			} 
- 			$.getJSON("<c:url value='/faqcomment'/>",{
- 				qa_num : qa_num
- 			},function(data){
- 				for(var i=0;i<data.length;i++){
- 					alert(html);
- 					var html=document.querySelector("#faqcomment_template").innerHTML;
- 					var resultHTML=html.replace("{qa_num}", data[i].qa_num)
-   						.replace("{user_num}", data[i].user_num)
- 						.replace("{qa_title}", data[i].qa_title)
+			}		
+		});
+	
+		$("#faqcomminsert").on("submit",function(event){
+			alert("aawoowow");
+			console.log(event.target);
+			console.log($(this).get(0)+"///////////");
+			alert($(this));
+			alert($(this).get(0));
+			alert("제발나와");
+ 		
+ 			var formData=new FormData($(this).get(0));
+			console.log(formData);
+ 			alert(formData);
+ 	/* 		  $.ajax({
+ 				  url: "<c:url value='/faqcomminsert'/>",
+ 				  type: 'post',
+ 				  dataType:'json',
+ 				  data: formData,
+ 				  cache: false,
+ 				  contentType: false,
+ 				  processData: false,
+ 				  success: function(json){
+ 					  alert("됐다.")
+ 					  if(json.code==='success'){
+ 						  $.getCommentList(pageNum);
+ 					  }else{
+ 						  $.msgBox(json.code);
+ 					  }
+ 				  }
+ 			  }); */
+/* 			$.ajax({   
+				type: "post",
+				url: "<c:url value='/faqcomminsert'/>",
+				success:function(data){
+					alert("wowowo");
+					alert(data);
+				}
+			}); */
+				
+/*	 		 	$.postJSON("<c:url value='/faqcomminsert'/>",function(data){
+		 		console.log("안보내지나?");
+				alert(data);
+				alert("aaaa");
+			});  */			 
+		});
+
+	 	function faqcommlist(qa_num,faqcomm){	 		
+			$.getJSON("<c:url value='/faqcomment'/>",{
+				qa_num : qa_num
+			},function (data){					
+				for(var i=0;i<data.length;i++){
+					var html=document.querySelector("#faqcomment_template").innerHTML;
+					var resultHTML=html.replace("{qa_num}", data[i].qa_num)
+						.replace("{user_num}", data[i].user_num)
+						.replace("{qa_title}", data[i].qa_title)
 						.replace("{qa_content}", data[i].qa_content)
 						.replace("{qa_date}", data[i].qa_date)
 						.replace("{ref}",data[i].ref)
 						.replace("{lev}",data[i].lev)
 						.replace("{step}",data[i].step)
 						.replace("{admin_num}",data[i].admin_num);
- 						faqcomm.after(resultHTML);
- 				/* 	var html=data[i].qa_num+"//////"+data[i].qa_num+"////////"+data[i].qa_num+"//////////" */
- 				/* 	$("#faqcomment"+data[i].qa_ref}).appendto(html); */	
- 				}
- 			});
-		});
+						faqcomm.after(resultHTML);
+					/* 	var html=data[i].qa_num+"//////"+data[i].qa_num+"////////"+data[i].qa_num+"//////////" */
+					/* 	$("#faqcomment"+data[i].qa_ref}).appendto(html); */	
+					
+	 			}
+			});
+		};
 	});
-	
-	$("#faqcomminsert").click(function(){
-		
-	});
-	
+
+ 	
+ 	
+
 
 </script>
 <script id="faqcomment_template" type="text/template">
 
 <div class="faq_comment" id="faq_comments">
 	<form action="faqinsert" method="post">	
-		<input type="hidden" name="qa_num" value={qa_num}>
-		<input type="hidden" name="ref" value={ref}>
-		<input type="hidden" name="lev" value={lev}>
-		<input type="hidden" name="step" value={step}>
+		<input type="text" name="qa_num" value={qa_num}>
+		<input type="text" name="ref" value={ref}>
+		<input type="text" name="lev" value={lev}>
+		<input type="text" name="step" value={step}>
 		<div class="media">
 			<div class="media-left media-top">
 				<img src="2.png" class="media-object" style="width:60px">
@@ -69,9 +116,10 @@
 </div>	 
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
-<h1>Q and A</h1>
+
+<div class="panel-group container" id="faq_list">
+	<h1>Q and A</h1>
 	<h2>Panels with Contextual Classes</h2>
-	<div class="panel-group">
 	<c:forEach var="faqlist" items="${faqlist }" varStatus="status">	
 		<div class="panel panel-default">
 			<div class="panel-heading" >	
@@ -86,20 +134,22 @@
 				${faqlist.admin_num }
 				<button class="btn btn-default faqcommbtn">댓글</button>
 			</div>
-			<form class="hidediv" action="faqcomminsert">
+			<form class="hidediv faqcommform" method="post">
 				<div class="media">
 					<div class="media-left media-top">
-						<img src="2.png" class="media-object" style="width:60px">
+						<!-- <img src="2.png" class="media-object" style="width:60px"> -->
 					</div>
 					<div class="media-body panel-body">
-						<input type="hidden" name="qa_num" value=${faqlist.qa_num }>
-						<input type="hidden" name="ref" value=${faqlist.ref }>
-						<input type="hidden" name="lev" value=${faqlist.lev }>
-						<input type="hidden" name="step" value=${faqlist.step }>
+						<input type="text" name="qa_num" value=${faqlist.qa_num }>
+						<input type="text" name="ref" value=${faqlist.ref }>
+						<input type="text" name="lev" value=${faqlist.lev }>
+						<input type="text" name="step" value=${faqlist.step }>
+						<input type="text" name="user_num" value=${faqlist.user_num }>
+						<input type="text" name="qa_title" value=${faqlist.qa_title }>
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit" id="faqcomminsert">
+								<button class="btn btn-default" type="submit"  id="faqcomminsert">
 									<i class="glyphicon glyphicon-pencil"></i>
 								</button>
 							</div>
@@ -109,10 +159,11 @@
 			</form>	
 		</div>
 	</c:forEach>
+	<a href="faqinsert" class="btn btn-default">글작성</a>
 </div>	
 
 
-<a href="faqinsert" class="btn btn-default">글작성</a>
+
 <!--  		 	if($(".faq_comment").css("display")=="none"){
 		 		$(".faq_comment").css("display","block");
 			}else{
