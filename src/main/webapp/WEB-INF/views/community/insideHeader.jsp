@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="jumbotron text-center" id="communityJumbo">
 	<div> 
-		<h3 class="communityHeader"><strong>K-Fi's Community World</strong></h3>
-		<p class="communityHeader"><span class="">Meet likeminded people around the world.</span></p> 
+		<h3 class="communityHeader"><strong>Community Name</strong></h3>
+		<p class="communityHeader"><span class="">Welcome to community~!</span></p> 
 	</div>
 </div>  
 <nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix" style="background-color:${msv.ms_color};">
@@ -62,8 +62,10 @@
 		</div>
 	</div>
 </div>
-<nav class="navbar navbar-fixed-top" data-spy="affix" data-offset-top="450">
-	<div class="topnav-centered">
-		<a href="#" class="active">메뉴메뉴</a>
-	</div>
-</nav>
+<div class="navbar navbar-comm-menu" data-spy="affix" data-offset-top="450">
+	<ul class="nav navbar-nav navbar-center">
+		<li><a href="#"><i class="glyphicon glyphicon-star"></i>POPULAR</a></li>
+		<li><a href="#"><i class="glyphicon glyphicon-time"></i>LATEST</a></li>
+		<li><a href="#"><i class="glyphicon glyphicon-stats"></i>POLLS</a></li>
+	</ul>
+</div>

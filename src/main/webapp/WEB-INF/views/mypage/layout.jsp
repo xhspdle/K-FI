@@ -15,6 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/kfi.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/kfi2.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/miniCalendar.css'/>">
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script src="<c:url value='/resources/js/kfi2.js'/>"></script>
 <!-- full calendar 추가 -->
