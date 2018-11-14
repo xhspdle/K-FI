@@ -13,6 +13,11 @@
 		<put-attribute name="footer" value="/WEB-INF/views/mypage/footer.jsp"/>
 	</definition>
 	<definition name=".community" template="/WEB-INF/views/community/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/community/insideHeader.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/community/insideMain.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/community/footer.jsp"/>
+	</definition>
+	<definition name=".communityMain" template="/WEB-INF/views/community/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/community/header.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/community/main.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/community/footer.jsp"/>
@@ -33,12 +38,12 @@
 	</definition>	
 	<definition name=".community.*" extends=".community">
 		<put-attribute name="content" value="/WEB-INF/views/community/{1}.jsp"></put-attribute>
-	</definition>	
+	</definition>
 	<definition name=".mypage.*.*" extends=".mypage">
 		<put-attribute name="content" value="/WEB-INF/views/mypage/{1}/{2}.jsp"></put-attribute>
 	</definition>	
-	<definition name=".*.*" extends=".mypage">
-		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+	<definition name=".mypage.*" extends=".mypage">
+		<put-attribute name="content" value="/WEB-INF/views/mypage/{1}.jsp"></put-attribute>
 	</definition>		
 	
 

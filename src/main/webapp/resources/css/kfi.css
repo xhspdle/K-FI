@@ -281,8 +281,10 @@ footer .glyphicon {
 	width: 100%;
 	-webkit-transition: all .5s ease-in-out;
 	transition: all .5s ease-in-out;
+	/*
 	background-color: #f4511e;
 	border-color: #f4511e;
+	*/
 }
 .affix a {
     color: #fff !important;
@@ -302,16 +304,19 @@ footer .glyphicon {
 	opacity: 1;
 	width: 50px;
 	height: 50px;
+	/*
 	background-color: white;
+	*/
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 }
+/*
 .affix .glyphicon-search {
 	color: #f4511e !important;
 }
 .affix button:hover .glyphicon-search {
 	color: #00cee8 !important;
-}
+}*/
 .affix #myNavbar {
 	opacity: 1;
 	-webkit-transition: all .5s ease-in-out;
@@ -337,7 +342,12 @@ footer .glyphicon {
 	color: white;
 }
 #headerSearch .row .container .input-group button:hover .glyphicon {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+	/*
 	color: #f4511e;
+	*/
+	text-shadow: 0 5px 5px rgba(0,0,0,0.3);
 }
 #headerSearch .row .search_con {
 	padding : 0;

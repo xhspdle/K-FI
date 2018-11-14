@@ -52,6 +52,7 @@
 	<div class="row">
 		<div class="container search_con">
 			<form id="searchForm" name="mySearchForm" method="post" action="<c:url value='/mypage/myboard/list'/>">
+			<!-- 여기서 검색은 커뮤니티 검색 전용으로 : action 주소 변경 필요 -->
 				<div class="input-group">
 					<div class="input-group-btn">
 						<button type="submit" class="btn btn-default btn-lg search_bar"><i class="glyphicon glyphicon-search"></i></button>
