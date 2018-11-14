@@ -51,11 +51,11 @@ public class MembersDao {
 	}
 	//아이디 찾기
 	public void findId(String user_email) {
-		sqlSession.update(NAMESPACE + ".findId", user_email);
+		sqlSession.selectOne(NAMESPACE + ".findId", user_email);
 	}
 	//비밀번호 찾기 (재설정)
-	public void findPwd(MembersVo vo) {
-		sqlSession.update(NAMESPACE + ".findPwd", vo);
+	public int updatepwd(MembersVo vo) {
+		return sqlSession.update(NAMESPACE + ".updatepwd", vo);
 	}
 	////////////////////////////admin에서 사용
 	public List<MembersVo> list(HashMap<String, Object> map) {

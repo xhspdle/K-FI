@@ -16,7 +16,7 @@
 	private int user_certi; // 인증상태 USER_CERTI	 -->
 	
 	
-
+	
 	<!-- 가입 -->
  	 <insert id="join" parameterType="logmembers">
 		insert into members values 
@@ -66,6 +66,8 @@
 	<update id="findPwd" parameterType="logmembers" >
 		update members set user_pwd=#{user_pwd} where user_id=#{user_id} and user_email=#{user_email}
 	</update>
+	
+
 	<!-- //////////////////////admin에서 같이 사용 -->
 	<!-- 목록 -->
 	<select id="list" parameterType="hashmap" resultType="logmembers">

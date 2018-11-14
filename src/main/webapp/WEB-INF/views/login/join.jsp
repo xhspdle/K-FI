@@ -271,5 +271,6 @@
 			<input type="submit" value="가입" id="joinbtn"> <input type="reset" value="취소">
 		</div>
 	</form>
+	<div></div>
 </body>
 </html>

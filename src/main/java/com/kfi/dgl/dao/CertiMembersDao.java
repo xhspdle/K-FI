@@ -23,4 +23,8 @@ public class CertiMembersDao {
 	public CertiMembersVo select(int user_num) {
 		return session.selectOne(NAMESPACE + ".select", user_num);
 	}
+	public int selectCode(String cm_key) {
+		return session.selectOne(NAMESPACE + ".selectCode", cm_key);
+	}
+	
 }
