@@ -221,7 +221,9 @@ footer .glyphicon {
 	width: 50%;
 	height: 50%;
 	margin: auto;
-} 
+}
+input[type=color],
+input[type=file], 
 .hidediv {
 	display: none;
 }

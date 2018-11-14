@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style>
-
-</style>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1>저장된 스킨</h1>
 <div class="container" style="background-color: yellow; padding: 20px" >
@@ -20,13 +17,16 @@
 </div>
 
 <div id="modifycnskin" class="modal container" style="width: 90%;height: 90%; background-color: #f0f0f5; border-radius: 8px; margin-top: 3%">
-	<form method="post" action="#" name="frm">
-		<div id="currskin" style="padding: 20px;" >
-			
+	<form method="post" action="#" name="cnskinfrm">
+		<div id="currskin" style="padding: 20px;" >			
 		</div>
 		<div class=file_input_div>
-			프로필파일<input type="file" name="comm_skin_profile" class="btn btn-default">
-			스킨커버파일<input type="file" name="comm_skin_cover" class="btn btn-default"> 
+			<button class="btn btn-info">프로필 사진</button>
+			<input type="file" name="comm_skin_profile">
+			<button class="btn btn-info">배경 사진</button>
+			<input type="file" name="comm_skin_cover">
+			<button class="btn btn-info">nav바 색상</button>
+			<input type="color">
 		</div>
 		<input type="submit" value="적용">
 	</form>
@@ -53,6 +53,10 @@
  	 	var cnskincover=$("#currskin").children().children().children("img").eq(1); 
  	 	cnskincover.prop("src",URL.createObjectURL(event.target.files[0]));
 	});
-
+	$(".file_input_div button").on("click",function(event){
+		event.preventDefault();
+		$(this).next().click();	
+	});
+	
 
 </script>

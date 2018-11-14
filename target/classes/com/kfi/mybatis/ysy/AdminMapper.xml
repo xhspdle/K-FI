@@ -13,7 +13,7 @@
  		select count(*) from admin where admin_id=#{admin_id}
  	</select>
  	<insert id="adjoin" parameterType="admin">
- 		insert into admin values(#{admin_num},#{admin_id},#{admin_pwd},#{admin_email},sysdate,#{admin_nick})
+ 		insert into admin values(#{admin_num},#{admin_id},#{admin_pwd},#{admin_nick},#{admin_email},sysdate)
  	</insert>
  	<select id="adminlist" resultType="admin">
 		select * from admin
