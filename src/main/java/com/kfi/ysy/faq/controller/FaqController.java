@@ -28,12 +28,17 @@ public class FaqController {
 	@RequestMapping(value="/faqlist",method=RequestMethod.GET)
 	public String faqlist(Model model) {
 		List<FaqVo> faqlist=faqservice.faqlist();
-		for(int i=0;i<faqlist.size();i++) {
+/*		for(int i=0;i<faqlist.size();i++) {
 			FaqVo vo=faqlist.get(i);
-			
-		}
-		
-		
+			System.out.println("////////////content"+vo.getQa_num());
+			System.out.println("////////////content"+vo.getUser_num());
+			System.out.println("////////////content"+vo.getQa_title());
+			System.out.println("////////////content"+vo.getQa_content());
+			System.out.println("////////////content"+vo.getRef());
+			System.out.println("////////////content"+vo.getLev());
+			System.out.println("////////////content"+vo.getStep());
+			System.out.println("////////////admin_num"+vo.getAdmin_num());
+		}	*/	
 		System.out.println(faqlist);
 		model.addAttribute("faqlist",faqlist);
 		return ".faq.faqlist";
@@ -75,26 +80,30 @@ public class FaqController {
 	}
 	@RequestMapping(value="/faqcomminsert", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 /*	@RequestMapping(value="/faqcomminsert", method=RequestMethod.POST)*/
-	@ResponseBody
-	public String faqcomminsert(FaqVo vo,HttpServletRequest request) {
+	
+	public @ResponseBody void faqcomminsert(FaqVo vo,HttpServletRequest request) {
 		HttpSession session=request.getSession();
 		AdminVo adminvo=(AdminVo)session.getAttribute("admininfo");
 		int qa_num = faqservice.faqmaxnum()+1;
 		vo.setQa_num(qa_num);
 		vo.setAdmin_num(adminvo.getAdmin_num());
 		vo.setLev(vo.getLev()+1);
-		vo.setStep(vo.getStep());
-		vo.setQa_content("이거되냐?");
+		faqservice.faqinsert(vo);
+		
+/*		vo.setQa_content("이거되냐?");
+		vo.setQa_title("욕나오네");
+		vo.setUser_num(1);
+		System.out.println("////////////content"+vo.getQa_num());
+		System.out.println("////////////content"+vo.getUser_num());
+		System.out.println("////////////content"+vo.getQa_title());
 		System.out.println("////////////content"+vo.getQa_content());
+		System.out.println("/////////////////////ref"+vo.getRef());
+		System.out.println("////////////content"+vo.getLev());
+		System.out.println("////////////content"+vo.getStep());
 		System.out.println("////////////admin_num"+vo.getAdmin_num());
-		System.out.println("////////////qa_num"+vo.getQa_num());
-		int result=faqservice.faqinsert(vo);
-		System.out.println("////////////////////"+result);
-		if(result>0) {
-			return "success";
-		}else {
-			return "fail";		
-		}
+	
+		System.out.println("////////////////////"+result);*/
+
 	}
 	//Q&A 게시물 작성
 	@RequestMapping(value="/faqinsert",method=RequestMethod.POST)

@@ -7,6 +7,9 @@ body {
 	color: #818181;
 }
 
+.navbar-default .navbar-nav>li>a{
+	color: white;
+}
 h2 {
 	font-size: 24px;
 	text-transform: uppercase;
@@ -39,7 +42,7 @@ h4 {
 }
 
 .logo-small {
-	color: #333333;
+	color: #b30000;
 	font-size: 50px;
 }
 
@@ -206,11 +209,31 @@ footer .glyphicon {
 		width: 100%;
 		margin-bottom: 35px;
 	}
+	#abpopup{
+		display : none;
+		width: 90%;
+		max-height:100%;
+	    border-radius: 10px;
+	    padding: 10px;
+		background-color: #efffd7;
+		border: solid 3px orange; 
+	}
+	
 }
+
 
 @media screen and (max-width: 480px) {
 	.logo {
 		font-size: 150px;
+	}
+	#abpopup{
+		display : none;
+		width: 90%;
+		max-height:100%;
+	    border-radius: 10px;
+	    padding: 10px;
+		background-color: #efffd7;
+		border: solid 3px orange; 
 	}
 }
 
@@ -252,13 +275,14 @@ table tr td{
 	margin: auto;
 	display : none;
 	position: fixed;
-	width: 25%;
+	width: 45%;
 	max-height:100%;
 	top: 100px;
     left: 80px;
     border-radius: 10px;
     padding: 10px;
 	background-color: #efffd7;
+	border: solid 3px orange; 
 /*     background-image: url("../resources/images/1.png");  */
 }
 
@@ -272,4 +296,86 @@ table tr td{
 body.modal-open::-webkit-scrollbar {
 	display: none;
 }
+/* flex */
+.flexrow {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: center;
+}
 
+/* Create four equal columns that sits next to each other */
+.flexcolumn {
+    -ms-flex: 31%; /* IE10 */
+    flex: 31%;
+    max-width: 31%;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.flexcolumn img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+.flexcolumn img:hover{
+	opacity: 0.7;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 1000px) {
+    .flexcolumn {
+        -ms-flex: 47%;
+        flex: 47%;
+        max-width: 47%;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 600px) {
+    .flexcolumn {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+        cursor: pointer;
+    }
+}
+.board_content_ad{
+	background-color:#f0f0f5;
+	border-radius: 10px;
+	padding:8px 0 8px 0;
+}
+.board-content-img {
+    width: 100%;
+    max-width: 600px;
+    left: 0;
+    top: 0;
+}
+.modalimg {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+.closeimg {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.closeimg:hover,
+.closeimg:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}

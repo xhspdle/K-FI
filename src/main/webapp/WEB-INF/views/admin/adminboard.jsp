@@ -104,8 +104,8 @@
 		};
 	});*/
 	function template(ab_title,ab_content){
- 		var html="<div class='well'>Basic Well"
- 				+"<div>"+ab_title+"</div>"
+ 		var html="<div class='well'>"
+ 				+"<h4>"+ab_title+"</h4><hr>"
  				+"<div>"+ab_content+"</div>"
  				+"</div>"
 		return html;
@@ -331,16 +331,18 @@
 		
 <div id="abpopup">	
 	<div class="modal-header">
-		<h4>공지사항</h4>	
+		<div style="color:orange; font-size:20px; font-weight: bold">공지사항</div>	
 	</div>
 	<div id="abpopupcontent"></div>
 	<div class="modal-footer">
-		<input class="pull-right btn btn-default" value="하루닫기" onclick="closepopup()"> 
-		<input class="pull-right btn btn-default" value="닫기"  onclick="$('#abpopup').css('display','none')">
+		
+		<input class="pull-right btn btn-default" style="width:45%" value="하루닫기" onclick="closepopup()">
+		<input class="pull-right btn btn-default" style="width:45%" value="닫기"  onclick="$('#abpopup').css('display','none')"> 
+		
 	</div>
 </div>
 <div id="noticebtn" class="hidediv" style="position: fixed;bottom: 20px;right: 20px;">
-	<h1><span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:red; " onclick="$('#abpopup').css('display','block')"></span></h1> 
+	<h1><span id="popupbtn"class="glyphicon glyphicon-exclamation-sign" style="color:gold; " onclick="$('#abpopup').css('display','block')"></span></h1> 
 </div>
 <%-- 	</c:when>
 	<c:otherwise>

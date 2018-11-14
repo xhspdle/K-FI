@@ -22,8 +22,6 @@
 		});
 	});
 </script>
-<input type="button" value="jam" onClick="style='width=320,height=240;')"> 
-
 <div id="adminlist">
 	<h1>
 		관리자정보<button class="btn btn-md" onclick="location.href='/kfi/mblist'">회원정보</button>

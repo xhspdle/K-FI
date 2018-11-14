@@ -21,50 +21,6 @@
 			}		
 		});
 	
-		$("#faqcomminsert").on("submit",function(event){
-			alert("aawoowow");
-			console.log(event.target);
-			console.log($(this).get(0)+"///////////");
-			alert($(this));
-			alert($(this).get(0));
-			alert("제발나와");
- 		
- 			var formData=new FormData($(this).get(0));
-			console.log(formData);
- 			alert(formData);
- 	/* 		  $.ajax({
- 				  url: "<c:url value='/faqcomminsert'/>",
- 				  type: 'post',
- 				  dataType:'json',
- 				  data: formData,
- 				  cache: false,
- 				  contentType: false,
- 				  processData: false,
- 				  success: function(json){
- 					  alert("됐다.")
- 					  if(json.code==='success'){
- 						  $.getCommentList(pageNum);
- 					  }else{
- 						  $.msgBox(json.code);
- 					  }
- 				  }
- 			  }); */
-/* 			$.ajax({   
-				type: "post",
-				url: "<c:url value='/faqcomminsert'/>",
-				success:function(data){
-					alert("wowowo");
-					alert(data);
-				}
-			}); */
-				
-/*	 		 	$.postJSON("<c:url value='/faqcomminsert'/>",function(data){
-		 		console.log("안보내지나?");
-				alert(data);
-				alert("aaaa");
-			});  */			 
-		});
-
 	 	function faqcommlist(qa_num,faqcomm){	 		
 			$.getJSON("<c:url value='/faqcomment'/>",{
 				qa_num : qa_num
@@ -88,8 +44,52 @@
 			});
 		};
 	});
+/* $(function(){
+	$("#faqcomminsert").on("click",function(event){
+		$.ajax({
+		url: '<c:url value="/faqcomminsert"/>',
+		type: 'post',
+		dataType:'json',
+	});
+}); */
+	
+	/* 
+		var formData=new FormData($(this).get(0));
+		console.log(formData);
+			alert(formData); */
+	/* 		  $.ajax({
+				  url: "<c:url value='/faqcomminsert'/>",
+				  type: 'post',
+				  dataType:'json',
+				  data: formData,
+				  cache: false,
+				  contentType: false,
+				  processData: false,
+				  success: function(json){
+					  alert("됐다.")
+					  if(json.code==='success'){
+						  $.getCommentList(pageNum);
+					  }else{
+						  $.msgBox(json.code);
+					  }
+				  }
+			  }); */
+/* 			$.ajax({   
+			type: "post",
+			url: "<c:url value='/faqcomminsert'/>",
+			success:function(data){
+				alert("wowowo");
+				alert(data);
+			}
+		}); */
+			
+/*	 		 	$.postJSON("<c:url value='/faqcomminsert'/>",function(data){
+	 		console.log("안보내지나?");
+			alert(data);
+			alert("aaaa");
+		});  */			 
 
- 	
+
  	
 
 
@@ -98,10 +98,10 @@
 
 <div class="faq_comment" id="faq_comments">
 	<form action="faqinsert" method="post">	
-		<input type="text" name="qa_num" value={qa_num}>
-		<input type="text" name="ref" value={ref}>
-		<input type="text" name="lev" value={lev}>
-		<input type="text" name="step" value={step}>
+		<input type="hidden" name="qa_num" value={qa_num}>
+		<input type="hidden" name="ref" value={ref}>
+		<input type="hidden" name="lev" value={lev}>
+		<input type="hidden" name="step" value={step}>
 		<div class="media">
 			<div class="media-left media-top">
 				<img src="2.png" class="media-object" style="width:60px">
@@ -134,22 +134,22 @@
 				${faqlist.admin_num }
 				<button class="btn btn-default faqcommbtn">댓글</button>
 			</div>
-			<form class="hidediv faqcommform" method="post">
+			<form class="hidediv faqcommform">
 				<div class="media">
 					<div class="media-left media-top">
 						<!-- <img src="2.png" class="media-object" style="width:60px"> -->
 					</div>
 					<div class="media-body panel-body">
-						<input type="text" name="qa_num" value=${faqlist.qa_num }>
-						<input type="text" name="ref" value=${faqlist.ref }>
-						<input type="text" name="lev" value=${faqlist.lev }>
-						<input type="text" name="step" value=${faqlist.step }>
-						<input type="text" name="user_num" value=${faqlist.user_num }>
-						<input type="text" name="qa_title" value=${faqlist.qa_title }>
+						<input type="hidden" name="qa_num" value=${faqlist.qa_num }>
+						<input type="hidden" name="user_num" value=${faqlist.user_num }>
+						<input type="hidden" name="qa_title" value=${faqlist.qa_title }>
+						<input type="hidden" name="ref" value=${faqlist.ref }>
+						<input type="hidden" name="lev" value=${faqlist.lev }>
+						<input type="hidden" name="step" value=${faqlist.step }>
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit"  id="faqcomminsert">
+								<button class="btn btn-default" id="faqcomminsert">
 									<i class="glyphicon glyphicon-pencil"></i>
 								</button>
 							</div>
