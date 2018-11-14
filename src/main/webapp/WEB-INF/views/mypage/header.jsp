@@ -20,7 +20,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<c:url value='/community'/>">COMMUNITY</a></li>
+				<li><a href="<c:url value='/communityMain/'/>">COMMUNITY</a></li>
 				<li class="dropdown">
 					<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
 					<ul class="dropdown-menu">

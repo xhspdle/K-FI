@@ -25,8 +25,8 @@ public class LoginController {
 	//로그인 처리
 	@RequestMapping(value="/login/login", method=RequestMethod.POST)
 	public String login(HttpServletRequest request,HttpSession session, String user_num) {
-		String user_id = request.getParameter("userId");
-		String user_pwd = request.getParameter("userPwd");
+		String user_id = request.getParameter("user_id");
+		String user_pwd = request.getParameter("user_pwd");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", user_id);
 		map.put("user_pwd", user_pwd);

@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.sidenav {
+	/* overflow: hidden; */
+	position: fixed;
+	bottom: 3%;
+	right: 3%;
+	padding: 10px;
+}
+.sidenav #icon_calendar,#icon_chat {
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+	margin-top: 15px;
+	padding-top: 15px;
+	padding-left: 16px;
+	-webkit-box-shadow: 0 1px 7px rgba(0,0,0,0.5);
+	box-shadow: 0 1px 7px rgba(0,0,0,0.5);
+	-webkit-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
+}
+.sidenav #icon_calendar:hover, #icon_chat:hover {
+	background-color: white;
+	color: #f4511e;
+}
+.sidenav #icon_calendar>i, #icon_chat>i {
+	display: inline-block;
+	font-size: 30px;
+	color: inherit;
+}

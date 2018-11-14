@@ -79,8 +79,8 @@ public class MembersService {
 	public void findId(String user_email) {
 		dao.findId(user_email);
 	}
-	public void findPwd(MembersVo vo) {
-		dao.findPwd(vo);
+	public int resetPwd(MembersVo vo) {
+		return	dao.updatepwd(vo);
 	}
 	// admin에서 사용
 	public MembersVo select(int user_num) {
@@ -98,7 +98,29 @@ public class MembersService {
 	public int delete(int user_num) {
 		return dao.delete(user_num);
 	}
-	
+	public int selectcode(String cm_key) {
+		return certiDao.selectCode(cm_key);
+	}
+	public void findpwsendmail(String user_email, String user_id) throws Exception{
+		int n = dao.idCheck(user_id);
+		if(n > 0) {
+			MembersVo vo= dao.emailCheck(user_email);
+			if(vo !=null) {
+				System.out.println("메일보내기");
+				String cm_key = new Key().getKey(10, false);
+				certiDao.insert(new CertiMembersVo(certiDao.getMaxNum()+1, vo.getUser_num(), cm_key));
+				MailUtil sendMail = new MailUtil(mailSender);
+				StringBuffer sb = new StringBuffer();
+				sendMail.setText(sb.append("<h1>비밀번호 찾기 메일인증</h1>")
+						.append("<h2>Hello~^^"+user_email+"</h2>")
+						.append("<h1>code : "+cm_key+"</h1>").toString());
+				sendMail.setFrom("tester112492@gmail.com", "관리자");
+				sendMail.setTo(user_email);
+				sendMail.send();
+				System.out.println("메일보냄");
+			}
+		}
+	}
 	public void joinsendmail(String user_email) throws MessagingException, UnsupportedEncodingException{
 		MailUtil sendMail = new MailUtil(mailSender);
 		sendMail.setSubject("[이메일 인증]");
@@ -113,15 +135,13 @@ public class MembersService {
 	//인증키
 	public void createkey(String user_email) throws Exception {
 		MembersVo vo=dao.emailCheck(user_email);
-		String cm_key = new Key().getKey(25, false); // 인증키 생성
+		String cm_key = new Key().getKey(10, false); // 인증키 생성
 		certiDao.insert(new CertiMembersVo(certiDao.getMaxNum() + 1, vo.getUser_num(), cm_key)); // 인증키 DB 저장
-		System.out.println("메일객체만들기전");
 		MailUtil sendMail = new MailUtil(mailSender);
-		System.out.println("메일객체맹금");
-		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-				.append("<a href='http://localhost:8082/kfi/mailcert?user_email=")
-				.append(user_email).append("&key=").append(cm_key)
-				.append("' target='_blenk'>이메일 인증 확인</a>").toString());
+		StringBuffer sb= new StringBuffer();
+		sendMail.setText(sb.append("<h1>이메일 찾기메일인증</h1>")
+				.append("<h2>Hello~^^"+user_email+"</h2>")
+				.append("<h1>code : "+cm_key+"</h1>").toString());
 		sendMail.setFrom("tester112492@gmail.com", "관리자");
 		sendMail.setTo(user_email);
 		sendMail.send();

@@ -15,4 +15,7 @@
 	<select id="select" parameterType="int" resultType="certimembers">
 		select * from certi_members where user_num=#{user_num}
 	</select>
+	<select id="selectCode" parameterType="string" resultType="int">
+		select count(*) from certi_members where cm_key=#{cm_key}
+	</select>
 </mapper>

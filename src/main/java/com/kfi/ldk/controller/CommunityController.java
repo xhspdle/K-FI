@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller(value="communityController")
 public class CommunityController {
 
+	@RequestMapping(value="/communityMain",method=RequestMethod.GET)
+	public String communityMain() {
+		return ".communityMain";
+	}
 	@RequestMapping(value="/community",method=RequestMethod.GET)
 	public String community() {
 		return ".community";
