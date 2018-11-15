@@ -223,10 +223,6 @@ footer .glyphicon {
 		margin: auto;
 	}
 	.navbar-comm-menu {
-		position: relative;
-		top: 0px;
-		left: 50%;
-		transform: translate(-50%, 0%);
 		width: 480px !important;
 	}
 	.navbar-comm-menu .navbar-center{
@@ -255,6 +251,12 @@ footer .glyphicon {
 	}
 	.boardOption {
 		left: 92% !important;
+	}
+	.navbar-comm-menu {
+		width: 320px !important;
+	}
+	.navbar-comm-menu .navbar-center>li {
+		margin-top: 3px;
 	}
 }
 /*
@@ -433,14 +435,16 @@ input[type='file'].myboardFile {
 #myBoardSelect .panel-group .panel-body .img-responsive {
 	max-height: 700px;
 }
-.panel-heading {
+.panel-default > .panel-heading {
 	background-color: transparent !important;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
 }
-.panel-heading:hover {
+.panel-default > .panel-heading:hover {
 	background-color: #f5f5f5 !important;
 	/*cursor: pointer;*/
+}
+.panel-heading {
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
 }
 .postTitle {
 	font-size: 36px !important;
@@ -791,6 +795,27 @@ body.modal-open::-webkit-scrollbar {
 #communityJumbo p.communityHeader {
 	margin-top: 3%;
 }
+.form-join {
+	position: relative;
+	top: 55%;
+}
+.btn-join-follow,.btn-comm-admin {
+	-webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+	background-color: transparent; /* rgba(0,0,0,0.3); */
+	border: 0px;
+	border-radius: 20px;
+	width: 50%;
+	-webkit-box-shadow: 0 1px 7px rgba(0,0,0,0.25);
+	box-shadow: 0 1px 7px rgba(0,0,0,0.25);
+}
+.btn-join-follow:hover,.btn-comm-admin:hover {
+	background-color: rgba(0,0,0,0.3);
+	color: white;
+}
+.btn-comm-admin {
+	
+}
 #best {
 	margin-top: 100px;
 	overflow: hidden;
@@ -910,4 +935,37 @@ body.modal-open::-webkit-scrollbar {
 	display: inline-block;
 	margin-right: 10px;
 	line-height: 1.5;
+}
+#commPollList span.glyphicon-stats {
+	margin-right: 10px;
+	color: #f4511e;
+}
+#commPollList .btn-info {
+	-webkit-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+#commPollList .media-heading>a {
+	-webkit-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	color: #818181;
+}
+#commPollList .media-heading>a:hover {
+	color: lightblue;
+	text-decoration: none;
+}
+#commPollList .btn-poll {
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 10px;
+	-webkit-box-shadow: 0 1px 7px rgba(0,0,0,0.25);
+	box-shadow: 0 1px 7px rgba(0,0,0,0.25);
+	-webkit-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
+	color: white;
+}
+#commPollList .btn-poll>span {
+	margin-right: 8px;
+}	
+#commPollList .btn-poll:hover {
+	background-color: white;
+	color: #f4511e;
 }

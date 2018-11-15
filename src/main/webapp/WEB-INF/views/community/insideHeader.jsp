@@ -4,7 +4,33 @@
 <div class="jumbotron text-center" id="communityJumbo">
 	<div> 
 		<h3 class="communityHeader"><strong>Community Name</strong></h3>
-		<p class="communityHeader"><span class="">Welcome to community~!</span></p> 
+		<p class="communityHeader"><span class="">Welcome to community~!</span></p>
+		<c:choose>
+			<c:when test="">
+				<!-- admin일 경우 -->
+				<div class="form-join">
+					<div class="col-sm-offset-5 col-sm-2">			
+						<a href="#" class="btn btn-comm-admin">Admin</a>
+					</div>
+				</div>
+			</c:when>
+			<c:when test="">
+				<!-- 이미 가입한 회원일 경우 -->
+				<form class="form-join">
+					<div class="input-group col-sm-offset-5 col-sm-2">
+						<button type="submit" class="btn btn-join-follow">Leave</button><br>
+					</div>
+				</form>
+			</c:when>
+			<c:otherwise>
+				<!-- 가입 안한 회원일 경우 -->
+				<form class="form-join">
+					<div class="input-group col-sm-offset-5 col-sm-2">
+						<button type="submit" class="btn btn-join-follow">Join</button><br>
+					</div>
+				</form>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>  
 <nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix" style="background-color:${msv.ms_color};">
@@ -67,6 +93,6 @@
 		<li><a href="#"><i class="glyphicon glyphicon-check"></i>WRITE</a></li>
 		<li><a href="#"><i class="glyphicon glyphicon-star"></i>POPULAR</a></li>
 		<li><a href="#"><i class="glyphicon glyphicon-time"></i>LATEST</a></li>
-		<li><a href="#"><i class="glyphicon glyphicon-stats"></i>POLLS</a></li>
+		<li><a href="<c:url value='/community/polls/list'/>"><i class="glyphicon glyphicon-stats"></i>POLLS</a></li>
 	</ul>
 </div>

@@ -64,9 +64,9 @@
 											<!-- /resources/upload/img/브이오.msp_savimg -->
 						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
 					</div>
-					<div class="media-body" style="padding-left:5px;">
-						<h4 class="media-heading" style="text-align:left;"><strong>브이오.user_nickname</strong></h4>
-						<p style="text-align:left;margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
+					<div class="media-body text-left" style="padding-left:5px;">
+						<h4 class="media-heading"><strong>브이오.user_nickname</strong></h4>
+						<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
 					</div>
 				</div>
 				<p>브이오.mb_content</p>

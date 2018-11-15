@@ -5,7 +5,12 @@
 	<div style="background:url(${pageContext.request.contextPath}/resources/upload/img/${msv.msc_savimg })"> 
 		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>">
 		<h3><strong>${user_nickname }</strong></h3>
-		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p> 
+		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p>
+		<form class="form-follow">
+			<div class="input-group col-sm-offset-5 col-sm-2">
+				<button type="submit" class="btn btn-join-follow">Follow</button>
+			</div>
+		</form>  
 	</div>
 </div>
 <nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix" style="background-color:${msv.ms_color};">

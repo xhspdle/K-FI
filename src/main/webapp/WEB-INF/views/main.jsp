@@ -8,7 +8,7 @@
 		<div class="input-group col-sm-offset-4 col-sm-4">
 			<input type="email" class="form-control" placeholder="what is you're favorite k-culture?" required>
 			<div class="input-group-btn">
-				<button type="button" class="btn btn-primary">Search</button>
+				<button type="submit" class="btn btn-primary">Search</button>
 			</div>
 		</div>
 	</form>
