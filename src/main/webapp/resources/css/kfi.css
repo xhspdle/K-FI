@@ -34,10 +34,13 @@ h4 {
     margin-bottom: 30px;
 }
 .jumbotron {
-	font-family: Montserrat, sans-serif;
+	font-family: Montserrat, sans-serif !important;
 	background-color: #00cee8;
 	color: #fff;
    	padding: 100px 25px;
+}
+.jumbotron h1, h2, h3, h4, h5, h6 {
+	font-family: Montserrat, sans-serif !important;
 }
 #mpjumbo{
 	margin-bottom: 0 !important;

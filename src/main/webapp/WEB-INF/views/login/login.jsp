@@ -29,7 +29,7 @@ body {
 	width: 50%;
 	padding: 10px;
 	background: rgba(0, 0, 0, 0.76);
-	background: url(../resources/images/backimg.png) no-repeat center center
+	background: url(../resources/images/loginback.jpg) no-repeat center center
 		fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -60,6 +60,8 @@ h1, h2, h3, button {
 	border-radius: 1.1rem;
 	outline: 0;
 	max-width: 500px;
+	-webkit-box-shadow: 5px 10px 40px rgba(0,0,0, .4);
+    box-shadow: 5px 10px 40px rgba(0,0,0, .4);
 }
 
 .tx-tfm {
