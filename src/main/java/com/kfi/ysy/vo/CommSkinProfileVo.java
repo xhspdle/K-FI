@@ -53,9 +53,4 @@ public class CommSkinProfileVo {
 		return "CommSkinProfileVo [csp_num=" + csp_num + ", comm_num=" + comm_num + ", csp_orgimg=" + csp_orgimg
 				+ ", csp_savimg=" + csp_savimg + ", csp_using=" + csp_using + "]";
 	}
-	
-	
-	
-	
-	
 }

@@ -14,17 +14,20 @@ public class FaqDao {
 	private final String NAMESPACE="com.kfi.mybatis.ysy.FaqMapper.";
 	public int faqmaxnum() {
 		return sqlSession.selectOne(NAMESPACE+"faqmaxnum");
-	};
+	}
 	public List<FaqVo> faqlist(){
 		return sqlSession.selectList(NAMESPACE+"faqlist");
-	};
+	}
 	public FaqVo faqdetail(int qa_num) {
 		return sqlSession.selectOne(NAMESPACE+"faqdetail", qa_num);
-	};
+	}
 	public int faqinsert(FaqVo vo) {
 		return sqlSession.insert(NAMESPACE+"faqinsert", vo);
 	}
 	public List<FaqVo> faqcomment(int qa_num){
 		return sqlSession.selectList(NAMESPACE+"faqcomment",qa_num);
-	};
+	}
+	public int faqdelete(int qa_num) {
+		return sqlSession.delete(NAMESPACE+"faqdelete",qa_num);
+	}
 }

@@ -26,4 +26,13 @@ public class AccuseService {
 	public AccuseVo acdetail(int ac_num) {
 		return dao.acdetail(ac_num);
 	}
+	public int acmaxnum() {
+		return dao.acmaxnum();
+	}
+	public int acgetcnt() {
+		return dao.acgetcnt();
+	}
+	public int acinsert(AccuseVo vo) {
+		return dao.acinsert(vo);
+	}
 }

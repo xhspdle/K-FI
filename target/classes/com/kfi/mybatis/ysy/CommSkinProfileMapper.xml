@@ -15,5 +15,8 @@
 	<select id="select_usingProfile" parameterType="int" resultType="commskinprofile">
 		select * from comm_skin_profile where comm_num=#{comm_num} and csp_using=1
 	</select>
-
+	
+	<select id="list">
+		select * from comm_skin_profile
+	</select>
 </mapper>

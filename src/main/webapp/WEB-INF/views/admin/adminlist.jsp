@@ -61,7 +61,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">×</button>
-				<h4 class="modal-title">Question Editor</h4>
+				<h4 class="modal-title">관리자 정보</h4>
 			</div>
 			<div class="modal-body">
 			<form class="form-horizontal " action="<c:url value='/admodify'/>" method="post">

@@ -26,4 +26,7 @@ public class FaqService {
 	public List<FaqVo> faqcomment(int qa_num){
 		return dao.faqcomment(qa_num);
 	}
+	public int faqdelete(int qa_num) {
+		return dao.faqdelete(qa_num);
+	}
 }

@@ -28,4 +28,13 @@ public class AccuseDao {
 	public AccuseVo acdetail(int ac_num)	{
 		return sqlSession.selectOne(NAMESPACE+"acdetail", ac_num);
 	}
+	public int acmaxnum() {
+		return sqlSession.selectOne(NAMESPACE+"acmaxnum");
+	}
+	public int acgetcnt() {
+		return sqlSession.selectOne(NAMESPACE+"acgetcnt");
+	}
+	public int acinsert(AccuseVo vo) {
+		return sqlSession.insert(NAMESPACE+"acinsert",vo);
+	}
 }

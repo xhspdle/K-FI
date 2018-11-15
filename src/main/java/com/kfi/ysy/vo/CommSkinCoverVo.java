@@ -52,7 +52,4 @@ public class CommSkinCoverVo {
 		return "CommSkinCoverVo [csc_num=" + csc_num + ", comm_num=" + comm_num + ", csc_orgimg=" + csc_orgimg
 				+ ", csc_savimg=" + csc_savimg + ", csc_using=" + csc_using + "]";
 	}
-
-	
-
 }

@@ -32,4 +32,13 @@
 	<select id="acdetail" parameterType="int" resultType="accuse">
 		select * from accuse where ac_num=#{ac_num}
 	</select>
+	<select id="acmaxnum" resultType="int">
+		select nvl(max(ab_num),0) maxnum from accuse
+	</select>
+<!-- 	<select id="acgetcnt" resultType="int">
+		select nvl(count(*),0) getcnt from accuse
+	</select> -->
+	<insert id="acinsert" parameterType="accuse">
+		insert into accuse values(#{ac_num},#{user1_num},#{user2_num},#{ac_reason},#{cb_num},#{board_num},sysdate,#{ac_status})
+	</insert>
 </mapper>

@@ -20,18 +20,25 @@
 </div>
 
 
-<script id="testboardlist" type="text/template">
+<div id="imgcomments">
+	<div class="pull-right" style="position:absolute;width: 100%;height: 100%; background-color: red; display: none; "></div>
+</div>
 
+
+
+<script id="testboardlist" type="text/template">
 <div class="board_content_ad">
-	<div class="media">
+<div class=container>	
+<div class="media">
 		<div class="media-left media-top">
-			<img src="img_avatar1.png" class="media-object" style="width:60px">
+			<img src="<c:url value='/resources/images/ysy/1 (19).jpg'/>" class="media-object" style="width:50px;height:50px;border-radius:50px">
 		</div>
 		<div class="media-body">
-		<h4 class="media-heading">Media Top</h4>
-			<p>Lorem ipsum...</p>
+		<h4 class="media-heading">test1</h4>
+			<p>집에가고싶다</p>
 		</div>
 	</div>
+</div>
 	<img src="<c:url value='/resources/images/ysy/1 ({imgnum}).jpg'/>">
 	내용<br>
 	<a >답글</a><br>
@@ -45,8 +52,7 @@ $(function(){
 	$(".flexcolumn").empty();
 	var length=($(".flexrow").children().length);
 	console.log(length+"length")
-	var j=0;
-	
+	var j=0;	
 	for(var i=1;i<=20;i++){	//6 10 14
 		var flaxcol=$(".flexrow").children().eq(j);
 		var html=$("#testboardlist").html();
@@ -70,12 +76,11 @@ $(function(){
 		$("#contentimg").prop("src",src);
 		$(".modalimg").css("display","block");
 		$(".navbar").css("display","none");
-		$('.modalimg').off();
+		$("#imgcomments").css("display","block");
 	})
 });
 
 var closeimg = document.getElementsByClassName("closeimg")[0];
-
 //When the user clicks on <span> (x), close the modalimg
 closeimg.onclick = function() { 
 	$(".modalimg").css("display","none");

@@ -214,7 +214,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">×</button>
-				<h4 class="modal-title">Question Editor</h4>
+				<h4 class="modal-title">공지사항 수정</h4>
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal" action="abupdate" method="post">

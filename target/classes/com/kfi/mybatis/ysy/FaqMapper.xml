@@ -26,5 +26,7 @@
 	<select id="faqdetail" parameterType="int" resultType="faq">
 		select * from faq where qa_num=#{qa_num}
 	</select>
-	
+	<delete id="faqdelete" parameterType="int">
+		delete from faq where qa_num=#{qa_num}
+	</delete>
 </mapper>

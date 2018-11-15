@@ -4,6 +4,7 @@
 
 <!-- //////////////////신고관리 페이지	//////////////////////	 -->
 <div class="text-center">
+<a href="acinsert">작성</a>
 <h1 id="convertform">신고관리</h1> 
 </div><br>
 <div id="aclistview1">
@@ -26,13 +27,14 @@
 			</div>
 		</div>
 	</c:forEach>
+</div>
+<div>
 	<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
 		<ul class="pagination">
 			<li> <a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
 		</ul>		
 	</c:forEach>
 </div>
-
 <div id="aclistview2" class="hidediv">
 	<table class="table table-striped">
 		<tr>
@@ -69,7 +71,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">×</button>
-				<h4 class="modal-title">Question Editor</h4>
+				<h4 class="modal-title">신고</h4>
 			</div>
 			<div class="modal-body" id="userinfobody">
 			

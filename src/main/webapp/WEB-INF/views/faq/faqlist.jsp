@@ -2,93 +2,69 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
-	$(function(){
+/* 	$(function(){
 		$(".faqcontent").click(function(event){
 			var qa_num=$(this).parent().children().first().text();	
 		 	location.href="<c:url value='/faqdetail?qa_num="+qa_num+"'/>";
 		});
-	});
+	}); */
+	
 	$(function(){	
-		$(".faqcommbtn").click(function(){
- 			var qa_num=$(this).siblings('input').val();
- 			var faqcomm = $(this).parent().parent().children().last();
- 			if(faqcomm.css("display")=="none"){
- 				faqcomm.css("display","block");
- 				faqcommlist(qa_num,faqcomm);
-			}else{
-	/* 			$(this).parent().parent().children().empty(); */
-				faqcomm.css("display","none");
-			}		
+		$(".faqcommbtn").click(faqcommentlist);
+	});
+	
+	function faqcommentlist(){
+ 		$(".faq_comment").remove();
+		var qa_num=$(this).siblings('input').val();
+		var faqcomm = $(this).parent().parent().children().last();
+		if(faqcomm.css("display")=="none"){
+			faqcomm.css("display","block");
+			faqcommlist(qa_num,faqcomm);
+		}else{
+/* 			$(this).parent().parent().children().empty(); */
+			faqcomm.css("display","block");
+		}		
+	}	
+ 	function faqcommlist(qa_num,faqcomm){	 		
+		$.getJSON("<c:url value='/faqcomment'/>",{
+			qa_num : qa_num
+		},function (data){					
+			for(var i=0;i<data.length;i++){
+				var html=document.querySelector("#faqcomment_template").innerHTML;
+				var resultHTML=html.replace("{qa_num}", data[i].qa_num)
+					.replace("{user_num}", data[i].user_num)
+					.replace("{qa_title}", data[i].qa_title)
+					.replace("{qa_content}", data[i].qa_content)
+					.replace("{qa_date}", data[i].qa_date)
+					.replace("{ref}",data[i].ref)
+					.replace("{lev}",data[i].lev)
+					.replace("{step}",data[i].step)
+					.replace("{admin_num}",data[i].admin_num)
+					.replace("{qa_num1}", data[i].qa_num);
+					faqcomm.after(resultHTML);
+ 			}
 		});
-	
-	 	function faqcommlist(qa_num,faqcomm){	 		
-			$.getJSON("<c:url value='/faqcomment'/>",{
-				qa_num : qa_num
-			},function (data){					
-				for(var i=0;i<data.length;i++){
-					var html=document.querySelector("#faqcomment_template").innerHTML;
-					var resultHTML=html.replace("{qa_num}", data[i].qa_num)
-						.replace("{user_num}", data[i].user_num)
-						.replace("{qa_title}", data[i].qa_title)
-						.replace("{qa_content}", data[i].qa_content)
-						.replace("{qa_date}", data[i].qa_date)
-						.replace("{ref}",data[i].ref)
-						.replace("{lev}",data[i].lev)
-						.replace("{step}",data[i].step)
-						.replace("{admin_num}",data[i].admin_num);
-						faqcomm.after(resultHTML);
-					/* 	var html=data[i].qa_num+"//////"+data[i].qa_num+"////////"+data[i].qa_num+"//////////" */
-					/* 	$("#faqcomment"+data[i].qa_ref}).appendto(html); */	
-					
-	 			}
+	};
+		 
+	$(function(){
+		$("button[name=faqcomminsert]").on("click",function(){
+			var form="faq_list"+$(this).val();
+			var formData = $("#"+form).serialize();
+			console.log('formData', formData);
+			alert("afa");
+			$.ajax({
+				url: "<c:url value='/faqcomminsert'/>",
+				type: 'post',
+				dataType:'json',
+				data: formData,
+				success: function(json){
+					alert("됐다.");
+					faqcommentlist();
+				
+				}
 			});
-		};
+		});
 	});
-/* $(function(){
-	$("#faqcomminsert").on("click",function(event){
-		$.ajax({
-		url: '<c:url value="/faqcomminsert"/>',
-		type: 'post',
-		dataType:'json',
-	});
-}); */
-	
-	/* 
-		var formData=new FormData($(this).get(0));
-		console.log(formData);
-			alert(formData); */
-	/* 		  $.ajax({
-				  url: "<c:url value='/faqcomminsert'/>",
-				  type: 'post',
-				  dataType:'json',
-				  data: formData,
-				  cache: false,
-				  contentType: false,
-				  processData: false,
-				  success: function(json){
-					  alert("됐다.")
-					  if(json.code==='success'){
-						  $.getCommentList(pageNum);
-					  }else{
-						  $.msgBox(json.code);
-					  }
-				  }
-			  }); */
-/* 			$.ajax({   
-			type: "post",
-			url: "<c:url value='/faqcomminsert'/>",
-			success:function(data){
-				alert("wowowo");
-				alert(data);
-			}
-		}); */
-			
-/*	 		 	$.postJSON("<c:url value='/faqcomminsert'/>",function(data){
-	 		console.log("안보내지나?");
-			alert(data);
-			alert("aaaa");
-		});  */			 
-
 
  	
 
@@ -104,12 +80,13 @@
 		<input type="hidden" name="step" value={step}>
 		<div class="media">
 			<div class="media-left media-top">
-				<img src="2.png" class="media-object" style="width:60px">
+				<img src="<c:url value='/resources/images/ysy/1 (34).jpg'/>" class="media-object" style="width:60px">
 			</div>
 				<div class="media-body">
 				<h4 class="media-heading">Media Top</h4>
 				{qa_content}
 				<div>댓글</div>
+				<a href="faqdelete?qa_num={qa_num1}">삭제</a>
 			</div>
 		</div>				
 	</form>
@@ -117,7 +94,7 @@
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />
 
-<div class="panel-group container" id="faq_list">
+<div class="panel-group container" >
 	<h1>Q and A</h1>
 	<h2>Panels with Contextual Classes</h2>
 	<c:forEach var="faqlist" items="${faqlist }" varStatus="status">	
@@ -132,9 +109,9 @@
 				${faqlist.qa_content}<br>
 				${faqlist.qa_date }
 				${faqlist.admin_num }
-				<button class="btn btn-default faqcommbtn">댓글</button>
+				<button class="btn btn-default faqcommbtn" value="${faqlist.qa_num}">댓글</button>
 			</div>
-			<form class="hidediv faqcommform">
+			<form class="hidediv " name="faqcommform" id="faq_list${faqlist.qa_num}">
 				<div class="media">
 					<div class="media-left media-top">
 						<!-- <img src="2.png" class="media-object" style="width:60px"> -->
@@ -149,9 +126,10 @@
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">
-								<button class="btn btn-default" id="faqcomminsert">
+								<button class="btn btn-default" name="faqcomminsert" value="${faqlist.qa_num}">
 									<i class="glyphicon glyphicon-pencil"></i>
 								</button>
+								
 							</div>
 						</div>
 					</div>

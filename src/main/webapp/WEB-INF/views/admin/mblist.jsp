@@ -77,8 +77,9 @@
 					<c:otherwise>
 						<td>확인바람</td>
 					</c:otherwise>	 --%>		
-				<td class="usercontent">${user.user_status }</td> 
+			
 				<%-- </c:choose> --%>
+				<td class="usercontent">${user.user_status }</td> 
 				<td class="usercontent">${user.user_regdate }</td>
 				<td><i class="glyphicon glyphicon-remove userdelete"></i></td>
 			</tr>
@@ -107,7 +108,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">×</button>
-				<h4 class="modal-title">Question Editor</h4>
+				<h4 class="modal-title">사용자 등록</h4>
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal" action="mbinsert" method="post">
@@ -153,7 +154,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">×</button>
-				<h4 class="modal-title">Question Editor</h4>
+				<h4 class="modal-title">사용자 수정</h4>
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal" action="mbupdate" method="post">

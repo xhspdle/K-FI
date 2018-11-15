@@ -80,19 +80,15 @@ public class FaqController {
 	}
 	@RequestMapping(value="/faqcomminsert", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 /*	@RequestMapping(value="/faqcomminsert", method=RequestMethod.POST)*/
-	
-	public @ResponseBody void faqcomminsert(FaqVo vo,HttpServletRequest request) {
+	@ResponseBody
+	public String faqcomminsert(FaqVo vo,HttpServletRequest request) {
 		HttpSession session=request.getSession();
 		AdminVo adminvo=(AdminVo)session.getAttribute("admininfo");
 		int qa_num = faqservice.faqmaxnum()+1;
 		vo.setQa_num(qa_num);
 		vo.setAdmin_num(adminvo.getAdmin_num());
 		vo.setLev(vo.getLev()+1);
-		faqservice.faqinsert(vo);
 		
-/*		vo.setQa_content("이거되냐?");
-		vo.setQa_title("욕나오네");
-		vo.setUser_num(1);
 		System.out.println("////////////content"+vo.getQa_num());
 		System.out.println("////////////content"+vo.getUser_num());
 		System.out.println("////////////content"+vo.getQa_title());
@@ -101,9 +97,16 @@ public class FaqController {
 		System.out.println("////////////content"+vo.getLev());
 		System.out.println("////////////content"+vo.getStep());
 		System.out.println("////////////admin_num"+vo.getAdmin_num());
-	
-		System.out.println("////////////////////"+result);*/
-
+		
+		JSONObject obj = new JSONObject();
+		if(faqservice.faqinsert(vo) > 0) {
+			obj.put("result", "ok");
+		}else {
+			obj.put("result", "no");
+		}
+		System.out.println(vo.toString());
+		/*System.out.println("////////////////////"+result);*/
+		return obj.toString();
 	}
 	//Q&A 게시물 작성
 	@RequestMapping(value="/faqinsert",method=RequestMethod.POST)
@@ -119,6 +122,16 @@ public class FaqController {
 			return "redirect:/faqlist";
 		}else {
 			return ".faq.error";
+		}
+	}
+	@RequestMapping(value="/faqdelete",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String faqdelete(int qa_num) {
+		int result = faqservice.faqdelete(qa_num);
+		if(result>0) {
+			return "success";
+		}else {
+			return "false";
 		}
 	}
 }

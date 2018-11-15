@@ -79,7 +79,7 @@
 					 <p>Lorem ipsum...</p>
 					</*-/div>
 					</div> -->
-					<img src="<c:url value='/resources/images/1 (1).jpg'/>"
+					<img src="<c:url value='/resources/images/ysy/1 (1).jpg'/>"
 						style="width: 200px; heigh =150px; border: 3px solid gold; border-radius: 150px;">
 					${admin.admin_id } ${admin.admin_nick }
 				</div>

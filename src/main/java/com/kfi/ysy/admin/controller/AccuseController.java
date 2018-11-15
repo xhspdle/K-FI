@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,4 +67,14 @@ public class AccuseController {
 			obj.put("user_date",vo.getUser_regdate());
 		}
 	}*/
+	@RequestMapping(value="/acinsert", method=RequestMethod.GET)
+	public String acinsertForm() {
+		return ".admin.accuseinsert";
+	}
+	@RequestMapping(value="/acinsert", method=RequestMethod.POST)
+	public String acinsert(AccuseVo vo) {
+		vo.setAc_num(acservice.acgetcnt()+1);
+		acservice.acinsert(vo);
+		return ".admin.accuseinsert";
+	}
 }

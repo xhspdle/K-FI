@@ -209,31 +209,12 @@ footer .glyphicon {
 		width: 100%;
 		margin-bottom: 35px;
 	}
-	#abpopup{
-		display : none;
-		width: 90%;
-		max-height:100%;
-	    border-radius: 10px;
-	    padding: 10px;
-		background-color: #efffd7;
-		border: solid 3px orange; 
-	}
-	
 }
 
 
 @media screen and (max-width: 480px) {
 	.logo {
 		font-size: 150px;
-	}
-	#abpopup{
-		display : none;
-		width: 90%;
-		max-height:100%;
-	    border-radius: 10px;
-	    padding: 10px;
-		background-color: #efffd7;
-		border: solid 3px orange; 
 	}
 }
 
@@ -277,8 +258,8 @@ table tr td{
 	position: fixed;
 	width: 45%;
 	max-height:100%;
-	top: 100px;
-    left: 80px;
+	top: 50px;
+    left: 50px;
     border-radius: 10px;
     padding: 10px;
 	background-color: #efffd7;
@@ -332,6 +313,15 @@ body.modal-open::-webkit-scrollbar {
         max-width: 47%;
         cursor: pointer;
     }
+    #abpopup{
+		display : none;
+		width: 75%;
+		max-height:100%;
+	    border-radius: 10px;
+	    padding: 10px;
+		background-color: #efffd7;
+		border: solid 3px orange; 
+	}
 }
 @media screen and (max-width: 600px) {
     .flexcolumn {
@@ -340,6 +330,15 @@ body.modal-open::-webkit-scrollbar {
         max-width: 100%;
         cursor: pointer;
     }
+	#abpopup{
+		display : none;
+		width: 80%;
+		max-height:100%;
+	    border-radius: 10px;
+	    padding: 10px;
+		background-color: #efffd7;
+		border: solid 3px orange; 
+	}
 }
 .board_content_ad{
 	background-color:#f0f0f5;
@@ -378,4 +377,39 @@ body.modal-open::-webkit-scrollbar {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+
+/*   스킨  관련   */
+#modifycnskin{
+	width: 85%;
+	height: 70%;
+	background-color: #f0f0f5;
+	border-radius: 8px;
+	margin-top: 5%;
+}
+#commskinlist{
+	width: 85%;
+	height: 85%;
+	margin: auto;
+}
+.communityskinimg{
+	background-color: red;
+	max-height: 400px;
+}
+#cnskinprofile{
+	position: relative;
+	width :150px; 
+	max-height: 150px;  
+	background-position: center; 
+	left: 45%; 
+	border-radius: 150px; 
+	border: solid 5px gold;
+}
+#cnskincover{
+	width :100%; 
+	max-height: 400px;  
+	width: auto;  
+	background-position: center;   
+	background-repeat: no-repeat;  
+	background-size: cover;
 }

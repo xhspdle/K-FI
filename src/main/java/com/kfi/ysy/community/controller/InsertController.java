@@ -10,4 +10,8 @@ public class InsertController {
 	public String insertForm() {
 		return ".community.board.insert";
 	}
+	public String insert() {
+		
+		return null;
+	}
 }
