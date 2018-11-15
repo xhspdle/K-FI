@@ -13,22 +13,25 @@
 			<div class="panel-heading" id="${vo.mb_num }">
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
-						<a href="<c:url value='/mypage/myboard/select?mb_num=${vo.mb_num }&keyword=${keyword }'/>" class="postA">
+						<a href="<c:url value='/mypage/myboard/select?mb_num=${vo.mb_num }&keyword=${keyword }'/>" 
+						class="postA">
 						${vo.mb_title }
 						</a>
 					</h1>
 				</blockquote>
 				<div class="dropdown boardOption">
-					<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+					<button class="btn dropdown-toggle 
+					<c:if test="${vo.user_num!=sessionScope.user_num}">disabled</c:if>" 
+					type="button" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
-						<li <c:if test="${vo.user_num!=sessionScope.user_num}">class="disabled"</c:if>>
+						<li>
 							<a href="#updateModal" data-toggle="modal" data-mb-num="${vo.mb_num }">
 								<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
 							</a>
 						</li>
-						<li <c:if test="${vo.user_num!=sessionScope.user_num}">class="disabled"</c:if>>
+						<li>
 							<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${vo.mb_num }">
 								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 							</a>

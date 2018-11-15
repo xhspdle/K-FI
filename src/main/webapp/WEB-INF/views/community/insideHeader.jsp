@@ -64,6 +64,7 @@
 </div>
 <div class="navbar navbar-comm-menu" data-spy="affix" data-offset-top="450">
 	<ul class="nav navbar-nav navbar-center">
+		<li><a href="#"><i class="glyphicon glyphicon-check"></i>WRITE</a></li>
 		<li><a href="#"><i class="glyphicon glyphicon-star"></i>POPULAR</a></li>
 		<li><a href="#"><i class="glyphicon glyphicon-time"></i>LATEST</a></li>
 		<li><a href="#"><i class="glyphicon glyphicon-stats"></i>POLLS</a></li>

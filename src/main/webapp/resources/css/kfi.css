@@ -222,6 +222,25 @@ footer .glyphicon {
 		width: 300px;
 		margin: auto;
 	}
+	.navbar-comm-menu {
+		position: relative;
+		top: 0px;
+		left: 50%;
+		transform: translate(-50%, 0%);
+		width: 480px !important;
+	}
+	.navbar-comm-menu .navbar-center{
+		margin: 0 !important;
+	}
+	.navbar-comm-menu .navbar-center>li {
+		float: left;
+		margin-right: 5px !important;
+	}
+	.navbar-comm-menu .navbar-center>li>a {
+		padding-left: 8px !important;
+		padding-right: 11px !important;
+		font-size: 8px !important;
+	}
 }
 @media screen and (max-width: 480px) {
 	.logo {
@@ -823,7 +842,7 @@ body.modal-open::-webkit-scrollbar {
 	top: 0px;
 	left: 50%;
 	transform: translate(-50%, 0%);
-	width: 35%;
+	width: 724px;
 	padding: 10px;
 	z-index: 90;
 }
@@ -874,10 +893,14 @@ body.modal-open::-webkit-scrollbar {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.25);
 	-webkit-transition: all .5s ease-in-out;
 	transition: all .5s ease-in-out;
+	cursor: pointer;
 }
 #commNotice .commNoticeList>li:hover {
 	color: #f4511e;
 	background-color: white;
+}
+#commNotice .commNoticeList>li>a {
+	display: block;
 }
 #commNotice .commNoticeList>li>a:hover {
 	text-decoration: none;

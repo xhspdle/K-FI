@@ -21,9 +21,16 @@
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
-						<li><a href="#updateModal" data-toggle="modal" data-mb-num="${boardVo.mb_num }"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit</a></li>
-						<li><a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">
-						<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a></li>
+						<li>
+							<a href="#updateModal" data-toggle="modal" data-mb-num="${boardVo.mb_num }">
+								<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
+							</a>
+						</li>
+						<li>
+							<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">
+								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
+							</a>
+						</li>
 						<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
 					</ul>
 				</div>
