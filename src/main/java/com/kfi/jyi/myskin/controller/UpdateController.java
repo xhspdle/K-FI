@@ -26,7 +26,6 @@ public class UpdateController {
 
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		session.setAttribute("user_num", 1);
 		int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
@@ -58,7 +57,9 @@ public class UpdateController {
 		hm.put("ms_profile", ms_profile);
 		hm.put("ms_cover", ms_cover);
 		hm.put("ms_name", ms_name);
+		System.out.println("ms_name:"+ms_name);
 		hm.put("ms_color", ms_color);
+		System.out.println("ms_color:"+ms_color);
 		hm.put("ms_msg", ms_msg);
 		hm.put("ms_using",Integer.parseInt(ms_using));
 		int result = service.update(hm);

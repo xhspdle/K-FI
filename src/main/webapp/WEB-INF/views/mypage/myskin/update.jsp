@@ -50,13 +50,13 @@
         <div class="form-group">
 	      <label class="control-label col-sm-2" for="msg">프로필 사진:</label>
 	      <div class="col-sm-10">   
-	        <input type="file" class="form-control" id="ms_profile" name="ms_profile" value="${msvlist.msp_orgimg }">
+	        <input type="file" class="form-control" id="ms_profile" name="ms_profile" >
 	      </div>
    		</div>
         <div class="form-group">
 	      <label class="control-label col-sm-2" for="msg">커버 사진:</label>
 	      <div class="col-sm-10">          
-	        <input type="file" class="form-control"  id="ms_cover" name="ms_cover" value="${msvlist.msc_orgimg }">
+	        <input type="file" class="form-control"  id="ms_cover" name="ms_cover" >
 	      </div>
     	</div>
 	    <div class="form-group">        

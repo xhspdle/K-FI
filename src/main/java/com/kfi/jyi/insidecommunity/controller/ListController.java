@@ -1,4 +1,4 @@
-package com.kfi.jyi.community.controller;
+package com.kfi.jyi.insidecommunity.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,17 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.ldk.service.CommonService;
 
-@Controller
+@Controller("insideCommunityListController")
 public class ListController {
 	@Autowired 
-	@Qualifier("communityServiceImpl") private CommonService service;
+	@Qualifier("insideCommunityServiceImpl") private CommonService service;
 
 	// model attribute annotation - 프로필, 커버 사진 넣기
 
 	
-
 	
-	//선택한 커뮤니티의 전체 게시물 불러오기
+	//해당 커뮤니티의 전체 게시물 불러오기
 	@RequestMapping(value="/community/selectComm",method=RequestMethod.GET)
 	public String selectComm(String comm_num, Model model) {
 		HashMap<String, Object> map=new HashMap<>();

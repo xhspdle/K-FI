@@ -20,12 +20,13 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<c:url value='/communityMain/'/>">COMMUNITY</a></li>
+				<li><a href="<c:url value='/communityMain'/>">COMMUNITY</a></li>
 				<li class="dropdown">
 					<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
 					<ul class="dropdown-menu">
 						<li><a href="#" data-toggle="modal" data-target="#writeModal">글쓰기</a></li>
 						<li><a href="<c:url value='/mypage/mycomm/list'/>">마이커뮤니티</a></li>
+						<li><a href="<c:url value='/mypage/myfriend/list'/>">친구목록</a></li>
 						<li><a href="<c:url value='/mypage/mycomm/calendar'/>">일정보기</a></li>
 						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
 						<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>

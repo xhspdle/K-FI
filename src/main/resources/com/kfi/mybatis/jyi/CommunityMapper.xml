@@ -24,5 +24,24 @@
 		</if>
 	</select>
 	
+	<select id="bestSix" resultType="community">
+		select * from community 
+		where comm_num in (
+                    select comm_num 
+                    from (
+                         select cul.*, rownum rnum 
+                         from (
+                              select count(cul_num) 
+                              from comm_user_list 
+                              order by count(user_num) desc
+                              ) cul
+                        )
+                 <![CDATA[  where rnum <7 ]]>
+                    )
+	</select>
+
+
+
+
 
 </mapper>

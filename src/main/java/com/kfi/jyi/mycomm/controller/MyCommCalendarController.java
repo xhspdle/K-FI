@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,29 @@ public class MyCommCalendarController {
 	@Autowired
 	private MyCommCalendarService service;
 	
+	@Autowired
+	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
+	
+	@ModelAttribute("msv")
+	public MySkinViewVo myskin(HttpSession session){
+		int user_num=(Integer)session.getAttribute("user_num");
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("user_num", user_num);
+		map.put("ms_using",1);
+		List<MySkinViewVo> list=(List<MySkinViewVo>)mySkinService.list(map);
+		MySkinViewVo msv=new MySkinViewVo(0, 0, "±âº»", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
+		if(list!=null) {
+			for(MySkinViewVo vo: list) {
+				msv=vo;
+			}
+		}
+		return msv;
+	}
+
+	
+	
+	
+	
 	@RequestMapping(value = "/mypage/mycomm/calendar", method = RequestMethod.GET)
 	public String mycommcalendar(Model model, HttpSession session,
 			@RequestParam(defaultValue = "all", required = false, value = "comm_num") String comm_num, String comm_name,
@@ -32,9 +56,9 @@ public class MyCommCalendarController {
 
 		MyCalendar mc = new MyCalendar();
 		List<CommCalendarVo> monthlist = null;
-		// int user_num=(Integer)session.getAttribute("user_num");
+		int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> hm = new HashMap<>();
-		hm.put("user_num", 1); // user_num
+		hm.put("user_num",  user_num); 
 		if (!(comm_num.equals("all"))) {
 			int commNum = Integer.parseInt(comm_num);
 			hm.put("comm_num", commNum);

@@ -22,18 +22,18 @@ import com.kfi.ysy.vo.CommSkinProfileVo;
 @Controller("myCommListController")
 public class MyCommListController {
 	@Autowired 
-	@Qualifier("communityServiceImpl") private CommonService service;
+	@Qualifier("insideCommunityServiceImpl") private CommonService service;
 	
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
 
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		session.setAttribute("user_num", 1);
 		int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
 		map.put("ms_using",1);
+		//select로 코드 수정하기
 		List<MySkinViewVo> list=(List<MySkinViewVo>)mySkinService.list(map);
 		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
 		if(list!=null) {
@@ -50,7 +50,6 @@ public class MyCommListController {
 	public String list(HttpSession session, Model model,String commAdmin) {
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("session", session);
-		map.put("listType","myPageMyCommunity");
 		map.put("commAdmin",commAdmin); 
 
 		/* 조건에 따라 마이 커뮤니티 목록 불러오기 */

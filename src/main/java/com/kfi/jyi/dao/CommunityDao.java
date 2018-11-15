@@ -26,6 +26,7 @@ public class CommunityDao {
 		return session.selectList(NAMESPACE+".select_mycommlist",map);
 	}
 	
-	
-	
+	public List<CommunityVo> bestSix(){
+		return session.selectList(NAMESPACE+".bestSix");
+	}
 }

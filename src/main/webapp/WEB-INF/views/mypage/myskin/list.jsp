@@ -13,13 +13,17 @@
 	    </c:forEach>
       <li class="divider"></li>
     </ul>
-   	<a class="myskin_ud_add" href="<c:url value='/mypage/myskin/insertForm' />">스킨 추가</a>
-	<a class="myskin_ud_default" href="<c:url value='/mypage/myskin/default' />">기본 이미지로 변경</a>
+    <span>
+	   	<a class="myskin_ud_add" href="<c:url value='/mypage/myskin/insertForm' />">스킨 추가</a>
+		<a class="myskin_ud_default" href="<c:url value='/mypage/myskin/default' />">기본 이미지로 변경</a>
+	</span>
   </div>
 	</div>
-		<a class="myskin_ud_apply" href="#">적용</a>
-		<a class="myskin_ud_update" href="#">수정</a> 
-		<a class="myskin_ud_del" href="#">삭제</a>
+		<span style="float:right;width: 18%;display: flex;margin-right: 17%;margin-top: 3%;}">
+			<a class="myskin_ud" href="#" id="applyMySkin">적용</a>
+			<a class="myskin_ud" href="#" id="updateMySkin">수정</a> 
+			<a class="myskin_ud" href="#" id="deleteMySkin">삭제</a>
+		</span>
 		<div class="pre_cover" id="myskin_list_cover" style="margin-top: 2%;background-size: cover !important;">
 			<img src="" class="img-circle"
 				style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;

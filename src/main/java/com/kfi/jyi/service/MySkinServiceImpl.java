@@ -76,7 +76,6 @@ public class MySkinServiceImpl implements CommonService {
 			ms_msg = "";
 
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload/img");
-		System.out.println(uploadPath+" !!!!!!!!경로");
 		String[] savimg = new String[2];
 		try {
 			int ms_num = msdao.getMaxNum();
@@ -137,7 +136,6 @@ public class MySkinServiceImpl implements CommonService {
 		int ms_num=(Integer) hm.get("ms_num");
 		//기본 이미지로 적용하기
 		if(ms_num==-1) {
-			//msdao.update_defalt(user_num); 
 			ms_num = msdao.getMaxNum() +1;
 			msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", "", 1));	
 			int msp_num=mspdao.getMaxNum()+1;
@@ -154,24 +152,24 @@ public class MySkinServiceImpl implements CommonService {
 		MySkinViewVo msvVo=(MySkinViewVo)select(ms_num);
 		//선택한 스킨 적용하기
 		if(ms_using==2) {
-			ms_using=1;
-			msdao.update(new MySkinVo(ms_num, user_num, msvVo.getMs_name(), msvVo.getMs_color(), msvVo.getMs_msg(),ms_using));
+			msdao.update(new MySkinVo(ms_num, user_num, msvVo.getMs_name(), msvVo.getMs_color(), msvVo.getMs_msg(),2));
 			HashMap<String, Object> updateElse=new HashMap<>();
 			updateElse.put("user_num", user_num);
 			updateElse.put("ms_num", ms_num);
 			msdao.update_not_using(updateElse); 
 			return 1;
 		}
+		MultipartFile ms_profile = (MultipartFile) hm.get("ms_profile");
+		MultipartFile ms_cover = (MultipartFile) hm.get("ms_cover");
 		String ms_name = (String) hm.get("ms_name");
 		String ms_color = (String) hm.get("ms_color");
 		String ms_msg = (String) hm.get("ms_msg");
-		MultipartFile ms_profile = (MultipartFile) hm.get("ms_profile");
-		MultipartFile ms_cover = (MultipartFile) hm.get("ms_cover");
-		if (ms_name == null || ms_name.equals(""))
+		if (ms_name == null) {
 			ms_name = msvVo.getMs_name(); 
-		if (ms_msg == null || ms_msg.equals(""))
+		}
+		if (ms_msg == null) {
 			ms_msg = "";
-
+		}
 		msdao.update(new MySkinVo(ms_num, user_num, ms_name, ms_color, ms_msg, ms_using));
 		int update = 0;
 		for (int i = 0; i < 2; i++) {
@@ -244,6 +242,20 @@ public class MySkinServiceImpl implements CommonService {
 				if (file.delete()) System.out.println("파일 삭제 성공");
 			}
 			msdao.delete(ms_num);
+			
+			//모두 삭제되었으면 기본 스킨 하나 넣기 
+			HashMap<String, Object> map=new HashMap<>();
+			int user_num=(Integer)session.getAttribute("user_num");
+			map.put("user_num", user_num);
+			List<MySkinViewVo> skinList=(List<MySkinViewVo>)msvdao.list(map);
+			if(skinList==null) {
+				ms_num = msdao.getMaxNum() +1;
+				msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", "", 1));	
+				int msp_num=mspdao.getMaxNum()+1;
+				int msc_num=mscdao.getMaxNum()+1;
+				mspdao.insert(new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));
+				mscdao.insert(new MySkinCoverVo(msc_num, ms_num, "logo2.png", "logo2.png"));
+			}
 			return 1;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

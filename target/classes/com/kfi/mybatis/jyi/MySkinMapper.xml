@@ -18,7 +18,7 @@
 	
 	<update id="update_myskin" parameterType="myskin">
 		<choose>
-			<when test="ms_using==1">
+			<when test="ms_using==2">
 				update my_skin set ms_using=1 where ms_num=#{ms_num} 
 			</when>
 			<otherwise>
@@ -32,9 +32,6 @@
 		where ms_num in (select ms_num from my_skin where user_num=#{user_num} and ms_num != #{ms_num})
 	</update>
 
-	<update id="update_defalt" parameterType="int">
-		update my_skin set ms_using=0 where user_num=#{user_num}
-	</update>
 
 	<select id="getCount_like_Skin" parameterType="int" resultType="int">
 		select NVL(count(ms_num),0) from my_skin where user_num=#{user_num} and ms_name like '%스킨%'
