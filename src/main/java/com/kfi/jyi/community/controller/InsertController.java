@@ -23,6 +23,7 @@ public class InsertController {
 		return ".community.createCommunity.insert";
 	}
 	
+	//새 커뮤니티 등록하기
 	@RequestMapping(value="/community/newComm/insert",method=RequestMethod.POST)
 	public String insert(String comm_name, String comm_content, String cs_color,
 			MultipartFile comm_skin_profile, MultipartFile comm_skin_cover,HttpSession session) {

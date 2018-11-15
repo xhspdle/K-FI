@@ -22,7 +22,7 @@ $(function() {
 	
 	function makeCalendar(year, month){
 		$('#wrap_icon_calendar').empty();
-		$("#wrap_icon_calendar").addClass("well").css("width",320);
+		$("#wrap_icon_calendar").addClass("well").css("width",245);
 		var date=new Date();
 		if(year==="year"){
 			year=date.getFullYear();
@@ -40,11 +40,11 @@ $(function() {
 		if(year > nowDateYear ){
 			nowDateYear=year;
 		}
-		var monthEng=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-				'October', 'November', 'December'];
+		var monthEng=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+				'Oct', 'Nov', 'Dec'];
 		$("#wrap_icon_calendar").append(
 				"<h4 id='miniym'><span><a id='prevmon' class='btn btn-default' role='button'> < </a>"
-				+"<select id='yearArr'></select>"+" "+monthEng[month]+" "
+				+"<select id='yearArr'></select></span><span>"+" "+monthEng[month]+" "
 				+"<a id='aftmon' class='btn btn-default' role='button'> > </a>"
 				+"</span></h4>");
 		for(var i=nowDateYear;i>=2000;i--){
@@ -137,7 +137,6 @@ $(function() {
 		var day=$(this).prop("id");
 		var d=day.slice(1,2);
 		if(d==='') day="0"+day;
-		console.log("#"+parseInt(year)+"-"+(parseInt(month)+1)+"-"+parseInt(day));
 		var top=$("#"+parseInt(year)+"-"+(parseInt(month)+1)+"-"+parseInt(day)).offset().top; 
 		// 상단을 기준으로 #요소가 위치한 거리를 절대좌표로 반환
 		$("html, body").animate({
@@ -317,14 +316,14 @@ $(function() {
 		var getPageContext=$('#getPageContext').val();
 		$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:ms_num},function(data){
 			var vo=data.vo;
-			$('.myskin_ud_apply')
+			$('#applyMySkin')
 			.prop('href',getPageContext+'/mypage/myskin/applySkin?ms_num='+vo.ms_num)
 			.css({
 				'display':'block',
 				'background-color':vo.ms_color
 			}); 
-			$('.myskin_ud_update').prop('href',getPageContext+'/mypage/myskin/updateform?ms_num='+vo.ms_num).css({'display':'block','background-color':vo.ms_color});
-			$('.myskin_ud_del').prop('href',getPageContext+'/mypage/myskin/delete?ms_num='+vo.ms_num).css({'display':'block','background-color':vo.ms_color});
+			$('#updateMySkin').prop('href',getPageContext+'/mypage/myskin/updateform?ms_num='+vo.ms_num).css({'display':'block','background-color':vo.ms_color});
+			$('#deleteMySkin').prop('href',getPageContext+'/mypage/myskin/delete?ms_num='+vo.ms_num).css({'display':'block','background-color':vo.ms_color});
 			$('#myskin_list_cover').css({
 				'display':'block',
 				'background': 'url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')'
@@ -337,6 +336,11 @@ $(function() {
 			});
 			$('#myskin_list_msg').text(vo.ms_msg);
 		});
+	});
+	
+	$('#ms_color').on('change',function(){
+		var vv=$(this).val();
+		alert(vv);
 	});
 	
 	/////////////////////////새 커뮤니티 등록하기

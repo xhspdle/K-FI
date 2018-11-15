@@ -18,11 +18,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kfi.dgl.service.MembersService;
 import com.kfi.dgl.vo.MembersVo;
 import com.kfi.jyi.vo.MySkinViewVo;
+import com.kfi.ldk.service.CommonService;
 
 @Controller(value="myInfoListController")
 public class ListController {
 	@Autowired private MembersService service;
 
+	@Autowired
+	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
+
+	@ModelAttribute("msv")
+	public MySkinViewVo myskin(HttpSession session){
+		int user_num=(Integer)session.getAttribute("user_num");
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("user_num", user_num);
+		map.put("ms_using",1);
+		List<MySkinViewVo> list=(List<MySkinViewVo>)mySkinService.list(map);
+		MySkinViewVo msv=new MySkinViewVo(0, 0, "±âº»", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
+		if(list!=null) {
+			for(MySkinViewVo vo: list) {
+				msv=vo;
+			}
+		}
+		return msv;
+	}
+	
 	@RequestMapping(value="/mypage/myinfo/password",method=RequestMethod.GET)
 	public String password() {
 		return ".mypage.myinfo.password";

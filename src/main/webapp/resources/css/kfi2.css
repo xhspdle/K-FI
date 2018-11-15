@@ -1,5 +1,43 @@
 @charset "UTF-8";
 
+/* myfriends list */
+.myFriendContainer {
+	    width: 100%;
+    border-radius: 5px;
+    padding: 4%;
+}
+
+.myFriendContainer::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.myFriendContainer img {
+	width: 75px;
+    height: 70px;
+  float: left;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.myFriendContainer span {
+	    word-break: break-all;
+  font-size: 20px;
+  color: black;
+}
+
+@media (max-width: 500px) {
+  .myFriendContainer {
+      text-align: center;
+  }
+  .myFriendContainer img {
+      margin: auto;
+      float: none;
+      display: block;
+  }
+}
+/*/////////////////////////////////////////////////////*/
 /* community */
 #pre_newComm_content {
 	overflow: hidden;
@@ -164,74 +202,39 @@
 	border-radius: 10%;
 }
 
-/* 수정 */
-.myskin_ud_update {
-	display: none;
-	margin-left: 58%;
-	margin-top: 40px;
-	position: absolute;
-	background-color: #00cee8;
-	border-radius: 10px;
-	padding: 5px 10px;
-	min-width: 53px;
-	color: white;
-	font-weight: 700;
-	text-decoration-line: none !important;
-}
 /* 스킨 추가 */
 .myskin_ud_add {
-	margin-left: 1%;
-	margin-top: -1px;
-	position: absolute;
-	background-color: #00cee8;
-	border-radius: 10px;
-	padding: 5px 10px;
-	min-width: 53px;
-	color: white;
-	font-weight: 700;
-	text-decoration-line: none !important;
+    background-color: #00cee8;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 700;
+    text-decoration-line: none !important;
 }
+
+
 /* 기본값으로 적용 */
-.myskin_ud_default {
-	margin-left: 10%;
-	margin-top: -1px;
-	position: absolute;
-	background-color: #00cee8;
-	border-radius: 10px;
-	padding: 5px 10px;
-	min-width: 53px;
-	color: white;
-	font-weight: 700;
-	text-decoration-line: none !important;
+ .myskin_ud_default {
+    background-color: #00cee8;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 700;
+    text-decoration-line: none !important;
 }
+
 /* 적용 */
-.myskin_ud_apply {
-	display: none;
-	margin-left: 54%;
-	margin-top: 40px;
-	position: absolute;
-	background-color: #00cee8;
-	border-radius: 10px;
-	padding: 5px 10px;
-	min-width: 53px;
-	color: white;
-	font-weight: 700;
-	text-decoration-line: none !important;
-}
-/* 삭제 */
-.myskin_ud_del {
-	display: none;
-	margin-left: 62%;
-	margin-top: 40px;
-	position: absolute;
-	background-color: #00cee8;
-	border-radius: 10px;
-	padding: 5px 10px;
-	min-width: 53px;
-	color: white;
-	font-weight: 700;
-	text-decoration-line: none !important;
-}
+ .myskin_ud {
+     margin-left: 2.5%;
+   	display: none;
+   	width: 24%;
+    background-color: #00cee8;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 700;
+    text-decoration-line: none !important;
+ }
 
 #myskin_list_nickname {
 	width: max-content;
@@ -256,58 +259,25 @@
 	overflow: visible;
 }
 
-/* mypate mini_Calendar */
-
-.sidenav {
-      width: 37%;
-    position: fixed;
-    z-index: 1;
-    top: 55%;
-    left: 81%;
-    overflow-x: hidden;
-    height: 52%;
+/* mypage mini_Calendar */
+#yearArr {
+	font-size: smaller;
+	margin-left: 4%;
 }
-
-.sidenav #icon_calendar {
-       padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #2196F3;
-    display: block;
-    color: #00cee8;
-    width: 10%;
-    font-size: 40px;
-    border-radius: 50%;
-    background: lightcyan;
-    padding: 2% 7% 2% 2%;
-    border: 2px #00cee8 solid;
-}
-/* 
-#icon_calendar {
-		position: absolute;
-      margin-left: 89%;
-    margin-top: 36%;
-   	color: #00cee8;
-	font-size: 40px;
-	border-radius: 50%;
-	background: orange;
-	padding: 0.5% 0.5% 0.5% 0.5%;
-	border: 1px red solid;
-} */
-
 
 #wrap_icon_calendar {
-	height: 340px !important;
-	position: absolute;
-	width: 320px;
-	margin-top: 2px;
+	    height: 265px !important;
+    position: absolute;
+    /* width: 320px; */
+    margin-top: -250px;
+    margin-left: -320%;
 }
 
 .mini_cal_week {
 	float: left;
-	width: 40px;
-	height: 28px;
-	font-size: 15px;
+	width: 14.2%;
+	height: 22px;
+	font-size: 11px;
 	text-align: center;
 	border: 1px solid #00cee8;
 	color: white;
@@ -316,9 +286,9 @@
 
 .mini_cal {
 	float: left;
-	width: 40px;
-	height: 40px;
-	font-size: x-large;
+	width: 29px;
+	height: 29px;
+	font-size: small !important;
 	text-align: center;
 	border: 1px solid lightgray;
 }
@@ -340,14 +310,15 @@
 
 #prevmon {
 	font-size: 10px;
-	position: absolute;
-	margin-left: -46px;
+    position: absolute;
+    margin-left: -21%;
 }
 
 #aftmon {
-	font-size: 10px;
-	position: absolute;
-	margin-left: 19px;
+	    font-size: 10px;
+    position: absolute;
+    margin-left: 7%;
+}
 }
 
 .jyi_cal_sc {
@@ -392,7 +363,7 @@
 }
 
 .mini_cal_a {
-	font-size: 25px;
+	font-size: 15px;
 	color: black;
 	text-decoration: none;
 }

@@ -39,7 +39,4 @@ public class MySkinDao {
 		return session.update(NAMESPACE+".update_not_using", map);
 	}
 	
-	public int update_defalt(int user_num) {
-		return session.update(NAMESPACE+".update_defalt",user_num);
-	}
 }

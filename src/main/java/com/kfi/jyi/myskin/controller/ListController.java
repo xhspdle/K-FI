@@ -26,7 +26,6 @@ public class ListController {
 	
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		session.setAttribute("user_num", 1);
 		int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
@@ -43,8 +42,6 @@ public class ListController {
 
 	@RequestMapping(value="/mypage/myskin/list")
 	public String getMySkin(HttpSession session, Model model) { 
-		session.setAttribute("user_num", 1);
-		session.setAttribute("user_nickname", "nicknameTEST");
 		int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);

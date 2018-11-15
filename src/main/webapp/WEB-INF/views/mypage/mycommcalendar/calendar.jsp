@@ -35,12 +35,12 @@
 				eventMouseout:function(calEvent,jsEvent){
 					$(this).children('.calevent').css('display','none');
 				},
-				eventClick:function(event){
+				/* eventClick:function(event){
 					if(event.url){
 						location.href=event.url;
 						return false;
 					}
-				}, eventColor: '#00cee8'
+				}, */ eventColor: '#00cee8'
 		})
 		$("#mypage_communitylist").on('change',function(){
 			var comm_num=$('#mypage_communitylist option:selected').val();
@@ -59,16 +59,19 @@
 	});
 </script>
 <div id="mypage_comm_calendar_wrap" style="width: 90%; margin: auto; margin-top: 30px;">
-	<select id="mypage_communitylist" class="form-control" style="width:20%;" >
-	<option value="all">전체</option>
-	<c:forEach var="communitylist" items="${ communitylist}">
-	<option value="${communitylist.comm_num }" <c:if test="${communitylist.comm_name ==comm_name }"> selected="selected"</c:if>>${communitylist.comm_name }</option> 
-	</c:forEach>
-	</select>
-	<select id="comm_gathering" class="form-control" style="width:10%;">
-		<option value="gathering">전체</option>
-		<option value="attend" <c:if test="${gathering =='attend' }"> selected="selected"</c:if>>참석</option>
-		<option value="not_attend" <c:if test="${gathering =='not_attend' }"> selected="selected"</c:if>>불참</option>
-	</select>
+	<span>
+		<select id="mypage_communitylist" class="form-control" style="width:20%;" >
+		<option value="all">커뮤니티</option>
+		<c:forEach var="communitylist" items="${ communitylist}">
+		<option value="${communitylist.comm_num }" <c:if test="${communitylist.comm_name ==comm_name }"> selected="selected"</c:if>>${communitylist.comm_name }</option> 
+		</c:forEach>
+		</select>
+		<select id="comm_gathering" class="form-control" style="width:10%;margin: -2.5% 0% 0% 21%;">
+			<option value="gathering">전체</option>
+			<option value="attend" <c:if test="${gathering =='attend' }"> selected="selected"</c:if>>참석</option>
+			<option value="not_attend" <c:if test="${gathering =='not_attend' }"> selected="selected"</c:if>>불참</option>
+		</select>
+	</span>
+	<br>
 	<div id='mypage_comm_calendar'></div>
 </div>

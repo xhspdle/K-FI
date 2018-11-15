@@ -24,7 +24,6 @@ public class DeleteController {
 
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		session.setAttribute("user_num", 1);
 		int user_num=(Integer)session.getAttribute("user_num");
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
