@@ -124,14 +124,14 @@ public class FaqController {
 			return ".faq.error";
 		}
 	}
-	@RequestMapping(value="/faqdelete",produces="application/json;charset=utf-8")
-	@ResponseBody
+	//Q&A게시물 삭제
+	@RequestMapping(value="/faqdelete",method=RequestMethod.GET)
 	public String faqdelete(int qa_num) {
 		int result = faqservice.faqdelete(qa_num);
 		if(result>0) {
-			return "success";
+			return "redirect:/faqlist";
 		}else {
-			return "false";
+			return ".faq.error";
 		}
 	}
 }

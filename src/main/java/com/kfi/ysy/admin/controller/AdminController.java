@@ -153,6 +153,7 @@ public class AdminController {
 			}
 		}
 	}*/
+	//관리자 수정
 	@RequestMapping(value="/admodify", method=RequestMethod.POST)
 	public String admodify(AdminVo vo) {
 		int result=service.admodify(vo);
@@ -163,9 +164,16 @@ public class AdminController {
 		}
 	}
 	//관리자 삭제
-	public String addelete(int admin_num) {
+	@RequestMapping(value="/addelete", method=RequestMethod.GET)
+	public String addelete(int admin_num, HttpSession session) {
+		System.out.println(admin_num);
 		int result = service.addelete(admin_num);
-		return null;
+		if(result>0) {
+			session.invalidate();
+			return "redirect:/adminlist";
+		}else {
+			return null;
+		}
 	}
 	//관리자 정보 및 스킨
 	@RequestMapping(value="/admindetail", method=RequestMethod.GET)

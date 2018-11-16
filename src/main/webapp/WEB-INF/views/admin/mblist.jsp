@@ -4,17 +4,6 @@
 
 <script type="text/javascript">
 	$(function(){
-		$(".userdelete").click(function(){
-			var result=confirm("정말로????");
-			var user_num=$(this).parent().parent().children().first().text();
- 			if(result){
-				location.href="mbdelete?user_num="+user_num;
-			}else{
-				return;
-			}
-		});
-	});
-	$(function(){
 		$(".usercontent").attr({'data-toggle':'modal','data-target':'#usermodify'});
 		$(".usercontent").click(function(){
 			var user_num=$(this).parent().children().first().text();
@@ -29,22 +18,16 @@
 				$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
 			}); 
 		});
+		$(".userdelete").click(function(){
+			var result=confirm("정말로????");
+			var user_num=$(this).parent().parent().children().first().text();
+ 			if(result){
+				location.href="mbdelete?user_num="+user_num;
+			}else{
+				return false;
+			}
+		});
 	});
-/* 	
-	$(function() { 
-		if ($.cookie('hnnpop') == undefined) { 
-			$("#pop-wrap").show(); 
-			} 
-		$("#pop-close-btn").bind("click",function(){ 
-			if ($("#pop-day").is(":checked")){ 
-				$.cookie('hnnpop', '1', { expires: 1, path : '/' }); 
-				} 
-			$("#pop-wrap").slideUp(200); return false; 
-			}); 
-		}); 
-
-	 */
-
 </script>
 <div id="memberslist"> 
 	<h1>
@@ -67,25 +50,24 @@
 				<td class="usercontent">${user.user_id }</td>
 				<td class="usercontent">${user.user_nickname }</td>
 				<td class="usercontent">${user.user_email }</td>
-<%-- 				<c:choose>
+ 				<c:choose>
 					<c:when test="${user.user_status==1}">
-						<td>정상</td>
+						<td class="usercontent">정상</td>
 					</c:when>
 					<c:when test="${user.user_status==2}">
-						<td>정지</td>
+						<td class="usercontent">정지</td>
 					</c:when>
 					<c:otherwise>
-						<td>확인바람</td>
-					</c:otherwise>	 --%>		
-			
-				<%-- </c:choose> --%>
-				<td class="usercontent">${user.user_status }</td> 
+						<td class="usercontent">확인바람</td>
+					</c:otherwise>					
+				 </c:choose>
+		<%-- 	<td class="usercontent">${user.user_status }</td>  --%>
 				<td class="usercontent">${user.user_regdate }</td>
 				<td><i class="glyphicon glyphicon-remove userdelete"></i></td>
 			</tr>
 		</c:forEach>
-	</table>		
-
+	</table>
+			
 	<div>
 			<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
@@ -188,8 +170,8 @@
 						<div class="col-sm-10">
 							<select class="form-control" name="user_status">
 								<option value="1">1번 정상</option>
-								<option value="2">2번 기간정지</option>
-								<option value="3">3번 정지</option>
+								<option value="2">2번 정지</option>
+								<option value="3">3번 기간정지</option>
 							</select>
 						</div>
 					</div>

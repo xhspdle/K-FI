@@ -25,7 +25,9 @@
 </div>
 
 <div id="modifycnskin" class="modal container">
+		<div class="modal-header">
 	<h3>수정하기</h3>
+	</div>
 	<form method="post" action="#" name="cnskinfrm">
 		<div id="currskin" style="padding: 20px;" >			
 		

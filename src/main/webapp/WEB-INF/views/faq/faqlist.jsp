@@ -65,7 +65,14 @@
 			});
 		});
 	});
-
+ 	function faqdelete(qa_num){
+ 		var result=confirm("이걸?????");
+ 		if(result){
+ 			location.href="faqdelete?qa_num="+qa_num;
+ 		}else{
+ 			return false;
+ 		}
+ 	}
  	
 
 
@@ -102,7 +109,10 @@
 			<div class="panel-heading" >	
 				<a href="#myPage"><img style="width:50px; height:50px;border-radius:50px;" class="miniLogo" alt="simpleLogo" src="<c:url value='/resources/images/1 (1).jpg'/>"></a>
 				${faqlist.user_num }
-				${faqlist.qa_title }		
+				${faqlist.qa_title }
+				<a onclick="faqdelete(${faqlist.qa_num})" class="btn btn-danger btn-md pull-right">
+					<span class="glyphicon glyphicon-trash"></span>
+				</a>		
 			</div>
 			<div class="panel-body">
 				<input type="hidden" value="${faqlist.qa_num}">
