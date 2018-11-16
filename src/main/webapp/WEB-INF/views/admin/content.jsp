@@ -8,7 +8,7 @@
 		$("#mainimg").parent().prev().remove();
 		$("#mainimg").parent().next().remove();
 	});
-	$(function(){
+/* 	$(function(){
 		var i=1;
 		setInterval(function(){ 			
 			i++;
@@ -21,9 +21,9 @@
 	});
 	function changemainimg(i){
 		$("#mainimg").attr("src","<c:url value='/resources/images/ysy/1 ("+i+").jpg'/>");
-	}
+	} */
 </script>
-<img src="<c:url value='/resources/images/ysy/1 (1).jpg'/>" id="mainimg">
+<img src="<c:url value='/resources/images/ysy/1 (25).jpg'/>" id="mainimg">
 
 <div class="logincontainer">
 	<div class="logincontent">

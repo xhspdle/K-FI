@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
 
-
-
-</style>
 <h1>리스트</h1>
 <div id="boardcontentimg" class="modalimg">
 	<span class="closeimg">&times;</span>
@@ -20,16 +16,13 @@
 </div>
 
 
-<div id="imgcomments">
-	<div class="pull-right" style="position:absolute;width: 100%;height: 100%; background-color: red; display: none; "></div>
-</div>
 
 
 
 <script id="testboardlist" type="text/template">
 <div class="board_content_ad">
 <div class=container>	
-<div class="media">
+	<div class="media">
 		<div class="media-left media-top">
 			<img src="<c:url value='/resources/images/ysy/1 (19).jpg'/>" class="media-object" style="width:50px;height:50px;border-radius:50px">
 		</div>
