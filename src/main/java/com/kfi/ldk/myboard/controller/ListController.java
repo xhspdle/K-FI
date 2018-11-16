@@ -23,6 +23,7 @@ import com.kfi.ldk.util.PageUtil;
 public class ListController {
 	@Autowired 
 	@Qualifier("myBoardServiceImpl") private CommonService service;//Qualifier("앞문자소문자")
+	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
 	@RequestMapping(value="/mypage/myboard/list",method=RequestMethod.GET)
 	@ResponseBody
