@@ -27,9 +27,9 @@ body {
 	margin: auto;
 	width: 50%;
 	padding: 10px;
-	background: rgba(0, 0, 0, 0.76);
+	/* background: rgba(0, 0, 0, 0.76);
 	background: url(../resources/images/backimg.png) no-repeat center center
-		fixed;
+		fixed; */
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -60,6 +60,7 @@ h1, h2, h3, button {
 	outline: 0;
 	max-width: 500px;
 	margin-left: 20%;
+	box-shadow: 5px 10px 40px rgba(0,0,0, .4);
 }
 
 .tx-tfm {

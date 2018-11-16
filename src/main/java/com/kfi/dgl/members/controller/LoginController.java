@@ -45,8 +45,10 @@ public class LoginController {
 			if(vo.getUser_certi() == 1) {
 			session.setAttribute("user_num", vo.getUser_num());
 			session.setAttribute("user_id", vo.getUser_id());
+			session.setAttribute("user_nickname", vo.getUser_nickname());
 			System.out.println("id:" +vo.getUser_id());
 			System.out.println(vo.getUser_pwd());
+			System.out.println(vo.getUser_nickname());
 			System.out.println((String)session.getAttribute("user_id"));
 			returnURL = "redirect:/mypage/main";
 			}else if(vo.getUser_certi() == 0){
