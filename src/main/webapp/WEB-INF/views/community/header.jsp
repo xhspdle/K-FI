@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style>
-.logout-btn{overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:0;line-height:0}
-</style> 
 <div class="jumbotron text-center" id="communityJumbo">
 	<div> 
 		<h3 class="communityHeader"><strong>K-Fi's Community World</strong></h3>
@@ -69,12 +66,3 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-$(function(){
-    $('.logout-btn').on('click',function(){
-    event.preventDefault();
-        alert("logout");
-        location.href="<c:url value='/login/logout'/>";
-    });
-});
-</script>
