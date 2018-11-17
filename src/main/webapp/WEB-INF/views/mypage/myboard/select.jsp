@@ -45,7 +45,10 @@
 						<img src="<c:url value='/resources/upload/img/${boardVo.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
 					</div>
 					<div class="media-body" style="padding-left:5px;">
-						<h4 class="media-heading" style="text-align:left;"><strong>${boardVo.user_nickname }</strong>
+						<h4 class="media-heading" style="text-align:left;">
+							<a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${boardVo.user_num }'/>" class="userSelect">
+								<strong>${boardVo.user_nickname }</strong>
+							</a>
 						<span class="pull-right" style="color:#f4511e;"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${boardVo.mb_views}</span></h4>
 						<p style="text-align:left;margin:0px;margin-top:-5px;"><small>${boardVo.user_email }</small></p>
 					</div>
@@ -205,7 +208,7 @@
 		<img class="media-object img-circle" src="<c:url value='/resources/upload/img/{msp_savimg}'/>" alt="commentProfile">
 	</div>
 	<div class="media-body">
-		<h3><strong><a href="">{user_id}</a></strong><span class="msgSpan"></span></h3>
+		<h3><strong><a href="{userSelect}">{user_id}</a></strong><span class="msgSpan"></span></h3>
 		<div class="dropdown commentOption">
 			<button class="btn dropdown-toggle{optionBtn}" type="button" data-toggle="dropdown">
 				<span class="glyphicon glyphicon-option-vertical"></span>

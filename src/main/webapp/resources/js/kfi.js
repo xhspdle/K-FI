@@ -286,7 +286,8 @@ $(document).ready(function(){
 						  		"class='media-object img-circle' style='width:50px;height:50px;'></div>" +
 						  		"<div class='media-body' style='padding-left:5px;'>" +
 						  		"<h4 class='media-body' style='text-align:left;'>" +
-						  		"<strong>"+ user_nickname +"</strong></h4>" +
+						  		"<a href='"+ getPageContext +"/mypage/myboard/selectList?selectedUserNum="+ user_num +"' class='userSelect'>" +
+						  		"<strong>"+ user_nickname +"</strong></a></h4>" +
 						  		"<p style='text-align:left;margin:0px;margin-top:-5px;'><small>"+ user_email + "</small></p></div>" +
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -315,7 +316,8 @@ $(document).ready(function(){
 					  			"class='media-object img-circle' style='width:50px;height:50px;'></div>" +
 					  			"<div class='media-body' style='padding-left:5px;'>" +
 					  			"<h4 class='media-body' style='text-align:left;margin-bottom:-5px;'>" +
-					  			"<strong>"+ user_nickname +"</strong></h4>" +
+					  			"<a href='"+ getPageContext +"/mypage/myboard/selectList?selectedUserNum="+ user_num +"' class='userSelect'>" +
+					  			"<strong>"+ user_nickname +"</strong></a></h4>" +
 					  			"<p style='text-align:left;'><small>"+ json.mb_date + "</small></p></div>" +
 						  	"<p>" + mb_content + "</p>" + 
 						  	attachment + "</div>" +
@@ -419,11 +421,13 @@ $(document).ready(function(){
 				  }else{
 					  optionBtn=" disabled";
 				  }
+				  var userSelect= getPageContext + "/mypage/myboard/selectList?selectedUserNum=" + user_num;
 				  html=document.querySelector("#commentTemplate").innerHTML;
 				  var resultHTML=html.replace("{msp_savimg}", msp_savimg)
 				  		.replace("{pageNum}",pageNum)
 				  		.replace("{path}", getPageContext)
 				  		.replace(/{myc_num}/gi, myc_num)
+				  		.replace("{userSelect}",userSelect)
 				  		.replace("{user_id}", user_id)
 				  		.replace("{myc_content}", myc_content)
 				  		.replace("{comment_likes}", cnt)
