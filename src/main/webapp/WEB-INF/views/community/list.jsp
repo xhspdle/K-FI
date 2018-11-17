@@ -13,7 +13,7 @@
 						<a href="<c:url value='/community?comm_num=${clist.comm_num }'/>" style="text-decoration: none;">
 						  <img src="<c:url value='/resources/upload/img/${csplist.csp_savimg}'/>">
 						  <p><span><b> ${clist.comm_name }</b></span>
-						  <br><span>${clist.comm_content }</span></p>
+						  <br><span style="font-size: 15px;">${clist.comm_content }</span></p>
 						</a>
 						</div>
 					</div>
