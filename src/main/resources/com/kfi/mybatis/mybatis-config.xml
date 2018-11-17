@@ -15,6 +15,11 @@
 		<typeAlias type="com.kfi.ldk.vo.TagVo" alias="tag"/>
 		<typeAlias type="com.kfi.ldk.vo.MyTagVo" alias="mytag"/>
 		<typeAlias type="com.kfi.ldk.vo.CommTagVo" alias="commtag"/>
+		<typeAlias type="com.kfi.ldk.vo.CommVoteVo" alias="commvote"/>
+		<!--  
+		<typeAlias type="com.kfi.ldk.vo.VotingOptionVo" alias="votingoption"/>
+		<typeAlias type="com.kfi.ldk.vo.VotingUserlistVo" alias="votinguserlist"/>
+		-->
 		<typeAlias type="com.kfi.jyi.vo.MembersVo" alias="members"/>
 		<typeAlias type="com.kfi.jyi.vo.CommUserListVo" alias="commuserlist"/>
 		<typeAlias type="com.kfi.jyi.vo.CommunityVo" alias="community"/>
@@ -50,6 +55,11 @@
 		<mapper resource="com/kfi/mybatis/ldk/TagMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/MyTagMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/CommTagMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/CommVoteMapper.xml"/>
+		<!--  
+		<mapper resource="com/kfi/mybatis/ldk/VotingOptionMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/VotingUserListMapper.xml"/>
+		-->
 		<mapper resource="com/kfi/mybatis/jyi/MyCommCalendarMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinCoverMapper.xml"/>

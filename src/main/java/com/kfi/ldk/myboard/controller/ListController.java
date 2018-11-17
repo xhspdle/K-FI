@@ -3,6 +3,7 @@ package com.kfi.ldk.myboard.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +29,25 @@ public class ListController {
 	@RequestMapping(value="/mypage/myboard/list",method=RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> list(@RequestParam(value="pageNum",defaultValue="1")
-			int pageNum,String keyword,HttpSession session) {
+			int pageNum,String keyword,HttpServletRequest request,HttpSession session) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("keyword", keyword);
+		int admin_num=0;
 		int user_num=0;
-		Object session_num=session.getAttribute("user_num");
-		if(session_num!=null && session_num!="") {
-			user_num=(Integer)session_num;
+		Object session_admin_num=session.getAttribute("admin_num");
+		if(session_admin_num!=null && session_admin_num!="") {
+			admin_num=(Integer)session_admin_num;
+		}
+		if(admin_num!=0) {
+			String user_numm=request.getParameter("user_num");
+			if(user_numm!=null) {
+				user_num=Integer.parseInt(user_numm);
+			}
+		}else {
+			Object session_num=session.getAttribute("user_num");
+			if(session_num!=null && session_num!="") {
+				user_num=(Integer)session_num;
+			}
 		}
 		map.put("user_num", user_num);
 		int totalRowCount=service.getCount(map);

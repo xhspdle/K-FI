@@ -256,12 +256,14 @@ $(document).ready(function(){
 									"<li><a href='#'><span class='glyphicon glyphicon-exclamation-sign'></span>&nbsp;&nbsp;Report bad contents</a></li></ul></div>";
 					}else{
 						boardOption="<div class='dropdown boardOption'>" +
-									"<button class='btn dropdown-toggle disabled' type='button' data-toggle='dropdown'>" +
+									"<button class='btn dropdown-toggle' type='button' data-toggle='dropdown'>" +
 									"<span class='glyphicon glyphicon-option-vertical'></span></button>" +
 									"<ul class='dropdown-menu rightOption'>" +
-									"<li><a href='#'>Edit</a></li>" +
-									"<li><a href='#'>Delete</a></li> +" +
-									"<li><a href='#'>Report bad contents</a></li></ul></div>";
+									"<li><a href='#' class='btn btn-block disabled' style='text-align: left'>" + 
+									"<span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;Edit</a></li>" +
+									"<li><a href='#' class='btn btn-block disabled' style='text-align: left'>" + 
+									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li> +" +
+									"<li><a href='#'><span class='glyphicon glyphicon-exclamation-sign'></span>&nbsp;&nbsp;Report bad contents</a></li></ul></div>";
 					}
 					if(i===0){
 						$("<div class='panel-group'>" +
@@ -869,10 +871,6 @@ $(document).ready(function(){
   /*
    * Community
    */
-  
-  var t;
-
-  var aginagin=false;
   $(window).blur(function(){
 	  $.commuinityMainReset();
   });
@@ -886,6 +884,7 @@ $(document).ready(function(){
 		  $(this).css('top',0)
 	  });
   }
+  var t;
   $.commuinityMainSlide=function(){
 	  if($("#commMainHere").val()!==undefined){
 		  var slides=document.getElementsByClassName("communitySlide");
@@ -935,8 +934,8 @@ $(document).ready(function(){
 			  });
 		  },3000);
 	  }
-	  
   }
   $.commuinityMainSlide();
+  
 });
 

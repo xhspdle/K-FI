@@ -23,10 +23,15 @@ public class MyPageController {
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService service;
 
+	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		session.setAttribute("user_num", 1);
-		int user_num=(Integer)session.getAttribute("user_num");
+		//session.setAttribute("user_num", 1);
+		int user_num=0;
+		Object session_num=session.getAttribute("user_num");
+		if(session_num!=null && session_num!="") {
+			user_num=(Integer)session_num;
+		}
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
 		map.put("ms_using",1);

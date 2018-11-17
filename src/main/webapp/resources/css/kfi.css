@@ -796,7 +796,7 @@ body.modal-open::-webkit-scrollbar {
 	font-size: 46px;
 }
 #communityJumbo p.communityHeader {
-	margin-top: 3%;
+	margin-top: 40px;
 }
 .form-join {
 	position: relative;

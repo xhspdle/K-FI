@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kfi.ldk.service.CommonService;
+import com.kfi.ldk.vo.MyBoardVo;
 import com.kfi.ysy.service.AccuseService;
 import com.kfi.ysy.util.AdminPageUtil;
 import com.kfi.ysy.vo.AccuseVo;
@@ -22,6 +25,8 @@ import com.kfi.ysy.vo.AccuseVo;
 public class AccuseController {
 	@Autowired 
 	private AccuseService acservice;
+	@Autowired
+	@Qualifier("myBoardServiceImpl") private CommonService mbService;
 	//신고게시판 리스트
 	@RequestMapping("/aclist")
 	public String aclist(@RequestParam(value="pagenum", defaultValue="1")int pagenum,String field, String keyword, Model model) {
@@ -53,7 +58,8 @@ public class AccuseController {
 		}	
 	}
 //신고 내용보기
-/*	@RequestMapping(value="/acdetail", produces="application/json;charset=utf-8")
+
+	/*	@RequestMapping(value="/acdetail", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String acdetail(int ac_num) {
 		AccuseVo vo=acservice.acdetail(ac_num);
@@ -67,8 +73,20 @@ public class AccuseController {
 			obj.put("user_date",vo.getUser_regdate());
 		}
 	}*/
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/acinsert", method=RequestMethod.GET)
-	public String acinsertForm() {
+	public String acinsertForm(@RequestParam(value="mb_num",defaultValue="0")int mb_num,
+			@RequestParam(value="cb_num",defaultValue="0")int cb_num,Model model) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		if(mb_num!=0) {
+			map.put("mb_num", mb_num);
+			map=(HashMap<String, Object>)mbService.select(map);
+			model.addAttribute("vo", map.get("boardVo"));
+		}else if(cb_num!=0) {
+			map.put("cb_num", cb_num);
+			//map=(HashMap<String, Object>)cbService.select(map);
+			//model.addAttribute("vo", map.get("commBoardVo"));
+		}
 		return ".admin.accuseinsert";
 	}
 	@RequestMapping(value="/acinsert", method=RequestMethod.POST)

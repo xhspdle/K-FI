@@ -20,23 +20,25 @@
 					</h1>
 				</blockquote>
 				<div class="dropdown boardOption">
-					<button class="btn dropdown-toggle 
-					<c:if test="${vo.user_num!=sessionScope.user_num}">disabled</c:if>" 
-					type="button" data-toggle="dropdown">
+					<button class="btn dropdown-toggle"	type="button" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
 						<li>
-							<a href="#updateModal" data-toggle="modal" data-mb-num="${vo.mb_num }">
+							<a href="#updateModal" class="btn btn-block 
+							<c:if test="${vo.user_num!=sessionScope.user_num}">disabled</c:if>" 
+							style="text-align: left;" data-toggle="modal" data-mb-num="${vo.mb_num }">
 								<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
 							</a>
 						</li>
 						<li>
-							<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${vo.mb_num }">
+							<a href="#" class="btn btn-block 
+							<c:if test="${vo.user_num!=sessionScope.user_num}">disabled</c:if>" 
+							style="text-align: left;" onclick="return false;" data-toggle="popover" data-mb-num="${vo.mb_num }">
 								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 							</a>
 						</li>
-						<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
+						<li><a href="<c:url value='/acinsert?mb_num=${vo.mb_num }'/>"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
 					</ul>
 				</div>
 			</div>
