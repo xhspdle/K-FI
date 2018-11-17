@@ -3,7 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.jyi.FriendsMapper">
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(frds_num),0) from friends
+	</select>
+	
+	<insert id="insert" parameterType="hashmap">
+		insert into friends values(#{frds_num}, #{user1_num}, #{user2_num},sysdate)
+	</insert>	
+	
+	<delete id="delete" parameterType="hashmap">
+		delete from friends where user1_num=#{user1_num} and user2_num=#{user2_num}
+	</delete>
+	
 	<select id="list" parameterType="hashmap" resultType="friends">
 		select * from friends where ${user_number}=#{user_num}
 	</select>
+	
+	
 </mapper>

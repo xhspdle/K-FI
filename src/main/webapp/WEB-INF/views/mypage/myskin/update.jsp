@@ -3,8 +3,9 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container w3-panel w3-border w3-round-xlarge"  >
-	<div class="col-sm" style="background-color: white;width:20%;height:10%;">
-	<h2>My Skin Update</h2>
+	<div class="col-sm" style="background-color: white;width:45%;height:10%;">
+	<h2 style="margin-left: 22%;margin-top: 10%;text-transform: uppercase;color: #303030;
+    font-weight: 600;margin-bottom: 30px;font-size: 32px;}">My Skin Update</h2>
 	</div>
 	<!-- 미리보기 설정(js) -->'
 	<div class="jumbotron col-sm" id="preview_cover" 

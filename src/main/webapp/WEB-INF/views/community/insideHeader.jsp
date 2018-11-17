@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="jumbotron text-center" id="communityJumbo">
+	<input type="hidden" id="comm_num" value="${comm_num }">
 	<div> 
 		<h3 class="communityHeader"><strong>Community Name</strong></h3>
 		<p class="communityHeader"><span class="">Welcome to community~!</span></p>
 		<c:choose>
-			<c:when test="">
+			<c:when test="${cul_status eq 2 }">
 				<!-- admin일 경우 -->
 				<div class="form-join">
 					<div class="col-sm-offset-5 col-sm-2">			
@@ -14,11 +15,11 @@
 					</div>
 				</div>
 			</c:when>
-			<c:when test="">
+			<c:when test="${cul_status eq 1 }">
 				<!-- 이미 가입한 회원일 경우 -->
 				<form class="form-join">
 					<div class="input-group col-sm-offset-5 col-sm-2">
-						<button type="submit" class="btn btn-join-follow">Leave</button><br>
+						<button type="submit" class="btn btn-join-follow"><a href="<c:url value='/commuserlist/delete?comm_num=${comm_num }'/>">Leave</a></button><br>
 					</div>
 				</form>
 			</c:when>
@@ -26,7 +27,7 @@
 				<!-- 가입 안한 회원일 경우 -->
 				<form class="form-join">
 					<div class="input-group col-sm-offset-5 col-sm-2">
-						<button type="submit" class="btn btn-join-follow">Join</button><br>
+						<button type="submit" class="btn btn-join-follow"><a href="<c:url value='/commuserlist/insert?comm_num=${comm_num }'/>">Join</a></button><br>
 					</div>
 				</form>
 			</c:otherwise>
@@ -90,7 +91,7 @@
 </div>
 <div class="navbar navbar-comm-menu" data-spy="affix" data-offset-top="450">
 	<ul class="nav navbar-nav navbar-center">
-		<li><a href="#"><i class="glyphicon glyphicon-check"></i>WRITE</a></li>
+		<li><a href="<c:url value='/community/board/insert'/>"><i class="glyphicon glyphicon-check"></i>WRITE</a></li>
 		<li><a href="#"><i class="glyphicon glyphicon-star"></i>POPULAR</a></li>
 		<li><a href="#"><i class="glyphicon glyphicon-time"></i>LATEST</a></li>
 		<li><a href="<c:url value='/community/polls/list'/>"><i class="glyphicon glyphicon-stats"></i>POLLS</a></li>

@@ -29,4 +29,8 @@ public class CommunityDao {
 	public List<CommunityVo> bestSix(){
 		return session.selectList(NAMESPACE+".bestSix");
 	}
+	
+	public List<CommunityVo> list(){
+		return session.selectList(NAMESPACE+".list");
+	}	
 }

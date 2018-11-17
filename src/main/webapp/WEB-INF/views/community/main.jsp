@@ -111,7 +111,7 @@
 				image!</p>
 			<p>Provides community statistics</p>
 			<br>
-			<button class="btn btn-default btn-lg">Create Community!</button>
+			<button class="btn btn-default btn-lg"><a href="<c:url value='/community/newComm/insertForm'/>">Create Community!</a></button>
 		</div>
 		<div class="col-sm-5">
 			<span class="glyphicon glyphicon-globe logo"></span>

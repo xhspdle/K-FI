@@ -16,6 +16,7 @@
 	<div style="width: 100%;">
 		<c:forEach var="msvVo" items="${msvlist }">
 			<c:forEach var="mVo" items="${mvolist }">
+				<c:if test="${msvVo.user_num eq mVo.user_num }">
 				<div class="w3-third" style="width: 33%; padding: 0.8%;">
 					<div class="w3-card"
 						style="height: 100px; border-radius: 25px; background-color:${msvVo.ms_color};overflow: hidden;">
@@ -27,22 +28,9 @@
 						  <p></p>
 						</a>
 						</div>
-						
-				<%-- 		<a href="#" style="text-decoration: none;"> 
-						<img
-							src="<c:url value='/resources/upload/img/${msvVo.msp_savimg}'/>"
-							style="height: 100%; width: 33%; border-radius: 50%; border-radius: 35%; padding: 3%;">
-							<c:if test="${msvVo.user_num == mVo.user_num }">
-							<h4 style="display: inline;">
-								<p><b>${mVo.user_nickname }</b></p>
-							</h4>
-							<p style="word-break: break-all;width: 60%;">
-								<span>${msvVo.ms_msg }</span>
-							</p>
-							</c:if>
-						</a> --%>
 					</div>
 				</div>
+				</c:if>
 			</c:forEach>
 		</c:forEach>
 	</div>

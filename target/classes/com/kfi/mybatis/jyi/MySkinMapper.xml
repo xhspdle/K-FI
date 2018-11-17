@@ -9,7 +9,7 @@
 	</select>
 	
 	<insert id="insert_myskin" parameterType="myskin">
-		insert into my_skin values(#{ms_num},#{user_num},#{ms_name},#{ms_color},#{ms_msg},1)	
+		insert into my_skin values(#{ms_num},#{user_num},#{ms_name},#{ms_color},#{ms_msg},#{ms_using})	
 	</insert>
 	
 	<delete id="delete_myskin" parameterType="int">

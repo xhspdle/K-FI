@@ -14,9 +14,15 @@ public class CommBoardViewDao {
 	@Autowired private SqlSession session;
 	private final static String NAMESPACE="com.kfi.mybatis.jyi.CommBoardViewMapper";
 	
-	//해당 커뮤니티 게시물 불러오기
+	//해당 커뮤니티의 선택한 게시물 불러오기
 	public CommBoardViewVo select(HashMap<String, Object> map){
 		return session.selectOne(NAMESPACE+".select_Community",map);
 	}
+	
+	//해당 커뮤니티 전체 게시물 불러오기
+	public List<CommBoardViewVo> list(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".select_Community",map);
+	}
+	
 	
 }

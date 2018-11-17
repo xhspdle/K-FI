@@ -29,7 +29,7 @@
 				 	$(".fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead").css({
 						'overflow': 'visible'
 					}); 
-					$('<div class="calevent">'+calEvent.id+'</div>')
+					$('<div class="calevent"><h4><b>'+calEvent.id+'</b></h4></div>')
 					.appendTo(this).parent().css({pageX:jsEvent.pageX,pageY:jsEvent.pageY,'overflow': 'visible'});
 				},
 				eventMouseout:function(calEvent,jsEvent){
@@ -58,20 +58,26 @@
 		});
 	});
 </script>
-<div id="mypage_comm_calendar_wrap" style="width: 90%; margin: auto; margin-top: 30px;">
-	<span>
-		<select id="mypage_communitylist" class="form-control" style="width:20%;" >
-		<option value="all">커뮤니티</option>
-		<c:forEach var="communitylist" items="${ communitylist}">
-		<option value="${communitylist.comm_num }" <c:if test="${communitylist.comm_name ==comm_name }"> selected="selected"</c:if>>${communitylist.comm_name }</option> 
-		</c:forEach>
-		</select>
-		<select id="comm_gathering" class="form-control" style="width:10%;margin: -2.5% 0% 0% 21%;">
-			<option value="gathering">전체</option>
-			<option value="attend" <c:if test="${gathering =='attend' }"> selected="selected"</c:if>>참석</option>
-			<option value="not_attend" <c:if test="${gathering =='not_attend' }"> selected="selected"</c:if>>불참</option>
-		</select>
-	</span>
+<div class="container">
+<div id="mypage_comm_calendar_wrap" >
+	<div style="display: -webkit-box;width: 50%;padding-top: 2%;">
+		<p style="width: 49%;">
+			<select id="mypage_communitylist" class="form-control" >
+			<option value="all">커뮤니티</option>
+			<c:forEach var="communitylist" items="${ communitylist}">
+			<option value="${communitylist.comm_num }" <c:if test="${communitylist.comm_name ==comm_name }"> selected="selected"</c:if>>${communitylist.comm_name }</option> 
+			</c:forEach>
+			</select>
+		</p> &nbsp;&nbsp;
+		<p style="width: 25%;">
+			<select id="comm_gathering" class="form-control" >
+				<option value="gathering">전체</option>
+				<option value="attend" <c:if test="${gathering =='attend' }"> selected="selected"</c:if>>참석</option>
+				<option value="not_attend" <c:if test="${gathering =='not_attend' }"> selected="selected"</c:if>>불참</option>
+			</select>
+		</p>
+	</div>
 	<br>
 	<div id='mypage_comm_calendar'></div>
+</div>
 </div>

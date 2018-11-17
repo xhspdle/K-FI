@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.CommRefuseMapper">
+
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(cr_num),0) from comm_refuse
+	</select>	
+	
+	<insert id="insert" parameterType="commuserlist">
+		insert into comm_refuse values(#{cr_num},#{cul_num},#{cr_refuse})
+	</insert>
+
+</mapper>

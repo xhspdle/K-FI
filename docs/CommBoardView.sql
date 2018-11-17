@@ -3,7 +3,7 @@
 create or replace view comm_board_view
 as
     select 
-    cb.cb_num, cb.comm_num, cb.cb_title, cb.cb_content, cb.cb_date, cb.cb_notice, cb.cb_views,
+    cb.cb_num, cb.comm_num, cb.user_num, cb.cb_title, cb.cb_content, cb.cb_date, cb.cb_notice, cb.cb_views,
     cp.cp_num, cp.cp_orgimg, cp.cp_savimg,
     cv.cv_num, cv.cv_orgvid, cv.cv_savvid,
     cc.commc_num, cc.user_num commc_user_num, cc.commc_content, cc.commc_date,cc.commc_like,

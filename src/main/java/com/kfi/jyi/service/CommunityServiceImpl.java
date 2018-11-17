@@ -158,9 +158,20 @@ public class CommunityServiceImpl implements CommonService {
 				CommSkinProfileVo cspvo = cspdao.select_usingProfile(comm_num);
 				csplist.add(cspvo);
 			}
-
 			map.put("csplist", csplist);
 
+			return map;
+		}else if(list.equals("list")) {
+			List<CommunityVo> clist = cdao.list();
+			map.put("clist", clist);
+
+			List<CommSkinProfileVo> csplist = new ArrayList<>();
+			for (CommunityVo cv : clist) {
+				int comm_num = cv.getComm_num();
+				CommSkinProfileVo cspvo = cspdao.select_usingProfile(comm_num);
+				csplist.add(cspvo);
+			}
+			map.put("csplist", csplist);
 			return map;
 		}
 		return null;
