@@ -7,58 +7,6 @@
 	src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>
 	
 <script type="text/javascript">
-/* 	$(function() {
-		$(".abcontent")
-				.click(
-						function(event) {
-							$("#abmodifymodal").insertAfter("#wrap");
-							$("#wrap").css("opacity", "0.1"); 
-
-							var ab_num = (event.target.className);
-							console.log(ab_num);
-							$
-									.getJSON(
-											"<c:url value='/abdetail'/>",
-											{
-												ab_num : ab_num
-											},
-											function(data) {
-
-												var board = document
-														.getElementById("abmodifymodal");
-												var div = document
-														.createElement("div");
-												var img = document
-														.createElement("img");
-												var p = document
-														.createElement("p");
-												div.style.width = "600px";
-												div.style.height = "auto";
-												div.style.border = "1px solid #000";
-												div.style.marginTop = "10px";
-												div.style.backgroundColor = "green";
-												div.style.marginLeft = "10px";
-												div.style.cssFloat = "left";
-
-												img.style.width = "auto";
-												img.style.maxWidth = "100%";
-												img.style.height = "auto";
-												img.style.maxHeight = "auto";
-
-												div.innerHTML = "우화와와와와와오 레드벨벳이다";
-												p.innerHTML = "멋지네요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
-												img.src = "<c:url value='/resources/images/1 ("
-														+ i + ").jpg'/>";
-												board.appendChild(div)
-														.appendChild(img);
-												div.appendChild(p);
-											});
-
-							$("#abmodifymodal").css("display", "block");
-						});
-	});
-	 */
-	
 	$(function(){
 		$(".abdelete").click(function(){
 			var result=confirm("진짜로????");	
@@ -86,23 +34,7 @@
 			}); 
 		});
 	});
-/* 	
-	$(function(){
-		if(checkpopup("close")){
-			$("#abpopup").css("display","none");
-		}else{
-			$.getJSON("<c:url value='/abpopup'/>",function(data){	
-				for(var i=0;i<data.length;i++){
-					console.log(data[i].ab_title);
-					console.log(data[i].ab_num);
-					console.log(data[i].ab_content);
-					var html=template(data[i].ab_title,data[i].ab_content);
-					$("#abpopupcontent").append(html);
-					$("#abpopup").css("display","block");		 
-				};
-			});
-		};
-	});*/
+
 	function template(ab_title,ab_content){
  		var html="<div class='well'>"
  				+"<h4>"+ab_title+"</h4><hr>"
@@ -110,7 +42,6 @@
  				+"</div>"
 		return html;
  	}
-
 	 
 	$(function(){
 		if(checkpopup("close")){
@@ -139,14 +70,13 @@
 		};
 	});
 	 
-
-	
  	function setCookie(name, value, expiredays){
  		var today=new Date();
  		alert(today);
  		today.setDate(today.getDate()+expiredays);
  		document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + today.toGMTString() + ";"
- 	}	
+ 	}
+ 	
  	function checkpopup(cookiename){
  		var cookie= document.cookie;
  		alert(cookie);
@@ -171,7 +101,23 @@
 	function deletecookie(){
 		setCookie("close","",-1);
 	}
-
+	
+/*	$(function(){
+	if(checkpopup("close")){
+		$("#abpopup").css("display","none");
+	}else{
+		$.getJSON("<c:url value='/abpopup'/>",function(data){	
+			for(var i=0;i<data.length;i++){
+				console.log(data[i].ab_title);
+				console.log(data[i].ab_num);
+				console.log(data[i].ab_content);
+				var html=template(data[i].ab_title,data[i].ab_content);
+				$("#abpopupcontent").append(html);
+				$("#abpopup").css("display","block");		 
+			};
+		});
+	};
+});*/
 
 </script>
 <c:set var="admin" value="${sessionScope.admininfo }" />

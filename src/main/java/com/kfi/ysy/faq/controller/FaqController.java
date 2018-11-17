@@ -134,4 +134,17 @@ public class FaqController {
 			return ".faq.error";
 		}
 	}
+	//Q&A게시물 답글 삭제
+	@RequestMapping(value="/faqcommdelete",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String faqcommdelete(int qa_num) {
+		int result = faqservice.faqdelete(qa_num);
+		JSONObject obj = new JSONObject();
+		if(result>0) {
+			obj.put("result", "success");
+		}else {
+			obj.put("result", "fail");
+		}
+		return obj.toString();
+	}
 }

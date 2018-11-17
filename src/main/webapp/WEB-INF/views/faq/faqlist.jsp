@@ -37,6 +37,7 @@
 					.replace("{qa_content}", data[i].qa_content)
 					.replace("{qa_date}", data[i].qa_date)
 					.replace("{ref}",data[i].ref)
+					.replace("{ref1}",data[i].ref)
 					.replace("{lev}",data[i].lev)
 					.replace("{step}",data[i].step)
 					.replace("{admin_num}",data[i].admin_num)
@@ -47,11 +48,13 @@
 	};
 		 
 	$(function(){
-		$("input[name=faqcomminsert]").on("click",function(){
+		$("button[name=faqcomminsert]").on("click",function(event){
+			event.preventDefault();
 			var faqcomm = $(this).closest("form");
 			var qa_num=$(this).val()
 			var form="faq_list"+qa_num;
 			var formData = $("#"+form).serialize();
+			alert("aaa");
 			$.ajax({
 				url: "<c:url value='/faqcomminsert'/>",
 				type: 'post',
@@ -65,14 +68,34 @@
 			});
 		});
 	});
- 	function faqdelete(qa_num){
- 		var result=confirm("이걸?????");
+	
+	
+	
+	$("#faqcommdelete").on("click",function(){
+ 		event.preventDefault();
+ 		alert("aaa");
+	});	
+/*  		var result=confirm("이걸?????");
+ 		alert(qa_num);
+ 		alert(ref);
  		if(result){
- 			location.href="faqdelete?qa_num="+qa_num;
+ 			$.getJSON("<c:url value='/faqcommdelete'/>",{
+ 				qa_num : qa_num
+ 			},function(data){
+ 				var faqcomm = $(this).closest("form");
+ 				console.log($(this));
+ 				console.log(faqcomm);
+ 				alert("wowo");
+ 				$(".faq_comment").remove();
+				faqcommlist(ref,faqcomm);
+ 			/* 	console.log(faqcomm.children()); */
+ 			/* 	
+ 				alert("확인해");
+ 			});
  		}else{
  			return false;
- 		}
- 	}
+ 		} */
+ 
  	
 
 
@@ -93,14 +116,15 @@
 				<h4 class="media-heading">Media Top</h4>
 				{qa_content}
 				<div>댓글</div>
-				<a href="faqdelete?qa_num={qa_num1}">삭제</a>
+				<a href="faqcommdelete?qa_num={qa_num1} " class="btn faqcommdelete" id="faqcommdelete">삭제</a>
 			</div>
 		</div>				
 	</form>
 </div>	 
 </script>
-<c:set var="admin" value="${sessionScope.admininfo }" />
 
+<c:set var="admin" value="${sessionScope.admininfo }" />
+<a href="aa" class="btn" onclick=""></a>
 <div class="panel-group container" >
 	<h1>Q and A</h1>
 	<h2>Panels with Contextual Classes</h2>
@@ -121,7 +145,7 @@
 				${faqlist.admin_num }
 				<button class="btn btn-default faqcommbtn" value="${faqlist.qa_num}">댓글</button>
 			</div>
-			<form class="hidediv " name="faqcommform" id="faq_list${faqlist.qa_num}">
+			<form class="hidediv " name="faqcommform" id="faq_list${faqlist.qa_num}" action="faqcomminsert" method="post">
 				<div class="media">
 					<div class="media-left media-top">
 						<!-- <img src="2.png" class="media-object" style="width:60px"> -->
@@ -136,11 +160,11 @@
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">
-								<input type="button" class="btn btn-default" name="faqcomminsert" value=${faqlist.qa_num }>>
-								<i class="glyphicon glyphicon-pencil"></i>
-	<%-- 						<button class="btn btn-default" name="faqcomminsert" value="${faqlist.qa_num}">
+<%-- 								<input type="button" class="btn btn-default" name="faqcomminsert" value=${faqlist.qa_num }>>
+								<i class="glyphicon glyphicon-pencil"></i> --%>
+								<button class="btn btn-default" name="faqcomminsert" value="${faqlist.qa_num}">
 									<i class="glyphicon glyphicon-pencil"></i>
-								</button> --%>		
+								</button>
 							</div>
 						</div>
 					</div>
