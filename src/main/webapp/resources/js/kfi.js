@@ -212,14 +212,14 @@ $(document).ready(function(){
   });
   
   var sameDate='';
-  $.getList=function(pageNum,keyword,appendWhere){
+  $.getList=function(pageNum,keyword,appendWhere,selectedUserNum){
 	  	var getSession=$("#getSession").val();
 	  	var append="#myBoardList";
 	  	if(appendWhere!==undefined){
 	  		append=appendWhere;
 	  	}
 		$.getJSON(getPageContext + "/mypage/myboard/list",
-			{"pageNum":pageNum,"keyword":keyword},
+			{"pageNum":pageNum,"keyword":keyword,"selectedUserNum":selectedUserNum},
 			function(data){
 				$(data.list).each(function(i,json){
 					var mb_num=json.mb_num;
@@ -352,8 +352,8 @@ $(document).ready(function(){
 	  $.footerBtn();
   }
   var more=2;
-  $.getListMore=function(keyword,appendWhere){	  
-	  $.getList(more++,keyword,appendWhere);
+  $.getListMore=function(keyword,appendWhere,selectedUserNum){	  
+	  $.getList(more++,keyword,appendWhere,selectedUserNum);
   }
   
   $("#myBoardSelect .postTitle > span").on({
@@ -768,7 +768,12 @@ $(document).ready(function(){
 		  $.getListMore(keyword,"#myBoardSearchList");
 	  });
   }else if($("#myBoardSelectListHere").val()!==undefined){
-	 
+	  var selectedUserNum=$("#myBoardSelectListHere").val();
+	  $.footerBtn();
+	  $(document).on('focus',"[href='javascript:$.getListMore()']",function(event){
+		  event.preventDefault();
+		  $.getListMore("","#myBoardSearchList",selectedUserNum);
+	  });
   }
   
   /*

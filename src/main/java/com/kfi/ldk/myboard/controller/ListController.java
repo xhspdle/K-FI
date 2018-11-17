@@ -28,8 +28,9 @@ public class ListController {
 	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
 	@RequestMapping(value="/mypage/myboard/list",method=RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> list(@RequestParam(value="pageNum",defaultValue="1")
-			int pageNum,String keyword,HttpServletRequest request,HttpSession session) {
+	public HashMap<String, Object> list(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
+			@RequestParam(value="selectedUserNum",defaultValue="0")int selectedUserNum,
+			String keyword,HttpServletRequest request,HttpSession session) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("keyword", keyword);
 		int admin_num=0;
@@ -43,6 +44,8 @@ public class ListController {
 			if(user_numm!=null) {
 				user_num=Integer.parseInt(user_numm);
 			}
+		}else if(selectedUserNum!=0){
+			user_num=selectedUserNum;
 		}else {
 			Object session_num=session.getAttribute("user_num");
 			if(session_num!=null && session_num!="") {
@@ -82,12 +85,9 @@ public class ListController {
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		model.addAttribute("pu", pu);
-		model.addAttribute("select_user_num", user_num);
+		model.addAttribute("selectedUserNum", user_num);
 		model.addAttribute("list", service.list(map));
 		return ".mypage.myboard.searchMain";
-		/*
-		 * 여기하던중 -> view페이지 가서 확인해야댐
-		 */
 	}
 	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")

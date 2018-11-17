@@ -6,10 +6,9 @@
 	<input type="hidden" id="myBoardSearchListHere" value="${keyword }">
 	</c:when>
 	<c:otherwise>
-	<input type="hidden" id="myBoardSelectListHere" value="${user_num }">
+	<input type="hidden" id="myBoardSelectListHere" value="${selectedUserNum }">
 	</c:otherwise>	
 </c:choose>
-
 <div id="myBoardSearchList" class="container">
 <c:forEach var="vo" items="${list }" varStatus="vs">
 	<h1 class="text-center" id="${vo.mb_date }" style="margin-bottom: 30px;">
@@ -20,7 +19,7 @@
 			<div class="panel-heading" id="${vo.mb_num }">
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
-						<a href="<c:url value='/mypage/myboard/select?mb_num=${vo.mb_num }&keyword=${keyword }'/>" 
+						<a href="<c:url value='/mypage/myboard/select?mb_num=${vo.mb_num }&keyword=${keyword }&'/>" 
 						class="postA">
 						${vo.mb_title }
 						</a>
