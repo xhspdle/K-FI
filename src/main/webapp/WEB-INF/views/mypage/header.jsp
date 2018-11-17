@@ -30,7 +30,6 @@
 					<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
 					<ul class="dropdown-menu">
 						<li><a href="#" data-toggle="modal" data-target="#writeModal">글쓰기</a></li>
-						<!-- 해야댐 -->
 						<c:if test="${empty selectedUserNum }">
 						<li><a href="<c:url value='/mypage/mycomm/list'/>">마이커뮤니티</a></li>
 						<li><a href="<c:url value='/mypage/myfriend/list'/>">친구목록</a></li>
@@ -38,7 +37,6 @@
 						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
 						<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
 						</c:if>
-						<!-- 해야댐 -->
 						<c:if test="${!empty user_num }">
 						<li><a href="<c:url value='/login/logout'/>" class="logout-btn">Logout</a></li>
 						</c:if>
