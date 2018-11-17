@@ -22,13 +22,13 @@
 			faqcommlist(qa_num,faqcomm);
 		}else{
 /* 			$(this).parent().parent().children().empty(); */
-			faqcomm.css("display","block");
+			faqcomm.css("display","none");
 		}		
 	}	
- 	function faqcommlist(qa_num,faqcomm){	 		
+ 	function faqcommlist(qa_num,faqcomm){	 
 		$.getJSON("<c:url value='/faqcomment'/>",{
 			qa_num : qa_num
-		},function (data){					
+		},function (data){
 			for(var i=0;i<data.length;i++){
 				var html=document.querySelector("#faqcomment_template").innerHTML;
 				var resultHTML=html.replace("{qa_num}", data[i].qa_num)
@@ -47,20 +47,20 @@
 	};
 		 
 	$(function(){
-		$("button[name=faqcomminsert]").on("click",function(){
-			var form="faq_list"+$(this).val();
+		$("input[name=faqcomminsert]").on("click",function(){
+			var faqcomm = $(this).closest("form");
+			var qa_num=$(this).val()
+			var form="faq_list"+qa_num;
 			var formData = $("#"+form).serialize();
-			console.log('formData', formData);
-			alert("afa");
 			$.ajax({
 				url: "<c:url value='/faqcomminsert'/>",
 				type: 'post',
 				dataType:'json',
 				data: formData,
-				success: function(json){
-					alert("됐다.");
-					faqcommentlist();
-				
+				success: function(data){
+					console.log(data);
+					$(".faq_comment").remove();
+					faqcommlist(qa_num,faqcomm);
 				}
 			});
 		});
@@ -136,10 +136,11 @@
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">
-								<button class="btn btn-default" name="faqcomminsert" value="${faqlist.qa_num}">
+								<input type="button" class="btn btn-default" name="faqcomminsert" value=${faqlist.qa_num }>>
+								<i class="glyphicon glyphicon-pencil"></i>
+	<%-- 						<button class="btn btn-default" name="faqcomminsert" value="${faqlist.qa_num}">
 									<i class="glyphicon glyphicon-pencil"></i>
-								</button>
-								
+								</button> --%>		
 							</div>
 						</div>
 					</div>

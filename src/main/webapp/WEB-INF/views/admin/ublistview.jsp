@@ -15,10 +15,6 @@
 	<div class="flexcolumn"></div>	
 </div>
 
-
-
-
-
 <script id="testboardlist" type="text/template">
 <div class="board_content_ad">
 <div class=container>	

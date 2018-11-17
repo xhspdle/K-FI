@@ -89,20 +89,20 @@ public class FaqController {
 		vo.setAdmin_num(adminvo.getAdmin_num());
 		vo.setLev(vo.getLev()+1);
 		
-		System.out.println("////////////content"+vo.getQa_num());
+/*		System.out.println("////////////content"+vo.getQa_num());
 		System.out.println("////////////content"+vo.getUser_num());
 		System.out.println("////////////content"+vo.getQa_title());
 		System.out.println("////////////content"+vo.getQa_content());
 		System.out.println("/////////////////////ref"+vo.getRef());
 		System.out.println("////////////content"+vo.getLev());
 		System.out.println("////////////content"+vo.getStep());
-		System.out.println("////////////admin_num"+vo.getAdmin_num());
+		System.out.println("////////////admin_num"+vo.getAdmin_num());*/
 		
 		JSONObject obj = new JSONObject();
 		if(faqservice.faqinsert(vo) > 0) {
-			obj.put("result", "ok");
+			obj.put("result", "success");
 		}else {
-			obj.put("result", "no");
+			obj.put("result", "fail");
 		}
 		System.out.println(vo.toString());
 		/*System.out.println("////////////////////"+result);*/
