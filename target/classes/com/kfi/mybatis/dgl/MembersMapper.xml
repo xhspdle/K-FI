@@ -20,7 +20,7 @@
 	<!-- 가입 -->
  	 <insert id="join" parameterType="logmembers">
 		insert into members values 
-		(#{user_num}, #{user_id}, #{user_pwd}, #{user_nickname}, #{user_email}, sysdate,0,0)
+		(#{user_num}, #{user_id}, #{user_pwd}, #{user_nickname}, #{user_email}, sysdate,1,1)
 	</insert>
 	 
 	<!-- 로그인 -->
