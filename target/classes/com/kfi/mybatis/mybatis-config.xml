@@ -77,5 +77,6 @@
 		<mapper resource="com/kfi/mybatis/ysy/CommSkinProfileMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/dgl/MembersMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/dgl/CertiMembersMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/dgl/CommCalendarMapper.xml"/>
 	</mappers>
 </configuration>

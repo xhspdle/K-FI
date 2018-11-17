@@ -9,8 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script"
-	rel="stylesheet"> -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
 	rel="stylesheet" type="text/css">
 <script
@@ -28,9 +26,8 @@ body {
 	margin: auto;
 	width: 50%;
 	padding: 10px;
-	background: rgba(0, 0, 0, 0.76);
-	background: url(../resources/images/loginback.jpg) no-repeat center center
-		fixed;
+	
+
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -108,6 +105,8 @@ form .error {
 
 .tab-head {
 	font-size: 22px;
+	text-align: center;
+	font-family: 'Montserrat', cursive;
 }
 
 #second {

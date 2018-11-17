@@ -22,13 +22,13 @@
 			faqcommlist(qa_num,faqcomm);
 		}else{
 /* 			$(this).parent().parent().children().empty(); */
-			faqcomm.css("display","block");
+			faqcomm.css("display","none");
 		}		
 	}	
- 	function faqcommlist(qa_num,faqcomm){	 		
+ 	function faqcommlist(qa_num,faqcomm){	 
 		$.getJSON("<c:url value='/faqcomment'/>",{
 			qa_num : qa_num
-		},function (data){					
+		},function (data){
 			for(var i=0;i<data.length;i++){
 				var html=document.querySelector("#faqcomment_template").innerHTML;
 				var resultHTML=html.replace("{qa_num}", data[i].qa_num)
@@ -47,25 +47,32 @@
 	};
 		 
 	$(function(){
-		$("button[name=faqcomminsert]").on("click",function(){
-			var form="faq_list"+$(this).val();
+		$("input[name=faqcomminsert]").on("click",function(){
+			var faqcomm = $(this).closest("form");
+			var qa_num=$(this).val()
+			var form="faq_list"+qa_num;
 			var formData = $("#"+form).serialize();
-			console.log('formData', formData);
-			alert("afa");
 			$.ajax({
 				url: "<c:url value='/faqcomminsert'/>",
 				type: 'post',
 				dataType:'json',
 				data: formData,
-				success: function(json){
-					alert("됐다.");
-					faqcommentlist();
-				
+				success: function(data){
+					console.log(data);
+					$(".faq_comment").remove();
+					faqcommlist(qa_num,faqcomm);
 				}
 			});
 		});
 	});
-
+ 	function faqdelete(qa_num){
+ 		var result=confirm("이걸?????");
+ 		if(result){
+ 			location.href="faqdelete?qa_num="+qa_num;
+ 		}else{
+ 			return false;
+ 		}
+ 	}
  	
 
 
@@ -102,7 +109,10 @@
 			<div class="panel-heading" >	
 				<a href="#myPage"><img style="width:50px; height:50px;border-radius:50px;" class="miniLogo" alt="simpleLogo" src="<c:url value='/resources/images/1 (1).jpg'/>"></a>
 				${faqlist.user_num }
-				${faqlist.qa_title }		
+				${faqlist.qa_title }
+				<a onclick="faqdelete(${faqlist.qa_num})" class="btn btn-danger btn-md pull-right">
+					<span class="glyphicon glyphicon-trash"></span>
+				</a>		
 			</div>
 			<div class="panel-body">
 				<input type="hidden" value="${faqlist.qa_num}">
@@ -126,10 +136,11 @@
 						<div class="input-group well-lg">
 							<input type="text" class="form-control" name="qa_content">
 							<div class="input-group-btn">
-								<button class="btn btn-default" name="faqcomminsert" value="${faqlist.qa_num}">
+								<input type="button" class="btn btn-default" name="faqcomminsert" value=${faqlist.qa_num }>>
+								<i class="glyphicon glyphicon-pencil"></i>
+	<%-- 						<button class="btn btn-default" name="faqcomminsert" value="${faqlist.qa_num}">
 									<i class="glyphicon glyphicon-pencil"></i>
-								</button>
-								
+								</button> --%>		
 							</div>
 						</div>
 					</div>

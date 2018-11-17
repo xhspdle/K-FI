@@ -27,13 +27,16 @@
 			</div>
 		</div>
 	</c:forEach>
-</div>
-<div>
-	<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+	<div>
 		<ul class="pagination">
-			<li> <a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
-		</ul>		
-	</c:forEach>
+			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
+			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+				<li><a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
+			</c:forEach>
+			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+			<li></li>
+		</ul>				
+	</div>
 </div>
 <div id="aclistview2" class="hidediv">
 	<table class="table table-striped">
@@ -56,11 +59,16 @@
 			</tr>
 		</c:forEach>	
 	</table>
-	<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-			<ul class="pagination">
-				<li> <a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
-			</ul>		
-	</c:forEach>
+	<div>
+		<ul class="pagination">
+			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
+			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+				<li><a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
+			</c:forEach>
+			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+			<li></li>
+		</ul>				
+	</div>	
 </div>
 
 <!--  /////////////////////////////신고된 사용자 정보 ////////////////////////////////////-->
@@ -150,8 +158,7 @@
  				var resultHTML=html.replace("{mburl}","<c:url value='/mbupdate'/>")
  					.replace("{acc_id}", data.user_id)
    					.replace("{user_num}", user_num)
- 					.replace("{acc_nick}", data.user_nick)
-				
+ 					.replace("{acc_nick}", data.user_nick)	
 					.replace("{acc_stat}", data.user_stat)
 					.replace("{acc_email}", data.user_email)
 					.replace("{acc_date}",data.user_date);				
@@ -163,7 +170,6 @@
 		});		
 	});
 	function acdeletecheck(ac_num){
-
 		var result=confirm("정말로????");
 		if(result==true){
 			location.href="acdelete?ac_num="+ac_num;

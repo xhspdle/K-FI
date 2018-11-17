@@ -152,7 +152,10 @@ h4 {
 	color: #333333;
 	background-color: #fff;
 }
-
+.navbar-header a i:hover {
+	color: #333333 ;
+	background-color: #fff ;
+}
 .navbar-default .navbar-toggle {
 	border-color: transparent;
 	color: #fff ;
@@ -251,7 +254,9 @@ input[type=file],
 table tr td{
 	cursor:pointer;
 }
-
+#abpopupcontent{
+	
+}
 #abpopup{
 	margin: auto;
 	display : none;
@@ -322,6 +327,18 @@ body.modal-open::-webkit-scrollbar {
 		background-color: #efffd7;
 		border: solid 3px orange; 
 	}
+	.logincontainer {
+		position: absolute;
+		max-width: 50%;
+		max-height: 40%;
+		top:25%;
+		left:0;
+		background: rgba(0, 0, 0, 0.3); /* Black background with 0.5 opacity */
+		color: #f1f1f1;
+		width: 100%;
+		padding: 20px;
+		border-radius: 10px;
+	}
 }
 @media screen and (max-width: 600px) {
     .flexcolumn {
@@ -338,6 +355,18 @@ body.modal-open::-webkit-scrollbar {
 	    padding: 10px;
 		background-color: #efffd7;
 		border: solid 3px orange; 
+	}
+	.logincontainer {
+		position: absolute;
+		max-width: 80%;
+		max-height: 40%;
+		top:25%;
+		left:0;
+		background: rgba(0, 0, 0, 0.3); /* Black background with 0.5 opacity */
+		color: #f1f1f1;
+		width: 100%;
+		padding: 20px;
+		border-radius: 10px;
 	}
 }
 .board_content_ad{
@@ -382,7 +411,8 @@ body.modal-open::-webkit-scrollbar {
 /*   스킨  관련   */
 #modifycnskin{
 	width: 85%;
-	height: 70%;
+	height: 80%;
+	max-height: 80%;
 	background-color: #f0f0f5;
 	border-radius: 8px;
 	margin-top: 5%;
@@ -412,4 +442,23 @@ body.modal-open::-webkit-scrollbar {
 	background-position: center;   
 	background-repeat: no-repeat;  
 	background-size: cover;
+}
+.logincontainer button{
+	background: rgba(0, 0, 0, 0.3);
+	color: #f1f1f1; 
+}
+.logincontainer h2{
+	color: #f1f1f1; 
+}
+.logincontainer {
+	position: absolute;
+	max-width:30%;
+	max-height: 40%;
+	top:25%;
+	left:20px;
+	background: rgba(0, 0, 0, 0.3); /* Black background with 0.5 opacity */
+	color: #f1f1f1;
+	width: 100%;
+	padding: 20px;
+	border-radius: 10px;
 }

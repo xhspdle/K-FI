@@ -4,8 +4,17 @@
 <c:set var="admin" value="${sessionScope.admininfo}" /> 
 <script>
 	$(function(){
+		$("#addeletebtn").click(function(){
+			var admin_num=$("#admininfo_num").val();
+	 		var result=confirm("삭제하게?????");
+	 		alert(result);
+	 		if(result){
+	 			location.href="addelete?admin_num="+admin_num;
+	 		}else{
+	 			return false;
+	 		}
+		});
 		$("#adminmodifybtn").click(function(){
-			alert("aaa");
 			var admin_num=$(this).parent().parent().children().first().text();
 			$.getJSON("<c:url value='/addetail'/>",{
 				admin_num : admin_num
@@ -17,10 +26,12 @@
 				$("#admininfo_pwd").val(data.admin_pwd);
 				$("#admininfo_email").val(data.admin_email);
 				$("#admininfo_regdate").text(data.admin_regdate);
-				alert(data.admin_regdate);
 			});							
 		});
 	});
+	
+	
+	
 </script>
 <div id="adminlist">
 	<h1>
@@ -82,7 +93,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2">Password:</label>
 					<div class="col-sm-10">          
-						<input type="text" class="form-control" id="admininfo_pwd" name="admin_pwd">
+						<input type="password" class="form-control" id="admininfo_pwd" name="admin_pwd">
 					</div>
 				</div>
 				<div class="form-group">
@@ -100,8 +111,9 @@
 				<div class="modal-footer">       
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-default">수정</button>
-						<button type="submit" class="btn btn-danger">삭제</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<input type="button" class="btn btn-danger" id="addeletebtn" value="삭제">
+						<!-- <button class="btn btn-danger" id="addeletebtn">삭제</button> button 에러-->
+						<button class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</form>

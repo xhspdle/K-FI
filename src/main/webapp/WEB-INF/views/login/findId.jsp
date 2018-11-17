@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css">
 <style type="text/css">
 .logomb-3 .col-xs-6 a{float:left;display:block;width:50%;text-align:center;box-sizing:border-box;font-size:21px;cursor:pointer}
 
@@ -19,9 +21,6 @@ body {
 	margin: auto;
 	width: 50%;
 	padding: 10px;
-	background: rgba(0, 0, 0, 0.76);
-	background: url(${pagecontext.request.contextPath}/resources/images/login.png) no-repeat center center
-		fixed;
 		
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -88,9 +87,6 @@ h1, h2, h3 {
 	margin-bottom: 0px !important;
 }
 
-.form-group-forgot {
-	text-align: center;
-}
 
 form .error {
 	color: #ff0000;
@@ -98,6 +94,9 @@ form .error {
 
 .findpwd-form {
 	display: none;
+}
+.tab-head{
+	font-family: 
 }
 </style>
 <link rel="stylesheet"
@@ -121,7 +120,7 @@ form .error {
  				$("#findpwd-form2").fadeOut(100);
  			});
 		
- 			$("#findpwd-btn").on('submit',"form[name='findid']",function(e){
+ 			/* $("#findpwd-btn").on('submit',"form[name='findid']",function(e){
  				e.preventDefault();
  				
  				var formData=new formData($(this).get(0));
@@ -137,7 +136,7 @@ form .error {
  						
  					}
  				});
- 			});
+ 			}); */
  			$(function() {
  				var idFlag = false;
  				var nickFlag = false;
@@ -344,7 +343,6 @@ form .error {
  <div class="col-sm-4">
 	<div class="container">
 		<form class="navbar-form navbar-left" action="<c:url value='/login/findid'/>" method="post">
-			
 			<div class="form-group">
 				<input type="hidden" id="user_num" name="user_num">
 				<label class="form-control-label" for="fpemail">Email</label><br>
@@ -375,13 +373,13 @@ form .error {
 				<div class="logomb-3">
 					<div class="col-xs-6">
 						<div class="tab-head1">
-							<a href="http://localhost:8082/kfi/login/findid" class="tabhead1"
+							<a href="http://localhost:8082/kfi/login/findid" class="tab-head"
 								id="findid-form-link1">Forgot ID</a>
 						</div>
 						<div class="tab-head2">
 							<!-- <a href="http://localhost:8082/kfi/login/findpwd" class="tabhead2" id="findpwd-form-link2">Password?</a> -->
 							<a href="http://localhost:8082/kfi/login/findpwd"
-								class="tabhead2" id="findpwd-form-link2">Password?</a>
+								class="tab-head" id="findpwd-form-link2">Password?</a>
 						</div>
 					</div>
 
@@ -405,8 +403,6 @@ form .error {
 				</form>
 			</div>
 		</div>
-<div class="container msgBox">
-	<div class="alert alert-danger"></div>
 </div>
 
 		<form action="<c:url value='/login/findpwd'/>" method="post"
@@ -429,9 +425,5 @@ form .error {
 			<button type="submit" class="btn btn-default" id="btn1">인증번호보내기</button>
 		</form>
 	</div>
-	<!-- Alert Msg Box -->
-<div class="container msgBox">
-	<div class="alert alert-danger"></div>
-</div>
 </body>
 </html>
