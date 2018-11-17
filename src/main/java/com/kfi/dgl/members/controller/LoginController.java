@@ -36,7 +36,6 @@ public class LoginController {
 			//세션에 이전 로그인 세션값이 존재시 제거
 			session.removeAttribute("user_num");
 			session.removeAttribute("user_id");
-			System.out.println(session.getAttribute("user_num")+"11");
 	}	
 		MembersVo vo =loginService.login(map);
 		
@@ -63,8 +62,8 @@ public class LoginController {
 	// 로그아웃
 	@RequestMapping(value="/login/logout")
 	public String logout(HttpSession session) {
+		System.out.println(session.getAttribute("user_num"));
 		session.invalidate();
 		return "redirect:/";
 	}
-	
 }

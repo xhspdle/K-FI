@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<style>
+.logout-btn{overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:0;line-height:0}
+</style> 
 <div class="jumbotron text-center" id="mypageJumbo">
 	<div style="background:url(${pageContext.request.contextPath}/resources/upload/img/${msv.msc_savimg })"> 
 		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>">
@@ -37,7 +40,7 @@
 						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
 						<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
 						<!-- 해야댐 -->
-						<li><a href="#">로그아웃</a></li>
+						<li><a href="<c:url value='/login/logout'/>" class="logout-btn">Logout</a></li>
 					</ul>
 				</li>
 				<li><button type="button" class="btn btn-default btn-lg" id="search" style="background-color:${msv.ms_color};">
@@ -63,3 +66,13 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+$(function(){
+    $('.logout-btn').on('click',function(){
+    event.preventDefault();
+        alert("logout");
+        location.href="<c:url value='/login/logout'/>";
+    });
+});
+/* 로그인시 메인메뉴에서 로그인을 없애고 로그아웃으로 만들자 */
+</script>

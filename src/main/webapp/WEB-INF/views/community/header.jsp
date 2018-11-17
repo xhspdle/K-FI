@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+.logout-btn{overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:0;line-height:0}
+</style> 
 <div class="jumbotron text-center" id="communityJumbo">
 	<div> 
 		<h3 class="communityHeader"><strong>K-Fi's Community World</strong></h3>
@@ -39,7 +42,7 @@
 						<li><a href="<c:url value='/mypage/mycommcalendar'/>">일정보기</a></li>
 						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
 						<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
-						<li><a href="#">로그아웃</a></li>
+						<li><a href="<c:url value='/login/logout'/>" class="logout-btn">Logout</a></li>
 					</ul>
 				</li>
 				<li><button type="button" class="btn btn-default btn-lg" id="search" style="background-color:${msv.ms_color};">
@@ -66,3 +69,12 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+$(function(){
+    $('.logout-btn').on('click',function(){
+    event.preventDefault();
+        alert("logout");
+        location.href="<c:url value='/login/logout'/>";
+    });
+});
+</script>

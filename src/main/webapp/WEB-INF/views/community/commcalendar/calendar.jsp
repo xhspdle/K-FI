@@ -33,7 +33,7 @@ body {
 	font-size: 18px;
 }
 
-.aaa {
+.form-box {
 	margin: 5%;
 }
 
@@ -43,17 +43,15 @@ body {
 }
 </style>
 <script>
-	$(function() { // document ready
+	$(function() { 
 		$('#calendar').fullCalendar(
 				{
-					defaultView : 'month',
-					defaultDate : '2018-11-07',
-					editable : true,
+					editable : false,
 					selectable : true,
-					eventLimit : true, // allow "more" link when too many events
+					eventLimit : true, 
 					header : {
-						left : 'prev,next today',
-						center : 'title',
+						left : 'today',
+						center : 'prevYear prev title next nextYear',
 						right : ''
 					},
 					views : {
@@ -63,25 +61,18 @@ body {
 								days : 2
 							},
 
-							// views that are more than a day will NOT do this behavior by default
-							// so, we need to explicitly enable it
-							groupByResource : true
+							groupByResource : false
 
-						//// uncomment this line to group by day FIRST with resources underneath
-						//groupByDateAndResource: true
 						}
 					},
 
-					//// uncomment this line to hide the all-day slot
-					//allDaySlot: false,
-
 					resources : [ {
 						id : 'a',
-						title : 'Room A'
+						title : '일정 2'
 					}, {
 						id : 'b',
-						title : 'Room B',
-						eventColor : 'green'
+						title : '일정 1',
+						
 					}, {
 						id : 'c',
 						title : 'Room C',
@@ -93,7 +84,7 @@ body {
 					} ],
 					events : [ {
 						id : '1',
-						resourceId : 'a',
+						resourceId : 'b',
 						start : '2018-11-06',
 						end : '2018-11-08',
 						title : '일정 1'
@@ -109,31 +100,31 @@ body {
 						start : '2018-11-17T09:00:00',
 						end : '2018-11-18T09:00:00',
 						title : '바쁜 일정1'
-					},{
-					id : '3',
-					resourceId : 'b',
-					start : '2018-11-17T11:00:00',
-					end : '2018-11-18T13:00:00',
-					title : '바쁜일정 2'
-				},{
-				id : '3',
-				resourceId : 'b',
-				start : '2018-11-17T13:00:00',
-				end : '2018-11-18T14:00:00',
-				title : '바쁜 일정3'
-			},{
-			id : '3',
-			resourceId : 'b',
-			start : '2018-11-17T20:00:00',
-			end : '2018-11-18T21:00:00',
-			title : '바쁜 일정4'
-		},{
-			id : '3',
-			resourceId : 'b',
-			start : '2018-11-17T20:00:00',
-			end : '2018-11-18T21:00:00',
-			title : '바쁜 일정5'
-		},{
+					}, {
+						id : '3',
+						resourceId : 'b',
+						start : '2018-11-17T11:00:00',
+						end : '2018-11-18T13:00:00',
+						title : '바쁜일정 2'
+					}, {
+						id : '3',
+						resourceId : 'b',
+						start : '2018-11-17T13:00:00',
+						end : '2018-11-18T14:00:00',
+						title : '바쁜 일정3'
+					}, {
+						id : '3',
+						resourceId : 'b',
+						start : '2018-11-17T20:00:00',
+						end : '2018-11-18T21:00:00',
+						title : '바쁜 일정4'
+					}, {
+						id : '3',
+						resourceId : 'b',
+						start : '2018-11-17T20:00:00',
+						end : '2018-11-18T21:00:00',
+						title : '바쁜 일정5'
+					}, {
 						id : '4',
 						resourceId : 'c',
 						start : '2018-11-01T11:30:00',
@@ -147,16 +138,18 @@ body {
 						title : '뒷풀이'
 					} ],
 
-					select : function(start, end, jsEvent, view, resource) {
-						console.log('select', start.format(), end.format(),
-								resource ? resource.id : '(no resource)');
-					},
+					/* select : function(start, end, jsEvent) {
+						console.log('select', start.format(), end.format());
+						alert(start.format());
+						alert(end.format());
+					}, */
 					dayClick : function(date, jsEvent, view, resource) {
 						console.log('dayClick', date.format(),
+								alert(date.format())+
 								resource ? resource.id : '(no resource)');
 					}
+					
 				});
-
 	});
 </script>
 
@@ -183,30 +176,32 @@ body {
 				</div>
 			</div>
 			<div class="modal-body">
-				<div class="aaa">
+				<div class="form-box">
 					<form action="<c:url value=''/>" name="addevent" role="form"
 						id="addevent-form" class="" method="post">
 						<div class="form-group">
 							<label class="form-control-label" for="findpwd-email">Title</label><br>
 							<input type="text" name="user_email" id="schedulename"
-								class="form-control" placeholder="Title">
+								class="form-control" placeholder="Title" maxlength="50">
 						</div>
 						<div class="form-group">
 							<label for="findpwd-code">Description</label> <input type="text"
 								name="" id="findpwd-code" class="form-control"
-								placeholder="Description">
+								placeholder="Description" maxlength="200">
+							<div class="startDate">
 							<div>
 								<label for="">Start Date</label>
 							</div>
-							<input type="text" id="date" class="startpickDate"
-								placeholder="Date"><i class="far fa-calendar-alt"></i>
-						</div>
-						<div class="endDate">
-							<div>
-								<label for="">End Date</label>
+								 <input type="text" id="date"class="startpickDate" name="startDate" placeholder="Date">
+								 <i class="far fa-calendar-alt"></i>
 							</div>
-							<input type="text" id="date" class="endpickDate"
-								placeholder="Date"><i class="far fa-calendar-alt"></i>
+							<div class="endDate">
+								<div>
+									<label for="">End Date</label>
+								</div>
+								<input type="text" id="date" class="endpickDate"
+									placeholder="Date"><i class="far fa-calendar-alt"></i>
+							</div>
 						</div>
 					</form>
 				</div>
