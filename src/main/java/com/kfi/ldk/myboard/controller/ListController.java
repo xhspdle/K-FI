@@ -72,6 +72,23 @@ public class ListController {
 		model.addAttribute("list", service.list(map));
 		return ".mypage.myboard.searchMain";
 	}
+	@RequestMapping(value="/mypage/myboard/selectList",method=RequestMethod.GET)
+	public String selectList(@RequestParam(value="pageNum",defaultValue="1")
+	int pageNum,int user_num,Model model){
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("user_num", user_num);
+		int totalRowCount=service.getCount(map);
+		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 5);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		model.addAttribute("pu", pu);
+		model.addAttribute("select_user_num", user_num);
+		model.addAttribute("list", service.list(map));
+		return ".mypage.myboard.searchMain";
+		/*
+		 * 여기하던중 -> view페이지 가서 확인해야댐
+		 */
+	}
 	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){

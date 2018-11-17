@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:choose>
+	<c:when test="${!empty keyword }">
+	<input type="hidden" id="myBoardSearchListHere" value="${keyword }">
+	</c:when>
+	<c:otherwise>
+	<input type="hidden" id="myBoardSelectListHere" value="${user_num }">
+	</c:otherwise>	
+</c:choose>
 
-<input type="hidden" id="myBoardSearchListHere" value="${keyword }">
 <div id="myBoardSearchList" class="container">
 <c:forEach var="vo" items="${list }" varStatus="vs">
 	<h1 class="text-center" id="${vo.mb_date }" style="margin-bottom: 30px;">
@@ -38,7 +45,9 @@
 								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 							</a>
 						</li>
+						<c:if test="${vo.user_num!=sessionScope.user_num}">
 						<li><a href="<c:url value='/acinsert?mb_num=${vo.mb_num }'/>"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

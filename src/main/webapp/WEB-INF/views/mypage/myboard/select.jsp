@@ -15,36 +15,29 @@
 					</h1>
 				</blockquote>
 				<div class="dropdown boardOption">
-					<button class="btn dropdown-toggle 
-					<c:if test="${sessionScope.user_num!=boardVo.user_num }">disabled</c:if>" 
-					type="button" data-toggle="dropdown">
+					<button class="btn dropdown-toggle"	type="button" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
 						<li>
-							<a href="#updateModal" data-toggle="modal" data-mb-num="${boardVo.mb_num }">
+							<a href="#updateModal" class="btn btn-block 
+							<c:if test="${sessionScope.user_num!=boardVo.user_num }">disabled</c:if>" 
+							style="text-align: left;" data-toggle="modal" data-mb-num="${boardVo.mb_num }">
 								<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
 							</a>
 						</li>
 						<li>
-							<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">
+							<a href="#" class="btn btn-block 
+							<c:if test="${sessionScope.user_num!=boardVo.user_num }">disabled</c:if>" 
+							style="text-align: left;" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">
 								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 							</a>
 						</li>
+						<c:if test="${sessionScope.user_num!=boardVo.user_num }">
 						<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
+						</c:if>
 					</ul>
 				</div>
-				<!--  
-				<div class="dropdown boardOption">
-					<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-option-vertical"></span>
-					</button>
-					<ul class="dropdown-menu rightOption">
-						<li><a href="#">수정</a></li>
-						<li><a href="#">삭제</a></li>
-					</ul>
-				</div>
-				-->
 			</div>
 			<div class="panel-body">
 				<div class="media">

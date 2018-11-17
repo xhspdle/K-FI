@@ -96,7 +96,9 @@ $(document).ready(function(){
   $("#writeModal").on('show.bs.modal',function(){
 	  $('body').addClass('test');
   });
-  
+  /*
+   * 사진 업로드 미리보기 & 추가업로드 버튼 로드
+   */
   $(document).on('change',"[name='fileP']",function(event){
 	  if(event.target.files[0]!==undefined){
 		  var tmppath=URL.createObjectURL(event.target.files[0]);
@@ -123,6 +125,9 @@ $(document).ready(function(){
 		  });
 	  }
   });
+  /*
+   * 영상 업로드 미리보기 & 추가업로드 버튼 로드
+   */
   $(document).on('change',"[name='fileV']",function(event){
 	  if(event.target.files[0]!==undefined){
 		  var tmppath=URL.createObjectURL(event.target.files[0]);
@@ -252,8 +257,7 @@ $(document).ready(function(){
 									"<li><a href='#updateModal' data-toggle='modal' data-mb-num='"+ mb_num +"'>" +
 									"<span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;Edit</a></li>" +
 									"<li><a href='#' onclick='return false;' data-toggle='popover' data-mb-num='"+ mb_num +"'>" +
-									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li>" +
-									"<li><a href='#'><span class='glyphicon glyphicon-exclamation-sign'></span>&nbsp;&nbsp;Report bad contents</a></li></ul></div>";
+									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li></ul></div>";
 					}else{
 						boardOption="<div class='dropdown boardOption'>" +
 									"<button class='btn dropdown-toggle' type='button' data-toggle='dropdown'>" +
@@ -263,7 +267,7 @@ $(document).ready(function(){
 									"<span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;Edit</a></li>" +
 									"<li><a href='#' class='btn btn-block disabled' style='text-align: left'>" + 
 									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li> +" +
-									"<li><a href='#'><span class='glyphicon glyphicon-exclamation-sign'></span>&nbsp;&nbsp;Report bad contents</a></li></ul></div>";
+									"<li><a href='"+ getPageContext +"/acinsert?mb_num="+ mb_num +"'><span class='glyphicon glyphicon-exclamation-sign'></span>&nbsp;&nbsp;Report bad contents</a></li></ul></div>";
 					}
 					if(i===0){
 						$("<div class='panel-group'>" +
@@ -763,6 +767,8 @@ $(document).ready(function(){
 		  event.preventDefault();
 		  $.getListMore(keyword,"#myBoardSearchList");
 	  });
+  }else if($("#myBoardSelectListHere").val()!==undefined){
+	 
   }
   
   /*
