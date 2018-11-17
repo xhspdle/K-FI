@@ -35,7 +35,7 @@ public class MyCommListController {
 		map.put("ms_using",1);
 		//select로 코드 수정하기
 		List<MySkinViewVo> list=(List<MySkinViewVo>)mySkinService.list(map);
-		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
+		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png","");
 		if(list!=null) {
 			for(MySkinViewVo vo: list) {
 				msv=vo;

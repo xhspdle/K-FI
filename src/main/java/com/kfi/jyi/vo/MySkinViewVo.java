@@ -13,11 +13,13 @@ public class MySkinViewVo {
 	private int msc_num; //커버번호
 	private String msc_orgimg; //커버 원본사진
 	private String msc_savimg; //커버 저장사진
+	private String user_nickname; //유저 닉네임 추가
 	public MySkinViewVo() {
 		super();
 	}
 	public MySkinViewVo(int ms_num, int user_num, String ms_name, String ms_color, String ms_msg, int ms_using,
-			int msp_num, String msp_orgimg, String msp_savimg, int msc_num, String msc_orgimg, String msc_savimg) {
+			int msp_num, String msp_orgimg, String msp_savimg, int msc_num, String msc_orgimg, String msc_savimg,
+			String user_nickname) {
 		super();
 		this.ms_num = ms_num;
 		this.user_num = user_num;
@@ -31,6 +33,7 @@ public class MySkinViewVo {
 		this.msc_num = msc_num;
 		this.msc_orgimg = msc_orgimg;
 		this.msc_savimg = msc_savimg;
+		this.user_nickname = user_nickname;
 	}
 	public int getMs_num() {
 		return ms_num;
@@ -104,17 +107,17 @@ public class MySkinViewVo {
 	public void setMsc_savimg(String msc_savimg) {
 		this.msc_savimg = msc_savimg;
 	}
+	public String getUser_nickname() {
+		return user_nickname;
+	}
+	public void setUser_nickname(String user_nickname) {
+		this.user_nickname = user_nickname;
+	}
 	@Override
 	public String toString() {
 		return "MySkinViewVo [ms_num=" + ms_num + ", user_num=" + user_num + ", ms_name=" + ms_name + ", ms_color="
 				+ ms_color + ", ms_msg=" + ms_msg + ", ms_using=" + ms_using + ", msp_num=" + msp_num + ", msp_orgimg="
 				+ msp_orgimg + ", msp_savimg=" + msp_savimg + ", msc_num=" + msc_num + ", msc_orgimg=" + msc_orgimg
-				+ ", msc_savimg=" + msc_savimg + "]";
+				+ ", msc_savimg=" + msc_savimg + ", user_nickname=" + user_nickname + "]";
 	}
-	
-	
-	
-	
-	
-	
 }

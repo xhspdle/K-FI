@@ -76,28 +76,35 @@ public class ListController {
 		return ".mypage.myboard.searchMain";
 	}
 	@RequestMapping(value="/mypage/myboard/selectList",method=RequestMethod.GET)
-	public String selectList(@RequestParam(value="pageNum",defaultValue="1")
-	int pageNum,int user_num,Model model){
+	public String selectList(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
+			@RequestParam(value="selectedUserNum",defaultValue="0")int selectedUserNum,Model model){
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		map.put("user_num", user_num);
+		map.put("user_num", selectedUserNum);
 		int totalRowCount=service.getCount(map);
 		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 5);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
 		model.addAttribute("pu", pu);
-		model.addAttribute("selectedUserNum", user_num);
+		model.addAttribute("selectedUserNum", selectedUserNum);
 		model.addAttribute("list", service.list(map));
 		return ".mypage.myboard.searchMain";
 	}
 	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
-	public MySkinViewVo myskin(HttpSession session){
-		int user_num=(Integer)session.getAttribute("user_num");
+	public MySkinViewVo myskin(HttpSession session,
+			@RequestParam(value="selectedUserNum",defaultValue="0")int selectedUserNum){
+		System.out.println(selectedUserNum);
+		int user_num=0;
+		if(selectedUserNum!=0) {
+			user_num=selectedUserNum;
+		}else {
+			user_num=(Integer)session.getAttribute("user_num");
+		}
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
 		map.put("ms_using",1);
 		List<MySkinViewVo> list=(List<MySkinViewVo>)mySkinService.list(map);
-		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
+		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png","");
 		if(list!=null) {
 			for(MySkinViewVo vo: list) {
 				msv=vo;

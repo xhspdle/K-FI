@@ -153,7 +153,7 @@
 				
 				<div class="text-center">
 					<ul class="pagination"></ul>
-					<a <c:if test="${!empty prev.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${prev.mb_num }&keyword=${keyword }'/>"</c:if>>
+					<a <c:if test="${!empty prev.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${prev.mb_num }&keyword=${keyword }&selectedUserNum=${selectedUserNum }'/>"</c:if>>
 						<span data-toggle="tooltip" 
 						<c:choose>
 							<c:when test="${!empty prev.mb_num }">
@@ -166,7 +166,7 @@
 						class="pull-left glyphicon glyphicon-step-backward prev"></span>
 					</a>
 					
-					<a <c:if test="${!empty next.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${next.mb_num }&keyword=${keyword }'/>"</c:if>>
+					<a <c:if test="${!empty next.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${next.mb_num }&keyword=${keyword }&selectedUserNum=${selectedUserNum }'/>"</c:if>>
 						<span data-toggle="tooltip" 
 						<c:choose>
 							<c:when test="${!empty next.mb_num }">

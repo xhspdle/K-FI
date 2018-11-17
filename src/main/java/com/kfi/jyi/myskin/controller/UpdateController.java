@@ -31,7 +31,7 @@ public class UpdateController {
 		map.put("user_num", user_num);
 		map.put("ms_using",1);
 		List<MySkinViewVo> list=(List<MySkinViewVo>)service.list(map);
-		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png");
+		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png","");
 		if(list!=null) {
 			for(MySkinViewVo vo: list) {
 				msv=vo;

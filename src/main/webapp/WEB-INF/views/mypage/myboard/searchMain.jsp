@@ -19,7 +19,7 @@
 			<div class="panel-heading" id="${vo.mb_num }">
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
-						<a href="<c:url value='/mypage/myboard/select?mb_num=${vo.mb_num }&keyword=${keyword }&'/>" 
+						<a href="<c:url value='/mypage/myboard/select?mb_num=${vo.mb_num }&keyword=${keyword }&selectedUserNum=${selectedUserNum }'/>" 
 						class="postA">
 						${vo.mb_title }
 						</a>
@@ -56,7 +56,7 @@
 						<img src="<c:url value='/resources/upload/img/${vo.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
 					</div>
 					<div class="media-body" style="padding-left:5px;">
-						<h4 class="media-heading" style="text-align:left;"><strong>${vo.user_nickname }</strong></h4>
+						<h4 class="media-heading" style="text-align:left;"><a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${vo.user_num }'/>"><strong>${vo.user_nickname }</strong></a></h4>
 						<p style="text-align:left;margin:0px;margin-top:-5px;"><small>${vo.user_email }</small></p>
 					</div>
 				</div>

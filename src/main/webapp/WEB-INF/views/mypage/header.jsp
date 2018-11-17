@@ -4,7 +4,7 @@
 <div class="jumbotron text-center" id="mypageJumbo">
 	<div style="background:url(${pageContext.request.contextPath}/resources/upload/img/${msv.msc_savimg })"> 
 		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>">
-		<h3><strong>${user_nickname }</strong></h3>
+		<h3><strong>${msv.user_nickname }</strong></h3>
 		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p>
 		<form class="form-follow">
 			<div class="input-group col-sm-offset-5 col-sm-2">
