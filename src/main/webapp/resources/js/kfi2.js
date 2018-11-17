@@ -340,7 +340,6 @@ $(function() {
 	
 	$('#ms_color').on('change',function(){
 		var vv=$(this).val();
-		alert(vv);
 	});
 	
 	/////////////////////////새 커뮤니티 등록하기
@@ -351,7 +350,13 @@ $(function() {
 		$('#pre_newComm_name').html('');
 		$('#pre_newComm_name').html('<b>'+comm_name+'</b>');
 	});
-	
+
+	$('input[name=cs_color]').on('change',function(event){
+		var color=$(this).val();
+		$('#new_comm_myNavbar').css('background-color',color);
+		$('#new_comm_search').css('background-color',color);
+	});
+
 	$('input[name=comm_content]').on('keyup',function(){
 		var comm_content=$(this).val();
 		$('#pre_newComm_content').text('');

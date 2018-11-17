@@ -5,6 +5,7 @@ import java.sql.Date;
 public class CommBoardViewVo {
     private int cb_num; //모임글번호
     private int comm_num; //모임번호
+    private int user_num; //유저번호
     private String cb_title; //모임글제목
     private String cb_content; //모임글내용
     private Date cb_date; //모임글작성일
@@ -30,13 +31,14 @@ public class CommBoardViewVo {
 	public CommBoardViewVo() {
 		super();
 	}
-	public CommBoardViewVo(int cb_num, int comm_num, String cb_title, String cb_content, Date cb_date, int cb_notice,
-			int cb_views, int cp_num, String cp_orgimg, String cp_savimg, int cv_num, String cv_orgvid,
+	public CommBoardViewVo(int cb_num, int comm_num, int user_num, String cb_title, String cb_content, Date cb_date,
+			int cb_notice, int cb_views, int cp_num, String cp_orgimg, String cp_savimg, int cv_num, String cv_orgvid,
 			String cv_savvid, int commc_num, int commc_user_num, String commc_content, Date commc_date, int commc_like,
 			int cbl_num, int cbl_user_num) {
 		super();
 		this.cb_num = cb_num;
 		this.comm_num = comm_num;
+		this.user_num = user_num;
 		this.cb_title = cb_title;
 		this.cb_content = cb_content;
 		this.cb_date = cb_date;
@@ -67,6 +69,12 @@ public class CommBoardViewVo {
 	}
 	public void setComm_num(int comm_num) {
 		this.comm_num = comm_num;
+	}
+	public int getUser_num() {
+		return user_num;
+	}
+	public void setUser_num(int user_num) {
+		this.user_num = user_num;
 	}
 	public String getCb_title() {
 		return cb_title;
@@ -178,11 +186,11 @@ public class CommBoardViewVo {
 	}
 	@Override
 	public String toString() {
-		return "CommBoardViewVo [cb_num=" + cb_num + ", comm_num=" + comm_num + ", cb_title=" + cb_title
-				+ ", cb_content=" + cb_content + ", cb_date=" + cb_date + ", cb_notice=" + cb_notice + ", cb_views="
-				+ cb_views + ", cp_num=" + cp_num + ", cp_orgimg=" + cp_orgimg + ", cp_savimg=" + cp_savimg
-				+ ", cv_num=" + cv_num + ", cv_orgvid=" + cv_orgvid + ", cv_savvid=" + cv_savvid + ", commc_num="
-				+ commc_num + ", commc_user_num=" + commc_user_num + ", commc_content=" + commc_content
+		return "CommBoardViewVo [cb_num=" + cb_num + ", comm_num=" + comm_num + ", user_num=" + user_num + ", cb_title="
+				+ cb_title + ", cb_content=" + cb_content + ", cb_date=" + cb_date + ", cb_notice=" + cb_notice
+				+ ", cb_views=" + cb_views + ", cp_num=" + cp_num + ", cp_orgimg=" + cp_orgimg + ", cp_savimg="
+				+ cp_savimg + ", cv_num=" + cv_num + ", cv_orgvid=" + cv_orgvid + ", cv_savvid=" + cv_savvid
+				+ ", commc_num=" + commc_num + ", commc_user_num=" + commc_user_num + ", commc_content=" + commc_content
 				+ ", commc_date=" + commc_date + ", commc_like=" + commc_like + ", cbl_num=" + cbl_num
 				+ ", cbl_user_num=" + cbl_user_num + "]";
 	}

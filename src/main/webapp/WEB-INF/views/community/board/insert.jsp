@@ -5,14 +5,21 @@
 		<h2><span class="glyphicon glyphicon-check"></span> Write</h2>
 	</div>
 	<div class="modal-body" style="padding:40px 50px;">
-		<form method="post" action="/kfi/mypage/myboard/insert" name="frm" enctype="multipart/form-data">
+		<form method="post" action="<c:url value='/community/board/insert'/>" name="frm" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="comm_title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
-				<input type="text" class="form-control" id="comm_title" name="comm_title" placeholder="Enter Title">
+				<input type="text" class="form-control" id="cb_title" name="cb_title" placeholder="Enter Title">
 			</div>
 			<div class="form-group">
 				<label for="comm_content"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
-				<textarea class="form-control" rows="5" id="comm_content" name="comm_content" placeholder="Write something!"></textarea>
+				<textarea class="form-control" rows="5" id="cb_content" name="cb_content" placeholder="Write something!"></textarea>
+			</div>
+			<!-- 공지유무 -->
+			<div class="form-group">
+				<label for="cb_notice"><span class="glyphicon glyphicon-menu-hamburger"></span>Notice</label>
+				<div class="checkbox">
+			      <label><input type="checkbox" name="cb_notice" value="1">is Notice</label>
+				</div>
 			</div>
 			<div class="form-group" style="margin-bottom:-11.4px;">
 				<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>

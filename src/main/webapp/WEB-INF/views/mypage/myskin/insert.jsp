@@ -5,38 +5,44 @@
 <div class="container w3-panel w3-border w3-round-xlarge">
 	<div class="col-sm"
 		style="background-color: white; width: 20%; height: 10%;">
-		<h2 style="margin-left: 50%; width: 80%;">My Skin</h2>
+		<h2 style="margin-left: 54%;margin-top: 8%; width: 80%;    font-size: 40px;
+    text-transform: uppercase;
+    color: #303030;
+    font-weight: 600;">My Skin</h2>
 	</div>
-	<!-- 미리보기 설정(js) -->
-	<div class="jumbotron col-sm" id="preview_cover"
-		style="margin: auto; width: 80%;">
-		<div>
-			<img src="<c:url value='/resources/images/default-profile.png'/>"
-				alt="new profile" class="img-circle" id="profile_preview"
-				style="border: white 4px solid !important;margin-top: 60px; width: 150px; height: 150px; background-color: white; display: block; margin-left: auto; margin-right: auto;">
-		<h4><span id="myskin_list_nickname" >${user_nickname}</span></h4> 
-				<p>
-				<span id="preview_msg"
-					style="margin-top: -25px;width: max-content; color: black; border-bottom: 2px solid white; display: block; margin-left: auto; margin-right: auto;">상태메세지
-					미리보기</span>
-			</p>
-			<div class="collapse navbar-collapse" id="preview_navbar"
-				style="border-radius: 10px;">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#contact">COMMUNITY</a></li>
-					<li class="dropdown"><a href="#contact">MYPAGE</a></li>
-					<li><button type="button" class="btn btn-default btn-lg"
-							style="border-radius: 10px;">
-							<span class="glyphicon glyphicon-search"></span>
-						</button></li>
-				</ul>
+	
+	<!-- 미리보기 -->	
+	<div id="new_community">
+		<div class="w3-row-padding w3-margin-top" style="height:370px;">
+			<div class="w3-third" style="width: 100%;height:100%;">
+				<div class="w3-card" id="preview_cover">
+				<div>
+					<img id="profile_preview" class="img-responsive img-circle" src="<c:url value='/resources/images/default-profile.png'/>">
+					<h4><span id="myskin_list_nickname" >${user_nickname}</span></h4>
+   					 <span id="preview_msg">상태메세지 미리보기</span>
+     			</div>
+						<div class="w3-container" style="padding: 0;">
+						<div class="collapse navbar-collapse" id="preview_navbar" style="background-color:#00cee8">
+							<ul class="nav navbar-nav navbar-right">
+								<li class="dropdown">
+									<a href="<c:url value='/community'/>">COMMUNITY</a>
+								</li>
+								<li class="dropdown">
+									<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
+								</li>
+								<li><button type="button" class="btn btn-default btn-lg" id="preview_cover">
+								<span class="glyphicon glyphicon-search"></span></button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	<br>
+
 	<!-- 등록 -->
 	<form class="form-horizontal col-sm" enctype="multipart/form-data"
-		method="post" action="<c:url value='/mypage/myskin/insert'/>"
-		style="width: 85%; margin: 50px;">
+		method="post" action="<c:url value='/mypage/myskin/insert'/>">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="skinname">스킨명:</label>
 			<div class="col-sm-6">
@@ -74,4 +80,4 @@
 			</div>
 		</div>
 	</form>
-</div>
+</div></div>

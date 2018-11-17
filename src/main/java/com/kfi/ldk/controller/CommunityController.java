@@ -20,21 +20,21 @@ public class CommunityController {
 	@Autowired
 	@Qualifier("communityServiceImpl")
 	private CommonService service;
-
+	
 	// 전체 커뮤니티 best6 커뮤니티 정보 불러오기
 	@RequestMapping(value = "/communityMain", method = RequestMethod.GET)
 	public String communityMain(Model model) {
-		/*HashMap<String, Object> map = (HashMap<String, Object>) service.list("bestSix");
-		List<CommunityVo> list = (List<CommunityVo>) map.get("bestSix");
-		model.addAttribute("list", list);
+		/*String list="bestSix";
+		HashMap<String, Object> map = (HashMap<String, Object>) service.list(list);
+		List<CommunityVo> cvolist = (List<CommunityVo>) map.get("bestSix");
+		model.addAttribute("list", cvolist);
 		List<CommSkinProfileVo> csplist = (List<CommSkinProfileVo>) map.get("csplist");
-		model.addAttribute("csplist", csplist);*/ 
+		model.addAttribute("csplist", csplist); 
+		System.out.println(cvolist.toString()+"!!!!!!cvolist");
+		System.out.println(csplist.toString()+"!!!!!!csplist");
+		*/
 		return ".communityMain";
 	}
 
-	@RequestMapping(value = "/community", method = RequestMethod.GET)
-	public String community() {
-		return ".community";
-	}
 
 }

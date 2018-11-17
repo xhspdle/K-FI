@@ -6,26 +6,39 @@
 	<h2>새 커뮤니티 등록하기</h2>
 	<!-- 미리보기 -->	
 	<div id="new_community">
-		<div class="w3-row-padding w3-margin-top">
-			<div class="w3-third">
-				<div class="w3-card">
+		<div class="w3-row-padding w3-margin-top" style="height:370px;">
+			<div class="w3-third" style="height:100%;">
+				<div class="w3-card" style="width:100%;height:100%;">
 					<img id="new_community_profile"
 						src="<c:url value='/resources/images/default-profile.png'/>"
-						style="width: 100%">
+						style="width: 100%;height:75%;">
 					<div class="w3-container">
-						<h4 id="pre_newComm_name">
+						<h3 id="pre_newComm_name" style="color:black;">
 							<b>커뮤니티명</b>
-						</h4>
+						</h3>
 						<p id="pre_newComm_content">커뮤니티 소개</p>
 					</div>
 				</div>
 			</div>
-
-			<div class="w3-third" style="width: 75%">
-				<div class="w3-card">
+			<div class="w3-third" style="width: 75%;height:100%;">
+				<div class="w3-card" style="width:100%;height:100%;" >
 					<img id="new_community_cover"
 						src="<c:url value='/resources/images/logo2.png'/>"
-						style="width: 100%; height: 369px;">
+						style="width: 100%;height:81%;">
+						<div class="w3-container" style="padding: 0;">
+						<div class="collapse navbar-collapse" id="new_comm_myNavbar" style="background-color:#00cee8">
+							<ul class="nav navbar-nav navbar-right">
+								<li class="dropdown">
+									<a href="<c:url value='/community'/>">COMMUNITY</a>
+								</li>
+								<li class="dropdown">
+									<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
+								</li>
+								<li><button type="button" class="btn btn-default btn-lg" id="new_comm_search">
+								<span class="glyphicon glyphicon-search"></span></button></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

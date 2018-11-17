@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.CommBoardMapper">
+	
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(cb_num),0) from comm_board
+	</select>
+	
+	<insert id="insert" parameterType="commboard">
+		insert into comm_board values(#{cb_num},#{comm_num},#{cb_title},#{cb_content},sysdate,#{cb_notice},#{cb_views})
+	</insert>
+	
+	
+
+
+</mapper>

@@ -14,8 +14,22 @@ public class FriendsDao {
 	@Autowired private SqlSession session;
 	private final static String NAMESPACE="com.kfi.mybatis.jyi.FriendsMapper";
 	
+	public int getMaxNum() {
+		return session.selectOne(NAMESPACE+".getMaxNum");
+	}
+	
+	public int insert(FriendsVo vo) {
+		return session.insert(NAMESPACE+".insert",vo);
+	}
+	
+	public int delete(HashMap<String, Object> map) {
+		return session.delete(NAMESPACE+".delete",map);
+	}
+	
 	public List<FriendsVo> list(HashMap<String, Object> map){
 		return session.selectList(NAMESPACE+".list",map);
 	}
+	
+	
 	
 }

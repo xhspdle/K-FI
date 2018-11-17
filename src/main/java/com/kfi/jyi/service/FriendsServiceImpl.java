@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kfi.dgl.dao.MembersDao;
 import com.kfi.dgl.vo.MembersVo;
@@ -37,21 +40,36 @@ public class FriendsServiceImpl implements CommonService {
 	}
 
 	@Override
+	@Transactional
 	public int insert(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		//ÆÈ·Î¿ì
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		HttpSession session=(HttpSession)map.get("session");
+		int user2_num=(Integer)session.getAttribute("user_num");
+		int user1_num=(Integer)map.get("user1_num");
+		try {
+			int frds_num=fdao.getMaxNum()+1;
+			FriendsVo vo=new FriendsVo(frds_num, user1_num, user2_num, null);
+			fdao.insert(vo);
+			return 1;
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return -1;
+		}
 	}
 
 	@Override
 	public int update(Object data) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int delete(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		HttpSession session=(HttpSession)map.get("session");
+		int user2_num=(Integer)session.getAttribute("user_num");
+		map.put("user2_num", user2_num);
+		return fdao.delete(map);
 	}
 
 	@Override

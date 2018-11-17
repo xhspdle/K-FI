@@ -20,7 +20,7 @@ public class InsertController {
 
 	@RequestMapping(value="/community/newComm/insertForm",method=RequestMethod.GET)
 	public String insertForm() {
-		return ".community.createCommunity.insert";
+		return ".communityMain.createCommunity";
 	}
 	
 	//새 커뮤니티 등록하기

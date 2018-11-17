@@ -33,6 +33,12 @@
 		뷰이름이 .admin.notice라면
 		=> value="/WEB-INF/views/admin/notice.jsp"
 	-->
+	
+	<definition name=".communityMain.*" extends=".communityMain">
+		<put-attribute name="content" value="/WEB-INF/views/community/{1}.jsp"></put-attribute>
+	</definition>	
+	
+	
 	<definition name=".community.*.*" extends=".community">
 		<put-attribute name="content" value="/WEB-INF/views/community/{1}/{2}.jsp"></put-attribute>
 	</definition>	

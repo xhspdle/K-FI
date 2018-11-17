@@ -40,6 +40,17 @@
                     )
 	</select>
 
+	<select id="list" resultType="community">
+		select * from community 
+		where comm_num in (
+                    select comm_num 
+                    from (
+                          select count(cul_num) 
+                          from comm_user_list 
+                          order by count(user_num) desc
+                        )
+                    )
+	</select>
 
 
 
