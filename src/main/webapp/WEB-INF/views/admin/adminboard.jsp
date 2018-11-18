@@ -48,7 +48,6 @@
 			$("#noticebtn").css("display","none");
 		}else{
 			$.getJSON("<c:url value='/abpopup'/>",function(data){	
-				console.log(data);
 				if(data!=null && data!=""){
 					$("#noticebtn").css("display","block");
 				}else{
@@ -56,12 +55,7 @@
 				}
 				$("#popupbtn").click(function(){
 					$("#abpopupcontent").empty();
-					alert("시작");
-					console.log("시작");
 					for(var i=0;i<data.length;i++){
-						console.log(data[i].ab_title);
-						console.log(data[i].ab_num);
-						console.log(data[i].ab_content);
 						var html=template(data[i].ab_title,data[i].ab_content);
 						$("#abpopupcontent").append(html);					
 					};
@@ -72,17 +66,14 @@
 	 
  	function setCookie(name, value, expiredays){
  		var today=new Date();
- 		alert(today);
  		today.setDate(today.getDate()+expiredays);
  		document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + today.toGMTString() + ";"
  	}
  	
  	function checkpopup(cookiename){
  		var cookie= document.cookie;
- 		alert(cookie);
   		if(cookie.length>0){
  			startIndex=cookie.indexOf(cookiename);
- 			alert(startIndex)
  			if(startIndex != -1){
  				return true;
  			}else{
@@ -150,7 +141,7 @@
 			</c:choose>
 			<td class="abcontent">${ablist.ab_title }</td>
 			<td class="abcontent">${ablist.ab_date }</td>
-			<td><i class="glyphicon glyphicon-remove abdelete"></i></td>
+			<td><i class="glyphicon glyphicon-trash abdelete" style="color: red"></i></td>
 		</tr>
 	</c:forEach>
 </table>

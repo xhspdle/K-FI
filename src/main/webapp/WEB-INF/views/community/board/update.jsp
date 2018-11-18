@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="container" style="padding: 0px;">
 	<div class="modal-header" style="padding:35px 50px;">
-		<h2><span class="glyphicon glyphicon-check"></span> Write</h2>
+		<h2><span class="glyphicon glyphicon-check"></span>Modify</h2>
 	</div>
 	<div class="modal-body" style="padding:40px 50px;">
 		<form method="post" action="/kfi/mypage/myboard/insert" name="frm" enctype="multipart/form-data">
