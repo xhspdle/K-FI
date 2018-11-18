@@ -21,7 +21,6 @@ public class MyCommentServiceImpl implements CommonService{
 	@Autowired private MyCommentListViewDao mcViewDao;
 	@Autowired private MyBoardLikeDao mblDao;
 	@Autowired private MyCommentLikeDao mclDao;
-	//@Autowired private MySkinViewDao msViewDao; 예인이 완성하면 다시작업
 	@Override
 	public int getMaxNum() {
 		return mcDao.getMaxNum();
@@ -43,19 +42,11 @@ public class MyCommentServiceImpl implements CommonService{
 		MyCommentVo vo=(MyCommentVo)data;
 		return mcDao.update(vo);
 	}
-	@Transactional
+	//@Transactional : on delete cascade
 	@Override
 	public int delete(Object data) {
 		int myc_num=(Integer)data;
-		try {
-			mclDao.delete(myc_num);
-			mcDao.delete(myc_num);
-			return 1;
-		}catch(Exception e) {
-			e.printStackTrace();
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			return -1;
-		}
+		return mcDao.delete(myc_num);
 	}
 	@Override
 	public Object select(Object data) {
@@ -69,7 +60,6 @@ public class MyCommentServiceImpl implements CommonService{
 		map.put("boardLikeCnt", mblDao.getCount(map));
 		map.put("commentCnt", mcDao.getCount(map));
 		map.put("commentList", mcViewDao.list(map));
-		//map.put("userProfile", msViewDao.se)
 		return map;
 	}
 }

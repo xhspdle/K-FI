@@ -4,25 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.ldk.CommVoteMapper">
 	<select id="getMaxNum" resultType="int">
-		select NVL(max(mb_num),0) maxnum from comm_vote
+		select NVL(max(vote_num),0) maxnum from comm_vote
 	</select>
-	<select id="getCount" parameterType="hashmap" resultType="int">
-		select NVL(count(mb_num),0) cnt from comm_vote
+	<select id="getCount" resultType="int">
+		select NVL(count(vote_num),0) cnt from comm_vote
 	</select>
 	<insert id="insert" parameterType="commvote">
 		insert into comm_vote 
-		values(#{vote_num},#{comm_num},#{vote_title},#{vote_info},sysdate,#{vote_end})
+		values(#{vote_num},#{comm_num},#{user_num},#{vote_title},#{vote_info},sysdate,#{vote_end})
 	</insert>
 	<update id="update" parameterType="commvote">
 		update comm_vote 
 		<set>
-			<if test="mb_title!=null and mb_title!=''">mb_title=#{mb_title},</if>
-			<if test="mb_content!=null and mb_content!=''">mb_content=#{mb_content}</if>
+			<if test="vote_title!=null and vote_title!=''">vote_title=#{vote_title},</if>
+			<if test="vote_info!=null and vote_info!=''">vote_info=#{vote_info}</if>
 		</set>
-		where mb_num=#{mb_num} and user_num=#{user_num}
+		where vote_num=#{vote_num}
 	</update>
 	<delete id="delete" parameterType="int">
-		delete from comm_vote where mb_num=#{mb_num}
+		delete from comm_vote where vote_num=#{vote_num}
 	</delete>
 	<select id="list" parameterType="hashmap" resultType="commvote">
 		select *
@@ -33,12 +33,12 @@
 	 	(
 	 		select *
 	 		from comm_vote
-	 		order by mb_num desc
+	 		order by vote_num desc
 	 	)aa
 		)
 		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
 	<select id="select" parameterType="int" resultType="commvote">
-		select * from comm_vote where mb_num=#{mb_num}
+		select * from comm_vote where vote_num=#{vote_num}
 	</select>
 </mapper>

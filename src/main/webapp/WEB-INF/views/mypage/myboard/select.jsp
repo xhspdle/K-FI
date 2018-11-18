@@ -208,7 +208,7 @@
 		<img class="media-object img-circle" src="<c:url value='/resources/upload/img/{msp_savimg}'/>" alt="commentProfile">
 	</div>
 	<div class="media-body">
-		<h3><strong><a href="{userSelect}">{user_id}</a></strong><span class="msgSpan"></span></h3>
+		<h3><strong><a href="{userSelect}">{user_nickname}</a></strong><span class="msgSpan"></span></h3>
 		<div class="dropdown commentOption">
 			<button class="btn dropdown-toggle{optionBtn}" type="button" data-toggle="dropdown">
 				<span class="glyphicon glyphicon-option-vertical"></span>

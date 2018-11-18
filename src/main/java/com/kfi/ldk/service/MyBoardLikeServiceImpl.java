@@ -30,7 +30,7 @@ public class MyBoardLikeServiceImpl implements CommonService{
 		map.put("user_num", vo.getUser_num());
 		map.put("mb_num", vo.getMb_num());
 		if(mblDao.select(map)!=null) {
-			delete(vo.getUser_num());
+			delete(map);
 			return -1;//ม฿บน
 		}else {
 			return mblDao.insert(new MyBoardLikeVo(getMaxNum() + 1, vo.getMb_num(), vo.getUser_num()));
@@ -41,10 +41,11 @@ public class MyBoardLikeServiceImpl implements CommonService{
 		MyBoardLikeVo vo=(MyBoardLikeVo)data;
 		return mblDao.update(vo);
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public int delete(Object data) {
-		int user_num=(Integer)data;
-		return mblDao.delete(user_num);
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		return mblDao.delete(map);
 	}
 	@SuppressWarnings("unchecked")
 	@Override

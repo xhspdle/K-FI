@@ -5,15 +5,18 @@ import java.sql.Date;
 public class CommVoteVo {
 	private int vote_num;
 	private int comm_num;
+	private int user_num;
 	private String vote_title;
 	private String vote_info;
 	private Date vote_begin;
 	private Date vote_end;
 	public CommVoteVo() {}
-	public CommVoteVo(int vote_num, int comm_num, String vote_title, String vote_info, Date vote_begin, Date vote_end) {
+	public CommVoteVo(int vote_num, int comm_num, int user_num, String vote_title, String vote_info, Date vote_begin,
+			Date vote_end) {
 		super();
 		this.vote_num = vote_num;
 		this.comm_num = comm_num;
+		this.user_num = user_num;
 		this.vote_title = vote_title;
 		this.vote_info = vote_info;
 		this.vote_begin = vote_begin;
@@ -30,6 +33,12 @@ public class CommVoteVo {
 	}
 	public void setComm_num(int comm_num) {
 		this.comm_num = comm_num;
+	}
+	public int getUser_num() {
+		return user_num;
+	}
+	public void setUser_num(int user_num) {
+		this.user_num = user_num;
 	}
 	public String getVote_title() {
 		return vote_title;
@@ -57,7 +66,8 @@ public class CommVoteVo {
 	}
 	@Override
 	public String toString() {
-		return "CommVoteVo [vote_num=" + vote_num + ", comm_num=" + comm_num + ", vote_title=" + vote_title
-				+ ", vote_info=" + vote_info + ", vote_begin=" + vote_begin + ", vote_end=" + vote_end + "]";
+		return "CommVoteVo [vote_num=" + vote_num + ", comm_num=" + comm_num + ", user_num=" + user_num
+				+ ", vote_title=" + vote_title + ", vote_info=" + vote_info + ", vote_begin=" + vote_begin
+				+ ", vote_end=" + vote_end + "]";
 	}
 }

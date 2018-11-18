@@ -22,7 +22,7 @@ public class InsideCommunityController {
 	private CommonService insideCommService;
 
 	// 가입한 유저인지, 강퇴당한 유저인지 확인하기 (글쓰기 disabled)
-	@ModelAttribute("checkUser")
+/*	@ModelAttribute("checkUser")
 	public int checkUser(Model model, HttpSession session, String comm_num) { //
 		int user_num = (Integer) session.getAttribute("user_num");
 		HashMap<String, Object> map = new HashMap<>();
@@ -31,13 +31,13 @@ public class InsideCommunityController {
 		int cul_status = (Integer) insideCommService.select(map);
 		model.addAttribute("cul_status", cul_status);
 		return cul_status;
-	}
+	}*/
 
 	@RequestMapping(value = "/community", method = RequestMethod.GET)
 	public String community(HttpSession session, String comm_num) {
-		if(!comm_num.equals("") && comm_num!=null) {
+/*		if(!comm_num.equals("") && comm_num!=null) {
 			session.setAttribute("comm_num", comm_num);
-		}
+		}*/
 		return ".community";
 	}
 

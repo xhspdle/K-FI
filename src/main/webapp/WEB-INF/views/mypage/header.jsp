@@ -6,11 +6,16 @@
 		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>">
 		<h3><strong>${msv.user_nickname }</strong></h3>
 		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p>
-		<form class="form-follow">
-			<div class="input-group col-sm-offset-5 col-sm-2">
-				<button type="submit" class="btn btn-join-follow">Follow</button>
-			</div>
-		</form>  
+		<!-- 이미 팔로우중인지 검사하는 코드 필요 -->
+		<c:choose>
+			<c:when test="${user_num!=selectedUserNum && !empty selectedUserNum}">
+			<form class="form-follow">
+				<div class="input-group col-sm-offset-5 col-sm-2">
+					<button type="submit" class="btn btn-join-follow">Follow</button>
+				</div>
+			</form> 
+			</c:when>
+		</c:choose>
 	</div>
 </div>
 <nav class="navbar navbar-default" data-spy="affix" data-offset-top="400" id="navAffix" style="background-color:${msv.ms_color};">
@@ -30,13 +35,22 @@
 					<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
 					<ul class="dropdown-menu">
 						<li><a href="#" data-toggle="modal" data-target="#writeModal">글쓰기</a></li>
-						<c:if test="${empty selectedUserNum }">
-						<li><a href="<c:url value='/mypage/mycomm/list'/>">마이커뮤니티</a></li>
-						<li><a href="<c:url value='/mypage/myfriend/list'/>">친구목록</a></li>
-						<li><a href="<c:url value='/mypage/mycomm/calendar'/>">일정보기</a></li>
-						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
-						<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
-						</c:if>
+						<c:choose>
+							<c:when test="${empty selectedUserNum }">
+							<li><a href="<c:url value='/mypage/mycomm/list'/>">마이커뮤니티</a></li>
+							<li><a href="<c:url value='/mypage/myfriend/list'/>">친구목록</a></li>
+							<li><a href="<c:url value='/mypage/mycomm/calendar'/>">일정보기</a></li>
+							<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
+							<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
+							</c:when>
+							<c:when test="${user_num==selectedUserNum }">
+							<li><a href="<c:url value='/mypage/mycomm/list'/>">마이커뮤니티</a></li>
+							<li><a href="<c:url value='/mypage/myfriend/list'/>">친구목록</a></li>
+							<li><a href="<c:url value='/mypage/mycomm/calendar'/>">일정보기</a></li>
+							<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
+							<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
+							</c:when>
+						</c:choose>
 						<c:if test="${!empty user_num }">
 						<li><a href="<c:url value='/login/logout'/>" class="logout-btn">Logout</a></li>
 						</c:if>

@@ -48,8 +48,14 @@ public class SelectController {
 	}
 	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
-	public MySkinViewVo myskin(HttpSession session){
-		int user_num=(Integer)session.getAttribute("user_num");
+	public MySkinViewVo myskin(HttpSession session,
+			@RequestParam(value="selectedUserNum",defaultValue="0")int selectedUserNum){
+		int user_num=0;
+		if(selectedUserNum!=0) {
+			user_num=selectedUserNum;
+		}else {
+			user_num=(Integer)session.getAttribute("user_num");
+		}
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("user_num", user_num);
 		map.put("ms_using",1);

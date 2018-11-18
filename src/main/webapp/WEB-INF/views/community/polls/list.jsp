@@ -15,11 +15,14 @@
 				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
 				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
 			</div>
-			<div class="panel-body">
-				<p>vote content here</p>
-				<a href="#" class="btn btn-info btn-block">option 1</a>
-				<a href="#" class="btn btn-info btn-block">option 2</a>
-				<a href="#" class="btn btn-info btn-block">option 3</a>
+			<div class="panel-body poll-body">
+				<div class="poll-list-options">
+					<a href="#" class="btn btn-info btn-block">option 1</a>
+					<a href="#" class="btn btn-info btn-block">option 2</a>
+					<a href="#" class="btn btn-info btn-block">option 3</a>
+					<a href="#" class="btn btn-info btn-block">option 4</a>
+					<a href="#" class="btn btn-info btn-block">option 5</a>
+				</div>
 			</div>
 			<div class="panel-footer">
 				<div class="media">
@@ -41,11 +44,13 @@
 				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
 				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
 			</div>
-			<div class="panel-body">
-				<p>vote content here</p>
-				<a href="#" class="btn btn-info btn-block">option 1</a>
-				<a href="#" class="btn btn-info btn-block">option 2</a>
-				<a href="#" class="btn btn-info btn-block">option 3</a>
+			<div class="panel-body poll-body">
+				<div class="poll-list-options">
+					<a href="#" class="btn btn-info btn-block">option 1</a>
+					<a href="#" class="btn btn-info btn-block">option 2</a>
+					<a href="#" class="btn btn-info btn-block">option 3</a>
+					<a href="#" class="btn btn-info btn-block">option 4</a>
+				</div>
 			</div>
 			<div class="panel-footer">
 				<div class="media">
@@ -66,11 +71,12 @@
 				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
 				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
 			</div>
-			<div class="panel-body">
-				<p>vote content here</p>
-				<a href="#" class="btn btn-info btn-block">option 1</a>
-				<a href="#" class="btn btn-info btn-block">option 2</a>
-				<a href="#" class="btn btn-info btn-block">option 3</a>
+			<div class="panel-body poll-body">
+				<div class="poll-list-options">
+					<a href="#" class="btn btn-info btn-block">option 1</a>
+					<a href="#" class="btn btn-info btn-block">option 2</a>
+					<a href="#" class="btn btn-info btn-block">option 3</a>
+				</div>
 			</div>
 			<div class="panel-footer">
 				<div class="media">
@@ -91,11 +97,14 @@
 				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
 				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
 			</div>
-			<div class="panel-body">
-				<p>vote content here</p>
-				<a href="#" class="btn btn-info btn-block">option 1</a>
-				<a href="#" class="btn btn-info btn-block">option 2</a>
-				<a href="#" class="btn btn-info btn-block">option 3</a>
+			<div class="panel-body poll-body">
+				<div class="poll-list-options">
+					<a href="#" class="btn btn-info btn-block">option 1</a>
+					<a href="#" class="btn btn-info btn-block">option 2</a>
+					<a href="#" class="btn btn-info btn-block">option 3</a>
+					<a href="#" class="btn btn-info btn-block">option 4</a>
+					<a href="#" class="btn btn-info btn-block">option 5</a>
+				</div>
 			</div>
 			<div class="panel-footer">
 				<div class="media">
@@ -116,11 +125,13 @@
 				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
 				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
 			</div>
-			<div class="panel-body">
-				<p>vote content here</p>
-				<a href="#" class="btn btn-info btn-block">option 1</a>
-				<a href="#" class="btn btn-info btn-block">option 2</a>
-				<a href="#" class="btn btn-info btn-block">option 3</a>
+			<div class="panel-body poll-body">
+				<div class="poll-list-options">
+					<a href="#" class="btn btn-info btn-block">option 1</a>
+					<a href="#" class="btn btn-info btn-block">option 2</a>
+					<a href="#" class="btn btn-info btn-block">option 3</a>
+					<a href="#" class="btn btn-info btn-block">option 4</a>
+				</div>
 			</div>
 			<div class="panel-footer">
 				<div class="media">
@@ -141,11 +152,12 @@
 				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
 				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
 			</div>
-			<div class="panel-body">
-				<p>vote content here</p>
-				<a href="#" class="btn btn-info btn-block">option 1</a>
-				<a href="#" class="btn btn-info btn-block">option 2</a>
-				<a href="#" class="btn btn-info btn-block">option 3</a>
+			<div class="panel-body poll-body">
+				<div class="poll-list-options">
+					<a href="#" class="btn btn-info btn-block">option 1</a>
+					<a href="#" class="btn btn-info btn-block">option 2</a>
+					<a href="#" class="btn btn-info btn-block">option 3</a>
+				</div>
 			</div>
 			<div class="panel-footer">
 				<div class="media">
@@ -160,6 +172,7 @@
 			</div>
 		</div>
 	</div>
+
 </div>
 
 <!-- polls Modal -->
@@ -188,32 +201,15 @@
 					</div>
 					<div class="form-group">
 						<label for="optionCnt"><span class="glyphicon glyphicon-th-list"></span> Number of options</label>
-						<select class="form-control">
+						<select class="form-control" id="optionCnt">
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
 							<option>4</option>
 							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
 						</select>
 					</div>
-					<div class="form-group">
-						<label for="vo_content"><span class="glyphicon glyphicon-unchecked"></span> Options</label>
-						<div class="input-group">
-							<span class="input-group-addon">1</span>							
-							<input type="text" class="form-control" name="vo_content" placeholder="write some options">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">2</span>							
-							<input type="text" class="form-control" name="vo_content" placeholder="write some options">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">3</span>							
-							<input type="text" class="form-control" name="vo_content" placeholder="write some options">
-						</div>
-					</div>
+					<div class="form-group" id="pollOptions"></div>
 					<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
 				</form>
 			</div>
@@ -224,3 +220,9 @@
 		</div> 
 	</div>
 </div> 
+<script id="pollOptionTemplate" type="text/template">
+<div class="input-group slide">
+	<span class="input-group-addon">{optionCnt}</span>							
+	<input type="text" class="form-control" name="vo_content" placeholder="write some options">
+</div>
+</script>

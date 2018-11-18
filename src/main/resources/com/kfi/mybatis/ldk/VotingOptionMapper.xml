@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.VotingOptionMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(vo_num),0) maxnum from voting_option
+	</select>
+	<select id="getCount" resultType="int">
+		select NVL(count(vo_num),0) cnt from voting_option
+	</select>
+	<insert id="insert" parameterType="votingoption">
+		insert into voting_option 
+		values(#{vo_num},#{vote_num},#{option_num},#{vo_content})
+	</insert>
+	<update id="update" parameterType="votingoption">
+		update voting_option set vo_content=#{vo_content} where vote_num=#{vote_num} and option_num=#{option_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from voting_option where vo_num=#{vo_num}
+	</delete>
+	<select id="list" parameterType="int" resultType="votingoption">
+		select * from voting_option where vote_num=#{vote_num} order_by option_num asc
+	</select>
+</mapper>

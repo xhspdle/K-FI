@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.VotingUserListMapper">
+	<select id="getMaxNum" resultType="int">
+		select NVL(max(vu_num),0) maxnum from voting_userlist
+	</select>
+	<select id="getCount" resultType="int">
+		select NVL(count(vu_num),0) cnt from voting_userlist
+	</select>
+	<insert id="insert" parameterType="votinguserlist">
+		insert into voting_userlist 
+		values(#{vu_num},#{vo_num},#{user_num})
+	</insert>
+	<delete id="delete" parameterType="hashmap">
+		delete from voting_userlist where vo_num=#{vo_num} and user_num=#{user_num}
+	</delete>
+	<select id="list" resultType="votinguserlist">
+		select * from voting_userlist vo_num=#{vo_num}
+	</select>
+</mapper>

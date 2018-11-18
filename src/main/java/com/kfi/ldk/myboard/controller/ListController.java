@@ -93,7 +93,6 @@ public class ListController {
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session,
 			@RequestParam(value="selectedUserNum",defaultValue="0")int selectedUserNum){
-		System.out.println(selectedUserNum);
 		int user_num=0;
 		if(selectedUserNum!=0) {
 			user_num=selectedUserNum;

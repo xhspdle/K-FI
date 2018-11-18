@@ -410,6 +410,7 @@ $(document).ready(function(){
 				  var myc_date=json.myc_date;
 				  var cnt=json.cnt;
 				  var user_id=json.user_id;
+				  var user_nickname=json.user_nickname;
 				  var msp_savimg=json.msp_savimg;
 				  var optionBtn='';
 				  var dropDowns='';
@@ -428,7 +429,7 @@ $(document).ready(function(){
 				  		.replace("{path}", getPageContext)
 				  		.replace(/{myc_num}/gi, myc_num)
 				  		.replace("{userSelect}",userSelect)
-				  		.replace("{user_id}", user_id)
+				  		.replace("{user_nickname}", user_nickname)
 				  		.replace("{myc_content}", myc_content)
 				  		.replace("{comment_likes}", cnt)
 				  		.replace("{myc_date}", myc_date)
@@ -951,6 +952,22 @@ $(document).ready(function(){
 	  }
   }
   $.commuinityMainSlide();
-  
+  $("#optionCnt").on({
+	  change: function(){
+		  var optionCnt=$(this).val();
+		  $("#pollOptions").css("opacity","0");
+		  setTimeout(function(){
+			  $("#pollOptions").empty();
+			  $("#pollOptions").append("<label for='vo_content'>"+ 
+			  "<span class='glyphicon glyphicon-unchecked'></span> Options</label>");
+			  html=document.querySelector("#pollOptionTemplate").innerHTML;
+			  for(let i=1;i<=optionCnt;i++){
+				  let resultHTML=html.replace("{optionCnt}",i);
+				  $("#pollOptions").append(resultHTML);
+			  }
+			  $("#pollOptions").css("opacity","1");
+		  },500);
+	  }
+  });
 });
 

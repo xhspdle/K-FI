@@ -19,7 +19,7 @@
 				<!-- 이미 가입한 회원일 경우 -->
 				<form class="form-join">
 					<div class="input-group col-sm-offset-5 col-sm-2">
-						<button type="submit" class="btn btn-join-follow"><a href="<c:url value='/commuserlist/delete?comm_num=${comm_num }'/>">Leave</a></button><br>
+						<a class="btn btn-join-follow" href="<c:url value='/commuserlist/delete?comm_num=${comm_num }'/>">Leave</a><br>
 					</div>
 				</form>
 			</c:when>
@@ -27,7 +27,7 @@
 				<!-- 가입 안한 회원일 경우 -->
 				<form class="form-join">
 					<div class="input-group col-sm-offset-5 col-sm-2">
-						<button type="submit" class="btn btn-join-follow"><a href="<c:url value='/commuserlist/insert?comm_num=${comm_num }'/>">Join</a></button><br>
+						<a class="btn btn-join-follow" href="<c:url value='/commuserlist/insert?comm_num=${comm_num }'/>">Join</a>
 					</div>
 				</form>
 			</c:otherwise>
