@@ -9,31 +9,14 @@
 </div><br>
 <div id="aclistview1">
 	<c:forEach var="accuse" items="${aclist }">
-		<div style="width: 30%; height: 100%;" class="pull-right">
-			<div>
-			신고인 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user1_num}"> ${accuse.user1_nickname}</a>	
-			</div>
-			<div>
-								<h5>신고접수내용</h5>
-					<p><strong>${accuse.ac_reason}</strong></p>
-			</div>
-			<div>
-			신고대상 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}"> ${accuse.user2_nickname}</a>
-			</div>	
-			<div>
-				<button class="btn btn-md btn-warning">확인</button>
-					<button class="btn btn-md btn-danger" onclick="return acdeletecheck(${accuse.ac_num})">삭제</button>
-			</div>	
-		</div>
-	
-<%-- 		<div class="col-sm-4 col-xs-12">
+		<div class="col-sm-4 col-xs-12">
 			<div class="panel panel-default text-center">
 				<div class="panel-heading">
 				신고인 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user1_num}"> ${accuse.user1_nickname}</a>		
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" style= "height: 150px; overflow: auto">
 					<h5>신고접수내용</h5>
-					<p><strong>${accuse.ac_reason}</strong></p>
+					<p style="word-break: break-all;"><strong>${accuse.ac_reason}</strong></p>
 				</div>
 				<div class="panel-footer">
 				신고대상 :<a data-toggle="modal" data-target="#accuse_user" class="accuse_user" id="${accuse.user2_num}"> ${accuse.user2_nickname}</a>		
@@ -42,8 +25,9 @@
 					<button class="btn btn-md btn-danger" onclick="return acdeletecheck(${accuse.ac_num})">삭제</button>
 				<br><br>
 			</div>
-		</div> --%>
+		</div> 
 	</c:forEach>
+	<div style="clear: both"></div>
 	<div>
 		<ul class="pagination">
 			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>

@@ -34,7 +34,7 @@ public class AccuseController {
 		map.put("field", field);
 		map.put("keyword",keyword);
 		int totalrowcnt=acservice.acgetcnt(map);
-		AdminPageUtil apu=new AdminPageUtil(totalrowcnt, pagenum, 5, 5);
+		AdminPageUtil apu=new AdminPageUtil(totalrowcnt, pagenum, 6, 5);
 		map.put("startrow",apu.getStartrow());	
 		map.put("endrow",apu.getEndrow());
 		List<AccuseVo> aclist = acservice.aclist(map);

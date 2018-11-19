@@ -172,6 +172,7 @@
 			</form>	
 		</div>
 	</c:forEach>
+	<br>
 	<a href="faqinsert" class="btn btn-default">글작성</a>
 </div>	
 

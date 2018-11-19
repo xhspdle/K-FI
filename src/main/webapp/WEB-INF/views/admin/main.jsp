@@ -69,7 +69,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="topheader text-center" id="admindetail">
+				<div class="topheader text-center">
 <!-- 					<div class="media">
 					<div class="media-left">
 					<img src="img_avatar1.png" class="media-object" style="width:60px">
@@ -79,9 +79,11 @@
 					 <p>Lorem ipsum...</p>
 					</*-/div>
 					</div> -->
-					<img src="<c:url value='/resources/images/ysy/1 (1).jpg'/>"
-						style="width: 200px; heigh =150px; border: 3px solid gold; border-radius: 150px;">
-					${admin.admin_id } ${admin.admin_nick }
+					<div id="admindetail" style="cursor: pointer; display: inline;">
+						<img src="<c:url value='/resources/images/ysy/1 (1).jpg'/>"
+							style="width: 200px; heigh =150px; border: 3px solid gold; border-radius: 150px;">
+						${admin.admin_id } ${admin.admin_nick }
+					</div>
 				</div>
 			</c:otherwise>
 		</c:choose>
