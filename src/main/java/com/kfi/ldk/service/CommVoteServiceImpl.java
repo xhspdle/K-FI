@@ -1,11 +1,17 @@
 package com.kfi.ldk.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.kfi.ldk.dao.CommVoteDao;
 import com.kfi.ldk.dao.VotingOptionDao;
 import com.kfi.ldk.dao.VotingUserListDao;
+import com.kfi.ldk.vo.CommVoteVo;
+import com.kfi.ldk.vo.VotingOptionVo;
 
 @Service
 public class CommVoteServiceImpl implements CommonService{
@@ -18,16 +24,28 @@ public class CommVoteServiceImpl implements CommonService{
 	}
 	@Override
 	public int getCount(Object data) {
-		// TODO Auto-generated method stub
-		/*
-		 * ¿©±âÇÒÂ÷·Ê
-		 */
-		return 0;
+		return cvDao.getCount();
 	}
+	@SuppressWarnings("unchecked")
+	@Transactional
 	@Override
 	public int insert(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		CommVoteVo cvVo=(CommVoteVo)map.get("CommVoteVo");
+		String[] vo_content=(String[])map.get("vo_content");
+		try {
+			int vote_num=getMaxNum() + 1;
+			cvVo.setVote_num(vote_num);
+			cvDao.insert(cvVo);
+			for(int i=0;i<vo_content.length;i++) {
+				voDao.insert(new VotingOptionVo(voDao.getMaxNum()+1, vote_num, i+1, vo_content[i]));
+			}
+			return 1;
+		}catch(Exception e) {
+			e.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return -1;
+		}
 	}
 	@Override
 	public int update(Object data) {

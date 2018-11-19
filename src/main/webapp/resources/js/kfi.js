@@ -155,7 +155,7 @@ $(document).ready(function(){
 	  }
   });
   
-  $("#sendServer").click(function(e){
+  $(document).on('submit',"[name='frm']",function(e){
 	  e.preventDefault();
 	  $(this).prop('disabled',true);
 	  var form=document.frm;
@@ -610,6 +610,10 @@ $(document).ready(function(){
 		  "transition": "1s",
 		  "opacity": "0.5"
 	  });
+	  $("#header").css({
+		  "transition": "1s",
+		  "opacity": "0.5"
+	  })
 	  $(".msgBox").css({
 		  "top": ($(window).height()-$(".msgBox").outerHeight())/2 + $(window).scrollTop(),
 		  "display": "block"
@@ -618,6 +622,7 @@ $(document).ready(function(){
 		  $(".msgBox").css("opacity","1");
 		  setTimeout(function(){
 			  $("#content").css("opacity","1");
+			  $("#header").css("opacity","1");
 			  $(".msgBox").css({
 				 "opacity": "0",
 			  });
@@ -959,7 +964,8 @@ $(document).ready(function(){
 		  setTimeout(function(){
 			  $("#pollOptions").empty();
 			  $("#pollOptions").append("<label for='vo_content'>"+ 
-			  "<span class='glyphicon glyphicon-unchecked'></span> Options</label>");
+			  "<span class='glyphicon glyphicon-unchecked'></span> Options</label>" +
+			  "<span class='msgSpan'></span>");
 			  html=document.querySelector("#pollOptionTemplate").innerHTML;
 			  for(let i=1;i<=optionCnt;i++){
 				  let resultHTML=html.replace("{optionCnt}",i);
@@ -967,6 +973,35 @@ $(document).ready(function(){
 			  }
 			  $("#pollOptions").css("opacity","1");
 		  },500);
+	  }
+  });
+  
+  if($("#msgHere").val()!==undefined && $("#msgHere").val()!==""){
+	  $.msgBox($("#msgHere").val());
+  }
+  
+  $(document).on('submit',"[name='voteFrm']",function(event){
+	  var formData=new FormData($(this).get(0));
+	  for(var pair of formData.entries()){
+		  if(pair[1]===''){
+			  if(pair[0]=='vo_content'){
+				  $("#pollOptions").find("span.msgSpan").each(function(){
+					  let msgSpans=$(this).text("please fill in the blank");
+					  $(msgSpans).css("opacity","1");
+					  setTimeout(function(){
+						  $(msgSpans).css("opacity","0");
+					  },3000);
+				  });
+			  }else{
+				  let msgSpan=$("#" + pair[0]).parent().find("span.msgSpan");
+				  $(msgSpan).text("please fill in the blank");
+				  $(msgSpan).css("opacity","1");
+				  setTimeout(function(){
+					  $(msgSpan).css("opacity","0");
+				  },3000);
+			  }
+			  event.preventDefault();
+		  }
 	  }
   });
 });

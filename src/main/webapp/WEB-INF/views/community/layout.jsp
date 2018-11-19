@@ -40,3 +40,8 @@
 		<tiles:insertAttribute name="footer"/>
 	</div>
 </div>
+
+<!-- Alert Msg Box -->
+<div class="container msgBox">
+	<div class="alert alert-danger"></div>
+</div>

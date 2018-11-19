@@ -91,6 +91,7 @@
 			</div> 
 		</div>
 	</div> 
+	
 	<!-- update Modal -->
 	<div class="modal fade" id="updateModal" role="dialog">
 		<div class="modal-dialog">

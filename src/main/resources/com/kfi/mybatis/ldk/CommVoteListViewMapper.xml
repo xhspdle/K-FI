@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.CommVoteListViewMapper">
+	<select id="getCount" resultType="int">
+		select NVL(count(vote_num),0) cnt from COMMVOTELIST
+	</select>
+	<resultMap type="com.kfi.ldk.vo.CommVoteList" id="commVoteList">
+		<result property="vote_num" column="vote_num"/>
+		<result property="comm_num" column="comm_num"/>
+		<result property="vote_title" column="vote_title"/>
+		<result property="remain" column="remain"/>
+		<result property="user_nickname" column="user_nickname"/>
+		<result property="user_email" column="user_email"/>
+		<result property="msp_savimg" column="msp_savimg"/>
+		<result property="cnt" column="cnt"/>
+		<collection property="list" ofType="com.kfi.ldk.vo.CommVoteOptionCollection">
+			<result property="option_num" column="option_num"/>
+			<result property="vo_content" column="vo_content"/>
+		</collection>
+	</resultMap>
+	<select id="list" parameterType="hashmap" resultMap="commVoteList">
+		select *
+		from
+		(
+	 	select aa.*,rownum rnum 
+	 	from
+	 	(
+	 		SELECT CL.VOTE_NUM,CL.COMM_NUM,CL.VOTE_TITLE,CL.REMAIN,CL.USER_NICKNAME,CL.USER_EMAIL,CL.MSP_SAVIMG,CL.VOTECNT,
+			VO.OPTION_NUM,VO.VO_CONTENT
+			FROM COMMVOTELIST CL,VOTING_OPTION VO
+			WHERE CL.VOTE_NUM=VO.VOTE_NUM AND CL.COMM_NUM=#{comm_num}
+			ORDER BY VOTE_NUM DESC,OPTION_NUM ASC;
+	 	)aa
+		)
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+</mapper>

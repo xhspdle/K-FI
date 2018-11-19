@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <input type="hidden" id="commPollsHere" value="CPH">
+<input type="hidden" id="msgHere" value="${msg }">
 <div id="commPollList" class="container text-center">
 	<div class="row" style="margin-bottom: 10px;">
 		<div class="col-sm-offset-4 col-sm-4">
@@ -185,22 +186,22 @@
 				<h1><span class="glyphicon glyphicon-stats"></span> Poll</h1>
 			</div>
 			<div class="modal-body" style="padding:40px 50px;">
-				<form method="post" action="<c:url value='/community/polls/insert'/>" name="voteFrm" enctype="multipart/form-data">
+				<form method="post" action="<c:url value='/community/polls/insert'/>" name="voteFrm">
 					
 					<div class="form-group">
-						<label for="vote_title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
+						<label for="vote_title"><span class="glyphicon glyphicon-pencil"></span> Title</label><span class="msgSpan"></span>
 						<input type="text" class="form-control" id="vote_title" name="vote_title" placeholder="Enter Title">
 					</div>
 					<div class="form-group">
-						<label for="vote_info"><span class="glyphicon glyphicon-info-sign"></span> Info</label>
+						<label for="vote_info"><span class="glyphicon glyphicon-info-sign"></span> Info</label><span class="msgSpan"></span>
 						<textarea class="form-control" rows="5" id="vote_info" name="vote_info" placeholder="Poll's info"></textarea>
 					</div>
 					<div class="form-group">
-						<label for="vote_end"><span class="glyphicon glyphicon-calendar"></span> Until</label>
+						<label for="vote_end"><span class="glyphicon glyphicon-calendar"></span> Until</label><span class="msgSpan"></span>
 						<input type="date" class="form-control" id="vote_end" name="vote_end">
 					</div>
 					<div class="form-group">
-						<label for="optionCnt"><span class="glyphicon glyphicon-th-list"></span> Number of options</label>
+						<label for="optionCnt"><span class="glyphicon glyphicon-th-list"></span> Number of options</label><span class="msgSpan"></span>
 						<select class="form-control" id="optionCnt">
 							<option>1</option>
 							<option>2</option>
@@ -209,8 +210,14 @@
 							<option>5</option>
 						</select>
 					</div>
-					<div class="form-group" id="pollOptions"></div>
-					<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
+					<div class="form-group" id="pollOptions">
+						<label for="vo_content"><span class="glyphicon glyphicon-unchecked"></span> Options</label><span class="msgSpan"></span>
+						<div class="input-group">
+							<span class="input-group-addon">1</span>							
+							<input type="text" class="form-control" name="vo_content" placeholder="write some options">
+						</div>
+					</div>
+					<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-ok"></span> Write</button>
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -220,6 +227,7 @@
 		</div> 
 	</div>
 </div> 
+
 <script id="pollOptionTemplate" type="text/template">
 <div class="input-group slide">
 	<span class="input-group-addon">{optionCnt}</span>							
