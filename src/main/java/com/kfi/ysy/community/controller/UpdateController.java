@@ -17,12 +17,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 import com.kfi.jyi.vo.CommPhotoVo;
+import com.kfi.ldk.service.CommonService;
+import com.kfi.ysy.service.CommunityPhotoService;
 
 
 @Controller(value="community_updatecontroller")
 public class UpdateController {
-	/*@Autowired
-	@Qualifier("CommBoardServiceImpl") private CommonService service;*/
+	@Autowired
+	private CommunityPhotoService cpservice;
 	@RequestMapping(value="/community/update",method=RequestMethod.GET)
 	public String updateForm() {
 		return ".community.board.update";
@@ -46,7 +48,10 @@ public class UpdateController {
 						is.close();
 						fos.close();
 						CommPhotoVo cpvo=new CommPhotoVo(1, 1, cp_orgimg, cp_savimg);
-						System.out.println(cpvo.toString());			
+						System.out.println(cpvo.toString());
+						int result=cpservice.insert(cpvo);
+						System.out.println(result);
+									
 					}
 				}
 			}
