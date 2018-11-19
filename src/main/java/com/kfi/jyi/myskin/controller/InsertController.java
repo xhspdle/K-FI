@@ -25,18 +25,21 @@ public class InsertController {
 	@Qualifier("mySkinServiceImpl")
 	private CommonService service;
 
+	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		int user_num=(Integer)session.getAttribute("user_num");
+		int user_num=0;
+		Object session_num=session.getAttribute("user_num");
+		if(session_num!=null && session_num!="") {
+			user_num=(Integer)session_num;
+		}
+		MySkinViewVo msv=new MySkinViewVo(0,user_num, "기본", "#00cee8","", 0, 0, "default-profile.png", "default-profile.png", 0,"logo2.png", "logo2.png","");
 		HashMap<String, Object> map=new HashMap<>();
+		map.put("list", "ms_using");
 		map.put("user_num", user_num);
-		map.put("ms_using",1);
-		List<MySkinViewVo> list=(List<MySkinViewVo>)service.list(map);
-		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png","");
-		if(list!=null) {
-			for(MySkinViewVo vo: list) {
+		MySkinViewVo vo=(MySkinViewVo)service.select(map);
+		if(vo!=null) {
 				msv=vo;
-			}
 		}
 		return msv;
 	}
@@ -58,10 +61,8 @@ public class InsertController {
 		hm.put("ms_msg", ms_msg);
 		int result = service.insert(hm);
 		if (result > 0) {
-			System.out.println("myskin insert 성공");
 			return "redirect:/mypage/myskin/list";
 		} else {
-			System.out.println("myskin insert 실패");
 			return "redirect:/mypage/myskin/list"; //에러페이지로 가기
 		}
 	}

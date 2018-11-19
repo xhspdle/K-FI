@@ -53,7 +53,6 @@ public class InsideCommunityServiceImpl implements CommonService {
 
 	@Override
 	public int getCount(Object data) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

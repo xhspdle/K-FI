@@ -27,18 +27,21 @@ public class ListController {
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
 
+	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		int user_num=(Integer)session.getAttribute("user_num");
+		int user_num=0;
+		Object session_num=session.getAttribute("user_num");
+		if(session_num!=null && session_num!="") {
+			user_num=(Integer)session_num;
+		}
+		MySkinViewVo msv=new MySkinViewVo(0,user_num, "기본", "#00cee8","", 0, 0, "default-profile.png", "default-profile.png", 0,"logo2.png", "logo2.png","");
 		HashMap<String, Object> map=new HashMap<>();
+		map.put("list", "ms_using");
 		map.put("user_num", user_num);
-		map.put("ms_using",1);
-		List<MySkinViewVo> list=(List<MySkinViewVo>)mySkinService.list(map);
-		MySkinViewVo msv=new MySkinViewVo(0, 0, "기본", "#00cee8"," ", 0, 0, "", "default-profile.png", 0, "", "logo2.png","");
-		if(list!=null) {
-			for(MySkinViewVo vo: list) {
+		MySkinViewVo vo=(MySkinViewVo)mySkinService.select(map);
+		if(vo!=null) {
 				msv=vo;
-			}
 		}
 		return msv;
 	}

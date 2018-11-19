@@ -15,8 +15,8 @@ public class MySkinViewDao {
 	private SqlSession session;
 	private final static String NAMESPACE="com.kfi.mybatis.jyi.MySkinViewMapper";
 
-	public List<MySkinViewVo> list(HashMap<String, Object> map){
-		return session.selectList(NAMESPACE+".list",map);
+	public List<MySkinViewVo> list(int user_num){
+		return session.selectList(NAMESPACE+".list",user_num);
 	}
 	
 	public MySkinViewVo select(int ms_num){
@@ -27,5 +27,8 @@ public class MySkinViewDao {
 		return session.selectOne(NAMESPACE+".applySkin",user_num);
 	}
 	
+	public MySkinViewVo select_using(int user_num){
+		return session.selectOne(NAMESPACE+".select_using",user_num);
+	}
 	
 }

@@ -21,18 +21,26 @@ public class CommunityController {
 	@Qualifier("communityServiceImpl")
 	private CommonService service;
 	
-	// 전체 커뮤니티 best6 커뮤니티 정보 불러오기
+	
 	@RequestMapping(value = "/communityMain", method = RequestMethod.GET)
 	public String communityMain(Model model) {
-		/*String list="bestSix";
+		// 전체 커뮤니티 best6 커뮤니티 정보 불러오기
+		String list="bestSix";
 		HashMap<String, Object> map = (HashMap<String, Object>) service.list(list);
-		List<CommunityVo> cvolist = (List<CommunityVo>) map.get("bestSix");
+		List<CommunityVo> cvolist = (List<CommunityVo>) map.get("list");
 		model.addAttribute("list", cvolist);
 		List<CommSkinProfileVo> csplist = (List<CommSkinProfileVo>) map.get("csplist");
 		model.addAttribute("csplist", csplist); 
-		System.out.println(cvolist.toString()+"!!!!!!cvolist");
-		System.out.println(csplist.toString()+"!!!!!!csplist");
-		*/
+		
+		//hot photo - 사진이 올려져 있고, 가장 조회수가 많은 게시물의 사진 한장
+		
+		
+		//hot video
+		
+		
+		
+		
+		
 		return ".communityMain";
 	}
 

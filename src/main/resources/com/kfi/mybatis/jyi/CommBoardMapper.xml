@@ -9,10 +9,12 @@
 	</select>
 	
 	<insert id="insert" parameterType="commboard">
-		insert into comm_board values(#{cb_num},#{comm_num},#{cb_title},#{cb_content},sysdate,#{cb_notice},#{cb_views})
+		insert into comm_board values(#{cb_num},#{comm_num}, #{user_num},#{cb_title},#{cb_content},sysdate,#{cb_notice},#{cb_views})
 	</insert>
 	
-	
-
+	<!-- 공지사항 불러오기 -->
+	<select id="getNotice" parameterType="int" resultType="commboard">
+		select * from comm_board where cb_notice=1 and comm_num=#{comm_num}
+	</select>
 
 </mapper>

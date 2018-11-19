@@ -1,5 +1,7 @@
 package com.kfi.jyi.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,4 +21,7 @@ public class CommBoardDao {
 		return session.insert(NAMESPACE+".insert",vo);
 	}
 	
+	public List<CommBoardVo> getNotice(int comm_num) {
+		return session.selectList(NAMESPACE+".getNotice",comm_num);
+	}
 }

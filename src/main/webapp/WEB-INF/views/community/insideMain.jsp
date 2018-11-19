@@ -5,18 +5,12 @@
 <div id="commBoardList" class="container text-center">
 	<div id="commNotice">
 		<ul class="commNoticeList center-block text-left">
+		<c:forEach var="notice" items="${noticeList }">
 			<li>
-				<a href="#"><i class="glyphicon glyphicon-bullhorn"></i>
-				NoticeNoticeNotice 1<i class="glyphicon glyphicon-menu-right pull-right"></i></a>
-			</li>
-			<li>
-				<a href="#"><i class="glyphicon glyphicon-bullhorn"></i>
-				NoticeNoticeNotice 1<i class="glyphicon glyphicon-menu-right pull-right"></i></a>
-			</li>
-			<li>
-				<a href="#"><i class="glyphicon glyphicon-bullhorn"></i>
-				NoticeNoticeNotice 1<i class="glyphicon glyphicon-menu-right pull-right"></i></a>
-			</li>
+				<a href="<c:url value='/community/board/select?cb_num=${notice.cb_num }'/>"><i class="glyphicon glyphicon-bullhorn"></i>
+				${notice.cb_title }<i class="glyphicon glyphicon-menu-right pull-right"></i></a>
+			</li>		
+		</c:forEach>
 		</ul>
 	</div>
 	

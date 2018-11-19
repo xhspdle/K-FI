@@ -12,7 +12,7 @@
 		insert into community values(#{comm_num},#{user_num},#{comm_name},#{comm_content},#{cs_color},SYSDATE)
 	</insert>
 
-	<!-- if) 해당 user가 관리자가 아닌(false)/맞는(true) 커뮤니티 목록 -->
+	<!-- if) 해당 user가 관리자가 아닌(false)/맞는(true) 마이 커뮤니티 목록 -->
 	<select id="select_mycommlist" parameterType="hashmap" resultType="community">
 		select * from community 
 		where comm_num in (select comm_num from comm_user_list where user_num=#{user_num} and cul_status=1) 
@@ -23,21 +23,20 @@
 			and user_num = #{user_num}
 		</if>
 	</select>
-	
+
 	<select id="bestSix" resultType="community">
-		select * from community 
-		where comm_num in (
-                    select comm_num 
-                    from (
-                         select cul.*, rownum rnum 
-                         from (
-                              select count(cul_num) 
-                              from comm_user_list 
-                              order by count(user_num) desc
-                              ) cul
-                        )
-                 <![CDATA[  where rnum <7 ]]>
-                    )
+		select * from community
+		where comm_num in(
+			                 select cnum    
+			                 from(   
+				                	select cul.*, rownum rnum     
+					                from(                    
+					                         select count(user_num) cnt, comm_num cnum
+					                         from comm_user_list 
+					                         group by comm_num
+					                         order by cnt desc
+					                	)cul 
+		       		 	<![CDATA[ ) where rnum <7 ) ]]>
 	</select>
 
 	<select id="list" resultType="community">
@@ -52,7 +51,9 @@
                     )
 	</select>
 
-
+	<select id="select_adminNum" parameterType="int" resultType="int">
+		select user_num from community where comm_num=#{comm_num}
+	</select>
 
 
 </mapper>

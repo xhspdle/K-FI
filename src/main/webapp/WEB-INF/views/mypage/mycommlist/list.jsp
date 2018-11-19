@@ -26,10 +26,8 @@
 					<div class="w3-third" style="width:33%;padding: 0.8%;">
 						<div class="w3-card" style="height: 300px;">
 							<!-- 해당 커뮤니티 페이지로 이동하기 -->
-							<a
-								href="<c:url value='/community/selectComm?comm_num=${list.comm_num }'/>">
-								<img 
-								src="<c:url value='/resources/upload/img/${csplist.csp_savimg}'/>"
+							<a href="<c:url value='/community?comm_num=${list.comm_num }'/>">
+								<img src="<c:url value='/resources/upload/img/${csplist.csp_savimg}'/>"
 								style="height: 78%;width: 100%">
 							</a>
 							<div class="w3-container"

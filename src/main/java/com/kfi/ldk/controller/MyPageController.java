@@ -26,21 +26,18 @@ public class MyPageController {
 	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
-		//session.setAttribute("user_num", 1);
 		int user_num=0;
 		Object session_num=session.getAttribute("user_num");
 		if(session_num!=null && session_num!="") {
 			user_num=(Integer)session_num;
 		}
-		HashMap<String, Object> map=new HashMap<>();
-		map.put("user_num", user_num);
-		map.put("ms_using",1);
-		List<MySkinViewVo> list=(List<MySkinViewVo>)service.list(map);
 		MySkinViewVo msv=new MySkinViewVo(0,user_num, "±âº»", "#00cee8","", 0, 0, "default-profile.png", "default-profile.png", 0,"logo2.png", "logo2.png","");
-		if(list!=null) {
-			for(MySkinViewVo vo: list) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("list", "ms_using");
+		map.put("user_num", user_num);
+		MySkinViewVo vo=(MySkinViewVo)service.select(map);
+		if(vo!=null) {
 				msv=vo;
-			}
 		}
 		return msv;
 	}

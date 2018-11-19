@@ -66,7 +66,6 @@ public class CommBoardServiceImpl implements CommonService {
 
 	@Override
 	public int getCount(Object data) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -98,7 +97,7 @@ public class CommBoardServiceImpl implements CommonService {
 			CommBoardVo cbvo=new CommBoardVo(cb_num, comm_num, user_num, cb_title, cb_content, null, cbNotice, 0);
 			cbdao.insert(cbvo);
 			
-			if(fileP!=null) {
+			if(fileP.length!=0) {
 				for(int i=0;i<fileP.length;i++) {
 					int cp_num=cpdao.getMaxNum()+1;
 					String cp_orgimg=fileP[i].getOriginalFilename();
@@ -114,7 +113,7 @@ public class CommBoardServiceImpl implements CommonService {
 				}
 			}
 			
-			if(fileV!=null) {
+			if(fileV.length!=0) {
 				for(int i=0; i<fileV.length;i++) {
 					int cv_num=cvdao.getMaxNum()+1;
 					String cv_orgvid=fileV[i].getOriginalFilename();
@@ -130,7 +129,7 @@ public class CommBoardServiceImpl implements CommonService {
 				}
 			}
 			
-			if(tag_name!=null) {
+			if(tag_name.length!=0) {
 				for(int i=0;i<tag_name.length;i++) {
 					TagVo tvo=tdao.select(tag_name[i]);
 					int tag_num=0;
@@ -156,7 +155,7 @@ public class CommBoardServiceImpl implements CommonService {
 				}
 			}
 			for(String deleteVid:fileV_list) {
-				File fileVideo=new File(uploadPathPhoto+"\\"+deleteVid);
+				File fileVideo=new File(uploadPathVideo+"\\"+deleteVid);
 				if(fileVideo.delete()) {
 					System.out.println("파일 삭제");
 				}
@@ -181,13 +180,22 @@ public class CommBoardServiceImpl implements CommonService {
 	@Override
 	public Object select(Object data) {
 		HashMap<String, Object> map = (HashMap<String, Object>) data;
-		return cbvdao.select(map);
+		String list=(String)map.get("list");
+		int comm_num=(Integer)map.get("comm_num");
+		if(list.equals("select")) {
+			//게시글 상세보기
+			return cbvdao.select(map);
+		}else if(list.equals("notice")) {
+			//공지사항 불러오기
+			return cbdao.getNotice(comm_num);
+		}
+		return null;
 	}
 
 	@Override
 	public Object list(Object data) {
-		HashMap<String, Object> map = (HashMap<String, Object>) data;
-		return cbvdao.list(map);
+		int comm_num=(Integer)data;
+		return cbvdao.list(comm_num);
 	}
 
 }

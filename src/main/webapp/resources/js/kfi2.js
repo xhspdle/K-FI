@@ -389,7 +389,13 @@ $(function() {
 		return true;
 	});
 	
-	
+	/////////////////////community 회원유무 확인 후 글쓰기 disabled 효과주기
+	var cul_status=$('#cul_status').val();
+	if(parseInt(cul_status)!=1){
+		$('#commWrite').attr('href','#');
+		//addClass, removeClass
+		
+	}
 	
 });
 

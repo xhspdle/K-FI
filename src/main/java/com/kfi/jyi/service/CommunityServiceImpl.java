@@ -139,18 +139,20 @@ public class CommunityServiceImpl implements CommonService {
 
 	@Override
 	public Object select(Object data) {
-		return null;
+		//관리자 번호 가져오기
+		int comm_num=(Integer)data;
+		return cdao.select_adminNum(comm_num);
 	}
 
 	@Override
 	public Object list(Object data) {
-		/* best6 또는 전체 커뮤니티 목록 불러오기 */
 		String list = (String) data;
 		HashMap<String, Object> map = new HashMap<>();
+		/* best6 커뮤니티 목록 불러오기 */
 		if (list.equals("bestSix")) {
 			List<CommunityVo> bestSix = cdao.bestSix();
 			map.put("list", bestSix);
-
+			
 			/* 해당 커뮤니티의 스킨 프로필 불러오기 */
 			List<CommSkinProfileVo> csplist = new ArrayList<>();
 			for (CommunityVo cv : bestSix) {
@@ -162,6 +164,7 @@ public class CommunityServiceImpl implements CommonService {
 
 			return map;
 		}else if(list.equals("list")) {
+			/* 전체 커뮤니티 목록 불러오기 */
 			List<CommunityVo> clist = cdao.list();
 			map.put("clist", clist);
 
@@ -176,5 +179,4 @@ public class CommunityServiceImpl implements CommonService {
 		}
 		return null;
 	}
-
 }

@@ -15,13 +15,13 @@ public class CommBoardViewDao {
 	private final static String NAMESPACE="com.kfi.mybatis.jyi.CommBoardViewMapper";
 	
 	//해당 커뮤니티의 선택한 게시물 불러오기
-	public CommBoardViewVo select(HashMap<String, Object> map){
-		return session.selectOne(NAMESPACE+".select_Community",map);
+	public List<CommBoardViewVo> select(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".select",map);
 	}
 	
 	//해당 커뮤니티 전체 게시물 불러오기
-	public List<CommBoardViewVo> list(HashMap<String, Object> map){
-		return session.selectList(NAMESPACE+".select_Community",map);
+	public List<CommBoardViewVo> list(int comm_num){
+		return session.selectList(NAMESPACE+".list",comm_num);
 	}
 	
 	

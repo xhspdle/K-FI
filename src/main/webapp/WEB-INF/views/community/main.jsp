@@ -17,26 +17,25 @@
 			</div>
 		</div>
 	</div>
-	<!-- 총 8개 중에 1번째, 마지막번째는 안보임  실제 데이터는 2번째꺼부터 7번째꺼까지 총 6개 -->
 	<c:forEach var="list" items="${list }">
-		<c:forEach var="csplist" items="${csplist }">
 			<div class="panel-group communitySlide">
 				<div class="panel panel-default">
 					<div class="panel-body">
+					<c:forEach var="csplist" items="${csplist }">
 					<c:if test="${list.comm_num == csplist.comm_num }">
-						<a href="<c:url value='/community/selectComm?comm_num=${list.comm_num }'/>">
+						<a href="<c:url value='/community?comm_num=${list.comm_num }'/>">
 							<img class="img-responsive center-block communitySlideImg"
-								src="<c:url value='/resources/upload/img/${ csplist.savimg}'/>"
+								src="<c:url value='/resources/upload/img/${ csplist.csp_savimg}'/>"
 								alt="community list">
 						</a>
 					</c:if>
+					</c:forEach>
 					</div>
 					<div class="panel-footer">
 						<h4>${list.comm_name }</h4>
 					</div>
 				</div>
 			</div>
-		</c:forEach>
 	</c:forEach>
 	<div class="panel-group communitySlide" style="opacity: 0;">
 		<div class="panel panel-default">

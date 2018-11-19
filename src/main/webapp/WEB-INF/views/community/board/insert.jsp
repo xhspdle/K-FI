@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="container" style="padding: 0px;">
 	<div class="modal-header" style="padding:35px 50px;">
 		<h2><span class="glyphicon glyphicon-check"></span> Write</h2>
@@ -15,12 +17,14 @@
 				<textarea class="form-control" rows="5" id="cb_content" name="cb_content" placeholder="Write something!"></textarea>
 			</div>
 			<!-- 공지유무 -->
-			<div class="form-group">
-				<label for="cb_notice"><span class="glyphicon glyphicon-menu-hamburger"></span>Notice</label>
-				<div class="checkbox">
-			      <label><input type="checkbox" name="cb_notice" value="1">is Notice</label>
+			<c:if test="${user_num eq comm_adminNum && cul_status eq 1 }">
+				<div class="form-group">
+					<label for="cb_notice"><span class="glyphicon glyphicon-menu-hamburger"></span>Notice</label>
+					<div class="checkbox">
+				      <label><input type="checkbox" name="cb_notice" value="1">is Notice</label>
+					</div>
 				</div>
-			</div>
+			</c:if>
 			<div class="form-group" style="margin-bottom:-11.4px;">
 				<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
 				<div class="editableDiv" id="tags"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
@@ -35,11 +39,8 @@
 				<input type="file" class="form-control myboardFile" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
 				<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 			</div>
-			<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
+			<!-- id="sendServer" -->
+			<button type="submit" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-ok"></span> Write</button>
 		</form>
-		<div class="progress">
-			<div class="progress-bar progress-bar-striped active" role="progressbar" 
-			aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
-		</div>
 	</div>
 </div>
