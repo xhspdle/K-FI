@@ -1,6 +1,7 @@
 package com.kfi.ldk.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.kfi.ldk.dao.CommVoteDao;
+import com.kfi.ldk.dao.CommVoteListViewDao;
 import com.kfi.ldk.dao.VotingOptionDao;
 import com.kfi.ldk.dao.VotingUserListDao;
 import com.kfi.ldk.vo.CommVoteVo;
@@ -18,6 +20,7 @@ public class CommVoteServiceImpl implements CommonService{
 	@Autowired private CommVoteDao cvDao;
 	@Autowired private VotingOptionDao voDao;
 	@Autowired private VotingUserListDao vuDao;
+	@Autowired private CommVoteListViewDao cvViewDao;
 	@Override
 	public int getMaxNum() {
 		return cvDao.getMaxNum();
@@ -62,9 +65,10 @@ public class CommVoteServiceImpl implements CommonService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object list(Object data) {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		return cvViewDao.list(map);
 	}
 }

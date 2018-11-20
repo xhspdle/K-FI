@@ -1,8 +1,6 @@
 package com.kfi.ldk.vo;
 
-import java.util.List;
-
-public class CommVoteList {
+public class CommVoteListView {
 	private int vote_num;
 	private int comm_num;
 	private String vote_title;
@@ -12,10 +10,9 @@ public class CommVoteList {
 	private String user_email;
 	private String msp_savimg;
 	private int cnt;
-	private List<CommVoteOptionCollection> list;
-	public CommVoteList() {}
-	public CommVoteList(int vote_num, int comm_num, String vote_title, int remain, int user_num, String user_nickname,
-			String user_email, String msp_savimg, int cnt, List<CommVoteOptionCollection> list) {
+	public CommVoteListView() {}
+	public CommVoteListView(int vote_num, int comm_num, String vote_title, int remain, int user_num,
+			String user_nickname, String user_email, String msp_savimg, int cnt) {
 		super();
 		this.vote_num = vote_num;
 		this.comm_num = comm_num;
@@ -26,7 +23,6 @@ public class CommVoteList {
 		this.user_email = user_email;
 		this.msp_savimg = msp_savimg;
 		this.cnt = cnt;
-		this.list = list;
 	}
 	public int getVote_num() {
 		return vote_num;
@@ -82,16 +78,10 @@ public class CommVoteList {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	public List<CommVoteOptionCollection> getList() {
-		return list;
-	}
-	public void setList(List<CommVoteOptionCollection> list) {
-		this.list = list;
-	}
 	@Override
 	public String toString() {
-		return "CommVoteList [vote_num=" + vote_num + ", comm_num=" + comm_num + ", vote_title=" + vote_title
+		return "CommVoteListView [vote_num=" + vote_num + ", comm_num=" + comm_num + ", vote_title=" + vote_title
 				+ ", remain=" + remain + ", user_num=" + user_num + ", user_nickname=" + user_nickname + ", user_email="
-				+ user_email + ", msp_savimg=" + msp_savimg + ", cnt=" + cnt + ", list=" + list + "]";
+				+ user_email + ", msp_savimg=" + msp_savimg + ", cnt=" + cnt + "]";
 	}
 }

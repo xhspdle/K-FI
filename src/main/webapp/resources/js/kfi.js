@@ -459,7 +459,7 @@ $(document).ready(function(){
 				  }
 			  }
 			  if(endPageNum<data.pu.totalPageCount){
-				  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ (startPageNum-1) +")'>" +
+				  $("<li><a class='aPaging bPaging' href='javascript:$.getCommentList("+ (endPageNum+1) +")'>" +
 				  	"<span class='glyphicon glyphicon-chevron-right bPaging'></span></a></li>")
 				  .appendTo(".pagination");
 			  }else{

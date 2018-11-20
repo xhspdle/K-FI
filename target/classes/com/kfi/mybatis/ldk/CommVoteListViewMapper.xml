@@ -2,12 +2,41 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kfi.mybatis.ldk.CommVoteListViewMapper">
-	<select id="getCount" resultType="int">
-		select NVL(count(vote_num),0) cnt from COMMVOTELIST
+<mapper namespace="com.kfi.mybatis.ldk.CommVoteListViewMapper">  
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		select NVL(count(vote_num),0) cnt from COMMVOTELIST where comm_num=#{comm_num}
 	</select>
+	<!--
+		☆☆☆ 
+		column에는 두 테이블의 조인에 사용되는 참조컬럼을 쓰면 된다 
+		페이징처리를 잘 작동시키면서 ResultMap을 사용하기 위해서는
+		각 각 테이블에 대한 Vo와, 조인한 결과값에 대한 Vo가 모두 필요하다
+	-->
 	<resultMap type="com.kfi.ldk.vo.CommVoteList" id="commVoteList">
-		<result property="vote_num" column="vote_num"/>
+		<collection property="list" column="vote_num" ofType="com.kfi.ldk.vo.commVoteListView" select="optionList"/>
+	</resultMap>
+	<select id="voteList" parameterType="hashmap" resultMap="commVoteList">
+		SELECT *
+		FROM
+		(
+		    SELECT BB.*,ROWNUM RNUM
+		    FROM
+		    (
+		        SELECT * FROM COMMVOTELIST WHERE COMM_NUM=#{comm_num} ORDER BY VOTE_NUM DESC
+		    )BB
+		)
+		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+	</select>
+	<!-- 파라미터타입 안쓰고, 위에 ResultMap에서 쓴  column을 where절에 변수로 주면 된다 -->
+	<select id="optionList" resultType="com.kfi.ldk.vo.CommVoteOptionCollection">
+		SELECT *
+		FROM VOTING_OPTION
+		WHERE VOTE_NUM=#{vote_num}
+	</select>
+	<!--  
+	☆☆☆이렇게 하면 페이징처리 안됨 위에처럼 해야댐!!!
+	<resultMap type="com.kfi.ldk.vo.CommVoteList" id="commVoteList">
+		<id property="vote_num" column="vote_num"/>
 		<result property="comm_num" column="comm_num"/>
 		<result property="vote_title" column="vote_title"/>
 		<result property="remain" column="remain"/>
@@ -16,6 +45,7 @@
 		<result property="msp_savimg" column="msp_savimg"/>
 		<result property="cnt" column="cnt"/>
 		<collection property="list" ofType="com.kfi.ldk.vo.CommVoteOptionCollection">
+			<id property="vo_num" column="vo_num"/>
 			<result property="option_num" column="option_num"/>
 			<result property="vo_content" column="vo_content"/>
 		</collection>
@@ -27,13 +57,14 @@
 	 	select aa.*,rownum rnum 
 	 	from
 	 	(
-	 		SELECT CL.VOTE_NUM,CL.COMM_NUM,CL.VOTE_TITLE,CL.REMAIN,CL.USER_NICKNAME,CL.USER_EMAIL,CL.MSP_SAVIMG,CL.VOTECNT,
-			VO.OPTION_NUM,VO.VO_CONTENT
+	 		SELECT CL.VOTE_NUM,CL.COMM_NUM,CL.VOTE_TITLE,CL.REMAIN,CL.USER_NICKNAME,CL.USER_EMAIL,CL.MSP_SAVIMG,CL.CNT,
+			VO.VO_NUM,VO.OPTION_NUM,VO.VO_CONTENT
 			FROM COMMVOTELIST CL,VOTING_OPTION VO
 			WHERE CL.VOTE_NUM=VO.VOTE_NUM AND CL.COMM_NUM=#{comm_num}
-			ORDER BY VOTE_NUM DESC,OPTION_NUM ASC;
+			ORDER BY VOTE_NUM DESC,OPTION_NUM ASC
 	 	)aa
 		)
 		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
+	-->
 </mapper>

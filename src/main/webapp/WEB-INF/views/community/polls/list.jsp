@@ -10,172 +10,74 @@
 		</div>
 		
 	</div>
+	<c:forEach var="vo" items="${list }">
 	<div class="panel-group col-sm-4">
 		<div class="panel panel-default">
 			<div class="panel-heading text-left">
-				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
-				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
+				<h3><span class="glyphicon glyphicon-stats"></span>${vo.vote_title }</h3>
+				<p><small style="color:#818181">${vo.cnt } votesㆍ${vo.remain } days left</small></p>
 			</div>
 			<div class="panel-body poll-body">
 				<div class="poll-list-options">
-					<a href="#" class="btn btn-info btn-block">option 1</a>
-					<a href="#" class="btn btn-info btn-block">option 2</a>
-					<a href="#" class="btn btn-info btn-block">option 3</a>
-					<a href="#" class="btn btn-info btn-block">option 4</a>
-					<a href="#" class="btn btn-info btn-block">option 5</a>
+					<c:forEach var="optionList" items="${vo.list }">
+					<a href="<c:url value='/community/votingUserList/insert?vo_num=${optionList.vo_num }'/>" 
+					class="btn btn-info btn-block">${optionList.vo_content }</a>
+					</c:forEach>
 				</div>
 			</div>
 			<div class="panel-footer">
 				<div class="media">
 					<div class="media-left media-top">
-						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
+						<img src="<c:url value='/resources/upload/img/${vo.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
 					</div>
 					<div class="media-body text-left" style="padding-left:5px;">
-						<h4 class="media-heading"><a href="#"><strong>브이오.user_nickname</strong></a></h4>
-						<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
+						<h4 class="media-heading"><a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${vo.user_num }'/>"><strong>${vo.user_nickname }</strong></a></h4>
+						<p style="margin:0px;margin-top:-5px;"><small>${vo.user_email }</small></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<div class="panel-group col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading text-left">
-				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
-				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
-			</div>
-			<div class="panel-body poll-body">
-				<div class="poll-list-options">
-					<a href="#" class="btn btn-info btn-block">option 1</a>
-					<a href="#" class="btn btn-info btn-block">option 2</a>
-					<a href="#" class="btn btn-info btn-block">option 3</a>
-					<a href="#" class="btn btn-info btn-block">option 4</a>
-				</div>
-			</div>
-			<div class="panel-footer">
-				<div class="media">
-					<div class="media-left media-top">
-						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
-					</div>
-					<div class="media-body text-left" style="padding-left:5px;">
-						<h4 class="media-heading"><a href="#"><strong>브이오.user_nickname</strong></a></h4>
-						<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="panel-group col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading text-left">
-				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
-				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
-			</div>
-			<div class="panel-body poll-body">
-				<div class="poll-list-options">
-					<a href="#" class="btn btn-info btn-block">option 1</a>
-					<a href="#" class="btn btn-info btn-block">option 2</a>
-					<a href="#" class="btn btn-info btn-block">option 3</a>
-				</div>
-			</div>
-			<div class="panel-footer">
-				<div class="media">
-					<div class="media-left media-top">
-						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
-					</div>
-					<div class="media-body text-left" style="padding-left:5px;">
-						<h4 class="media-heading"><a href="#"><strong>브이오.user_nickname</strong></a></h4>
-						<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="panel-group col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading text-left">
-				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
-				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
-			</div>
-			<div class="panel-body poll-body">
-				<div class="poll-list-options">
-					<a href="#" class="btn btn-info btn-block">option 1</a>
-					<a href="#" class="btn btn-info btn-block">option 2</a>
-					<a href="#" class="btn btn-info btn-block">option 3</a>
-					<a href="#" class="btn btn-info btn-block">option 4</a>
-					<a href="#" class="btn btn-info btn-block">option 5</a>
-				</div>
-			</div>
-			<div class="panel-footer">
-				<div class="media">
-					<div class="media-left media-top">
-						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
-					</div>
-					<div class="media-body text-left" style="padding-left:5px;">
-						<h4 class="media-heading"><a href="#"><strong>브이오.user_nickname</strong></a></h4>
-						<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="panel-group col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading text-left">
-				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
-				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
-			</div>
-			<div class="panel-body poll-body">
-				<div class="poll-list-options">
-					<a href="#" class="btn btn-info btn-block">option 1</a>
-					<a href="#" class="btn btn-info btn-block">option 2</a>
-					<a href="#" class="btn btn-info btn-block">option 3</a>
-					<a href="#" class="btn btn-info btn-block">option 4</a>
-				</div>
-			</div>
-			<div class="panel-footer">
-				<div class="media">
-					<div class="media-left media-top">
-						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
-					</div>
-					<div class="media-body text-left" style="padding-left:5px;">
-						<h4 class="media-heading"><a href="#"><strong>브이오.user_nickname</strong></a></h4>
-						<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="panel-group col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading text-left">
-				<h3><span class="glyphicon glyphicon-stats"></span>Polls Title</h3>
-				<p><small style="color:#818181">10 votesㆍ7 days left</small></p>
-			</div>
-			<div class="panel-body poll-body">
-				<div class="poll-list-options">
-					<a href="#" class="btn btn-info btn-block">option 1</a>
-					<a href="#" class="btn btn-info btn-block">option 2</a>
-					<a href="#" class="btn btn-info btn-block">option 3</a>
-				</div>
-			</div>
-			<div class="panel-footer">
-				<div class="media">
-					<div class="media-left media-top">
-						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
-					</div>
-					<div class="media-body text-left" style="padding-left:5px;">
-						<h4 class="media-heading"><a href="#"><strong>브이오.user_nickname</strong></a></h4>
-						<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	</c:forEach>
 </div>
-
+<div class="row">
+	<div class="text-center">
+		<ul class="pagination">
+		<c:choose>
+			<c:when test="${pu.startPageNum > pu.pageBlockCount }">
+			<li>
+				<a class="aPaging bPaging" 
+				href="<c:url value='/community/polls/list?pageNum=${pu.startPageNum-1 }'/>">
+				<span class="glyphicon glyphicon-chevron-left bPaging"></span>
+				</a>
+			</li>
+			</c:when>
+			<c:otherwise>
+			<li><span class="glyphicon glyphicon-chevron-left bPaging"></span></li>
+			</c:otherwise>
+		</c:choose>	
+		<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+			<li <c:if test="${i==pu.pageNum }">class='active'</c:if>>
+				<a class="aPaging bPaging" 
+				href="<c:url value='/community/polls/list?pageNum=${i }'/>">${i }</a>
+			</li>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${pu.endPageNum < pu.totalPageCount }">
+			<li>
+				<a class="aPaging bPaging" 
+				href="<c:url value='/community/polls/list?pageNum=${pu.endPageNum+1 }'/>">
+				<span class="glyphicon glyphicon-chevron-right bPaging"></span>
+				</a>
+			</li>
+			</c:when>
+			<c:otherwise>
+			<li><span class="glyphicon glyphicon-chevron-right bPaging"></span></li>
+			</c:otherwise>
+		</c:choose>
+		</ul>
+	</div>
+</div>
 <!-- polls Modal -->
 <div class="modal fade" id="pollsModal" role="dialog">
 	<div class="modal-dialog">
