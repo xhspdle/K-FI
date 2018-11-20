@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="myBoardSelect" class="container">
+<div id="commBoardSelect" class="container">
 	<h1 class="text-center" style="margin-bottom:30px;"><span style="border-bottom: 4px solid tan">${cbvo.cb_date }</span></h1>
 	<div class="panel-group">
 		<div class="panel panel-default">
@@ -106,22 +106,22 @@
 				</div>
 				</c:forEach>				
 			</div>
-<%-- 			<div class="panel-footer text-left">
+ 			<div class="panel-footer text-left">
 				<h3 class="postListComment select">
 				<c:forEach var="tags" items="${tagList }">
 					<span style="font-size: 24px;">#${tags.tag_name }&nbsp;</span>
 				</c:forEach>
 				</h3>
-				<h3 class="postLikeComment select" id="likeCnt" data-like-cnt="${like_cnt }">
-				${like_cnt } Likes<span class="msgSpan"></span></h3>
+				<h3 class="postLikeComment select" id="likeCnt" data-like-cnt="${likeNum }">
+				${likeNum } Likes<span class="msgSpan"></span></h3>
 				<div class="likes">
-					<a class="btn btn-default" href="<c:url value='/mypage/myboardlike/insert?mb_num=${boardVo.mb_num }'/>" 
+					<a class="btn btn-default" href="<c:url value='/'/>" 
 					data-board-num="${boardVo.mb_num }">
 					<span class="glyphicon glyphicon-heart"></span> Like</a>
 					<div class="likeUserList">
 					</div>
 				</div>
-				<h3 class="postLikeComment select" id="commentCnt">${comment_cnt } Comments</h3>
+<%--				<h3 class="postLikeComment select" id="commentCnt">${comment_cnt } Comments</h3>
 				<div class="media">
 				<c:choose>
 					<c:when test="${!empty user_num }">
@@ -148,7 +148,6 @@
 				</c:choose>
 				</div>
 				<div id="commentList">
-				
 				</div>
 				
 				<div class="text-center">
@@ -178,8 +177,8 @@
 						</c:choose>
 						class="pull-right glyphicon glyphicon-step-forward next"></span>
 					</a>
-				</div>
-			</div> --%>
+				</div>--%>
+			</div> 
 		</div>
 	</div>
 </div>

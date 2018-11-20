@@ -44,3 +44,13 @@
 		</form>
 	</div>
 </div>
+<script id="fileImgTemplate" type="text/template">
+<label for="fileP{i}_up" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> {label}</label>
+<input type="file" class="form-control myboardFile" id="fileP{i}_up" name="fileP" accept=".jpg, .jpeg, .png, .gif">
+<img id="fimg{i}" src="{mp_savimg}" style="display:none;width:100%;">
+</script>
+<script id="fileVidTemplate" type="text/template">
+<label for="fileV{i}_up" class="btn btn-info btn-block btn-file"><span class="glyphicon glyphicon-facetime-video"></span> {label}</label>
+<input type="file" class="form-control myboardFile" id="fileV{i}_up" name="fileV" accept=".avi, .wmv, .mp4">
+<video id="fvid{i}" controls autoplay muted="muted" loop src="{mv_savvid}" style="display:none;width:100%"></video>
+</script>

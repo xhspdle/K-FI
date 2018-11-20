@@ -43,4 +43,9 @@ public class TagDao {
 		return session.selectOne(NAMESPACE+".getTagCountNum",tag_name);
 	}
 	
+	public List<TagVo> getCommTag(int cb_num){
+		return session.selectList(NAMESPACE+".getCommTag", cb_num);
+	}
+	
+	
 }

@@ -23,6 +23,7 @@ import com.kfi.jyi.vo.CommPhotoVo;
 import com.kfi.jyi.vo.CommVideoVo;
 import com.kfi.jyi.vo.MySkinViewVo;
 import com.kfi.ldk.service.CommonService;
+import com.kfi.ldk.vo.TagVo;
 
 @Controller("insideCommunityListController")
 public class ListController {
@@ -62,8 +63,7 @@ public class ListController {
 		model.addAttribute("vo", (MembersVo)result.get("vo")); //작성자 회원 정보
 		model.addAttribute("writervo", (MySkinViewVo)result.get("writervo")); //게시글 작성자 skin view
 		model.addAttribute("likeNum", (Integer)result.get("likeNum"));  //추천수
-		
-		
+		model.addAttribute("tagList", (List<TagVo>)result.get("tagList"));  //태그리스트
 		
 		return ".community.board.select";
 	}

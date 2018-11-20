@@ -213,7 +213,7 @@ public class CommBoardServiceImpl implements CommonService {
 			for(CommBoardLikeVo cblvo: cblList) {
 				++likeNum;
 			}
-			
+			List<TagVo> tagList=tdao.getCommTag(cb_num);
 			
 			
 			result.put("cbvo", cbvo); //게시글
@@ -224,7 +224,7 @@ public class CommBoardServiceImpl implements CommonService {
 			result.put("vo", vo); //작성자 회원 정보
 			result.put("writervo", writervo); //작성자 회원 skin view  
 			result.put("likeNum", likeNum); //추천수
-			
+			result.put("tagList", tagList); //태그리스트
 			
 			
 			return result;

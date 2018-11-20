@@ -53,6 +53,8 @@
 		select nvl(count(tag_name),0) from tag where tag_name=#{tag_name}
 	</select>
 	
-	
+	<select id="getCommTag" parameterType="int" resultType="tag">
+		select * from tag where tag_num in (select tag_num from comm_tag where cb_num = #{cb_num})
+	</select>
 	
 </mapper>
