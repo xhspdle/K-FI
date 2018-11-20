@@ -183,7 +183,7 @@ form .error {
  								eMsg.show();
  								eMsg.removeClass('redText');
  								eMsg.addClass('greenText');
- 								return idFlag = 1;
+ 								return idFlag = true;
  								return true;
  							}
  						}
@@ -225,7 +225,7 @@ form .error {
  								eMsg.show();
  								eMsg.removeClass('redText');
  								eMsg.addClass('greenText');
- 								return nickFlag = 1;
+ 								return nickFlag = true;
  								return true;
  							}
  						}
@@ -324,7 +324,7 @@ form .error {
  					eMsg.show();
  					eMsg.removeClass('redText');
  					eMsg.addClass('greenText');
- 					return emailFlag = 1;
+ 					return emailFlag = true;
  					return true;
  				}
  					}
@@ -385,7 +385,7 @@ form .error {
 
 				</div>
 				<form action="<c:url value='/login/findid'/>" name="findid"
-					role="form" id="findid-form1">
+					role="form" id="findid-form1" method="post">
 					<div class="form-group">
 						<label class="form-control-label" for="findpwd-email">Email</label><br>
 						<input type="email" name="user_email" id="findpwd-email" class="form-control"

@@ -28,7 +28,7 @@ public class CommCalendar {
 	public int selectEvent(int comm_num) {
 		return ccdao.selectEvent(comm_num);
 	}
-	public List<Object> listEvent(int comm_num) {
+	public List<CommCalendarVo> listEvent(int comm_num) {
 		return ccdao.listEvent(comm_num);
 	}
 }

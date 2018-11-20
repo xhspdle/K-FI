@@ -31,7 +31,7 @@ public class CommCalendarDao {
 		public int selectEvent(int comm_num) {
 			return sqlSession.selectOne(NAMESPACE +".seleteEvent", comm_num);
 		}
-		public List<Object> listEvent(int comm_num) {
+		public List<CommCalendarVo> listEvent(int comm_num) {
 			return sqlSession.selectList(NAMESPACE +".listEvent", comm_num);
 		}
 		

@@ -25,11 +25,7 @@ import com.kfi.jyi.vo.MySkinVo;
 public class JoinController {
 	@Autowired
 	private MembersService service;
-	@RequestMapping(value = "/login/join", method = RequestMethod.GET)
-	public String join() {
-		return "/login/join";
-	}
-
+	
 	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
 	public String join(MembersVo vo, HttpSession session) throws MessagingException, UnsupportedEncodingException {
 		int user_num = service.getMaxnum()+1;

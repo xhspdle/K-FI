@@ -31,7 +31,7 @@
 	<delete id="deleteevent" parameterType="int">
 		delete from comm_calendar where cc_num=#{cc_num} and comm_num=#{comm_num}
 	</delete>
-	<select id="listevent" >
-		select* from comm_calendar
+	<select id="listevent" resultType="community" parameterType="int">
+		select * from comm_calendar where comm_num=#{comm_num}
 	</select>
 </mapper>

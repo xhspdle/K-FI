@@ -65,10 +65,20 @@ public class FindIdController {
 		}
 		
 		@RequestMapping(value="/login/findpwd", method=RequestMethod.GET)
-		public String findPwd() {
-			System.out.println("폼");
-			return "/login/findpwd";
+		public String findPwd(String user_email,Model model) throws Exception {
+			System.out.println("user_email:" +user_email);
+			MembersVo vo=service.emailCheck(user_email);
+			model.addAttribute("user_email", user_email);
+			if (vo != null) {
+				System.out.println("보내자");
+				service.createkey(user_email);
+				return "/login/findId";
+			}else {
+				System.out.println("실패");
+				return "redirect:/login/login";
+			}
 		}
+		
 		@RequestMapping(value="/login/findpwdmail", method=RequestMethod.POST)
 		public String findpwdsendmail(String user_id, String user_email, Model model) throws Exception{
 			service.findpwsendmail(user_email, user_id);

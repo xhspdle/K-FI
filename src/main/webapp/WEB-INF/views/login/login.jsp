@@ -15,6 +15,211 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+		var idFlag = false;
+		var nickFlag = false;
+		var pwdFlag = false;
+		var emailFlag = false;
+
+		var getContext = $('#getContext').val();
+
+		$('#idck').click(function() {
+			var id = $("#id").val();
+			var eMsg = $("#idMsg");
+			var isID = /^[a-zA-Z0-9]{5,15}$/;
+
+			if (id == "") {
+				$(eMsg).text("반드시 입력해주세요!");
+				$("#userid").focus();
+				return false;
+			}
+
+			$.ajax({
+				async : true,
+				type : "GET",
+				url : getContext + '/login/join/idcheck',
+				data : {
+					'user_id' : id
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data)
+					if (!isID.test(id)) {
+						$(eMsg).text("5~15자의 영문 소문자, 숫자만 사용가능 합니다!");
+						$("#userid").focus();
+						return false;
+					} else if (data.msg == 'false') {
+						$(eMsg).text("이미 사용중인 아이디 입니다.");
+						eMsg.show(); // span태그 보여준다.
+						eMsg.removeClass('greenText'); // span태그에 greenText 클래스를 삭제한다.
+						eMsg.addClass('redText'); // span태그에 redText 클래스를 추가한다.
+						$("#userid").focus();
+						return false;
+					} else if (data.msg == 'true') {
+						$(eMsg).text("cool ID~!!");
+						$("#usernickname").focus();
+						eMsg.show();
+						eMsg.removeClass('redText');
+						eMsg.addClass('greenText');
+						return idFlag = true;
+						return true;
+					}
+				}
+			});
+		});
+
+		// 닉네임 중복 체크 부분 
+		$('#nickck').click(function() {
+			var nickname = $("#nickname").val();
+			var eMsg = $("#nickMsg");
+			var isNick = /^[a-zA-Z0-9가-힣]{4,15}$/;
+			if (nickname == "") {
+				$(eMsg).text("반드시 입력해주세요!");
+				$("#usernickname").focus();
+				return false;
+			}
+			$.ajax({
+				async : true,
+				type : "GET",
+				url : getContext + '/login/join/nickcheck',
+				data : {
+					'user_nickname' : nickname
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data)
+					if (!isNick.test(nickname)) {
+						$(eMsg).text("영문,한글,숫자를 이용한 4~15자의 닉네임을 만들어 주세요.");
+						$("#usernickname").focus();
+						eMsg.show();
+						eMsg.removeClass('greenText');
+						eMsg.addClass('redText');
+						return false;
+					} else if (data.msg == 'false') {
+						$(eMsg).text("이미 사용중인 닉네임 입니다.");
+						$("#usernickname").focus();
+						return false;
+					} else if (data.msg == 'true') {
+						$(eMsg).text("좋은 닉네임이에요~^^");
+						$("#userpwd").focus();
+						eMsg.show();
+						eMsg.removeClass('redText');
+						eMsg.addClass('greenText');
+						return nickFlag = true;
+						return true;
+					}
+				}
+
+			});
+		});
+
+		//비밀번호 유효성 체크
+		$('#pwd')
+				.keyup(
+						function() {
+							var pwd = $("#pwd").val();
+							var eMsg = $("#pwdMsg");
+							var pwdck = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+							var nullck = " ";
+							if (pwd.valueOf(nullck) > -1) {
+								$(eMsg).text("영문, 숫자, 특수문자 포함해야합니다. (8~15자)");
+								eMsg.removeClass('greenText');
+								eMsg.addClass('redText');
+								return false;
+							} else if (pwd.length < 1) {
+								$(eMsg).text("영문, 숫자, 특수문자 포함해야합니다. (8~15자)");
+								eMsg.removeClass('greenText');
+								eMsg.addClass('redText');
+								return false;
+							} else if (!pwdck.test(pwd)) {
+								$(eMsg).text("영문, 숫자, 특수문자 포함해야합니다. (8~15자)");
+								$("#user_pwd").focus();
+								eMsg.removeClass('greenText');
+								eMsg.addClass('redText');
+								return false;
+							} else {
+								$(eMsg).text("좋아요~!");
+								eMsg.show();
+								eMsg.removeClass('redText');
+								eMsg.addClass('greenText');
+								return true;
+							}
+
+						});
+
+		//비밀번호 동일입력 체크
+		$('#pwdCheck').keyup(function() {
+			var eMsg = $("#pwdCkMsg");
+			var pwd = $("#pwd").val();
+			var pwdck = $("#pwdCheck").val();
+			if (pwd == pwdck) {
+				$(eMsg).text("비밀번호가 일치합니다.");
+				return true;
+				return pwdFlag = true;
+			} else {
+				$(eMsg).text("비밀번호가 일치하지않습니다.");
+				$("#pwdCheck").focus();
+				return false;
+			}
+
+		});
+
+		// 이메일 중복체크
+		$('#emailck').click(
+						function() {
+							var email = $("#email").val();
+							var eMsg = $("#emailMsg");
+							var isEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+							if (email == "") {
+								$(eMsg).text("이메일 주소를 입력해주세요.");
+								return false;
+							}
+							$.ajax({
+										async : true,
+										type : "GET",
+										url : getContext
+												+ '/login/join/emailcheck',
+										data : {
+											'useremail' : email
+										},
+										contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+										dataType : "json",
+										success : function(data) {
+											console.log(data)
+											if (!isEmail.test(email)) {
+												$(eMsg).text("이메일 형식이 맞지않습니다.");
+												eMsg.show();
+												eMsg.removeClass('greenText');
+												eMsg.addClass('redText');
+												return false;
+
+											} else if (data.msg == 'false') {
+												$(eMsg)
+														.text(
+																"이미 사용중인 이메일 입니다.");
+												eMsg.show();
+												eMsg.removeClass('greenText');
+												eMsg.addClass('redText');
+												$("#useremail").focus();
+												return false;
+
+											} else if (data.msg == 'true') {
+												$(eMsg).text(
+														"사용할 수 있는 이메일 입니다.");
+												$("#useremail").focus();
+												eMsg.show();
+												eMsg.removeClass('redText');
+												eMsg.addClass('greenText');
+												return emailFlag = true;
+												return true;
+											}
+										}
+									});
+						});
+	});
+</script>
 <style type="text/css">
 .row {
 	margin-top: 21rem;
@@ -140,18 +345,18 @@ form .error {
 							<label class="form-control-label" for="findpwd-email">Email</label><br>
 							<input type="email" name="user_email" id="findpwd-email"
 								class="form-control" aria-describedby="emailHelp"
-								placeholder="Enter Email">
+								placeholder="Enter Email"><br>
+						<button type="submit" class="btn btn-default" id="findid-btn">Send Code</button>
 						</div>
 						<div class="form-group">
 							<label for="findpwd-code">Code</label> <input type="text"
 								name="cm_key" id="findpwd-code" class="form-control"
 								aria-describedby="codeHelp" placeholder="Enter Code">
 						</div>
-						<button type="submit" class="btn btn-default" id="findid-btn">Send
-							Code</button>
+							<button type="submit" class="btn btn-default" id="emailCode-btn1">Code verification</button>
 					</form>
 
-					<form action="<c:url value='/login/findpwd'/>" method="post"
+					<form action="<c:url value='/login/findpwd'/>" method="get"
 						name="findpwd" id="findpwd-form2" class="tab-pane fade"
 						style="display: none">
 						<div class="form-group">
@@ -172,7 +377,7 @@ form .error {
 								name="cm_key" id="code" class="form-control"
 								aria-describedby="emailHelp" placeholder="Enter Code">
 						</div>
-						<button type="submit" class="btn btn-default" id="code">Code verification</button>
+						<input type="submit" class="btn btn-default" id="emailCode-btn2" onClick="this.form.action='/login/selectcode'" value="Code verification">
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -251,7 +456,7 @@ form .error {
 							<h1>Signup</h1>
 						</div>
 					</div>
-					<form action="<c:url value='/login/join'/>" name="registration">
+					<form action="<c:url value='/login/join'/>" name="registration" method="post">
 						<div class="form-group">
 							<label for="firstname">ID</label> <input type="text"
 								name="user_id" class="form-control" id="userid"
@@ -311,7 +516,7 @@ form .error {
 			});
 		});
 		$(function() {
-			$("form[name='login']").validate({
+			$("form[name='user_id']").validate({
 				rules : {
 
 					id : {
@@ -340,19 +545,18 @@ form .error {
 
 		$(function() {
 
-			$("form[name='registration']")
+			$("form[name='login']")
 					.validate(
 							{
 								rules : {
-									firstname : "required",
-									lastname : "required",
+									
 									email : {
 										required : true,
 										email : true
 									},
 									password : {
 										required : true,
-										minlength : 5
+										minlength : 8
 									}
 								},
 
@@ -361,7 +565,7 @@ form .error {
 									lastname : "Please enter your NickName",
 									password : {
 										required : "Please provide a password",
-										minlength : "Your password must be at least 5 characters long"
+										minlength : "Your password must be at least 8 characters long"
 									},
 									email : "Please enter a valid email address"
 								},
