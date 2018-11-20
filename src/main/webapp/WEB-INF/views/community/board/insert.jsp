@@ -7,7 +7,7 @@
 		<h2><span class="glyphicon glyphicon-check"></span> Write</h2>
 	</div>
 	<div class="modal-body" style="padding:40px 50px;">
-		<form method="post" action="<c:url value='/community/board/insert'/>" name="frm" enctype="multipart/form-data">
+		<form method="post" action="<c:url value='/community/board/insert'/>" name="frm1" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="comm_title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
 				<input type="text" class="form-control" id="cb_title" name="cb_title" placeholder="Enter Title">

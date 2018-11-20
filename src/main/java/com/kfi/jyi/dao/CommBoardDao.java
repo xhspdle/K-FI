@@ -24,4 +24,9 @@ public class CommBoardDao {
 	public List<CommBoardVo> getNotice(int comm_num) {
 		return session.selectList(NAMESPACE+".getNotice",comm_num);
 	}
+	
+	public CommBoardVo select(int cb_num) {
+		return session.selectOne(NAMESPACE+".select",cb_num);
+	}
+	
 }

@@ -55,33 +55,17 @@
 	<h1 class="bigTitle">HOT ISSUE - PHOTO</h1>
 	<br>
 	<div class="row">
-		<div class="col-sm-4">
-			<p>
-				<small>2018-11-13</small>
-			</p>
-			<p>게시글 제목만 보여주면 되지않을까</p>
-			<img class="img-responsive margin"
-				src="<c:url value='/resources/images/logo2.png'/>"
-				alt="community issue list" style="width: 100%">
-		</div>
-		<div class="col-sm-4">
-			<p>
-				<small>2018-11-13</small>
-			</p>
-			<p>blablabla blablabla</p>
-			<img class="img-responsive margin"
-				src="<c:url value='/resources/images/라이언움짤.gif'/>"
-				alt="community issue list" style="width: 100%">
-		</div>
-		<div class="col-sm-4">
-			<p>
-				<small>2018-11-13</small>
-			</p>
-			<p>블라블라블라블라</p>
-			<img class="img-responsive margin"
-				src="<c:url value='/resources/images/Kpoplogo.png'/>"
-				alt="community issue list" style="width: 100%">
-		</div>
+		<c:forEach var="hotP" items="${hotPhoto3 }"> 
+			<div class="col-sm-4">
+				<p>
+					<small>${hotP.cb_date }</small>
+				</p>
+				<p>${hotP.cb_title }</p>
+				<img class="img-responsive margin"
+					src="<c:url value='/resources/upload/img/${hotP.cp_savimg }'/>"
+					alt="community issue list" style="width: 100%">
+			</div>
+		</c:forEach>
 	</div>
 </div>
 <div id="issue-vid" class="container-fluid text-center">
@@ -90,12 +74,12 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<p>
-				<small>2018-11-13</small>
+				<small>${hotvideo.cb_date }</small>
 			</p>
-			<p>영상은 딱 하나만 뙇</p>
+			<p>${hotvideo.cb_title }</p>
 			<video class="img-responsive center-block" controls autoplay
 				muted="muted" loop
-				src="<c:url value='/resources/images/Aerial - 18390.mp4'/>">
+				src="<c:url value='/resources/upload/vid/${hotvideo.cv_savvid }'/>">
 			</video>
 		</div>
 	</div>

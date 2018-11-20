@@ -81,7 +81,7 @@ public class InsideCommunityController {
 		//공지사항 번호 --> 날짜 없으면 관리자가 공지사항 아님으로 수정해줘야함
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("list", "notice");
-		map.put("comm_num", commNum);
+		map.put("session", session);
 		List<CommBoardVo> noticeList=(List<CommBoardVo>)commBoardservice.select(map);
 		model.addAttribute("noticeList", noticeList);
 		

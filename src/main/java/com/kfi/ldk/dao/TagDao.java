@@ -38,4 +38,9 @@ public class TagDao {
 	public List<MyTagListJoinVo> listMyTagJoin(int mb_num) {
 		return session.selectList(NAMESPACE + ".listMyTagJoin", mb_num);
 	}
+	
+	public int getTagCountNum(String tag_name) {
+		return session.selectOne(NAMESPACE+".getTagCountNum",tag_name);
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.kfi.jyi.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kfi.jyi.vo.CommBoardVo;
 import com.kfi.jyi.vo.CommPhotoVo;
 import com.kfi.jyi.vo.CommVideoVo;
+import com.kfi.jyi.vo.HotVideoVo;
 
 @Repository
 public class CommVideoDao {
@@ -19,6 +22,14 @@ public class CommVideoDao {
 	
 	public int insert(CommVideoVo vo) {
 		return session.insert(NAMESPACE+".insert",vo);
+	}
+	
+	public List<CommVideoVo> select(int cb_num){
+		return session.selectList(NAMESPACE+".select",cb_num);
+	}
+	
+	public HotVideoVo hotVideo() {
+		return session.selectOne(NAMESPACE+".hotVideo");
 	}
 	
 }

@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="myBoardSelect" class="container">
-	<h1 class="text-center" style="margin-bottom:30px;"><span style="border-bottom: 4px solid tan">${list[0].cb_date }</span></h1>
+	<h1 class="text-center" style="margin-bottom:30px;"><span style="border-bottom: 4px solid tan">${cbvo.cb_date }</span></h1>
 	<div class="panel-group">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
-						<span class="postA">${list[0].cb_title }</span>
+						<span class="postA">${cbvo.cb_title }</span>
 					</h1>
 				</blockquote>
 				<div class="dropdown boardOption">
@@ -18,19 +18,19 @@
 					<ul class="dropdown-menu rightOption">
 						<li>
 							<a href="<c:url value='#update'/>" class="btn btn-block 
-							<c:if test="${sessionScope.user_num!=list[0].user_num }">disabled</c:if>" 
-							style="text-align: left;" data-toggle="modal" data-mb-num="${list[0].cb_num }">
+							<c:if test="${sessionScope.user_num!=cbvo.user_num }">disabled</c:if>" 
+							style="text-align: left;" data-toggle="modal" data-mb-num="${cbvo.cb_num }">
 								<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
 							</a>
 						</li>
 						<li>
 							<a href="#delete" class="btn btn-block 
-							<c:if test="${sessionScope.user_num!=list[0].user_num }">disabled</c:if>" 
-							style="text-align: left;" onclick="return false;" data-toggle="popover" data-mb-num="${list[0].cb_num }">
+							<c:if test="${sessionScope.user_num!=cbvo.user_num }">disabled</c:if>" 
+							style="text-align: left;" onclick="return false;" data-toggle="popover" data-mb-num="${cbvo.cb_num }">
 								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 							</a>
 						</li>
-						<c:if test="${sessionScope.user_num!=list[0].user_num }">
+						<c:if test="${sessionScope.user_num!=cbvo.user_num }">
 						<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
 						</c:if>
 					</ul>
@@ -40,24 +40,24 @@
 				<div class="media">
 				<!-- 프로필 사진 -->
 					<div class="media-left media-top">
-						<img src="<c:url value='/resources/upload/img/${msvo.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
+						<img src="<c:url value='/resources/upload/img/${writervo.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
 					</div>
 					<div class="media-body" style="padding-left:5px;">
 						<h4 class="media-heading" style="text-align:left;">
-							<a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${msvo.user_num }'/>" class="userSelect">
-								<strong>${msvo.user_nickname }</strong>
+							<a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${vo.user_num }'/>" class="userSelect">
+								<strong>${vo.user_nickname }</strong>
 							</a>
-						<span class="pull-right" style="color:#f4511e;"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${list[0].cb_views}</span></h4>
+						<span class="pull-right" style="color:#f4511e;"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${cbvo.cb_views}</span></h4>
 						<p style="text-align:left;margin:0px;margin-top:-5px;"><small>${vo.user_email }</small></p>
 					</div>
 				</div>
 				
-				<p>${list[0].cb_content }</p>
+				<p>${cbvo.cb_content }</p>
 				
-				<%-- <c:if test="${!empty imgList }">
+				<c:if test="${!empty imgList }">
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
-						<c:forEach var="vo" items="${imgList }" varStatus="vs">
+						<c:forEach var="img" items="${imgList }" varStatus="vs">
 						<c:choose>
 							<c:when test="${vs.index==0 }">
 							<li data-target="#myCarousel" data-slide-to="${vs.index }" class="active"></li>
@@ -67,21 +67,21 @@
 							</c:otherwise>
 						</c:choose>
 						</c:forEach>
-					</ol>
+					</ol>  
 					<div class="carousel-inner">
-						<c:forEach var="vo" items="${imgList }" varStatus="vs">
+						<c:forEach var="img" items="${imgList }" varStatus="vs">
 						<c:choose>
 							<c:when test="${vs.index==0 }">
 							<div class="item active">
 								<img class="img-responsive center-block" 
-								src="<c:url value='/resources/upload/img/${vo.mp_savimg }'/>" 
+								src="<c:url value='/resources/upload/img/${img.cp_savimg }'/>" 
 								alt="MyBoard Photos"><!-- style="width:100%;" -->
 							</div>
 							</c:when>
 							<c:otherwise>
 							<div class="item">
 								<img class="img-responsive center-block" 
-								src="<c:url value='/resources/upload/img/${vo.mp_savimg }'/>" 
+								src="<c:url value='/resources/upload/img/${img.cp_savimg }'/>" 
 								alt="MyBoard Photos"><!-- style="width:100%;" -->
 							</div>
 							</c:otherwise>
@@ -98,13 +98,13 @@
 						<span class="sr-only">Next</span>
 					</a>
 					</div>
-				</c:if> --%>
-				<%-- <c:forEach var="vo" items="${vidList }">
+				</c:if>
+				<c:forEach var="vid" items="${vidList }">
 				<div>
 					<video class="img-responsive center-block slideanim" controls autoplay muted="muted" loop 
-					src="<c:url value='/resources/upload/vid/${vo.mv_savvid }'/>" style="margin-top:3%;"></video>
+					src="<c:url value='/resources/upload/vid/${vid.cv_savvid }'/>" style="margin-top:3%;"></video>
 				</div>
-				</c:forEach>	 --%>			
+				</c:forEach>				
 			</div>
 <%-- 			<div class="panel-footer text-left">
 				<h3 class="postListComment select">
@@ -119,7 +119,6 @@
 					data-board-num="${boardVo.mb_num }">
 					<span class="glyphicon glyphicon-heart"></span> Like</a>
 					<div class="likeUserList">
-					
 					</div>
 				</div>
 				<h3 class="postLikeComment select" id="commentCnt">${comment_cnt } Comments</h3>

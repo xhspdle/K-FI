@@ -18,18 +18,24 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.InputSource;
 
+import com.kfi.dgl.dao.MembersDao;
+import com.kfi.dgl.vo.MembersVo;
 import com.kfi.jyi.dao.CommBoardDao;
+import com.kfi.jyi.dao.CommBoardLikeDao;
 import com.kfi.jyi.dao.CommBoardViewDao;
 import com.kfi.jyi.dao.CommPhotoDao;
 import com.kfi.jyi.dao.CommUserListDao;
 import com.kfi.jyi.dao.CommVideoDao;
 import com.kfi.jyi.dao.CommunityDao;
+import com.kfi.jyi.dao.MySkinViewDao;
+import com.kfi.jyi.vo.CommBoardLikeVo;
 import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.jyi.vo.CommBoardVo;
 import com.kfi.jyi.vo.CommPhotoVo;
 import com.kfi.jyi.vo.CommUserListVo;
 import com.kfi.jyi.vo.CommVideoVo;
 import com.kfi.jyi.vo.CommunityVo;
+import com.kfi.jyi.vo.MySkinViewVo;
 import com.kfi.ldk.dao.CommTagDao;
 import com.kfi.ldk.dao.TagDao;
 import com.kfi.ldk.service.CommonService;
@@ -58,6 +64,9 @@ public class CommBoardServiceImpl implements CommonService {
 	@Autowired private CommVideoDao cvdao;
 	@Autowired private TagDao tdao;
 	@Autowired private CommTagDao commtdao;
+	@Autowired private CommBoardLikeDao cbldao;
+	@Autowired private MySkinViewDao msvdao;
+	@Autowired private MembersDao mdao;
 	
 	@Override
 	public int getMaxNum() {
@@ -92,12 +101,13 @@ public class CommBoardServiceImpl implements CommonService {
 		ArrayList<String> fileV_list=new ArrayList<>();
 		String uploadPathPhoto=session.getServletContext().getRealPath("/resources/upload/img");
 		String uploadPathVideo=session.getServletContext().getRealPath("/resources/upload/vid");
+		System.out.println("uploadPathPhoto: "+uploadPathPhoto);
+		System.out.println("uploadPathVideo: "+uploadPathVideo);
 		try {
 			int cb_num=getMaxNum()+1;
 			CommBoardVo cbvo=new CommBoardVo(cb_num, comm_num, user_num, cb_title, cb_content, null, cbNotice, 0);
 			cbdao.insert(cbvo);
-			
-			if(fileP.length!=0) {
+			if(!fileP[0].isEmpty()) {
 				for(int i=0;i<fileP.length;i++) {
 					int cp_num=cpdao.getMaxNum()+1;
 					String cp_orgimg=fileP[i].getOriginalFilename();
@@ -112,8 +122,7 @@ public class CommBoardServiceImpl implements CommonService {
 					cpdao.insert(cpvo);
 				}
 			}
-			
-			if(fileV.length!=0) {
+			if(!fileV[0].isEmpty()) {
 				for(int i=0; i<fileV.length;i++) {
 					int cv_num=cvdao.getMaxNum()+1;
 					String cv_orgvid=fileV[i].getOriginalFilename();
@@ -128,16 +137,17 @@ public class CommBoardServiceImpl implements CommonService {
 					cvdao.insert(cvvo);
 				}
 			}
-			
-			if(tag_name.length!=0) {
+			if(tag_name!=null) {
 				for(int i=0;i<tag_name.length;i++) {
-					TagVo tvo=tdao.select(tag_name[i]);
+					System.out.println(tag_name[i]);
+					int tagCount=tdao.getTagCountNum(tag_name[i]);
 					int tag_num=0;
-					if(tvo==null) {
+					if(tagCount==0) {
 						tag_num=tdao.getMaxNum()+1;
 						TagVo newtvo=new TagVo(tag_num, tag_name[i]);
 						tdao.insert(newtvo);
 					}else{
+						TagVo tvo=tdao.select(tag_name[i]);
 						tag_num=tvo.getTag_num()+1;
 					}
 					int ctag_num=commtdao.getMaxNum()+1;
@@ -181,10 +191,43 @@ public class CommBoardServiceImpl implements CommonService {
 	public Object select(Object data) {
 		HashMap<String, Object> map = (HashMap<String, Object>) data;
 		String list=(String)map.get("list");
-		int comm_num=(Integer)map.get("comm_num");
+		HttpSession session=(HttpSession)map.get("session");
+		int comm_num=(Integer)session.getAttribute("comm_num");
 		if(list.equals("select")) {
 			//게시글 상세보기
-			return cbvdao.select(map);
+			int cb_num=(Integer)map.get("cb_num");
+			HashMap<String, Object> result=new HashMap<>();
+			CommBoardVo cbvo=cbdao.select(cb_num);
+			List<CommPhotoVo> imgList=cpdao.select(cb_num);
+			List<CommVideoVo> vidList=cvdao.select(cb_num);
+			List<CommBoardLikeVo> cblList=cbldao.select(cb_num);
+			List<MySkinViewVo> msvList=new ArrayList<>();
+			int writer=cbvo.getUser_num();
+			MySkinViewVo writervo=msvdao.select_using(writer);
+			for(CommBoardLikeVo vo : cblList) {
+				MySkinViewVo msvo=msvdao.select_using(vo.getUser_num());
+				msvList.add(msvo);
+			}
+			MembersVo vo=mdao.select(writer);
+			int likeNum=0;
+			for(CommBoardLikeVo cblvo: cblList) {
+				++likeNum;
+			}
+			
+			
+			
+			result.put("cbvo", cbvo); //게시글
+			result.put("imgList", imgList); //게시글 사진
+			result.put("vidList", vidList); //게시글 비디오
+			result.put("cblList", cblList); //게시글 추천
+			result.put("msvList", msvList); //추천 유저 skin view
+			result.put("vo", vo); //작성자 회원 정보
+			result.put("writervo", writervo); //작성자 회원 skin view  
+			result.put("likeNum", likeNum); //추천수
+			
+			
+			
+			return result;
 		}else if(list.equals("notice")) {
 			//공지사항 불러오기
 			return cbdao.getNotice(comm_num);

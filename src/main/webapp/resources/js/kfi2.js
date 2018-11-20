@@ -394,8 +394,28 @@ $(function() {
 	if(parseInt(cul_status)!=1){
 		$('#commWrite').attr('href','#');
 		//addClass, removeClass
-		
 	}
+	
+	///////////////////////Comm_tags 
+	$('#Comm_tags').keypress(function(event){
+		$('.tagsPlaceholder').fadeOut().animate(500);
+		if(event.which==32){
+			$('.tagsPlaceholder').text('');
+			var tag=$(this).val();
+			var t=tag.charAt(0);
+			if(t!='#'){
+				$('.tagsPlaceholder').text('');
+				return false;
+			}
+			if(t=='#'){
+				var length=tag.length;
+				var tag_name=tag.substring(1,length);
+					$('.editableDiv').append("<div name='tag_name'>"+tag_name+"</div>");
+			}
+		}
+	});
+	
+	
 	
 });
 

@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.InputSource;
 
 import com.kfi.jyi.dao.CommBoardViewDao;
+import com.kfi.jyi.dao.CommPhotoDao;
 import com.kfi.jyi.dao.CommUserListDao;
+import com.kfi.jyi.dao.CommVideoDao;
 import com.kfi.jyi.dao.CommunityDao;
 import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.jyi.vo.CommUserListVo;
@@ -42,6 +44,14 @@ public class CommunityServiceImpl implements CommonService {
 	@Autowired
 	private CommBoardViewDao cbvdao;
 
+	@Autowired
+	private CommPhotoDao cpdao;
+	
+	@Autowired
+	private CommVideoDao cvdao;
+	
+	
+	
 	@Override
 	public int getMaxNum() {
 		/* 전체 커뮤니티 최대 갯수 구하기 */
@@ -176,6 +186,10 @@ public class CommunityServiceImpl implements CommonService {
 			}
 			map.put("csplist", csplist);
 			return map;
+		}else if(list.equals("hotPhoto3")) {
+			return cpdao.hotPhoto3();
+		}else if(list.equals("hotVideo")) {
+			return cvdao.hotVideo();
 		}
 		return null;
 	}
