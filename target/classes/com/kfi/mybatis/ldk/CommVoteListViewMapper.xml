@@ -10,13 +10,15 @@
 		☆☆☆ 
 		column에는 두 테이블의 조인에 사용되는 참조컬럼을 쓰면 된다 
 		페이징처리를 잘 작동시키면서 ResultMap을 사용하기 위해서는
-		각 각 테이블에 대한 Vo와, 조인한 결과값에 대한 Vo가 모두 필요하다
+		컬렉션으로 지정한 테이블에 대한 vo와 조인한 결과값에 대한 Vo가 필요
+		☆☆☆
+		조인에 사용되는 column=vote_num이외에 alias를 줘서 컬럼을 하나 더 조회해야 기본키조회가능 ㅠㅠㅠㅠ
 	-->
 	<resultMap type="com.kfi.ldk.vo.CommVoteList" id="commVoteList">
-		<collection property="list" column="vote_num" ofType="com.kfi.ldk.vo.commVoteListView" select="optionList"/>
+		<collection property="list" column="vote_num" ofType="com.kfi.ldk.vo.CommVoteOptionCollection" select="optionList"/>
 	</resultMap>
 	<select id="voteList" parameterType="hashmap" resultMap="commVoteList">
-		SELECT *
+		SELECT VOTE_NUM,vote_num voteNum,COMM_NUM,USER_NUM,VOTE_TITLE,VOTE_INFO,REMAIN,USER_NICKNAME,USER_EMAIL,MSP_SAVIMG,CNT
 		FROM
 		(
 		    SELECT BB.*,ROWNUM RNUM
@@ -29,7 +31,7 @@
 	</select>
 	<!-- 파라미터타입 안쓰고, 위에 ResultMap에서 쓴  column을 where절에 변수로 주면 된다 -->
 	<select id="optionList" resultType="com.kfi.ldk.vo.CommVoteOptionCollection">
-		SELECT *
+		SELECT VO_NUM,VOTE_NUM,OPTION_NUM,VO_CONTENT
 		FROM VOTING_OPTION
 		WHERE VOTE_NUM=#{vote_num}
 	</select>

@@ -56,7 +56,7 @@ public class VotingUserListServiceImpl implements CommonService{
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
 		int vote_num=(Integer)map.get("vote_num");
 		map.put("votedOptionList", voDao.list(vote_num));
-		map.put("totlaVoteCnt", voDao.getCount(map));
+		map.put("totalVoteCnt", voDao.getCount(map));
 		return map;
 	}
 }

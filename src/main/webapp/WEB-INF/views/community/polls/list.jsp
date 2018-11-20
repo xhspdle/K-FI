@@ -15,27 +15,37 @@
 		<div class="panel panel-default">
 			<div class="panel-heading text-left">
 				<h3><span class="glyphicon glyphicon-stats"></span>${vo.vote_title }</h3>
-				<p><small style="color:#818181">${vo.cnt } votesㆍ${vo.remain } days left</small></p>
+				<p><small style="color:#818181" data-vote-cnt="${vo.voteNum }">${vo.cnt } votes
+				</small><small style="color:#818181">ㆍ${vo.remain } days left</small></p>
+				<div class="dropdown pollOption">
+					<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-option-vertical"></span>
+					</button>
+					<ul class="dropdown-menu rightOption">
+					<li>
+						<a href="#" class="btn btn-block
+						<c:if test="${vo.user_num!=sessionScope.user_num}">disabled</c:if>"
+						style="text-align: left;" onclick="return false;" data-toggle="popover"
+						data-vote-num="${vo.voteNum }" data-popover-type="commPoll">
+							<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
+						</a>
+					</li>
+				</ul>
+				</div>
 			</div>
 			<div class="panel-body poll-body">
 				<div class="poll-list-options">
-					<ul class="poll-options">
+					<ul class="poll-options" id="voteOptionList${vo.voteNum }">
 						<c:forEach var="optionList" items="${vo.list }">
 						<li>
-							<div class="progress comm-vote-progress" data-poll-vote-num="${vo.vote_num}" 
-							data-poll-option-num="${optionList.vo_num }">
+							<div class="progress comm-vote-progress" data-poll-vote-num="${vo.voteNum}" 
+							data-poll-option-num="${optionList.vo_num }" id="${optionList.vo_num }">
 								<div class="progress-bar" role="progressbar" aria-valuenow=""
-								aria-valuemin="0" aria-valuemax="" style="width:100%"></div>
+								aria-valuemin="0" aria-valuemax="100" style="width:100%"></div>
 								<span class="optionText">${optionList.vo_content }</span>
 								<span class="optionPerc">40%</span>
 							</div>
 						</li>
-						
-						<!--    
-						<a href="<c:url value='/community/votinguserlist/insert?vote_num=${vo.vote_num}&vo_num=${optionList.vo_num }'/>" 
-						class="btn btn-info btn-block btn-voting" data-poll-option-num="${optionList.vo_num }"
-						data-poll-vote-num="${vo.vote_num}">${optionList.vo_content }</a>
-						-->
 						</c:forEach>
 					</ul>
 				</div>

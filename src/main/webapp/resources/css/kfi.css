@@ -240,6 +240,9 @@ footer .glyphicon {
 		padding-right: 11px !important;
 		font-size: 8px !important;
 	}
+	.pollOption {
+		left: 90% !important;
+	}
 }
 @media screen and (max-width: 480px) {
 	.logo {
@@ -798,6 +801,13 @@ body.modal-open::-webkit-scrollbar {
 #communityJumbo p.communityHeader {
 	margin-top: 40px;
 }
+.communitySlide .panel-body {
+	padding-bottom: 0;
+	height: 226.36px;
+}
+.communitySlide .img-responsive {
+	max-height: 100%;
+}
 .form-join {
 	position: relative;
 	top: 55%;
@@ -998,12 +1008,17 @@ body.modal-open::-webkit-scrollbar {
 	background-color: rgba(0,0,0,.5);
 	cursor: pointer;
 }
-#commPollList .comm-vote-progress:hover {
+#commPollList .comm-vote-progress:hover .optionText {
 	-webkit-box-shadow: 2px 5px 9px rgba(0,0,0,0.25);
 	box-shadow: 2px 5px 9px rgba(0,0,0,0.25);
-	color: 
+	color: #f4511e;
+}
+#commPollList .comm-vote-progress:hover .progress-bar  {
+	background-color: white;
 }
 #commPollList .comm-vote-progress>.progress-bar {
+	-webkit-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
 	background-color: #4a90e2;
 	background-image: linear-gradient(90deg,hsla(0,0%,100%,0),hsla(0,0%,100%,0.2));
 }
@@ -1035,11 +1050,27 @@ body.modal-open::-webkit-scrollbar {
 	opacity: 0;
 }
 #commPollList .optionText.voted {
-	width: 70%;
 	text-align: left;
 }
 #commPollList .optionPerc.voted {
+	opacity: 1;
 	display: inline-block;
 	width: 30%;
 	left: 70%;
+}
+#commPollList .pollOption {
+	position: relative;
+	top: -70px;
+	left: 87%;
+	margin-bottom: -50px;
+	text-align: left !important;
+}
+#commPollList .pollOption > button {
+	background-color: transparent !important;
+	color: #f4511e !important;
+	border: 0 !important;
+}
+#commPollList .pollOption .rightOption {
+	left: -162px;
+	top: -3px;
 }

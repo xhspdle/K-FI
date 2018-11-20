@@ -4,6 +4,7 @@ import java.util.List;
 
 public class CommVoteList {
 	private int vote_num;
+	private int voteNum;
 	private int comm_num;
 	private String vote_title;
 	private int remain;
@@ -14,10 +15,11 @@ public class CommVoteList {
 	private int cnt;
 	private List<CommVoteOptionCollection> list;
 	public CommVoteList() {}
-	public CommVoteList(int vote_num, int comm_num, String vote_title, int remain, int user_num, String user_nickname,
-			String user_email, String msp_savimg, int cnt, List<CommVoteOptionCollection> list) {
+	public CommVoteList(int vote_num, int voteNum, int comm_num, String vote_title, int remain, int user_num,
+			String user_nickname, String user_email, String msp_savimg, int cnt, List<CommVoteOptionCollection> list) {
 		super();
 		this.vote_num = vote_num;
+		this.voteNum = voteNum;
 		this.comm_num = comm_num;
 		this.vote_title = vote_title;
 		this.remain = remain;
@@ -33,6 +35,12 @@ public class CommVoteList {
 	}
 	public void setVote_num(int vote_num) {
 		this.vote_num = vote_num;
+	}
+	public int getVoteNum() {
+		return voteNum;
+	}
+	public void setVoteNum(int voteNum) {
+		this.voteNum = voteNum;
 	}
 	public int getComm_num() {
 		return comm_num;
@@ -90,8 +98,9 @@ public class CommVoteList {
 	}
 	@Override
 	public String toString() {
-		return "CommVoteList [vote_num=" + vote_num + ", comm_num=" + comm_num + ", vote_title=" + vote_title
-				+ ", remain=" + remain + ", user_num=" + user_num + ", user_nickname=" + user_nickname + ", user_email="
-				+ user_email + ", msp_savimg=" + msp_savimg + ", cnt=" + cnt + ", list=" + list + "]";
+		return "CommVoteList [vote_num=" + vote_num + ", voteNum=" + voteNum + ", comm_num=" + comm_num
+				+ ", vote_title=" + vote_title + ", remain=" + remain + ", user_num=" + user_num + ", user_nickname="
+				+ user_nickname + ", user_email=" + user_email + ", msp_savimg=" + msp_savimg + ", cnt=" + cnt
+				+ ", list=" + list + "]";
 	}
 }

@@ -256,7 +256,8 @@ $(document).ready(function(){
 									"<ul class='dropdown-menu rightOption'>" +
 									"<li><a href='#updateModal' data-toggle='modal' data-mb-num='"+ mb_num +"'>" +
 									"<span class='glyphicon glyphicon-edit'></span>&nbsp;&nbsp;Edit</a></li>" +
-									"<li><a href='#' onclick='return false;' data-toggle='popover' data-mb-num='"+ mb_num +"'>" +
+									"<li><a href='#' onclick='return false;' data-toggle='popover' " +
+									"data-mb-num='"+ mb_num +"' data-popover-type='myBoard'>" +
 									"<span class='glyphicon glyphicon-trash'></span>&nbsp;&nbsp;Delete</a></li></ul></div>";
 					}else{
 						boardOption="<div class='dropdown boardOption'>" +
@@ -634,12 +635,20 @@ $(document).ready(function(){
   }
   
   $(document).on('focus',"[data-toggle='popover']",function(){
+	  
+	  var popoverType=$(this).attr("data-popover-type");
+	  var action='';
+	  if(popoverType==="myBoard"){
+		  action=getPageContext + "/mypage/myboard/delete";
+	  }else if(popoverType==="commPoll"){
+		  action=getPageContext + "/community/polls/delete"
+	  }
 	  $("button.dropdown-toggle").attr("data-toggle","off");
 	  $("[data-toggle='popover']").popover({
 		  title: "<h3><strong>Wanna delete?</strong></h3>" + 
 		  		 "<p>please enter your password</p>",
 		  content: "<form class='form-horizontal boardDelete' method='post' " + 
-		  		   "action='"+ getPageContext +"/mypage/myboard/delete'>" +
+		  		   "action='"+ action +"'>" +
 		  		   "<div class='input-group input-group-lg'>" +
 		  		   "<input type='hidden' name='mb_num' value='"+ $("[data-toggle='popover']").attr("data-mb-num") +"'>" +
 		  		   "<input type='password' name='user_pwd' class='form-control' >" + 
@@ -1008,18 +1017,47 @@ $(document).ready(function(){
   
   $(".comm-vote-progress").each(function(){
 	  $(this).click(function(){
-		  var vote_num=parseInte($(this).attr("data-poll-vote-num"));
+		  var vote_num=parseInt($(this).attr("data-poll-vote-num"));
 		  var vo_num=parseInt($(this).attr("data-poll-option-num"));
 		  $.getJSON(getPageContext + "/community/votinguserlist/insert",
 				  {'vote_num':vote_num,'vo_num':vo_num},
 				  function(json){
 					  if(json.code==='success'){
-						  
+						  $.votingUserList(vote_num);
 					  }else {
 						  $.msgBox(json.code);
 					  }
 				  });
 	  });
   });
+  $.votingUserList=function(vote_num){
+	  $.getJSON(getPageContext + "/community/votinguserlist/list",
+			  {'vote_num':vote_num},
+			  function(json){
+				  //votedOptionList
+				  //totalVoteCnt
+				  var votedOptionList=json.votedOptionList;
+				  var totalVoteCnt=json.totalVoteCnt.votecnt;
+				  $("[data-vote-cnt='"+ vote_num +"']").text(totalVoteCnt + " votes");
+				  for(let i in votedOptionList){
+					  let vo_num=votedOptionList[i].vo_num;
+					  let vote_num1=votedOptionList[i].vote_num;
+					  let option_num=votedOptionList[i].option_num;
+					  let vo_content=votedOptionList[i].vo_content;
+					  let cnt=votedOptionList[i].cnt;
+					  let perc=(cnt/totalVoteCnt*100).toFixed(2);//소수점 둘째자리까지 표기
+					  let progress=$("#voteOptionList" + vote_num1).find("#" + vo_num);
+					  let progressBar=$(progress).find(".progress-bar");
+					  let optionText=$(progress).find(".optionText");
+					  let optionPerc=$(progress).find(".optionPerc");
+					  $(progressBar).css("width", perc + "%");
+					  $(progressBar).attr("aria-valuenow", perc);
+					  $(optionText).text(vo_content);
+					  $(optionText).addClass("voted");
+					  $(optionPerc).text(perc);
+					  $(optionPerc).addClass("voted");
+				  }
+			  });
+  }
 });
 

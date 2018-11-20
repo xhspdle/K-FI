@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kfi.ldk.vo.VotingOptionCountJoinVo;
 import com.kfi.ldk.vo.VotingOptionVo;
 
 @Repository
@@ -16,7 +17,7 @@ public class VotingOptionDao {
 	public int getMaxNum() {
 		return session.selectOne(NAMESPACE + ".getMaxNum");
 	}
-	public int getCount(HashMap<String, Object> map) {
+	public VotingOptionCountJoinVo getCount(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE + ".getCount", map);
 	}
 	public int insert(VotingOptionVo vo) {

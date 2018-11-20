@@ -1,5 +1,5 @@
 package com.kfi.ldk.vo;
-
+//resultMap 처리시 불필요
 public class CommVoteListView {
 	private int vote_num;
 	private int comm_num;

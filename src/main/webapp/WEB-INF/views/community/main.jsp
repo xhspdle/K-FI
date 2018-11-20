@@ -17,6 +17,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<c:forEach var="list" items="${list }">
 			<div class="panel-group communitySlide">
 				<div class="panel panel-default">
@@ -37,6 +38,7 @@
 				</div>
 			</div>
 	</c:forEach>
+	
 	<div class="panel-group communitySlide" style="opacity: 0;">
 		<div class="panel panel-default">
 			<div class="panel-body">

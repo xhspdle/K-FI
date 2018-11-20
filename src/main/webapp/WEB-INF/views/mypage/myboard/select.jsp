@@ -29,7 +29,8 @@
 						<li>
 							<a href="#" class="btn btn-block 
 							<c:if test="${sessionScope.user_num!=boardVo.user_num }">disabled</c:if>" 
-							style="text-align: left;" onclick="return false;" data-toggle="popover" data-mb-num="${boardVo.mb_num }">
+							style="text-align: left;" onclick="return false;" data-toggle="popover" 
+							data-mb-num="${boardVo.mb_num }" data-popover-type="myBoard">
 								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 							</a>
 						</li>

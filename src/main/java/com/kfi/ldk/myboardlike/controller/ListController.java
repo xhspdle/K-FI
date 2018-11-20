@@ -16,7 +16,7 @@ import com.kfi.ldk.util.PageUtil;
 public class ListController {
 	@Autowired
 	@Qualifier("myBoardLikeServiceImpl") private CommonService service;
-	@RequestMapping(value="/mypage/myboardlike/list")
+	@RequestMapping("/mypage/myboardlike/list")
 	@ResponseBody
 	public HashMap<String, Object> list(@RequestParam(value="pageNum",defaultValue="1") 
 		int pageNum,int mb_num){
