@@ -6,6 +6,9 @@
 	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
 	crossorigin="anonymous">
 <style>
+/* .fc-time {
+    display:none;
+} */
 body {
 	margin: 0;
 	padding: 0;
@@ -43,113 +46,117 @@ body {
 }
 </style>
 <script>
-	$(function() { 
-		$('#calendar').fullCalendar(
-				{
-					editable : false,
-					selectable : true,
-					eventLimit : true, 
-					header : {
-						left : 'today',
-						center : 'prevYear prev title next nextYear',
-						right : ''
+	$(function() {
+		/* 		$('#calendar').fullCalendar('removeEvents');
+		 $('#calendar').fullCalendar('refetchEvents'); */
+		var title = $("input[name=cc_name] schedule-title").val();
+		var start = $("input[name=start").val();
+		var end = $("input[name=end"").val();
+		$('#calendar').fullCalendar({
+			displayEventTime : false,
+			editable : false,
+			selectable : true,
+			eventLimit : false,
+			header : {
+				left : 'today',
+				center : 'prevYear prev title next nextYear',
+				right : ''
+			},
+			views : {
+				agendaTwoDay : {
+					type : 'agenda',
+					duration : {
+						days : 2
 					},
-					views : {
-						agendaTwoDay : {
-							type : 'agenda',
-							duration : {
-								days : 2
-							},
 
-							groupByResource : false
+					groupByResource : false
 
-						}
-					},
+				}
+			},
 
-					resources : [ {
-						id : 'a',
-						title : '일정 2'
-					}, {
-						id : 'b',
-						title : '일정 1',
-						
-					}, {
-						id : 'c',
-						title : 'Room C',
-						eventColor : 'orange'
-					}, {
-						id : 'd',
-						title : 'Room D',
-						eventColor : 'red'
-					} ],
-					events : [ {
-						id : '1',
-						resourceId : 'b',
-						start : '2018-11-06',
-						end : '2018-11-08',
-						title : '일정 1'
-					}, {
-						id : '2',
-						resourceId : 'a',
-						start : '2018-11-20T09:00:00',
-						end : '2018-11-20T14:00:00',
-						title : '일정 2'
-					}, {
-						id : '3',
-						resourceId : 'b',
-						start : '2018-11-17T09:00:00',
-						end : '2018-11-18T09:00:00',
-						title : '바쁜 일정1'
-					}, {
-						id : '3',
-						resourceId : 'b',
-						start : '2018-11-17T11:00:00',
-						end : '2018-11-18T13:00:00',
-						title : '바쁜일정 2'
-					}, {
-						id : '3',
-						resourceId : 'b',
-						start : '2018-11-17T13:00:00',
-						end : '2018-11-18T14:00:00',
-						title : '바쁜 일정3'
-					}, {
-						id : '3',
-						resourceId : 'b',
-						start : '2018-11-17T20:00:00',
-						end : '2018-11-18T21:00:00',
-						title : '바쁜 일정4'
-					}, {
-						id : '3',
-						resourceId : 'b',
-						start : '2018-11-17T20:00:00',
-						end : '2018-11-18T21:00:00',
-						title : '바쁜 일정5'
-					}, {
-						id : '4',
-						resourceId : 'c',
-						start : '2018-11-01T11:30:00',
-						end : '2018-11-01T16:30:00',
-						title : '정모'
-					}, {
-						id : '5',
-						resourceId : 'd',
-						start : '2018-11-23T10:00:00',
-						end : '2018-11-23T15:00:00',
-						title : '뒷풀이'
-					} ],
+			resources : [ {
+				id : 'a',
+				title : '일정 2'
+			}, {
+				id : 'b',
+				title : '일정 1',
 
-					/* select : function(start, end, jsEvent) {
-						console.log('select', start.format(), end.format());
-						alert(start.format());
-						alert(end.format());
-					}, */
-					dayClick : function(date, jsEvent, view, resource) {
-						console.log('dayClick', date.format(),
-								alert(date.format())+
-								resource ? resource.id : '(no resource)');
-					}
-					
-				});
+			}, {
+				id : 'c',
+				title : 'Room C',
+				eventColor : 'orange'
+			}, {
+				id : 'd',
+				title : 'Room D',
+				eventColor : 'red'
+			} ],
+			events : [ {
+				id : '1',
+				resourceId : 'b',
+				start : '2018-11-06',
+				end : '2018-11-08',
+				title : '일정 1'
+			}, {
+				id : '2',
+				resourceId : 'a',
+				start : '2018-11-20',
+				end : '2018-11-20',
+				title : '일정 2'
+			}, {
+				id : '3',
+				resourceId : 'b',
+				start : '2018-11-17T09:00:00',
+				end : '2018-11-18T09:00:00',
+				title : '바쁜 일정1'
+			}, {
+				id : '4',
+				resourceId : 'b',
+				start : '2018-11-17T11:00:00',
+				end : '2018-11-18T13:00:00',
+				title : '바쁜일정 2'
+			}, {
+				id : '5',
+				resourceId : 'b',
+				start : '2018-11-17T13:00:00',
+				end : '2018-11-18T14:00:00',
+				title : '바쁜 일정3'
+			}, {
+				id : '6',
+				resourceId : 'b',
+				start : '2018-11-17T20:00:00',
+				end : '2018-11-18T21:00:00',
+				title : '바쁜 일정4'
+			}, {
+				id : '3',
+				resourceId : 'b',
+				start : '2018-11-17T20:00:00',
+				end : '2018-11-18T21:00:00',
+				title : '바쁜 일정5'
+			}, {
+				id : '4',
+				resourceId : 'c',
+				start : '2018-11-01T11:30:00',
+				end : '2018-11-01T16:30:00',
+				title : '정모'
+			}, {
+				id : '5',
+				resourceId : 'd',
+				start : '2018-11-23T10:00:00',
+				end : '2018-11-23T15:00:00',
+				title : '뒷풀이'
+			} ],
+			dayClick : function(date, jsEvent, view, resource) {
+				console.log('dayClick' + date.format())
+				alert(date.format());
+			}
+		});
+		$('#addevent-btn').on('click', function() {
+			alert("complete");
+		});
+		$('.fc-content').on('click', function() {
+			alert("sss");
+
+		});
 	});
 </script>
 
@@ -159,7 +166,7 @@ body {
 		<button class="btn btn-info" id="schedule-btn" data-toggle="modal"
 			data-target="#myModal">Add Event</button>
 	</div>
-	<div id='calendar'></div>
+	<div id='calendar' style="z-index: 999"></div>
 </div>
 
 <!-- Modal -->
@@ -176,41 +183,134 @@ body {
 				</div>
 			</div>
 			<div class="modal-body">
-				<div class="form-box">
-					<form action="<c:url value=''/>" name="addevent" role="form"
-						id="addevent-form" class="" method="post">
+				<form action="<c:url value='/community/commcalendar'/>"
+					name="addevent" role="form" id="addevent-form" class=""
+					method="post">
+					<div class="form-box">
 						<div class="form-group">
 							<label class="form-control-label" for="findpwd-email">Title</label><br>
-							<input type="text" name="user_email" id="schedulename"
+							<input type="text" name="cc_name" id="schedule-title"
 								class="form-control" placeholder="Title" maxlength="50">
 						</div>
 						<div class="form-group">
 							<label for="findpwd-code">Description</label> <input type="text"
-								name="" id="findpwd-code" class="form-control"
+								name="cc_info" id="findpwd-code" class="form-control"
 								placeholder="Description" maxlength="200">
 							<div class="startDate">
-							<div>
-								<label for="">Start Date</label>
-							</div>
-								 <input type="text" id="date"class="startpickDate" name="startDate" placeholder="Date">
-								 <i class="far fa-calendar-alt"></i>
-							</div>
-							<div class="endDate">
 								<div>
-									<label for="">End Date</label>
+									<label for="">Start Date</label>
 								</div>
-								<input type="text" id="date" class="endpickDate"
-									placeholder="Date"><i class="far fa-calendar-alt"></i>
+								<div class="input-group">
+									<span class="input-group-addon"><i
+										class="far fa-calendar-alt"></i></span> <input type="date" id="start"
+										class="startpickDate" name="cc_begin" placeholder="Date">
+								</div>
 							</div>
 						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-				</div>
+						<div class="endDate">
+							<div>
+								<label for="">End Date</label>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="far fa-calendar-alt"></i></span> <input type="date" id="end"
+									class="endpickDate" name="cc_end" placeholder="Date">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-default" id="addevent-btn">OK</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
 
+
 <!-- ///////////////////////////////// 모달 //////////////////-->
+
+<div id="fullCalModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span> <span class="sr-only">close</span>
+				</button>
+				<h4 id="modalTitle" class="modal-title">Edit Event</h4>
+			</div>
+			<div id="modalBody" class="modal-body">
+				<div>
+					<input type="hidden" name="eventId" value=""> <input
+						type="text" id="titleValue" name="titleValue" style="width: 50%"
+						onkeypress="if (event.keyCode == 13) putTitleUpdate();">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="fullCalModal" class="modal fade in" role="dialog" style="display:">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<div>
+					<label class="form-control-label" for="" id="schedule-header">Add
+						Event</label>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form action="<c:url value='/community/commcalendar'/>"
+					name="addevent" role="form" id="addevent-form" class=""
+					method="post">
+					<div class="form-box">
+						<div class="form-group">
+							<label class="form-control-label" for="findpwd-email">Title</label><br>
+							<input type="text" name="cc_name" id="schedule-title"
+								class="form-control" placeholder="Title" maxlength="50">
+						</div>
+						<div class="form-group">
+							<label for="findpwd-code">Description</label> <input type="text"
+								name="cc_info" id="findpwd-code" class="form-control"
+								placeholder="Description" maxlength="200">
+							<div class="startDate">
+								<div>
+									<label for="">Start Date</label>
+								</div>
+								<div class="input-group">
+									<span class="input-group-addon"><i
+										class="far fa-calendar-alt"></i></span> <input type="date" id="start"
+										class="startpickDate" name="cc_begin" placeholder="Date">
+								</div>
+							</div>
+						</div>
+						<div class="endDate">
+							<div>
+								<label for="">End Date</label>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="far fa-calendar-alt"></i></span> <input type="date" id="end"
+									class="endpickDate" name="cc_end" placeholder="Date">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+				<button class="btn btn-primary"
+					onclick="javascript:putTitleUpdate()">수정</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

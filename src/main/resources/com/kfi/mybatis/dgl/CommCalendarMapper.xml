@@ -4,13 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.dgl.CommCalendarMapper">
 	
-	<insert id="insertCalendar" parameterType="community">
+	<insert id="insertEvent" parameterType="community">
 		insert into comm_calendar values(#{cc_num}, #{comm_num}, #{cc_name}, #{cc_info}, #{cc_begin}, #{cc_end})
 	</insert>
-	<delete id="delete" parameterType="int">
+	<delete id="deleteEvent" parameterType="int">
 		delete from comm_calendar where cc_num=#{cc_num}
 	</delete>
-	<select id="select" parameterType="int" resultType="community">
+	<select id="seleteEvent" parameterType="int" resultType="community">
 		select * from comm_calendar where cc_num=#{cc_num}
+	</select>
+	<!-- 일정 마지막 번호 -->
+	<select id="commgetMaxnum" resultType="int">
+		select NVL(max(cc_num),0) maxnum from comm_calendar
+	</select>
+	<update id="updateevent" parameterType="community">
+		update comm_calendar
+		<set>
+		 	<if test="cc_name!=null and ucc_name!=''">ucc_name=#{ucc_name},</if>
+		 	<if test="cc_info!=null and cc_info!=''">cc_info=#{cc_info},</if>
+		 	<if test="cc_begin!=null and cc_begin!=''">cc_begin=#{cc_begin},</if>
+		 	<if test="cc_end!=null and cc_end!=''">cc_end=#{cc_end}</if> 
+		</set>
+		where comm_num=#{comm_num}
+	</update>
+	
+	<delete id="deleteevent" parameterType="int">
+		delete from comm_calendar where cc_num=#{cc_num} and comm_num=#{comm_num}
+	</delete>
+	<select id="listevent" >
+		select* from comm_calendar
 	</select>
 </mapper>
