@@ -1008,12 +1008,16 @@ $(document).ready(function(){
   
   $(".comm-vote-progress").each(function(){
 	  $(this).click(function(){
-		  var vote_num=parseInte($(this).attr());
+		  var vote_num=parseInte($(this).attr("data-poll-vote-num"));
 		  var vo_num=parseInt($(this).attr("data-poll-option-num"));
 		  $.getJSON(getPageContext + "/community/votinguserlist/insert",
 				  {'vote_num':vote_num,'vo_num':vo_num},
 				  function(json){
-					  $()
+					  if(json.code==='success'){
+						  
+					  }else {
+						  $.msgBox(json.code);
+					  }
 				  });
 	  });
   });

@@ -34,7 +34,7 @@ public class InsertDeleteController {
 		map.put("vo_num", vo_num);
 		int n=service.insert(map);
 		if(n>0) {
-			map.put("votedList", service.list(map));
+			//map.put("votedList", service.list(map));
 			map.put("code", "success");
 		}else if(n==-1) {
 			map.put("code", "duplicated");

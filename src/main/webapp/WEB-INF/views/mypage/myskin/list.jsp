@@ -19,11 +19,12 @@
 		    </div>
 		  </div>
 	</div>
-		<span style="float:right;width: 18%;display: flex;margin-right: 17%;margin-top: 3%;}">
+		<span style="position:absolute;right:-10px;z-index:99;float:right;width: 18%;display: flex;margin-right: 17%;margin-top: 3%;}">
 			<a class="myskin_ud" href="#" id="applyMySkin">적용</a>
 			<a class="myskin_ud" href="#" id="updateMySkin">수정</a> 
 			<a class="myskin_ud" href="#" id="deleteMySkin">삭제</a>
 		</span>
+		<div class="col-sm-offset-1 col-sm-10">
 		<div class="pre_cover" id="myskin_list_cover" style="margin-top: 2%;background-size: cover !important;">
 			<img src="" class="img-circle"
 				style="margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
@@ -37,5 +38,6 @@
 					<li><button type="button" id="myskin_list_icon" class="btn btn-default btn-lg" style="border-radius:10px;" ><span class="glyphicon glyphicon-search"></span></button></li>
 				</ul>
 			</div>
+		</div>
 		</div>
 </div>

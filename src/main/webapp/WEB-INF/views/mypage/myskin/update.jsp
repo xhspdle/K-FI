@@ -9,14 +9,14 @@
 	</div>
 	<!-- 미리보기 설정(js) -->'
 	<div class="jumbotron col-sm" id="preview_cover" 
-	style="background-size: cover !important;margin:auto;width:80%;background: url('${pageContext.request.contextPath }/resources/upload/img/${msvlist.msc_savimg }');">
+	style="background-size: cover !important;margin:auto;width:80%;background: url('${pageContext.request.contextPath }/resources/upload/img/${msvlist.msc_savimg }');padding-left:0;padding-right:0;">
 		<div>
 			<img id="profile_preview" src="<c:url value='/resources/upload/img/${msvlist.msp_savimg }'/>" class="img-circle"
-				style="border: white 4px solid !important;margin-top: 60px;width: 150px;height: 150px;background-color: white;display: block;
+				style="border: white 4px solid !important;margin-top: 42px;width: 150px;height: 150px;background-color: white;display: block;
 				margin-left: auto;margin-right: auto;">
 			<h4><span id="myskin_list_nickname">${user_nickname}</span></h4> 
 			<p><span id="preview_msg" style="margin-top: -25px;width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;">${msvlist.ms_msg }</span></p> 
-			<div class="collapse navbar-collapse" id="preview_navbar"  style="background-color: ${msvlist.ms_color};border-radius:10px;" >
+			<div class="collapse navbar-collapse" id="preview_navbar"  style="background-color: ${msvlist.ms_color};border-radius:10px;width:100%;" >
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#contact">COMMUNITY</a></li>
 					<li class="dropdown">

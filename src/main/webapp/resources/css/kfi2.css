@@ -174,11 +174,12 @@
 
 #preview_cover {
 	width: 80%;
+	height: 450px;
 	margin: auto;
 	font-family: Montserrat, sans-serif;
 	background-color: #00cee8;
 	color: #fff;
-	padding: 1px 1px;
+	/* padding: 1px 1px; */
 }
 
 #preview_msg {
@@ -207,7 +208,7 @@
 .pre_cover {
 	background-size: cover !important;
 	padding: 1% 0% 0% 0%;
-	margin: -3% 0% 0% 6%;
+	margin: auto;
 	width: 75%;
 	background-repeat: no-repeat !important;
 	border-radius: 10px;
@@ -289,7 +290,11 @@
 	font-weight: 700;
 	font-size: xx-large;
 }
-
+#myskin_dropmenu {
+	position: absolute;
+	left: 44%;
+	transform: translateX(-50%);
+}
 /* mypage 커뮤니티 일정 mouseover했을 때 */
 .calevent {
 	    margin-top: 0.5%;
