@@ -5,12 +5,14 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kfi.ldk.dao.VotingOptionDao;
 import com.kfi.ldk.dao.VotingUserListDao;
 import com.kfi.ldk.vo.VotingUserListVo;
 
 @Service
 public class VotingUserListServiceImpl implements CommonService{
 	@Autowired private VotingUserListDao vulDao;
+	@Autowired private VotingOptionDao voDao;
 	@Override
 	public int getMaxNum() {
 		return vulDao.getMaxNum();
@@ -48,9 +50,13 @@ public class VotingUserListServiceImpl implements CommonService{
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
 		return vulDao.select(map);
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object list(Object data) {
-		int vo_num=(Integer)data;
-		return vulDao.list(vo_num);
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		int vote_num=(Integer)map.get("vote_num");
+		map.put("votedOptionList", voDao.list(vote_num));
+		map.put("totlaVoteCnt", voDao.getCount(map));
+		return map;
 	}
 }

@@ -6,8 +6,11 @@
 	<select id="getMaxNum" resultType="int">
 		select NVL(max(vo_num),0) maxnum from voting_option
 	</select>
-	<select id="getCount" resultType="int">
-		select NVL(count(vo_num),0) cnt from voting_option
+	<select id="getCount" parameterType="hashmap" resultType="int">
+		SELECT NVL(COUNT(*),0) VOTECNT
+		FROM COMM_VOTE CVV,VOTING_OPTION VO,VOTING_USERLIST VU
+		WHERE CVV.VOTE_NUM=VO.VOTE_NUM AND VO.VO_NUM=VU.VO_NUM AND VOTE_NUM=#{vote_num}
+		GROUP BY CVV.VOTE_NUM
 	</select>
 	<insert id="insert" parameterType="votingoption">
 		insert into voting_option 
@@ -19,7 +22,15 @@
 	<delete id="delete" parameterType="int">
 		delete from voting_option where vo_num=#{vo_num}
 	</delete>
-	<select id="list" parameterType="int" resultType="votingoption">
-		select * from voting_option where vote_num=#{vote_num} order_by option_num asc
+	<select id="list" parameterType="hashmap" resultType="votingoption">
+		select vo.vo_num,vo.vote_num,vo.option_num,vo.vo_content,aa.cnt
+		from voting_option vo, 
+		(
+		    select vo_num,nvl(count(*),0) cnt
+		    from voting_userlist
+		    group by vo_num
+		)aa
+		where vo.vo_num=aa.vo_num and vote_num=#{vote_num} 
+		order by option_num asc
 	</select>
 </mapper>

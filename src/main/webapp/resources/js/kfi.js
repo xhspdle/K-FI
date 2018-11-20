@@ -366,7 +366,7 @@ $(document).ready(function(){
 	  }
   });
   
-  $("#commentForm > button[type='submit']").click(function(e){
+  $(document).on('submit',"[name='frmComment']",function(e){
 	  e.preventDefault();
 	  var mb_num=$("#commentForm > input[type='hidden']").val();
 	  var myc_content=$("#commentForm > input[type='text']").val();
@@ -983,6 +983,7 @@ $(document).ready(function(){
   $(document).on('submit',"[name='voteFrm']",function(event){
 	  var formData=new FormData($(this).get(0));
 	  for(var pair of formData.entries()){
+		  console.log(pair[0] + "," + pair[1]);
 		  if(pair[1]===''){
 			  if(pair[0]=='vo_content'){
 				  $("#pollOptions").find("span.msgSpan").each(function(){
@@ -1005,12 +1006,12 @@ $(document).ready(function(){
 	  }
   });
   
-  $(".btn-voting").each(function(){
-	  $(this).click(function(e){
-		  e.preventDefault();
+  $(".comm-vote-progress").each(function(){
+	  $(this).click(function(){
+		  var vote_num=parseInte($(this).attr());
 		  var vo_num=parseInt($(this).attr("data-poll-option-num"));
 		  $.getJSON(getPageContext + "/community/votinguserlist/insert",
-				  {'vo_num':vo_num},
+				  {'vote_num':vote_num,'vo_num':vo_num},
 				  function(json){
 					  $()
 				  });

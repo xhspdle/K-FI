@@ -21,29 +21,20 @@
 				<div class="poll-list-options">
 					<ul class="poll-options">
 						<c:forEach var="optionList" items="${vo.list }">
-						<!--  
-						<li class="poll-item">
-							<div class="label">
-								<div class="bar"></div>
-								<div class="vo-title">
-									<div class="vo-content">
-										호이호이
-									</div>
-								</div>
-							</div>
-						</li>
-						-->
 						<li>
-							<div class="progress">
-								<div class="progress-bar" role="progressbar" aria-valuenow="40"
-								aria-valuemin="0" aria-valuemax="100" style="width:40%">
-								40%
-								</div>
+							<div class="progress comm-vote-progress" data-poll-vote-num="${vo.vote_num}" 
+							data-poll-option-num="${optionList.vo_num }">
+								<div class="progress-bar" role="progressbar" aria-valuenow=""
+								aria-valuemin="0" aria-valuemax="" style="width:100%"></div>
+								<span class="optionText">${optionList.vo_content }</span>
+								<span class="optionPerc">40%</span>
 							</div>
 						</li>
-						<!--  
-						<a href="<c:url value='/community/votinguserlist/insert?vo_num=${optionList.vo_num }'/>" 
-						class="btn btn-info btn-block btn-voting" data-poll-option-num="${optionList.vo_num }">${optionList.vo_content }</a>
+						
+						<!--    
+						<a href="<c:url value='/community/votinguserlist/insert?vote_num=${vo.vote_num}&vo_num=${optionList.vo_num }'/>" 
+						class="btn btn-info btn-block btn-voting" data-poll-option-num="${optionList.vo_num }"
+						data-poll-vote-num="${vo.vote_num}">${optionList.vo_content }</a>
 						-->
 						</c:forEach>
 					</ul>

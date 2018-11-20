@@ -79,7 +79,7 @@
 						</div>
 						<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
 					</form>
-					<div class="progress">
+					<div class="progress myboard-progress">
 						<div class="progress-bar progress-bar-striped active" role="progressbar" 
 						aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
 					</div>

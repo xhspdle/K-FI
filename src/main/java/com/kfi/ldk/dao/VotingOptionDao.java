@@ -1,5 +1,6 @@
 package com.kfi.ldk.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,8 +16,8 @@ public class VotingOptionDao {
 	public int getMaxNum() {
 		return session.selectOne(NAMESPACE + ".getMaxNum");
 	}
-	public int getCount() {
-		return session.selectOne(NAMESPACE + ".getCount");
+	public int getCount(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".getCount", map);
 	}
 	public int insert(VotingOptionVo vo) {
 		return session.insert(NAMESPACE + ".insert", vo);
