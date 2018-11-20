@@ -89,7 +89,6 @@ public class ListController {
 		model.addAttribute("list", service.list(map));
 		return ".mypage.myboard.searchMain";
 	}
-	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session,
 			@RequestParam(value="selectedUserNum",defaultValue="0")int selectedUserNum){
@@ -103,7 +102,7 @@ public class ListController {
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("list", "ms_using");
 		map.put("user_num", user_num);
-		MySkinViewVo vo=(MySkinViewVo)service.select(map);
+		MySkinViewVo vo=(MySkinViewVo)mySkinService.select(map);
 		if(vo!=null) {
 				msv=vo;
 		}

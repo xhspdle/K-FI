@@ -24,7 +24,7 @@
 				<li><a href="#issue-vid">ISSUE-VID</a></li>
 				<li><a href="#build">BUILD</a></li>
 				<li class="dropdown">
-					<a href="<c:url value='/communityMain'/>">COMMUNITY</a>
+					<a href="<c:url value='/community'/>">COMMUNITY</a>
 					<ul class="dropdown-menu">
 						<li><a href="<c:url value='/community/newComm/insertForm'/>">커뮤니티 등록</a></li>
 						<li><a href="<c:url value='/communityMain/list'/>">커뮤니티 목록</a></li>
