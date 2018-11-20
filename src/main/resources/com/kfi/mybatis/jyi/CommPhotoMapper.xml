@@ -11,6 +11,28 @@
 	<insert id="insert" parameterType="commphoto">
 		insert into comm_photo values(#{cp_num},#{cb_num},#{cp_orgimg},#{cp_savimg})
 	</insert>
-
+	
+	<select id="select" parameterType="int" resultType="commphoto">
+		select * from comm_photo where cb_num=#{cb_num}
+	</select>
+	
+	<select id="hotPhoto3" resultType="hotphoto3">
+		select * 
+		from comm_photo cp, comm_board cb
+		where cp.cb_num=cb.cb_num 
+		and cp_num in(
+	    			select cp_num 
+	    			from(
+	     				select cp_num, rownum rnum
+	        			from (
+	            				select *
+	            				from comm_board cb 
+	            				order by cb_views desc
+	            		) cb, comm_photo cp
+	        		where cb.cb_num=cp.cb_num 
+	        		)
+		<![CDATA[  where rnum <4 )	 ]]>  order by cb_date desc
+	</select>
+	
 
 </mapper>

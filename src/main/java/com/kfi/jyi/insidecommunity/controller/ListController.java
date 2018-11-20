@@ -1,5 +1,6 @@
 package com.kfi.jyi.insidecommunity.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,56 +14,58 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kfi.dgl.service.MembersService;
+import com.kfi.dgl.vo.MembersVo;
+import com.kfi.jyi.vo.CommBoardLikeVo;
 import com.kfi.jyi.vo.CommBoardViewVo;
+import com.kfi.jyi.vo.CommBoardVo;
+import com.kfi.jyi.vo.CommPhotoVo;
+import com.kfi.jyi.vo.CommVideoVo;
+import com.kfi.jyi.vo.MySkinViewVo;
 import com.kfi.ldk.service.CommonService;
 
 @Controller("insideCommunityListController")
 public class ListController {
 	@Autowired 
-	@Qualifier("commBoardServiceImpl") private CommonService service;
+	@Qualifier("commBoardServiceImpl") private CommonService commBoardservice;
 
 	@Autowired 
 	@Qualifier("insideCommunityServiceImpl") private CommonService insideCommService;
 	
+	@Autowired
+	@Qualifier("mySkinServiceImpl")
+	private CommonService mySkinService;
+	
+	@Autowired
+	private MembersService membersSerivce;
+	
 	// model attribute annotation - 프로필, 커버 사진 넣기
 
-	// 가입한 유저인지, 강퇴당한 유저인지 확인하기 (글쓰기 disabled)
-	@ModelAttribute("checkUser")
-	public int checkUser(Model model, HttpSession session, String comm_num) {
-		
-		//수정 예정 
-		
-		/*int user_num=(Integer)session.getAttribute("user_num");
-		HashMap<String, Object> map=new HashMap<>();
-		map.put("comm_num",1);  
-		map.put("user_num", user_num);
-		int cul_status=(Integer)insideCommService.select(map);
-		model.addAttribute("cul_status", cul_status);
-		return cul_status;*/
-		return 0; 
-	}
+	// 가입한 유저인지, 강퇴당한 유저인지 확인하기 
 	
 	
-	//해당 커뮤니티의 전체 게시물 불러오기
-	@RequestMapping(value="/community/selectComm",method=RequestMethod.GET)
-	public String selectComm(String comm_num, Model model) {
-		HashMap<String, Object> map=new HashMap<>();
-		map.put("comm_num",comm_num);//Integer.parseInt(comm_num)
-		map.put("cb_num", "");
-		List<CommBoardViewVo> list=(List<CommBoardViewVo>)service.list(map);
-		model.addAttribute("list", list);
-		return ".community.list";
-	}
 	
 	//해당 커뮤니티의 선택한 게시물 불러오기
-	@RequestMapping(value="/community/selectCommBoard",method=RequestMethod.GET)
-	public String selectCommBoard(String comm_num, String cb_num, Model model) {
-		HashMap<String, Object> map=new HashMap<>();
-		map.put("comm_num",comm_num);
-		map.put("cb_num", cb_num);
-		CommBoardViewVo list=(CommBoardViewVo)service.select(map);
-		model.addAttribute("list", list);
-		return ".community.board.list";
+	@RequestMapping(value="/community/board/select",method=RequestMethod.GET)
+	public String selectCommBoard(HttpSession session,String cb_num, Model model) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("list", "select");
+		map.put("session", session);
+		map.put("cb_num", Integer.parseInt(cb_num));
+		
+		HashMap<String, Object> result =(HashMap<String, Object>)commBoardservice.select(map);
+		model.addAttribute("cbvo", (CommBoardVo)result.get("cbvo")); //게시글
+		model.addAttribute("imgList", (List<CommPhotoVo>)result.get("imgList")); //게시글 사진
+		model.addAttribute("vidList", (List<CommVideoVo>)result.get("vidList")); //게시글 비디오
+		model.addAttribute("cblList", (List<CommBoardLikeVo>)result.get("cblList")); //게시글 추천
+		model.addAttribute("msvList", (List<MySkinViewVo>)result.get("msvList")); //게시글 작성자, 추천 유저 skin view
+		model.addAttribute("vo", (MembersVo)result.get("vo")); //작성자 회원 정보
+		model.addAttribute("writervo", (MySkinViewVo)result.get("writervo")); //게시글 작성자 skin view
+		model.addAttribute("likeNum", (Integer)result.get("likeNum"));  //추천수
+		
+		
+		
+		return ".community.board.select";
 	}
 	
 }

@@ -17,26 +17,25 @@
 			</div>
 		</div>
 	</div>
-	<!-- 총 8개 중에 1번째, 마지막번째는 안보임  실제 데이터는 2번째꺼부터 7번째꺼까지 총 6개 -->
 	<c:forEach var="list" items="${list }">
-		<c:forEach var="csplist" items="${csplist }">
 			<div class="panel-group communitySlide">
 				<div class="panel panel-default">
 					<div class="panel-body">
+					<c:forEach var="csplist" items="${csplist }">
 					<c:if test="${list.comm_num == csplist.comm_num }">
-						<a href="<c:url value='/community/selectComm?comm_num=${list.comm_num }'/>">
+						<a href="<c:url value='/community?comm_num=${list.comm_num }'/>">
 							<img class="img-responsive center-block communitySlideImg"
-								src="<c:url value='/resources/upload/img/${ csplist.savimg}'/>"
+								src="<c:url value='/resources/upload/img/${ csplist.csp_savimg}'/>"
 								alt="community list">
 						</a>
 					</c:if>
+					</c:forEach>
 					</div>
 					<div class="panel-footer">
 						<h4>${list.comm_name }</h4>
 					</div>
 				</div>
 			</div>
-		</c:forEach>
 	</c:forEach>
 	<div class="panel-group communitySlide" style="opacity: 0;">
 		<div class="panel panel-default">
@@ -56,33 +55,17 @@
 	<h1 class="bigTitle">HOT ISSUE - PHOTO</h1>
 	<br>
 	<div class="row">
-		<div class="col-sm-4">
-			<p>
-				<small>2018-11-13</small>
-			</p>
-			<p>게시글 제목만 보여주면 되지않을까</p>
-			<img class="img-responsive margin"
-				src="<c:url value='/resources/images/logo2.png'/>"
-				alt="community issue list" style="width: 100%">
-		</div>
-		<div class="col-sm-4">
-			<p>
-				<small>2018-11-13</small>
-			</p>
-			<p>blablabla blablabla</p>
-			<img class="img-responsive margin"
-				src="<c:url value='/resources/images/라이언움짤.gif'/>"
-				alt="community issue list" style="width: 100%">
-		</div>
-		<div class="col-sm-4">
-			<p>
-				<small>2018-11-13</small>
-			</p>
-			<p>블라블라블라블라</p>
-			<img class="img-responsive margin"
-				src="<c:url value='/resources/images/Kpoplogo.png'/>"
-				alt="community issue list" style="width: 100%">
-		</div>
+		<c:forEach var="hotP" items="${hotPhoto3 }"> 
+			<div class="col-sm-4">
+				<p>
+					<small>${hotP.cb_date }</small>
+				</p>
+				<p>${hotP.cb_title }</p>
+				<img class="img-responsive margin"
+					src="<c:url value='/resources/upload/img/${hotP.cp_savimg }'/>"
+					alt="community issue list" style="width: 100%">
+			</div>
+		</c:forEach>
 	</div>
 </div>
 <div id="issue-vid" class="container-fluid text-center">
@@ -91,12 +74,12 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<p>
-				<small>2018-11-13</small>
+				<small>${hotvideo.cb_date }</small>
 			</p>
-			<p>영상은 딱 하나만 뙇</p>
+			<p>${hotvideo.cb_title }</p>
 			<video class="img-responsive center-block" controls autoplay
 				muted="muted" loop
-				src="<c:url value='/resources/images/Aerial - 18390.mp4'/>">
+				src="<c:url value='/resources/upload/vid/${hotvideo.cv_savvid }'/>">
 			</video>
 		</div>
 	</div>

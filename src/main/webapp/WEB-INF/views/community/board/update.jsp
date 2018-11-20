@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script type="text/javascript">
+
+</script>
+    
 <div class="container" style="padding: 0px;">
 	<div class="modal-header" style="padding:35px 50px;">
 		<h2><span class="glyphicon glyphicon-check"></span>Modify</h2>
 	</div>
 	<div class="modal-body" style="padding:40px 50px;">
-		<form method="post" action="/kfi/mypage/myboard/insert" name="frm" enctype="multipart/form-data">
+		<form method="post" action="/kfi/community/update" name="frm" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="comm_title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
 				<input type="text" class="form-control" id="comm_title" name="comm_title" placeholder="Enter Title">
@@ -20,7 +25,8 @@
 			</div>
 			<div class="form-group imgUpload">
 				<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
-				<input type="file" class="form-control myboardFile" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
+				<input multiple="multiple" type="file" class="form-control myboardFile" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
+				<input multiple="multiple" type="file" class="form-control myboardFile"  name="fileP" accept=".jpg, .jpeg, .png, .gif">
 				<img id="fimg1" src="" style="display:none;width:100%;">
 			</div>
 			<div class="form-group vidUpload">
@@ -28,7 +34,7 @@
 				<input type="file" class="form-control myboardFile" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
 				<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 			</div>
-			<button type="submit" class="btn btn-success btn-block" id="sendServer"><span class="glyphicon glyphicon-ok"></span> Write</button>
+			<button type="submit" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-ok"></span> Modify</button>
 		</form>
 		<div class="progress">
 			<div class="progress-bar progress-bar-striped active" role="progressbar" 

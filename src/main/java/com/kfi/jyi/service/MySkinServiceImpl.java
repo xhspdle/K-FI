@@ -79,11 +79,11 @@ public class MySkinServiceImpl implements CommonService {
 		String[] savimg = new String[2];
 		try {
 			int ms_num = msdao.getMaxNum();
-			ms_num=ms_num+1;
+			ms_num = ms_num + 1;
 			msdao.insert(new MySkinVo(ms_num, user_num, ms_name, ms_color, ms_msg, 0));
 			// 프로필 사진 있을 때
 			int msp_num = mspdao.getMaxNum();
-			msp_num+=1;
+			msp_num += 1;
 			if (!ms_profile.isEmpty()) {
 				// 유저가 사진명이 같은 다른 사진을 넣을 수 있으므로 모두 다 업로드
 				String msp_orgimg = ms_profile.getOriginalFilename();
@@ -94,14 +94,13 @@ public class MySkinServiceImpl implements CommonService {
 				FileCopyUtils.copy(is, fos);
 				is.close();
 				fos.close();
-				mspdao.insert(new MySkinProfileVo(msp_num, ms_num , msp_orgimg, msp_savimg));
+				mspdao.insert(new MySkinProfileVo(msp_num, ms_num, msp_orgimg, msp_savimg));
 			} else {
-				mspdao.insert(
-						new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));
+				mspdao.insert(new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));
 			}
 			// 커버 사진 있을 때
 			int msc_num = mscdao.getMaxNum();
-			msc_num+=1;
+			msc_num += 1;
 			if (!ms_cover.isEmpty()) {
 				String msc_orgimg = ms_cover.getOriginalFilename();
 				String msc_savimg = UUID.randomUUID() + "_" + msc_orgimg;
@@ -133,30 +132,48 @@ public class MySkinServiceImpl implements CommonService {
 		HashMap<String, Object> hm = (HashMap<String, Object>) data;
 		HttpSession session = (HttpSession) hm.get("session");
 		int user_num = (Integer) session.getAttribute("user_num");
-		int ms_num=(Integer) hm.get("ms_num");
-		//기본 이미지로 적용하기
-		if(ms_num==-1) {
-			ms_num = msdao.getMaxNum() +1;
-			msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", "", 1));	
-			int msp_num=mspdao.getMaxNum()+1;
-			int msc_num=mscdao.getMaxNum()+1;
-			mspdao.insert(new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));
-			mscdao.insert(new MySkinCoverVo(msc_num, ms_num, "logo2.png", "logo2.png"));
-			HashMap<String, Object> updateElse=new HashMap<>();
+		int ms_num = (Integer) hm.get("ms_num");
+		// 기본 이미지로 적용하기
+		if (ms_num == -1) {
+			List<MySkinViewVo> list = msvdao.list(user_num);
+			int num = 0;
+			for (MySkinViewVo msvv : list) {
+				// 이미 기본스킨 있으면 사용
+				if (msvv.getMs_name().equals("기본 스킨") 
+						&& msvv.getMs_color().equals("#00cee8")
+						&& msvv.getMsp_savimg().equals("default-profile.png")
+						&& msvv.getMsc_savimg().equals("logo2.png") 
+						&& (msvv.getMs_msg()==null)) {
+					++num;
+					msdao.update(new MySkinVo(msvv.getMs_num(), user_num,msvv.getMs_name(),msvv.getMs_color()," ", 1));
+				}
+			}
+			if (num == 0) {
+				ms_num = msdao.getMaxNum() + 1;
+				msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", " ", 1));
+				int msp_num = mspdao.getMaxNum() + 1;
+				int msc_num = mscdao.getMaxNum() + 1;
+				mspdao.insert(new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));
+				mscdao.insert(new MySkinCoverVo(msc_num, ms_num, "logo2.png", "logo2.png"));
+			}
+			HashMap<String, Object> updateElse = new HashMap<>();
 			updateElse.put("user_num", user_num);
 			updateElse.put("ms_num", ms_num);
-			msdao.update_not_using(updateElse); 
+			msdao.update_not_using(updateElse);
 			return 1;
 		}
-		int ms_using=(Integer) hm.get("ms_using");
-		MySkinViewVo msvVo=(MySkinViewVo)select(ms_num);
-		//선택한 스킨 적용하기
-		if(ms_using==2) {
-			msdao.update(new MySkinVo(ms_num, user_num, msvVo.getMs_name(), msvVo.getMs_color(), msvVo.getMs_msg(),2));
-			HashMap<String, Object> updateElse=new HashMap<>();
+		int ms_using = (Integer) hm.get("ms_using");
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("list", "ms_num");
+		map.put("ms_num", ms_num);
+		MySkinViewVo msvVo = (MySkinViewVo) select(map);
+		// 선택한 스킨 적용하기
+		if (ms_using == 2) {
+			msdao.update(new MySkinVo(ms_num, user_num, msvVo.getMs_name(), msvVo.getMs_color(), msvVo.getMs_msg(), 1));
+			HashMap<String, Object> updateElse = new HashMap<>();
 			updateElse.put("user_num", user_num);
 			updateElse.put("ms_num", ms_num);
-			msdao.update_not_using(updateElse); 
+			msdao.update_not_using(updateElse);
 			return 1;
 		}
 		MultipartFile ms_profile = (MultipartFile) hm.get("ms_profile");
@@ -165,7 +182,7 @@ public class MySkinServiceImpl implements CommonService {
 		String ms_color = (String) hm.get("ms_color");
 		String ms_msg = (String) hm.get("ms_msg");
 		if (ms_name == null) {
-			ms_name = msvVo.getMs_name(); 
+			ms_name = msvVo.getMs_name();
 		}
 		if (ms_msg == null) {
 			ms_msg = "";
@@ -174,10 +191,13 @@ public class MySkinServiceImpl implements CommonService {
 		int update = 0;
 		for (int i = 0; i < 2; i++) {
 			// 파일 수정 없을 때
-			if (!ms_profile.isEmpty()) ++update;
-			if (!ms_cover.isEmpty()) ++update;
+			if (!ms_profile.isEmpty())
+				++update;
+			if (!ms_cover.isEmpty())
+				++update;
 		}
-		if (update == 0) return 1;
+		if (update == 0)
+			return 1;
 		try {
 			String uploadPath = session.getServletContext().getRealPath("/resources/upload/img");
 			String msp_orgimg = msvVo.getMsp_orgimg();
@@ -185,9 +205,10 @@ public class MySkinServiceImpl implements CommonService {
 			String msc_orgimg = msvVo.getMsc_orgimg();
 			String msc_savimg = msvVo.getMsc_savimg();
 			if (!ms_profile.isEmpty()) {
-				if(!(msp_savimg.equals("default-profile.png"))) {
+				if (!(msp_savimg.equals("default-profile.png"))) {
 					File file = new File(uploadPath + "\\" + msp_savimg);
-					if (file.delete()) System.out.println("이전 사진 삭제 성공");
+					if (file.delete())
+						System.out.println("이전 사진 삭제 성공");
 				}
 				msp_orgimg = ms_profile.getOriginalFilename();
 				msp_savimg = UUID.randomUUID() + "_" + msp_orgimg;
@@ -200,9 +221,10 @@ public class MySkinServiceImpl implements CommonService {
 				mspdao.update(new MySkinProfileVo(msvVo.getMsp_num(), ms_num, msp_orgimg, msp_savimg));
 			}
 			if (!ms_cover.isEmpty()) {
-				if(!(msc_savimg.equals("logo2.png"))) {
+				if (!(msc_savimg.equals("logo2.png"))) {
 					File file = new File(uploadPath + "\\" + msc_savimg);
-					if (file.delete()) System.out.println("이전 사진 삭제 성공");
+					if (file.delete())
+						System.out.println("이전 사진 삭제 성공");
 				}
 				msc_orgimg = ms_cover.getOriginalFilename();
 				msc_savimg = UUID.randomUUID() + "_" + msc_orgimg;
@@ -230,31 +252,43 @@ public class MySkinServiceImpl implements CommonService {
 		HttpSession session = (HttpSession) hm.get("session");
 		String uploadPath = session.getServletContext().getRealPath("/resources/upload/img");
 		try {
-			MySkinViewVo list=(MySkinViewVo)select(ms_num);
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("list", "ms_num");
+			map.put("ms_num", ms_num);
+			MySkinViewVo list = (MySkinViewVo) select(map);
+
 			mspdao.delete(ms_num);
-			if(!(list.getMsp_savimg().equals("default-profile.png"))) {
+			if (!(list.getMsp_savimg().equals("default-profile.png"))) {
 				File file = new File(uploadPath + "\\" + list.getMsp_savimg());
-				if (file.delete()) System.out.println("파일 삭제 성공");
+				if (file.delete())
+					System.out.println("파일 삭제 성공");
 			}
 			mscdao.delete(ms_num);
-			if(!(list.getMsc_savimg().equals("logo2.png"))) {
+			if (!(list.getMsc_savimg().equals("logo2.png"))) {
 				File file = new File(uploadPath + "\\" + list.getMsc_savimg());
-				if (file.delete()) System.out.println("파일 삭제 성공");
+				if (file.delete())
+					System.out.println("파일 삭제 성공");
 			}
 			msdao.delete(ms_num);
-			
-			//모두 삭제되었으면 기본 스킨 하나 넣기 
-			HashMap<String, Object> map=new HashMap<>();
-			int user_num=(Integer)session.getAttribute("user_num");
-			map.put("user_num", user_num);
-			List<MySkinViewVo> skinList=(List<MySkinViewVo>)msvdao.list(map);
-			if(skinList==null) {
-				ms_num = msdao.getMaxNum() +1;
-				msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", "", 1));	
-				int msp_num=mspdao.getMaxNum()+1;
-				int msc_num=mscdao.getMaxNum()+1;
+
+			// 스킨 모두 삭제시, 기본 스킨 하나 넣기
+			int user_num = (Integer) session.getAttribute("user_num");
+			List<MySkinViewVo> skinList = (List<MySkinViewVo>) msvdao.list(user_num);
+			if (skinList.isEmpty()) {
+				ms_num = msdao.getMaxNum() + 1;
+				msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", " ", 1));
+				int msp_num = mspdao.getMaxNum() + 1;
+				int msc_num = mscdao.getMaxNum() + 1;
 				mspdao.insert(new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));
 				mscdao.insert(new MySkinCoverVo(msc_num, ms_num, "logo2.png", "logo2.png"));
+			}
+
+			// 사용중인 스킨을 삭제할 경우
+			if (list.getMs_using() == 1) {
+				List<MySkinViewVo> skinlist = (List<MySkinViewVo>) msvdao.list(user_num);
+				MySkinViewVo skinvo = skinlist.get(0);
+				msdao.update(new MySkinVo(skinvo.getMs_num(), user_num, skinvo.getMs_name(), skinvo.getMs_color(),
+						skinvo.getMs_msg(), 1));
 			}
 			return 1;
 		} catch (Exception e) {
@@ -266,14 +300,22 @@ public class MySkinServiceImpl implements CommonService {
 
 	@Override
 	public Object select(Object data) {
-		int ms_num = (Integer) data;
-		return msvdao.select(ms_num);
+		HashMap<String, Object> map = (HashMap<String, Object>) data;
+		String list = (String) map.get("list");
+		if (list.equals("ms_num")) {
+			int ms_num = (Integer) map.get("ms_num");
+			return msvdao.select(ms_num);
+		} else if (list.equals("ms_using")) {
+			int user_num = (Integer) map.get("user_num");
+			return msvdao.select_using(user_num);
+		}
+		return null;
 	}
 
 	@Override
 	public Object list(Object data) {
-		HashMap<String, Object> map=(HashMap<String, Object>)data;
-		return msvdao.list(map);
+		int user_num = (Integer) data;
+		return msvdao.list(user_num);
 	}
 
 }

@@ -33,4 +33,10 @@ public class CommunityDao {
 	public List<CommunityVo> list(){
 		return session.selectList(NAMESPACE+".list");
 	}	
+
+	public int select_adminNum(int comm_num) {
+		return session.selectOne(NAMESPACE+".select_adminNum", comm_num);
+	}
+
+
 }

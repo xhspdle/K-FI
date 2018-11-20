@@ -12,5 +12,28 @@
 		insert into comm_video values(#{cv_num},#{cb_num},#{cv_orgvid},#{cv_savvid})
 	</insert>
 
-
+	<select id="select" parameterType="int" resultType="commvideo">
+		select * from comm_video where cb_num=#{cb_num}
+	</select>
+	
+	<select id="hotVideo" resultType="hotvideo">
+	select * 
+	from comm_video cv, comm_board cb
+	where cv.cb_num=cb.cb_num  
+	and cv_num =(
+			     select cv_num 
+			     from(
+			     	select cv_num, rownum rnum
+			        from (
+			            select *
+			            from comm_board cb 
+			            order by cb_views desc
+			            ) cb, comm_video cv
+			        where cb.cb_num=cv.cb_num 
+			        )
+			     where rnum =1 ) 
+	</select>
+	
+	
+	
 </mapper>

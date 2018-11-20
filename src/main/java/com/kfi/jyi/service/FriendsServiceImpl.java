@@ -82,20 +82,13 @@ public class FriendsServiceImpl implements CommonService {
 	public Object list(Object data) {
 		HashMap<String, Object> map = (HashMap<String, Object>) data;
 		List<FriendsVo> flist = fdao.list(map);
-		System.out.println(flist.toString());
 		List<MySkinViewVo> msvlist = new ArrayList<>();
-		HashMap<String, Object> hm = new HashMap<>();
 		for (FriendsVo vo : flist) {
-			if (map.get("user_number").equals("user1_num")) {
-				hm.put("user_num", vo.getUser1_num());
-			} else if (map.get("user_number").equals("user2_num")) {
-				hm.put("user_num", vo.getUser2_num());
-			}
-			hm.put("ms_using", 1);
-			List<MySkinViewVo> msvl = msvdao.list(hm);
 			MySkinViewVo csv = null;
-			for (MySkinViewVo csvv : msvl) {
-				csv=csvv;
+			if (map.get("user_number").equals("user1_num")) {
+				csv=msvdao.select_using(vo.getUser1_num());
+			} else if (map.get("user_number").equals("user2_num")) {
+				csv=msvdao.select_using(vo.getUser2_num());
 			}
 			msvlist.add(csv);
 		}
