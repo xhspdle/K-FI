@@ -17,7 +17,7 @@
 		<typeAlias type="com.kfi.ldk.vo.CommTagVo" alias="commtag"/>
 		<typeAlias type="com.kfi.ldk.vo.CommVoteVo" alias="commvote"/>
 		<typeAlias type="com.kfi.ldk.vo.VotingOptionVo" alias="votingoption"/>
-		<typeAlias type="com.kfi.ldk.vo.VotingUserlistVo" alias="votinguserlist"/>
+		<typeAlias type="com.kfi.ldk.vo.VotingUserListVo" alias="votinguserlist"/>
 		<typeAlias type="com.kfi.jyi.vo.MembersVo" alias="members"/>
 		<typeAlias type="com.kfi.jyi.vo.CommUserListVo" alias="commuserlist"/>
 		<typeAlias type="com.kfi.jyi.vo.CommunityVo" alias="community"/>

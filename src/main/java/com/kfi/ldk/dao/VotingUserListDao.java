@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kfi.ldk.vo.VotingOptionVo;
+import com.kfi.ldk.vo.VotingUserListVo;
 
 @Repository
 public class VotingUserListDao {
@@ -19,7 +19,7 @@ public class VotingUserListDao {
 	public int getCount() {
 		return session.selectOne(NAMESPACE + ".getCount");
 	}
-	public int insert(VotingOptionVo vo) {
+	public int insert(VotingUserListVo vo) {
 		return session.insert(NAMESPACE + ".insert", vo);
 	}
 	public int delete(HashMap<String, Object> map) {
@@ -27,5 +27,8 @@ public class VotingUserListDao {
 	}
 	public List<Object> list(int vo_num){
 		return session.selectList(NAMESPACE + ".list", vo_num);
+	}
+	public VotingUserListVo select(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".select", map);
 	}
 }

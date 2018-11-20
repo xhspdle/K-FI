@@ -1,11 +1,11 @@
 package com.kfi.ldk.vo;
 
-public class VotingUserlistVo {
+public class VotingUserListVo {
 	private int vu_num;
 	private int vo_num;
 	private int user_num;
-	public VotingUserlistVo() {}
-	public VotingUserlistVo(int vu_num, int vo_num, int user_num) {
+	public VotingUserListVo() {}
+	public VotingUserListVo(int vu_num, int vo_num, int user_num) {
 		super();
 		this.vu_num = vu_num;
 		this.vo_num = vo_num;

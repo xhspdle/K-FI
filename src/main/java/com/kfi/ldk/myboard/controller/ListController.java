@@ -1,7 +1,6 @@
 package com.kfi.ldk.myboard.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -491,7 +491,7 @@ $(document).ready(function(){
 			  });
   });
   
-  $("div.likes > a").click(function(e){
+  $("#myBoardSelect div.likes > a").click(function(e){
 	  e.preventDefault();
 	  var mb_num=parseInt($(this).attr("data-board-num"));
 	  $.getJSON(getPageContext + "/mypage/myboardlike/insert",
@@ -1003,6 +1003,18 @@ $(document).ready(function(){
 			  event.preventDefault();
 		  }
 	  }
+  });
+  
+  $(".btn-voting").each(function(){
+	  $(this).click(function(e){
+		  e.preventDefault();
+		  var vo_num=parseInt($(this).attr("data-poll-option-num"));
+		  $.getJSON(getPageContext + "/community/votinguserlist/insert",
+				  {'vo_num':vo_num},
+				  function(json){
+					  $()
+				  });
+	  });
   });
 });
 

@@ -19,10 +19,34 @@
 			</div>
 			<div class="panel-body poll-body">
 				<div class="poll-list-options">
-					<c:forEach var="optionList" items="${vo.list }">
-					<a href="<c:url value='/community/votingUserList/insert?vo_num=${optionList.vo_num }'/>" 
-					class="btn btn-info btn-block">${optionList.vo_content }</a>
-					</c:forEach>
+					<ul class="poll-options">
+						<c:forEach var="optionList" items="${vo.list }">
+						<!--  
+						<li class="poll-item">
+							<div class="label">
+								<div class="bar"></div>
+								<div class="vo-title">
+									<div class="vo-content">
+										호이호이
+									</div>
+								</div>
+							</div>
+						</li>
+						-->
+						<li>
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" aria-valuenow="40"
+								aria-valuemin="0" aria-valuemax="100" style="width:40%">
+								40%
+								</div>
+							</div>
+						</li>
+						<!--  
+						<a href="<c:url value='/community/votinguserlist/insert?vo_num=${optionList.vo_num }'/>" 
+						class="btn btn-info btn-block btn-voting" data-poll-option-num="${optionList.vo_num }">${optionList.vo_content }</a>
+						-->
+						</c:forEach>
+					</ul>
 				</div>
 			</div>
 			<div class="panel-footer">

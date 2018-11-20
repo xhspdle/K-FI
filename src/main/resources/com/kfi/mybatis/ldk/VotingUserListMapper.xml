@@ -16,7 +16,10 @@
 	<delete id="delete" parameterType="hashmap">
 		delete from voting_userlist where vo_num=#{vo_num} and user_num=#{user_num}
 	</delete>
-	<select id="list" resultType="votinguserlist">
+	<select id="list" parameterType="int" resultType="votinguserlist">
 		select * from voting_userlist vo_num=#{vo_num}
+	</select>
+	<select id="select" parameterType="hashmap" resultType="votinguserlist">
+		select * from voting_userlist where vo_num=#{vo_num} and user_num=#{user_num}
 	</select>
 </mapper>

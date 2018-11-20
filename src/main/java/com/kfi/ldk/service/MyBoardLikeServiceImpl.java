@@ -25,15 +25,14 @@ public class MyBoardLikeServiceImpl implements CommonService{
 	}
 	@Override
 	public int insert(Object data) {
-		MyBoardLikeVo vo=(MyBoardLikeVo)data;
 		HashMap<String, Object> map=new HashMap<String, Object>();
-		map.put("user_num", vo.getUser_num());
-		map.put("mb_num", vo.getMb_num());
-		if(mblDao.select(map)!=null) {
+		int user_num=(Integer)map.get("user_num");
+		int mb_num=(Integer)map.get("mb_num");
+		if(select(map)!=null) {
 			delete(map);
 			return -1;//ม฿บน
 		}else {
-			return mblDao.insert(new MyBoardLikeVo(getMaxNum() + 1, vo.getMb_num(), vo.getUser_num()));
+			return mblDao.insert(new MyBoardLikeVo(getMaxNum() + 1, mb_num, user_num));
 		}
 	}
 	@Override

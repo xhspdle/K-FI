@@ -1,4 +1,4 @@
-package com.kfi.ldk.myboardlike.controller;
+package com.kfi.ldk.votinguserlist.controller;
 
 import java.util.HashMap;
 
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.ldk.service.CommonService;
 
-@Controller(value="MyBoardLikeInsertDeleteController")
+@Controller(value="VotingUserListInsertDeleteController")
 public class InsertDeleteController {
 	@Autowired
-	@Qualifier("myBoardLikeServiceImpl") private CommonService service;
-	@RequestMapping("/mypage/myboardlike/insert")
+	@Qualifier("votingUserListServiceImpl") private CommonService service;
+	@RequestMapping("/community/votinguserlist/insert")
 	@ResponseBody
-	public HashMap<String, Object> insert(int mb_num,HttpSession session){
+	public HashMap<String, Object> insert(int vo_num,HttpSession session){
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		int user_num=0;
 		Object session_num=session.getAttribute("user_num");
@@ -26,9 +26,8 @@ public class InsertDeleteController {
 			user_num=(Integer)session_num;
 		}
 		map.put("user_num", user_num);
-		map.put("mb_num", mb_num);
+		map.put("vo_num", vo_num);
 		int n=service.insert(map);
-		map.put("boardLikeCnt", service.getCount(map));
 		if(n>0) {
 			map.put("code", "success");
 		}else if(n==-1) {
