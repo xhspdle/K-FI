@@ -1,4 +1,4 @@
-/*package com.kfi.dgl.commcalendar.controller;
+package com.kfi.dgl.commcalendar.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -51,10 +51,13 @@ public class CommCalendarController {
 			return "redirect:/";
 		}
 	}
-	@RequestMapping(value="/community/list", method = RequestMethod.POST)
+/*	@RequestMapping(value="/community/list", method = RequestMethod.POST)
 	public String listEvent() {
 		
 	}
+	
+	@RequestMapping(value="/community/delete", method = RequestMethod.POST)
+	public String deleteEvent() {
+	}*/
 }
 
-*/
