@@ -3,31 +3,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script type="text/javascript">
-	$(function(){
-		$(".usercontent").attr({'data-toggle':'modal','data-target':'#usermodify'});
-		$(".usercontent").click(function(){
-			var user_num=$(this).parent().children().first().text();
-		 	$.getJSON("<c:url value='/mbgetinfo'/>",{
-				user_num : user_num
-			},function(data){			
-				$("#modifyuser_num").val(user_num);
-				$("#modifyuser_id").val(data.user_id);
-				$("#modifyuser_pwd").val(data.user_pwd);
-				$("#modifyuser_nickname").val(data.user_nick);
-				$("#modifyuser_email").val(data.user_email);
-				$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
-			}); 
-		});
-		$(".userdelete").click(function(){
-			var result=confirm("정말로????");
-			var user_num=$(this).parent().parent().children().first().text();
- 			if(result){
-				location.href="mbdelete?user_num="+user_num;
-			}else{
-				return false;
-			}
-		});
+$(function(){
+	$(".usercontent").attr({'data-toggle':'modal','data-target':'#usermodify'});
+	$(".usercontent").click(function(){
+		var user_num=$(this).parent().children().first().text();
+	 	$.getJSON("<c:url value='/mbgetinfo'/>",{
+			user_num : user_num
+		},function(data){			
+			$("#modifyuser_num").val(user_num);
+			$("#modifyuser_id").val(data.user_id);
+			$("#modifyuser_pwd").val(data.user_pwd);
+			$("#modifyuser_nickname").val(data.user_nick);
+			$("#modifyuser_email").val(data.user_email);
+			$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
+		}); 
 	});
+	$(".userdelete").click(function(){
+		var result=confirm("정말로????");
+		var user_num=$(this).parent().parent().children().first().text();
+			if(result){
+			location.href="mbdelete?user_num="+user_num;
+		}else{
+			return false;
+		}
+	});
+});
 </script>
 <div id="memberslist"> 
 	<h1>
@@ -36,7 +36,7 @@
 	</h1>
 	<table class="table table-striped">
 		<tr>
-			<th>회원번호</th>
+			<!-- <th>회원번호</th> -->
 			<th>회원ID</th>
 			<th>회원NICKNAME</th>
 			<th>회원EMAIL</th>
@@ -46,7 +46,7 @@
 		</tr>
 		<c:forEach var="user" items="${mblist }">
 			<tr>
-				<td class="usercontent" >${user.user_num}</td>
+				<td hidden="hidden" class="usercontent" >${user.user_num}</td>
 				<td class="usercontent">${user.user_id }</td>
 				<td class="usercontent">${user.user_nickname }</td>
 				<td class="usercontent">${user.user_email }</td>

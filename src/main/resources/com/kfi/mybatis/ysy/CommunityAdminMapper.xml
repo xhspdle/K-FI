@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ysy.CommunityAdminMapper">
+	<select id="list" resultType="communityadmin">
+		select mb.user_num,mb.user_id,mb.user_nickname,mb.user_email, cul.cul_num, cul.comm_num, cul.cul_status
+		from members mb, comm_user_list cul where mb.user_num=cul.user_num
+	</select>
+</mapper>

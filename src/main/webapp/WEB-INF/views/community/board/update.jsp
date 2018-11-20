@@ -1,32 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<script type="text/javascript">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-</script>
-    
 <div class="container" style="padding: 0px;">
 	<div class="modal-header" style="padding:35px 50px;">
-		<h2><span class="glyphicon glyphicon-check"></span>Modify</h2>
+		<h2><span class="glyphicon glyphicon-check"></span> Modify</h2>
 	</div>
 	<div class="modal-body" style="padding:40px 50px;">
-		<form method="post" action="/kfi/community/update" name="frm" enctype="multipart/form-data">
+		<form method="post" action="<c:url value='/community/board/update'/>" name="frm1" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="comm_title"><span class="glyphicon glyphicon-pencil"></span> Title</label>
-				<input type="text" class="form-control" id="comm_title" name="comm_title" placeholder="Enter Title">
+				<input type="text" class="form-control" id="cb_title" name="cb_title" placeholder="Enter Title">
 			</div>
 			<div class="form-group">
 				<label for="comm_content"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
-				<textarea class="form-control" rows="5" id="comm_content" name="comm_content" placeholder="Write something!"></textarea>
+				<textarea class="form-control" rows="5" id="cb_content" name="cb_content" placeholder="Write something!"></textarea>
 			</div>
+			<!-- 공지유무 -->
+			<c:if test="${user_num eq comm_adminNum && cul_status eq 1 }">
+				<div class="form-group">
+					<label for="cb_notice"><span class="glyphicon glyphicon-menu-hamburger"></span>Notice</label>
+					<div class="checkbox">
+				      <label><input type="checkbox" name="cb_notice" value="1">is Notice</label>
+					</div>
+				</div>
+			</c:if>
 			<div class="form-group" style="margin-bottom:-11.4px;">
 				<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
 				<div class="editableDiv" id="tags"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
 			</div>
 			<div class="form-group imgUpload">
 				<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
-				<input multiple="multiple" type="file" class="form-control myboardFile" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
-				<input multiple="multiple" type="file" class="form-control myboardFile"  name="fileP" accept=".jpg, .jpeg, .png, .gif">
+				<input type="file" class="form-control myboardFile" id="fileP1" name="fileP" accept=".jpg, .jpeg, .png, .gif">
 				<img id="fimg1" src="" style="display:none;width:100%;">
 			</div>
 			<div class="form-group vidUpload">
@@ -34,11 +39,8 @@
 				<input type="file" class="form-control myboardFile" id="fileV1" name="fileV" style="display:none;" accept=".avi, .wmv, .mp4">
 				<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 			</div>
+			<!-- id="sendServer" -->
 			<button type="submit" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-ok"></span> Modify</button>
 		</form>
-		<div class="progress">
-			<div class="progress-bar progress-bar-striped active" role="progressbar" 
-			aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
-		</div>
 	</div>
 </div>

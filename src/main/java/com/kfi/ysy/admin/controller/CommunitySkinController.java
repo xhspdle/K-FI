@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class CommunitySkinController {
-	@RequestMapping(value="communityskin", method=RequestMethod.GET)
+	@RequestMapping(value="/community/commadmin/communityskin", method=RequestMethod.GET)
 	public String commskinForm() {
-		return ".admin.communityskin";
+		return ".community.commadmin.communityskin";
 	}
 	@RequestMapping(value="communityskin", method=RequestMethod.POST)
 	public String insert() {

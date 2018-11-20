@@ -39,7 +39,7 @@
 	</h1>
 	<table class="table table-striped">
 		<tr>
-			<th>관리자번호</th>
+		<!-- 	<th>관리자번호</th> -->
 			<th>관리자ID</th>
 			<th>관리자NICKNAME</th>
 			<th>관리자EMAIL</th>
@@ -48,7 +48,7 @@
 		</tr>
  		<c:forEach var="adminlist" items="${adminlist }"> 
  			<tr>
-				<td>${adminlist.admin_num}</td>
+				<td hidden="hidden">${adminlist.admin_num}</td>
 				<td>${adminlist.admin_id }</td>
 				<td>${adminlist.admin_nick }</td>
 				<td>${adminlist.admin_email }</td>
