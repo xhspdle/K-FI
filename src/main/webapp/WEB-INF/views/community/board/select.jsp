@@ -17,7 +17,7 @@
 					</button>
 					<ul class="dropdown-menu rightOption">
 						<li>
-							<a href="<c:url value='#update'/>" class="btn btn-block 
+							<a href="<c:url value='/community/board/update'/>" class="btn btn-block 
 							<c:if test="${sessionScope.user_num!=cbvo.user_num }">disabled</c:if>" 
 							style="text-align: left;" data-toggle="modal" data-mb-num="${cbvo.cb_num }">
 								<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit

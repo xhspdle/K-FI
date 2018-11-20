@@ -25,11 +25,11 @@ import com.kfi.ysy.service.CommunityPhotoService;
 public class UpdateController {
 	@Autowired
 	private CommunityPhotoService cpservice;
-	@RequestMapping(value="/community/update",method=RequestMethod.GET)
+	@RequestMapping(value="/community/board/update",method=RequestMethod.GET)
 	public String updateForm() {
 		return ".community.board.update";
 	}
-	@RequestMapping(value="/community/update",method=RequestMethod.POST)
+	@RequestMapping(value="/community/board/update",method=RequestMethod.POST)
 	public String update(MultipartHttpServletRequest mtrequest) {
 		List<MultipartFile> fileList=mtrequest.getFiles("fileP");
 		String uploadPathPhoto=mtrequest.getServletContext().getRealPath("/resources/upload/img");
