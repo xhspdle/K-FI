@@ -65,7 +65,7 @@
 				<p>${hotP.cb_title }</p>
 				<img class="img-responsive margin"
 					src="<c:url value='/resources/upload/img/${hotP.cp_savimg }'/>"
-					alt="community issue list" style="width: 100%">
+					alt="community issue list">
 			</div>
 		</c:forEach>
 	</div>

@@ -9,10 +9,18 @@
 	<input type="hidden" id="myBoardSelectListHere" value="${selectedUserNum }">
 	</c:otherwise>	
 </c:choose>
+<div id="myTagSearchList" class="container text-center">
+	<h1 style="margin-bottom:20px;"><span class="search-border-bottom">#TAGS</span></h1>
+	<div class="list-center">
+		<a>#태그다</a>
+		<a>#태그다</a>
+	</div>
+</div>
+
 <div id="myBoardSearchList" class="container">
 <c:forEach var="vo" items="${list }" varStatus="vs">
 	<h1 class="text-center" id="${vo.mb_date }" style="margin-bottom: 30px;">
-		<span style="border-bottom: 4px solid tan">${vo.mb_date }</span>
+		<span class="search-border-bottom">${vo.mb_date }</span>
 	</h1>
 	<div class="panel-group <c:if test="${vs.index!=0}">slideanim</c:if>">
 		<div class="panel panel-default">

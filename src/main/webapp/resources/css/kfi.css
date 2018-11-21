@@ -850,10 +850,16 @@ body.modal-open::-webkit-scrollbar {
 #issue-img img {
 	-webkit-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+    position:relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 #issue-img img:hover {
-	transform: scale(1.05);
-	-webkit-transform:scale(1.05);  
+	transform: translateX(-50%) scale(1.05);
+	-webkit-transform: translateX(-50%) scale(1.05);  
+}
+#issue-img .img-responsive {
+	max-height: 500px;
 }
 #issue-vid {
 	margin-top: 50px;
@@ -1076,4 +1082,30 @@ body.modal-open::-webkit-scrollbar {
 #commPollList .text-nowrap {
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+/*
+	Tag
+*/
+#myTagSearchList .search-border-bottom {
+	border-bottom: 4px solid tan;
+}
+#myTagSearchList .list-center {
+	overflow: hidden;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 50%;
+}
+#myTagSearchList ul {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 50%;
+}
+#myTagSearchList ul>li {
+	float: left;
+	list-style: none;
+	margin-left: 10px;
+	font-size: 20px;
+	text-align: center;
 }
