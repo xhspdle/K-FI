@@ -23,9 +23,10 @@ public class MyBoardLikeServiceImpl implements CommonService{
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
 		return mblDao.getCount(map);
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public int insert(Object data) {
-		HashMap<String, Object> map=new HashMap<String, Object>();
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
 		int user_num=(Integer)map.get("user_num");
 		int mb_num=(Integer)map.get("mb_num");
 		if(select(map)!=null) {

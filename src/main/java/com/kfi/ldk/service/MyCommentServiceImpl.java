@@ -4,15 +4,10 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import com.kfi.jyi.dao.MySkinViewDao;
 import com.kfi.ldk.dao.MyBoardLikeDao;
 import com.kfi.ldk.dao.MyCommentDao;
-import com.kfi.ldk.dao.MyCommentLikeDao;
 import com.kfi.ldk.dao.MyCommentListViewDao;
-import com.kfi.ldk.vo.MyCommentLikeVo;
 import com.kfi.ldk.vo.MyCommentVo;
 
 @Service
@@ -20,7 +15,6 @@ public class MyCommentServiceImpl implements CommonService{
 	@Autowired private MyCommentDao mcDao;
 	@Autowired private MyCommentListViewDao mcViewDao;
 	@Autowired private MyBoardLikeDao mblDao;
-	@Autowired private MyCommentLikeDao mclDao;
 	@Override
 	public int getMaxNum() {
 		return mcDao.getMaxNum();

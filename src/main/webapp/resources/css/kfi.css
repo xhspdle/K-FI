@@ -1061,7 +1061,7 @@ body.modal-open::-webkit-scrollbar {
 #commPollList .pollOption {
 	position: relative;
 	top: -70px;
-	left: 87%;
+	left: 93%;
 	margin-bottom: -50px;
 	text-align: left !important;
 }
@@ -1073,4 +1073,8 @@ body.modal-open::-webkit-scrollbar {
 #commPollList .pollOption .rightOption {
 	left: -162px;
 	top: -3px;
+}
+#commPollList .text-nowrap {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

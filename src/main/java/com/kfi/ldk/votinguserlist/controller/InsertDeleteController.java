@@ -37,7 +37,7 @@ public class InsertDeleteController {
 			//map.put("votedList", service.list(map));
 			map.put("code", "success");
 		}else if(n==-1) {
-			map.put("code", "duplicated");
+			map.put("code", "already voted! cancled your vote..");
 		}else {
 			map.put("code", "fail");
 		}

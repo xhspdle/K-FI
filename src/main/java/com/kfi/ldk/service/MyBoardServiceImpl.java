@@ -250,18 +250,20 @@ public class MyBoardServiceImpl implements CommonService{
 				for(int i=0;i<photoList.size();i++) {
 					MyPhotoVo mpVo=(MyPhotoVo)photoList.get(i);
 					File f=new File(uploadPathP + "\\" + mpVo.getMp_savimg());
-					if(!f.delete()) {
-						throw new Exception("[사진삭제오류]" +photoList.size()+1 + "개 중 " + i+1 +"번째 파일에서 오류 발생");
+					if(f.delete()) {
+						System.out.println(uploadPathP + "경로에 사진 삭제 성공!");
+					}else {
+						//throw new Exception("[사진삭제오류]" +photoList.size() + "개 중 " + (i+1) +"번째 파일에서 오류 발생");
 					}
-					System.out.println(uploadPathP + "경로에 사진 삭제 성공!");
 				}
 				for(int i=0;i<videoList.size();i++) {
 					MyVideoVo mvVo=(MyVideoVo)videoList.get(i);
 					File f=new File(uploadPathV + "\\" + mvVo.getMv_savvid());
-					if(!f.delete()) {
-						throw new Exception("[영상삭제오류]" +videoList.size()+1 + "개 중 " + i+1 +"번째 파일에서 오류 발생");
+					if(f.delete()) {
+						System.out.println(uploadPathV + "경로에 영상 삭제 성공!");
+					}else {
+						//throw new Exception("[영상삭제오류]" +videoList.size() + "개 중 " + (i+1) +"번째 파일에서 오류 발생");
 					}
-					System.out.println(uploadPathV + "경로에 영상 삭제 성공!");
 				}
 				//mpDao.delete(mb_num); on delete cascade
 				//mvDao.delete(mb_num); on delete cascade
@@ -272,7 +274,7 @@ public class MyBoardServiceImpl implements CommonService{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			//TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return -2;
 		}
 	}
