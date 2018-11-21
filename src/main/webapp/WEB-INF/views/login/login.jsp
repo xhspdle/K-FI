@@ -61,7 +61,7 @@
 						return false;
 					} else if (data.msg == 'true') {
 						$(eMsg).text("cool ID~!!");
-						$("#nickck").focus();
+						$("#usernick").focus();
 						eMsg.show();
 						eMsg.removeClass('redText');
 						eMsg.addClass('greenText');
@@ -118,9 +118,9 @@
 		});
 
 		//비밀번호 유효성 체크
-		$('#user_pwd').keyup(
+		$('#password').keyup(
 						function() {
-							var pwd = $("#user_pwd").val();
+							var pwd = $("#password").val();
 							var eMsg = $("#pwdMsg");
 							var pwdck = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 							var nullck = " ";
@@ -151,17 +151,17 @@
 						});
 
 		//비밀번호 동일입력 체크
-		$('#pwdCheck').keyup(function() {
+		$('#passwordcheck').keyup(function() {
 			var eMsg = $("#pwdCkMsg");
-			var pwd = $("#pwd").val();
-			var pwdck = $("#pwdCheck").val();
+			var pwd = $("#password").val();
+			var pwdck = $("#passwordcheck").val();
 			if (pwd == pwdck) {
 				$(eMsg).text("비밀번호가 일치합니다.");
 				return true;
 				return pwdFlag = true;
 			} else {
 				$(eMsg).text("비밀번호가 일치하지않습니다.");
-				$("#pwdCheck").focus();
+				$("#passwordcheck").focus();
 				return false;
 			}
 
@@ -178,8 +178,7 @@
 								$(eMsg).text("이메일 주소를 입력해주세요.");
 								return false;
 							}
-							$
-									.ajax({
+							$.ajax({
 										async : true,
 										type : "GET",
 										url : getContext
@@ -495,8 +494,7 @@ form .error {
 									id="usernick" aria-describedby="nicknameHelp"
 									placeholder="Enter Nick name">
 								<div class="input-group-btn">
-									<button type="button" class="btn btn-default" value=""
-										id="nickck">
+									<button type="button" class="btn btn-default" id="nickck">
 										<i class="glyphicon glyphicon-ok"></i>
 									</button>
 								</div>
@@ -511,11 +509,11 @@ form .error {
 								<span class="redText" id="pwdMsg"></span>
 						</div>
 						<div class="form-group">
-							<label for="passwordcheck">Password</label> <input
+							<label for="passwordcheck">Retype Password</label> <input
 								type="password" name="pwdCheck" id="passwordcheck"
 								class="form-control" aria-describedby="passwordcheckHelp"
-								placeholder="Enter Password">
-								<span class="redText" id="nickMsg"></span>
+								placeholder="Enter Retype Password">
+								<span class="redText" id="pwdckMsg"></span>
 						</div>
 						<div class="form-group">
 							<label for="useremail">Email address</label>
