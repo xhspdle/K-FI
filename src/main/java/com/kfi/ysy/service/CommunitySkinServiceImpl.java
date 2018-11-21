@@ -1,8 +1,16 @@
 package com.kfi.ysy.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.kfi.ldk.service.CommonService;
+import com.kfi.ysy.dao.CommSkinCoverDao;
+import com.kfi.ysy.dao.CommSkinProfileDao;
 
 public class CommunitySkinServiceImpl implements CommonService {
+	@Autowired private CommSkinCoverDao cdao;
+	@Autowired private CommSkinProfileDao pdao;
+	
+	
 	@Override
 	public int getMaxNum() {
 		

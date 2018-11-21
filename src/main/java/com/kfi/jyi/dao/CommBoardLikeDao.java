@@ -1,5 +1,6 @@
 package com.kfi.jyi.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,6 +18,19 @@ public class CommBoardLikeDao {
 		return session.selectList(NAMESPACE+".select",cb_num);
 	}
 	
+	public int getBoardLikeUserNum(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".getBoardLikeUserNum",map);
+	}
 	
+	public int insert(CommBoardLikeVo vo) {
+		return session.insert(NAMESPACE+".insert",vo);
+	}
 	
+	public int delete(HashMap<String, Object> map) {
+		return session.delete(NAMESPACE+".delete",map);
+	}
+	
+	public int getMaxNum() {
+		return session.selectOne(NAMESPACE+".getMaxNum");
+	}
 }

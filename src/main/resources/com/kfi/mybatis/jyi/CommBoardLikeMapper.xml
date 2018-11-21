@@ -8,5 +8,20 @@
 		select * from comm_board_like where cb_num=#{cb_num}
 	</select>
 	
+	<select id="getBoardLikeUserNum" parameterType="hashmap" resultType="int">
+		select nvl(max(user_num),0) from comm_board_like where cb_num=#{cb_num} and user_num=#{user_num}
+	</select>
+
+	<insert id="insert" parameterType="commboardlike">
+		insert into comm_board_like values(#{cbl_num},#{cb_num},#{user_num})
+	</insert>
+
+	<delete id="delete" parameterType="hashmap">
+		delete from comm_board_like where user_num=#{user_num} and cb_num=#{cb_num}
+	</delete>
+
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(cbl_num),0) from comm_board_like
+	</select>
 
 </mapper>

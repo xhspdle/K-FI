@@ -23,11 +23,14 @@ import com.kfi.dgl.vo.MembersVo;
 import com.kfi.jyi.dao.CommBoardDao;
 import com.kfi.jyi.dao.CommBoardLikeDao;
 import com.kfi.jyi.dao.CommBoardViewDao;
+import com.kfi.jyi.dao.CommCommentDao;
 import com.kfi.jyi.dao.CommPhotoDao;
 import com.kfi.jyi.dao.CommUserListDao;
 import com.kfi.jyi.dao.CommVideoDao;
 import com.kfi.jyi.dao.CommunityDao;
 import com.kfi.jyi.dao.MySkinViewDao;
+import com.kfi.jyi.util.PageUtil;
+import com.kfi.jyi.vo.CommBoardCntVo;
 import com.kfi.jyi.vo.CommBoardLikeVo;
 import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.jyi.vo.CommBoardVo;
@@ -67,6 +70,7 @@ public class CommBoardServiceImpl implements CommonService {
 	@Autowired private CommBoardLikeDao cbldao;
 	@Autowired private MySkinViewDao msvdao;
 	@Autowired private MembersDao mdao;
+	@Autowired private CommCommentDao ccdao;
 	
 	@Override
 	public int getMaxNum() {
@@ -214,8 +218,8 @@ public class CommBoardServiceImpl implements CommonService {
 				++likeNum;
 			}
 			List<TagVo> tagList=tdao.getCommTag(cb_num);
-			
-			
+			int commentCnt=ccdao.select_CommentNum(cb_num);
+
 			result.put("cbvo", cbvo); //게시글
 			result.put("imgList", imgList); //게시글 사진
 			result.put("vidList", vidList); //게시글 비디오
@@ -225,7 +229,7 @@ public class CommBoardServiceImpl implements CommonService {
 			result.put("writervo", writervo); //작성자 회원 skin view  
 			result.put("likeNum", likeNum); //추천수
 			result.put("tagList", tagList); //태그리스트
-			
+			result.put("commentCnt", commentCnt); //댓글수
 			
 			return result;
 		}else if(list.equals("notice")) {
@@ -237,8 +241,35 @@ public class CommBoardServiceImpl implements CommonService {
 
 	@Override
 	public Object list(Object data) {
-		int comm_num=(Integer)data;
-		return cbvdao.list(comm_num);
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		HttpSession session=(HttpSession)map.get("session");
+		int pageNum=(Integer)map.get("pageNum");
+		int comm_num=(Integer)map.get("comm_num");
+		
+		PageUtil page=new PageUtil(pageNum, 5, 5, 5);
+		int startRow=page.getStartRow();
+		int endRow=page.getEndRow();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		
+		List<CommBoardVo> list=cbdao.list(map);
+		List<MySkinViewVo> msvlist=new ArrayList<>();
+		List<CommBoardCntVo> cbclist=new ArrayList<>();
+		
+		for(CommBoardVo vo: list) {
+			MySkinViewVo msvv=msvdao.select_using(vo.getUser_num());
+			msvlist.add(msvv);
+			CommBoardCntVo cntvo=cbdao.getBoardCnt(vo.getCb_num());
+			cbclist.add(cntvo);
+		}
+		
+		
+		HashMap<String, Object> result=new HashMap<>();
+		result.put("list", list);//게시글
+		result.put("msvlist", msvlist); //게시글 작성자 프로필
+		result.put("cbclist", cbclist); //게시글 좋아요, 댓글수, 조회수 
+		
+		return result;
 	}
 
 }

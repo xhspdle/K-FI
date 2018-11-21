@@ -396,47 +396,87 @@ $(function() {
 		//addClass, removeClass
 	}
 	
-	///////////////////////Comm_tags 
-	$('#Comm_tags').keypress(function(event){
-		$('.tagsPlaceholder').fadeOut().animate(500);
-		if(event.which==32){
-			$('.tagsPlaceholder').text('');
-			var tag=$(this).val();
-			var t=tag.charAt(0);
-			if(t!='#'){
-				$('.tagsPlaceholder').text('');
-				return false;
-			}
-			if(t=='#'){
-				var length=tag.length;
-				var tag_name=tag.substring(1,length);
-					$('.editableDiv').append("<div name='tag_name'>"+tag_name+"</div>");
-			}
-		}
+	/////////////////////////커뮤니티 게시물 좋아요
+	getBoardLikeUserList();
+	
+	$('#comm_like').on('click',function(event){
+		event.preventDefault();
+		var getPageContext=$('#getPageContext').val();
+		var cb_num=parseInt($('#cb_num').val());
+		$.getJSON(getPageContext+'/commboardlike/insert?cb_num='+cb_num,function(data){
+			var result=data.result;
+			$('#commBoardSelect #likeCnt').attr('data-like-cnt',result);
+			$('#commBoardSelect #likeCnt').text(result+' Likes');
+			getBoardLikeUserList();
+		});
 	});
 	
-	
-	
+	///////////////////////////댓글
+	getBoardCommentList();
+
+	/*$("input[name='commCommentFrm']").submit(function(event){
+		event.preventDefault();
+		var getPageContext=$('#getPageContext').val();
+		var cb_num=parseInt($("input[name='cb_num']").val());
+		var commc_content=$("input[name='commc_content']").val();
+		$.ajax({
+			url:getPageContext+'/commcomment/insert',
+			dataType:'json',
+			type:'post',
+			data:{'cb_num':cb_num,'commc_content':commc_content},
+			success:function(data){
+				var result=data.result;
+				getBoardCommentList();
+			}
+		});
+	});*/
 });
 
-
-
-
-
-
-/* 해당 스킨 적용하기 */
-/*function mySkinApply(num){
-	var getPageContext=$("#getPageContext").val();
-	$.getJSON(getPageContext+'/mypage/myskin/selectApply',{ms_num:num},function(data){
-		var vo=data.vo;
-		$("#profileImg").prop('src',getPageContext+'/resources/upload/img/'+vo.msp_savimg);
-		$("#mypageJumbo div").css({
-			'background':'url('+getPageContext+'/resources/upload/img/'+vo.msc_savimg+')',
-			'background-size':'cover !important',
-			'background-repeat':'no-repeat !important'
+//추천 유저 목록 불러오기
+function getBoardLikeUserList(){
+	var getPageContext=$('#getPageContext').val();
+	var cb_num=$('#cb_num').val();
+	$.getJSON(getPageContext+'/commboardlike/list',{cb_num:cb_num},function(data){
+		$("#commBoardSelect .likeUserList img").remove();
+		var list=data.list;
+		$(list).each(function(i){
+			$("<img class='img-responsive img-circle' " +
+				"src='"+ getPageContext +"/resources/upload/img/"+ list[i].msp_savimg +"' alt='likerProfiles' " +
+				"data-toggle='tooltip' title='"+ list[i].user_nickname +"'>")
+				.appendTo("#commBoardSelect .likeUserList");
 		});
-		$('#mypageJumbo p span').text(vo.ms_msg);
-		$('.navbar').css('background-color',vo.ms_color);
-		$('#search').css('background-color',vo.ms_color);
-	});
-}*/
+	});		
+}
+
+//댓글 목록 불러오기
+/*function getBoardCommentList(){
+	var getPageContext=$('#getPageContext').val();
+	var cb_num=$('#cb_num').val();
+	$.getJSON(getPageContext+'/commcomment/list?cb_num='+cb_num,function(data){
+		$("#commBoardSelect #commentList").empty();
+		var list=data.list; //댓글
+		var msvvolist=data.msvvolist; //댓글단 유저 프로필
+		var pageNum=data.pageNum;
+		$(list).each(function(i,vo){
+				html=document.querySelector("#commBoardSelect #commentTemplate").innerHTML;
+				var msp_savimg="";
+				var userSelect="";
+				var user_nickname="";
+				var user_num=0;
+				if(msvvolist[i].user_num == vo.user_num){
+					msp_savimg=msvvolist[i].msp_savimg;
+					userSelect=getPageContext+"/";
+					user_nickname=msvvolist[i].user_nickname;
+					user_num=msvvolist[i].user_num;
+				}
+				var result=html.replace('{pageNum}',pageNum)
+					.replace('{msp_savimg}', msp_savimg)
+					.replace('{userSelect}', msp_savimg)
+					.replace('{myc_content}', vo.commc_content)
+					.replace('{myc_num}', user_num)
+					.replace('{path}', getPageContext)
+					.replace('{myc_num}', user_num)
+		});
+	});	
+}
+*/

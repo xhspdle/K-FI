@@ -15,59 +15,80 @@
 	</div>
 	
 	<!-- 여기서부터 c:forEach -->
-	<h1 class="text-center" id="브이오.mb_date" style="margin-bottom: 30px;">
-		<span style="border-bottom: 4px solid tan">2018-날짜-날짜</span>
-	</h1>
-	<!-- 								0번째꺼는 슬라이드 안주기 
-	<div class="panel-group <c:if test="${vs.index!=0 }">slideanim</c:if>">
-	-->
-	<div class="panel-group">
+	<c:forEach var="board" items="${list }" >
+		<c:choose>
+			<c:when test="${date ne board.cb_date }">
+				<h1 class="text-center" id="${board.cb_date }" style="margin-bottom: 30px;">
+					<span style="border-bottom: 4px solid tan">${board.cb_date }</span>
+				</h1>
+				<c:set var="date"  value="${board.cb_date } "/>
+			</c:when>
+			<c:when test="${date eq board.cb_date }">
+			</c:when>
+			<c:otherwise>
+				<h1 class="text-center" id="${board.cb_date }" style="margin-bottom: 30px;">
+					<span style="border-bottom: 4px solid tan">${board.cb_date }</span>
+				</h1>
+			</c:otherwise>
+		</c:choose>		
+		<c:set var="date" value="${board.cb_date }"/>
+		
+		<div class="panel-group">
 		<div class="panel panel-default">
-			<div class="panel-heading" id="브이오.mb_num">
+			<div class="panel-heading" id="${board.cb_num }">
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
 						<a href="#" class="postA">
-						브이오.mb_title
+						${board.cb_title }
 						</a>
 					</h1>
 				</blockquote>
 				<div class="dropdown boardOption">
 					<button class="btn dropdown-toggle 
-					<c:if test="${vo.user_num!=sessionScope.user_num}">disabled</c:if>" 
+					<c:if test="${board.user_num ne sessionScope.user_num}">disabled</c:if>" 
 					type="button" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
-						<li>
-							<a href="#updateModal" data-toggle="modal" data-mb-num="${vo.mb_num }">
-								<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
-							</a>
-						</li>
-						<li>
-							<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${vo.mb_num }">
-								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
-							</a>
-						</li>
-						<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
+						<c:if test="${board.user_num eq sessionScope.user_num}">
+							<li>
+								<a href="#updateModal" data-toggle="modal" data-mb-num="${board.cb_num }">
+									<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
+								</a>
+							</li>
+						</c:if>
+						<c:if test="${board.user_num eq sessionScope.user_num || sessionScope.user_num eq comm_adminNum }">
+							<li>
+								<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${board.cb_num}">
+									<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
+								</a>
+							</li>
+						</c:if>
+						<c:if test="${board.user_num ne sessionScope.user_num }">
+							<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>
 			<div class="panel-body">
-				<div class="media">
-					<div class="media-left media-top">
-											<!-- /resources/upload/img/브이오.msp_savimg -->
-						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
+			<c:set var="j" value="${0 }"/>
+			<c:forEach var="msv" items="${msvlist }">
+				<c:choose>
+				<c:when test="${j eq 0 &&  msv.user_num eq board.user_num }">
+					<c:set var="j" value="${j+=1 }"/>
+					<div class="media">
+						<div class="media-left media-top">
+							<img src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
+						</div>
+						<div class="media-body text-left" style="padding-left:5px;">
+							<h4 class="media-heading"><strong>${msv.user_nickname }</strong></h4>
+							<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
+						</div>
 					</div>
-					<div class="media-body text-left" style="padding-left:5px;">
-						<h4 class="media-heading"><strong>브이오.user_nickname</strong></h4>
-						<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
-					</div>
-				</div>
-				<p>브이오.mb_content</p>
-				<!-- 스샷용 이미지 -->
-				<img class="img-responsive center-block" 
-					src="<c:url value='/resources/images/logo2.png'/>" alt="board image">
-				<!-- --------- -->
+				</c:when>
+				</c:choose>
+			</c:forEach>
+				<p>${board.cb_content }</p>
 				<c:choose>
 					<c:when test="${!empty vo.mv_savvid}">
 					<video class="img-responsive center-block" controls autoplay muted="muted" loop 
@@ -80,82 +101,18 @@
 				</c:choose>
 			</div>
 			<div class="panel-footer">
-				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-heart-empty"></span>&nbsp;Likes <span class="badge">${vo.like_cnt }</span></h4>
-				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments <span class="badge">${vo.comment_cnt }</span></h4>
-				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${vo.mb_views }</h4>
+			<c:forEach var="cnt" items="${cbclist }">
+			<c:if test="${board.cb_num eq cnt.cb }">
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-heart-empty"></span>&nbsp;Likes <span class="badge">${cnt.cblcnt }</span></h4>
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments <span class="badge">${cnt.cmcnt }</span></h4>
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${cnt.cvcnt }</h4>
+			</c:if>
+			</c:forEach>
 			</div>
 		</div>
 	</div>
+	</c:forEach>
 	<!-- 여기까지 c:forEach -->
-	
-	
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel=heading" id="브이오.mb_num">
-				<blockquote class="postBlock">
-					<h1 class="postTitle">
-						<a href="#" class="postA">
-						브이오.mb_title
-						</a>
-					</h1>
-				</blockquote>
-				<div class="dropdown boardOption">
-					<button class="btn dropdown-toggle 
-					<c:if test="${vo.user_num!=sessionScope.user_num}">disabled</c:if>" 
-					type="button" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-option-vertical"></span>
-					</button>
-					<ul class="dropdown-menu rightOption">
-						<li>
-							<a href="#updateModal" data-toggle="modal" data-mb-num="${vo.mb_num }">
-								<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
-							</a>
-						</li>
-						<li>
-							<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${vo.mb_num }">
-								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
-							</a>
-						</li>
-						<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="panel-body">
-				<div class="media">
-					<div class="media-left media-top">
-											<!-- /resources/upload/img/브이오.msp_savimg -->
-						<img src="<c:url value='/resources/images/라이언움짤.gif'/>" class="media-object img-circle" style="width:50px;height:50px">
-					</div>
-					<div class="media-body" style="padding-left:5px;">
-						<h4 class="media-heading" style="text-align:left;"><strong>브이오.user_nickname</strong></h4>
-						<p style="text-align:left;margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
-					</div>
-				</div>
-				<p>브이오.mb_content</p>
-				<!-- 스샷용 이미지 -->
-				<img class="img-responsive center-block" 
-					src="<c:url value='/resources/images/logo2.png'/>" alt="board image">
-				<!-- --------- -->
-				<c:choose>
-					<c:when test="${!empty vo.mv_savvid}">
-					<video class="img-responsive center-block" controls autoplay muted="muted" loop 
-					src="<c:url value='/resources/upload/vid/${vo.mv_savvid }'/>"></video>
-					</c:when>
-					<c:when test="${!empty vo.mp_savimg }">
-					<img class="img-responsive center-block" 
-					src="<c:url value='/resources/upload/img/${vo.mp_savimg }'/>" alt="board image">
-					</c:when>
-				</c:choose>
-			</div>
-			<div class="panel-footer">
-				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-heart-empty"></span>&nbsp;Likes <span class="badge">${vo.like_cnt }</span></h4>
-				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments <span class="badge">${vo.comment_cnt }</span></h4>
-				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${vo.mb_views }</h4>
-			</div>
-		</div>
-	</div>
-	
-	
 	
 </div>
 <!-- Calendar icon -->

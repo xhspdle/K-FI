@@ -6,7 +6,6 @@
 		<img id="profileImg" class="img-circle" alt="profile" src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>">
 		<h3><strong>${msv.user_nickname }</strong></h3>
 		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p>
-		<!-- 이미 팔로우중인지 검사하는 코드 필요 -->
 		<c:choose>
 			<c:when test="${user_num!=selectedUserNum && !empty selectedUserNum}">
 			<form class="form-follow">

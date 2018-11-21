@@ -113,25 +113,10 @@ public class InsideCommunityServiceImpl implements CommonService {
 
 	@Override
 	public Object list(Object data) {
-		HashMap<String, Object> map = (HashMap<String, Object>) data;
-		HttpSession session = (HttpSession) map.get("session");
-		int user_num = (Integer) session.getAttribute("user_num");
-
-		/* mypage의 mycommunity 불러오기 */
-		map.put("user_num", user_num);
-		List<CommunityVo> list = cdao.select_mycommlist(map);
-
-		/* 해당 커뮤니티의 스킨 프로필 불러오기 */
-		List<CommSkinProfileVo> csplist = new ArrayList<>();
-		for (CommunityVo cv : list) {
-			int comm_num = cv.getComm_num();
-			CommSkinProfileVo cspvo = cspdao.select_usingProfile(comm_num);
-			csplist.add(cspvo);
-		}
-		HashMap<String, Object> result = new HashMap<>();
-		result.put("list", list);
-		result.put("csplist", csplist);
-		return result;
+		
+		
+		
+		return null;
 	}
 
 }

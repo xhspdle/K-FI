@@ -64,6 +64,8 @@ public class ListController {
 		model.addAttribute("writervo", (MySkinViewVo)result.get("writervo")); //게시글 작성자 skin view
 		model.addAttribute("likeNum", (Integer)result.get("likeNum"));  //추천수
 		model.addAttribute("tagList", (List<TagVo>)result.get("tagList"));  //태그리스트
+		model.addAttribute("commentCnt", (Integer)result.get("commentCnt"));  //댓글 수
+		
 		
 		return ".community.board.select";
 	}

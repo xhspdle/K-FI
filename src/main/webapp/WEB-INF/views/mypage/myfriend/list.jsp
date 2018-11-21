@@ -21,7 +21,7 @@
 					<div class="w3-card"
 						style="height: 100px; border-radius: 25px; background-color:${msvVo.ms_color};overflow: hidden;">
 						<div class="myFriendContainer">
-						<a href="#" style="text-decoration: none;">
+						<a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${msvVo.user_num }'/>" style="text-decoration: none;">
 						  <img src="<c:url value='/resources/upload/img/${msvVo.msp_savimg}'/>">
 						  <p><span><b> ${mVo.user_nickname }</b></span>
 						  <br><span>${msvVo.ms_msg }</span></p>

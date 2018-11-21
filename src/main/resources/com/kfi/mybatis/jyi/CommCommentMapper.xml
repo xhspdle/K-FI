@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.CommCommentMapper">
+
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(commc_num),0) from comm_comment
+	</select>
+
+	<select id="select_CommentNum" resultType="int">
+		select nvl(max(commc_num),0) from comm_comment where cb_num=#{cb_num}
+	</select>
+	
+	<insert id="insert" parameterType="commcomment">
+		insert into comm_comment values(#{commc_num},#{cb_num},#{user_num},#{commc_content},sysdate,#{commc_like})
+	</insert>
+
+	<select id="list" parameterType="hashmap" resultType="commcomment"> 
+		select c.* 
+		from (
+			select cc.*, rownum rnum 
+			from comm_comment cc 
+			where cb_num=#{cb_num}
+			) c
+		<![CDATA[ where rnum >= #{startRow} and rnum <= #{endRow} ]]>
+	</select>
+
+</mapper>

@@ -1,11 +1,13 @@
 package com.kfi.jyi.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kfi.jyi.vo.CommBoardCntVo;
 import com.kfi.jyi.vo.CommBoardVo;
 
 @Repository
@@ -28,5 +30,15 @@ public class CommBoardDao {
 	public CommBoardVo select(int cb_num) {
 		return session.selectOne(NAMESPACE+".select",cb_num);
 	}
+	
+	
+	public List<CommBoardVo> list(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE+".list",map);
+	}
+	
+	public CommBoardCntVo getBoardCnt(int cb_num) {
+		return session.selectOne(NAMESPACE+".getBoardCnt",cb_num);
+	}
+	
 	
 }

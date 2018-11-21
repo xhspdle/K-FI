@@ -21,5 +21,21 @@
 		select * from comm_board where cb_num=#{cb_num}
 	</select>
 	
+	<select id="list" parameterType="hashmap" resultType="commboard">
+		select commb.* 
+		from (
+			select cb.*, rownum rnum 
+			from comm_board cb 
+			where comm_num=#{comm_num}) commb
+		<![CDATA[ where rnum >= #{startRow} and rnum <= #{endRow} ]]> order by cb_date desc
+	</select>
+
+	<select id="getBoardCnt" parameterType="int" resultType="commboardcnt">
+	    select cmcnt, cblcnt, cvcnt, cb
+	    from (select nvl(count(distinct commc_num),0) cmcnt from comm_comment where cb_num=#{cb_num}) aa,
+	        (select  nvl(count(distinct cbl_num),0) cblcnt from comm_board_like where cb_num=#{cb_num}) bb,
+	        (select nvl(max(cb_views),0) cvcnt, nvl(max(cb_num),0) cb from comm_board where cb_num=#{cb_num}) cc 
+	</select>
+
 
 </mapper>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="commBoardSelect" class="container">
+	<input type="hidden" id="cb_num" value="${cbvo.cb_num }">
 	<h1 class="text-center" style="margin-bottom:30px;"><span style="border-bottom: 4px solid tan">${cbvo.cb_date }</span></h1>
 	<div class="panel-group">
 		<div class="panel panel-default">
@@ -115,29 +116,28 @@
 				<h3 class="postLikeComment select" id="likeCnt" data-like-cnt="${likeNum }">
 				${likeNum } Likes<span class="msgSpan"></span></h3>
 				<div class="likes">
-					<a class="btn btn-default" href="<c:url value='/'/>" 
-					data-board-num="${boardVo.mb_num }">
+					<a class="btn btn-default" href="#" data-board-num="${cbvo.cb_num }" id="comm_like">
 					<span class="glyphicon glyphicon-heart"></span> Like</a>
 					<div class="likeUserList">
 					</div>
 				</div>
-<%--				<h3 class="postLikeComment select" id="commentCnt">${comment_cnt } Comments</h3>
+				<h3 class="postLikeComment select" id="commentCnt">${commentCnt } Comments</h3>
 				<div class="media">
 				<c:choose>
 					<c:when test="${!empty user_num }">
 					<div class="media-left media-top">
-						<img class="media-object img-circle" src="<c:url value='/resources/upload/img/${boardVo.msp_savimg }'/>" alt="userProfile">
+						<img class="media-object img-circle" src="<c:url value='/resources/upload/img/${writervo.msp_savimg }'/>" alt="userProfile">
 					</div>
-					<div class="media-body media-middle form-group row">
-						<form id="commentForm" name="frmComment" class="form-inline" action="<c:url value='/mypage/mycomment/insert'/>">
-							<input type="hidden" name="mb_num" value="${boardVo.mb_num }">
-							<input type="text" name="myc_content" class="form-control" placeholder="Say something!">
+				<div class="media-body media-middle form-group row">
+						<form id="commentForm" name="commCommentFrm" class="form-inline" action="<c:url value='/commcomment/insert'/>">
+							<input type="hidden" name="cb_num" value="${cbvo.cb_num }">
+							<input type="text" name="commc_content" class="form-control" placeholder="Say something!">
 							<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span></button>
 							<span class="help-block"></span>
 						</form>
 					</div>	
 					</c:when>
-					<c:otherwise>
+						<c:otherwise>
 					<div class="media-left media-top">
 						<img class="media-object img-circle" src="<c:url value='/resources/images/default-profile.png'/>" alt="userProfile">
 					</div>
@@ -149,8 +149,7 @@
 				</div>
 				<div id="commentList">
 				</div>
-				
-				<div class="text-center">
+	<%--			<div class="text-center">
 					<ul class="pagination"></ul>
 					<a <c:if test="${!empty prev.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${prev.mb_num }&keyword=${keyword }&selectedUserNum=${selectedUserNum }'/>"</c:if>>
 						<span data-toggle="tooltip" 
@@ -182,3 +181,24 @@
 		</div>
 	</div>
 </div>
+<script id="commentTemplate" type="text/template">
+<div class="media slide" data-comm-pagenum="{pageNum}">
+	<div class="media-left">
+		<img class="media-object img-circle" src="<c:url value='/resources/upload/img/{msp_savimg}'/>" alt="commentProfile">
+	</div>
+	<div class="media-body">
+		<h3><strong><a href="{userSelect}">{user_nickname}</a></strong><span class="msgSpan"></span></h3>
+		<div class="dropdown commentOption">
+			<button class="btn dropdown-toggle{optionBtn}" type="button" data-toggle="dropdown">
+				<span class="glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu rightOption">{dropDowns}</ul>
+		</div>
+		<p>{myc_content}</p>
+		<a class="thumbsUp" data-comm-num="{myc_num}" href="{path}/mypage/mycommentlike/insert?myc_num={myc_num}">
+			<i class="glyphicon glyphicon-thumbs-up"></i>
+		</a>
+		<span data-comm-num="{myc_num}">{comment_likes}</span><small>{myc_date}</small><span class="msgSpan"></span>
+	</div>
+</div>
+</script>

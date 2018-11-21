@@ -35,6 +35,11 @@
 		<typeAlias type="com.kfi.jyi.vo.CommBoardLikeVo" alias="commboardlike"/>
 		<typeAlias type="com.kfi.jyi.vo.HotPhoto3Vo" alias="hotphoto3"/>
 		<typeAlias type="com.kfi.jyi.vo.HotVideoVo" alias="hotvideo"/>
+	<typeAlias type="com.kfi.jyi.vo.CommCommentVo" alias="commcomment"/>
+		<typeAlias type="com.kfi.jyi.vo.CommBoardCntVo" alias="commboardcnt"/>
+	
+	
+	
 		
 		<typeAlias type="com.kfi.dgl.vo.MembersVo" alias="logmembers"/>
 		<typeAlias type="com.kfi.dgl.vo.CertiMembersVo" alias="certimembers"/>
@@ -79,6 +84,10 @@
 		<mapper resource="com/kfi/mybatis/jyi/CommPhotoMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/CommVideoMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/CommBoardLikeMapper.xml"/>
+			<mapper resource="com/kfi/mybatis/jyi/CommCommentMapper.xml"/>
+		
+		
+		
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AccuseMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/AdminBoardMapper.xml"/>

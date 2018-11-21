@@ -19,10 +19,10 @@ import com.kfi.jyi.vo.MySkinViewVo;
 import com.kfi.ldk.service.CommonService;
 import com.kfi.ysy.vo.CommSkinProfileVo;
 
-@Controller("myCommListController")
+@Controller(value="myCommListController")
 public class MyCommListController {
 	@Autowired 
-	@Qualifier("insideCommunityServiceImpl") private CommonService service;
+	@Qualifier("myCommunityListServiceImpl") private CommonService service;
 	
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
