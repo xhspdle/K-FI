@@ -7,6 +7,7 @@ public class CommVoteList {
 	private int voteNum;
 	private int comm_num;
 	private String vote_title;
+	private String vote_info;
 	private int remain;
 	private int user_num;
 	private String user_nickname;
@@ -15,13 +16,15 @@ public class CommVoteList {
 	private int cnt;
 	private List<CommVoteOptionCollection> list;
 	public CommVoteList() {}
-	public CommVoteList(int vote_num, int voteNum, int comm_num, String vote_title, int remain, int user_num,
-			String user_nickname, String user_email, String msp_savimg, int cnt, List<CommVoteOptionCollection> list) {
+	public CommVoteList(int vote_num, int voteNum, int comm_num, String vote_title, String vote_info, int remain,
+			int user_num, String user_nickname, String user_email, String msp_savimg, int cnt,
+			List<CommVoteOptionCollection> list) {
 		super();
 		this.vote_num = vote_num;
 		this.voteNum = voteNum;
 		this.comm_num = comm_num;
 		this.vote_title = vote_title;
+		this.vote_info = vote_info;
 		this.remain = remain;
 		this.user_num = user_num;
 		this.user_nickname = user_nickname;
@@ -53,6 +56,12 @@ public class CommVoteList {
 	}
 	public void setVote_title(String vote_title) {
 		this.vote_title = vote_title;
+	}
+	public String getVote_info() {
+		return vote_info;
+	}
+	public void setVote_info(String vote_info) {
+		this.vote_info = vote_info;
 	}
 	public int getRemain() {
 		return remain;
@@ -99,8 +108,8 @@ public class CommVoteList {
 	@Override
 	public String toString() {
 		return "CommVoteList [vote_num=" + vote_num + ", voteNum=" + voteNum + ", comm_num=" + comm_num
-				+ ", vote_title=" + vote_title + ", remain=" + remain + ", user_num=" + user_num + ", user_nickname="
-				+ user_nickname + ", user_email=" + user_email + ", msp_savimg=" + msp_savimg + ", cnt=" + cnt
-				+ ", list=" + list + "]";
+				+ ", vote_title=" + vote_title + ", vote_info=" + vote_info + ", remain=" + remain + ", user_num="
+				+ user_num + ", user_nickname=" + user_nickname + ", user_email=" + user_email + ", msp_savimg="
+				+ msp_savimg + ", cnt=" + cnt + ", list=" + list + "]";
 	}
 }
