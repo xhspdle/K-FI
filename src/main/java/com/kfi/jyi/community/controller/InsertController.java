@@ -36,9 +36,9 @@ public class InsertController {
 		map.put("comm_skin_cover", comm_skin_cover);
 		int result=(Integer)service.insert(map);
 		if(result>0) {
-			return ".community";
+			return ".communityMain";
 		}else {
-			return ".community"; //오류페이지로 이동
+			return ".communityMain"; //오류페이지로 이동
 		}
 	}
 	

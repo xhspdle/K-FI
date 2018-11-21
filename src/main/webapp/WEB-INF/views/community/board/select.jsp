@@ -27,7 +27,7 @@
 						<li>
 							<a href="#delete" class="btn btn-block 
 							<c:if test="${sessionScope.user_num!=cbvo.user_num }">disabled</c:if>" 
-							style="text-align: left;" onclick="return false;" data-toggle="popover" data-mb-num="${cbvo.cb_num }">
+							style="text-align: left;" onclick="return false;" data-toggle="popover" data-popover-type="commBoard" data-cb-num="${cbvo.cb_num }">
 								<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 							</a>
 						</li>

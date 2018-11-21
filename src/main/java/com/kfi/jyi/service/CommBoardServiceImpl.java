@@ -133,7 +133,7 @@ public class CommBoardServiceImpl implements CommonService {
 					String cv_savvid=UUID.randomUUID()+"_"+cv_orgvid;
 					fileV_list.add(cv_savvid);
 					InputStream is=fileV[i].getInputStream();
-					FileOutputStream fos=new FileOutputStream(uploadPathVideo+"\\"+cv_orgvid);
+					FileOutputStream fos=new FileOutputStream(uploadPathVideo+"\\"+cv_savvid);
 					FileCopyUtils.copy(is, fos);
 					is.close();
 					fos.close();
@@ -187,8 +187,19 @@ public class CommBoardServiceImpl implements CommonService {
 
 	@Override
 	public int delete(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		String cbNum=(String)map.get("cb_num");
+		int cb_num=0;
+		if(cbNum!=null && !cbNum.equals("")) cb_num=Integer.parseInt(cbNum);
+		String userPwd=(String)map.get("user_pwd");
+		int user_pwd=0;
+		if(userPwd!=null && !userPwd.equals("")) user_pwd=Integer.parseInt(userPwd);
+		int result=cbdao.commBoard_checkPwd(map);
+		if(result>0) {
+			return cbdao.delete(cb_num);
+		}else {
+			return -1;
+		}
 	}
 
 	@Override

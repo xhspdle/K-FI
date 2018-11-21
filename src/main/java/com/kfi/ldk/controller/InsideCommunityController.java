@@ -42,7 +42,6 @@ public class InsideCommunityController {
 		if (comm_num!=null) {
 			commNum = Integer.parseInt(comm_num);
 			session.setAttribute("comm_num", commNum);
-			//System.out.println(comm_num+"!!!!!!!comm_num");
 		}
 	}
 

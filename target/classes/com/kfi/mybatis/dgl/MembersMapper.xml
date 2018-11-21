@@ -98,7 +98,8 @@
 		</set>
 		where user_num=#{user_num}
 	</update>
-	<delete id="delete" parameterType="int">
-		delete from members where user_num=#{user_num}
-	</delete>
+
+	<update id="delete" parameterType="int">
+		update members set user_status= -1  where user_num=#{user_num} 
+	</update>
 </mapper>

@@ -112,6 +112,9 @@
 		</div>
 	</div>
 	</c:forEach>
+	<div class='container-fluid text-center'>
+	<h2><a class='btn btn-default' href='javascript:$.getListMore()'>
+	<span class='glyphicon glyphicon-plus'></span> More </a></h2></div>
 	<!-- 여기까지 c:forEach -->
 	
 </div>

@@ -44,12 +44,13 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">회원 탈퇴</h4>
 				</div>
-				<div class="modal-body"><!-- (미완성_마지막에 모든 자료 지우고 처리하기) -->
+				<div class="modal-body">
+					<!-- 회원 번호바꾸기 -->
 					<p>비밀번호를 입력해주세요</p>
 					<form method="post" action="<c:url value='/mypage/myinfo/delete'/>" id="myinfo_delete_frm">
 					<div style="display: -webkit-box;">
 						<input type="password" class="form-control" name="myinfo_delete_user_pwd" id="myinfo_delete_user_pwd">
-						<button type="submit" class="btn btn-default" id="myinfo_delete"  >탈퇴하기</button>
+						<button type="submit" class="btn btn-default" id="myinfo_delete">탈퇴하기</button>
 					</div>
 					</form>
 				</div>

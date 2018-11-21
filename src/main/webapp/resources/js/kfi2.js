@@ -412,9 +412,9 @@ $(function() {
 	});
 	
 	///////////////////////////댓글
-	getBoardCommentList();
+	/*getBoardCommentList();
 
-	/*$("input[name='commCommentFrm']").submit(function(event){
+	$("input[name='commCommentFrm']").submit(function(event){
 		event.preventDefault();
 		var getPageContext=$('#getPageContext').val();
 		var cb_num=parseInt($("input[name='cb_num']").val());
@@ -430,6 +430,22 @@ $(function() {
 			}
 		});
 	});*/
+	
+	
+	//////커뮤니티 게시글 조회수 올리기
+	var cb_num=$('#cb_num').val();
+	if(cb_num != null){
+		var getPageContext=$('#getPageContext').val();
+		$.getJSON(getPageContext+'/community/board/updateViews?cb_num='+cb_num,function(data){
+			var result=data.result;
+			console.log(result+"!!!!!");
+		});
+	}
+	
+	//////커뮤니티 전체 게시글 페이징
+	
+	
+	
 });
 
 //추천 유저 목록 불러오기

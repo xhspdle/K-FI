@@ -40,5 +40,16 @@ public class CommBoardDao {
 		return session.selectOne(NAMESPACE+".getBoardCnt",cb_num);
 	}
 	
+	public int delete(int cb_num) {
+		return session.delete(NAMESPACE+".delete",cb_num);
+	}
+	
+	public int commBoard_checkPwd(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".commBoard_checkPwd", map);
+	}
+	
+	public int updateViews(int cb_num) {
+		return session.update(NAMESPACE+".updateViews", cb_num);
+	}
 	
 }

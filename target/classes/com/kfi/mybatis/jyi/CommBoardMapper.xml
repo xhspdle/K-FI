@@ -37,5 +37,19 @@
 	        (select nvl(max(cb_views),0) cvcnt, nvl(max(cb_num),0) cb from comm_board where cb_num=#{cb_num}) cc 
 	</select>
 
+	<delete id="delete" parameterType="int">
+		delete from comm_board where cb_num=#{cb_num}
+	</delete>
+
+	<select id="commBoard_checkPwd" resultType="int">
+		select nvl(count(user_num),0)
+		from members
+		where user_num = (select user_num from comm_board where cb_num=#{cb_num}) and user_pwd=#{user_pwd}
+	</select>
+
+	<update id="updateViews">
+		update comm_board set cb_views = cb_views+1 where cb_num=#{cb_num}
+	</update>
+
 
 </mapper>
