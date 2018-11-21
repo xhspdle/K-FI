@@ -644,8 +644,11 @@ $(document).ready(function(){
 		  hiddenInput="<input type='hidden' name='mb_num' value='"+ $(this).attr("data-mb-num") +"'>";
 	  }else if(popoverType==="commPoll"){
 		  action=getPageContext + "/community/polls/delete";
-		  hiddenInput="<input type='hidden' name='vote_num' value='"+ $(this).attr +"'";
-	  }
+		  hiddenInput="<input type='hidden' name='vote_num' value='"+ $(this).attr("data-vote-num") +"'>";
+	  }else if(popoverType==="commBoard"){
+		  action=getPageContext + "/community/board/delete";
+		  hiddenInput="<input type='hidden' name='cb_num' value='"+ $(this).attr("data-cb-num") +"'>";
+	  }	
 	  $("button.dropdown-toggle").attr("data-toggle","off");
 	  $("[data-toggle='popover']").popover({
 		  title: "<h3><strong>Wanna delete?</strong></h3>" + 

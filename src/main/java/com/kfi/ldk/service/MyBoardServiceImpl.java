@@ -253,7 +253,7 @@ public class MyBoardServiceImpl implements CommonService{
 					if(f.delete()) {
 						System.out.println(uploadPathP + "경로에 사진 삭제 성공!");
 					}else {
-						//throw new Exception("[사진삭제오류]" +photoList.size() + "개 중 " + (i+1) +"번째 파일에서 오류 발생");
+						System.out.println(photoList.size() + "개 사진중 " + (i+1) +"번째 파일 삭제 실패");
 					}
 				}
 				for(int i=0;i<videoList.size();i++) {
@@ -262,7 +262,7 @@ public class MyBoardServiceImpl implements CommonService{
 					if(f.delete()) {
 						System.out.println(uploadPathV + "경로에 영상 삭제 성공!");
 					}else {
-						//throw new Exception("[영상삭제오류]" +videoList.size() + "개 중 " + (i+1) +"번째 파일에서 오류 발생");
+						System.out.println(videoList.size() + "개 영상중 " + (i+1) +"번째 파일 삭제 실패");
 					}
 				}
 				//mpDao.delete(mb_num); on delete cascade
