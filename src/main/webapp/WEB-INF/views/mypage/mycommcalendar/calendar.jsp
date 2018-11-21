@@ -25,22 +25,15 @@
 				}, 
 				</c:forEach>
 				],
-				eventMouseover:function(calEvent,jsEvent,view){
-				 	$(".fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead").css({
-						'overflow': 'visible'
-					}); 
-					$('<div class="calevent"><h4><b>'+calEvent.id+'</b></h4></div>')
-					.appendTo(this).parent().css({pageX:jsEvent.pageX,pageY:jsEvent.pageY,'overflow': 'visible'});
-				},
-				eventMouseout:function(calEvent,jsEvent){
-					$(this).children('.calevent').css('display','none');
-				},
-				/* eventClick:function(event){
-					if(event.url){
-						location.href=event.url;
-						return false;
-					}
-				}, */ eventColor: '#00cee8'
+				eventRender: function(event, element){
+			          element.popover({
+			              animation:true,
+			              delay: 300,
+			              content: event.id,
+			              trigger: 'hover'
+			          });
+			   	},
+		        eventColor: '#00cee8'
 		})
 		$("#mypage_communitylist").on('change',function(){
 			var comm_num=$('#mypage_communitylist option:selected').val();
@@ -56,7 +49,9 @@
 			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num
 					+"&comm_name="+comm_name+"&gathering="+gathering;
 		});
+		
 	});
+	
 </script>
 <div class="container">
 <div id="mypage_comm_calendar_wrap" >

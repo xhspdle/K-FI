@@ -8,11 +8,10 @@
 	    	<div style="padding: 1%;padding-left: 38%;">
 		    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="padding: 6px 78px;">My Skin
 		    <span class="caret"></span></button>
-		    <ul id="myskin_dropmenu" class="dropdown-menu" style="width: 19%;">
-		     	<c:forEach var="list" items="${msvlist }">
+		    <ul class="dropdown-menu">
+		      <c:forEach var="list" items="${msvlist }">
 			    	 <li id="${list.ms_num }"><a href="#contact">${list.ms_name }</a></li>
 			    </c:forEach>
-		      <li class="divider"></li>
 		    </ul>
 		    <a class="myskin_ud_add" href="<c:url value='/mypage/myskin/insertForm' />">스킨 추가</a>
 				<a class="myskin_ud_default" href="<c:url value='/mypage/myskin/default' />">기본 이미지로 변경</a>
@@ -20,9 +19,10 @@
 		  </div>
 	</div>
 		<span style="position:absolute;right:-10px;z-index:99;float:right;width: 18%;display: flex;margin-right: 17%;margin-top: 3%;}">
-			<a class="myskin_ud" href="#" id="applyMySkin">적용</a>
-			<a class="myskin_ud" href="#" id="updateMySkin">수정</a> 
-			<a class="myskin_ud" href="#" id="deleteMySkin">삭제</a>
+			<!-- class="myskin_ud" -->
+			<a  href="#" id="applyMySkin">적용</a>
+			<a  href="#" id="updateMySkin">수정</a> 
+			<a  href="#" id="deleteMySkin">삭제</a>
 		</span>
 		<div class="col-sm-offset-1 col-sm-10">
 		<div class="pre_cover" id="myskin_list_cover" style="margin-top: 2%;background-size: cover !important;">

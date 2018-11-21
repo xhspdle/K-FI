@@ -41,11 +41,11 @@ public class InsertController {
 		return msv;
 	}
 	
-	@RequestMapping(value="/friends/follow",method=RequestMethod.GET)
-	public String follow(HttpSession session, String user1_num) {
+	@RequestMapping(value="/friends/follow",method=RequestMethod.POST)
+	public String follow(HttpSession session, String selectedUserNum) {
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("session", session);
-		map.put("user1_num",user1_num );
+		map.put("user1_num",selectedUserNum );
 		int result=(Integer)service.insert(map);
 		if(result>0) {
 			return ".mypage.myfriend.list";
