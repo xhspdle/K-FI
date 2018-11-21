@@ -638,10 +638,13 @@ $(document).ready(function(){
 	  
 	  var popoverType=$(this).attr("data-popover-type");
 	  var action='';
+	  var hiddenInput='';
 	  if(popoverType==="myBoard"){
 		  action=getPageContext + "/mypage/myboard/delete";
+		  hiddenInput="<input type='hidden' name='mb_num' value='"+ $(this).attr("data-mb-num") +"'>";
 	  }else if(popoverType==="commPoll"){
-		  action=getPageContext + "/community/polls/delete"
+		  action=getPageContext + "/community/polls/delete";
+		  hiddenInput="<input type='hidden' name='vote_num' value='"+ $(this).attr +"'";
 	  }
 	  $("button.dropdown-toggle").attr("data-toggle","off");
 	  $("[data-toggle='popover']").popover({
@@ -650,7 +653,7 @@ $(document).ready(function(){
 		  content: "<form class='form-horizontal boardDelete' method='post' " + 
 		  		   "action='"+ action +"'>" +
 		  		   "<div class='input-group input-group-lg'>" +
-		  		   "<input type='hidden' name='mb_num' value='"+ $("[data-toggle='popover']").attr("data-mb-num") +"'>" +
+		  		   hiddenInput +
 		  		   "<input type='password' name='user_pwd' class='form-control' >" + 
 		  		   "<div class='input-group-btn'>" +
 		  		   "<button class='btn btn-danger' type='submit'>" +
