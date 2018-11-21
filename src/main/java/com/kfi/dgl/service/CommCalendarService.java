@@ -9,7 +9,7 @@ import com.kfi.dgl.dao.CommCalendarDao;
 import com.kfi.jyi.vo.CommCalendarVo;
 
 @Service
-public class CommCalendar {
+public class CommCalendarService {
 
 	@Autowired CommCalendarDao ccdao;
 	

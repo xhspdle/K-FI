@@ -10,12 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kfi.dgl.service.CommCalendar;
+import com.kfi.dgl.service.CommCalendarService;
 import com.kfi.jyi.vo.CommCalendarVo;
 
 @Controller(value = "CommCalendarController")
 public class CommCalendarController {
-	@Autowired private CommCalendar service;
+	@Autowired private CommCalendarService service;
 	@RequestMapping(value="/community/commcalendar", method = RequestMethod.GET)
 	public String commcalendar() {
 		return ".community.commcalendar.calendar";

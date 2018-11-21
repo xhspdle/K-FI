@@ -36,8 +36,8 @@
 		var pwdFlag = false;
 		var emailFlag = false;
 		
-		var getContext = $('#getContext').val();
 		/* var joinbtn = $("#joinbtn");
+		var getContext = $('#getContext').val();
 		joinbtn.attr("disabled", "disabled");*/
  
 		$('#idck').click(function() {

@@ -16,7 +16,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 	$(function() {
 		var idFlag = false;
 		var nickFlag = false;
@@ -26,7 +25,7 @@
 		var getContext = $('#getContext').val();
 
 		$('#idck').click(function() {
-			var id = $("#id").val();
+			var id = $("#userid").val();
 			var eMsg = $("#idMsg");
 			var isID = /^[a-zA-Z0-9]{5,15}$/;
 
@@ -39,7 +38,7 @@
 			$.ajax({
 				async : true,
 				type : "GET",
-				url : getContext + '/login/join/idcheck',
+				url : getContext + 'login/join/idcheck',
 				data : {
 					'user_id' : id
 				},
@@ -49,6 +48,9 @@
 					if (!isID.test(id)) {
 						$(eMsg).text("5~15자의 영문 소문자, 숫자만 사용가능 합니다!");
 						$("#userid").focus();
+						eMsg.show();
+						eMsg.removeClass('greenText');
+						eMsg.addClass('redText');
 						return false;
 					} else if (data.msg == 'false') {
 						$(eMsg).text("이미 사용중인 아이디 입니다.");
@@ -59,7 +61,7 @@
 						return false;
 					} else if (data.msg == 'true') {
 						$(eMsg).text("cool ID~!!");
-						$("#usernickname").focus();
+						$("#nickck").focus();
 						eMsg.show();
 						eMsg.removeClass('redText');
 						eMsg.addClass('greenText');
@@ -72,18 +74,18 @@
 
 		// 닉네임 중복 체크 부분 
 		$('#nickck').click(function() {
-			var nickname = $("#nickname").val();
+			var nickname = $("#usernick").val();
 			var eMsg = $("#nickMsg");
 			var isNick = /^[a-zA-Z0-9가-힣]{4,15}$/;
 			if (nickname == "") {
 				$(eMsg).text("반드시 입력해주세요!");
-				$("#usernickname").focus();
+				$("#nickck").focus();
 				return false;
 			}
 			$.ajax({
 				async : true,
 				type : "GET",
-				url : getContext + '/login/join/nickcheck',
+				url : getContext + 'login/join/nickcheck',
 				data : {
 					'user_nickname' : nickname
 				},
@@ -92,14 +94,14 @@
 					console.log(data)
 					if (!isNick.test(nickname)) {
 						$(eMsg).text("영문,한글,숫자를 이용한 4~15자의 닉네임을 만들어 주세요.");
-						$("#usernickname").focus();
+						$("#nickck").focus();
 						eMsg.show();
 						eMsg.removeClass('greenText');
 						eMsg.addClass('redText');
 						return false;
 					} else if (data.msg == 'false') {
 						$(eMsg).text("이미 사용중인 닉네임 입니다.");
-						$("#usernickname").focus();
+						$("#nickck").focus();
 						return false;
 					} else if (data.msg == 'true') {
 						$(eMsg).text("좋은 닉네임이에요~^^");
@@ -116,10 +118,9 @@
 		});
 
 		//비밀번호 유효성 체크
-		$('#pwd')
-				.keyup(
+		$('#user_pwd').keyup(
 						function() {
-							var pwd = $("#pwd").val();
+							var pwd = $("#user_pwd").val();
 							var eMsg = $("#pwdMsg");
 							var pwdck = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 							var nullck = " ";
@@ -167,22 +168,24 @@
 		});
 
 		// 이메일 중복체크
-		$('#emailck').click(
+		$('#emailck')
+				.click(
 						function() {
-							var email = $("#email").val();
+							var email = $("#useremail").val();
 							var eMsg = $("#emailMsg");
 							var isEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 							if (email == "") {
 								$(eMsg).text("이메일 주소를 입력해주세요.");
 								return false;
 							}
-							$.ajax({
+							$
+									.ajax({
 										async : true,
 										type : "GET",
 										url : getContext
-												+ '/login/join/emailcheck',
+												+ 'login/join/emailcheck',
 										data : {
-											'useremail' : email
+											'user_email' : email
 										},
 										contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 										dataType : "json",
@@ -202,13 +205,13 @@
 												eMsg.show();
 												eMsg.removeClass('greenText');
 												eMsg.addClass('redText');
-												$("#useremail").focus();
+												$("#user_email").focus();
 												return false;
 
 											} else if (data.msg == 'true') {
 												$(eMsg).text(
 														"사용할 수 있는 이메일 입니다.");
-												$("#useremail").focus();
+												$("#user_email").focus();
 												eMsg.show();
 												eMsg.removeClass('redText');
 												eMsg.addClass('greenText');
@@ -218,9 +221,17 @@
 										}
 									});
 						});
+		/*  $('#signup-btn').click(function() {
+			 if(idFlag)
+			 nickFlag
+			 pwdFlag
+			 emailFlag
+		}  */
 	});
 </script>
 <style type="text/css">
+.redText{display: block;color: red;margin-left:10px;}
+.greenText{display: block;color: green;margin-left:10px;}
 .row {
 	margin-top: 21rem;
 }
@@ -231,8 +242,6 @@ body {
 	margin: auto;
 	width: 50%;
 	padding: 10px;
-	
-
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -262,8 +271,8 @@ h1, h2, h3, button {
 	border-radius: 1.1rem;
 	outline: 0;
 	max-width: 500px;
-	-webkit-box-shadow: 5px 10px 40px rgba(0,0,0, .4);
-    box-shadow: 5px 10px 40px rgba(0,0,0, .4);
+	-webkit-box-shadow: 5px 10px 40px rgba(0, 0, 0, .4);
+	box-shadow: 5px 10px 40px rgba(0, 0, 0, .4);
 }
 
 .tx-tfm {
@@ -319,7 +328,7 @@ form .error {
 }
 </style>
 <body>
-
+	<input type="hidden" id="getContext" name="getContext" value="<c:url value='/'/>">
 	<!-- /////////////////////////////모달/////////////////////////////////////// -->
 
 	<!-- Modal -->
@@ -340,20 +349,23 @@ form .error {
 				<div class="modal-body">
 
 					<form action="<c:url value='/login/findid'/>" name="findid"
-						role="form" id="findid-form1" class="tab-pane fade in active" method="post">
+						role="form" id="findid-form1" class="tab-pane fade in active"
+						method="post">
 						<div class="form-group">
 							<label class="form-control-label" for="findpwd-email">Email</label><br>
 							<input type="email" name="user_email" id="findpwd-email"
 								class="form-control" aria-describedby="emailHelp"
 								placeholder="Enter Email"><br>
-						<button type="submit" class="btn btn-default" id="findid-btn">Send Code</button>
+							<button type="submit" class="btn btn-default" id="findid-btn">Send
+								Code</button>
 						</div>
 						<div class="form-group">
 							<label for="findpwd-code">Code</label> <input type="text"
 								name="cm_key" id="findpwd-code" class="form-control"
 								aria-describedby="codeHelp" placeholder="Enter Code">
 						</div>
-							<button type="submit" class="btn btn-default" id="emailCode-btn1">Code verification</button>
+						<button type="submit" class="btn btn-default" id="emailCode-btn1">Code
+							verification</button>
 					</form>
 
 					<form action="<c:url value='/login/findpwd'/>" method="get"
@@ -377,12 +389,14 @@ form .error {
 								name="cm_key" id="code" class="form-control"
 								aria-describedby="emailHelp" placeholder="Enter Code">
 						</div>
-						<input type="submit" class="btn btn-default" id="emailCode-btn2" onClick="this.form.action='/login/selectcode'" value="Code verification">
+						<input type="submit" class="btn btn-default" id="emailCode-btn2"
+							onClick="this.form.action='/login/selectcode'"
+							value="Code verification">
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					
+
 				</div>
 			</div>
 		</div>
@@ -456,38 +470,70 @@ form .error {
 							<h1>Signup</h1>
 						</div>
 					</div>
-					<form action="<c:url value='/login/join'/>" name="registration" method="post">
+					<form action="<c:url value='/login/join'/>" name="registration"
+						method="post">
 						<div class="form-group">
-							<label for="firstname">ID</label> <input type="text"
-								name="user_id" class="form-control" id="userid"
-								aria-describedby="idHelp" placeholder="Enter ID">
+							<label for="userid">ID</label>
+							<div class="input-group">
+								<input type="text" name="user_id" class="form-control"
+									id="userid" aria-describedby="idHelp" placeholder="Enter ID">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-default" value=""
+										id="idck">
+										<i class="glyphicon glyphicon-ok"></i>
+									</button>
+								</div>
+							</div>
+							<span class="redText" id="idMsg"></span>
+						</div>
+
+
+						<div class="form-group">
+							<label for="usernick">Nick Name</label>
+							<div class="input-group">
+								<input type="text" name="user_nickname" class="form-control"
+									id="usernick" aria-describedby="nicknameHelp"
+									placeholder="Enter Nick name">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-default" value=""
+										id="nickck">
+										<i class="glyphicon glyphicon-ok"></i>
+									</button>
+								</div>
+							</div>
+							<span class="redText" id="nickMsg"></span>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Nick Name</label> <input
-								type="text" name="user_nickname" class="form-control"
-								id="usernickname" aria-describedby="nicknameHelp"
-								placeholder="Enter Nick name">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Password</label> <input
+							<label for="password">Password</label> <input
 								type="password" name="user_pwd" id="password"
 								class="form-control" aria-describedby="passwordHelp"
 								placeholder="Enter Password">
+								<span class="redText" id="pwdMsg"></span>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Password</label> <input
+							<label for="passwordcheck">Password</label> <input
 								type="password" name="pwdCheck" id="passwordcheck"
 								class="form-control" aria-describedby="passwordcheckHelp"
 								placeholder="Enter Password">
+								<span class="redText" id="nickMsg"></span>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label> <input
-								type="email" name="user_email" class="form-control" id="useremail"
-								aria-describedby="emailHelp" placeholder="Enter email">
+							<label for="useremail">Email address</label>
+							<div class="input-group">
+								<input type="email" name="user_email" class="form-control"
+									id="useremail" aria-describedby="emailHelp"
+									placeholder="Enter email">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-default" value=""
+										id="emailck">
+										<i class="glyphicon glyphicon-ok"></i>
+									</button>
+								</div>
+							</div>
+							<span class="redText" id="emailMsg"></span>
 						</div>
 						<div class="col-md-12 text-center mb-3">
-							<button type="submit"
-								class=" btn btn-block mybtn btn-primary tx-tfm">Sign Up</button>
+							<button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" id="signup-btn">Sign Up</button>
 						</div>
 						<div class="col-md-12 ">
 							<div class="form-group">
@@ -549,7 +595,7 @@ form .error {
 					.validate(
 							{
 								rules : {
-									
+
 									email : {
 										required : true,
 										email : true

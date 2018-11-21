@@ -26,7 +26,7 @@ public class JoinController {
 	@Autowired
 	private MembersService service;
 	
-	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
+	@RequestMapping(value = "/login/join", method = RequestMethod.GET)
 	public String join(MembersVo vo, HttpSession session) throws MessagingException, UnsupportedEncodingException {
 		int user_num = service.getMaxnum()+1;
 		vo.setUser_num(user_num);
