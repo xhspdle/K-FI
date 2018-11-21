@@ -44,6 +44,6 @@
 	<select id="confirmDel" parameterType="hashmap" resultType="com.kfi.ldk.vo.CommVoteConfirmDelVo">
 		select mem.user_num,mem.user_id,mem.user_pwd,cv.vote_num
 		from members mem,comm_vote cv
-		where mem.user_num=cv.user_num and user_pwd=#{user_pwd} and vote_num=#{mb_num}
+		where mem.user_num=cv.user_num and user_pwd=#{user_pwd} and vote_num=#{vote_num}
 	</select>
 </mapper>

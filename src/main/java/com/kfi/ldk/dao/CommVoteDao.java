@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kfi.ldk.vo.CommVoteConfirmDelVo;
 import com.kfi.ldk.vo.CommVoteVo;
 
 @Repository
@@ -33,5 +34,8 @@ public class CommVoteDao {
 	}
 	public CommVoteVo select(int vote_num) {
 		return session.selectOne(NAMESPACE + ".select", vote_num);
+	}
+	public CommVoteConfirmDelVo confirmDel(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE + ".confirmDel", map);
 	}
 }

@@ -639,21 +639,25 @@ $(document).ready(function(){
 	  var popoverType=$(this).attr("data-popover-type");
 	  var action='';
 	  var hiddenInput='';
+	  var goTo='';
 	  if(popoverType==="myBoard"){
 		  action=getPageContext + "/mypage/myboard/delete";
 		  hiddenInput="<input type='hidden' name='mb_num' value='"+ $(this).attr("data-mb-num") +"'>";
+		  goTo="boardDelete";
 	  }else if(popoverType==="commPoll"){
 		  action=getPageContext + "/community/polls/delete";
 		  hiddenInput="<input type='hidden' name='vote_num' value='"+ $(this).attr("data-vote-num") +"'>";
+		  goTo="commPollDelete";
 	  }else if(popoverType==="commBoard"){
 		  action=getPageContext + "/community/board/delete";
 		  hiddenInput="<input type='hidden' name='cb_num' value='"+ $(this).attr("data-cb-num") +"'>";
+		  goTo="commBoardDelete";
 	  }	
 	  $("button.dropdown-toggle").attr("data-toggle","off");
 	  $("[data-toggle='popover']").popover({
 		  title: "<h3><strong>Wanna delete?</strong></h3>" + 
 		  		 "<p>please enter your password</p>",
-		  content: "<form class='form-horizontal boardDelete' method='post' " + 
+		  content: "<form class='form-horizontal' name='"+ goTo +"' method='post' " + 
 		  		   "action='"+ action +"'>" +
 		  		   "<div class='input-group input-group-lg'>" +
 		  		   hiddenInput +
@@ -669,7 +673,7 @@ $(document).ready(function(){
 	  $("button.dropdown-toggle").attr("data-toggle","dropdown");
   });
   
-  $(document).on('submit',".boardDelete",function(e){
+  $(document).on('submit',"[name='boardDelete']",function(e){
 	  e.preventDefault();
 	  var formData=new FormData($(this).get(0));
 	  $.ajax({
@@ -683,6 +687,27 @@ $(document).ready(function(){
 		  success: function(json){
 			  if(json.code==='success'){
 				  location.href=getPageContext + "/mypage/main";
+			  }else{
+				  $.msgBox(json.code);
+			  }
+		  }
+	  });
+  });
+  
+  $(document).on('submit',"[name='commPollDelete']",function(e){
+	  e.preventDefault();
+	  var formData=new FormData($(this).get(0));
+	  $.ajax({
+		  url: getPageContext + "/community/polls/delete",
+		  type: 'post',
+		  dataType: 'json',
+		  data: formData,
+		  cache: false,
+		  contentType: false,
+		  processData: false,
+		  success: function(json){
+			  if(json.code==='success'){
+				  location.href=getPageContext + "/community/polls/list";
 			  }else{
 				  $.msgBox(json.code);
 			  }
@@ -1065,5 +1090,6 @@ $(document).ready(function(){
 				  }
 			  });
   }
+
 });
 

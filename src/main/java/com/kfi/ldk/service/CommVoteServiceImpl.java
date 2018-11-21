@@ -10,6 +10,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import com.kfi.ldk.dao.CommVoteDao;
 import com.kfi.ldk.dao.CommVoteListViewDao;
 import com.kfi.ldk.dao.VotingOptionDao;
+import com.kfi.ldk.vo.CommVoteConfirmDelVo;
 import com.kfi.ldk.vo.CommVoteVo;
 import com.kfi.ldk.vo.VotingOptionVo;
 
@@ -49,17 +50,22 @@ public class CommVoteServiceImpl implements CommonService{
 	}
 	@Override
 	public int update(Object data) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public int delete(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		int vote_num=(Integer)map.get("vote_num");
+		CommVoteConfirmDelVo vo=cvDao.confirmDel(map);
+		if(vo!=null) {
+			return cvDao.delete(vote_num);
+		}else {
+			return -1;
+		}
 	}
 	@Override
 	public Object select(Object data) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@SuppressWarnings("unchecked")
