@@ -1,6 +1,6 @@
 package com.kfi.dgl.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 //»ç¿ëÀÚ 
 public class MembersVo {

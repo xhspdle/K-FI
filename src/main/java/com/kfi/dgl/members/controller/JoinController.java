@@ -9,7 +9,6 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kfi.dgl.service.MembersService;
-import com.kfi.dgl.util.MailUtil;
 import com.kfi.dgl.vo.MembersVo;
 import com.kfi.jyi.vo.MySkinVo;
 
@@ -26,7 +24,7 @@ public class JoinController {
 	@Autowired
 	private MembersService service;
 	
-	@RequestMapping(value = "/login/join", method = RequestMethod.GET)
+	@RequestMapping(value = "/login/join", method = RequestMethod.POST)
 	public String join(MembersVo vo, HttpSession session) throws MessagingException, UnsupportedEncodingException {
 		int user_num = service.getMaxnum()+1;
 		vo.setUser_num(user_num);
@@ -79,7 +77,7 @@ public class JoinController {
 	return map;
 	}
 	
-	@RequestMapping(value="/login/join/emailcheck")
+	@RequestMapping(value="/login/join/emailcheck" )
 	@ResponseBody
 	public Map<String, String> emailcheck(String user_email){
 	MembersVo vo = service.emailCheck(user_email);

@@ -54,9 +54,9 @@
 						return false;
 					} else if (data.msg == 'false') {
 						$(eMsg).text("이미 사용중인 아이디 입니다.");
-						eMsg.show(); // span태그 보여준다.
-						eMsg.removeClass('greenText'); // span태그에 greenText 클래스를 삭제한다.
-						eMsg.addClass('redText'); // span태그에 redText 클래스를 추가한다.
+						eMsg.show(); 
+						eMsg.removeClass('greenText'); 
+						eMsg.addClass('redText'); 
 						$("#userid").focus();
 						return false;
 					} else if (data.msg == 'true') {
@@ -152,11 +152,13 @@
 
 		//비밀번호 동일입력 체크
 		$('#passwordcheck').keyup(function() {
-			var eMsg = $("#pwdCkMsg");
+			var eMsg = $("#pwdckMsg");
 			var pwd = $("#password").val();
 			var pwdck = $("#passwordcheck").val();
 			if (pwd == pwdck) {
 				$(eMsg).text("비밀번호가 일치합니다.");
+				eMsg.removeClass('redText');
+				eMsg.addClass('greenText');
 				return true;
 				return pwdFlag = true;
 			} else {
@@ -221,7 +223,7 @@
 									});
 						});
 		/*  $('#signup-btn').click(function() {
-			 if(idFlag)
+			 if(idFlag )
 			 nickFlag
 			 pwdFlag
 			 emailFlag
