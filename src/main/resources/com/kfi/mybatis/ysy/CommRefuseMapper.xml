@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.ysy.CommRefuseMapper">
 	<select id="getMaxNum" resultType="int">
-		select NVL(max(mbl_num),0) maxnum from comm_refuse
+		select NVL(max(cr_num),0) maxnum from comm_refuse
 	</select>
+		<insert id="insert" parameterType="commrefuse">
+		insert into comm_refuse values(#{cr_num},#{cul_num},#{cr_refuse})
+	</insert>
+	
 </mapper>
