@@ -8,8 +8,9 @@
 		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p>
 		<c:choose>
 			<c:when test="${user_num!=selectedUserNum && !empty selectedUserNum}">
-			<form class="form-follow">
+			<form class="form-follow" method="post" action="<c:url value='/friends/follow'/>">
 				<div class="input-group col-sm-offset-5 col-sm-2">
+					<input type="hidden" name="selectedUserNum" value=${selectedUserNum }>
 					<button type="submit" class="btn btn-join-follow">Follow</button>
 				</div>
 			</form> 
