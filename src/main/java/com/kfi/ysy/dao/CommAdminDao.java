@@ -7,10 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 @Repository
-public class CommunityAdminDao {
+public class CommAdminDao {
 	@Autowired private SqlSession session;
-	private final static String NAMESPACE="com.kfi.mybatis.ysy.CommunityAdminMapper.";
-	public List<CommunityAdminDao> list(Object data){
-		return session.selectList(NAMESPACE+"list");
+	private final static String NAMESPACE="com.kfi.mybatis.ysy.CommAdminMapper.";
+	public List<CommAdminDao> list(int comm_num){
+		return session.selectList(NAMESPACE+"list", comm_num);
 	}
 }

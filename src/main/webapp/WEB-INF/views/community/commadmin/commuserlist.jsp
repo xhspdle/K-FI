@@ -18,11 +18,10 @@ tbody tr:nth-child(2n+1) {
 	<div class="container">
 		<!-- <button class="btn btn-md" onclick="location.href='/kfi/adminlist'">관리자정보</button> -->
 		<div class="btn-group">
-			<button type="button" class="btn btn-primary">MEMBERS</button>
-			<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/communityskin'">SKIN</button>
-			<button type="button" class="btn btn-primary">Sony</button>
-		</div>
-		<br><br>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile'">PROFILE</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin'">SKIN</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist'">MEMBERS</button>
+		</div><!-- <br><br> -->
 		<table class="table">
 			<thead>
 				<tr>
@@ -86,7 +85,7 @@ tbody tr:nth-child(2n+1) {
 					</div>
 					<div class="modal-footer">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default" id="efbtn">작성</button>
+							<button type="button" class="btn btn-default" id="efbtn">작성</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 					</div>
@@ -181,10 +180,14 @@ tbody tr:nth-child(2n+1) {
 			}
 		});
 	});
-/* 	$("#efbtn").on("click",function(){
-		alert("와아");
-	
-	}); */
+ 	$("#efbtn").on("click",function(){
+ 		var result=confirm("강퇴??");
+ 		if(result){
+ 			location.href="<c:url value='/community/commrefuse/insert'/>"
+ 		}else{
+ 			return false;
+ 		}
+	});
 
 
 

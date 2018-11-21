@@ -2,7 +2,7 @@ package com.kfi.ysy.vo;
 
 import java.sql.Date;
 
-public class CommunityAdminVo {
+public class CommAdminVo {
 	private int user_num;
 	private String user_id;
 	private String user_nickname;
@@ -10,7 +10,7 @@ public class CommunityAdminVo {
 	private int cul_num;
 	private int comm_num;
 	private int cul_status;
-	public CommunityAdminVo() {}
+	public CommAdminVo() {}
 	public int getUser_num() {
 		return user_num;
 	}

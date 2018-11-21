@@ -72,11 +72,14 @@ $(function(){
 			<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
 		<ul class="pagination">
-			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
+			<li class="previous"><a href="<c:url value='/mblist?pagenum=${apu.pagenum-1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
 			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-				<li><a href="<c:url value='/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
+				
+				
+				<li><a href="<c:url value='/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+				
 			</c:forEach>
-			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+			<li class="next"><a href="<c:url value='/mblist?pagenum=${apu.pagenum+1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
 			<li></li>
 		</ul>	
 				

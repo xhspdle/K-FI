@@ -52,7 +52,7 @@
 		<typeAlias type="com.kfi.ysy.vo.AccuseListViewVo" alias="accuselist"/>
 		<typeAlias type="com.kfi.ysy.vo.CommSkinCoverVo" alias="commskincover"/>
 		<typeAlias type="com.kfi.ysy.vo.CommSkinProfileVo" alias="commskinprofile"/>
-		<typeAlias type="com.kfi.ysy.vo.CommunityAdminVo" alias="communityadmin"/>
+		<typeAlias type="com.kfi.ysy.vo.CommAdminVo" alias="communityadmin"/>
 		
 	</typeAliases>
 	<mappers>	 
@@ -98,7 +98,7 @@
 		<mapper resource="com/kfi/mybatis/ysy/FaqMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/CommSkinCoverMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/CommSkinProfileMapper.xml"/>
-		<mapper resource="com/kfi/mybatis/ysy/CommunityAdminMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/CommAdminMapper.xml"/>
 		
 		
 		<mapper resource="com/kfi/mybatis/dgl/MembersMapper.xml"/>

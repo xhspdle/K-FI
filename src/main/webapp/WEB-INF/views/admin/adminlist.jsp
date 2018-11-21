@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="admin" value="${sessionScope.admininfo}" /> 
+<style>
+.cursordefault{
+	cursor: default;
+}
+</style>
 <script>
 	$(function(){
 		$("#addeletebtn").click(function(){
@@ -49,16 +54,16 @@
  		<c:forEach var="adminlist" items="${adminlist }"> 
  			<tr>
 				<td hidden="hidden">${adminlist.admin_num}</td>
-				<td>${adminlist.admin_id }</td>
-				<td>${adminlist.admin_nick }</td>
-				<td>${adminlist.admin_email }</td>
-				<td>${adminlist.admin_regdate }</td>
+				<td class="cursordefault">${adminlist.admin_id }</td>
+				<td class="cursordefault">${adminlist.admin_nick }</td>
+				<td class="cursordefault">${adminlist.admin_email }</td>
+				<td class="cursordefault">${adminlist.admin_regdate }</td>
 				<c:choose> 
 				<c:when test="${admin.admin_num eq adminlist.admin_num}">							
 					<td><button class="btn btn-sm btn-primary" id="adminmodifybtn" data-toggle="modal" data-target="#admininfo-template">수정</button></td>
 				</c:when>
 				<c:otherwise>
-					<td></td>
+					<td class="cursordefault"></td>
 				</c:otherwise>					
 				</c:choose>
 			</tr>

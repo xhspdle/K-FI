@@ -23,16 +23,18 @@
 	background-repeat: no-repeat;  
 	background-size: cover;
 }
-
+#commskinlist{
+	box-shadow: 0px 0px 7px #a6a6a6;
+	border-radius: 5px;
+}
 </style>
 <div class="container">
 	<div class="btn-group">
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/list'">MEMBERS</button>
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/communityskin'">SKIN</button>
-		<button type="button" class="btn btn-primary">Sony</button>
-	</div>
-	<br><br>
-	<div id="commskinlist" class="panel panel-default">
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile'">PROFILE</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin'">SKIN</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist'">MEMBERS</button>
+	</div><!-- <br><br> -->
+	<div id="commskinlist">
 		<div class="panel-heading" >
 			저장된 스킨	
 		</div>

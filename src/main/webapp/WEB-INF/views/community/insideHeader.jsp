@@ -12,7 +12,7 @@
 				<!-- admin일 경우 -->
 				<div class="form-join">
 					<div class="col-sm-offset-5 col-sm-2">			
-						<a href="#" class="btn btn-comm-admin">Admin</a>
+						<a href="<c:url value='/community/commadmin/commuserlist?comm_num=${comm_num }'/>" class="btn btn-comm-admin">Admin</a>
 					</div>
 				</div>
 			</c:when>
