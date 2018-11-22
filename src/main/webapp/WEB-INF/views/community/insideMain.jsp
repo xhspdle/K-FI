@@ -148,11 +148,11 @@
 <script id="commBoardListTemplate" type="text/template">
 		<div class="panel-group">
 		<div class="panel panel-default">
-			<div class="panel-heading" id="{board.cb_num }">
+			<div class="panel-heading" id="{cb_num }">
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
-						<a href="<c:url value='/community/board/select?cb_num={board.cb_num }'/>" class="postA">
-						{board.cb_title }
+						<a href="<c:url value='/community/board/select?cb_num={cb_num }'/>" class="postA">
+						{cb_title }
 						</a>
 					</h1>
 				</blockquote>
@@ -161,13 +161,13 @@
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
-						<li>{liType}</li>
+						{liType}
 					</ul>
 				</div>
 			</div>
 			<div class="panel-body">
 				{mediaDiv}	
-				<p>{board.cb_content }</p>
+				<p>{cb_content }</p>
 				{vid}
 				{photo}				
 			</div>

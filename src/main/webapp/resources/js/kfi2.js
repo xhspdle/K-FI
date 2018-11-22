@@ -651,15 +651,16 @@ function getCommBoard(){
 			var disabled="";
 			var liType="";
 			var comm_adminNum=$('#comm_adminNum').val();
-			if(user_num == sessionUser && sessionUser == comm_adminNum){
-				liType='<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="'+board.cb_num+'">'
-					+'<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a>';
-			}else if(user_num == sessionUser){
-				liType='<a href="#updateModal" data-toggle="modal" data-mb-num="{'+board.cb_num+'}">'
-					+'<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit</a>';
+			/* delete, update li 붙는 조건 확인 필요 */
+			if(user_num == sessionUser){
+				liType='<li><a href="#updateModal" data-toggle="modal" data-mb-num="{'+board.cb_num+'}">'
+					+'<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit</a></li>';
+			}else if(user_num == sessionUser || sessionUser == comm_adminNum){
+				liType='<li><a href="#" onclick="return false;" data-toggle="popover" data-mb-num="'+board.cb_num+'">'
+				+'<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a></li>';
 			}else if(user_num != sessionUser){
 				disabled="disabled";
-				liType='<a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a>';
+				liType='<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>';
 			}
 			var mediaDiv="";
 			$(proflist).each(function(j,pro){
@@ -674,46 +675,54 @@ function getCommBoard(){
 			});
 			var cvCnt=0;
 			var video='';
-			/*if(cvlist != null){
-				$(cvlist).each(function(k,vid){
-					var vidnum=vid.cb_num;
-					if(vidnum == board.cb_num ){
-						video='<video class="img-responsive center-block" controls autoplay muted="muted" loop' 
-								+'src="'+getPageContext+'/resources/upload/vid/'+vid.cv_savvid+'"></video>';
-						cvCnt=1;
-					}
-				});
-			}*/
-			var photo ='';
-			if(cvCnt!=1 && cplist != null){
-				$(cplist).each(function(p,pt){
-					if(pt.cb_num==board.cb_num){
-						photo ='<img class="img-responsive center-block" src="'+getPageContext+'/resources/upload/img/'+pt.cp_savimg +'" alt="board image">';
+			if(cvlist != null){
+				$(cvlist).each(function(v,vi){
+					if(vi!=null){
+						var vidnum=vi.cb_num;
+						if(vidnum == board.cb_num ){
+							video='<video class="img-responsive center-block" controls autoplay muted="muted" loop' 
+									+'src="'+getPageContext+'/resources/upload/vid/'+vi.cv_savvid+'"></video>';
+							cvCnt=1;
+						}
 					}
 				});
 			}
-			var cblcnt='';
-			var cmcnt='';
-			var cvcnt ='';
+			var photo ='';
+			if(cvCnt!=1 && cplist != null){
+				$(cplist).each(function(p,pt){
+					if(pt!=null){
+						if(pt.cb_num==board.cb_num){
+							photo ='<img class="img-responsive center-block" src="'+getPageContext+'/resources/upload/img/'+pt.cp_savimg +'" alt="board image">';
+						}
+					}
+				});
+			}
+			var cblcnt = 0;
+			var cmcnt = 0;
+			var cvcnt = 0;
 			$(cbclist).each(function(c,cnt){
-				if(board.cb_num == cnt.cb_num){
-					cblcnt=cnt.cblcnt;
-					cmcnt=cnt.cmcnt;
-					cvcnt =cnt.cvcnt;
+				if(cnt!=null){
+					if(board.cb_num == cnt.cb_num){
+						cblcnt=cnt.cblcnt;
+						cmcnt=cnt.cmcnt;
+						cvcnt =cnt.cvcnt;
+					}
+					
 				}
 			});
-			
-			var resultHTML=html.replace(/board.cb_num/gi, board.cb_num)
-				.replace(/board.cb_title/gi,board.cb_title)
-				.replace("{disabled}", disabled)
-		  		.replace("{liType}", liType)
-		  		.replace("{mediaDiv}", mediaDiv)
-		  		.replace(/board.cb_content/gi, board.cb_content)
-		  		.replace("{video}", video)
-		  		.replace("{photo}", photo)
-		  		.replace("{cblcnt}", cblcnt)
-		  		.replace("{cmcnt}", cmcnt)
-		  		.replace("{cvcnt}", cvcnt);
+			var resultHTML=html.replace(/{/gi, "")
+	  			.replace(/}/gi, "")
+	  			.replace(/cb_num/gi, board.cb_num)
+				.replace(/cb_title/gi,board.cb_title)
+				.replace("disabled", disabled)
+		  		.replace("liType", liType)
+		  		.replace("mediaDiv", mediaDiv)
+		  		.replace(/cb_content/gi, board.cb_content)
+		  		.replace("video", video)
+		  		.replace("photo", photo)
+		  		.replace("cblcnt", cblcnt)
+		  		.replace("cmcnt", cmcnt)
+		  		.replace("cvcnt", cvcnt);
 			$("#moreCommBoard").append(resultHTML);
 			
 		});
