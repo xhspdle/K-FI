@@ -52,4 +52,8 @@ public class CommBoardDao {
 		return session.update(NAMESPACE+".updateViews", cb_num);
 	}
 	
+	public int getViews(int cb_num) {
+		return session.selectOne(NAMESPACE+".getViews",cb_num);
+	}
+	
 }

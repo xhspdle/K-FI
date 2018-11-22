@@ -139,18 +139,18 @@ public class MySkinServiceImpl implements CommonService {
 			int num = 0;
 			for (MySkinViewVo msvv : list) {
 				// 이미 기본스킨 있으면 사용
-				if (msvv.getMs_name().equals("기본 스킨") 
+				if (msvv.getMs_name().equals("기본스킨") 
 						&& msvv.getMs_color().equals("#00cee8")
 						&& msvv.getMsp_savimg().equals("default-profile.png")
 						&& msvv.getMsc_savimg().equals("logo2.png") 
-						&& (msvv.getMs_msg()==null)) {
+						&& (msvv.getMs_msg().equals(" "))) {
 					++num;
 					msdao.update(new MySkinVo(msvv.getMs_num(), user_num,msvv.getMs_name(),msvv.getMs_color()," ", 1));
 				}
 			}
 			if (num == 0) {
 				ms_num = msdao.getMaxNum() + 1;
-				msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", " ", 1));
+				msdao.insert(new MySkinVo(ms_num, user_num, "기본스킨", "#00cee8", " ", 1));
 				int msp_num = mspdao.getMaxNum() + 1;
 				int msc_num = mscdao.getMaxNum() + 1;
 				mspdao.insert(new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));
@@ -276,7 +276,7 @@ public class MySkinServiceImpl implements CommonService {
 			List<MySkinViewVo> skinList = (List<MySkinViewVo>) msvdao.list(user_num);
 			if (skinList.isEmpty()) {
 				ms_num = msdao.getMaxNum() + 1;
-				msdao.insert(new MySkinVo(ms_num, user_num, "기본 스킨", "#00cee8", " ", 1));
+				msdao.insert(new MySkinVo(ms_num, user_num, "기본스킨", "#00cee8", " ", 1));
 				int msp_num = mspdao.getMaxNum() + 1;
 				int msc_num = mscdao.getMaxNum() + 1;
 				mspdao.insert(new MySkinProfileVo(msp_num, ms_num, "default-profile.png", "default-profile.png"));

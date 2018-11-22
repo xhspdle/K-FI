@@ -41,16 +41,16 @@ public class DeleteController {
 		return msv;
 	}
 	
-	@RequestMapping(value="/friends/unfollow",method=RequestMethod.GET)
-	public String unfollow(HttpSession session, String user1_num) {
+	@RequestMapping(value="/friends/unfollow",method=RequestMethod.POST)
+	public String unfollow(HttpSession session, String selectedUserNum) {
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("session", session);
-		map.put("user1_num",user1_num );
+		map.put("user1_num",selectedUserNum );
 		int result=(Integer)service.delete(map);
 		if(result>0) {
-			return ".mypage.myfriend.list";
+			return "redirect:/mypage/myfriend/list";
 		}else {
-			return ".mypage.myfriend.list"; //오류
+			return "redirect:/mypage/myfriend/list"; //오류
 		}
 	}
 }

@@ -51,5 +51,10 @@
 		update comm_board set cb_views = cb_views+1 where cb_num=#{cb_num}
 	</update>
 
+	<select id="getViews" resultType="int">
+		select nvl(max(cb_views),0) from comm_board where cb_num=#{cb_num}
+	</select>
+	
+
 
 </mapper>
