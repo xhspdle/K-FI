@@ -36,7 +36,7 @@
 			}
 
 			$.ajax({
-				async : true,
+				async : false,
 				type : "GET",
 				url : getContext + 'login/join/idcheck',
 				data : {
@@ -70,6 +70,7 @@
 					}
 				}
 			});
+			return pwdFlag = true;
 		});
 
 		// 닉네임 중복 체크 부분 
@@ -83,7 +84,7 @@
 				return false;
 			}
 			$.ajax({
-				async : true,
+				async : false,
 				type : "GET",
 				url : getContext + 'login/join/nickcheck',
 				data : {
@@ -115,6 +116,7 @@
 				}
 
 			});
+			return pwdFlag = true;
 		});
 
 		//비밀번호 유효성 체크
@@ -166,7 +168,7 @@
 				$("#passwordcheck").focus();
 				return false;
 			}
-
+			return pwdFlag = true;
 		});
 
 		// 이메일 중복체크
@@ -181,7 +183,7 @@
 								return false;
 							}
 							$.ajax({
-										async : true,
+										async : false,
 										type : "GET",
 										url : getContext
 												+ 'login/join/emailcheck',
@@ -221,13 +223,12 @@
 											}
 										}
 									});
+										return emailFlag = true;
 						});
-		/*  $('#signup-btn').click(function() {
-			 if(idFlag )
-			 nickFlag
-			 pwdFlag
-			 emailFlag
-		}  */
+ $('#signup-btn').click(function() {
+			 if(idFlag == true && nickFlag == true && pwdFlag ==true && emailFlag == true)
+			alert("됫다!");
+		});
 	});
 </script>
 <style type="text/css">

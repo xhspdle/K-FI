@@ -1,6 +1,6 @@
 package com.kfi.dgl.commcalendar.controller;
 
-import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,14 +54,14 @@ public class CommCalendarController {
 			return "redirect:/";
 		}
 	}
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/community/list", method = RequestMethod.POST)
-	public String listEvent(HttpSession session, Model model, CommCalendarVo vo) {
-		HashMap<String, Object> map=new HashMap<>();
+	public String listEvent(HttpSession session, Model model, CommCalendarVo vo)throws Exception{
 		int comm_num1=(int) session.getAttribute("comm_num");
 		System.out.println(session.getAttribute("comm_num"));
 		vo.setComm_num(comm_num1);
-		service.listEvent(comm_num1);
-		model.addAttribute(map);
+		List<CommCalendarVo> list= service.listEvent(comm_num1);
+		model.addAttribute("list",list);
 		return ".community.commcalendar.calendar";
 		
 	}

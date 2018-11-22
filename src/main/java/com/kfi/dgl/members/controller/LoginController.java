@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,7 +27,7 @@ public class LoginController {
 
 	// 로그인 처리
 	@RequestMapping(value = "/login/login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, HttpSession session, String user_num) {
+	public String login(HttpServletRequest request, HttpSession session, String user_num, Model model) {
 		String user_id = request.getParameter("user_id");
 		String user_pwd = request.getParameter("user_pwd");
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -52,6 +53,9 @@ public class LoginController {
 				System.out.println(vo.getUser_nickname());
 				System.out.println((String) session.getAttribute("user_id"));
 				returnURL = "redirect:/mypage/main";
+			} else if (vo.getUser_certi() == 1 && vo.getUser_status() == 2) {
+				/*정지되었습니다 메시지 보내기*/
+				returnURL = "redirect:/login/login";
 			} else if (vo.getUser_certi() == 0) {
 				returnURL = "redirect:/login/login";
 			} else {

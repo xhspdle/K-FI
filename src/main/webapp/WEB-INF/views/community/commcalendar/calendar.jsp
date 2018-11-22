@@ -60,13 +60,13 @@ body {
 				right : 'today'
 			},
 			events : [ 
-				<c:forEach var="list" items='${monthlist }'> 
+				<c:forEach var="list" items="${monthlist}"> 
 				{
 						id:'${list.cc_info}', 
 					  title: '${list.cc_name}',  
 	                   start: '${list.cc_begin}',
 	                   end: '${list.cc_end}',
-	                   url: '/mypage/mycommcalendar'
+	                   url: '/community/list'
 				}, 
 				</c:forEach>
 				],
