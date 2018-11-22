@@ -3,18 +3,14 @@ package com.kfi.ysy.service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kfi.ldk.service.CommonService;
-import com.kfi.ysy.dao.CommSkinCoverDao;
 import com.kfi.ysy.dao.CommSkinProfileDao;
+import com.kfi.ysy.vo.CommSkinProfileVo;
 
-public class CommunitySkinServiceImpl implements CommonService {
-	@Autowired private CommSkinCoverDao cdao;
-	@Autowired private CommSkinProfileDao pdao;
-	
-	
+public class CommSkinProfileServiceImpl implements CommonService {
+	@Autowired private CommSkinProfileDao cspdao;
 	@Override
 	public int getMaxNum() {
-		
-		return 0;
+		return cspdao.getMaxNum();
 	}
 
 	@Override
@@ -25,14 +21,14 @@ public class CommunitySkinServiceImpl implements CommonService {
 
 	@Override
 	public int insert(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		CommSkinProfileVo vo=(CommSkinProfileVo)data;
+		return cspdao.insert(vo);
 	}
 
 	@Override
 	public int update(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		CommSkinProfileVo vo=(CommSkinProfileVo)data;
+		return 1;
 	}
 
 	@Override
@@ -43,7 +39,7 @@ public class CommunitySkinServiceImpl implements CommonService {
 
 	@Override
 	public Object select(Object data) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -52,5 +48,5 @@ public class CommunitySkinServiceImpl implements CommonService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }
