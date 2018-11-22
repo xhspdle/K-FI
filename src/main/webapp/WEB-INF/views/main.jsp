@@ -20,7 +20,7 @@
 			<h4>Korea, K-POP, K-Drama, Red Velvet, Twice, BTS</h4><br>
 			<p>K-POP 좋아하는 사람 모여라! 덕질하기 가장 좋은 싸이트는 바로 여기! 수다, 사진, 영상 모두 모두 나누자!
 			너도 나도 K-POP! 드라마도 한국 드라마가 최고!! 미스터 선샤인 짱짱맨 오예!! 트와이스 사나 모모 짱짱 레드벨벳도 짱짱 방탄소년단도 호올
-			신나게 모이자 후룰룰루룰루루루루루루루루루ㅜㄹ루ㅜ루루루ㅜ루루루
+			신나게 모이자!!
 			</p>
 			<br><button class="btn btn-default btn-lg">Join Us</button>
 		</div>

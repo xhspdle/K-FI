@@ -27,7 +27,7 @@
 			</c:if>
 			<div class="form-group" style="margin-bottom:-11.4px;">
 				<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
-				<div class="editableDiv" id="tags"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
+				<div class="editableDiv" id="tags" contenteditable="true"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
 			</div>
 			<div class="form-group imgUpload">
 				<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
