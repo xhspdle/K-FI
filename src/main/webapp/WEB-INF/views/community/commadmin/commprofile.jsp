@@ -7,42 +7,42 @@
 <div id="userinsert">
 
 	<div class="modal-dialog">
-		<div class="btn-group">
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile'">PROFILE</button>
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin'">SKIN</button>
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist'">MEMBERS</button>
+	<div class="btn-group">
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile?comm_num=${comm_num}'">PROFILE</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin?comm_num=${comm_num}'">SKIN</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist?comm_num=${comm_num}'">MEMBERS</button>
 	</div><!-- <br><br> -->
 		<div class="modal-content">
+			<form class="form-horizontal" action="mbinsert" method="post">		
 			<div class="modal-header">
-				<h4 class="modal-title">프로필 수정</h4>
+				<h4 class="modal-title" style="display: inline;">프로필 수정</h4>
+				<div class="btn-group  pull-right">
+					<button class="btn btn-primary">적용</button>
+					<button type="button" class="btn btn-primary">초기화</button>
+				</div>
 			</div>
 			
 			<div class="modal-body">
 				<div>
-					<img src="<c:url value='/resources/images/ysy/aaa.gif'/>">
+					<img id="commprofileimg" src="" style="display:none;width:100%;">
 				</div>
-	
-				<form class="form-horizontal" action="mbinsert" method="post">
-					<div class="form-group">
-						<label class="control-label col-sm-2">ID:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="user_id">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2">Password:</label>
-						<div class="col-sm-10">
-							<input type="password" class="form-control" name="user_pwd">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="email">Email:</label>
-						<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-					</div>
+					<label for="commprofileimgbtn" class="btn btn-primary"><span class="glyphicon glyphicon-picture"> Upload Photo</span></label>
+					<input type="file" id="commprofileimgbtn" style="display: none;"><br> 
 					
-	
-				</form>
-			</div>		
+					
+					<label>Admin ID:</label>
+					<input type="text" class="form-control" name="user_id">		
+					
+					<label>Nickname:</label>
+					<input type="text" class="form-control" name="user_nickname">
+				
+					<label>Community Name:</label>
+					<input type="email" class="form-control" name="comm_name">
+
+					<label>상태메세지:</label>
+					<textarea class="form-control" rows="3" name="comm_content"></textarea>		
+				</div>
+			</form>			
 		</div>
 	</div>
 </div>

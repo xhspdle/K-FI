@@ -48,7 +48,7 @@
 							<a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${vo.user_num }'/>" class="userSelect">
 								<strong>${vo.user_nickname }</strong>
 							</a>
-						<span class="pull-right" style="color:#f4511e;"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views ${cbvo.cb_views}</span></h4>
+						<span class="pull-right" style="color:#f4511e;"><span class="glyphicon glyphicon-signal"></span>&nbsp;<span id="viewsCnt">Views ${cbvo.cb_views}</span></span></h4>
 						<p style="text-align:left;margin:0px;margin-top:-5px;"><small>${vo.user_email }</small></p>
 					</div>
 				</div>

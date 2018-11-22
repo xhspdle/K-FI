@@ -30,6 +30,10 @@ public class FriendsDao {
 		return session.selectList(NAMESPACE+".list",map);
 	}
 	
+	public int getFrdNum(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".getFrdNum",map);
+	}
+	
 	
 	
 }

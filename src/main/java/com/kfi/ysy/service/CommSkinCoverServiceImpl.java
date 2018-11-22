@@ -4,17 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kfi.ldk.service.CommonService;
 import com.kfi.ysy.dao.CommSkinCoverDao;
-import com.kfi.ysy.dao.CommSkinProfileDao;
 
-public class CommunitySkinServiceImpl implements CommonService {
+
+public class CommSkinCoverServiceImpl implements CommonService {
 	@Autowired private CommSkinCoverDao cdao;
-	@Autowired private CommSkinProfileDao pdao;
-	
-	
 	@Override
 	public int getMaxNum() {
-		
-		return 0;
+		return cdao.getMaxNum();
 	}
 
 	@Override
@@ -25,7 +21,8 @@ public class CommunitySkinServiceImpl implements CommonService {
 
 	@Override
 	public int insert(Object data) {
-		// TODO Auto-generated method stub
+		
+
 		return 0;
 	}
 

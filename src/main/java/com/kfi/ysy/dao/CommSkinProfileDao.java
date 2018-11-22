@@ -24,7 +24,8 @@ public class CommSkinProfileDao {
 	public CommSkinProfileVo select_usingProfile(int comm_num) {
 		return session.selectOne(NAMESPACE+".select_usingProfile",comm_num);
 	}
-
 	
-	
+	public CommSkinProfileVo select(int comm_num) {
+		return session.selectOne(NAMESPACE+".select",comm_num);
+	}
 }

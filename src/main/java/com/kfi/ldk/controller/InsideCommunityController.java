@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kfi.jyi.vo.CommBoardCntVo;
+import com.kfi.jyi.vo.CommBoardProfileVo;
 import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.jyi.vo.CommBoardVo;
 import com.kfi.jyi.vo.CommCommentVo;
@@ -74,6 +75,7 @@ public class InsideCommunityController {
 		int commNum=1;
 		if(comm_num!=null) {
 			commNum=Integer.parseInt(comm_num);
+			session.setAttribute("comm_num", commNum);
 		}else {
 			commNum=(Integer)session.getAttribute("comm_num");
 		}
@@ -88,18 +90,15 @@ public class InsideCommunityController {
 		if(pageNum!=null && !pageNum.equals("")) {
 			pageNUM=Integer.parseInt(pageNum);
 		}
-		int commNUM=1;
-		if(comm_num!=null && !comm_num.equals("")) {
-			commNUM=Integer.parseInt(comm_num);
-		}
+		
 		HashMap<String, Object> board=new HashMap<>();
 		board.put("pageNum", pageNUM);
 		board.put("session", session);
-		board.put("comm_num", commNUM);
+		board.put("comm_num", commNum);
 		HashMap<String, Object> result=(HashMap<String, Object>)commBoardservice.list(board);
 		
 		model.addAttribute("list",(List<CommBoardVo>)result.get("list"));
-		model.addAttribute("msvlist",(List<MySkinViewVo>)result.get("msvlist"));
+		model.addAttribute("proflist",(List<CommBoardProfileVo>)result.get("proflist"));
 		model.addAttribute("cbclist",(List<CommBoardCntVo>)result.get("cbclist"));
 		
 		

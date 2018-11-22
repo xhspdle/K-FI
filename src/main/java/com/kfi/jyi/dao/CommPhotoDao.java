@@ -31,5 +31,7 @@ public class CommPhotoDao {
 		return session.selectList(NAMESPACE+".hotPhoto3");
 	}
 	
-	
+	public CommPhotoVo getBoardPhoto1(int cb_num) {
+		return session.selectOne(NAMESPACE+".getBoardPhoto1",cb_num);
+	}
 }

@@ -20,6 +20,9 @@
 	</delete>
 	<select id="list" parameterType="hashmap" resultType="tag">
 		select * from tag
+		<if test="keyword!=null and keyword!=''">
+		where tag_name like '%'||#{keyword}||'%'
+		</if>
 	</select>
 	<select id="select" parameterType="string" resultType="tag">
 		select * from tag where tag_name=#{tag_name}
@@ -48,7 +51,6 @@
 		)AA
 		WHERE MT.TAG_NUM(+)=T.TAG_NUM AND AA.TAG_NAME=T.TAG_NAME AND MT.MB_NUM=#{mb_num}
 	</select>
-	
 	<select id="getTagCountNum" parameterType="string" resultType="int">
 		select nvl(count(tag_name),0) from tag where tag_name=#{tag_name}
 	</select>

@@ -78,3 +78,69 @@ VO.VO_NUM,VO.OPTION_NUM,VO.VO_CONTENT
 FROM COMMVOTELIST CL,VOTING_OPTION VO
 WHERE CL.VOTE_NUM=VO.VOTE_NUM AND CL.COMM_NUM=1
 ORDER BY VOTE_NUM DESC,OPTION_NUM ASC;
+
+-- TAG + MY_TAG -> 태그검색
+SELECT T.TAG_NUM,T.TAG_NAME,MT.MTAG_NUM,MT.MB_NUM
+FROM TAG T,MY_TAG MT
+WHERE T.TAG_NUM=MT.TAG_NUM AND T.TAG_NAME LIKE '%트%';
+
+-- TAG + MY_TAG + MY_BOARD + etc -> 태그검색 페이징
+SELECT *
+FROM
+(
+    SELECT YY.*,ROWNUM RNUM
+    FROM
+    (
+        SELECT *
+        FROM
+        (
+            SELECT MB.MB_NUM,MB.USER_NUM,MEM.USER_ID,MEM.USER_NICKNAME,MEM.USER_EMAIL,MB.MB_TITLE,MB.MB_CONTENT,MB.MB_DATE,MB.MB_VIEWS,
+            AA.COMMENT_CNT,BB.LIKE_CNT,MP.MP_NUM,MP.MP_SAVIMG,MV.MV_NUM,MV.MV_SAVVID,MSP.MSP_SAVIMG
+            FROM MY_BOARD MB,MEMBERS MEM,
+            (
+                SELECT NVL(COUNT(MYC_NUM),0) COMMENT_CNT,MC.MB_NUM
+                FROM MY_COMMENT MC,MY_BOARD MBB
+                WHERE MC.MB_NUM=MBB.MB_NUM
+                GROUP BY MC.MB_NUM
+            )AA,
+            (
+                SELECT NVL(COUNT(MBL_NUM),0) LIKE_CNT,MBL.MB_NUM
+                FROM MY_BOARD_LIKE MBL,MY_BOARD MBBB
+                WHERE MBL.MB_NUM=MBBB.MB_NUM
+                GROUP BY MBL.MB_NUM
+            )BB,
+            (
+                SELECT MB_NUM,MP_NUM,MP_SAVIMG
+                FROM MY_PHOTO
+                WHERE ROWID IN 
+                    (
+                        SELECT MAX(ROWID) FROM MY_PHOTO GROUP BY MB_NUM
+                    )
+            )MP,
+            (
+                SELECT MB_NUM,MV_NUM,MV_SAVVID
+                FROM MY_VIDEO
+                WHERE ROWID IN 
+                    (
+                        SELECT MAX(ROWID) FROM MY_VIDEO GROUP BY MB_NUM
+                    )	
+            )MV,
+            MY_SKIN MS,MY_SKIN_PROFILE MSP,
+            (   
+                SELECT DISTINCT MT.MB_NUM
+                FROM MY_TAG MT,
+                (
+                SELECT *
+                FROM TAG 
+                WHERE TAG_NAME LIKE '%'||'트'||'%'
+                )AA
+                WHERE AA.TAG_NUM=MT.TAG_NUM
+            )TT
+            WHERE MP.MB_NUM(+)=MB.MB_NUM AND MV.MB_NUM(+)=MB.MB_NUM AND AA.MB_NUM(+)=MB.MB_NUM AND BB.MB_NUM(+)=MB.MB_NUM AND MB.USER_NUM=MEM.USER_NUM 
+            AND MEM.USER_NUM=MS.USER_NUM AND MS.MS_NUM=MSP.MS_NUM AND MS.MS_USING=1
+            AND TT.MB_NUM=MB.MB_NUM
+        )XX
+        ORDER BY XX.MB_NUM DESC
+    )YY
+)
+WHERE RNUM>=1 AND RNUM<=5;

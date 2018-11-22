@@ -7,7 +7,7 @@
 		<h3><strong>${msv.user_nickname }</strong></h3>
 		<p><span style="border-bottom: 2px solid white;">${msv.ms_msg }</span></p>
 		<c:choose>
-			<c:when test="${user_num!=selectedUserNum && !empty selectedUserNum}">
+			<c:when test="${user_num!=selectedUserNum && !empty selectedUserNum && frdNum == 0}">
 			<form class="form-follow" method="post" action="<c:url value='/friends/follow'/>">
 				<div class="input-group col-sm-offset-5 col-sm-2">
 					<input type="hidden" name="selectedUserNum" value=${selectedUserNum }>
@@ -15,6 +15,15 @@
 				</div>
 			</form> 
 			</c:when>
+			<c:when test="${user_num!=selectedUserNum && !empty selectedUserNum && frdNum != 0}">
+			<form class="form-follow" method="post" action="<c:url value='/friends/unfollow'/>">
+				<div class="input-group col-sm-offset-5 col-sm-2">
+					<input type="hidden" name="selectedUserNum" value=${selectedUserNum }>
+					<button type="submit" class="btn btn-join-follow">UnFollow</button>
+				</div>
+			</form> 
+			</c:when>
+			
 		</c:choose>
 	</div>
 </div>

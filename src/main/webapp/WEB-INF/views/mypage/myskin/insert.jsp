@@ -5,10 +5,7 @@
 <div class="container w3-panel w3-border w3-round-xlarge">
 	<div class="col-sm"
 		style="background-color: white; width: 20%; height: 10%;">
-		<h2 style="margin-left: 54%;margin-top: 8%; width: 80%;    font-size: 40px;
-    text-transform: uppercase;
-    color: #303030;
-    font-weight: 600;">My Skin</h2>
+		<h2 style="margin-left: 54%;margin-top: 8%; text-transform: uppercase;">My Skin</h2>
 	</div>
 	
 	<!-- 미리보기 -->	
@@ -42,7 +39,7 @@
 
 	<!-- 등록 -->
 	<form class="form-horizontal col-sm" enctype="multipart/form-data"
-		method="post" action="<c:url value='/mypage/myskin/insert'/>">
+		method="post" action="<c:url value='/mypage/myskin/insert'/>" >
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="skinname">스킨명:</label>
 			<div class="col-sm-6">
@@ -76,7 +73,7 @@
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-default"
-					style="margin-top: 2%; margin-left: 30%; padding: 8px 100px;">등록</button>
+					style="margin-top: 2%; margin-left: 30%; padding: 8px 100px;" id="myskinFrm">등록</button>
 			</div>
 		</div>
 	</form>

@@ -813,14 +813,14 @@ $(document).ready(function(){
   if($("#myBoardSearchListHere").val()!==undefined){
 	  var keyword=$("#myBoardSearchListHere").val();
 	  $.footerBtn();
-	  $(document).on('focus',"[href='javascript:$.getListMore()']",function(event){
+	  $(document).on('click',"[href='javascript:$.getListMore()']",function(event){
 		  event.preventDefault();
 		  $.getListMore(keyword,"#myBoardSearchList");
 	  });
   }else if($("#myBoardSelectListHere").val()!==undefined){
 	  var selectedUserNum=$("#myBoardSelectListHere").val();
 	  $.footerBtn();
-	  $(document).on('focus',"[href='javascript:$.getListMore()']",function(event){
+	  $(document).on('click',"[href='javascript:$.getListMore()']",function(event){
 		  event.preventDefault();
 		  $.getListMore("","#myBoardSearchList",selectedUserNum);
 	  });

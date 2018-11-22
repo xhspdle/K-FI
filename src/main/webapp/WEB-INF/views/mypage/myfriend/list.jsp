@@ -7,10 +7,10 @@
 	<span style="margin-top: -5%; display: table-cell; float: right;">
 		<a href="<c:url value='/mypage/myfriend/list?user_number=user2_num'/>">
 			<button class="w3-btn w3-black w3-round-xxlarge"
-				style="background-color:${msv.ms_color} !important;">팔로워</button>
+				style="background-color:${msv.ms_color} !important;">팔로잉</button>
 	</a> <a href="<c:url value='/mypage/myfriend/list?user_number=user1_num'/>">
 			<button class="w3-btn w3-black w3-round-xxlarge"
-				style="background-color:${msv.ms_color} !important;">팔로잉</button>
+				style="background-color:${msv.ms_color} !important;">팔로워</button>
 	</a>
 	</span>
 	<div style="width: 100%;">

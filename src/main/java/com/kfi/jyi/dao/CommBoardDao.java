@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kfi.jyi.vo.CommBoardCntVo;
+import com.kfi.jyi.vo.CommBoardProfileVo;
 import com.kfi.jyi.vo.CommBoardVo;
 
 @Repository
@@ -51,5 +52,14 @@ public class CommBoardDao {
 	public int updateViews(int cb_num) {
 		return session.update(NAMESPACE+".updateViews", cb_num);
 	}
+	
+	public int getViews(int cb_num) {
+		return session.selectOne(NAMESPACE+".getViews",cb_num);
+	}
+	
+	public CommBoardProfileVo getCommBoardProfile(int cb_num) {
+		return session.selectOne(NAMESPACE+".getCommBoardProfile",cb_num);
+	}
+	
 	
 }
