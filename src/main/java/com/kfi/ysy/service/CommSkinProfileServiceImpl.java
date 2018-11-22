@@ -1,11 +1,12 @@
 package com.kfi.ysy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kfi.ldk.service.CommonService;
 import com.kfi.ysy.dao.CommSkinProfileDao;
 import com.kfi.ysy.vo.CommSkinProfileVo;
-
+@Service
 public class CommSkinProfileServiceImpl implements CommonService {
 	@Autowired private CommSkinProfileDao cspdao;
 	@Override
@@ -40,8 +41,7 @@ public class CommSkinProfileServiceImpl implements CommonService {
 	@Override
 	public Object select(Object data) {
 		int comm_num=(Integer)data;
-		/*return cspdao.select(comm_num);*/
-		return null;
+		return cspdao.select(comm_num);
 	}
 	
 	@Override

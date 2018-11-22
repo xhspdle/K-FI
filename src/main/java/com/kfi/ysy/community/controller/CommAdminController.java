@@ -20,6 +20,8 @@ import com.kfi.ysy.vo.CommSkinProfileVo;
 public class CommAdminController {
 	@Autowired 
 	@Qualifier("commAdminServiceImpl") private CommonService service;
+	@Autowired 
+	@Qualifier("commSkinProfileServiceImpl") private CommonService cspservice;
 //////////////////////////////////////////////////////////////////////////////////////////////////
 	//커뮤니티 가입회원 정보
 	@SuppressWarnings("unchecked")
@@ -50,10 +52,10 @@ public class CommAdminController {
 	@RequestMapping(value="/community/commadmin/commprofile", method=RequestMethod.GET)
 	public String commprofileForm(int comm_num, Model model) {
 		System.out.println(".................."+comm_num);
-		CommSkinProfileVo vo =(CommSkinProfileVo)service.select(comm_num);
+		CommSkinProfileVo vo =(CommSkinProfileVo)cspservice.select(comm_num);
 		System.out.println("/////////////////////"+vo.getCsp_savimg());
 		System.out.println(vo.getCsp_num());
-		
+		model.addAttribute("commprofile",vo);
 		return ".community.commadmin.commprofile";
 	}
 	public String commprofileupdate() {
