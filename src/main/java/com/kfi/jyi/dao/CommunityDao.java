@@ -37,6 +37,9 @@ public class CommunityDao {
 	public int select_adminNum(int comm_num) {
 		return session.selectOne(NAMESPACE+".select_adminNum", comm_num);
 	}
-
+	//커뮤니티 관리자에서 사용
+	public CommunityVo select_comm(int comm_num) {
+		return session.selectOne(NAMESPACE+".select_comm", comm_num);
+	}
 
 }

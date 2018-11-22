@@ -56,4 +56,9 @@
 	</select>
 
 
+	<!-- 커뮤니티 관리자에서 사용 -->
+	<select id="select_comm" parameterType="int" resultType="community">
+		select * from community where comm_num=#{comm_num}
+	</select>
+	
 </mapper>

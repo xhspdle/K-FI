@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kfi.mybatis.ysy.CommAdminMapper">
 	<select id="list" resultType="communityadmin" parameterType="int">
-		select mb.user_num,mb.user_id,mb.user_nickname,mb.user_email, cul.cul_num, cul.comm_num, cul.cul_status
+		select mb.user_num,mb.user_id,mb.user_nickname,mb.user_email,
+		cul.cul_num, cul.comm_num, cul.cul_status
 		from members mb, comm_user_list cul where mb.user_num=cul.user_num and cul.comm_num=#{comm_num}
 	</select>
+	
+
 </mapper>
