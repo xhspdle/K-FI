@@ -21,6 +21,7 @@ import com.kfi.jyi.vo.CommunityVo;
 import com.kfi.ldk.service.CommonService;
 import com.kfi.ysy.dao.CommAdminDao;
 import com.kfi.ysy.service.CommAdminServiceImpl;
+import com.kfi.ysy.vo.CommSkinCoverVo;
 import com.kfi.ysy.vo.CommSkinProfileVo;
 
 @Controller
@@ -30,6 +31,8 @@ public class CommAdminController {
 	@Qualifier("commAdminServiceImpl") private CommonService service;
 	@Autowired 
 	@Qualifier("commSkinProfileServiceImpl") private CommonService cspservice;
+	@Autowired 
+	@Qualifier("commSkinCoverServiceImpl") private CommonService cscservice;
 //////////////////////////////////////////////////////////////////////////////////////////////////
 	//커뮤니티 가입회원 정보
 	@SuppressWarnings("unchecked")
@@ -46,11 +49,15 @@ public class CommAdminController {
 		}
 	}
 	
+	
+	
 ////////////////////////////////////////////////////////////////////////////////////////////////////	
 	//커뮤니티 스킨 변경
 	@RequestMapping(value="/community/commadmin/commskin", method=RequestMethod.GET)
+	@SuppressWarnings("unchecked")
 	public String commskinForm(int comm_num, Model model) {
-		
+		List<CommSkinCoverVo> list=(List<CommSkinCoverVo>)cscservice.list(comm_num);
+		model.addAttribute("commskinlist",list);
 		return ".community.commadmin.commskin";
 	}
 

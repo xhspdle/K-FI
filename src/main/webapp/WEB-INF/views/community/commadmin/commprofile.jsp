@@ -54,7 +54,7 @@
 <script>
 $(function(){
 	$("#commprofilemodifybtn").on("click",function(){
-		var result=confirm("저장??");
+		var result=confirm("저장할까요???");
 		if(result){
 			var form=$("#commprofilemodify")[0];
 			console.log(form)

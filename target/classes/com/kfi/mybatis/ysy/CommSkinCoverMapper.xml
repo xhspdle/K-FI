@@ -12,6 +12,6 @@
 	</insert>
 	
 	<select id="list" parameterType="commskincover">
-		select * from comm_skin_cover
+		select * from comm_skin_cover where comm_num=#{comm_num}
 	</select>
 </mapper>

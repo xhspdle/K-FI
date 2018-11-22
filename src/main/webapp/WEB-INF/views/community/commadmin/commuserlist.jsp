@@ -181,7 +181,7 @@ tbody tr:nth-child(2n+1) {
 		});
 	});
  	$("#efbtn").on("click",function(){
- 		var result=confirm("강퇴??");
+ 		var result=confirm("강제퇴장 시키겠습니까?");
  		if(result){
  			location.href="<c:url value='/community/commrefuse/insert'/>"
  		}else{
