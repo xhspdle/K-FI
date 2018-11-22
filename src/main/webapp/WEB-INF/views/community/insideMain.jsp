@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <input type="hidden" id="commInsideHere" value="CMH">
+<input type="hidden" id="pageNum" value="${pageNum }">
+
 <div id="commBoardList" class="container text-center">
 	<div id="commNotice">
 		<ul class="commNoticeList center-block text-left">
@@ -89,26 +91,24 @@
 				</c:if>
 			</c:forEach>
 				<p>${board.cb_content }</p>
-				<%-- <c:forEach var="cvo" items="${ cvlist}">
-				<c:set var="j" value="0" />
-					<c:choose>
-						<c:when test="${cvo.cb_num eq board.cb_num }">
-							<video class="img-responsive center-block" controls autoplay muted="muted" loop 
-							src="<c:url value='/resources/upload/vid/${cvo.cv_savvid }'/>"></video>
-						</c:when>
-						<c:otherwise>
-						<c:set var="j" value="j+=1"/>
-							<c:if test="${ j!=0 }" >
-								<c:forEach var="cpo" items="${ cplist}">
-									<c:if test="${cpo.cb_num eq board.cb_num }">
-										<img class="img-responsive center-block" 
-										src="<c:url value='/resources/upload/img/${cpo.cp_savimg }'/>" alt="board image">
-									</c:if>
-								</c:forEach>
+				<c:set var="j" value="0"/>
+				<c:if test="${cvlist ne null }">
+					<c:forEach var="video" items="${cvlist }">
+							<c:if test="${video.cb_num eq board.cb_num }">
+								<video class="img-responsive center-block" controls autoplay muted="muted" loop 
+								src="<c:url value='/resources/upload/vid/${video.cv_savvid }'/>"></video>
+								<c:set var="j" value="1"/>
 							</c:if>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach> --%>
+					</c:forEach>
+				</c:if>		
+				<c:if test="${j ne '1' and cplist ne null}">
+					<c:forEach var="photo" items="${cplist }">
+							<c:if test="${photo.cb_num eq board.cb_num }">
+								<img class="img-responsive center-block" 
+								src="<c:url value='/resources/upload/img/${photo.cp_savimg }'/>" alt="board image">
+							</c:if>
+					</c:forEach>
+				</c:if>				
 			</div>
 			<div class="panel-footer">
 			<c:forEach var="cnt" items="${cbclist }">
@@ -122,11 +122,13 @@
 		</div>
 	</div>
 	</c:forEach>
+	<div id="moreCommBoard"></div>
 	<div class='container-fluid text-center'>
-	<h2><a class='btn btn-default' href='#'>
-	<span class='glyphicon glyphicon-plus'></span> More </a></h2></div>
+		<h2>
+			<a class='btn btn-default' href='javascript:getCommBoard()'><span class='glyphicon glyphicon-plus'></span> More </a>
+		</h2>
+	</div>
 	<!-- 여기까지 c:forEach -->
-	
 </div>
 <!-- Calendar icon -->
 	<input type="hidden" id="url" value="${pageContext.request.contextPath }">

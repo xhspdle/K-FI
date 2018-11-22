@@ -2,12 +2,15 @@ package com.kfi.jyi.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class CommBoardVo {
 	private int cb_num; // 모임글번호
 	private int comm_num; // 모임번호
 	private int user_num; //유저번호
 	private String cb_title; // 모임글제목
 	private String cb_content; // 모임글내용
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date cb_date; // 모임글작성일
 	private int cb_notice; // 공지사항
 	private int cb_views; // 조회수

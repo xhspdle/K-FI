@@ -462,11 +462,35 @@ $(function() {
 		});
 	}
 	
-	//////커뮤니티 전체 게시글 페이징
-	
-	
-	
 });
+
+
+//커뮤니티 게시글 페이징 처리
+function getCommBoard(){
+	var pageNum=parseInt($('#pageNum').val())+1;
+	var getPageContext=$('#getPageContext').val();
+	$.getJSON(getPageContext+'/community/board/list?pageNum='+pageNum,function(result){
+		var page=result.pageNum;
+		$('#pageNum').val(page);
+		var list=result.list; //List<CommBoardVo>
+		var proflist=result.proflist; //List<CommBoardProfileVo>
+		var cbclist=result.cbclist; //List<CommBoardCntVo>
+		var cplist=result.cplist; //List<CommPhotoVo>
+		var cvlist=result.cvlist; //List<CommVideoVo>
+		$(list).each(function(i,board){
+			console.log(board.cb_date);
+			var cb_date=$('#'+board.cb_date).val();
+			if(cb_date==undefined){
+				var dateSpan="<h1 class='text-center' id='"+board.cb_date+"' style='margin-bottom: 30px;'>"+
+					"<span style='border-bottom: 4px solid tan'>"+board.cb_date+"</span></h1>";
+				$('#moreCommBoard').append(dateSpan);
+			}
+			
+			
+		});
+		
+	});
+}
 
 //추천 유저 목록 불러오기
 function getBoardLikeUserList(){
@@ -516,3 +540,20 @@ function getBoardLikeUserList(){
 	});	
 }
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
