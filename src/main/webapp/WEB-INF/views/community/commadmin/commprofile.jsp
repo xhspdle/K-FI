@@ -5,15 +5,15 @@
 
 
 <div>
-	<div class="modal-dialog">
+	<div class="modal-dialog" >
 	<div class="btn-group">
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile?comm_num=${comm_num}'">PROFILE</button>
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin?comm_num=${comm_num}'">SKIN</button>
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist?comm_num=${comm_num}'">MEMBERS</button>
 	</div><!-- <br><br> -->
-		<div class="modal-content">
+		<div class="modal-content" ><!-- style="background-color: #f6f6ff" -->
 			<form class="form-horizontal" action="commprofileupdate" method="post" id="commprofilemodify" enctype="multipart/form-data">		
-			<div class="modal-header">
+			<div class="modal-header" ><!-- style="background-color: #e6e6ff" -->
 				<h4 class="modal-title" style="display: inline;">프로필 수정</h4>
 				<!-- <div class="btn-group  pull-right"> -->
 				<button type="button" class="btn btn-primary pull-right" id="commprofilemodifybtn">적용</button>
@@ -39,7 +39,7 @@
 							<p class="form-control-static">${commadmininfo.user_nickname }</p>
 						</div>
 					</div>
-					<input type="text" name="csp_num" value=${commprofile.csp_num }>
+					<input type="hidden" name="csp_num" value=${commprofile.csp_num }>
 					<input type="hidden" name="comm_num" value=${comminfo.comm_num }>
 					<label>Community Name:</label>
 					<input type="text" class="form-control" name="comm_name" value=${comminfo.comm_name }>		

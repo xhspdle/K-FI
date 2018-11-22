@@ -60,27 +60,18 @@ public class CommSkinProfileServiceImpl implements CommonService {
 			System.out.println(uploadimg + "에 업로드성공");
 			is.close();
 			fos.close();
-			System.out.println("성공");
-			System.out.println(csp_orgimg);
-			System.out.println(csp_savimg);
-			return cspdao.update(cspvo);
+			cspdao.update(cspvo);
+						
+			String comm_name = multirequest.getParameter("comm_name");
+			String comm_content = multirequest.getParameter("comm_content");
+			CommunityVo cvo=new CommunityVo(comm_num, 0, comm_name, comm_content, null, null);
+			cdao.update(cvo);
 			
-			
-			
-			
-		
+			return 1;
 		}catch(Exception e){
 			e.getMessage();
 			return -1;
 		}
-	/*			
-		String comm_name = multirequest.getParameter("comm_name");
-		String comm_content = multirequest.getParameter("comm_content");
-				*/
-	/*	System.out.println("//////////"+comm_num);
-		System.out.println(comm_name);
-		System.out.println(csp_savimg);*/
-	
 	}
 
 	@Override

@@ -72,7 +72,11 @@ public class CommAdminController {
 	@RequestMapping(value="/community/commadmin/commprofileupdate", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String commprofileupdate(MultipartHttpServletRequest multirequest) {
-		cspservice.update(multirequest);	
-		return "success";
+		int result=cspservice.update(multirequest);	
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 }

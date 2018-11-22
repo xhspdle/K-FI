@@ -41,5 +41,8 @@ public class CommunityDao {
 	public CommunityVo select_comm(int comm_num) {
 		return session.selectOne(NAMESPACE+".select_comm", comm_num);
 	}
+	public int update(CommunityVo vo) {
+		return session.update(NAMESPACE+".update", vo);
+	}
 
 }
