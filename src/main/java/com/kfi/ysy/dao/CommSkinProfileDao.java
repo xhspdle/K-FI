@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.objenesis.strategy.SerializingInstantiatorStrategy;
 import org.springframework.stereotype.Repository;
 
 import com.kfi.ysy.vo.CommSkinProfileVo;
@@ -27,5 +28,8 @@ public class CommSkinProfileDao {
 	
 	public CommSkinProfileVo select(int comm_num) {
 		return session.selectOne(NAMESPACE+".select",comm_num);
+	}
+	public int update(CommSkinProfileVo vo) {
+		return session.update(NAMESPACE+".update",vo);
 	}
 }

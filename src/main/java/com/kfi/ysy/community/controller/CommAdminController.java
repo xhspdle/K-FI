@@ -2,7 +2,9 @@ package com.kfi.ysy.community.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kfi.dgl.vo.MembersVo;
 import com.kfi.jyi.vo.CommunityVo;
@@ -55,7 +60,6 @@ public class CommAdminController {
 	@RequestMapping(value="/community/commadmin/commprofile", method=RequestMethod.GET)
 	@SuppressWarnings("unchecked")
 	public String commprofileForm(int comm_num, Model model) {
-		System.out.println(".................."+comm_num);
 		HashMap<String, Object> map=(HashMap<String, Object>)cspservice.select(comm_num);
 		CommSkinProfileVo cspvo=(CommSkinProfileVo)map.get("cspvo");
 		MembersVo mvo=(MembersVo)map.get("mvo");
@@ -65,9 +69,10 @@ public class CommAdminController {
 		model.addAttribute("comminfo",cvo);	
 		return ".community.commadmin.commprofile";
 	}
-	public String commprofileupdate() {
-		
-		
-		return "redirect:/commprofileForm()";
+	@RequestMapping(value="/community/commadmin/commprofileupdate", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String commprofileupdate(MultipartHttpServletRequest multirequest) {
+		cspservice.update(multirequest);	
+		return "success";
 	}
 }
