@@ -3,7 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <input type="hidden" id="commInsideHere" value="CMH">
 <input type="hidden" id="pageNum" value="${pageNum }">
-
+<input type="hidden" id="user_num" value="${user_num }">
+<input type="hidden" id="comm_adminNum" value="${comm_adminNum }">
 <div id="commBoardList" class="container text-center">
 	<div id="commNotice">
 		<ul class="commNoticeList center-block text-left">
@@ -125,7 +126,7 @@
 	<div id="moreCommBoard"></div>
 	<div class='container-fluid text-center'>
 		<h2>
-			<a class='btn btn-default' href='javascript:getCommBoard()'><span class='glyphicon glyphicon-plus'></span> More </a>
+			<a class='btn btn-default' href='javascript:getCommBoard();'><span class='glyphicon glyphicon-plus'></span> More </a>
 		</h2>
 	</div>
 	<!-- 여기까지 c:forEach -->
@@ -144,8 +145,37 @@
 		<i class="glyphicon glyphicon-calendar"></i></div>
 		<div id="wrap_icon_calendar" ></div>
 	</div>
-<script id="commBoardListTemplate" type="text/x-jquery-tmpl">
-
-
-
+<script id="commBoardListTemplate" type="text/template">
+		<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading" id="{board.cb_num }">
+				<blockquote class="postBlock">
+					<h1 class="postTitle">
+						<a href="<c:url value='/community/board/select?cb_num={board.cb_num }'/>" class="postA">
+						{board.cb_title }
+						</a>
+					</h1>
+				</blockquote>
+				<div class="dropdown boardOption">
+					<button class="btn dropdown-toggle {disabled}"  type="button" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-option-vertical"></span>
+					</button>
+					<ul class="dropdown-menu rightOption">
+						<li>{liType}</li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body">
+				{mediaDiv}	
+				<p>{board.cb_content }</p>
+				{vid}
+				{photo}				
+			</div>
+			<div class="panel-footer">
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-heart-empty"></span>&nbsp;Likes <span class="badge">{cblcnt }</span></h4>
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments <span class="badge">{cmcnt }</span></h4>
+				<h4 class="postLikeComment slideanim"><span class="glyphicon glyphicon-signal"></span>&nbsp;Views {cvcnt }</h4>
+			</div>
+		</div>
+	</div>
 </script>	

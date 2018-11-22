@@ -37,6 +37,14 @@
 	<select id="getCommcLikeCnt" parameterType="int" resultType="int">
 		select nvl(max(commc_like),0) from comm_comment where commc_num=#{commc_num}
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from comm_comment where commc_num=#{commc_num}
+	</delete>
 
+	<update id="update" parameterType="hashmap">
+		update comm_comment set commc_content=#{commc_content} where commc_num=#{commc_num}	
+	</update>
+	
 
 </mapper>

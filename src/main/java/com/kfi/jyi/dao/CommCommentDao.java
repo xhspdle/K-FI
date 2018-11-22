@@ -39,4 +39,13 @@ public class CommCommentDao {
 	public int getCommcLikeCnt(int commc_num) {
 		return session.selectOne(NAMESPACE+".getCommcLikeCnt",commc_num);
 	}
+	
+	public int delete(int commc_num) {
+		return session.delete(NAMESPACE+".delete",commc_num);
+	}
+	
+	public int update(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".update",map);
+	}
+	
 }

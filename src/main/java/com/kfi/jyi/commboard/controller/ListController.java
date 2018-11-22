@@ -64,7 +64,7 @@ public class ListController {
 	}
 
 	// 해당 커뮤니티의 페이징처리
-	@RequestMapping(value = "/community/board/list")
+	@RequestMapping(value = "/community/board/list", method=RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> community(Model model, HttpSession session, String comm_num, String pageNum) {
 		int commNum = 1;

@@ -81,14 +81,14 @@ public class CommCommentServiceImpl implements CommonService {
 
 	@Override
 	public int update(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		return ccdao.update(map);
 	}
 
 	@Override
 	public int delete(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		int commc_num=(Integer)data;
+		return ccdao.delete(commc_num);
 	}
 
 	@Override
