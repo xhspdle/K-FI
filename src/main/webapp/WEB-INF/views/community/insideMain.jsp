@@ -71,25 +71,22 @@
 				</div>
 			</div>
 			<div class="panel-body">
-			<c:set var="j" value="${0 }"/>
-			<c:forEach var="msv" items="${msvlist }">
-				<c:choose>
-				<c:when test="${j eq 0 &&  msv.user_num eq board.user_num }">
-					<c:set var="j" value="${j+=1 }"/>
+			<c:forEach var="pro" items="${proflist }">
+				<c:if test="${pro.cb_num eq board.cb_num }">
 					<div class="media">
 						<div class="media-left media-top">
-							<img src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
+							<img src="<c:url value='/resources/upload/img/${pro.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
 						</div>
 						<div class="media-body text-left" style="padding-left:5px;">
 							<h4 class="media-heading">
-							<a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${board.user_num }'/>" class="userSelect">
-							<strong>${msv.user_nickname }</strong></h4>
-							</a>
-							<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
+								<a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${board.user_num }'/>" class="userSelect">
+									<strong>${pro.user_nickname }</strong>
+								</a>
+							</h4>
+							<p style="margin:0px;margin-top:-5px;"><small>${ pro.user_email}</small></p>
 						</div>
 					</div>
-				</c:when>
-				</c:choose>
+				</c:if>
 			</c:forEach>
 				<p>${board.cb_content }</p>
 				<c:choose>
@@ -116,7 +113,7 @@
 	</div>
 	</c:forEach>
 	<div class='container-fluid text-center'>
-	<h2><a class='btn btn-default' href='javascript:$.getListMore()'>
+	<h2><a class='btn btn-default' href='#'>
 	<span class='glyphicon glyphicon-plus'></span> More </a></h2></div>
 	<!-- 여기까지 c:forEach -->
 	

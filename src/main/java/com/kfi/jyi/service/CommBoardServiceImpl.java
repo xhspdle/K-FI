@@ -32,6 +32,7 @@ import com.kfi.jyi.dao.MySkinViewDao;
 import com.kfi.jyi.util.PageUtil;
 import com.kfi.jyi.vo.CommBoardCntVo;
 import com.kfi.jyi.vo.CommBoardLikeVo;
+import com.kfi.jyi.vo.CommBoardProfileVo;
 import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.jyi.vo.CommBoardVo;
 import com.kfi.jyi.vo.CommPhotoVo;
@@ -264,20 +265,23 @@ public class CommBoardServiceImpl implements CommonService {
 		map.put("endRow", endRow);
 		
 		List<CommBoardVo> list=cbdao.list(map);
-		List<MySkinViewVo> msvlist=new ArrayList<>();
+		List<CommBoardProfileVo> proflist=new ArrayList<>();
 		List<CommBoardCntVo> cbclist=new ArrayList<>();
+		List<CommPhotoVo> cplist=new ArrayList<>();
+		
 		
 		for(CommBoardVo vo: list) {
-			MySkinViewVo msvv=msvdao.select_using(vo.getUser_num());
-			msvlist.add(msvv);
 			CommBoardCntVo cntvo=cbdao.getBoardCnt(vo.getCb_num());
 			cbclist.add(cntvo);
+			CommBoardProfileVo cbpvo=cbdao.getCommBoardProfile(vo.getCb_num());
+			proflist.add(cbpvo);
+			CommPhotoVo pvo=cpdao.getBoardPhoto1(vo.getCb_num());
+			cplist.add(pvo);
 		}
-		
 		
 		HashMap<String, Object> result=new HashMap<>();
 		result.put("list", list);//게시글
-		result.put("msvlist", msvlist); //게시글 작성자 프로필
+		result.put("proflist", proflist); //게시글 작성자 프로필
 		result.put("cbclist", cbclist); //게시글 좋아요, 댓글수, 조회수 
 		
 		return result;

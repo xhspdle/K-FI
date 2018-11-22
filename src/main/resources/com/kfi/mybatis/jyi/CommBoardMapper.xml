@@ -55,6 +55,15 @@
 		select nvl(max(cb_views),0) from comm_board where cb_num=#{cb_num}
 	</select>
 	
+	
+	<select id="getCommBoardProfile" parameterType="int" resultType="commboardprofile">
+		select *
+		from
+		(select msp_savimg, user_nickname, user_num from my_skin_view where ms_using=1 and user_num = (select user_num from comm_board where cb_num=#{cb_num})) aa,
+		(select user_email from members where user_num=(select user_num from comm_board where cb_num=#{cb_num})) bb,
+		(select cb_num from comm_board where cb_num=#{cb_num}) cc
+	</select>
+	
 
 
 </mapper>

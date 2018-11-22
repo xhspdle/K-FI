@@ -35,10 +35,10 @@
 		<typeAlias type="com.kfi.jyi.vo.CommBoardLikeVo" alias="commboardlike"/>
 		<typeAlias type="com.kfi.jyi.vo.HotPhoto3Vo" alias="hotphoto3"/>
 		<typeAlias type="com.kfi.jyi.vo.HotVideoVo" alias="hotvideo"/>
-	<typeAlias type="com.kfi.jyi.vo.CommCommentVo" alias="commcomment"/>
+		<typeAlias type="com.kfi.jyi.vo.CommCommentVo" alias="commcomment"/>
 		<typeAlias type="com.kfi.jyi.vo.CommBoardCntVo" alias="commboardcnt"/>
-	
-	<typeAlias type="com.kfi.jyi.vo.CommRefuseVo" alias="commrefuse"/>
+		<typeAlias type="com.kfi.jyi.vo.CommBoardProfileVo" alias="commboardprofile"/>
+		<typeAlias type="com.kfi.jyi.vo.CommRefuseVo" alias="commrefuse"/>
 	
 	
 		
