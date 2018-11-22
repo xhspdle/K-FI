@@ -112,7 +112,10 @@
 			<div class="panel-footer text-left">
 				<h3 class="postListComment select">
 				<c:forEach var="tags" items="${tagList }">
-					<span style="font-size: 24px;">#${tags.tag_name }&nbsp;</span>
+					<form method="post"	action="<c:url value='/mypage/myboard/list'/>" class="tagBtnForm">
+						<input type="hidden" name="tag" value="${tags.tag_name }">
+						<button type="submit" class="tagBtn">#${tags.tag_name }</button>
+					</form>
 				</c:forEach>
 				</h3>
 				<h3 class="postLikeComment select" id="likeCnt" data-like-cnt="${like_cnt }">

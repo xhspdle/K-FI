@@ -39,7 +39,7 @@ public class UpdateController {
 	}
 	@RequestMapping(value="/mypage/myboard/update",method=RequestMethod.POST)
 	@ResponseBody
-	public String update(MultipartHttpServletRequest request,String[] tages,
+	public String update(MultipartHttpServletRequest request,
 				MultipartFile[] fileP,MultipartFile[] fileV,HttpSession session) {
 		int mb_num=0;
 		String mbNum=request.getParameter("mb_num");
@@ -48,11 +48,13 @@ public class UpdateController {
 		}
 		String mb_title=request.getParameter("mb_title");
 		String mb_content=request.getParameter("mb_content");
+		String[] tag_name=request.getParameterValues("tag_name");
 		try {
 			HashMap<String, Object> map=new HashMap<String, Object>();
 			map.put("session", session);
 			map.put("fileP", fileP);
 			map.put("fileV", fileV);
+			map.put("tag_name", tag_name);
 			int user_num=0;
 			Object session_num=session.getAttribute("user_num");
 			if(session_num!=null && session_num!="") {

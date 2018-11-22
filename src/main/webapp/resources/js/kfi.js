@@ -212,14 +212,15 @@ $(document).ready(function(){
   });
   
   var sameDate='';
-  $.getList=function(pageNum,keyword,appendWhere,selectedUserNum){
+  $.getList=function(pageNum,keyword,tag,appendWhere,selectedUserNum){
 	  	var getSession=$("#getSession").val();
 	  	var append="#myBoardList";
+	  	var tagHere="";
 	  	if(appendWhere!==undefined){
 	  		append=appendWhere;
 	  	}
 		$.getJSON(getPageContext + "/mypage/myboard/list",
-			{"pageNum":pageNum,"keyword":keyword,"selectedUserNum":selectedUserNum},
+			{"pageNum":pageNum,"keyword":keyword,"tag":tag,"selectedUserNum":selectedUserNum},
 			function(data){
 				$(data.list).each(function(i,json){
 					var mb_num=json.mb_num;
@@ -346,7 +347,7 @@ $(document).ready(function(){
 		});
   }
   $.footerBtn=function(){
-	  $("footer").before("<div class='container-fluid text-center'>" +
+	  $("footer").before("<div class='container-fluid text-center' id='footerBtn'>" +
 			  			 "<h2><a class='btn btn-default' href='javascript:$.getListMore()'>" +
 			  			 "<span class='glyphicon glyphicon-plus'></span> More </a></h2></div>");
   }
@@ -355,9 +356,44 @@ $(document).ready(function(){
 	  $.footerBtn();
   }
   var more=2;
-  $.getListMore=function(keyword,appendWhere,selectedUserNum){	  
-	  $.getList(more++,keyword,appendWhere,selectedUserNum);
+  $.getListMore=function(keyword,tag,appendWhere,selectedUserNum){
+	  $.getList(more++,keyword,tag,appendWhere,selectedUserNum);
   }
+  
+  if($("#myBoardSearchListHere").val()!==undefined){
+	  var keyword=$("#myBoardSearchListHere").val();
+	  $.footerBtn();
+	  $(document).on('focus',"[href='javascript:$.getListMore()']",function(event){
+		  event.preventDefault();
+		  $.getListMore(keyword,"","#myBoardSearchList");
+	  });
+  }else if($("#myBoardSelectListHere").val()!==undefined){
+	  var selectedUserNum=$("#myBoardSelectListHere").val();
+	  $.footerBtn();
+	  $(document).on('focus',"[href='javascript:$.getListMore()']",function(event){
+		  event.preventDefault();
+		  $.getListMore("","","#myBoardSearchList",selectedUserNum);
+	  });
+  }else if($("#tagSearchHere").val()!==undefined){
+	  var tag=$("#tagSearchHere").val();
+	  $.footerBtn();
+	  $(document).on('focus',"[href='javascript:$.getListMore()']",function(event){
+		  event.preventDefault();
+		  $.getListMore("",tag,"#myBoardSearchList");
+	  });
+  }  
+  
+  $("a[data-my-tag]").click(function(e){
+	  e.preventDefault();
+	  var tag=$(this).attr("data-my-tag");
+	  $("#myBoardSearchList").empty();
+	  $.getList(1,"",tag,"#myBoardSearchList");
+	  $("#footerBtn").remove();
+	  $.footerBtn();
+	  $(document).on('focus',"[href='javascript:$.getListMore()']",function(event){
+		  $(this).attr("href","javascript:$.getListMore('','"+ tag +"','#myBoardSearchList')");
+	  });
+  });
   
   $("#myBoardSelect .postTitle > span").on({
 	  click: function(){
@@ -727,6 +763,13 @@ $(document).ready(function(){
 				  var mb_title=boardVo.mb_title;
 				  var mb_content=boardVo.mb_content;
 				  var mb_date=boardVo.mb_date;
+				  var attachTagList=document.createElement("span");
+				  $(data.tagList).each(function(i,json){
+					  html=document.querySelector("#tagListTemplate").innerHTML;
+					  var attachTag=html.replace(/{tag_num}/gi, json.tag_num)
+					  			.replace(/{tag_name}/gi, json.tag_name);
+					  $(attachTagList).append(attachTag);
+				  });
 				  var attachImgList=document.createElement("div");
 				  $(data.imgList).each(function(i,json){
 					  html=document.querySelector("#fileImgTemplate").innerHTML;
@@ -749,9 +792,11 @@ $(document).ready(function(){
 				  var resultHTML=html.replace("{mb_num}", mb_num)
 				  		.replace("{mb_title}", mb_title)
 				  		.replace("{mb_content}", mb_content)
+				  		.replace("{tagList}", $(attachTagList).html())
 				  		.replace("{attachImgList}", $(attachImgList).html())
 				  		.replace("{attachVidList}", $(attachVidList).html());
 				  $("#updateBody").append(resultHTML);
+				  $()
 			  });
   });
   
@@ -810,22 +855,6 @@ $(document).ready(function(){
 	  });
   });
   
-  if($("#myBoardSearchListHere").val()!==undefined){
-	  var keyword=$("#myBoardSearchListHere").val();
-	  $.footerBtn();
-	  $(document).on('click',"[href='javascript:$.getListMore()']",function(event){
-		  event.preventDefault();
-		  $.getListMore(keyword,"#myBoardSearchList");
-	  });
-  }else if($("#myBoardSelectListHere").val()!==undefined){
-	  var selectedUserNum=$("#myBoardSelectListHere").val();
-	  $.footerBtn();
-	  $(document).on('click',"[href='javascript:$.getListMore()']",function(event){
-		  event.preventDefault();
-		  $.getListMore("","#myBoardSearchList",selectedUserNum);
-	  });
-  }
-  
   /*
    * 동적으로 생성된 요소에 부트스트랩 툴팁 바인딩하기
    * $('[data-toggle="tooltip"]').tooltip(); 으로 하면 작동안함
@@ -858,28 +887,29 @@ $(document).ready(function(){
 	  $.getCommentList();
 	  $.getMyBoardLikeList();
   }
+/*  
   $(".editableDiv").each(function(){
 	  this.contentEditable=true;
-  });
+  });*/
   var tagSpan='';
-  $(".tagsPlaceholder").click(function(){
-	  $("#tags").focus();
+  $(document).on('click',".tagsPlaceholder",function(){
+	  $(this).prev().focus();
   });
   var tagSpanAttached=false;
   var tagSpanNumbering=0;
-  $("#tags").on({
+  $(document).on({
 	  'keydown': function(event){
 		  if(event.keyCode===51){
 			  tagSpanAttached=false;
 			  tagSpan=document.createElement('span');
 			  tagSpan.setAttribute("data-tag-num",tagSpanNumbering++);
 			  $(tagSpan).addClass("tagSpan");
-			  $(".tagsPlaceholder").css("opacity","0");
+			  $(this).next().css("opacity","0");
 		  }
 	  },'keyup': function(event){
 		  event.preventDefault();
 		  if(tagSpanAttached===false){
-			  let tag_name=$("#tags").text().trim();
+			  let tag_name=$(this).text().trim();
 			  if(tag_name.lastIndexOf(" ")===-1){
 				  tag_name=tag_name.substring(tag_name.lastIndexOf("#"));
 			  }else{
@@ -890,7 +920,7 @@ $(document).ready(function(){
 			  }
 		  }
 		  if(event.keyCode===32) {
-			  let tag_name=$("#tags").text().trim();
+			  let tag_name=$(this).text().trim();
 			  if(tag_name!==""){
 				  if(tag_name.lastIndexOf("#")!==-1){
 					  if(tag_name.lastIndexOf(" ")===-1){
@@ -898,36 +928,36 @@ $(document).ready(function(){
 					  }else{
 						  tag_name=tag_name.split(" ")[0].substring(tag_name.lastIndexOf("#") + 1);
 					  }
-					  $(tagSpan).appendTo("label[for='tags']");
-					  $("[for='tags']").after("<input type='hidden' name='tag_name' id='tag"+ 
+					  let appendLabel=$(this).parent().find("label");
+					  $(tagSpan).appendTo(appendLabel);
+					  $(appendLabel).after("<input type='hidden' name='tag_name' id='tag"+ 
 							  $(tagSpan).attr("data-tag-num") +"' value='"+ tag_name +"'>");
-					  $("#tags").empty();
+					  $(this).empty();
 					  tagSpanAttached=true;
 					  setTimeout(function(){
 						  $(tagSpan).css("opacity","1");
 					  },100);
 				  }else{
-					  $("#tags").empty();
+					  $(this).empty();
 				  }
 			  }else{
-				  $("#tags").empty();
+				  $(this).empty();
 			  }
 		  }
-		  if($("#tags").text()===""){
-			  $(".tagsPlaceholder").css("opacity","1");
+		  if($(this).text()===""){
+			  $(this).next().css("opacity","1");
 		  }else{
-			  $(".tagsPlaceholder").css("opacity","0");
+			  $(this).next().css("opacity","0");
 		  }
 	  }
-  });
-  $("label[for='tags']").on('click',".glyphicon-remove-circle",function(){
+  },".editableDiv");
+  $(document).on('click',".glyphicon-remove-circle",function(){
 	  var tagSpanNum=$(this).parent().attr("data-tag-num");
 	  $("input[type='hidden']").remove("#tag" + tagSpanNum);
 	  let removeSpan=$(this).parent().css("opacity","0")
 	  setTimeout(function(){
 		  $(removeSpan).remove();
 	  },500);
-	  
   });
   /*
    * Community
@@ -1090,6 +1120,6 @@ $(document).ready(function(){
 				  }
 			  });
   }
-
+  
 });
 

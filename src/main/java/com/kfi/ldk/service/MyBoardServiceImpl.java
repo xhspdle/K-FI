@@ -156,6 +156,7 @@ public class MyBoardServiceImpl implements CommonService{
 		MultipartFile[] fileP=(MultipartFile[])map.get("fileP");
 		MultipartFile[] fileV=(MultipartFile[])map.get("fileV");
 		HttpSession session=(HttpSession)map.get("session");
+		String[] tag_name=(String[])map.get("tag_name");
 		String uploadPathP=session.getServletContext().getRealPath("/resources/upload/img");
 		String uploadPathV=session.getServletContext().getRealPath("/resources/upload/vid");
 		InputStream is=null;
@@ -186,10 +187,11 @@ public class MyBoardServiceImpl implements CommonService{
 				mpDao.update(new MyPhotoVo(mpVo.getMp_num(), 0, mp_orgimg, mp_savimg));
 				
 				File f=new File(uploadPathP + "\\" + mpVo.getMp_savimg());
-				if(!f.delete()) {
-					throw new Exception("[사진삭제오류]" +photoList.size()+1 + "개 중 " + i+1 +"번째 파일에서 오류 발생");
+				if(f.delete()) {
+					System.out.println(uploadPathP + "경로에 사진 삭제 성공!");
+				}else {
+					System.out.println(photoList.size() + "개 사진중 " + (i+1) +"번째 파일 삭제 실패");
 				}
-				System.out.println(uploadPathP + "경로에 사진 삭제 성공!");
 			}
 			for(int i=0;i<fileV.length;i++) {
 				String mv_orgvid=fileV[i].getOriginalFilename();
@@ -211,10 +213,26 @@ public class MyBoardServiceImpl implements CommonService{
 				mvDao.update(new MyVideoVo(mvVo.getMv_num(), 0, mv_orgvid, mv_savvid));
 				
 				File f=new File(uploadPathV + "\\" + mvVo.getMv_savvid());
-				if(!f.delete()) {
-					throw new Exception("[영상삭제오류]" +videoList.size()+1 + "개 중 " + i+1 +"번째 파일에서 오류 발생");
+				if(f.delete()) {
+					System.out.println(uploadPathV + "경로에 영상 삭제 성공!");
+				}else {
+					System.out.println(videoList.size() + "개 영상중 " + (i+1) +"번째 파일 삭제 실패");
 				}
-				System.out.println(uploadPathV + "경로에 영상 삭제 성공!");
+			}
+			int mb_num=mbVo.getMb_num();
+			myTagDao.delete(mb_num);
+			if(tag_name!=null) {
+				for(int i=0;i<tag_name.length;i++) {
+					TagVo vo=tagDao.select(tag_name[i]);
+					if(vo==null) {
+						int tag_num=tagDao.getMaxNum() + 1;
+						tagDao.insert(new TagVo(tag_num, tag_name[i]));
+						myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
+					}else {
+						int tag_num=vo.getTag_num();
+						myTagDao.insert(new MyTagVo(myTagDao.getMaxNum() + 1, tag_num, mb_num));
+					}
+				}
 			}
 		}catch(Exception e) {
 			File f=null;

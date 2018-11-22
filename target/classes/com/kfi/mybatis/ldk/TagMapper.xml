@@ -20,9 +20,14 @@
 	</delete>
 	<select id="list" parameterType="hashmap" resultType="tag">
 		select * from tag
-		<if test="keyword!=null and keyword!=''">
-		where tag_name like '%'||#{keyword}||'%'
-		</if>
+		<choose>
+			<when test="keyword!=null and keyword!=''">
+			where tag_name like '%'||#{keyword}||'%'
+			</when>
+			<when test="tag!=null and tag!=''">
+			where tag_name like '%'||#{tag}||'%'
+			</when>
+		</choose>
 	</select>
 	<select id="select" parameterType="string" resultType="tag">
 		select * from tag where tag_name=#{tag_name}
@@ -41,7 +46,7 @@
 	</select>
 	-->
 	<select id="listMyTagJoin" parameterType="int" resultType="com.kfi.ldk.vo.MyTagListJoinVo">
-		SELECT T.TAG_NUM,T.TAG_NAME,AA.TAG_CNT
+		SELECT T.TAG_NUM,MT.MTAG_NUM,T.TAG_NAME,AA.TAG_CNT
 		FROM TAG T,MY_TAG MT,
 		(
 		    SELECT TT.TAG_NAME,COUNT(TT.TAG_NAME) TAG_CNT

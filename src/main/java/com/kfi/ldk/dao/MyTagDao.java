@@ -25,8 +25,8 @@ public class MyTagDao {
 	public int update(MyTagVo vo) {
 		return session.update(NAMESPACE + ".update", vo);
 	}
-	public int delete(int user_num) {
-		return session.delete(NAMESPACE + ".delete", user_num);
+	public int delete(int mb_num) {
+		return session.delete(NAMESPACE + ".delete", mb_num);
 	}
 	public List<Object> list(HashMap<String, Object> map) {
 		return session.selectList(NAMESPACE + ".list", map);

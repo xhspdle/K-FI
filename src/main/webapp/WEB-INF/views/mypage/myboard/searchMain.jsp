@@ -8,8 +8,8 @@
 	<c:when test="${!empty selectedUserNum }">
 	<input type="hidden" id="myBoardSelectListHere" value="${selectedUserNum }">
 	</c:when>
-	<c:when test="">
-	
+	<c:when test="${!empty tag }">
+	<input type="hidden" id="tagSearchHere" value="${tag }">
 	</c:when>	
 </c:choose>
 <c:if test="${!empty tagList }">
@@ -18,7 +18,8 @@
 	<div class="list-center">
 	
 		<c:forEach var="vo" items="${tagList }">
-			<a href="<c:url value='/'/>">#${vo.tag_name }</a>
+			<a href="<c:url value='/mypage/myboard/list?tag=${vo.tag_name }'/>" data-my-tag="${vo.tag_name }">
+			#${vo.tag_name }</a>
 		</c:forEach>
 	</div>
 </div>

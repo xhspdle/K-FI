@@ -8,9 +8,9 @@
 			<when test="keyword!=null and keyword!=''">
 				where mb_title like '%'||#{keyword}||'%' or mb_content like '%'||#{keyword}||'%'
 			</when>
-			<otherwise>
+			<when test="user_num!=null and user_num!=0">
 				where user_num=#{user_num}
-			</otherwise>
+			</when>
 		</choose>
 	</sql>
 	<!-- 
@@ -25,29 +25,134 @@
 			<when test="keyword!=null and keyword!=''">
 				(mb_title like '%'||#{keyword}||'%' or mb_content like '%'||#{keyword}||'%')
 			</when>
-			<otherwise>
+			<when test="user_num!=null and user_num!=0">
 				(user_num=#{user_num})
-			</otherwise>
+			</when>
 		</choose>
 	</sql>
 	<select id="getCount" parameterType="hashmap" resultType="int">
-		select NVL(count(mb_num),0) cnt from myboardlist
-		<include refid="search"/>
+		SELECT NVL(COUNT(MB_NUM),0) CNT
+        FROM
+        (
+            SELECT MB.MB_NUM,MB.USER_NUM,MEM.USER_ID,MEM.USER_NICKNAME,MEM.USER_EMAIL,MB.MB_TITLE,MB.MB_CONTENT,MB.MB_DATE,MB.MB_VIEWS,
+            AA.COMMENT_CNT,BB.LIKE_CNT,MP.MP_NUM,MP.MP_SAVIMG,MV.MV_NUM,MV.MV_SAVVID,MSP.MSP_SAVIMG
+            FROM MY_BOARD MB,MEMBERS MEM,
+            (
+                SELECT NVL(COUNT(MYC_NUM),0) COMMENT_CNT,MC.MB_NUM
+                FROM MY_COMMENT MC,MY_BOARD MBB
+                WHERE MC.MB_NUM=MBB.MB_NUM
+                GROUP BY MC.MB_NUM
+            )AA,
+            (
+                SELECT NVL(COUNT(MBL_NUM),0) LIKE_CNT,MBL.MB_NUM
+                FROM MY_BOARD_LIKE MBL,MY_BOARD MBBB
+                WHERE MBL.MB_NUM=MBBB.MB_NUM
+                GROUP BY MBL.MB_NUM
+            )BB,
+            (
+                SELECT MB_NUM,MP_NUM,MP_SAVIMG
+                FROM MY_PHOTO
+                WHERE ROWID IN 
+                    (
+                        SELECT MAX(ROWID) FROM MY_PHOTO GROUP BY MB_NUM
+                    )
+            )MP,
+            (
+                SELECT MB_NUM,MV_NUM,MV_SAVVID
+                FROM MY_VIDEO
+                WHERE ROWID IN 
+                    (
+                        SELECT MAX(ROWID) FROM MY_VIDEO GROUP BY MB_NUM
+                    )	
+            )MV,
+            MY_SKIN MS,MY_SKIN_PROFILE MSP
+            <if test="tag!=null and tag!=''">
+            ,
+            (   
+                SELECT DISTINCT MT.MB_NUM
+                FROM MY_TAG MT,
+                (
+                SELECT *
+                FROM TAG 
+                WHERE TAG_NAME LIKE '%'||#{tag}||'%'
+                )AA
+                WHERE AA.TAG_NUM=MT.TAG_NUM
+            )TT
+            </if>
+            WHERE MP.MB_NUM(+)=MB.MB_NUM AND MV.MB_NUM(+)=MB.MB_NUM AND AA.MB_NUM(+)=MB.MB_NUM AND BB.MB_NUM(+)=MB.MB_NUM AND MB.USER_NUM=MEM.USER_NUM 
+            AND MEM.USER_NUM=MS.USER_NUM AND MS.MS_NUM=MSP.MS_NUM AND MS.MS_USING=1
+            <if test="tag!=null and tag!=''">
+            AND TT.MB_NUM=MB.MB_NUM
+            </if>
+        )XX
+        <include refid="search"/>
 	</select>
 	<select id="list" parameterType="hashmap" resultType="myboardlist">
-		select *
-		from
+		SELECT *
+		FROM
 		(
-	 	select aa.*,rownum rnum 
-	 	from
-	 	(
-	 		select *
-	 		from myboardlist
-	 		<include refid="search"/>
-	 		order by mb_num desc
-	 	)aa
+		    SELECT YY.*,ROWNUM RNUM
+		    FROM
+		    (
+		        SELECT *
+		        FROM
+		        (
+		            SELECT MB.MB_NUM,MB.USER_NUM,MEM.USER_ID,MEM.USER_NICKNAME,MEM.USER_EMAIL,MB.MB_TITLE,MB.MB_CONTENT,MB.MB_DATE,MB.MB_VIEWS,
+		            AA.COMMENT_CNT,BB.LIKE_CNT,MP.MP_NUM,MP.MP_SAVIMG,MV.MV_NUM,MV.MV_SAVVID,MSP.MSP_SAVIMG
+		            FROM MY_BOARD MB,MEMBERS MEM,
+		            (
+		                SELECT NVL(COUNT(MYC_NUM),0) COMMENT_CNT,MC.MB_NUM
+		                FROM MY_COMMENT MC,MY_BOARD MBB
+		                WHERE MC.MB_NUM=MBB.MB_NUM
+		                GROUP BY MC.MB_NUM
+		            )AA,
+		            (
+		                SELECT NVL(COUNT(MBL_NUM),0) LIKE_CNT,MBL.MB_NUM
+		                FROM MY_BOARD_LIKE MBL,MY_BOARD MBBB
+		                WHERE MBL.MB_NUM=MBBB.MB_NUM
+		                GROUP BY MBL.MB_NUM
+		            )BB,
+		            (
+		                SELECT MB_NUM,MP_NUM,MP_SAVIMG
+		                FROM MY_PHOTO
+		                WHERE ROWID IN 
+		                    (
+		                        SELECT MAX(ROWID) FROM MY_PHOTO GROUP BY MB_NUM
+		                    )
+		            )MP,
+		            (
+		                SELECT MB_NUM,MV_NUM,MV_SAVVID
+		                FROM MY_VIDEO
+		                WHERE ROWID IN 
+		                    (
+		                        SELECT MAX(ROWID) FROM MY_VIDEO GROUP BY MB_NUM
+		                    )	
+		            )MV,
+		            MY_SKIN MS,MY_SKIN_PROFILE MSP
+		            <if test="tag!=null and tag!=''">
+		            ,
+		            (   
+		                SELECT DISTINCT MT.MB_NUM
+		                FROM MY_TAG MT,
+		                (
+		                SELECT *
+		                FROM TAG 
+		                WHERE TAG_NAME LIKE '%'||#{tag}||'%'
+		                )AA
+		                WHERE AA.TAG_NUM=MT.TAG_NUM
+		            )TT
+		            </if>
+		            WHERE MP.MB_NUM(+)=MB.MB_NUM AND MV.MB_NUM(+)=MB.MB_NUM AND AA.MB_NUM(+)=MB.MB_NUM AND BB.MB_NUM(+)=MB.MB_NUM AND MB.USER_NUM=MEM.USER_NUM 
+		            AND MEM.USER_NUM=MS.USER_NUM AND MS.MS_NUM=MSP.MS_NUM AND MS.MS_USING=1
+		            <if test="tag!=null and tag!=''">
+		            AND TT.MB_NUM=MB.MB_NUM
+		            </if>
+		        )XX
+		        <include refid="search"/>
+		        ORDER BY XX.MB_NUM DESC
+		    )YY
 		)
-		<![CDATA[where rnum>=#{startRow} and rnum<=#{endRow}]]>
+		<![CDATA[WHERE RNUM>=#{startRow} AND RNUM<=#{endRow}]]>
 	</select>
 	<select id="select" parameterType="int" resultType="myboardlist">
 		select * from myboardlist where mb_num=#{mb_num}

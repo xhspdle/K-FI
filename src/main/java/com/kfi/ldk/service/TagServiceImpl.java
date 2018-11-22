@@ -38,6 +38,7 @@ public class TagServiceImpl implements CommonService{
 	@Override
 	public Object list(Object data) {
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		System.out.println("TagServiceImpl List¸Þ¼Òµå" + map);
 		return tagDao.list(map);
 	}
 }

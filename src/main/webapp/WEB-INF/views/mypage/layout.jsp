@@ -60,12 +60,8 @@
 							<textarea class="form-control" rows="5" id="mb_content" name="mb_content" placeholder="Write something!"></textarea>
 						</div>
 						<div class="form-group" style="margin-bottom:-11.4px;">
-							<!--  
 							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
-							<textarea class="form-control" rows="1" id="tags" name="tags" placeholder="#blabla #blabla"></textarea>
-							-->
-							<label for="tags"><span class="glyphicon glyphicon-tags"></span> Tags</label>
-							<div class="editableDiv" id="tags"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
+							<div class="editableDiv" id="tags" contenteditable="true"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
 						</div>
 						<div class="form-group imgUpload">
 							<label for="fileP1" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> Upload Photo</label>
@@ -130,9 +126,9 @@
 		<label for="mb_content_up"><span class="glyphicon glyphicon-menu-hamburger"></span> Content</label>
 		<textarea class="form-control" rows="5" id="mb_content_up" name="mb_content">{mb_content}</textarea>
 	</div>
-	<div class="form-group">
-		<label for="tags_up"><span class="glyphicon glyphicon-tags"></span> Tags</label>
-		<input type="text" class="form-control" id="tags_up" name="tags" placeholder="#blabla #blabla">
+	<div class="form-group" style="margin-bottom:-11.4px;">
+		<label for="tags_up"><span class="glyphicon glyphicon-tags"></span> Tags</label>{tagList}
+		<div class="editableDiv" id="tags_up" contenteditable="true"></div><span class="tagsPlaceholder">#tags and hit the SPACEBAR!</span>							
 	</div>
 	<div class="form-group imgUpload">
 		{attachImgList}
@@ -142,10 +138,14 @@
 	</div>
 	<button type="submit" class="btn btn-success btn-block" id="sendServer_up"><span class="glyphicon glyphicon-ok"></span> Update</button>
 </form>
-<div class="progress">
+<div class="progress myboard-progress">
 	<div class="progress-bar progress-bar-striped active" role="progressbar" 
 	aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
 </div>
+</script>
+<script id="tagListTemplate" type="text/template">
+<span data-tag-num="{tag_num}" class="tagSpan" style="opacity:1;">{tag_name}<span class="glyphicon glyphicon-remove-circle"></span></span>
+<input type="hidden" name="tag_name" id="tag{tag_num}" value="{tag_name}">
 </script>
 <script id="fileImgTemplate" type="text/template">
 <label for="fileP{i}_up" class="btn btn-primary btn-block btn-file"><span class="glyphicon glyphicon-picture"></span> {label}</label>
