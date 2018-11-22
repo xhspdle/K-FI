@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.jyi.CommCommentLikeMapper">
+
+	<select id="getMaxNum" resultType="int">
+		select nvl(max(ccl_num),0) from comm_comment_like
+	</select>
+
+	<insert id="insert" parameterType="commcommentlike">
+		insert into comm_comment_like values(#{ccl_num},#{commc_num},#{user_num})
+	</insert>
+	
+	<delete id="delete" parameterType="hashmap">
+		delete from comm_comment_like where commc_num=#{commc_num} and user_num=#{user_num}
+	</delete>
+	
+	<select id="checkUserNum" parameterType="hashmap" resultType="int">
+		select nvl(max(user_num),0) from comm_comment_like where commc_num=#{commc_num} and user_num=#{user_num}
+	</select>
+	
+	
+</mapper>

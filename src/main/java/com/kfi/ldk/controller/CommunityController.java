@@ -37,7 +37,6 @@ public class CommunityController {
 		
 		//hot photo3 
 		List<HotPhoto3Vo> hotPhoto3=(List<HotPhoto3Vo>)service.list("hotPhoto3");
-		System.out.println(hotPhoto3.toString()+"!!!!!!!!hotPhoto3");
 		model.addAttribute("hotPhoto3", hotPhoto3); 
 		
 		//hot video

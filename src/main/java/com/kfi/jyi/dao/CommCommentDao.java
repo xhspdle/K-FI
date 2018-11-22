@@ -28,4 +28,15 @@ public class CommCommentDao {
 		return session.selectList(NAMESPACE+".list",map);
 	}
 	
+	public int update_CommcLike(int commc_num) {
+		return session.update(NAMESPACE+".update_CommcLike",commc_num);
+	}
+	
+	public int update_disCommcLike(int commc_num) {
+		return session.update(NAMESPACE+".update_disCommcLike",commc_num);
+	}
+	
+	public int getCommcLikeCnt(int commc_num) {
+		return session.selectOne(NAMESPACE+".getCommcLikeCnt",commc_num);
+	}
 }

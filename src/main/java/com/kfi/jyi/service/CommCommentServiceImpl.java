@@ -63,8 +63,8 @@ public class CommCommentServiceImpl implements CommonService {
 
 	@Override
 	public int getCount(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cb_num=(Integer)data;
+		return ccdao.select_CommentNum(cb_num);
 	}
 
 	@Override
@@ -114,8 +114,13 @@ public class CommCommentServiceImpl implements CommonService {
 			msvvolist.add(msvvo);
 		}
 		HashMap<String, Object> result=new HashMap<>();
-		map.put("list",list);//´ñ±Û
-		map.put("msvvolist", msvvolist);//´ñ±Û´Ü À¯Àú ÇÁ·ÎÇÊ
+		result.put("list",list);//´ñ±Û
+		result.put("msvvolist",msvvolist);//´ñ±ÛÀ¯Àú ÇÁ·ÎÇÊ
+		result.put("startPageNum", page.getStartPageNum());
+		result.put("endPageNum", page.getEndPageNum());
+		result.put("pageBlockCount", page.getPageBlockCount());
+		result.put("totalPageCount", page.getTotalPageCount());
+		
 		
 		return result;
 	}

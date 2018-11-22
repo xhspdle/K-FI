@@ -144,3 +144,8 @@
 		<i class="glyphicon glyphicon-calendar"></i></div>
 		<div id="wrap_icon_calendar" ></div>
 	</div>
+<script id="commBoardListTemplate" type="text/x-jquery-tmpl">
+
+
+
+</script>	

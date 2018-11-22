@@ -19,7 +19,11 @@ public class InsertController {
 	@Autowired
 	@Qualifier("commCommentServiceImpl") private CommonService service;
 	
-	@RequestMapping(value="/commcomment/insert")
+	@Autowired
+	@Qualifier("commCommentLikeServiceImpl") private CommonService commentLikeService;
+	
+	
+	@RequestMapping(value="/commcomment/insert", method=RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> insert(String commc_content, String cb_num, HttpSession session) {
 		HashMap<String, Object> map=new HashMap<>();
@@ -35,5 +39,31 @@ public class InsertController {
 		resultMap.put("result", result);
 		return resultMap;
 	}
+	
+	
+	
+	//댓글 좋아요 등록, 취소	
+	@RequestMapping(value="/communityBoard/commCommentLike/insert", method=RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> insertLike(String commc_num, HttpSession session) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("session", session);
+		int commcNum=0;
+		if(commc_num!=null && !commc_num.equals("")) {
+			commcNum=Integer.parseInt(commc_num);
+		}
+		map.put("commc_num", commcNum);
+		int result=commentLikeService.insert(map);
+		
+		
+		HashMap<String, Object> resultMap=new HashMap<>();
+		resultMap.put("result", result);
+		
+		int commentLikeCnt=commentLikeService.getCount(commcNum);
+		resultMap.put("commentLikeCnt", commentLikeCnt);
+		
+		return resultMap;
+	}
+	
 	
 }

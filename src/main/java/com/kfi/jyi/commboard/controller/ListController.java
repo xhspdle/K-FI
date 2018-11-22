@@ -36,6 +36,11 @@ public class ListController {
 	@Qualifier("insideCommunityServiceImpl")
 	private CommonService insideCommService;
 	
+	@Autowired
+	@Qualifier("commCommentServiceImpl")
+	private CommonService commCommentService;
+	
+	
 	@ModelAttribute("checkUser")
 	public int checkUser(Model model, HttpSession session, String comm_num) {
 		int commNum = 1;
@@ -86,5 +91,36 @@ public class ListController {
 		
 		return result;
 	}
+	
+	
+	
+	
+	//커뮤니티 게시글 댓글리스트
+	@RequestMapping(value="/community/board/commentList",method=RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> commentList(String pageNum, String cb_num){
+		int cbNum=1;
+		if(!cb_num.equals("") && cb_num!=null) {
+			cbNum=Integer.parseInt(cb_num);
+		}
+		int pageNUM=1;
+		if(!pageNum.equals("") && pageNum!=null) {
+			pageNUM=Integer.parseInt(pageNum);
+		}
+		int commentCnt=commCommentService.getCount(cbNum);
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("cb_num", cbNum);
+		map.put("pageNum", pageNUM);
+		HashMap<String, Object> result=(HashMap<String, Object>)commCommentService.list(map);
+		result.put("commentCnt", commentCnt);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
 
 }

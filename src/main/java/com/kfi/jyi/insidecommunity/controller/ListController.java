@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kfi.dgl.service.MembersService;
 import com.kfi.dgl.vo.MembersVo;
+import com.kfi.jyi.vo.CommBoardCntVo;
 import com.kfi.jyi.vo.CommBoardLikeVo;
+import com.kfi.jyi.vo.CommBoardProfileVo;
 import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.jyi.vo.CommBoardVo;
 import com.kfi.jyi.vo.CommPhotoVo;
@@ -62,10 +64,10 @@ public class ListController {
 		model.addAttribute("msvList", (List<MySkinViewVo>)result.get("msvList")); //게시글 작성자, 추천 유저 skin view
 		model.addAttribute("vo", (MembersVo)result.get("vo")); //작성자 회원 정보
 		model.addAttribute("writervo", (MySkinViewVo)result.get("writervo")); //게시글 작성자 skin view
-		model.addAttribute("likeNum", (Integer)result.get("likeNum"));  //추천수
 		model.addAttribute("tagList", (List<TagVo>)result.get("tagList"));  //태그리스트
 		model.addAttribute("commentCnt", (Integer)result.get("commentCnt"));  //댓글 수
-		
+		model.addAttribute("likeNum", (Integer)result.get("likeNum"));  //추천수
+		model.addAttribute("pageNum", 1);  //댓글 페이지 번호 기본값
 		
 		return ".community.board.select";
 	}

@@ -430,25 +430,19 @@ $(function() {
 		});
 	});
 	
-	///////////////////////////댓글
-	/*getBoardCommentList();
-
+	///////////커뮤니티 게시글 댓글리스트 불러오기
+	getBoardCommentList(1);
+	
+	//댓글 추가하기
 	$("input[name='commCommentFrm']").submit(function(event){
 		event.preventDefault();
 		var getPageContext=$('#getPageContext').val();
 		var cb_num=parseInt($("input[name='cb_num']").val());
 		var commc_content=$("input[name='commc_content']").val();
-		$.ajax({
-			url:getPageContext+'/commcomment/insert',
-			dataType:'json',
-			type:'post',
-			data:{'cb_num':cb_num,'commc_content':commc_content},
-			success:function(data){
-				var result=data.result;
-				getBoardCommentList();
-			}
+		$.getJSON(getPageContext+'/commcomment/insert',{cb_num:cb_num,commc_content:commc_content},function(){
+			getBoardCommentList(1);
 		});
-	});*/
+	});
 	
 	
 	//////커뮤니티 게시글 조회수 올리기
@@ -462,9 +456,35 @@ $(function() {
 		});
 	}
 	
+	 $("#commCommentList").on('click',".thumbsUp",function(event){
+		  event.preventDefault();
+		  var commc_num=parseInt($(this).attr("data-comm-num"));
+		  $.getJSON(getPageContext + "/communityBoard/commCommentLike/insert",{commc_num:commc_num},
+				  function(resultMap){
+					  $("span[data-comm-num='"+ commc_num +"'").text(resultMap.commentLikeCnt);
+					  var msgSpan=$("span[data-comm-num='"+ commc_num +"'").next().next();
+					  if(resultMap.result==1){
+						  $(msgSpan).text("Thumbs Up!");
+					  }else if(resultMap.result==0){
+						  $(msgSpan).text("cancled");
+					  }else{
+						  $.msgBox(resultMap.result);
+					  }
+					  $(msgSpan).css("opacity","1");
+					  setTimeout(function(){
+						  $(msgSpan).css("opacity","0"); 
+					  },3000);
+				  });
+	  });
+	
+	
+	
+	
+	
+	
+	
 });
-
-
+	
 //커뮤니티 게시글 페이징 처리
 function getCommBoard(){
 	var pageNum=parseInt($('#pageNum').val())+1;
@@ -477,49 +497,12 @@ function getCommBoard(){
 		var cbclist=result.cbclist; //List<CommBoardCntVo>
 		var cplist=result.cplist; //List<CommPhotoVo>
 		var cvlist=result.cvlist; //List<CommVideoVo>
-		$(list).each(function(i,board){
-			var cb_date=$('#'+board.cb_date).val();
-			if(cb_date==undefined){
-				var dateSpan="<h1 class='text-center' id='"+board.cb_date+"' style='margin-bottom: 30px;'>"+
-					"<span style='border-bottom: 4px solid tan'>"+board.cb_date+"</span></h1>";
-				$('#moreCommBoard').append(dateSpan);
-			}
-			
-			var data='<div class="panel-group"><div class="panel panel-default">'
-			+'<div class="panel-heading" id="'+board.cb_num+'">'
-			+'	<blockquote class="postBlock">'
-			+'	<h1 class="postTitle"><a href="'+ getPageContext+'/community/board/select?cb_num='+board.cb_num +'" class="postA">'+board.cb_title+'</a>'
-			+'  </h1></blockquote>' 
-			+'	<div class="dropdown boardOption">'
-			+'		<button class="btn dropdown-toggle" <c:if test="'+board.user_num+' ne sessionScope.user_num}">disabled</c:if>" type="button" data-toggle="dropdown">'
-			+'			<span class="glyphicon glyphicon-option-vertical"></span>'
-			+'		</button>'
-			+'		<ul class="dropdown-menu rightOption">'
-			+'			<c:if test="'+board.user_num+' eq sessionScope.user_num}">'
-			+'				<li>'
-			+'				<a href="#updateModal" data-toggle="modal" data-mb-num="'+board.cb_num+' }">'
-			+'					<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit'
-			+'				</a>'
-			+'			</li>'
-			+'		</c:if>'
-			+'			<c:if test="'+board.user_num+' eq sessionScope.user_num || sessionScope.user_num eq comm_adminNum }">'
-			+'				<li>'
-			+'					<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="'+board.cb_num+'">'
-			+'						<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete'
-			+'					</a>'
-			+'				</li>'
-			+'			</c:if>'
-			+'			<c:if test="'+board.user_num+' ne sessionScope.user_num }">'
-			+'				<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>'
-			+'			</c:if>'
-			+'		</ul>'
-			+'	</div>'
-			+'</div>';
-			$('#moreCommBoard').append(data);
-			
-			
-		});
+
 		
+		
+		
+		
+
 	});
 }
 
@@ -540,43 +523,86 @@ function getBoardLikeUserList(){
 }
 
 //댓글 목록 불러오기
-/*function getBoardCommentList(){
-	var getPageContext=$('#getPageContext').val();
-	var cb_num=$('#cb_num').val();
-	$.getJSON(getPageContext+'/commcomment/list?cb_num='+cb_num,function(data){
-		$("#commBoardSelect #commentList").empty();
-		var list=data.list; //댓글
-		var msvvolist=data.msvvolist; //댓글단 유저 프로필
-		var pageNum=data.pageNum;
-		$(list).each(function(i,vo){
-				html=document.querySelector("#commBoardSelect #commentTemplate").innerHTML;
-				var msp_savimg="";
-				var userSelect="";
-				var user_nickname="";
-				var user_num=0;
-				if(msvvolist[i].user_num == vo.user_num){
-					msp_savimg=msvvolist[i].msp_savimg;
-					userSelect=getPageContext+"/";
-					user_nickname=msvvolist[i].user_nickname;
-					user_num=msvvolist[i].user_num;
-				}
-				var result=html.replace('{pageNum}',pageNum)
-					.replace('{msp_savimg}', msp_savimg)
-					.replace('{userSelect}', msp_savimg)
-					.replace('{myc_content}', vo.commc_content)
-					.replace('{myc_num}', user_num)
-					.replace('{path}', getPageContext)
-					.replace('{myc_num}', user_num)
-		});
-	});	
+function getBoardCommentList(pageNum){
+	  var getPageContext=$('#getPageContext').val();
+	  if(pageNum==undefined){
+		pageNum=1;  
+	  }
+	  var cb_num=parseInt($("#commBoardSelect input[name='cb_num']").val());
+	  $.getJSON(getPageContext+'/community/board/commentList',{pageNum:pageNum,cb_num:cb_num},
+		  function(result){
+			  $("#commBoardSelect #commentCnt").text(result.commentCnt + " Comments");
+			  $("#commCommentList").empty();
+			  $(result.list).each(function(i,comment){
+				  var optionBtn='';
+				  var dropDowns='';
+				  var user_num=$('#user_num').val(); //로그인한 사용자
+				  var commBoardUserNum=$('#commBoardUserNum').val(); //게시물 작성자
+				  var commentWriterNum=comment.user_num; //댓글 작성자
+				  if(user_num==commentWriterNum){
+					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/communityBoard/comment/delete?myc_num="+ comment.commc_num +"' data-comm-num='"+ comment.commc_num +"'>삭제</a></li>" +
+					  			"<li><a class='dropDownUpdate' href='"+ getPageContext +"/communityBoard/comment/delete' data-comm-num='"+ comment.commc_num +"'>수정</a></li>";
+				  }else if(user_num==commBoardUserNum){
+					  dropDowns="<li><a class='dropDownDelete' href='"+ getPageContext +"/communityBoard/comment/delete?myc_num="+ comment.commc_num +"' data-comm-num='"+ comment.commc_num +"'>삭제</a></li>";
+				  }else{
+					  optionBtn=" disabled";
+				  }
+				  var userSelect= getPageContext + "/mypage/myboard/selectList?selectedUserNum=" + commentWriterNum;
+				  html=document.querySelector("#commentTemplate").innerHTML;
+				  var j=0;
+				  $(result.msvvolist).each(function(i,msv){
+					  var msp_savimg=msv.msp_savimg;
+					  var user_nickname=msv.user_nickname;
+					  if(j!=1 && commentWriterNum == msv.user_num){
+						  j=1;
+						  var resultHTML=html.replace("{msp_savimg}", msp_savimg)
+					  		.replace("{pageNum}",pageNum)
+					  		.replace("{path}", getPageContext)
+					  		.replace(/{myc_num}/gi, comment.commc_num)
+					  		.replace("{userSelect}",userSelect)
+					  		.replace("{user_nickname}", user_nickname)
+					  		.replace("{myc_content}", comment.commc_content)
+					  		.replace("{comment_likes}", comment.commc_like)
+					  		.replace("{myc_date}", comment.commc_date)
+					  		.replace("{dropDowns}", dropDowns)
+					  		.replace("{optionBtn}", optionBtn);
+					  $("#commCommentList").append(resultHTML);
+					  }
+				  });
+			  });
+			  
+			  //페이징 처리
+			  $("#commBoardSelect .pagination").empty();
+			  var startPageNum=result.startPageNum;
+			  var endPageNum=result.endPageNum;
+			  if(startPageNum > result.pageBlockCount){
+				  $("<li><a class='aPaging bPaging' href='javascript:getBoardCommentList("+ (startPageNum-1) +")'>" +
+				  	"<span class='glyphicon glyphicon-chevron-left bPaging'></span></a></li>")
+				  .appendTo("#commBoardSelect .pagination");
+			  }else{
+				  $("#commBoardSelect .pagination")
+				  .append("<li><span class='glyphicon glyphicon-chevron-left bPaging'></span></li>");
+			  }
+			  for(var i=startPageNum;i<=endPageNum;i++){
+				  if(i==result.pageNum){
+					  $("<li><a class='aPaging bPaging' href='javascript:getBoardCommentList("+ i +")'>" + i + "</a></li>")
+					  .appendTo("#commBoardSelect .pagination")
+					  .addClass("active")
+				  }else{
+					  $("<li><a class='aPaging bPaging' href='javascript:getBoardCommentList("+ i +")'>" + i + "</a></li>")
+					  .appendTo("#commBoardSelect .pagination")
+				  }
+			  }
+			  if(endPageNum < result.totalPageCount){
+				  $("<li><a class='aPaging bPaging' href='javascript:getBoardCommentList("+ (endPageNum+1) +")'>" +
+				  	"<span class='glyphicon glyphicon-chevron-right bPaging'></span></a></li>")
+				  .appendTo("#commBoardSelect .pagination");
+			  }else{
+				  $("#commBoardSelect .pagination")
+				  .append("<li><span class='glyphicon glyphicon-chevron-right bPaging'></span></li>");
+			  }
+		  });
 }
-*/
-
-
-
-
-
-
 
 
 
