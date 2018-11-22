@@ -31,7 +31,7 @@
 	            		) cb, comm_photo cp
 	        		where cb.cb_num=cp.cb_num 
 	        		)
-		<![CDATA[  where rnum <4 )	 ]]>  order by cb_date desc
+		<![CDATA[  where rnum <4 )	 ]]>
 	</select>
 	
 	<select id="getBoardPhoto1" resultType="commphoto" parameterType="int">

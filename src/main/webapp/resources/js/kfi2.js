@@ -478,13 +478,44 @@ function getCommBoard(){
 		var cplist=result.cplist; //List<CommPhotoVo>
 		var cvlist=result.cvlist; //List<CommVideoVo>
 		$(list).each(function(i,board){
-			console.log(board.cb_date);
 			var cb_date=$('#'+board.cb_date).val();
 			if(cb_date==undefined){
 				var dateSpan="<h1 class='text-center' id='"+board.cb_date+"' style='margin-bottom: 30px;'>"+
 					"<span style='border-bottom: 4px solid tan'>"+board.cb_date+"</span></h1>";
 				$('#moreCommBoard').append(dateSpan);
 			}
+			
+			var data='<div class="panel-group"><div class="panel panel-default">'
+			+'<div class="panel-heading" id="'+board.cb_num+'">'
+			+'	<blockquote class="postBlock">'
+			+'	<h1 class="postTitle"><a href="'+ getPageContext+'/community/board/select?cb_num='+board.cb_num +'" class="postA">'+board.cb_title+'</a>'
+			+'  </h1></blockquote>' 
+			+'	<div class="dropdown boardOption">'
+			+'		<button class="btn dropdown-toggle" <c:if test="'+board.user_num+' ne sessionScope.user_num}">disabled</c:if>" type="button" data-toggle="dropdown">'
+			+'			<span class="glyphicon glyphicon-option-vertical"></span>'
+			+'		</button>'
+			+'		<ul class="dropdown-menu rightOption">'
+			+'			<c:if test="'+board.user_num+' eq sessionScope.user_num}">'
+			+'				<li>'
+			+'				<a href="#updateModal" data-toggle="modal" data-mb-num="'+board.cb_num+' }">'
+			+'					<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit'
+			+'				</a>'
+			+'			</li>'
+			+'		</c:if>'
+			+'			<c:if test="'+board.user_num+' eq sessionScope.user_num || sessionScope.user_num eq comm_adminNum }">'
+			+'				<li>'
+			+'					<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="'+board.cb_num+'">'
+			+'						<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete'
+			+'					</a>'
+			+'				</li>'
+			+'			</c:if>'
+			+'			<c:if test="'+board.user_num+' ne sessionScope.user_num }">'
+			+'				<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>'
+			+'			</c:if>'
+			+'		</ul>'
+			+'	</div>'
+			+'</div>';
+			$('#moreCommBoard').append(data);
 			
 			
 		});
