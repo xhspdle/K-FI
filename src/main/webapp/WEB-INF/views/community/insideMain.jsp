@@ -38,7 +38,7 @@
 			<div class="panel-heading" id="${board.cb_num }">
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
-						<a href="#" class="postA">
+						<a href="<c:url value='/community/board/select?cb_num=${board.cb_num }'/>" class="postA">
 						${board.cb_title }
 						</a>
 					</h1>
@@ -81,7 +81,10 @@
 							<img src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>" class="media-object img-circle" style="width:50px;height:50px">
 						</div>
 						<div class="media-body text-left" style="padding-left:5px;">
-							<h4 class="media-heading"><strong>${msv.user_nickname }</strong></h4>
+							<h4 class="media-heading">
+							<a href="<c:url value='/mypage/myboard/selectList?selectedUserNum=${board.user_num }'/>" class="userSelect">
+							<strong>${msv.user_nickname }</strong></h4>
+							</a>
 							<p style="margin:0px;margin-top:-5px;"><small>브이오.user_email</small></p>
 						</div>
 					</div>

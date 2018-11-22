@@ -151,7 +151,7 @@
 
 .myskin {
 	margin: auto;
-	height: 300px;
+	/* height: 300px; */
 }
 
 .myskin_list_nav {
@@ -206,7 +206,34 @@
 	padding: 1px 1px;
 	
 } */
-.pre_cover {
+
+
+#myskin_list_msg{
+	    font-size: x-large;
+margin-bottom: 13px;
+    margin-top: -22px;
+    width: max-content;
+    color: black;
+    border-bottom: 2px solid white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 17px;
+    font-weight: bold;
+
+
+}
+
+
+.pre_cover{
+	height: fit-content;
+	    background-size: cover !important;
+    padding: 1% 0% 0% 0%;
+    background-repeat: no-repeat !important;
+}
+
+
+/* .pre_cover {
 	background-size: cover !important;
 	padding: 1% 0% 0% 0%;
 	margin: -3% 0% 0% 6%;
@@ -214,8 +241,8 @@
 	background-repeat: no-repeat !important;
 	border-radius: 10px;
 	display: none;
-	/*position: relative;*/
-}
+	position: relative;
+} */
 /* .pre_cover:before{
 	top:0;
 	left:0;
@@ -251,7 +278,6 @@
 
 /* 스킨 추가 */
 .myskin_ud_add {
-	background-color: #00cee8;
 	border-radius: 10px;
 	padding: 5px 10px;
 	color: white;
@@ -261,7 +287,6 @@
 
 /* 기본값으로 적용 */
 .myskin_ud_default {
-	background-color: #00cee8;
 	border-radius: 10px;
 	padding: 5px 10px;
 	color: white;

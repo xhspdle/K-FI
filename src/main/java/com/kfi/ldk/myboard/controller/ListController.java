@@ -27,6 +27,8 @@ public class ListController {
 	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
 	@Autowired
 	@Qualifier("tagServiceImpl") private CommonService tagService;
+	@Autowired 
+	@Qualifier("friendsServiceImpl") private CommonService friendsService;
 	@RequestMapping(value="/mypage/myboard/list",method=RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> list(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
@@ -79,7 +81,7 @@ public class ListController {
 	}
 	@RequestMapping(value="/mypage/myboard/selectList",method=RequestMethod.GET)
 	public String selectList(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
-			@RequestParam(value="selectedUserNum",defaultValue="0")int selectedUserNum,Model model){
+			@RequestParam(value="selectedUserNum",defaultValue="0")int selectedUserNum,Model model, HttpSession session){
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("user_num", selectedUserNum);
 		int totalRowCount=service.getCount(map);
@@ -89,6 +91,15 @@ public class ListController {
 		model.addAttribute("pu", pu);
 		model.addAttribute("selectedUserNum", selectedUserNum);
 		model.addAttribute("list", service.list(map));
+		
+		/* 친구 확인 코드 추가 */
+		HashMap<String, Object> frd=new HashMap<>();
+		frd.put("user2_num", (Integer)session.getAttribute("user_num"));
+		frd.put("user1_num", selectedUserNum);
+		int frdNum=friendsService.getCount(frd);
+		model.addAttribute("frdNum", frdNum);
+		
+		
 		return ".mypage.myboard.searchMain";
 	}
 	@RequestMapping(value="/mypage/myboard/tagSelectList",method=RequestMethod.GET)

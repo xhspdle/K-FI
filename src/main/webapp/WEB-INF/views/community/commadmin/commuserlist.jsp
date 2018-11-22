@@ -8,6 +8,9 @@ tbody tr{
 tbody tr:nth-child(2n+1) {
  	background-color: #e3f2fd;
 }
+.colwhite{
+	color: white;
+}
 
 </style>
 
@@ -15,11 +18,10 @@ tbody tr:nth-child(2n+1) {
 	<div class="container">
 		<!-- <button class="btn btn-md" onclick="location.href='/kfi/adminlist'">관리자정보</button> -->
 		<div class="btn-group">
-			<button type="button" class="btn btn-primary">MEMBERS</button>
-			<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/communityskin'">SKIN</button>
-			<button type="button" class="btn btn-primary">Sony</button>
-		</div>
-		<br><br>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile'">PROFILE</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin'">SKIN</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist'">MEMBERS</button>
+		</div><!-- <br><br> -->
 		<table class="table">
 			<thead>
 				<tr>
@@ -34,6 +36,7 @@ tbody tr:nth-child(2n+1) {
 			<tbody>
 			<c:forEach var="commuserlist" items="${commuserlist }">
 				<tr>
+					<td hidden="hidden">${commuserlist.cul_num }</td>
 					<td hidden="hidden">${commuserlist.user_num }</td>
 					<td class="commuser">${commuserlist.user_id}</td>
 					<td class="commuser">${commuserlist.user_nickname}</td>
@@ -49,42 +52,40 @@ tbody tr:nth-child(2n+1) {
 
 <div class="modal" id="commforcedexitform">
 	<div class="modal-dialog">
-		<div class="modal-content" style="background-color: #e3f2fd">
+		<div class="modal-content" style="background-color: #0c558d">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">×</button>
-					<div style="font-size: 20px; font: bold;">사용자 강퇴</div>
+				<div style="font-size: 20px; font: bold; color:white">사용자 강퇴</div>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal">
-					<input type="hidden" class="form-control" name="user_num">
+				<form class="form-horizontal" action="<c:url value='/community/commrefuse/insert'/>" method="post">
+					<input type="hidden" class="form-control colwhite" name="cul_num" id="culnum">
 					<div class="form-group">
-						<label class="control-label col-sm-2">ID:</label>
+						<label class="control-label col-sm-2 colwhite">ID:</label>
 						<div class="col-sm-10">
-							<!-- <input type="text" class="form-control" name="user_id" readonly="readonly" style="background-color: white"> -->
+							<input type="text" class="form-control" readonly="readonly" id="efid">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2">NickName:</label>
+						<label class="control-label col-sm-2 colwhite">NickName:</label>
 						<div class="col-sm-10">
-							<!-- <input type="text" class="form-control" name="user_nickname" readonly="readonly"> -->
+							<input type="text" class="form-control" readonly="readonly" id="efnick"> 
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2">Email:</label>
+						<label class="control-label col-sm-2 colwhite">Email:</label>
 						<div class="col-sm-10">
-							<!-- <input type="text" class="form-control" name="user_email" readonly="readonly"> -->
+							<input type="text" class="form-control" readonly="readonly" id="efmail">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2">사유:</label>
+						<label class="control-label col-sm-2 colwhite">사유:</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" rows="4"></textarea> 
+							<textarea class="form-control" rows="4" name="cr_refuse"></textarea> 
 						</div>
 					</div>
 					<div class="modal-footer">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default" data-dismiss="modal">작성</button>
+							<button type="button" class="btn btn-default" id="efbtn">작성</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 					</div>
@@ -96,32 +97,30 @@ tbody tr:nth-child(2n+1) {
 
 <div class="modal" id="commusermodify">
 	<div class="modal-dialog">
-		<div class="modal-content" style="background-color: #e3f2fd">
+		<div class="modal-content" style="background-color: #0c558d">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">×</button>
-				<h4 class="modal-title">사용자 수정</h4>
+				<h4 class="modal-title colwhite" >사용자 수정</h4>
 			</div>
 			<div class="modal-body">
 				<div class="form-horizontal">
 					<input type="hidden" class="form-control" name="user_num"
 						id="modifyuser_num">
 					<div class="form-group">
-						<label class="control-label col-sm-2">ID:</label>
+						<label class="control-label col-sm-2 colwhite">ID:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="user_id" readonly="readonly" id="modifyuser_id">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label col-sm-2">NickName:</label>
+						<label class="control-label col-sm-2 colwhite">NickName:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="user_nickname"
 								id="modifyuser_nickname">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2">Email:</label>
+						<label class="control-label col-sm-2 colwhite">Email:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="user_email"
 								id="modifyuser_email">
@@ -130,7 +129,7 @@ tbody tr:nth-child(2n+1) {
 					<div class="modal-footer">
 						<div class="col-sm-offset-2 col-sm-10">
 							<div class="btn-group pull-left">
-								<button type="button" class="btn btn-primary">관리자권한양도</button>
+								<button type="button" class="btn btn-success">관리자권한양도</button>
 								<button type="button" class="btn btn-danger">강퇴</button>	
 							</div>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -148,17 +147,12 @@ tbody tr:nth-child(2n+1) {
 		$(".commforcedexit").attr({'data-toggle':'modal','data-target':'#commforcedexitform'});
 		
 		$(".commforcedexit").on("click",function(){
-			alert("bbb");
-			var str="";
-			var tdArr=new Array();
 			var tr=$(this).closest('tr');
 			var td=tr.children();
-			console.log(tr.text());
-			$("#commforcedexitform").
-			td.each(function(i){
-				tdArr.push(td.eq(i).text());
-			});
-			
+			$("#culnum").val(td.eq(0).text());
+			$("#efid").val(td.eq(2).text());
+			$("#efnick").val(td.eq(3).text());
+			$("#efmail").val(td.eq(4).text());		
 		});
 		
 		$(".commuser").click(function(){
@@ -185,6 +179,14 @@ tbody tr:nth-child(2n+1) {
 				return false;
 			}
 		});
+	});
+ 	$("#efbtn").on("click",function(){
+ 		var result=confirm("강퇴??");
+ 		if(result){
+ 			location.href="<c:url value='/community/commrefuse/insert'/>"
+ 		}else{
+ 			return false;
+ 		}
 	});
 
 

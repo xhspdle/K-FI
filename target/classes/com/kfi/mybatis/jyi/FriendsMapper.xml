@@ -20,5 +20,8 @@
 		select * from friends where ${user_number}=#{user_num}
 	</select>
 	
+	<select id="getFrdNum" parameterType="hashmap" resultType="int">
+	 	select nvl(count(frds_num),0) from friends where user1_num=#{user1_num} and user2_num=#{user2_num}
+	</select>
 	
 </mapper>

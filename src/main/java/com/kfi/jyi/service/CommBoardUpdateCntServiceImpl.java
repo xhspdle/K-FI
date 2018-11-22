@@ -2,6 +2,7 @@ package com.kfi.jyi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kfi.jyi.dao.CommBoardDao;
 import com.kfi.ldk.service.CommonService;
@@ -30,13 +31,20 @@ public class CommBoardUpdateCntServiceImpl implements CommonService{
 	}
 
 	@Override
+	@Transactional
 	public int update(Object data) {
 		String cbNum=(String)data;
 		int cb_num=0;
 		if(cbNum!=null && !cbNum.equals("")) {
 			cb_num=Integer.parseInt(cbNum);
 		}
-		return cbdao.updateViews(cb_num);
+		try {
+			cbdao.updateViews(cb_num);
+			int result=cbdao.getViews(cb_num);
+			return result;
+		}catch(Exception e) {
+			return -1;
+		}
 	}
 
 	@Override
@@ -47,7 +55,6 @@ public class CommBoardUpdateCntServiceImpl implements CommonService{
 
 	@Override
 	public Object select(Object data) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

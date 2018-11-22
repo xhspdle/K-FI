@@ -10,4 +10,4 @@ select admin.admin_id, admin.admin_nick, admin_board.* from admin_board, admin  
 			left join members user1 on ac.user1_num=user1.user_num 
 			left join members user2 on ac.user2_num=user2.user_num;
 			
-ac_status 추가 accuse
+--ac_status 추가 accuse

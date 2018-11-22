@@ -14,12 +14,7 @@ public class CommSkinCoverDao {
 	public int getMaxNum() {
 		return session.selectOne(NAMESPACE+".getMaxNum");
 	}
-	
-	
 	public int insert(CommSkinCoverVo vo) {
 		return session.insert(NAMESPACE+".insert",vo);
-	}
-	
-	
-	
+	}	
 }

@@ -45,12 +45,16 @@ public class InsertController {
 	public String follow(HttpSession session, String selectedUserNum) {
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("session", session);
-		map.put("user1_num",selectedUserNum );
+		int user1_num=0;
+		if(selectedUserNum!=null && !selectedUserNum.equals("")) {
+			user1_num=Integer.parseInt(selectedUserNum);
+		}
+		map.put("user1_num",user1_num );
 		int result=(Integer)service.insert(map);
 		if(result>0) {
-			return ".mypage.myfriend.list";
+			return "redirect:/mypage/myfriend/list";
 		}else {
-			return ".mypage.myfriend.list"; //오류
+			return "redirect:/mypage/myfriend/list"; //오류
 		}
 	}
 }

@@ -29,14 +29,14 @@ public class FriendsServiceImpl implements CommonService {
 	
 	@Override
 	public int getMaxNum() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getCount(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		/* 친구인지 확인 */
+		HashMap<String, Object> map=(HashMap<String, Object>)data;
+		return fdao.getFrdNum(map);
 	}
 
 	@Override
@@ -86,9 +86,9 @@ public class FriendsServiceImpl implements CommonService {
 		for (FriendsVo vo : flist) {
 			MySkinViewVo csv = null;
 			if (map.get("user_number").equals("user1_num")) {
-				csv=msvdao.select_using(vo.getUser1_num());
-			} else if (map.get("user_number").equals("user2_num")) {
 				csv=msvdao.select_using(vo.getUser2_num());
+			} else if (map.get("user_number").equals("user2_num")) {
+				csv=msvdao.select_using(vo.getUser1_num());
 			}
 			msvlist.add(csv);
 		}

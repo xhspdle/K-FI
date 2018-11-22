@@ -38,6 +38,7 @@
 	<typeAlias type="com.kfi.jyi.vo.CommCommentVo" alias="commcomment"/>
 		<typeAlias type="com.kfi.jyi.vo.CommBoardCntVo" alias="commboardcnt"/>
 	
+	<typeAlias type="com.kfi.jyi.vo.CommRefuseVo" alias="commrefuse"/>
 	
 	
 		
@@ -51,8 +52,8 @@
 		<typeAlias type="com.kfi.ysy.vo.AccuseListViewVo" alias="accuselist"/>
 		<typeAlias type="com.kfi.ysy.vo.CommSkinCoverVo" alias="commskincover"/>
 		<typeAlias type="com.kfi.ysy.vo.CommSkinProfileVo" alias="commskinprofile"/>
-		<typeAlias type="com.kfi.ysy.vo.CommunityAdminVo" alias="communityadmin"/>
-		<typeAlias type="com.kfi.ysy.vo.CommRefuseVo" alias="commrefuse"/>
+		<typeAlias type="com.kfi.ysy.vo.CommAdminVo" alias="communityadmin"/>
+		
 	</typeAliases>
 	<mappers>	 
 		<mapper resource="com/kfi/mybatis/ldk/MyBoardMapper.xml"/>
@@ -85,6 +86,9 @@
 		<mapper resource="com/kfi/mybatis/jyi/CommVideoMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/CommBoardLikeMapper.xml"/>
 			<mapper resource="com/kfi/mybatis/jyi/CommCommentMapper.xml"/>
+			
+			
+			<mapper resource="com/kfi/mybatis/jyi/CommRefuseMapper.xml"/>
 		
 		
 		
@@ -94,8 +98,8 @@
 		<mapper resource="com/kfi/mybatis/ysy/FaqMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/CommSkinCoverMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ysy/CommSkinProfileMapper.xml"/>
-		<mapper resource="com/kfi/mybatis/ysy/CommunityAdminMapper.xml"/>
-		<mapper resource="com/kfi/mybatis/ysy/CommRefuseMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ysy/CommAdminMapper.xml"/>
+		
 		
 		<mapper resource="com/kfi/mybatis/dgl/MembersMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/dgl/CertiMembersMapper.xml"/>

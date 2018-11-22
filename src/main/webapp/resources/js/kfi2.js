@@ -187,6 +187,16 @@ $(function() {
 		$("#preview_cover").css('background','url('+filePath+')');
 	});
 	
+	$('#myskinFrm').on('click',function(){
+		var skinName=$('#ms_name').val();
+		if(skinName == ''){
+			alert('스킨명을 입력해주세요');
+			return false;
+		}
+		return true;
+	});
+	
+	
 	
 	/////////////////////////회원정보 확인
 	$('#myinfo_pwd_submit').on('click',function(){
@@ -316,6 +326,8 @@ $(function() {
 		var getPageContext=$('#getPageContext').val();
 		$.getJSON(getPageContext+'/mypage/myskin/select',{ms_num:ms_num},function(data){
 			var vo=data.vo;
+			$('#noneCover').css('display','block');
+			$('#myskin_list_nav').css('display','block');
 			$('#applyMySkin')
 			.prop('href',getPageContext+'/mypage/myskin/applySkin?ms_num='+vo.ms_num)
 			.css({
@@ -341,6 +353,13 @@ $(function() {
 	$('#ms_color').on('change',function(){
 		var vv=$(this).val();
 	});
+	
+	var myskinColorOne=$('#myskinColorOne').val();
+	if(myskinColorOne != null){
+		$('.myskin_ud_add').css('background-color',myskinColorOne);
+		$('.myskin_ud_default').css('background-color',myskinColorOne);
+	}
+	
 	
 	/////////////////////////새 커뮤니티 등록하기
 	
@@ -437,8 +456,9 @@ $(function() {
 	if(cb_num != null){
 		var getPageContext=$('#getPageContext').val();
 		$.getJSON(getPageContext+'/community/board/updateViews?cb_num='+cb_num,function(data){
-			var result=data.result;
-			console.log(result+"!!!!!");
+			var views=data.result;
+			var viewNum=' Views ' +views;
+			$('#viewsCnt').text(viewNum);
 		});
 	}
 	
@@ -457,7 +477,7 @@ function getBoardLikeUserList(){
 		var list=data.list;
 		$(list).each(function(i){
 			$("<img class='img-responsive img-circle' " +
-				"src='"+ getPageContext +"/resources/upload/img/"+ list[i].msp_savimg +"' alt='likerProfiles' " +
+				"src='"+ getPageContext +"/resources/upload/img/"+list[i].msp_savimg +"' alt='likerProfiles' " +
 				"data-toggle='tooltip' title='"+ list[i].user_nickname +"'>")
 				.appendTo("#commBoardSelect .likeUserList");
 		});

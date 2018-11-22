@@ -47,15 +47,14 @@ public class ListController {
 	}
 	
 	
-	//user_num이 유저번호1이면 팔로잉 당함
-	//유저번호2이면 유저번호1을 팔로워 중
+	
 	@RequestMapping(value="/mypage/myfriend/list",method=RequestMethod.GET)
 	public String list(HttpSession session,String user_number,Model model) {
 		HashMap<String, Object> map=new HashMap<>();
 		int user_num=(Integer)session.getAttribute("user_num");
 		map.put("user_num", user_num);
 		if(user_number==null) {
-			user_number="user1_num";
+			user_number="user2_num";
 		}
 		map.put("user_number", user_number);
 		

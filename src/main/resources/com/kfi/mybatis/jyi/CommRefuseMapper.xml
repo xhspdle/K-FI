@@ -8,7 +8,7 @@
 		select NVL(max(cr_num),0) from comm_refuse
 	</select>	
 	
-	<insert id="insert" parameterType="commuserlist">
+	<insert id="insert" parameterType="commrefuse">
 		insert into comm_refuse values(#{cr_num},#{cul_num},#{cr_refuse})
 	</insert>
 

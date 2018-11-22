@@ -1,18 +1,18 @@
 package com.kfi.ysy.service;
 
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kfi.ldk.service.CommonService;
-import com.kfi.ysy.dao.CommunityAdminDao;
+import com.kfi.ysy.dao.CommAdminDao;
 
 @Service
-public class CommunityAdminServiceImpl implements CommonService{
+public class CommAdminServiceImpl implements CommonService{
 	@Autowired
-	private CommunityAdminDao dao;
+	private CommAdminDao dao;
 	@Override
 	public int getMaxNum() {
 		// TODO Auto-generated method stub
@@ -45,7 +45,7 @@ public class CommunityAdminServiceImpl implements CommonService{
 	}
 	@Override
 	public Object list(Object data) {
-		data=null;
-		return (List<CommunityAdminDao>)dao.list(data);	
+		int comm_num=(Integer)data;
+		return (List<CommAdminDao>)dao.list(comm_num);	
 	}
 }
