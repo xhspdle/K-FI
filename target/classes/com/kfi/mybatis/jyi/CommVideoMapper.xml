@@ -34,6 +34,9 @@
 			     where rnum =1 ) 
 	</select>
 	
+	<select id="getCommVideo1" resultType="commvideo" parameterType="int">
+		select * from(select cv.*, rownum rnum from comm_video cv where cb_num=#{cb_num}) where rnum=1
+	</select>
 	
 	
 </mapper>

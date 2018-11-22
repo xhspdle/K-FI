@@ -44,6 +44,7 @@ body {
 </style>
 <script>
 	$(function() {
+		var url=$('#getContextPath').val();
 		/* 		$('#calendar').fullCalendar('removeEvents');
 		 $('#calendar').fullCalendar('refetchEvents'); */
 		/* var title = $("input[name=cc_name] schedule-title").val();
@@ -60,7 +61,7 @@ body {
 				right : 'today'
 			},
 			events : [ 
-				<c:forEach var="list" items="${monthlist}"> 
+				<c:forEach var="list" items="${list}"> 
 				{
 						id:'${list.cc_info}', 
 					  title: '${list.cc_name}',  
@@ -70,10 +71,10 @@ body {
 				}, 
 				</c:forEach>
 				],
-			dayClick : function(date, jsEvent, view, resource) {
+			/* dayClick : function(date, jsEvent, view, resource) {
 				console.log('dayClick' + date.format())
 				alert(date.format());
-			}
+			} */
 		});
 		$('#addevent-btn').on('click', function() {
 			alert("complete");

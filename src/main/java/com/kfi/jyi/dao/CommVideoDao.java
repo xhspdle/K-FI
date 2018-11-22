@@ -32,4 +32,8 @@ public class CommVideoDao {
 		return session.selectOne(NAMESPACE+".hotVideo");
 	}
 	
+	public CommVideoVo getCommVideo1(int cb_num) {
+		return session.selectOne(NAMESPACE+".getCommVideo1",cb_num);
+	}
+	
 }

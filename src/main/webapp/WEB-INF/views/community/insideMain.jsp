@@ -89,16 +89,26 @@
 				</c:if>
 			</c:forEach>
 				<p>${board.cb_content }</p>
-				<c:choose>
-					<c:when test="${!empty vo.mv_savvid}">
-					<video class="img-responsive center-block" controls autoplay muted="muted" loop 
-					src="<c:url value='/resources/upload/vid/${vo.mv_savvid }'/>"></video>
-					</c:when>
-					<c:when test="${!empty vo.mp_savimg }">
-					<img class="img-responsive center-block" 
-					src="<c:url value='/resources/upload/img/${vo.mp_savimg }'/>" alt="board image">
-					</c:when>
-				</c:choose>
+				<%-- <c:forEach var="cvo" items="${ cvlist}">
+				<c:set var="j" value="0" />
+					<c:choose>
+						<c:when test="${cvo.cb_num eq board.cb_num }">
+							<video class="img-responsive center-block" controls autoplay muted="muted" loop 
+							src="<c:url value='/resources/upload/vid/${cvo.cv_savvid }'/>"></video>
+						</c:when>
+						<c:otherwise>
+						<c:set var="j" value="j+=1"/>
+							<c:if test="${ j!=0 }" >
+								<c:forEach var="cpo" items="${ cplist}">
+									<c:if test="${cpo.cb_num eq board.cb_num }">
+										<img class="img-responsive center-block" 
+										src="<c:url value='/resources/upload/img/${cpo.cp_savimg }'/>" alt="board image">
+									</c:if>
+								</c:forEach>
+							</c:if>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach> --%>
 			</div>
 			<div class="panel-footer">
 			<c:forEach var="cnt" items="${cbclist }">

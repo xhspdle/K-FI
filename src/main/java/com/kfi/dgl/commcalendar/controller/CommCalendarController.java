@@ -16,8 +16,17 @@ import com.kfi.jyi.vo.CommCalendarVo;
 @Controller(value = "CommCalendarController")
 public class CommCalendarController {
 	@Autowired private CommCalendarService service;
+	
 	@RequestMapping(value="/community/commcalendar", method = RequestMethod.GET)
-	public String commcalendar() {
+	public String commcalendar(HttpSession session, Model model) {
+		/* 커뮤니티 일정 LIST */
+		int comm_num1=(Integer)session.getAttribute("comm_num");
+		System.out.println(comm_num1+"!!!!!!!!comm_num1");
+		List<CommCalendarVo> list= service.listEvent(comm_num1);
+		
+		/* mycalendar 유틸  넣었다가 빼서 모델에 넣으세여 하고 이 문장은 지우세여*/
+		
+		model.addAttribute("list",list);
 		return ".community.commcalendar.calendar";
 	}
 	
@@ -33,7 +42,7 @@ public class CommCalendarController {
 		int n = service.addEvent(vo);
 		if(n>0) {
 			System.out.println("된다");
-			return ".community.commcalendar.calendar";
+			return "redirect:/community/commcalendar";
 		}else {
 			System.out.println("안되");
 			return "redirect:/";
@@ -68,7 +77,7 @@ public class CommCalendarController {
 	
 	@RequestMapping(value="/community/delete", method = RequestMethod.POST)
 	public String deleteEvent(HttpSession session, int cc_num) {
-		int comm_num2=(int) session.getAttribute("comm_num");
+		int comm_num2=(Integer) session.getAttribute("comm_num");
 		System.out.println(session.getAttribute("comm_num"));
 		int n= service.deleteEvent(comm_num2);
 		if(n>0) {

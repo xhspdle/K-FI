@@ -268,7 +268,7 @@ public class CommBoardServiceImpl implements CommonService {
 		List<CommBoardProfileVo> proflist=new ArrayList<>();
 		List<CommBoardCntVo> cbclist=new ArrayList<>();
 		List<CommPhotoVo> cplist=new ArrayList<>();
-		
+		List<CommVideoVo> cvlist=new ArrayList<>();
 		
 		for(CommBoardVo vo: list) {
 			CommBoardCntVo cntvo=cbdao.getBoardCnt(vo.getCb_num());
@@ -277,12 +277,16 @@ public class CommBoardServiceImpl implements CommonService {
 			proflist.add(cbpvo);
 			CommPhotoVo pvo=cpdao.getBoardPhoto1(vo.getCb_num());
 			cplist.add(pvo);
+			CommVideoVo cvo=cvdao.getCommVideo1(vo.getCb_num());
+			cvlist.add(cvo);
 		}
 		
 		HashMap<String, Object> result=new HashMap<>();
 		result.put("list", list);//게시글
 		result.put("proflist", proflist); //게시글 작성자 프로필
 		result.put("cbclist", cbclist); //게시글 좋아요, 댓글수, 조회수 
+		result.put("cplist", cplist); //게시글 사진
+		result.put("cvlist", cvlist); //게시글 비디오
 		
 		return result;
 	}

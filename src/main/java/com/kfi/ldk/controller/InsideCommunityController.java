@@ -1,6 +1,7 @@
 package com.kfi.ldk.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +20,8 @@ import com.kfi.jyi.vo.CommBoardProfileVo;
 import com.kfi.jyi.vo.CommBoardViewVo;
 import com.kfi.jyi.vo.CommBoardVo;
 import com.kfi.jyi.vo.CommCommentVo;
+import com.kfi.jyi.vo.CommPhotoVo;
+import com.kfi.jyi.vo.CommVideoVo;
 import com.kfi.jyi.vo.MySkinViewVo;
 import com.kfi.ldk.service.CommonService;
 
@@ -101,6 +104,8 @@ public class InsideCommunityController {
 		model.addAttribute("proflist",(List<CommBoardProfileVo>)result.get("proflist"));
 		model.addAttribute("cbclist",(List<CommBoardCntVo>)result.get("cbclist"));
 		
+		model.addAttribute("cplist",(List<CommPhotoVo>)result.get("cplist"));
+		model.addAttribute("cvlist",(List<CommVideoVo>)result.get("cvlist"));
 		
 		return ".community";
 	}
