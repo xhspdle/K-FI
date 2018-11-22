@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kfi.ldk.service.CommonService;
 import com.kfi.ysy.dao.CommAdminDao;
 import com.kfi.ysy.service.CommAdminServiceImpl;
+import com.kfi.ysy.vo.CommSkinProfileVo;
 
 @Controller
 
@@ -28,6 +29,7 @@ public class CommAdminController {
 		System.out.println(list);
 		if(list!=null) {
 			model.addAttribute("commuserlist", list);
+			model.addAttribute("comm_num",comm_num);
 			return ".community.commadmin.commuserlist";
 		}else {
 			return null;
@@ -37,7 +39,8 @@ public class CommAdminController {
 ////////////////////////////////////////////////////////////////////////////////////////////////////	
 	//커뮤니티 스킨 변경
 	@RequestMapping(value="/community/commadmin/commskin", method=RequestMethod.GET)
-	public String commskinForm() {
+	public String commskinForm(int comm_num, Model model) {
+		
 		return ".community.commadmin.commskin";
 	}
 
@@ -45,7 +48,12 @@ public class CommAdminController {
 //////////////////////////////////////////////////////////////////////////////////////////////////	
 	//커뮤니티 프로필 변경
 	@RequestMapping(value="/community/commadmin/commprofile", method=RequestMethod.GET)
-	public String commprofileForm() {
+	public String commprofileForm(int comm_num, Model model) {
+		System.out.println(".................."+comm_num);
+		CommSkinProfileVo vo =(CommSkinProfileVo)service.select(comm_num);
+		System.out.println("/////////////////////"+vo.getCsp_savimg());
+		System.out.println(vo.getCsp_num());
+		
 		return ".community.commadmin.commprofile";
 	}
 	public String commprofileupdate() {

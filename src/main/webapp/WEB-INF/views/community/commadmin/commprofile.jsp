@@ -8,12 +8,12 @@
 
 	<div class="modal-dialog">
 	<div class="btn-group">
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile'">PROFILE</button>
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin'">SKIN</button>
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist'">MEMBERS</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile?comm_num=${comm_num}'">PROFILE</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin?comm_num=${comm_num}'">SKIN</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist?comm_num=${comm_num}'">MEMBERS</button>
 	</div><!-- <br><br> -->
 		<div class="modal-content">
-			<form class="form-horizontal" action="mbinsert" method="get">		
+			<form class="form-horizontal" action="mbinsert" method="post">		
 			<div class="modal-header">
 				<h4 class="modal-title" style="display: inline;">프로필 수정</h4>
 				<div class="btn-group  pull-right">
@@ -24,10 +24,12 @@
 			
 			<div class="modal-body">
 				<div>
-					<img src="<c:url value='/resources/images/ysy/aaa.gif'/>">
+					<img id="commprofileimg" src="" style="display:none;width:100%;">
 				</div>
-					<button type="button" class="btn btn-primary">이미지찾기</button><br>
-		
+					<label for="commprofileimgbtn" class="btn btn-primary"><span class="glyphicon glyphicon-picture"> Upload Photo</span></label>
+					<input type="file" id="commprofileimgbtn" style="display: none;"><br> 
+					
+					
 					<label>Admin ID:</label>
 					<input type="text" class="form-control" name="user_id">		
 					

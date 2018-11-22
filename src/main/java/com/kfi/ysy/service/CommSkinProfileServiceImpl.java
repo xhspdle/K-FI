@@ -39,14 +39,13 @@ public class CommSkinProfileServiceImpl implements CommonService {
 
 	@Override
 	public Object select(Object data) {
-		
-		return null;
+		int comm_num=(Integer)data;
+		return cspdao.select(comm_num);
 	}
-
+	
 	@Override
 	public Object list(Object data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
