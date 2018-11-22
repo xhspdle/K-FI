@@ -5,18 +5,24 @@
 	<c:when test="${!empty keyword }">
 	<input type="hidden" id="myBoardSearchListHere" value="${keyword }">
 	</c:when>
-	<c:otherwise>
+	<c:when test="${!empty selectedUserNum }">
 	<input type="hidden" id="myBoardSelectListHere" value="${selectedUserNum }">
-	</c:otherwise>	
+	</c:when>
+	<c:when test="">
+	
+	</c:when>	
 </c:choose>
+<c:if test="${!empty tagList }">
 <div id="myTagSearchList" class="container text-center">
 	<h1 style="margin-bottom:20px;"><span class="search-border-bottom">#TAGS</span></h1>
 	<div class="list-center">
-		<a>#태그다</a>
-		<a>#태그다</a>
+	
+		<c:forEach var="vo" items="${tagList }">
+			<a href="<c:url value='/'/>">#${vo.tag_name }</a>
+		</c:forEach>
 	</div>
 </div>
-
+</c:if>
 <div id="myBoardSearchList" class="container">
 <c:forEach var="vo" items="${list }" varStatus="vs">
 	<h1 class="text-center" id="${vo.mb_date }" style="margin-bottom: 30px;">

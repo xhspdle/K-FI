@@ -25,6 +25,8 @@ public class ListController {
 	@Qualifier("myBoardServiceImpl") private CommonService service;//Qualifier("앞문자소문자")
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService mySkinService;
+	@Autowired
+	@Qualifier("tagServiceImpl") private CommonService tagService;
 	@RequestMapping(value="/mypage/myboard/list",method=RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> list(@RequestParam(value="pageNum",defaultValue="1")int pageNum,
@@ -72,6 +74,7 @@ public class ListController {
 		model.addAttribute("pu", pu);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("list", service.list(map));
+		model.addAttribute("tagList", tagService.list(map));
 		return ".mypage.myboard.searchMain";
 	}
 	@RequestMapping(value="/mypage/myboard/selectList",method=RequestMethod.GET)
@@ -87,6 +90,20 @@ public class ListController {
 		model.addAttribute("selectedUserNum", selectedUserNum);
 		model.addAttribute("list", service.list(map));
 		return ".mypage.myboard.searchMain";
+	}
+	@RequestMapping(value="/mypage/myboard/tagSelectList",method=RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> tagSelectList(
+			@RequestParam(value="pageNum",defaultValue="1")int pageNum,String keyword) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		int totalRowCount=tagService.getCount(map);
+		PageUtil pu=new PageUtil(pageNum, totalRowCount, 5, 5);
+		map.put("startRow", pu.getStartRow());
+		map.put("endRow", pu.getEndRow());
+		map.put("pu", pu);
+		map.put("list", tagService.list(map));
+		return map;
 	}
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session,

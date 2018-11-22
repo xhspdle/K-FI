@@ -13,7 +13,7 @@
 	<c:forEach var="vo" items="${list }">
 	<div class="panel-group col-sm-4">
 		<div class="panel panel-default">
-			<div class="panel-heading text-left" data-toggle="tooltip" title="${vo.vote_info }">
+			<div class="panel-heading text-left" data-toggle="tooltip" title="${vo.vote_title } : ${vo.vote_info }">
 				<h3 class="text-nowrap"><span class="glyphicon glyphicon-stats"></span>${vo.vote_title }</h3>
 				<p><small style="color:#818181" data-vote-cnt="${vo.voteNum }">${vo.cnt } votes
 				</small><small style="color:#818181">ㆍ${vo.remain } days left</small></p>
