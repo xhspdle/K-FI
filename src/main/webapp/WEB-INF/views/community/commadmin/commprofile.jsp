@@ -4,30 +4,28 @@
 
 
 
-<div id="userinsert">
-
-	<div class="modal-dialog">
+<div>
+	<div class="modal-dialog" >
 	<div class="btn-group">
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile?comm_num=${comm_num}'">PROFILE</button>
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin?comm_num=${comm_num}'">SKIN</button>
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist?comm_num=${comm_num}'">MEMBERS</button>
 	</div><!-- <br><br> -->
-		<div class="modal-content">
-			<form class="form-horizontal" action="mbinsert" method="post">		
-			<div class="modal-header">
+		<div class="modal-content" ><!-- style="background-color: #f6f6ff" -->
+			<form class="form-horizontal" action="commprofileupdate" method="post" id="commprofilemodify" enctype="multipart/form-data">		
+			<div class="modal-header" ><!-- style="background-color: #e6e6ff" -->
 				<h4 class="modal-title" style="display: inline;">프로필 수정</h4>
-				<div class="btn-group  pull-right">
-					<button type="button" class="btn btn-primary" id="commskinmodifybtn">적용</button>
-					<button type="button" class="btn btn-primary">초기화</button>
-				</div>
-			</div>
-			
+				<!-- <div class="btn-group  pull-right"> -->
+				<button type="button" class="btn btn-primary pull-right" id="commprofilemodifybtn">적용</button>
+				<%-- 	<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile?comm_num=${comm_num}'">초기화</button> --%>
+				<!-- </div> -->
+			</div>		
 			<div class="modal-body">
-				<div>
-					<img id="commprofileimg" src="<c:url value='/resources/upload/img/${commprofile.csp_savimg}'/>" style="height: 300px">				
+				<div style="text-align: center;">
+					<img id="commprofileimg" src="<c:url value='/resources/upload/img/${commprofile.csp_savimg}'/>" style="height: 300px;">				
 				</div>
 					<label for="commprofileimgbtn" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-picture"> Upload Photo</span></label>
-					<input type="file" id="commprofileimgbtn" style="display: none;"><br> 
+					<input type="file" id="commprofileimgbtn" name="csp_orgimg" style="display: none;"><br> 
 					
 					<div class="form-group">
 						<label class="control-label col-sm-3">Admin ID:</label>
@@ -41,19 +39,46 @@
 							<p class="form-control-static">${commadmininfo.user_nickname }</p>
 						</div>
 					</div>
-	
+					<input type="hidden" name="csp_num" value=${commprofile.csp_num }>
+					<input type="hidden" name="comm_num" value=${comminfo.comm_num }>
 					<label>Community Name:</label>
-					<input type="email" class="form-control" name="comm_name" value=${comminfo.comm_name }>
-				
+					<input type="text" class="form-control" name="comm_name" value=${comminfo.comm_name }>		
 					<label>상태메세지:</label>
 					<textarea class="form-control" rows="3" name="comm_content">${comminfo.comm_content }</textarea>		
 				</div>
+
 			</form>			
 		</div>
 	</div>
 </div>
 <script>
-	$("#commskinmodifybtn").on("click",function(){
-		alert("와이제 시작인가?");
+$(function(){
+	$("#commprofilemodifybtn").on("click",function(){
+		var result=confirm("저장할까요???");
+		if(result){
+			var form=$("#commprofilemodify")[0];
+			console.log(form)
+			var formData=new FormData(form);
+			console.log(form);
+			$.ajax({
+				url: "<c:url value='/community/commadmin/commprofileupdate'/>",
+				type: "post",
+				dataType:"json",
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success:function(data){
+					console.log(data);
+				}
+			});
+		}else{
+			return false;
+		}
 	});
+	$("#commprofileimgbtn").on("change",function(event){ 
+		$("#commprofileimg").prop("src",URL.createObjectURL(event.target.files[0]));
+	});
+})
+	
 </script>

@@ -447,3 +447,31 @@ margin-bottom: 13px;
 .mycomm_a:hover {
 	color: white;
 }
+
+
+/*    커뮤니티 게시글 좋아요   */
+#commCommentList .media-body > h3 {
+	margin-top: 10px;
+	font-size: 24px;
+}
+#commCommentList .media-body h3 strong > a {
+	-webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+#commCommentList .media-body h3 strong > a:hover {
+	text-decoration: none;
+	color: lightblue;
+	text-shadow: 0 1px 3px rgba(0,0,0,0.25)
+}
+#commCommentList .media-body > p {
+	margin-top: 10px;
+	color: black;
+}
+
+#commCommentList .media-body > span {
+	margin-right: 30px;
+}
+#commCommentList div.media {
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}

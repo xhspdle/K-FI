@@ -1,11 +1,12 @@
 package com.kfi.ysy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kfi.ldk.service.CommonService;
 import com.kfi.ysy.dao.CommSkinCoverDao;
 
-
+@Service
 public class CommSkinCoverServiceImpl implements CommonService {
 	@Autowired private CommSkinCoverDao cdao;
 	@Override
@@ -46,8 +47,8 @@ public class CommSkinCoverServiceImpl implements CommonService {
 
 	@Override
 	public Object list(Object data) {
-		// TODO Auto-generated method stub
-		return null;
+		int comm_num=(Integer)data;
+		return cdao.list(comm_num);
 	}
 	
 }

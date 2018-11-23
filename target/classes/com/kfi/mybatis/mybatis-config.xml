@@ -39,7 +39,7 @@
 		<typeAlias type="com.kfi.jyi.vo.CommBoardCntVo" alias="commboardcnt"/>
 		<typeAlias type="com.kfi.jyi.vo.CommBoardProfileVo" alias="commboardprofile"/>
 		<typeAlias type="com.kfi.jyi.vo.CommRefuseVo" alias="commrefuse"/>
-	
+		<typeAlias type="com.kfi.jyi.vo.CommCommentLikeVo" alias="commcommentlike"/>
 	
 		
 		<typeAlias type="com.kfi.dgl.vo.MembersVo" alias="logmembers"/>
@@ -90,7 +90,7 @@
 			
 			
 			<mapper resource="com/kfi/mybatis/jyi/CommRefuseMapper.xml"/>
-		
+			<mapper resource="com/kfi/mybatis/jyi/CommCommentLikeMapper.xml"/>
 		
 		
 		<mapper resource="com/kfi/mybatis/ysy/AdminMapper.xml"/>

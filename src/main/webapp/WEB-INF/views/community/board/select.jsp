@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="commBoardSelect" class="container">
 	<input type="hidden" id="cb_num" value="${cbvo.cb_num }">
+	<input type="hidden" id="commBoardUserNum" value="${cbvo.user_num}">
 	<h1 class="text-center" style="margin-bottom:30px;"><span style="border-bottom: 4px solid tan">${cbvo.cb_date }</span></h1>
 	<div class="panel-group">
 		<div class="panel panel-default">
@@ -121,6 +122,8 @@
 					<div class="likeUserList">
 					</div>
 				</div>
+				<!-- 댓글 -->
+				<input type="hidden" id="user_num" value="${user_num }">
 				<h3 class="postLikeComment select" id="commentCnt">${commentCnt } Comments</h3>
 				<div class="media">
 				<c:choose>
@@ -147,9 +150,9 @@
 					</c:otherwise>
 				</c:choose>
 				</div>
-				<div id="commentList">
+				<div id="commCommentList">
 				</div>
-	<%--			<div class="text-center">
+				<div class="text-center">
 					<ul class="pagination"></ul>
 					<a <c:if test="${!empty prev.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${prev.mb_num }&keyword=${keyword }&selectedUserNum=${selectedUserNum }'/>"</c:if>>
 						<span data-toggle="tooltip" 
@@ -176,7 +179,7 @@
 						</c:choose>
 						class="pull-right glyphicon glyphicon-step-forward next"></span>
 					</a>
-				</div>--%>
+				</div>
 			</div> 
 		</div>
 	</div>
@@ -195,7 +198,7 @@
 			<ul class="dropdown-menu rightOption">{dropDowns}</ul>
 		</div>
 		<p>{myc_content}</p>
-		<a class="thumbsUp" data-comm-num="{myc_num}" href="{path}/mypage/mycommentlike/insert?myc_num={myc_num}">
+		<a class="thumbsUp" data-comm-num="{myc_num}" href="{path}/communityBoard/commCommentLike/insert?commc_num={myc_num}">
 			<i class="glyphicon glyphicon-thumbs-up"></i>
 		</a>
 		<span data-comm-num="{myc_num}">{comment_likes}</span><small>{myc_date}</small><span class="msgSpan"></span>

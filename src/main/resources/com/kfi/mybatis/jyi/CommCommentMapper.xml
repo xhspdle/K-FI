@@ -9,7 +9,7 @@
 	</select>
 
 	<select id="select_CommentNum" resultType="int">
-		select nvl(max(commc_num),0) from comm_comment where cb_num=#{cb_num}
+		select nvl(count(commc_num),0) from comm_comment where cb_num=#{cb_num}
 	</select>
 	
 	<insert id="insert" parameterType="commcomment">
@@ -25,5 +25,26 @@
 			) c
 		<![CDATA[ where rnum >= #{startRow} and rnum <= #{endRow} ]]>
 	</select>
+
+	<update id="update_CommcLike" parameterType="int">
+		update comm_comment set commc_like=commc_like+1 where commc_num=#{commc_num}
+	</update>
+	
+	<update id="update_disCommcLike" parameterType="int">
+		update comm_comment set commc_like=commc_like-1 where commc_num=#{commc_num}
+	</update>
+
+	<select id="getCommcLikeCnt" parameterType="int" resultType="int">
+		select nvl(max(commc_like),0) from comm_comment where commc_num=#{commc_num}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from comm_comment where commc_num=#{commc_num}
+	</delete>
+
+	<update id="update" parameterType="hashmap">
+		update comm_comment set commc_content=#{commc_content} where commc_num=#{commc_num}	
+	</update>
+	
 
 </mapper>

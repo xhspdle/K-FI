@@ -108,6 +108,9 @@ public class InsideCommunityController {
 		model.addAttribute("cvlist",(List<CommVideoVo>)result.get("cvlist"));
 		model.addAttribute("pageNum",pageNUM);
 		
+		
+		
+		
 		return ".community";
 	}
 	
