@@ -53,7 +53,7 @@ tbody tr:nth-child(2n+1) {
 					
 					<c:choose>
 						<c:when test="${commadmin_num eq commuserlist.user_num}">
-							<td>관리자</td>
+							<td><span class="btn btn-success btn-sm">관리자</span></td>
 						</c:when>
 						<c:otherwise>
 							<td><button type="button" class="btn btn-danger btn-sm commforcedexitbtn">강퇴</button></td>
@@ -169,12 +169,15 @@ tbody tr:nth-child(2n+1) {
 			$("#efmail").val(td.eq(5).text());		
 		});
 		
-		$(".commuser").click(function(){
+		$(".commuser").on("click",function(){
 			var commadmin_num = "<c:out value='${commadmin_num}'/>";
-			alert(commadmin_num);
-			alert("aaa");
 			var tr=$(this).closest('tr');
 			var td=tr.children();
+			if(commadmin_num==td.eq(2).text()){
+				tr.css("cursor","default");
+				console.log(td.last().children());
+				return false;
+			}; 
 			$("#commnum").val(td.eq(0).text());
 			$("#commusernum").val(td.eq(2).text());
 			$("#commuserid").val(td.eq(3).text());
