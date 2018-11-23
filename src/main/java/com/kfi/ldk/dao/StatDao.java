@@ -37,12 +37,12 @@ public class StatDao {
 		return session.selectList(NAMESPACE + ".periodMyBoardCnt", period);
 	}
 	public List<StatPeriodCommBoardCntVo> periodCommBoardCnt(int period){
-		return session.selectList(NAMESPACE + "periodCommBoardCnt", period);
+		return session.selectList(NAMESPACE + ".periodCommBoardCnt", period);
 	}
 	public List<StatPeriodMyViewSumVo> periodMyViewSum(int period){
-		return session.selectList(NAMESPACE + "periodMyViewSum", period);
+		return session.selectList(NAMESPACE + ".periodMyViewSum", period);
 	}
 	public List<StatPeriodCommViewSumVo> periodCommViewSum(int period){
-		return session.selectList(NAMESPACE + "periodCommViewSum", period);
+		return session.selectList(NAMESPACE + ".periodCommViewSum", period);
 	}
 }

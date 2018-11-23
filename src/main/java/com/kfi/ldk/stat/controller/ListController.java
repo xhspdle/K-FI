@@ -16,6 +16,13 @@ public class ListController {
 	private String listForm(Model model) {
 		model.addAttribute("totalMemCnt", service.totalMemCnt());
 		model.addAttribute("totalCommCnt", service.totalCommCnt());
+		model.addAttribute("commMemCnt", service.commMemCnt());
+		model.addAttribute("commViewSum", service.commViewSum());
+		model.addAttribute("periodMemCntWeek", service.periodMemCnt(7));
+		model.addAttribute("periodMyBoardCntWeek", service.periodMyBoardCnt(7));
+		model.addAttribute("periodCommBoardCntWeek", service.periodCommBoardCnt(7));
+		model.addAttribute("periodMyViewSumWeek", service.periodMyViewSum(7));
+		model.addAttribute("periodCommViewSumWeek", service.periodCommViewSum(7));
 		return ".admin.stat.list";
 	}
 }

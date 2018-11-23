@@ -238,6 +238,9 @@ $(document).ready(function(){
 					var msp_savimg=json.msp_savimg;
 					var attachment='';
 					var boardOption='';
+					if(keyword===undefined){
+						keyword='';
+					}
 					if(sameDate!==json.mb_date){
 						$("<h1 class='text-center' id='"+ json.mb_date +"' style='margin-bottom:30px;'>" +
 						  "<span style='border-bottom: 4px solid tan'>" + json.mb_date +

@@ -3,28 +3,28 @@ package com.kfi.ldk.vo;
 import java.sql.Date;
 
 public class StatPeriodCommViewSumVo {
-	private Date mb_date;
-	private int cnt;
+	private Date cb_date;
+	private int sum;
 	public StatPeriodCommViewSumVo() {}
-	public StatPeriodCommViewSumVo(Date mb_date, int cnt) {
+	public StatPeriodCommViewSumVo(Date cb_date, int sum) {
 		super();
-		this.mb_date = mb_date;
-		this.cnt = cnt;
+		this.cb_date = cb_date;
+		this.sum = sum;
 	}
-	public Date getMb_date() {
-		return mb_date;
+	public Date getCb_date() {
+		return cb_date;
 	}
-	public void setMb_date(Date mb_date) {
-		this.mb_date = mb_date;
+	public void setCb_date(Date cb_date) {
+		this.cb_date = cb_date;
 	}
-	public int getCnt() {
-		return cnt;
+	public int getSum() {
+		return sum;
 	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 	@Override
 	public String toString() {
-		return "StatPeriodMyViewCntVo [mb_date=" + mb_date + ", cnt=" + cnt + "]";
+		return "StatPeriodCommViewSumVo [cb_date=" + cb_date + ", sum=" + sum + "]";
 	}
 }
