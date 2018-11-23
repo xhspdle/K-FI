@@ -17,8 +17,8 @@
 	</delete>
 
 	<!-- 강퇴 -->	
-	<update id="update" parameterType="hashmap" >
-		update comm_user_list set cul_status=-1 where user_num=#{user_num} and comm_num=#{comm_num}
+	<update id="update" parameterType="int" >
+		update comm_user_list set cul_status=-1 where cul_num=#{cul_num}
 	</update>
 
 	<!-- 처리상태 확인(가입유무, 강퇴) -->

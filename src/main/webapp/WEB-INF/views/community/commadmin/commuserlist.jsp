@@ -36,13 +36,14 @@ tbody tr:nth-child(2n+1) {
 			<tbody>
 			<c:forEach var="commuserlist" items="${commuserlist }">
 				<tr>
+					<td hidden="text">${comm_num}</td>
 					<td hidden="hidden">${commuserlist.cul_num }</td>
 					<td hidden="hidden">${commuserlist.user_num }</td>
 					<td class="commuser">${commuserlist.user_id}</td>
 					<td class="commuser">${commuserlist.user_nickname}</td>
 					<td class="commuser">${commuserlist.user_email}</td>
 					<td class="commuser">${commuserlist.cul_status}</td>
-					<td><button type="button" class="btn btn-danger btn-sm commforcedexit">강퇴</button></td>
+					<td><button type="button" class="btn btn-danger btn-sm commforcedexitbtn">강퇴</button></td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -50,14 +51,15 @@ tbody tr:nth-child(2n+1) {
 	</div>
 </div>
 
-<div class="modal" id="commforcedexitform">
+<div class="modal" id="commforcedexitmodal">
 	<div class="modal-dialog">
 		<div class="modal-content" style="background-color: #0c558d">
 			<div class="modal-header">
 				<div style="font-size: 20px; font: bold; color:white">사용자 강퇴</div>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="<c:url value='/community/commrefuse/insert'/>" method="post">
+				<form class="form-horizontal" id="commforcedexitform" action="<c:url value='/community/commrefuse/insert'/>" method="post">
+					<input type="hidden" class="form-control" readonly="readonly" name="comm_num" id="efcomm_num">
 					<input type="hidden" class="form-control colwhite" name="cul_num" id="culnum">
 					<div class="form-group">
 						<label class="control-label col-sm-2 colwhite">ID:</label>
@@ -144,15 +146,16 @@ tbody tr:nth-child(2n+1) {
 <script type="text/javascript">
 	$(function(){
 		$(".commuser").attr({'data-toggle':'modal','data-target':'#commusermodify'});
-		$(".commforcedexit").attr({'data-toggle':'modal','data-target':'#commforcedexitform'});
+		$(".commforcedexitbtn").attr({'data-toggle':'modal','data-target':'#commforcedexitmodal'});
 		
-		$(".commforcedexit").on("click",function(){
+		$(".commforcedexitbtn").on("click",function(){
 			var tr=$(this).closest('tr');
 			var td=tr.children();
-			$("#culnum").val(td.eq(0).text());
-			$("#efid").val(td.eq(2).text());
-			$("#efnick").val(td.eq(3).text());
-			$("#efmail").val(td.eq(4).text());		
+			$("#efcomm_num").val(td.eq(0).text());
+			$("#culnum").val(td.eq(1).text());
+			$("#efid").val(td.eq(3).text());
+			$("#efnick").val(td.eq(4).text());
+			$("#efmail").val(td.eq(5).text());		
 		});
 		
 		$(".commuser").click(function(){
@@ -170,7 +173,7 @@ tbody tr:nth-child(2n+1) {
 				$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
 			}); 
 		});
-		$(".userdelete").click(function(){
+/* 		$(".userdelete").click(function(){
 			var result=confirm("정말로????");
 			var user_num=$(this).parent().parent().children().first().text();
  			if(result){
@@ -178,12 +181,12 @@ tbody tr:nth-child(2n+1) {
 			}else{
 				return false;
 			}
-		});
+		}); */
 	});
  	$("#efbtn").on("click",function(){
  		var result=confirm("강제퇴장 시키겠습니까?");
  		if(result){
- 			location.href="<c:url value='/community/commrefuse/insert'/>"
+ 			$("#commforcedexitform").submit();
  		}else{
  			return false;
  		}

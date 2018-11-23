@@ -26,8 +26,8 @@ public class CommUserListDao {
 		return session.delete(NAMESPACE + ".delete", map);
 	}
 
-	public int update(HashMap<String, Object> map) {
-		return session.update(NAMESPACE + ".update", map);
+	public int update(int cul_num) {
+		return session.update(NAMESPACE + ".update", cul_num);
 	}
 
 	public int getCul_status(HashMap<String, Object> map) {

@@ -1,5 +1,7 @@
 package com.kfi.ysy.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +28,21 @@ public class CommRefuseServiceImpl implements CommonService {
 
 	@Override
 	public int insert(Object data) {
-		CommRefuseVo vo=(CommRefuseVo)data; 
+/*		HashMap<String, Object> map =(HashMap<String, Object>)data;
+		int comm_num=(Integer)map.get("comm_num");
+		CommRefuseVo crfvo =(CommRefuseVo)map.get("crfvo");
+		int cr_num=getMaxNum()+1;
+		crfvo.setCr_num(cr_num);
+		System.out.println("///////////"+cr_num);	
+		int result=crdao.insert(crfvo);*/
+		CommRefuseVo vo =(CommRefuseVo)data;
 		int cr_num=getMaxNum()+1;
 		vo.setCr_num(cr_num);
+		int cul_num=vo.getCul_num();
 		int result=crdao.insert(vo);
-		System.out.println(cr_num);
+		int result1=culdao.update(cul_num);
 		System.out.println(result);
-		
-		return crdao.insert(vo);
+		return 1;
 	}
 
 	@Override

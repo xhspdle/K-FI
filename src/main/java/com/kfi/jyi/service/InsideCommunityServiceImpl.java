@@ -74,8 +74,13 @@ public class InsideCommunityServiceImpl implements CommonService {
 			return -1;
 		}
 	}
-
+	
 	@Override
+	public int update(Object data) {	
+		return 0;
+	}
+	
+/*	@Override
 	@Transactional
 	public int update(Object data) {
 		// 관리자 -> 강퇴 (-1), 취소사유에 강퇴사유 적기
@@ -92,7 +97,7 @@ public class InsideCommunityServiceImpl implements CommonService {
 			System.out.println(e.getMessage());
 			return -1;
 		}
-	}
+	}*/
 
 	@Override
 	public int delete(Object data) {
