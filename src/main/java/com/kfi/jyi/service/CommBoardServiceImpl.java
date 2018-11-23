@@ -209,6 +209,7 @@ public class CommBoardServiceImpl implements CommonService {
 		String list=(String)map.get("list");
 		HttpSession session=(HttpSession)map.get("session");
 		int comm_num=(Integer)session.getAttribute("comm_num");
+		map.put("comm_num", comm_num);
 		if(list.equals("select")) {
 			//게시글 상세보기
 			int cb_num=(Integer)map.get("cb_num");
@@ -242,6 +243,10 @@ public class CommBoardServiceImpl implements CommonService {
 			result.put("likeNum", likeNum); //추천수
 			result.put("tagList", tagList); //태그리스트
 			result.put("commentCnt", commentCnt); //댓글수
+			int prevCbNum=cbdao.prevCbNum(map);
+			int nextCbNum=cbdao.nextCbNum(map);
+			result.put("prevCbNum", prevCbNum); //이전 게시글 번호
+			result.put("nextCbNum", nextCbNum); //다음 게시글 번호
 			
 			return result;
 		}else if(list.equals("notice")) {

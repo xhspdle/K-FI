@@ -40,7 +40,7 @@
 				<video id="fvid1" controls autoplay muted="muted" loop src="" style="display:none;width:100%"></video>
 			</div>
 			<!-- id="sendServer" -->
-			<button type="submit" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-ok"></span> Write</button>
+			<button type="submit" id="insertCommBoardSub" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-ok"></span> Write</button>
 		</form>
 	</div>
 </div>

@@ -68,6 +68,8 @@ public class ListController {
 		model.addAttribute("commentCnt", (Integer)result.get("commentCnt"));  //댓글 수
 		model.addAttribute("likeNum", (Integer)result.get("likeNum"));  //추천수
 		model.addAttribute("pageNum", 1);  //댓글 페이지 번호 기본값
+		model.addAttribute("prevCbNum", (Integer)result.get("prevCbNum"));  //이전글번호
+		model.addAttribute("nextCbNum", (Integer)result.get("nextCbNum"));  //다음글번호
 		
 		return ".community.board.select";
 	}

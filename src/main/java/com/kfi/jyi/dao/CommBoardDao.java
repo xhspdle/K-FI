@@ -61,5 +61,12 @@ public class CommBoardDao {
 		return session.selectOne(NAMESPACE+".getCommBoardProfile",cb_num);
 	}
 	
+	public int prevCbNum(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".prevCbNum",map);
+	}
+	
+	public int nextCbNum(HashMap<String, Object> map) {
+		return session.selectOne(NAMESPACE+".nextCbNum",map);
+	}
 	
 }

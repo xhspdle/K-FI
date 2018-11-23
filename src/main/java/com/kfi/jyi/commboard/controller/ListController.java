@@ -87,14 +87,6 @@ public class ListController {
 		HashMap<String, Object> result = (HashMap<String, Object>) commBoardservice.list(board);
 		result.put("pageNum", pageNUM);
 
-		System.out.println(result.get("list").toString()+"!!!!!list");
-		System.out.println(result.get("cbclist").toString()+"!!!!!cbclist");
-		System.out.println(result.get("proflist").toString()+"!!!!!proflist");
-		System.out.println(result.get("cplist").toString()+"!!!!!cplist");
-		System.out.println(result.get("cvlist").toString()+"!!!!!cvlist");
-		
-		
-		
 		return result;
 	}
 	

@@ -151,13 +151,13 @@
 			<div class="panel-heading" id="{cb_num }">
 				<blockquote class="postBlock">
 					<h1 class="postTitle">
-						<a href="<c:url value='/community/board/select?cb_num={cb_num }'/>" class="postA">
+						<a href="{selectCbNum }" class="postA">
 						{cb_title }
 						</a>
 					</h1>
 				</blockquote>
 				<div class="dropdown boardOption">
-					<button class="btn dropdown-toggle {disabled}"  type="button" data-toggle="dropdown">
+					<button class="btn dropdown-toggle {disabled}" type="button" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-option-vertical"></span>
 					</button>
 					<ul class="dropdown-menu rightOption">
@@ -168,7 +168,7 @@
 			<div class="panel-body">
 				{mediaDiv}	
 				<p>{cb_content }</p>
-				{vid}
+				{video}
 				{photo}				
 			</div>
 			<div class="panel-footer">

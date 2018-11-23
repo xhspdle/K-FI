@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,23 @@ public class InsertController {
 		resultMap.put("result", result);
 		return resultMap;
 	}
+	
+	/*@RequestMapping(value="/commcomment/insert",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String insert(String commc_content, String cb_num, HttpSession session) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("session", session);
+		int cbNum=0;
+		if(cb_num!=null && !cb_num.equals("")) {
+			cbNum=Integer.parseInt(cb_num);
+		}
+		map.put("cb_num", cbNum);
+		map.put("commc_content", commc_content);
+		int result=service.insert(map);
+		JSONObject json=new JSONObject();
+		json.append("result", result);
+		return json.toString();
+	}*/
 	
 	
 	

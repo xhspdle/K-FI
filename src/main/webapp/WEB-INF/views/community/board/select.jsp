@@ -152,12 +152,13 @@
 				</div>
 				<div id="commCommentList">
 				</div>
+				<!-- prev/next 게시글  -->
 				<div class="text-center">
 					<ul class="pagination"></ul>
-					<a <c:if test="${!empty prev.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${prev.mb_num }&keyword=${keyword }&selectedUserNum=${selectedUserNum }'/>"</c:if>>
+					<a <c:if test="${prevCbNum != 0 }">href="<c:url value='/community/board/select?cb_num=${prevCbNum }'/>"</c:if>>
 						<span data-toggle="tooltip" 
 						<c:choose>
-							<c:when test="${!empty prev.mb_num }">
+							<c:when test="${prevCbNum != 0 }">
 							title="Prev"
 							</c:when>
 							<c:otherwise>
@@ -166,11 +167,10 @@
 						</c:choose> 
 						class="pull-left glyphicon glyphicon-step-backward prev"></span>
 					</a>
-					
-					<a <c:if test="${!empty next.mb_num }">href="<c:url value='/mypage/myboard/select?mb_num=${next.mb_num }&keyword=${keyword }&selectedUserNum=${selectedUserNum }'/>"</c:if>>
+					<a <c:if test="${nextCbNum !=0}">href="<c:url value='/community/board/select?cb_num=${nextCbNum }'/>"</c:if>>
 						<span data-toggle="tooltip" 
 						<c:choose>
-							<c:when test="${!empty next.mb_num }">
+							<c:when test="${nextCbNum !=0}">
 							title="Next"
 							</c:when>
 							<c:otherwise>

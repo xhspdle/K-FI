@@ -22,9 +22,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <link href="<c:url value='/resources/css/fullcalendar.min.css'/>" rel="stylesheet">
 <script src="<c:url value='/resources/js/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
-<!-- template 추가 -->
-<script type="text/javascript" src="<c:url value='/resources/js/jquery.tmpl.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/jquery.tmplPlus.js'/>"></script>
 <!-- 추가 끝 -->
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">

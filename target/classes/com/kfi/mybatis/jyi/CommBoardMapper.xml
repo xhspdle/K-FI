@@ -64,6 +64,16 @@
 		(select cb_num from comm_board where cb_num=#{cb_num}) cc
 	</select>
 	
+	<select id="prevCbNum" resultType="int" parameterType="hashmap">
+		select nvl(max(cb_num),0) from comm_board 
+		<![CDATA[ where cb_num < (select cb_num from comm_board where cb_num=#{cb_num} and comm_num=#{comm_num}) ]]>
+		and comm_num=#{comm_num}
+	</select>
 
+	<select id="nextCbNum" resultType="int" parameterType="hashmap">
+		select nvl(min(cb_num),0) from comm_board 
+		where cb_num > (select cb_num from comm_board where cb_num=#{cb_num} and comm_num=#{comm_num})
+		and comm_num=#{comm_num}
+	</select>
 
 </mapper>

@@ -26,9 +26,9 @@ public class DeleteController {
 	
 		int result=(Integer)commBoardservice.delete(map);
 		if(result>0) {
-			return ".community";
+			return "redirect:/community";
 		}else {
-			return ".community"; //오류
+			return "redirect:/community";//오류
 		}
 	
 	}

@@ -102,7 +102,8 @@ public class CommCommentServiceImpl implements CommonService {
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
 		int cb_num=(Integer)map.get("cb_num");
 		int pageNum=(Integer)map.get("pageNum");
-		PageUtil page=new PageUtil(pageNum, 5, 5, 5);
+		int totalRowCount=ccdao.select_CommentNum(cb_num);
+		PageUtil page=new PageUtil(pageNum, totalRowCount, 5, 5);
 		int startRow=page.getStartRow();
 		int endRow=page.getEndRow();
 		map.put("startRow", startRow);
@@ -116,11 +117,17 @@ public class CommCommentServiceImpl implements CommonService {
 		HashMap<String, Object> result=new HashMap<>();
 		result.put("list",list);//´ñ±Û
 		result.put("msvvolist",msvvolist);//´ñ±ÛÀ¯Àú ÇÁ·ÎÇÊ
+		
 		result.put("startPageNum", page.getStartPageNum());
 		result.put("endPageNum", page.getEndPageNum());
 		result.put("pageBlockCount", page.getPageBlockCount());
 		result.put("totalPageCount", page.getTotalPageCount());
+		result.put("pageNum", page.getPageNum());
 		
+		System.out.println("startPageNum "+page.getStartPageNum());
+		System.out.println("endPageNum "+ page.getEndPageNum());
+		System.out.println("pageBlockCount "+page.getPageBlockCount());
+		System.out.println("totalPageCount "+page.getTotalPageCount());
 		
 		return result;
 	}
