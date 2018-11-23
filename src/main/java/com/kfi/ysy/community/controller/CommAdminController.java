@@ -72,6 +72,7 @@ public class CommAdminController {
 	@SuppressWarnings("unchecked")
 	public String commskinForm(int comm_num, Model model) {
 		List<CommSkinCoverVo> list=(List<CommSkinCoverVo>)cscservice.list(comm_num);
+		System.out.println("/////////////////////////////coverlist"+list);
 		model.addAttribute("commskinlist",list);
 		return ".community.commadmin.commskin";
 	}
