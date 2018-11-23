@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.StatMapper">
+	<!-- 전체 유저 수 -->
+	<select id="totalMemCnt" resultType="int">
+		SELECT NVL(COUNT(*),0) CNT FROM MEMBERS
+	</select>
+	<!-- 전체 커뮤니티 수 -->
+	<select id="totalCommCnt" resultType="int">
+		SELECT NVL(COUNT(*),0) CNT FROM COMMUNITY
+	</select>
+	<!-- 커뮤니티별 가입자수 TOP10 -->
+	<select id="commMemCnt" resultType="com.kfi.ldk.vo.StatCommMemCntVo">
+		SELECT *
+		FROM
+		(
+		    SELECT AA.*,ROWNUM RNUM
+		    FROM
+		    (
+		        SELECT COMM.COMM_NUM,NVL(COUNT(MEM.USER_NUM),0) CNT
+		        FROM COMMUNITY COMM,MEMBERS MEM
+		        WHERE COMM.USER_NUM=MEM.USER_NUM
+		        GROUP BY COMM.COMM_NUM
+		        ORDER BY CNT DESC
+		    )AA
+		)
+		<![CDATA[WHERE RNUM>=1 AND RNUM<=10]]>
+	</select>
+	<!-- 커뮤니티별 조회수 TOP10 -->
+	<select id="commViewSum" resultType="com.kfi.ldk.vo.StatCommViewSumVo">
+		SELECT *
+		FROM
+		(
+		    SELECT AA.*,ROWNUM RNUM
+		    FROM
+		    (
+		        SELECT COMM.COMM_NUM,SUM(CB.CB_VIEWS) SUM
+		        FROM COMMUNITY COMM,COMM_BOARD CB
+		        WHERE COMM.COMM_NUM=CB.COMM_NUM
+		        GROUP BY COMM.COMM_NUM
+		        ORDER BY SUM DESC
+		    )AA
+		)
+		<![CDATA[WHERE RNUM>=1 AND RNUM<=10]]>
+	</select>
+	<!-- 기간별 사이트 가입자수(월30/주7) -->
+	<select id="periodMemCnt" parameterType="int" resultType="com.kfi.ldk.vo.StatPeriodMemCntVo">
+		SELECT *
+		FROM
+		(
+			SELECT AA.*,ROWNUM RNUM
+			FROM
+			(
+				SELECT USER_REGDATE,NVL(COUNT(*),0) CNT 
+				FROM MEMBERS
+				<![CDATA[WHERE SYSDATE-USER_REGDATE<=#{period}]]>
+				GROUP BY USER_REGDATE
+				ORDER BY USER_REGDATE DSC
+			)AA
+		)
+		<![CDATA[WHERE RNUM>=1 AND RNUM<=10]]>
+	</select>
+	<!-- 기간별 등록된 글 수(마이페이지) -->
+	<select id="periodMyBoardCnt" parameterType="int" resultType="com.kfi.ldk.vo.StatPeriodMyBoardCntVo">
+		SELECT *
+		FROM
+		(
+			SELECT AA.*,ROWNUM RNUM
+			FROM
+			(
+				SELECT MB_DATE,NVL(COUNT(*),0) CNT 
+				FROM MY_BOARD
+				<![CDATA[WHERE SYSDATE-MB_DATE<=#{period}]]>
+				GROUP BY MB_DATE
+				ORDER BY MB_DATE DSC
+			)AA
+		)
+		<![CDATA[WHERE RNUM>=1 AND RNUM<=10]]>
+	</select>
+	<!-- 기간별 등록된 글 수(커뮤니티) -->
+	<select id="periodCommBoardCnt" parameterType="int" resultType="com.kfi.ldk.vo.StatPeriodCommBoardCntVo">
+		SELECT *
+		FROM
+		(
+			SELECT AA.*,ROWNUM RNUM
+			FROM
+			(
+				SELECT CB_DATE,NVL(COUNT(*),0) CNT 
+				FROM COMM_BOARD
+				<![CDATA[WHERE SYSDATE-CB_DATE<=#{period}]]>
+				GROUP BY CB_DATE
+				ORDER BY CB_DATE DSC
+			)AA
+		)
+		<![CDATA[WHERE RNUM>=1 AND RNUM<=10]]>
+	</select>
+	<!-- 기간별 조회수(마이페이지) -->
+	<select id="periodMyViewSum" parameterType="int" resultType="com.kfi.ldk.vo.StatPeriodMyViewSumVo">
+		SELECT *
+		FROM
+		(
+			SELECT AA.*,ROWNUM RNUM
+			FROM
+			(
+				SELECT MB_DATE,SUM(MB_VIEWS) SUM 
+				FROM MY_BOARD
+				<![CDATA[WHERE SYSDATE-MB_DATE<=#{period}]]>
+				GROUP BY MB_DATE
+				ORDER BY MB_DATE DSC
+			)AA
+		)
+		<![CDATA[WHERE RNUM>=1 AND RNUM<=10]]>
+	</select>
+	<!-- 기간별 조회수(커뮤니티) -->
+	<select id="periodCommViewSum" parameterType="int" resultType="com.kfi.ldk.vo.StatPeriodCommViewSumVo">
+		SELECT *
+		FROM
+		(
+			SELECT AA.*,ROWNUM RNUM
+			FROM
+			(
+				SELECT CB_DATE,SUM(CB_VIEWS) SUM 
+				FROM COMM_BOARD
+				<![CDATA[WHERE SYSDATE-CB_DATE<=#{period}]]>
+				GROUP BY CB_DATE
+				ORDER BY CB_DATE DSC
+			)AA
+		)
+		<![CDATA[WHERE RNUM>=1 AND RNUM<=10]]>
+	</select>
+</mapper>

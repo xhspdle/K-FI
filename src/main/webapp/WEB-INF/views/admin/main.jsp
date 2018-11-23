@@ -19,7 +19,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="<c:url value='/resources/js/admin.js'/>"></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar1"
@@ -54,7 +54,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="mblist">회원관리</a></li>
 						<li><a href="aclist">신고관리</a></li>
-						<li><a href="userboardlistview">통계관리</a></li>
+						<li><a href="<c:url value='/admin/stat/list'/>">통계관리</a></li>
 						<li><a href="ablist">공지사항</a></li>
 						<li><a href="faqlist">Q&#38;A</a></li>
 						<!-- <li><a href="communityskin">skin</a></li> -->
@@ -97,8 +97,9 @@
 				class="glyphicon glyphicon-chevron-up"></span>
 			</a>
 			<p>
-				Bootstrap Theme Made By <a href="https://www.w3schools.com"
-					title="Visit w3schools">www.w3schools.com</a>
+				K-FI Web Project Made By 
+				<a href="https://github.com/xhspdle/K-FI" title="Visit Team 안경선배">
+				Team 안경선배</a>
 			</p>
 		</footer>
 <!-- 	 	<div id="bbb" style="position: fixed;bottom: 20px;right: 20px;">

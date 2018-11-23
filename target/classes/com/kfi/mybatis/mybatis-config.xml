@@ -72,6 +72,7 @@
 		<mapper resource="com/kfi/mybatis/ldk/VotingOptionMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/VotingUserListMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/ldk/CommVoteListViewMapper.xml"/>
+		<mapper resource="com/kfi/mybatis/ldk/StatMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MyCommCalendarMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinMapper.xml"/>
 		<mapper resource="com/kfi/mybatis/jyi/MySkinCoverMapper.xml"/>
