@@ -6,7 +6,8 @@
 	<select id="list" resultType="communityadmin" parameterType="int">
 		select mb.user_num,mb.user_id,mb.user_nickname,mb.user_email,
 		cul.cul_num, cul.comm_num, cul.cul_status
-		from members mb, comm_user_list cul where mb.user_num=cul.user_num and cul.comm_num=#{comm_num}
+		from members mb, comm_user_list cul 
+		where mb.user_num=cul.user_num and cul.comm_num=#{comm_num} and cul.cul_status=1 
 	</select>
 	
 

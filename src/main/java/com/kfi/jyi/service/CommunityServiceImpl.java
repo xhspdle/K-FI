@@ -137,8 +137,8 @@ public class CommunityServiceImpl implements CommonService {
 
 	@Override
 	public int update(Object data) {
-		// TODO Auto-generated method stub
-		return 0;
+		CommunityVo vo=(CommunityVo)data;
+		return cdao.update(vo);
 	}
 
 	@Override

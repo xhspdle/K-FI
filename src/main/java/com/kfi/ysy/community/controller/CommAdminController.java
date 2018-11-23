@@ -4,23 +4,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kfi.dgl.vo.MembersVo;
 import com.kfi.jyi.vo.CommunityVo;
 import com.kfi.ldk.service.CommonService;
 import com.kfi.ysy.dao.CommAdminDao;
-import com.kfi.ysy.service.CommAdminServiceImpl;
+
 import com.kfi.ysy.vo.CommSkinCoverVo;
 import com.kfi.ysy.vo.CommSkinProfileVo;
 
@@ -33,6 +35,8 @@ public class CommAdminController {
 	@Qualifier("commSkinProfileServiceImpl") private CommonService cspservice;
 	@Autowired 
 	@Qualifier("commSkinCoverServiceImpl") private CommonService cscservice;
+	@Autowired
+	@Qualifier("communityServiceImpl") private CommonService cservice;
 //////////////////////////////////////////////////////////////////////////////////////////////////
 	//커뮤니티 가입회원 정보
 	@SuppressWarnings("unchecked")
@@ -40,15 +44,26 @@ public class CommAdminController {
 	public String commuserlist(int comm_num,Model model) {	
 		List<CommAdminDao> list=(List<CommAdminDao>)service.list(comm_num);
 		System.out.println(list);
+		int admin_num=(Integer)cservice.select(comm_num);
 		if(list!=null) {
 			model.addAttribute("commuserlist", list);
 			model.addAttribute("comm_num",comm_num);
+			model.addAttribute("commadmin_num",admin_num);
 			return ".community.commadmin.commuserlist";
 		}else {
 			return null;
 		}
 	}
-	
+	@RequestMapping(value="/community/commadmin/commadminauth", method=RequestMethod.POST )
+	public String commadminauth(CommunityVo vo, Model model) {
+		int comm_num=vo.getComm_num();
+		int result = cservice.update(vo);
+		if(result>0) {		
+			System.out.println("//////////"+result);
+			return "redirect:/community/commadmin/commuserlist?comm_num="+comm_num;
+		}
+		return null;	
+	}
 	
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////	
