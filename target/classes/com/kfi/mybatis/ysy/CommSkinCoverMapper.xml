@@ -11,7 +11,15 @@
 		insert into comm_skin_cover values(#{csc_num},#{comm_num},#{csc_orgimg},#{csc_savimg},#{csc_using})
 	</insert>
 	
-	<select id="list" parameterType="commskincover">
+	<select id="list" resultType="commskincover" parameterType="int">
 		select * from comm_skin_cover where comm_num=#{comm_num}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from comm_skin_cover where=csc_num=#{csc_num}
+	</delete>
+	
+	<select id="select" parameterType="int" resultType="commskincover">
+		select * from comm_skin_cover where=csc_num=#{csc_num}
 	</select>
 </mapper>

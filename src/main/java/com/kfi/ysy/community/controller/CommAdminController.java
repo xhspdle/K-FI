@@ -71,10 +71,22 @@ public class CommAdminController {
 	@RequestMapping(value="/community/commadmin/commskin", method=RequestMethod.GET)
 	@SuppressWarnings("unchecked")
 	public String commskinForm(int comm_num, Model model) {
-		List<CommSkinCoverVo> list=(List<CommSkinCoverVo>)cscservice.list(comm_num);
-		System.out.println("/////////////////////////////coverlist"+list);
+		HashMap<String, Object> map =(HashMap<String, Object>)cscservice.list(comm_num);
+		CommunityVo vo = (CommunityVo)map.get("cvo");
+		List<CommSkinCoverVo> list = (List<CommSkinCoverVo>)map.get("csclist");
+		model.addAttribute("commvo",vo);
 		model.addAttribute("commskinlist",list);
 		return ".community.commadmin.commskin";
+	}
+	//커뮤니티 스킨추가
+	@RequestMapping(value="/community/commadmin/commskininsert", method=RequestMethod.POST)
+	public String commskininsrt(int comm_num,MultipartHttpServletRequest multirequest) {
+		int result=cscservice.insert(multirequest);
+		if(result>0) {
+			return "redirect:/community/commadmin/commskin?comm_num="+comm_num;
+		}else {
+			return null;
+		}
 	}
 
 	

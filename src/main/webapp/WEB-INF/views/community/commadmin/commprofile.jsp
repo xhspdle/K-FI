@@ -1,22 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
 
+.modal-header{
+	background-color: #0c558d;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+#commskinprosty{
+	box-shadow: 0px 0px 7px #a6a6a6;
+	border-radius: 5px;
+}
+</style>
 
 
 <div>
-	<div class="modal-dialog" >
+	<div class="modal-dialog">
 	<div class="btn-group">
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile?comm_num=${comm_num}'">PROFILE</button>
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin?comm_num=${comm_num}'">SKIN</button>
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist?comm_num=${comm_num}'">MEMBERS</button>
 	</div><!-- <br><br> -->
-		<div class="modal-content" ><!-- style="background-color: #f6f6ff" -->
+		<div id="commskinprosty"><!-- style="background-color: #f6f6ff" -->
 			<form class="form-horizontal" action="commprofileupdate" method="post" id="commprofilemodify" enctype="multipart/form-data">		
 			<div class="modal-header" ><!-- style="background-color: #e6e6ff" -->
-				<h4 class="modal-title" style="display: inline;">프로필 수정</h4>
+				<h4 class="modal-title" style="display: inline;color: white;">프로필 수정</h4>
 				<!-- <div class="btn-group  pull-right"> -->
-				<button type="button" class="btn btn-primary pull-right" id="commprofilemodifybtn">적용</button>
+				<button type="button" class="btn btn-success pull-right" id="commprofilemodifybtn">적용</button>
 				<%-- 	<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile?comm_num=${comm_num}'">초기화</button> --%>
 				<!-- </div> -->
 			</div>		

@@ -26,8 +26,7 @@ public class CommRefuseController {
 		map.put("comm_num", comm_num);*/
 		int result=service.insert(vo);
 		System.out.println(result);
-		String path="redirect:/community/commadmin/commuserlist?comm_num="+comm_num;
-		/*return "redirect:/community/commadmin/commuserlist?comm_num="+comm_num;*/
-		return path;
+		return "redirect:/community/commadmin/commuserlist?comm_num="+comm_num;
+		
 	}
 }

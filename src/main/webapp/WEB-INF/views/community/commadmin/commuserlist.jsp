@@ -66,7 +66,7 @@ tbody tr:nth-child(2n+1) {
 	</div>
 </div>
 
-<div class="modal" id="commforcedexitmodal">
+<div class="modal" id="commforcedexitmodal" style="margin-top: 5%;">
 	<div class="modal-dialog">
 		<div class="modal-content" style="background-color: #0c558d">
 			<div class="modal-header">
@@ -112,7 +112,7 @@ tbody tr:nth-child(2n+1) {
 	</div>
 </div>
 
-<div class="modal" id="commadminauthmodal">
+<div class="modal" id="commadminauthmodal" style="margin-top: 5%;">
 	<div class="modal-dialog">
 		<div class="modal-content" style="background-color: #0c558d">
 			<div class="modal-header">

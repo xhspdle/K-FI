@@ -22,4 +22,10 @@ public class CommSkinCoverDao {
 	public List<CommSkinCoverVo> list(int comm_num){
 		return session.selectList(NAMESPACE+".list", comm_num);
 	}
+	public int delete(int csc_num){
+		return session.delete(NAMESPACE+".delete", csc_num);
+	}
+	public CommSkinCoverVo select(int csc_num){
+		return session.selectOne(NAMESPACE+".select", csc_num);
+	}
 }
