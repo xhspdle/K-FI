@@ -17,12 +17,15 @@
 	</insert>
 
 	<select id="list" parameterType="hashmap" resultType="commcomment"> 
-		select c.* 
-		from (
-			select cc.*, rownum rnum 
-			from comm_comment cc 
-			where cb_num=#{cb_num}
-			) c
+		SELECT *
+		FROM(
+		select c.* , rownum rnum 
+				from (
+					select cc.*
+					from comm_comment cc 
+					where cb_num=#{cb_num}
+		           ORDER BY COMMC_DATE DESC
+					) c )
 		<![CDATA[ where rnum >= #{startRow} and rnum <= #{endRow} ]]>
 	</select>
 

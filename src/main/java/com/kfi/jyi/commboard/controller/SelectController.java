@@ -1,4 +1,4 @@
-package com.kfi.jyi.insidecommunity.controller;
+package com.kfi.jyi.commboard.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ import com.kfi.ldk.service.CommonService;
 import com.kfi.ldk.vo.TagVo;
 
 @Controller("insideCommunityListController")
-public class ListController {
+public class SelectController {
 	@Autowired 
 	@Qualifier("commBoardServiceImpl") private CommonService commBoardservice;
 
@@ -41,10 +41,6 @@ public class ListController {
 	
 	@Autowired
 	private MembersService membersSerivce;
-	
-	// model attribute annotation - 프로필, 커버 사진 넣기
-
-	// 가입한 유저인지, 강퇴당한 유저인지 확인하기 
 	
 	
 	

@@ -35,5 +35,7 @@ public class CommVideoDao {
 	public CommVideoVo getCommVideo1(int cb_num) {
 		return session.selectOne(NAMESPACE+".getCommVideo1",cb_num);
 	}
-	
+	public int update(CommVideoVo vo) {
+		return session.update(NAMESPACE+".update",vo);
+	}
 }

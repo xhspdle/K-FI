@@ -3,6 +3,7 @@ package com.kfi.jyi.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.kfi.jyi.dao.CommBoardDao;
 import com.kfi.ldk.service.CommonService;
@@ -43,6 +44,7 @@ public class CommBoardUpdateCntServiceImpl implements CommonService{
 			int result=cbdao.getViews(cb_num);
 			return result;
 		}catch(Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return -1;
 		}
 	}

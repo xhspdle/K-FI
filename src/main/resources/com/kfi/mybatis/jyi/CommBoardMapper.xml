@@ -22,12 +22,13 @@
 	</select>
 	
 	<select id="list" parameterType="hashmap" resultType="commboard">
-		select commb.* 
-		from (
-			select cb.*, rownum rnum 
-			from comm_board cb 
-			where comm_num=#{comm_num}) commb
-		<![CDATA[ where rnum >= #{startRow} and rnum <= #{endRow} ]]> order by cb_date desc
+	 SELECT * FROM(
+         select commb.* ,ROWNUM RNUM
+            from (
+                select cb.*
+                from comm_board cb 
+                where comm_num=#{comm_num} order by cb_date desc) commb)
+		<![CDATA[ where rnum >= #{startRow} and rnum <= #{endRow} ]]>
 	</select>
 
 	<select id="getBoardCnt" parameterType="int" resultType="commboardcnt">
@@ -75,5 +76,34 @@
 		where cb_num > (select cb_num from comm_board where cb_num=#{cb_num} and comm_num=#{comm_num})
 		and comm_num=#{comm_num}
 	</select>
+	
+	<select id="totalRowCount_commBoardList" resultType="int" parameterType="int">
+	 	select nvl(count(cb_num),0) from comm_board where comm_num=#{comm_num}
+	</select>
 
+	<select id="list_Views" parameterType="hashmap" resultType="commboard">
+	 SELECT * FROM(
+         select commb.* ,ROWNUM RNUM
+            from (
+                select cb.*
+                from comm_board cb 
+                where comm_num=#{comm_num} order by cb_views desc) commb)
+		<![CDATA[ where rnum >= #{startRow} and rnum <= #{endRow} ]]>
+	</select>
+
+	<update id="update" parameterType="commboard">
+		update comm_board 
+		<set>
+		<if test="cb_title != null and cb_title != '' ">
+		cb_title=#{cb_title},
+		</if>
+		<if test="cb_content != null and cb_content != ''">
+		cb_content=#{cb_content},
+		</if>
+		<if test="cb_notice != -1 ">
+		cb_notice=#{cb_notice}
+		</if>
+		</set>
+		where cb_num=#{cb_num}
+	</update>
 </mapper>

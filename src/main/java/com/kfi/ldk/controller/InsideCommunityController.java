@@ -74,7 +74,7 @@ public class InsideCommunityController {
 
 	// 해당 커뮤니티의 전체 게시물 불러오기
 	@RequestMapping(value = "/community", method = RequestMethod.GET)
-	public String community(Model model, HttpSession session,String comm_num, String pageNum) {
+	public String community(Model model, HttpSession session,String comm_num, String pageNum, String type) {
 		int commNum=1;
 		if(comm_num!=null) {
 			commNum=Integer.parseInt(comm_num);
@@ -82,7 +82,6 @@ public class InsideCommunityController {
 		}else {
 			commNum=(Integer)session.getAttribute("comm_num");
 		}
-		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("list", "notice");
 		map.put("session", session);
@@ -95,6 +94,7 @@ public class InsideCommunityController {
 		}
 		
 		HashMap<String, Object> board=new HashMap<>();
+		board.put("type","main");
 		board.put("pageNum", pageNUM);
 		board.put("session", session);
 		board.put("comm_num", commNum);

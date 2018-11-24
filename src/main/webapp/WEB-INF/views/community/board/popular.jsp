@@ -16,26 +16,7 @@
 		</c:forEach>
 		</ul>
 	</div>
-	
-	<!-- 여기서부터 c:forEach -->
 	<c:forEach var="board" items="${list }" >
-		<c:choose>
-			<c:when test="${date ne board.cb_date }">
-				<h1 class="text-center" id="${board.cb_date }" style="margin-bottom: 30px;">
-					<span style="border-bottom: 4px solid tan">${board.cb_date }</span>
-				</h1>
-				<c:set var="date"  value="${board.cb_date } "/>
-			</c:when>
-			<c:when test="${date eq board.cb_date }">
-			</c:when>
-			<c:otherwise>
-				<h1 class="text-center" id="${board.cb_date }" style="margin-bottom: 30px;">
-					<span style="border-bottom: 4px solid tan">${board.cb_date }</span>
-				</h1>
-			</c:otherwise>
-		</c:choose>		
-		<c:set var="date" value="${board.cb_date }"/>
-		
 		<div class="panel-group">
 		<div class="panel panel-default">
 			<div class="panel-heading" id="${board.cb_num }">
@@ -55,14 +36,14 @@
 					<ul class="dropdown-menu rightOption">
 						<c:if test="${board.user_num eq sessionScope.user_num}">
 							<li>
-								<a href="<c:url value='/community/board/updateForm?cb_num=${board.cb_num }'/>" data-toggle="modal" data-mb-num="${board.cb_num }">
+								<a href="#updateModal" data-toggle="modal" data-mb-num="${board.cb_num }">
 									<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
 								</a>
 							</li>
 						</c:if>
 						<c:if test="${board.user_num eq sessionScope.user_num || sessionScope.user_num eq comm_adminNum }">
 							<li>
-								<a href="#delete" onclick="return false;" data-toggle="popover"  data-popover-type="commBoard" data-cb-num="${board.cb_num}">
+								<a href="#" onclick="return false;" data-toggle="popover" data-mb-num="${board.cb_num}">
 									<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete
 								</a>
 							</li>
@@ -123,29 +104,14 @@
 		</div>
 	</div>
 	</c:forEach>
-	<div id="moreCommBoard"></div>
+	<div id="moreCommBoardPopular"></div>
 	<div class='container-fluid text-center'>
 		<h2>
-			<a class='btn btn-default' href='javascript:getCommBoard();'><span class='glyphicon glyphicon-plus'></span> More </a>
+			<a class='btn btn-default' href='javascript:getCommBoardPopular();'><span class='glyphicon glyphicon-plus'></span> More </a>
 		</h2>
 	</div>
-	<!-- 여기까지 c:forEach -->
 </div>
-<!-- Calendar icon -->
-	<input type="hidden" id="url" value="${pageContext.request.contextPath }">
-	<input type="hidden" id="year" value="year">
-	<input type="hidden" id="month" value="month">
-	<div class="sidenav">
-		<!--  
-		<div id="icon_chat" data-toggle="tooltip" data-placement="top" title="chat">
-		<i class="glyphicon glyphicon-comment"></i></div>
-		<div id="wrap_icon_chat"></div>-->
-		
-		<div id="icon_calendar" data-toggle="tooltip" data-placement="top" title="calendar">
-		<i class="glyphicon glyphicon-calendar"></i></div>
-		<div id="wrap_icon_calendar" ></div>
-	</div>
-<script id="commBoardListTemplate" type="text/template">
+<script id="commBoardPopularListTemplate" type="text/template">
 		<div class="panel-group">
 		<div class="panel panel-default">
 			<div class="panel-heading" id="{cb_num }">

@@ -34,4 +34,17 @@ public class CommTagDao {
 	public CommTagVo select(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE + ".select", map);
 	}
+	public CommTagVo select_tagNum(HashMap<String, Object> map){
+		return session.selectOne(NAMESPACE+".select_tagNum",map);
+	}
+	
+	public List<CommTagVo> list_CommTag(int cb_num){
+		return session.selectList(NAMESPACE+".list_CommTag",cb_num);
+	}
+	
+	public int delete_TagNum(HashMap<String, Object> map) {
+		return session.delete(NAMESPACE+".delete_TagNum",map);
+	}
+	
+	
 }

@@ -35,12 +35,11 @@ public class ListController {
 	@Autowired
 	@Qualifier("insideCommunityServiceImpl")
 	private CommonService insideCommService;
-	
+
 	@Autowired
 	@Qualifier("commCommentServiceImpl")
 	private CommonService commCommentService;
-	
-	
+
 	@ModelAttribute("checkUser")
 	public int checkUser(Model model, HttpSession session, String comm_num) {
 		int commNum = 1;
@@ -64,7 +63,7 @@ public class ListController {
 	}
 
 	// 해당 커뮤니티의 페이징처리
-	@RequestMapping(value = "/community/board/list", method=RequestMethod.GET)
+	@RequestMapping(value = "/community/board/list", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> community(Model model, HttpSession session, String comm_num, String pageNum) {
 		int commNum = 1;
@@ -81,6 +80,7 @@ public class ListController {
 		}
 
 		HashMap<String, Object> board = new HashMap<>();
+		board.put("type", "main");
 		board.put("pageNum", pageNUM);
 		board.put("session", session);
 		board.put("comm_num", commNum);
@@ -89,36 +89,73 @@ public class ListController {
 
 		return result;
 	}
+
 	
-	
-	
-	
-	//커뮤니티 게시글 댓글리스트
-	@RequestMapping(value="/community/board/commentList",method=RequestMethod.GET)
+	// 해당 커뮤니티의 조회수순 인기 게시글 불러오기
+	@RequestMapping(value = "/community/popular", method = RequestMethod.GET)
+	public String community(Model model, HttpSession session, String comm_num, String pageNum, String type) {
+		int commNum = 1;
+		if (comm_num != null) {
+			commNum = Integer.parseInt(comm_num);
+			session.setAttribute("comm_num", commNum);
+		} else {
+			commNum = (Integer) session.getAttribute("comm_num");
+		}
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("list", "notice");
+		map.put("session", session);
+		List<CommBoardVo> noticeList = (List<CommBoardVo>) commBoardservice.select(map);
+		model.addAttribute("noticeList", noticeList);
+
+		int pageNUM = 1;
+		if (pageNum != null && !pageNum.equals("")) {
+			pageNUM = Integer.parseInt(pageNum);
+		}
+
+		HashMap<String, Object> board = new HashMap<>();
+		board.put("type", type);
+		board.put("pageNum", pageNUM);
+		board.put("session", session);
+		board.put("comm_num", commNum);
+		HashMap<String, Object> result = (HashMap<String, Object>) commBoardservice.list(board);
+
+		model.addAttribute("list", (List<CommBoardVo>) result.get("list"));
+		model.addAttribute("proflist", (List<CommBoardProfileVo>) result.get("proflist"));
+		model.addAttribute("cbclist", (List<CommBoardCntVo>) result.get("cbclist"));
+
+		model.addAttribute("cplist", (List<CommPhotoVo>) result.get("cplist"));
+		model.addAttribute("cvlist", (List<CommVideoVo>) result.get("cvlist"));
+		model.addAttribute("pageNum", pageNUM);
+
+		return ".community.board.popular";
+	}
+
+	// 해당 커뮤니티의 popular 페이징처리
+	@RequestMapping(value = "/community/board/popular/list", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> commentList(String pageNum, String cb_num){
-		int cbNum=1;
-		if(!cb_num.equals("") && cb_num!=null) {
-			cbNum=Integer.parseInt(cb_num);
+	public HashMap<String, Object> communityPopular(Model model, HttpSession session, String comm_num, String pageNum) {
+		int commNum = 1;
+		if (comm_num != null) {
+			commNum = Integer.parseInt(comm_num);
+			session.setAttribute("comm_num", commNum);
+		} else {
+			commNum = (Integer) session.getAttribute("comm_num");
 		}
-		int pageNUM=1;
-		if(!pageNum.equals("") && pageNum!=null) {
-			pageNUM=Integer.parseInt(pageNum);
+
+		int pageNUM = 1;
+		if (pageNum != null && !pageNum.equals("")) {
+			pageNUM = Integer.parseInt(pageNum);
 		}
-		int commentCnt=commCommentService.getCount(cbNum);
-		HashMap<String, Object> map=new HashMap<>();
-		map.put("cb_num", cbNum);
-		map.put("pageNum", pageNUM);
-		HashMap<String, Object> result=(HashMap<String, Object>)commCommentService.list(map);
-		result.put("commentCnt", commentCnt);
-		
+
+		HashMap<String, Object> board = new HashMap<>();
+		board.put("type", "views");
+		board.put("pageNum", pageNUM);
+		board.put("session", session);
+		board.put("comm_num", commNum);
+		HashMap<String, Object> result = (HashMap<String, Object>) commBoardservice.list(board);
+		result.put("pageNum", pageNUM);
+
 		return result;
 	}
-	
-	
-	
-	
-	
-	
 
 }

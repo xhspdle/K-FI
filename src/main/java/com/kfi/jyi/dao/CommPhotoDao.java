@@ -34,4 +34,9 @@ public class CommPhotoDao {
 	public CommPhotoVo getBoardPhoto1(int cb_num) {
 		return session.selectOne(NAMESPACE+".getBoardPhoto1",cb_num);
 	}
+
+	public int update(CommPhotoVo vo) {
+		return session.update(NAMESPACE+".update",vo);
+	}
+	
 }

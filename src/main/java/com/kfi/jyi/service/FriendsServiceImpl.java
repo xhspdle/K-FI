@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.kfi.dgl.dao.MembersDao;
 import com.kfi.dgl.vo.MembersVo;
@@ -54,6 +55,7 @@ public class FriendsServiceImpl implements CommonService {
 			return 1;
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return -1;
 		}
 	}

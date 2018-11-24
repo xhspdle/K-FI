@@ -37,6 +37,12 @@ public class CommBoardDao {
 		return session.selectList(NAMESPACE+".list",map);
 	}
 	
+	
+	public List<CommBoardVo> list_Views(HashMap<String, Object> map) {
+		return session.selectList(NAMESPACE+".list_Views",map);
+	}
+	
+	
 	public CommBoardCntVo getBoardCnt(int cb_num) {
 		return session.selectOne(NAMESPACE+".getBoardCnt",cb_num);
 	}
@@ -67,6 +73,14 @@ public class CommBoardDao {
 	
 	public int nextCbNum(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".nextCbNum",map);
+	}
+	
+	public int totalRowCount_commBoardList(int comm_num) {
+		return session.selectOne(NAMESPACE+".totalRowCount_commBoardList",comm_num);
+	}
+	
+	public int update(CommBoardVo vo) {
+		return session.update(NAMESPACE+".update",vo);
 	}
 	
 }

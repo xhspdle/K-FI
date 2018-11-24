@@ -29,4 +29,17 @@
 	<select id="select" parameterType="int" resultType="commtag">
 		select * from comm_tag where ctag_num=#{ctag_num}
 	</select>
+	
+	<select id="select_tagNum" parameterType="hashmap" resultType="commtag">
+		select * from comm_tag where tag_num=#{tag_num} and cb_num=#{cb_num}
+	</select>
+	
+	<select id="list_CommTag" parameterType="int" resultType="commtag">
+		select * from comm_tag where cb_num=#{cb_num}
+	</select>
+	
+	<delete id="delete_TagNum" parameterType="hashmap">
+		delete from comm_tag where cb_num=#{cb_num} and tag_num=#{tag_num}
+	</delete>
+	
 </mapper>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.InputSource;
@@ -131,6 +132,7 @@ public class CommunityServiceImpl implements CommonService {
 				}
 			}
 			System.out.println(e.getMessage());
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return -1;
 		}
 	}

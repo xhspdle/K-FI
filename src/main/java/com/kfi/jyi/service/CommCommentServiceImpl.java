@@ -14,6 +14,7 @@ import org.apache.commons.fileupload.UploadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.InputSource;
@@ -68,15 +69,23 @@ public class CommCommentServiceImpl implements CommonService {
 	}
 
 	@Override
+	@Transactional
 	public int insert(Object data) {
 		HashMap<String, Object> map=(HashMap<String, Object>)data;
 		HttpSession session=(HttpSession)map.get("session");
 		int user_num=(Integer)session.getAttribute("user_num");
 		int cb_num=(Integer)map.get("cb_num");
 		String commc_content=(String)map.get("commc_content");
-		int commc_num=ccdao.getMaxNum()+1;
-		CommCommentVo vo=new CommCommentVo(commc_num, cb_num, user_num, commc_content, null, 0);
-		return ccdao.insert(vo);
+		try {
+			int commc_num=ccdao.getMaxNum()+1;
+			CommCommentVo vo=new CommCommentVo(commc_num, cb_num, user_num, commc_content, null, 0);
+			return ccdao.insert(vo);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return -1;
+		}
+		
 	}
 
 	@Override
@@ -113,6 +122,7 @@ public class CommCommentServiceImpl implements CommonService {
 		for(CommCommentVo ccvo: list) {
 			MySkinViewVo msvvo=msvdao.select_using(ccvo.getUser_num());
 			msvvolist.add(msvvo);
+			System.out.println(ccvo.getCommc_content() +"!!!!!!!!commentContent");
 		}
 		HashMap<String, Object> result=new HashMap<>();
 		result.put("list",list);//´ñ±Û
@@ -123,11 +133,6 @@ public class CommCommentServiceImpl implements CommonService {
 		result.put("pageBlockCount", page.getPageBlockCount());
 		result.put("totalPageCount", page.getTotalPageCount());
 		result.put("pageNum", page.getPageNum());
-		
-		System.out.println("startPageNum "+page.getStartPageNum());
-		System.out.println("endPageNum "+ page.getEndPageNum());
-		System.out.println("pageBlockCount "+page.getPageBlockCount());
-		System.out.println("totalPageCount "+page.getTotalPageCount());
 		
 		return result;
 	}

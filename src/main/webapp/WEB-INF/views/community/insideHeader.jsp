@@ -93,7 +93,7 @@
 <div class="navbar navbar-comm-menu" data-spy="affix" data-offset-top="450">
 	<ul class="nav navbar-nav navbar-center"> 
 		<li><a id='commWrite' href="<c:url value='/community/board/insert'/>"><i class="glyphicon glyphicon-check"></i>WRITE</a></li>
-		<li><a href="#"><i class="glyphicon glyphicon-star"></i>POPULAR</a></li>
+		<li><a href="<c:url value='/community/popular?type=views'/>"><i class="glyphicon glyphicon-star"></i>POPULAR</a></li>
 		<li><a href="#"><i class="glyphicon glyphicon-time"></i>LATEST</a></li>
 		<li><a href="<c:url value='/community/polls/list'/>"><i class="glyphicon glyphicon-stats"></i>POLLS</a></li>
 	</ul>

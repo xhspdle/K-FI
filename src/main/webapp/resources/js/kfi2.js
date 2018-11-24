@@ -432,6 +432,21 @@ $(function() {
 		return true;
 	});
 	
+	/////////////////////////커뮤니티 게시물 업데이트할 때 
+	$('#updateCommBoardSub').on('click',function(){
+		var cbTitle=$('#cb_title').val();
+		if(cbTitle==''){
+			alert('제목을 입력해주세요');
+			return false;
+		}
+		var cbContent=$('#cb_content').val();
+		if(cbContent==''){
+			alert('내용을 입력해주세요');
+			return false;
+		}
+		return true;
+	});
+	
 	/////////////////////////커뮤니티 게시물 좋아요
 	getBoardLikeUserList();
 	
@@ -538,7 +553,63 @@ $(function() {
 				  });
 	  });
 	
+	$('#updateCommBoard .glyphicon-remove-circle').on('click',function(){
+		 var tagSpanNum=$(this).parent().attr("data-tag-num");
+		 console.log(tagSpanNum);
+		 $("input[type='hidden']").remove("#tag" + tagSpanNum);
+		 let removeSpan=$(this).parent().css("opacity","0")
+		 setTimeout(function(){
+			  $(removeSpan).remove();
+		 },500);
+		 var delTag='<input type="hidden" name="del_Tags" value="'+tagSpanNum+'">';
+		 $('#del_TagList').append(delTag);
+	});
+	 
+	 
+	//파일 미리보기
+	var imgListSize=$('#imgListSize').val();
+	if(imgListSize!=undefined){
+		var imgSize=parseInt(imgListSize);
+		for(var i=0;i<5;i++){
+			console.log(imgSize);
+			$(document).on('change',"[name='fileP"+(i+1)+"']",function(event){
+				  if(event.target.files[0]!==undefined){
+					  var tmppath=URL.createObjectURL(event.target.files[0]);
+					  $(this).next().fadeIn("fast").attr("src", URL.createObjectURL(event.target.files[0]));
+					  URL.revokeObjectURL(event.target.files[0]);
+				  }else{
+					  $(this).next().fadeOut("slow");
+				  }
+				  if($(".imgUpload").children().length<=3){
+					  $("<button type='button' class='btn btn-default btn-block addImg'>" +
+				  		"Upload More?</button>").appendTo(".imgUpload");
+					  console.log("??");
+					  var n=imgSize;
+					  $(".imgUpload").on('click',".addImg",function(){
+						  if(n>=6){
+							  $(this).css('color',"red");
+							  $(this).html("Up to 5 photos can be uploaded")
+						  }else{
+							  fileImgTemplate=document.querySelector("#fileImgTemplate").innerHTML;
+							  let attachImg=fileImgTemplate.replace("{mp_savimg}", '')
+							  			.replace(/{i}/gi, n)
+							  			.replace("{label}", "Upload Photo" + n++);
+							  $(".imgUpload").append(attachImg);
+						  }
+					  });
+				  }
+			  });
+		}
+	}
 	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 });
 
 //추천 유저 목록 불러오기
@@ -563,7 +634,8 @@ function getBoardCommentList(pageNum){
 	  if(pageNum==undefined){
 		pageNum=1;  
 	  }
-	  var cb_num=parseInt($("#commBoardSelect input[name='cb_num']").val());
+	  var cb_num=$("#cb_num").val();
+	  console.log(cb_num+"///cb_num");
 	  $.getJSON(getPageContext+'/community/board/commentList',{pageNum:pageNum,cb_num:cb_num},
 		  function(result){
 			  $("#commBoardSelect #commentCnt").text(result.commentCnt + " Comments");
@@ -672,7 +744,7 @@ function getCommBoard(){
 			var liType="";
 			var comm_adminNum=$('#comm_adminNum').val();
 			if(user_num == sessionUser){
-				liType='<li><a href="#updateModal" data-toggle="modal" data-cb-num="{'+board.cb_num+'}">'
+				liType='<li><a href="'+getPageContext+'/community/board/updateForm?cb_num='+board.cb_num +'" data-toggle="modal" data-cb-num="{'+board.cb_num+'}">'
 					+'<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit</a></li>'
 					+'<li><a href="#delete" onclick="return false;" data-toggle="popover" data-popover-type="commBoard" data-cb-num="'+board.cb_num+'">'
 					+'<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a></li>';
@@ -754,6 +826,107 @@ function getCommBoard(){
 }
 
 
+//////////////////////popular 게시글 페이징 처리
+function getCommBoardPopular(){
+	var pageNum=parseInt($('#pageNum').val())+1;
+	var getPageContext=$('#getPageContext').val();
+	$.getJSON(getPageContext+'/community/board/popular/list?pageNum='+pageNum,function(result){
+		var page=result.pageNum;
+		$('#pageNum').val(page);
+		var list=result.list; //List<CommBoardVo>
+		var proflist=result.proflist; //List<CommBoardProfileVo>
+		var cbclist=result.cbclist; //List<CommBoardCntVo>
+		var cplist=result.cplist; //List<CommPhotoVo>
+		var cvlist=result.cvlist; //List<CommVideoVo>
+		
+		html=document.querySelector('#commBoardPopularListTemplate').innerHTML;
+		
+		$(list).each(function(i,board){
+			var user_num=board.user_num;
+			var sessionUser=$('#user_num').val();
+			var disabled="";
+			var liType="";
+			var comm_adminNum=$('#comm_adminNum').val();
+			if(user_num == sessionUser){
+				liType='<li><a href="#updateModal" data-toggle="modal" data-cb-num="{'+board.cb_num+'}">'
+					+'<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit</a></li>'
+					+'<li><a href="#delete" onclick="return false;" data-toggle="popover" data-popover-type="commBoard" data-cb-num="'+board.cb_num+'">'
+					+'<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a></li>';
+			}else if(sessionUser == comm_adminNum){
+				liType='<li><a href="#delete" onclick="return false;" data-toggle="popover" data-popover-type="commBoard" data-cb-num="'+board.cb_num+'">'
+				+'<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a></li>';
+			}else if(user_num != sessionUser){
+				disabled="disabled";
+				liType='<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>';
+			}
+			var mediaDiv="<span></span>";
+			$(proflist).each(function(j,pro){
+				var proCbnum=pro.cb_num;
+				if(proCbnum==board.cb_num){
+					mediaDiv='<div class="media"><div class="media-left media-top">'
+							+'<img src="'+getPageContext+'/resources/upload/img/'+pro.msp_savimg +'" class="media-object img-circle" style="width:50px;height:50px"></div>'
+							+'<div class="media-body text-left" style="padding-left:5px;"><h4 class="media-heading">'
+							+'<a href="'+getPageContext+'/mypage/myboard/selectList?selectedUserNum='+board.user_num +'" class="userSelect">'
+							+'<strong>'+pro.user_nickname +'</strong></a></h4><p style="margin:0px;margin-top:-5px;"><small>'+pro.user_email+'</small></p></div></div>';
+				}
+			});
+			var cvCnt=0;
+			var video='<span></span>';
+			if(cvlist != null){
+				$(cvlist).each(function(v,vi){
+					if(vi!=null){
+						var vidnum=vi.cb_num;
+						if(vidnum == board.cb_num ){
+							video='<video class="img-responsive center-block" controls autoplay muted="muted" loop' 
+									+'src="'+getPageContext+'/resources/upload/vid/'+vi.cv_savvid+'"></video>';
+							cvCnt=1;
+						}
+					}
+				});
+			}
+			var photo ='<span></span>';
+			if(cvCnt!=1 && cplist != null){
+				$(cplist).each(function(p,pt){
+					if(pt!=null){
+						var ptcbnum=pt.cb_num;
+						if(ptcbnum==board.cb_num){
+							photo ='<img class="img-responsive center-block" src="'+getPageContext+'/resources/upload/img/'+pt.cp_savimg +'" alt="board image">';
+						}
+					}
+				});
+			}
+			var cblcnt = 0;
+			var cmcnt = 0;
+			var cvcnt = 0;
+			$(cbclist).each(function(c,cnt){
+				if(cnt!=null){
+					var cntnum=cnt.cb;
+					if(board.cb_num == cntnum){
+						cblcnt=cnt.cblcnt;
+						cmcnt=cnt.cmcnt;
+						cvcnt =cnt.cvcnt;
+					}
+				}
+			});
+			var selectCb_num=getPageContext+'/community/board/select?cb_num='+board.cb_num;
+			var resultHTML=html.replace(/{/gi, "")
+	  			.replace(/}/gi, "")
+	  			.replace(/cb_num/gi, board.cb_num)
+	  			.replace("selectCbNum", selectCb_num)
+				.replace(/cb_title/gi,board.cb_title)
+				.replace("disabled", disabled)
+		  		.replace("liType", liType)
+		  		.replace("mediaDiv", mediaDiv)
+		  		.replace(/cb_content/gi, board.cb_content)
+		  		.replace("video", video)
+		  		.replace("photo", photo)
+		  		.replace("cblcnt", cblcnt)
+		  		.replace("cmcnt", cmcnt)
+		  		.replace("cvcnt", cvcnt);
+			$("#moreCommBoardPopular").append(resultHTML);
+		});
+	});
+}
 
 
 

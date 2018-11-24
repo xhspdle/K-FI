@@ -38,5 +38,7 @@
 		select * from(select cv.*, rownum rnum from comm_video cv where cb_num=#{cb_num}) where rnum=1
 	</select>
 	
-	
+	<update id="update" parameterType="commvideo">
+		update comm_video set cv_orgvid=#{cv_orgvid}, cv_savvid=#{cv_savvid} where cv_num=#{cv_num}
+	</update>
 </mapper>
