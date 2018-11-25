@@ -31,10 +31,12 @@ $(function(){
 });
 </script>
 <div id="memberslist"> 
+
 	<h1>
 		회원정보
 		<a class="btn btn-md btn-default" href=<c:url value='/admin/adminlist'/>>관리자정보</a>
 	</h1>
+
 	<table class="table table-striped">
 		<tr>
 			<!-- <th>회원번호</th> -->

@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- //////////////////신고관리 페이지	//////////////////////	 -->
-<div class="text-center">
-<a href="acinsert">작성</a>
+
+<%-- <a href="<c:url value='/admin/aclist'/>">작성</a> --%>
+
 <h1 id="convertform">신고관리</h1> 
-</div><br>
+
+<br>
 <div id="aclistview1">
 	<c:forEach var="accuse" items="${aclist }">
 		<div class="col-sm-4 col-xs-12">

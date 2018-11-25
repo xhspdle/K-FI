@@ -113,8 +113,10 @@
 	data-target="#abmodify-modal">확인</button>
 <c:choose>
 	<c:when test="${not empty admin}"> --%>
+
 <h1>공지사항</h1>
-<input type="button" onclick="deletecookie()" value="삭제">
+
+<!-- <input type="button" onclick="deletecookie()" value="삭제"> -->
 <table class="table table-striped">
 	<tr>
 		<th>게시물번호</th>

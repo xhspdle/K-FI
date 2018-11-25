@@ -70,8 +70,8 @@
 		</nav>
 		<c:choose>
 			<c:when test="${empty admin}">
-				<div class="topheader text-center">
-					<h1>WOW</h1>
+				<div class="topheader text-center" style="background-image: url(<c:url value='/resources/images/ysy/1 (1).jpg'/>)">
+					
 				</div>
 			</c:when>
 			<c:otherwise>
