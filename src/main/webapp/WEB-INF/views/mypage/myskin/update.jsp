@@ -6,27 +6,34 @@
 	<div class="col-sm" style="width:45%;">
 	<h2 style="margin-left: 22%;margin-top: 10%;text-transform: uppercase;}">My Skin Update</h2>
 	</div>
-	<!-- 미리보기 설정(js) -->'
-	<div class="jumbotron col-sm" id="preview_cover" 
-	style="background-size: cover !important;margin:auto;width:80%;background: url('${pageContext.request.contextPath }/resources/upload/img/${msvlist.msc_savimg }');padding-left:0;padding-right:0;">
-		<div>
-			<img id="profile_preview" src="<c:url value='/resources/upload/img/${msvlist.msp_savimg }'/>" class="img-circle"
-				style="border: white 4px solid !important;margin-top: 42px;width: 150px;height: 150px;background-color: white;display: block;
-				margin-left: auto;margin-right: auto;">
-			<h4><span id="myskin_list_nickname">${user_nickname}</span></h4> 
-			<p><span id="preview_msg" style="margin-top: -25px;width: max-content;color:black;border-bottom: 2px solid white;display: block;margin-left: auto;margin-right: auto;">${msvlist.ms_msg }</span></p> 
-			<div class="collapse navbar-collapse" id="preview_navbar"  style="background-color: ${msvlist.ms_color};border-radius:10px;width:100%;" >
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#contact">COMMUNITY</a></li>
-					<li class="dropdown">
-						<a href="#contact">MYPAGE</a>
-					</li>
-					<li><button type="button" class="btn btn-default btn-lg" style="border:${msvlist.ms_color} ;background-color: ${msvlist.ms_color};border-radius:10px;">
-					<span class="glyphicon glyphicon-search"></span></button></li>
-				</ul>
+	<!-- 미리보기 체인지 -->
+	<div id="new_community">
+		<div class="w3-row-padding w3-margin-top" style="height:370px;">
+			<div class="w3-third" style="width: 100%;height:100%;">
+				<div class="w3-card" id="preview_cover" style="background: url('${pageContext.request.contextPath }/resources/upload/img/${msvlist.msc_savimg }');">
+				<div>
+					<img id="profile_preview" class="img-responsive img-circle" src="<c:url value='/resources/upload/img/${msvlist.msp_savimg }'/>">
+					<h4><span id="myskin_list_nickname" >${user_nickname}</span></h4>
+   					<span id="preview_msg">${msvlist.ms_msg }</span>
+     			</div>
+						<div class="w3-container" style="padding: 0;">
+						<div class="collapse navbar-collapse" id="preview_navbar" style="background-color: ${msvlist.ms_color};">
+							<ul class="nav navbar-nav navbar-right">
+								<li class="dropdown">
+									<a href="<c:url value='/community'/>">COMMUNITY</a>
+								</li>
+								<li class="dropdown">
+									<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
+								</li>
+								<li><button type="button" class="btn btn-default btn-lg" id="preview_cover"  style="border:${msvlist.ms_color} ;background-color: ${msvlist.ms_color};">
+								<span class="glyphicon glyphicon-search"></span></button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	<br>
 	<!-- 등록 -->
   	<form class="form-horizontal col-sm" enctype="multipart/form-data" method="post" action="<c:url value='/mypage/myskin/update'/>" style="width: 85%;margin:50px;">
     	<input type="hidden" name="ms_num" value="${msvlist.ms_num }">
@@ -65,4 +72,4 @@
 	      </div>
 	    </div>
   </form>
-</div>
+</div></div>
