@@ -16,7 +16,7 @@
 		select * from comm_photo where cb_num=#{cb_num}
 	</select>
 	
-	<select id="hotPhoto3" resultType="hotphoto3">
+	<!-- <select id="hotPhoto3" resultType="hotphoto3">
 		select * 
 		from comm_photo cp, comm_board cb
 		where cp.cb_num=cb.cb_num 
@@ -32,6 +32,14 @@
 	        		where cb.cb_num=cp.cb_num 
 	        		)
 		<![CDATA[  where rnum <4 )	 ]]>
+	</select> -->
+	
+	
+	<select id="hotPhoto3" resultType="hotphoto3">
+	select *
+	from(select aa.*,rownum rnum
+	from(select cp_num, cb.cb_num, cp.cp_orgimg, cp.cp_savimg, comm_num, user_num, cb_title, cb_content, cb_date, cb_notice, cb.cb_views from comm_board cb, comm_photo cp where cb.cb_num=cp.cb_num order by cb_views desc)aa
+	<![CDATA[ )where rnum <4 ]]>
 	</select>
 	
 	<select id="getBoardPhoto1" resultType="commphoto" parameterType="int">

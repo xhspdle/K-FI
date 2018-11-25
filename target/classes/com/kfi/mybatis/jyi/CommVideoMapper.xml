@@ -16,7 +16,7 @@
 		select * from comm_video where cb_num=#{cb_num}
 	</select>
 	
-	<select id="hotVideo" resultType="hotvideo">
+	<!-- <select id="hotVideo" resultType="hotvideo">
 	select * 
 	from comm_video cv, comm_board cb
 	where cv.cb_num=cb.cb_num  
@@ -33,7 +33,13 @@
 			        )
 			     where rnum =1 ) 
 	</select>
-	
+	 -->
+	 <select id="hotVideo" resultType="hotvideo">
+	 select *
+	 from(select aa.*,rownum rnum
+	 from(select cv_num, cb.cb_num, cv.cv_orgvid, cv.cv_savvid, comm_num, user_num, cb_title, cb_content, cb_date, cb_notice, cb.cb_views from comm_board cb, comm_video cv where cb.cb_num=cv.cb_num order by cb_views desc)aa
+	 )where rnum =1 
+	 </select>
 	<select id="getCommVideo1" resultType="commvideo" parameterType="int">
 		select * from(select cv.*, rownum rnum from comm_video cv where cb_num=#{cb_num}) where rnum=1
 	</select>
