@@ -22,7 +22,14 @@ public class InsertController {
 	public String insert(HttpSession session, String comm_num) {
 		HashMap<String, Object> map=new HashMap<>();
 		map.put("session", session);
-		map.put("comm_num",1); //Integer.parseInt(comm_num)
+		int comm_num1=0;
+		if(comm_num!=null) {
+			comm_num1=Integer.parseInt(comm_num);
+		}
+		if(comm_num1==0) {
+			return "redirect:/community"; //¿À·ù
+		}
+		map.put("comm_num",comm_num1); //Integer.parseInt(comm_num)
 		int result=(Integer)service.insert(map);
 		if(result>0) {
 			return "redirect:/community"; 
