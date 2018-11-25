@@ -1,30 +1,28 @@
 package com.kfi.ldk.vo;
 
-import java.sql.Date;
-
 public class StatPeriodMemCntVo {
-	private Date user_regdate;
-	private int cnt;
+	private String user_regdate;
+	private int sum;
 	public StatPeriodMemCntVo() {}
-	public StatPeriodMemCntVo(Date user_regdate, int cnt) {
+	public StatPeriodMemCntVo(String user_regdate, int sum) {
 		super();
 		this.user_regdate = user_regdate;
-		this.cnt = cnt;
+		this.sum = sum;
 	}
-	public Date getUser_regdate() {
+	public String getUser_regdate() {
 		return user_regdate;
 	}
-	public void setUser_regdate(Date user_regdate) {
+	public void setUser_regdate(String user_regdate) {
 		this.user_regdate = user_regdate;
 	}
-	public int getCnt() {
-		return cnt;
+	public int getSum() {
+		return sum;
 	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 	@Override
 	public String toString() {
-		return "StatPeriodMemCntVo [user_regdate=" + user_regdate + ", cnt=" + cnt + "]";
+		return "StatPeriodMemCntVo [user_regdate=" + user_regdate + ", sum=" + sum + "]";
 	}
 }

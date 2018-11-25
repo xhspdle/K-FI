@@ -53,7 +53,7 @@
 					<li><a href="<c:url value='/community/newComm/insertForm'/>">CREATE</a></li>
 						<li><a href="<c:url value='/communityMain/list'/>">K-FI's LIST</a></li>
 						<li><a href="<c:url value='/mypage/mycomm/list'/>">MY COMMUNITY</a></li>
-						<li><a href="<c:url value='/community/commcalendar'/>">CALENDAR</a></li>
+						<li><a href="<c:url value='/community/commcalendar/list'/>">CALENDAR</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

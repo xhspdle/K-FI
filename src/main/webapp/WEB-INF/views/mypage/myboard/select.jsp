@@ -133,7 +133,7 @@
 				<c:choose>
 					<c:when test="${!empty user_num }">
 					<div class="media-left media-top">
-						<img class="media-object img-circle" src="<c:url value='/resources/upload/img/${boardVo.msp_savimg }'/>" alt="userProfile">
+						<img class="media-object img-circle" src="<c:url value='/resources/upload/img/${msv.msp_savimg }'/>" alt="userProfile">
 					</div>
 					<div class="media-body media-middle form-group row">
 						<form id="commentForm" name="frmComment" class="form-inline" action="<c:url value='/mypage/mycomment/insert'/>">

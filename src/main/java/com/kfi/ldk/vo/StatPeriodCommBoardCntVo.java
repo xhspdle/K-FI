@@ -1,20 +1,18 @@
 package com.kfi.ldk.vo;
 
-import java.sql.Date;
-
 public class StatPeriodCommBoardCntVo {
-	private Date cb_date;
+	private String cb_date;
 	private int cnt;
 	public StatPeriodCommBoardCntVo() {}
-	public StatPeriodCommBoardCntVo(Date cb_date, int cnt) {
+	public StatPeriodCommBoardCntVo(String cb_date, int cnt) {
 		super();
 		this.cb_date = cb_date;
 		this.cnt = cnt;
 	}
-	public Date getCb_date() {
+	public String getCb_date() {
 		return cb_date;
 	}
-	public void setCb_date(Date cb_date) {
+	public void setCb_date(String cb_date) {
 		this.cb_date = cb_date;
 	}
 	public int getCnt() {

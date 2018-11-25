@@ -152,7 +152,7 @@
 			var formatter = new google.visualization.NumberFormat(
 					{suffix: ' 명',fractionDigits: 0 });
 			<c:forEach var="vo" items="${periodMemCntWeek }">
-			data.addRows([["${vo.user_regdate}", {v: ${vo.cnt}, f: formatter.formatValue("${vo.cnt}")}]]);
+			data.addRows([["${vo.user_regdate}", {v: ${vo.sum}, f: formatter.formatValue("${vo.sum}")}]]);
 			</c:forEach>
 			var table = new google.visualization.Table(document.getElementById("periodMemCntWeek_table"));
 			table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
@@ -164,7 +164,7 @@
 	    	data.addColumn('string', 'User RegeDate');
 			data.addColumn('number', 'Members');
 			<c:forEach var="vo" items="${periodMemCntWeek }">
-			data.addRows([["${vo.user_regdate}", ${vo.cnt}]]);
+			data.addRows([["${vo.user_regdate}", ${vo.sum}]]);
 			</c:forEach>
 			var options = {
 				chartArea: {width:'70%',height:'70%'},
