@@ -28,7 +28,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="<c:url value='/community/newComm/insertForm'/>">커뮤니티 등록</a></li>
 						<li><a href="<c:url value='/communityMain/list'/>">커뮤니티 목록</a></li>
-						<li><a href="<c:url value='/community/commcalendar'/>">일정보기</a></li>
+						<li><a href="<c:url value='/community/commcalendar/list'/>">일정보기</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

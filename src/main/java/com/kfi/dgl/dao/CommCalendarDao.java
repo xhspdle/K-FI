@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kfi.jyi.vo.CommCalendarVo;
+import com.kfi.jyi.vo.CommCalendarVo2;
 
 @Repository
 public class CommCalendarDao {
@@ -22,20 +23,20 @@ public class CommCalendarDao {
 		return sqlSession.selectOne(NAMESPACE + ".commgetMaxnum");
 	}
 
-	public int insertEvent(CommCalendarVo vo) {
+	public int insertEvent(CommCalendarVo2 vo) {
 		return sqlSession.insert(NAMESPACE + ".insertEvent", vo);
 	}
 
-	public int updateEvent(CommCalendarVo vo) {
+	public int updateEvent(CommCalendarVo2 vo) {
 		return sqlSession.update(NAMESPACE + ".updateEvent", vo);
 	}
 
-	public int deleteEvent(String cc_name) {
-		return sqlSession.delete(NAMESPACE + ".deleteEvent", cc_name);
+	public int deleteEvent(int cc_num) {
+		return sqlSession.delete(NAMESPACE + ".deleteEvent", cc_num);
 	}
 
-	public int selectEvent(int comm_num) {
-		return sqlSession.selectOne(NAMESPACE + ".selectEvent", comm_num);
+	public CommCalendarVo2 selectEvent(int cc_num) {
+		return sqlSession.selectOne(NAMESPACE + ".selectEvent2", cc_num);
 	}
 
 	public List<CommCalendarVo> listEvent(int comm_num) {

@@ -44,7 +44,7 @@ body {
 </style>
 <script>
 	$(function() {
-		var url=$('#getContextPath').val();
+		var getContextPath=$('#getContextPath').val();
 		/* 		$('#calendar').fullCalendar('removeEvents');
 		 $('#calendar').fullCalendar('refetchEvents'); */
 		/* var title = $("input[name=cc_name] schedule-title").val();
@@ -61,60 +61,73 @@ body {
 				right : 'today'
 			},
 			events : [ 
-				<c:forEach var="list" items="${list}"> 
-				{
-						id:'${list.cc_info}', 
-					  title: '${list.cc_name}',  
-	                   start: '${list.cc_begin}',
-	                   end: '${list.cc_end}',
-				}, 
-				</c:forEach>
-				],
-			        eventClick: function(event, jsEvent, view) {
-			            console.log(event.start.format());
-			            console.log(event.title);
-			            $('#fullCalModal').modal();
-			            var r = confirm("Delete " + event.title);
-			            if (r === true) {
-			              $('#calendar').fullCalendar('removeEvents', event._id);
-			            } 
-					}
+			<c:forEach var="vo" items="${list}"> 
+			{
+				id:'${vo.cc_num}', 
+		 		title: '${vo.cc_name}',  
+                start: '${vo.cc_begin}',
+                end: '${vo.cc_end}'
+			}, 
+			</c:forEach>
+			],
+	        eventClick: function(event, jsEvent, view) {
+	            $.getJSON(getContextPath + "/community/commcalendar/select",
+	            		{'cc_num':event.id},
+	            		function(json){
+	            			var select=json.select;
+	            			var cc_num=select.cc_num;
+							var comm_num=select.comm_num;
+							var cc_name=select.cc_name;
+							var cc_info=select.cc_info;
+							var cc_begin=select.cc_begin;
+							var cc_end=select.cc_end;
+							$("input[name='cc_num']").val(cc_num);
+							$("input[name='comm_num']").val(comm_num);
+							$("input[name='cc_name']").val(cc_name);
+							$("input[name='cc_info']").val(cc_info);
+							$("input[name='cc_begin']").val(cc_begin);
+							$("input[name='cc_end']").val(cc_end);
+	            		});
+	            $('#fullCalModal').modal();
+			}
 		});
- 	$('#addevent-btn').on('click', function() {
-			alert("complete");
- 	});
- 	$('#calendar').fullCalendar({
- 		  eventClick: function(event, jsEvent, element) {
-
- 		    event.title = "CLICKED!";
- 		   $('#fullCalModal').modal();
- 		  }
- 		});
- 	$('.fc-content').on('click', function(){
- 		var cc_name = $("#schedule-title").val();
- 		alert(cc_name);
- 		alert("삭제하시겠습니까?");
- 		$.ajax({
-			async : false,
-			type : "GET",
-			url : url + '/community/delete',
-			data : {
-				'cc_title' : cc_title
-			},
-			dataType : "json",
-			success : function(data) {
-				console.log(data)
-				
-				}
-			
- 	});
- 	});
- 	$("#update-btn").on('click', function(){
- 		
- 	});
+	 	$("#del-btn").click(function(event){
+	 		event.preventDefault();
+	 		var cc_num=$(this).parent().parent().find("input[name='cc_num']").val();
+	 		$.getJSON(getContextPath + "/community/commcalendar/delete",
+					{'cc_num':cc_num},
+					function(json){
+						var code=json.code;
+						if(code==='success'){
+							location.href=getContextPath + "/community/commcalendar/list";
+						}else {
+							$.msgBox(code);
+						}
+					});	
+	 	});
+	 	$("#update-btn").click(function(event){
+	 		event.preventDefault();
+	 		var formData=new FormData($(this).parent().parent().get(0));
+	 		$.ajax({
+	 			url: getContextPath + "/community/commcalendar/update",
+	 			type: 'post',
+	 			dataType: 'json',
+	 			data: formData,
+	 			cache: false,
+	 			contentType: false,
+	 			processData: false,
+	 			success: function(json){
+	 				if(json.code==='success'){
+	 					location.href=getContextPath + "/community/commcalendar/list";
+	 				}else{
+	 					$.msgBox(json.code);
+	 				}
+	 			}
+	 		});
+	 	});
 	});
 </script>
-
+<input type="hidden" id="isSelect" value="${select.cc_num }">
 <div class="container">
 	<input type="hidden" id="getContextPath" value="<c:url value='/'/>">
 	<div id='createSchedule'>
@@ -139,7 +152,7 @@ body {
 				</div>
 			</div>
 			<div class="modal-body">
-				<form action="<c:url value='/community/commcalendar'/>"
+				<form action="<c:url value='/community/commcalendar/insert'/>"
 					name="addevent" role="form" id="addevent-form" class=""
 					method="post">
 					<div class="form-box">
@@ -159,7 +172,7 @@ body {
 								<div class="input-group">
 									<span class="input-group-addon"><i
 										class="far fa-calendar-alt"></i></span> <input type="date" id="start"
-										class="startpickDate" name="cc_begin" placeholder="Date">
+										class="startpickDate" name="cc_begin" placeholder="Date" value="">
 								</div>
 							</div>
 						</div>
@@ -169,8 +182,9 @@ body {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon"><i
-									class="far fa-calendar-alt"></i></span> <input type="date" id="end"
-									class="endpickDate" name="cc_end" placeholder="Date">
+									class="far fa-calendar-alt"></i></span> 
+									<input type="date" id="end"
+									class="endpickDate" name="cc_end" placeholder="Date" value="">
 							</div>
 						</div>
 					</div>
@@ -200,8 +214,8 @@ body {
 			</div>
 			<div class="modal-body" id="modalBody">
 				<form action="<c:url value='/community/delete'/>" name="eventedit"
-					role="form" id="addevent-form" class="" method="post">
-					<input type="hidden" name="cc_num" id="cc_num">
+					role="form" id="editevent-form" class="" method="post">
+					<input type="hidden" name="cc_num" id="" value="${select.cc_num }">
 					<div class="form-box">
 						<div class="form-group">
 							<input type="hidden" name="cc_num" id="cc_num"> <label

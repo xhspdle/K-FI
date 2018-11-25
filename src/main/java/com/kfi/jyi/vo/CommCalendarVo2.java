@@ -5,19 +5,21 @@ import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 //CommCalendar 모임일정
-public class CommCalendarVo {
+public class CommCalendarVo2 {
 	private int cc_num; // 모임일정번호
 	private int comm_num; // 모임번호
 	private String cc_name; // 일정이름
 	private String cc_info; // 일정설명
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date cc_begin;// 모임시작일
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date cc_end;// 모임종료일
 
-	public CommCalendarVo() {
+	public CommCalendarVo2() {
 		super();
 	}
 
-	public CommCalendarVo(int cc_num, int comm_num, String cc_name, String cc_info, Date cc_begin, Date cc_end) {
+	public CommCalendarVo2(int cc_num, int comm_num, String cc_name, String cc_info, Date cc_begin, Date cc_end) {
 		super();
 		this.cc_num = cc_num;
 		this.comm_num = comm_num;

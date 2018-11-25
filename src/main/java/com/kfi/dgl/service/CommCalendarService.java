@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kfi.dgl.dao.CommCalendarDao;
 import com.kfi.jyi.vo.CommCalendarVo;
+import com.kfi.jyi.vo.CommCalendarVo2;
 
 @Service
 public class CommCalendarService {
@@ -16,17 +17,17 @@ public class CommCalendarService {
 	public int getMaxnum() {
 		return ccdao.commgetMaxnum();
 	}
-	public int addEvent(CommCalendarVo vo) {
+	public int addEvent(CommCalendarVo2 vo) {
 		return ccdao.insertEvent(vo);
 	}
-	public int updateEvent(CommCalendarVo vo) {
+	public int updateEvent(CommCalendarVo2 vo) {
 		return ccdao.updateEvent(vo);
 	}
-	public int deleteEvent(String cc_name) {
-		return ccdao.deleteEvent(cc_name);
+	public int deleteEvent(int cc_num) {
+		return ccdao.deleteEvent(cc_num);
 	}
-	public int selectEvent(int comm_num) {
-		return ccdao.selectEvent(comm_num);
+	public CommCalendarVo2 selectEvent(int cc_num) {
+		return ccdao.selectEvent(cc_num);
 	}
 	public List<CommCalendarVo> listEvent(int comm_num) {
 		return ccdao.listEvent(comm_num);
