@@ -740,7 +740,6 @@ function getCommBoard(){
 			}
 			var user_num=board.user_num;
 			var sessionUser=$('#user_num').val();
-			var disabled="";
 			var liType="";
 			var comm_adminNum=$('#comm_adminNum').val();
 			if(user_num == sessionUser){
@@ -752,7 +751,6 @@ function getCommBoard(){
 				liType='<li><a href="#delete" onclick="return false;" data-toggle="popover" data-popover-type="commBoard" data-cb-num="'+board.cb_num+'">'
 				+'<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete</a></li>';
 			}else if(user_num != sessionUser){
-				disabled="disabled";
 				liType='<li><a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Report bad contents</a></li>';
 			}
 			var mediaDiv="<span></span>";
@@ -810,7 +808,6 @@ function getCommBoard(){
 	  			.replace(/cb_num/gi, board.cb_num)
 	  			.replace("selectCbNum", selectCb_num)
 				.replace(/cb_title/gi,board.cb_title)
-				.replace("disabled", disabled)
 		  		.replace("liType", liType)
 		  		.replace("mediaDiv", mediaDiv)
 		  		.replace(/cb_content/gi, board.cb_content)
