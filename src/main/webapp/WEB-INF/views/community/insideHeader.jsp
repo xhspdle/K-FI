@@ -98,3 +98,10 @@
 		<li><a href="<c:url value='/community/polls/list'/>"><i class="glyphicon glyphicon-stats"></i>POLLS</a></li>
 	</ul>
 </div>
+
+<script>
+	$(function(){
+	
+	});
+
+</script>

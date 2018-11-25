@@ -132,9 +132,9 @@ img {vertical-align: middle;}
 </style>
 <div class="container">
 	<div class="btn-group">
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commprofile?comm_num=${comm_num}'">PROFILE</button>
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commskin?comm_num=${comm_num}'">SKIN</button>
-		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist?comm_num=${comm_num}'">MEMBERS</button>
+				<a class="btn btn-primary" href="<c:url value='/community/commadmin/commprofile?comm_num=${comm_num}'/>">PROFILE</a>
+		<a class="btn btn-primary" href="<c:url value='/community/commadmin/commskin?comm_num=${comm_num}'/>">SKIN</a>
+		<a class="btn btn-primary" href="<c:url value='/community/commadmin/commuserlist?comm_num=${comm_num}'/>">MEMBERS</a>
 	</div><!-- <br><br> -->
 	<div id="commskinlist">
 		<div class="modal-header" style="background-color: #08395e;border-top-left-radius: 5px;border-top-right-radius: 5px;">
@@ -189,6 +189,7 @@ img {vertical-align: middle;}
 				
 				</div>
 				<div class="file_input_div form-group">
+					<input type="hidden" name="comm_num" value=${comm_num }>
 					<button class="btn btn-info">배경 사진</button>
 					<input type="file" name="csc_orgimg" style="display: none;">
 					<button class="btn btn-info">nav바 색상</button>

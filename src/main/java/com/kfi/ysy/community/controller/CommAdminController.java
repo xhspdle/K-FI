@@ -43,7 +43,6 @@ public class CommAdminController {
 	@RequestMapping(value="/community/commadmin/commuserlist", method=RequestMethod.GET)
 	public String commuserlist(int comm_num,Model model) {	
 		List<CommAdminDao> list=(List<CommAdminDao>)service.list(comm_num);
-		System.out.println(list);
 		int admin_num=(Integer)cservice.select(comm_num);
 		if(list!=null) {
 			model.addAttribute("commuserlist", list);
@@ -51,7 +50,7 @@ public class CommAdminController {
 			model.addAttribute("commadmin_num",admin_num);
 			return ".community.commadmin.commuserlist";
 		}else {
-			return null;
+			return "fail";
 		}
 	}
 	@RequestMapping(value="/community/commadmin/commadminauth", method=RequestMethod.POST )
@@ -59,9 +58,9 @@ public class CommAdminController {
 		int comm_num=vo.getComm_num();
 		int result = cservice.update(vo);
 		if(result>0) {	
-			return "redirect:/community/commadmin/commuserlist?comm_num="+comm_num;
+			return "redirect:/mypage/mycomm/list";
 		}
-		return null;	
+		return "fail";	
 	}
 	
 	
@@ -84,7 +83,7 @@ public class CommAdminController {
 		if(result>0) {
 			return "redirect:/community/commadmin/commskin?comm_num="+comm_num;
 		}else {
-			return null;
+			return "fail";
 		}
 	}
 	//커뮤니티 스킨삭제
@@ -97,7 +96,7 @@ public class CommAdminController {
 		if(result>0) {
 			return "redirect:/community/commadmin/commskin?comm_num="+comm_num;
 		}else {
-			return null;
+			return "fail";
 		}	
 	}
 	

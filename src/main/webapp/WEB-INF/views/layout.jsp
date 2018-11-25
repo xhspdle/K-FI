@@ -22,8 +22,10 @@
     left: 50px;
     border-radius: 10px;
     padding: 10px;
-	background-color: #efffd7;
+	background-color: white;
 	border: solid 3px orange; 
+	z-index:3;
+	font-weight: bold;
 /*     background-image: url("../resources/images/1.png");  */
 }
 </style>
@@ -32,8 +34,8 @@
 <script src="<c:url value='/resources/js/kfi.js'/>"></script>
 <script type="text/javascript">
 	function template(ab_title,ab_content){
- 		var html="<div class='well'>"
- 				+"<h4>"+ab_title+"</h4><hr>"
+ 		var html="<div class='well' >"
+ 				+"<h4 style='color:#08395e;font-weight: bold;'>"+ab_title+"</h4><hr>"
  				+"<div>"+ab_content+"</div>"
  				+"</div>"
 		return html;
@@ -42,7 +44,7 @@
 		if(checkpopup("close")){
 			$("#noticebtn").css("display","none");
 		}else{
-			$.getJSON("<c:url value='/abpopup'/>",function(data){	
+			$.getJSON("<c:url value='/admin/abpopup'/>",function(data){	
 				if(data!=null && data!=""){
 					$("#noticebtn").css("display","block");
 				}else{
