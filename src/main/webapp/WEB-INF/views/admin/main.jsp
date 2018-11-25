@@ -39,24 +39,24 @@
 						<c:choose>
 							<c:when test="${empty admin}">
 								<!--  	<a class="navbar-brand" href="#myPage">관리자</a> -->
-								<a href="adlogin"><i class="glyphicon glyphicon-log-in"></i></a>
-								<a href="adjoin"><i class="glyphicon glyphicon-user"></i></a>
+								<a href="<c:url value='/admin/adlogin'/>"><i class="glyphicon glyphicon-log-in"></i></a>
+								<a href="<c:url value='/admin/adjoin'/>"><i class="glyphicon glyphicon-user"></i></a>
 							</c:when>
 							<c:otherwise>
 								<a class="navbar-brand" href="#myPage">${admin.admin_nick }님
 									반갑습니다</a>
-								<a href="adlogout"><i class="glyphicon glyphicon-log-out"></i></a>
+								<a href="<c:url value='/admin/adlogout'/>"><i class="glyphicon glyphicon-log-out"></i></a>
 							</c:otherwise>
 						</c:choose>
 					</div>
 				</div>		
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="mblist">회원관리</a></li>
-						<li><a href="aclist">신고관리</a></li>
+						<li><a href="<c:url value='/admin/mblist'/>">회원관리</a></li>
+						<li><a href="<c:url value='/admin/aclist'/>">신고관리</a></li>
 						<li><a href="<c:url value='/admin/stat/list'/>">통계관리</a></li>
-						<li><a href="ablist">공지사항</a></li>
-						<li><a href="faqlist">Q&#38;A</a></li>
+						<li><a href="<c:url value='/admin/ablist'/>">공지사항</a></li>
+						<li><a href="<c:url value='/faq/faqlist'/>">Q&#38;A</a></li>
 						<!-- <li><a href="communityskin">skin</a></li> -->
 					</ul>
 				</div>
@@ -113,7 +113,7 @@
 </body>
 <script type="text/javascript">
 $("#admindetail").click(function(){
-	location.href="<c:url value='/admindetail'/>"; 
+	location.href="<c:url value='/admin/admindetail'/>"; 
 });
 
 </script>

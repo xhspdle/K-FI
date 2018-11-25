@@ -32,7 +32,7 @@
 		<ul class="pagination">
 			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
 			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-				<li><a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
+				<li><a href="<c:url value='/admin/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
 			</c:forEach>
 			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
 			<li></li>
@@ -64,7 +64,7 @@
 		<ul class="pagination">
 			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
 			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-				<li><a href="<c:url value='/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
+				<li><a href="<c:url value='/admin/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
 			</c:forEach>
 			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
 			<li></li>
@@ -147,33 +147,29 @@
 	});
 	$(function(){
 		$(".accuse_user").click(function(event){
-			alert("aaa");
 	 		$("#userinfobody").empty();
 			var user_num=event.target.id;
-			$.getJSON("<c:url value='/mbgetinfo'/>",{
+			$.getJSON("<c:url value='/admin/mbgetinfo'/>",{
 				user_num : user_num
 			},function(data){
-				alert(data.user_id);
  				var html=document.querySelector("#userinfotemlpate").innerHTML;
-				alert(html)
- 				var resultHTML=html.replace("{mburl}","<c:url value='/mbupdate'/>")
+ 				var resultHTML=html.replace("{mburl}","<c:url value='/admin/mbupdate'/>")
  					.replace("{acc_id}", data.user_id)
    					.replace("{user_num}", user_num)
  					.replace("{acc_nick}", data.user_nick)	
 					.replace("{acc_stat}", data.user_stat)
 					.replace("{acc_email}", data.user_email)
 					.replace("{acc_date}",data.user_date);				
-				alert(resultHTML);
 				$("#userinfobody").append(resultHTML);
-				console.log(data.user_stat)
 				$("select[name=user_status] option[value="+data.user_stat+"]").prop("selected",true);
 			});
 		});		
 	});
 	function acdeletecheck(ac_num){
-		var result=confirm("정말로????");
-		if(result==true){
-			location.href="acdelete?ac_num="+ac_num;
+		var result=confirm("삭제하시겠습니까?????");
+		if(result){
+			var acdelete="<c:url value='/admin/acdelete'/>"
+			location.href=acdelete+"?ac_num="+ac_num;
 			return true;
 		}else{
 			return false;

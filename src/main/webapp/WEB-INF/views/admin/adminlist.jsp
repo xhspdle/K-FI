@@ -11,17 +11,18 @@
 	$(function(){
 		$("#addeletebtn").click(function(){
 			var admin_num=$("#admininfo_num").val();
-	 		var result=confirm("삭제하게?????");
+	 		var result=confirm("삭제하시겠습니까?????");
 	 		alert(result);
 	 		if(result){
-	 			location.href="addelete?admin_num="+admin_num;
+	 			var addelete ="<c:url value='/admin/addelete'/>";
+	 			location.href=addelete+"?admin_num="+admin_num;
 	 		}else{
 	 			return false;
 	 		}
 		});
 		$("#adminmodifybtn").click(function(){
 			var admin_num=$(this).parent().parent().children().first().text();
-			$.getJSON("<c:url value='/addetail'/>",{
+			$.getJSON("<c:url value='/admin/addetail'/>",{
 				admin_num : admin_num
 			},function(data){
 				$("#admininfo_num").val(data.admin_num);
@@ -40,7 +41,8 @@
 </script>
 <div id="adminlist">
 	<h1>
-		관리자정보<button class="btn btn-md" onclick="location.href='/kfi/mblist'">회원정보</button>
+		관리자정보
+		<a class="btn btn-md btn-default" href=<c:url value='/admin/mblist'/>>회원정보</a>
 	</h1>
 	<table class="table table-striped">
 		<tr>
@@ -80,7 +82,7 @@
 				<h4 class="modal-title">관리자 정보</h4>
 			</div>
 			<div class="modal-body">
-			<form class="form-horizontal " action="<c:url value='/admodify'/>" method="post">
+			<form class="form-horizontal " action="<c:url value='/admin/admodify'/>" method="post">
 			 	<input type="hidden" id="admininfo_num" name="admin_num">
 				<div class="form-group">
 					<label class="control-label col-sm-2" >ID:</label>

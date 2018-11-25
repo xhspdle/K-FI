@@ -28,12 +28,12 @@ public class AdminController {
 		return ".admin";
 	}
 //관리자로그인양식
-	@RequestMapping(value="/adlogin", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/adlogin", method=RequestMethod.GET)
 	public String adloginForm() {
 		return ".admin.login";
 	}
 //관리자로그인
-	@RequestMapping(value="/adlogin", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/adlogin", method=RequestMethod.POST)
 	public String adlogin(HttpServletRequest request) {
 		String admin_id=request.getParameter("admin_id");
 		String admin_pwd=request.getParameter("admin_pwd");
@@ -50,7 +50,7 @@ public class AdminController {
 		}
 	}
 //관리자 로그아웃
-	@RequestMapping("/adlogout")
+	@RequestMapping("/admin/adlogout")
 	public String adlogout(HttpSession session) {
 		session.invalidate();
 		return ".admin";
@@ -69,12 +69,12 @@ public class AdminController {
 		return obj.toString();
 	}	
 //관리자 가입 양식
-	@RequestMapping(value = "/adjoin", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/adjoin", method = RequestMethod.GET)
 	public String adjoinForm() {
 		return ".admin.join";
 	}
 //관리자 등록
-	@RequestMapping(value = "/adjoin", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/adjoin", method = RequestMethod.POST)
 	public String adjoin(AdminVo vo) {
 		int admin_num=service.abmaxnum()+1;
 		vo.setAdmin_num(admin_num);
@@ -105,9 +105,8 @@ public class AdminController {
 		return jsonarr.toString();	
 	}*/
 	
-	@RequestMapping(value="/adminlist", method=RequestMethod.GET)
-	public String adminlist(Model model) {
-		
+	@RequestMapping(value="/admin/adminlist", method=RequestMethod.GET)
+	public String adminlist(Model model) {	
 		List<AdminVo> adminlist=service.adminlist();
 		if(adminlist!=null) {
 			model.addAttribute("adminlist", adminlist);
@@ -117,7 +116,7 @@ public class AdminController {
 		}	
 	}
 //관리자 정보보기
-	@RequestMapping(value="/addetail", produces="application/json;charset=utf-8")
+	@RequestMapping(value="/admin/addetail", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String addetail(int admin_num) {
 		AdminVo adminvo=service.addetail(admin_num);
@@ -154,29 +153,28 @@ public class AdminController {
 		}
 	}*/
 	//관리자 수정
-	@RequestMapping(value="/admodify", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/admodify", method=RequestMethod.POST)
 	public String admodify(AdminVo vo) {
 		int result=service.admodify(vo);
 		if(result>0) {
-			return "redirect:/adminlist";
+			return "redirect:/admin/adminlist";
 		}else {
 			return null;
 		}
 	}
 	//관리자 삭제
-	@RequestMapping(value="/addelete", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/addelete", method=RequestMethod.GET)
 	public String addelete(int admin_num, HttpSession session) {
-		System.out.println(admin_num);
 		int result = service.addelete(admin_num);
 		if(result>0) {
 			session.invalidate();
-			return "redirect:/adminlist";
+			return "redirect:/admin/content";
 		}else {
 			return null;
 		}
 	}
 	//관리자 정보 및 스킨
-	@RequestMapping(value="/admindetail", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/admindetail", method=RequestMethod.GET)
 	public String admindetailForm() {
 		return ".admin.admindetail";
 	}

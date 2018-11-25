@@ -4,7 +4,7 @@
 <!-- 로그인 페이지 -->
 <div class="container">
   <h2>Log in</h2>
-  <form method="post" action="adlogin">
+  <form method="post" action="<c:url value='/admin/adlogin'/>">
     <div class="form-group">
       <label for="usr">ID:</label>
       <input type="text" class="form-control" name="admin_id">

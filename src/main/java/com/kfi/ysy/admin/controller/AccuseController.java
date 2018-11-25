@@ -28,7 +28,7 @@ public class AccuseController {
 	@Autowired
 	@Qualifier("myBoardServiceImpl") private CommonService mbService;
 	//신고게시판 리스트
-	@RequestMapping("/aclist")
+	@RequestMapping("/admin/aclist")
 	public String aclist(@RequestParam(value="pagenum", defaultValue="1")int pagenum,String field, String keyword, Model model) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("field", field);
@@ -45,16 +45,16 @@ public class AccuseController {
 			model.addAttribute("keyword",keyword);
 			return ".admin.accuseboard";
 		}else {
-			return ".admin.error";
+			return ".error";
 		}
 	}
-	@RequestMapping(value="/acdelete", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/acdelete", method=RequestMethod.GET)
 	public String acdelete(int ac_num) {
 		int result=acservice.acdelete(ac_num);
 		if(result>0) {
-			return "redirect:/aclist";
+			return "redirect:/admin/aclist";
 		}else {
-			return null;
+			return ".error";
 		}	
 	}
 //신고 내용보기
@@ -74,7 +74,7 @@ public class AccuseController {
 		}
 	}*/
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/acinsert", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/acinsert", method=RequestMethod.GET)
 	public String acinsertForm(@RequestParam(value="mb_num",defaultValue="0")int mb_num,
 			@RequestParam(value="cb_num",defaultValue="0")int cb_num,Model model) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
@@ -89,7 +89,7 @@ public class AccuseController {
 		}
 		return ".admin.accuseinsert";
 	}
-	@RequestMapping(value="/acinsert", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/acinsert", method=RequestMethod.POST)
 	public String acinsert(AccuseVo vo) {
 		vo.setAc_num(acservice.acgetcnt()+1);
 		acservice.acinsert(vo);

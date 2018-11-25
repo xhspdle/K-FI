@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="<c:url value='/resources/js/admin.js'/>"></script>
 
-<script type="text/javascript"
-	src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>
-	
 <script type="text/javascript">
 	$(function(){
 		$(".abdelete").click(function(){
-			var result=confirm("진짜로????");	
+			var result=confirm("삭제하시겠습니까????");	
 			var ab_num=$(this).parent().parent().children().first().text();
  			if(result){
-				location.href="abdelete?ab_num="+ab_num;
+ 				var abdelete="<c:url value='/admin/abdelete'/>";
+				location.href=abdelete+"?ab_num="+ab_num;
 			}else{
 				return false;
 			}
@@ -22,7 +19,7 @@
 		$(".abcontent").attr({'data-toggle':'modal','data-target':'#adminboardupdate'});
 		$(".abcontent").click(function(){
 			var ab_num=$(this).parent().children().first().text();
-		 	$.getJSON("<c:url value='/abdetail'/>",{
+		 	$.getJSON("<c:url value='/admin/abdetail'/>",{
 		 		ab_num : ab_num
 			},function(data){
 				$("#abupdate_num").val(ab_num);
@@ -47,7 +44,7 @@
 		if(checkpopup("close")){
 			$("#noticebtn").css("display","none");
 		}else{
-			$.getJSON("<c:url value='/abpopup'/>",function(data){	
+			$.getJSON("<c:url value='/admin/abpopup'/>",function(data){	
 				if(data!=null && data!=""){
 					$("#noticebtn").css("display","block");
 				}else{
@@ -154,7 +151,7 @@
 				<h4 class="modal-title">공지사항 수정</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="abupdate" method="post">
+				<form class="form-horizontal" action="<c:url value='/admin/abupdate'/>" method="post">
 					<input type="hidden" class="form-control" name="ab_num" id="abupdate_num">
 					<div class="form-group">
 						<label class="control-label col-sm-2">제목:</label>
@@ -215,7 +212,7 @@
 			<ul class="pagination">
 				<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
 				<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-					<li><a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
+					<li><a href="<c:url value='/admin/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
 				</c:forEach>
 				<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
 			</ul>

@@ -27,7 +27,7 @@ public class AdminBoardController {
 	@Autowired 
 	private AdminBoardService abservice;
 	//관리자 게시판 리스트조회
-	@RequestMapping("/ablist")
+	@RequestMapping("/admin/ablist")
 	public String ablist(@RequestParam(value="pagenum",defaultValue="1")int pagenum, 
 			String field,String keyword, Model model) {	
 		HashMap<String, Object> map=new HashMap<String, Object>();
@@ -49,7 +49,7 @@ public class AdminBoardController {
 		}
 	}
 	//팝업 게시물
-	@RequestMapping(value="/abpopup",produces="application/json;charset=utf-8")
+	@RequestMapping(value="/admin/abpopup",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String abpopup() {
 		List<AdminBoardVo> list=abservice.abpopup();
@@ -68,12 +68,12 @@ public class AdminBoardController {
 		return arr.toString();
 	}
 	//관리자 게시글 양식
-	@RequestMapping(value="/abinsert", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/abinsert", method=RequestMethod.GET)
 	public String abinsertForm() {
 		return ".admin.abinsert";
 	}
 	//관리자 게시글 등록
-	@RequestMapping(value="/abinsert", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/abinsert", method=RequestMethod.POST)
 	public String abinsert(AdminBoardVo vo) {
 		int ab_num=abservice.abmaxnum()+1;
 		vo.setAb_num(ab_num);
@@ -82,23 +82,23 @@ public class AdminBoardController {
 		System.out.println(vo.getAb_notice());
 		int result=abservice.abinsert(vo);
 		if (result>0){
-			return "redirect:/ablist";		
+			return "redirect:/admin/ablist";		
 		}else {
 			return ".admin.error";
 		}
 	}
 	//관리자 게시글 삭제
-	@RequestMapping(value="/abdelete" ,method=RequestMethod.GET)
+	@RequestMapping(value="/admin/abdelete" ,method=RequestMethod.GET)
 	public String abdelete(int ab_num) {
 		int result = abservice.abdelete(ab_num);
 		if (result>0){
-			return "redirect:/ablist";		
+			return "redirect:/admin/ablist";		
 		}else {
 			return ".admin.error";
 		}
 	}
 	//게시글 수정
-	@RequestMapping(value="/abdetail" , produces="application/json;charset=utf-8")
+	@RequestMapping(value="/admin/abdetail" , produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String abdetail(int ab_num) {
 		AdminBoardVo vo=abservice.abdetail(ab_num);		
@@ -122,11 +122,11 @@ public class AdminBoardController {
 		}
 		return obj.toString();
 	}
-	@RequestMapping(value="/abupdate",method=RequestMethod.POST)
+	@RequestMapping(value="/admin/abupdate",method=RequestMethod.POST)
 	public String abupdate(AdminBoardVo vo) {
 		int result=abservice.abupdate(vo);
 		if(result>0) {
-			return "redirect:/ablist";		
+			return "redirect:/admin/ablist";		
 		}else {
 			return ".admin.error";
 		}

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="admin" value="${sessionScope.admininfo }" />
 <div class="container" style="margin-top: 20px">
-	<form method="post" action="abinsert">
+	<form method="post" action="<c:url value='/admin/abinsert'/>">
 		<div class="media">
 			<div class="media-left">
 				<img src="img_avatar1.png" class="media-object" style="width: 60px">

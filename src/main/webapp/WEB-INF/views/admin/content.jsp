@@ -23,12 +23,12 @@
 		$("#mainimg").attr("src","<c:url value='/resources/images/ysy/1 ("+i+").jpg'/>");
 	} */
 </script>
-<img src="<c:url value='/resources/images/ysy/1 (25).jpg'/>" id="mainimg">
+<img src="<c:url value='/resources/images/ysy/loginmain.jpg'/>" id="mainimg">
 
 <div class="logincontainer">
 	<div class="logincontent">
 		<h2>LOG IN</h2>
-		<form method="post" action="adlogin">
+		<form method="post" action="<c:url value='/admin/adlogin'/>">
 			<div class="form-group">
 				<label for="usr">ID:</label>
 				<input type="text" class="form-control" name="admin_id">

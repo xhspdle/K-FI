@@ -25,7 +25,7 @@ public class FaqController {
 	@Autowired
 	private FaqService faqservice;
 	//Q&A 리스트조회
-	@RequestMapping(value="/faqlist",method=RequestMethod.GET)
+	@RequestMapping(value="/faq/faqlist",method=RequestMethod.GET)
 	public String faqlist(Model model) {
 		List<FaqVo> faqlist=faqservice.faqlist();
 /*		for(int i=0;i<faqlist.size();i++) {
@@ -44,20 +44,20 @@ public class FaqController {
 		return ".faq.faqlist";
 	}
 	//Q&A 세부정보
-	@RequestMapping(value="/faqdetail",method=RequestMethod.GET)
+	@RequestMapping(value="/faq/faqdetail",method=RequestMethod.GET)
 	public String faqdetail(int qa_num,Model model) {
 		FaqVo vo=faqservice.faqdetail(qa_num);
 		model.addAttribute("faqinfo", vo);
 		return ".faq.faqdetail";
 	}
 	//Q&A 게시물작성양식
-	@RequestMapping(value="/faqinsert",method=RequestMethod.GET)
+	@RequestMapping(value="/faq/faqinsert",method=RequestMethod.GET)
 	public String faqinsertForm() {
 		return ".faq.faqinsert";
 	}
 
 	//Q&A 게시글 답글 리스트
-	@RequestMapping(value="/faqcomment",produces="application/json;charset=utf-8")
+	@RequestMapping(value="/faq/faqcomment",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String faqcomment(int qa_num) {
 		List<FaqVo> list=faqservice.faqcomment(qa_num);
@@ -78,7 +78,7 @@ public class FaqController {
 		System.out.println(arr);
 		return arr.toString();
 	}
-	@RequestMapping(value="/faqcomminsert", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	@RequestMapping(value="/faq/faqcomminsert", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 /*	@RequestMapping(value="/faqcomminsert", method=RequestMethod.POST)*/
 	@ResponseBody
 	public String faqcomminsert(FaqVo vo,HttpServletRequest request) {
@@ -109,7 +109,7 @@ public class FaqController {
 		return obj.toString();
 	}
 	//Q&A 게시물 작성
-	@RequestMapping(value="/faqinsert",method=RequestMethod.POST)
+	@RequestMapping(value="/faq/faqinsert",method=RequestMethod.POST)
 	public String faqinsert(FaqVo vo) {		
 		int qa_num = faqservice.faqmaxnum()+1;
 		vo.setQa_num(qa_num);
@@ -119,23 +119,23 @@ public class FaqController {
 		vo.setStep(vo.getStep());
 		int result=faqservice.faqinsert(vo);
 		if(result>0) {
-			return "redirect:/faqlist";
+			return "redirect:/faq/faqlist";
 		}else {
 			return ".faq.error";
 		}
 	}
 	//Q&A게시물 삭제
-	@RequestMapping(value="/faqdelete",method=RequestMethod.GET)
+	@RequestMapping(value="/faq/faqdelete",method=RequestMethod.GET)
 	public String faqdelete(int qa_num) {
 		int result = faqservice.faqdelete(qa_num);
 		if(result>0) {
-			return "redirect:/faqlist";
+			return "redirect:/faq/faqlist";
 		}else {
 			return ".faq.error";
 		}
 	}
 	//Q&A게시물 답글 삭제
-	@RequestMapping(value="/faqcommdelete",produces="application/json;charset=utf-8")
+	@RequestMapping(value="/faq/faqcommdelete",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String faqcommdelete(int qa_num) {
 		int result = faqservice.faqdelete(qa_num);

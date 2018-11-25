@@ -7,7 +7,7 @@ $(function(){
 	$(".usercontent").attr({'data-toggle':'modal','data-target':'#usermodify'});
 	$(".usercontent").click(function(){
 		var user_num=$(this).parent().children().first().text();
-	 	$.getJSON("<c:url value='/mbgetinfo'/>",{
+	 	$.getJSON("<c:url value='/admin/mbgetinfo'/>",{
 			user_num : user_num
 		},function(data){			
 			$("#modifyuser_num").val(user_num);
@@ -19,10 +19,11 @@ $(function(){
 		}); 
 	});
 	$(".userdelete").click(function(){
-		var result=confirm("정말로????");
+		var result=confirm("삭제하시겠습니까????");
 		var user_num=$(this).parent().parent().children().first().text();
-			if(result){
-			location.href="mbdelete?user_num="+user_num;
+		if(result){
+			var mbdelete="<c:url value='/admin/mbdelete'/>"
+			location.href=mbdelete+"?user_num="+user_num;
 		}else{
 			return false;
 		}
@@ -32,7 +33,7 @@ $(function(){
 <div id="memberslist"> 
 	<h1>
 		회원정보
-		<button class="btn btn-md" onclick="location.href='/kfi/adminlist'">관리자정보</button>
+		<a class="btn btn-md btn-default" href=<c:url value='/admin/adminlist'/>>관리자정보</a>
 	</h1>
 	<table class="table table-striped">
 		<tr>
@@ -40,7 +41,7 @@ $(function(){
 			<th>회원ID</th>
 			<th>회원NICKNAME</th>
 			<th>회원EMAIL</th>
-			<th>회원등급</th>
+			<th>회원상태</th>
 			<th>가입일</th>
 			<th>삭제</th>
 		</tr>
@@ -57,6 +58,9 @@ $(function(){
 					<c:when test="${user.user_status==2}">
 						<td class="usercontent">정지</td>
 					</c:when>
+					<c:when test="${user.user_status==-1}">
+						<td class="usercontent">탈퇴</td>
+					</c:when>
 					<c:otherwise>
 						<td class="usercontent">확인바람</td>
 					</c:otherwise>					
@@ -72,14 +76,14 @@ $(function(){
 			<%-- <a href="<c:url value='/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">
 		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
 		<ul class="pagination">
-			<li class="previous"><a href="<c:url value='/mblist?pagenum=${apu.pagenum-1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
+			<li class="previous"><a href="<c:url value='/admin/mblist?pagenum=${apu.pagenum-1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
 			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
 				
 				
-				<li><a href="<c:url value='/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+				<li><a href="<c:url value='/admin/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
 				
 			</c:forEach>
-			<li class="next"><a href="<c:url value='/mblist?pagenum=${apu.pagenum+1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+			<li class="next"><a href="<c:url value='/admin/mblist?pagenum=${apu.pagenum+1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
 			<li></li>
 		</ul>	
 				
@@ -96,7 +100,7 @@ $(function(){
 				<h4 class="modal-title">사용자 등록</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="mbinsert" method="post">
+				<form class="form-horizontal" action="<c:url value='/admin/mbinsert'/>" method="post">
 					<div class="form-group">
 						<label class="control-label col-sm-2">ID:</label>
 						<div class="col-sm-10">
@@ -142,7 +146,7 @@ $(function(){
 				<h4 class="modal-title">사용자 수정</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="mbupdate" method="post">
+				<form class="form-horizontal" action="<c:url value='/admin/mbupdate'/>" method="post">
 					<input type="hidden" class="form-control" name="user_num" id="modifyuser_num">
 					<div class="form-group">
 						<label class="control-label col-sm-2">ID:</label>
@@ -174,6 +178,7 @@ $(function(){
 							<select class="form-control" name="user_status">
 								<option value="1">1번 정상</option>
 								<option value="2">2번 정지</option>
+								<option value="-1">-1번 탈퇴</option>
 								<option value="3">3번 기간정지</option>
 							</select>
 						</div>
