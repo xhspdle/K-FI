@@ -2,7 +2,6 @@ package com.kfi.ldk.controller;
 
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kfi.jyi.vo.MySkinViewVo;
 import com.kfi.ldk.service.CommonService;
@@ -23,7 +21,6 @@ public class MyPageController {
 	@Autowired
 	@Qualifier("mySkinServiceImpl") private CommonService service;
 
-	@SuppressWarnings("unchecked")
 	@ModelAttribute("msv")
 	public MySkinViewVo myskin(HttpSession session){
 		int user_num=0;

@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kfi.jyi.vo.CommPhotoVo;
 import com.kfi.jyi.vo.CommunityVo;
 import com.kfi.jyi.vo.HotPhoto3Vo;
 import com.kfi.jyi.vo.HotVideoVo;
@@ -25,6 +24,7 @@ public class CommunityController {
 	private CommonService service;
 	
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/communityMain", method = RequestMethod.GET)
 	public String communityMain(Model model) {
 		// 전체 커뮤니티 best6 커뮤니티 정보 불러오기

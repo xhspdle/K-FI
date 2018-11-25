@@ -2,21 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	/* The side navigation menu */
 	.sidenav {
-	    height: 100%; /* 100% Full-height */
-	    width: 0; /* 0 width - change this with JavaScript */
-	    position: fixed; /* Stay in place */
-	    z-index: 1; /* Stay on top */
+	    height: 100%; /
+	    width: 0; 
+	    position: fixed; 
+	    z-index: 1; 
 	    top: 0;
 	    left: 0;
-	    background-color: #111; /* Black*/
-	    overflow-x: hidden; /* Disable horizontal scroll */
-	    padding-top: 60px; /* Place content 60px from the top */
-	    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+	    background-color: #111; 
+	    overflow-x: hidden; 
+	    padding-top: 60px; 
+	    transition: 0.5s; 
 	}
-	
-	/* The navigation menu links */
 	.sidenav a {
 	    padding: 8px 8px 8px 32px;
 	    text-decoration: none;
@@ -25,13 +22,9 @@
 	    display: block;
 	    transition: 0.3s;
 	}
-	
-	/* When you mouse over the navigation links, change their color */
 	.sidenav a:hover {
 	    color: #f1f1f1;
 	}
-	
-	/* Position and style the close button (top right corner) */
 	.sidenav .closebtn {
 	    position: absolute;
 	    top: 50;
@@ -39,14 +32,10 @@
 	    font-size: 36px;
 	    margin-left: 50px;
 	}
-	
-	/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 	#statMain {
 	    transition: margin-left .5s;
 	    padding: 20px;
 	}
-	
-	/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 	@media screen and (max-height: 450px) {
 	    .sidenav {padding-top: 15px;}
 	    .sidenav a {font-size: 18px;}
@@ -79,8 +68,8 @@
 		mix-blend-mode: screen;
 	}
 	.pies {
-		width: 600px;
-		height: 400px;
+		height: 600px;
+		width: 800px;
 		margin: auto;
 	}
 </style>
@@ -114,9 +103,9 @@
 			data.addRows([["${vo.comm_name}", ${vo.cnt}]]);
 			</c:forEach>
 			var options = {
-				chartArea: {width:'80%',height:'80%'},
-				height: 400,
-				width: 600,
+				chartArea: {width:'70%',height:'70%'},
+				height: 600,
+				width: 800,
 				title: 'Number of Community Members'
 			};
 			var chart = new google.visualization.PieChart(document.getElementById('commMemCnt_chart'));
@@ -146,9 +135,9 @@
 			data.addRows([["${vo.comm_name}", ${vo.sum}]]);
 			</c:forEach>
 			var options = {
-				chartArea: {width:'80%',height:'80%'},
-				height: 400,
-				width: 600,
+				chartArea: {width:'70%',height:'70%'},
+				height: 600,
+				width: 800,
 				title: 'Number of Community Views'
 			};
 			var chart = new google.visualization.PieChart(document.getElementById('commViewSum_chart'));
@@ -159,7 +148,7 @@
 	    function drawTable3(){
 			var data = new google.visualization.DataTable();
 			data.addColumn('string', 'User RegeDate');
-			data.addColumn('number', 'Number of Members');
+			data.addColumn('number', 'Members');
 			var formatter = new google.visualization.NumberFormat(
 					{suffix: ' 명',fractionDigits: 0 });
 			<c:forEach var="vo" items="${periodMemCntWeek }">
@@ -173,14 +162,14 @@
 	    function drawChart3() {
 	    	var data = new google.visualization.DataTable();
 	    	data.addColumn('string', 'User RegeDate');
-			data.addColumn('number', 'Number of Members');
+			data.addColumn('number', 'Members');
 			<c:forEach var="vo" items="${periodMemCntWeek }">
 			data.addRows([["${vo.user_regdate}", ${vo.cnt}]]);
 			</c:forEach>
 			var options = {
-				chartArea: {width:'80%',height:'80%'},
-				height: 400,
-				width: 600,
+				chartArea: {width:'70%',height:'70%'},
+				height: 600,
+				width: 800,
 				title: 'Number of Members in weeks',
 				hAxis: {title: 'RegDate'},
 				vAxis: {minValue: 0}
@@ -193,7 +182,7 @@
 	    function drawTable4(){
 			var data = new google.visualization.DataTable();
 			data.addColumn('string', 'User RegeDate');
-			data.addColumn('number', 'Number of MyBoard Posts');
+			data.addColumn('number', 'Posts');
 			var formatter = new google.visualization.NumberFormat(
 					{suffix: ' posts',fractionDigits: 0 });
 			<c:forEach var="vo" items="${periodMyBoardCntWeek }">
@@ -207,14 +196,14 @@
 	    function drawChart4() {
 	    	var data = new google.visualization.DataTable();
 	    	data.addColumn('string', 'User RegeDate');
-			data.addColumn('number', 'Number of MyBoard Posts');
+			data.addColumn('number', 'Posts');
 			<c:forEach var="vo" items="${periodMyBoardCntWeek }">
 			data.addRows([["${vo.mb_date}", ${vo.cnt}]]);
 			</c:forEach>
 			var options = {
-				chartArea: {width:'80%',height:'80%'},
-				height: 400,
-				width: 600,
+				chartArea: {width:'70%',height:'70%'},
+				height: 600,
+				width: 800,
 				title: 'Number of MyBoard Posts in week',
 				hAxis: {title: 'Post Date'},
 				vAxis: {minValue: 0}
@@ -227,7 +216,7 @@
 	    function drawTable5(){
 			var data = new google.visualization.DataTable();
 			data.addColumn('string', 'User RegeDate');
-			data.addColumn('number', 'Number of CommBoard Posts');
+			data.addColumn('number', 'Posts');
 			var formatter = new google.visualization.NumberFormat(
 					{suffix: ' posts',fractionDigits: 0 });
 			<c:forEach var="vo" items="${periodCommBoardCntWeek }">
@@ -241,14 +230,14 @@
 	    function drawChart5() {
 	    	var data = new google.visualization.DataTable();
 	    	data.addColumn('string', 'User RegeDate');
-			data.addColumn('number', 'Number of CommBoard Posts');
+			data.addColumn('number', 'Posts');
 			<c:forEach var="vo" items="${periodCommBoardCntWeek }">
 			data.addRows([["${vo.cb_date}", ${vo.cnt}]]);
 			</c:forEach>
 			var options = {
-				chartArea: {width:'80%',height:'80%'},
-				height: 400,
-				width: 600,
+				chartArea: {width:'70%',height:'70%'},
+				height: 600,
+				width: 800,
 				title: 'Number of CommBoard Posts in week',
 				hAxis: {title: 'Post Date'},
 				vAxis: {minValue: 0}
@@ -261,7 +250,7 @@
 	    function drawTable6(){
 			var data = new google.visualization.DataTable();
 			data.addColumn('string', 'User RegeDate');
-			data.addColumn('number', 'Number of MyBoard Posts');
+			data.addColumn('number', 'Posts');
 			var formatter = new google.visualization.NumberFormat(
 					{suffix: ' Views',fractionDigits: 0 });
 			<c:forEach var="vo" items="${periodMyViewSumWeek }">
@@ -275,14 +264,14 @@
 	    function drawChart6() {
 	    	var data = new google.visualization.DataTable();
 	    	data.addColumn('string', 'User RegeDate');
-			data.addColumn('number', 'Number of MyBoard Posts');
+			data.addColumn('number', 'Posts');
 			<c:forEach var="vo" items="${periodMyViewSumWeek }">
 			data.addRows([["${vo.mb_date}", ${vo.sum}]]);
 			</c:forEach>
 			var options = {
-				chartArea: {width:'80%',height:'80%'},
-				height: 400,
-				width: 600,
+				chartArea: {width:'70%',height:'70%'},
+				height: 600,
+				width: 800,
 				title: 'Number of MyBoard Views in week',
 				hAxis: {title: 'Date'},
 				vAxis: {minValue: 0}
@@ -295,7 +284,7 @@
 	    function drawTable7(){
 			var data = new google.visualization.DataTable();
 			data.addColumn('string', 'CommBoard RegeDate');
-			data.addColumn('number', 'Number of CommBoard Views');
+			data.addColumn('number', 'Views');
 			var formatter = new google.visualization.NumberFormat(
 					{suffix: ' Views',fractionDigits: 0 });
 			<c:forEach var="vo" items="${periodCommViewSumWeek }">
@@ -309,14 +298,14 @@
 	    function drawChart7() {
 	    	var data = new google.visualization.DataTable();
 	    	data.addColumn('string', 'CommBoard RegeDate');
-			data.addColumn('number', 'Number of CommBoard Views');
+			data.addColumn('number', 'Views');
 			<c:forEach var="vo" items="${periodCommViewSumWeek }">
 			data.addRows([["${vo.cb_date}", ${vo.sum}]]);
 			</c:forEach>
 			var options = {
-				chartArea: {width:'80%',height:'80%'},
-				height: 400,
-				width: 600,
+				chartArea: {width:'70%',height:'70%'},
+				height: 600,
+				width: 800,
 				title: 'Number of CommBoard Views in week',
 				hAxis: {title: 'Date'},
 				vAxis: {minValue: 0}
@@ -398,22 +387,22 @@
 				<div id="commMembers">
 					<h3>Community Statistic - Members</h3>
 					<div class="row">
-						<h4 class="text-center">Number of Community Members</h4>
+						<h4 class="text-center">Number of Community Members Top 10</h4>
 						<div id="commMemCnt_chart" class="pies"></div>
 					</div>
 					<div class="row">
-						<h4 class="text-center">Number of Community Members</h4>
+						<h4 class="text-center">Number of Community Members Top 10</h4>
 						<div id="commMemCnt_table"></div>
 					</div>
 				</div>
 				<div id="commViews" style="display:none;">
 					<h3>Community Statistic - Views</h3>
 					<div class="row">
-						<h4 class="text-center">Number of Community Views</h4>
+						<h4 class="text-center">Number of Community Views Top 10</h4>
 						<div id="commViewSum_chart" class="pies"></div>
 					</div>
 					<div class="row">
-						<h4 class="text-center">Number of Community Views</h4>
+						<h4 class="text-center">Number of Community Views Top 10</h4>
 						<div id="commViewSum_table"></div>
 					</div>
 				</div>
