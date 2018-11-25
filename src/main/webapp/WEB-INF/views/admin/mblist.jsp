@@ -31,10 +31,12 @@ $(function(){
 });
 </script>
 <div id="memberslist"> 
+
 	<h1>
 		회원정보
 		<a class="btn btn-md btn-default" href=<c:url value='/admin/adminlist'/>>관리자정보</a>
 	</h1>
+
 	<table class="table table-striped">
 		<tr>
 			<!-- <th>회원번호</th> -->
@@ -77,11 +79,15 @@ $(function(){
 		<button type="button" class="btn btn-primary ">${i }</button></a> --%>
 		<ul class="pagination">
 			<li class="previous"><a href="<c:url value='/admin/mblist?pagenum=${apu.pagenum-1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
-			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-				
-				
-				<li><a href="<c:url value='/admin/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
-				
+			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">				
+				<c:choose>
+					<c:when test="${apu.pagenum eq i }">
+						<li><a style="background-color: #08395e; color: white;" href="<c:url value='/admin/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="<c:url value='/admin/mblist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+					</c:otherwise>
+				</c:choose>	 	
 			</c:forEach>
 			<li class="next"><a href="<c:url value='/admin/mblist?pagenum=${apu.pagenum+1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
 			<li></li>

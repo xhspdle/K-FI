@@ -19,14 +19,12 @@ public class CommRefuseController {
 	@Qualifier("commRefuseServiceImpl") private CommonService service;
 	@RequestMapping(value="/community/commrefuse/insert", method=RequestMethod.POST)
 	public String insert(CommRefuseVo vo,int comm_num) {
-		System.out.println(comm_num);		
-		System.out.println(vo.getCr_refuse());
-/*		HashMap<String, Object> map = new HashMap<>();
-		map.put("crfvo", vo);
-		map.put("comm_num", comm_num);*/
 		int result=service.insert(vo);
-		System.out.println(result);
-		return "redirect:/community/commadmin/commuserlist?comm_num="+comm_num;
+		if(result>0) {
+			return "redirect:/community/commadmin/commuserlist?comm_num="+comm_num;
+		}else {
+			return "fail";
+		}
 		
 	}
 }

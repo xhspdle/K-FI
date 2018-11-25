@@ -78,7 +78,7 @@
 			</c:forEach>
 			</c:if>
 			</div>
-			<button type="submit" id="updateCommBoardSub" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-ok"></span> Modify</button>
+			<button type="submit" id="updateCommBoardSub" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-ok"></span> Update</button>
 		</form>
 	</div>
 </div>

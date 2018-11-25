@@ -113,8 +113,10 @@
 	data-target="#abmodify-modal">확인</button>
 <c:choose>
 	<c:when test="${not empty admin}"> --%>
+
 <h1>공지사항</h1>
-<input type="button" onclick="deletecookie()" value="삭제">
+
+<!-- <input type="button" onclick="deletecookie()" value="삭제"> -->
 <table class="table table-striped">
 	<tr>
 		<th>게시물번호</th>
@@ -210,11 +212,18 @@
 				</ul>
 				 --%>
 			<ul class="pagination">
-				<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
+				<li class="previous"><a href="<c:url value='/admin/ablist?pagenum=${apu.pagenum-1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
 				<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
-					<li><a href="<c:url value='/admin/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>	 
+					<c:choose>
+						<c:when test="${apu.pagenum eq i }">
+							<li><a style="background-color: #08395e; color: white;" href="<c:url value='/admin/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="<c:url value='/admin/ablist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+						</c:otherwise>
+					</c:choose>	 
 				</c:forEach>
-				<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+				<li class="next"><a href="<c:url value='/admin/ablist?pagenum=${apu.pagenum+1 }&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
 			</ul>
 		</div>
 <div class="container">

@@ -27,23 +27,14 @@
 				],
 				selectable: true,
 				selectHelper: true,
-				eventRender: function(event, element){
-			          element.popover({
-			              animation:true,
-			              delay: 300,
-			              content: event.id,
-			              trigger: 'hover'
-			          });
-			        },
-/* 				eventRender: function(event, element){
-			         element.popover({
-			              animation:true,
-			              delay: 300,
-			              content: event.id,
-			              trigger: 'hover'
-			          });
-			   	},
- */		        eventColor: '#00cee8'
+				eventMouseover:function(event, jsEvent, view){
+					$(this).attr({
+						'data-toggle':'tooltip',
+						'data-placement':'top',
+						'title':event.id
+					});
+				},
+	        eventColor: '#00cee8'
 		})
 		$("#mypage_communitylist").on('change',function(){
 			var comm_num=$('#mypage_communitylist option:selected').val();

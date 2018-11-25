@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- //////////////////신고관리 페이지	//////////////////////	 -->
-<div class="text-center">
-<a href="acinsert">작성</a>
+
+<%-- <a href="<c:url value='/admin/aclist'/>">작성</a> --%>
+
 <h1 id="convertform">신고관리</h1> 
-</div><br>
+
+<br>
 <div id="aclistview1">
 	<c:forEach var="accuse" items="${aclist }">
 		<div class="col-sm-4 col-xs-12">
@@ -29,14 +31,31 @@
 	</c:forEach>
 	<div style="clear: both"></div>
 	<div>
-		<ul class="pagination">
+<%-- 		<ul class="pagination">
 			<li class="previous"><a href="#"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
 			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
 				<li><a href="<c:url value='/admin/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li> 
 			</c:forEach>
 			<li class="next"><a href="#"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
 			<li></li>
-		</ul>				
+		</ul>	 --%>
+		
+		
+		<ul class="pagination">
+			<li class="previous"><a href="<c:url value='/admin/aclist?pagenum=${apu.pagenum-1}&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-left"></i></a></li>
+			<c:forEach var="i" begin="${apu.startpagenum }" end="${apu.endpagenum }">
+				<c:choose>
+					<c:when test="${apu.pagenum eq i }">
+						<li><a style="background-color: #08395e; color: white;" href="<c:url value='/admin/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="<c:url value='/admin/aclist?pagenum=${i }&field=${field }&keyword=${keyword }'/>">${i }</a></li>
+					</c:otherwise>
+				</c:choose>	 
+			</c:forEach>
+			<li class="next"><a href="<c:url value='/admin/aclist?pagenum=${apu.pagenum+1 }&field=${field }&keyword=${keyword }'/>"><i class="glyphicon glyphicon-triangle-right"></i></a></li>
+		</ul>
+				
 	</div>
 </div>
 <div id="aclistview2" class="hidediv">

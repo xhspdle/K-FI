@@ -40,10 +40,12 @@
 	
 </script>
 <div id="adminlist">
+
 	<h1>
 		관리자정보
 		<a class="btn btn-md btn-default" href=<c:url value='/admin/mblist'/>>회원정보</a>
 	</h1>
+
 	<table class="table table-striped">
 		<tr>
 		<!-- 	<th>관리자번호</th> -->
