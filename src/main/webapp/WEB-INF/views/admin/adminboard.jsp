@@ -114,7 +114,7 @@
 <c:choose>
 	<c:when test="${not empty admin}"> --%>
 
-<h1>공지사항</h1>
+<h1 style="padding: 15px;">공지사항</h1>
 
 <!-- <input type="button" onclick="deletecookie()" value="삭제"> -->
 <table class="table table-striped">
@@ -170,7 +170,8 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">NickName:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="admin_num" readonly="readonly" id="abupdate_adnum">
+							<input type="hidden" class="form-control" name="admin_num" readonly="readonly" id="abupdate_adnum">
+							<input type="text" class="form-control" readonly="readonly" value=${admin.admin_nick }>
 						</div>
 					</div>
 					<div class="form-group">

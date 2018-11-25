@@ -41,7 +41,7 @@
 </script>
 <div id="adminlist">
 
-	<h1>
+	<h1 style="padding: 15px;">
 		관리자정보
 		<a class="btn btn-md btn-default" href=<c:url value='/admin/mblist'/>>회원정보</a>
 	</h1>

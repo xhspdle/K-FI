@@ -6,7 +6,7 @@
 
 <%-- <a href="<c:url value='/admin/aclist'/>">작성</a> --%>
 
-<h1 id="convertform">신고관리</h1> 
+<h1 id="convertform" style="padding: 15px;">신고관리</h1> 
 
 <br>
 <div id="aclistview1">

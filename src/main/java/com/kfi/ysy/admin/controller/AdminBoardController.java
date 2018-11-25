@@ -78,8 +78,6 @@ public class AdminBoardController {
 		int ab_num=abservice.abmaxnum()+1;
 		vo.setAb_num(ab_num);
 		
-		System.out.println("//////////////////////////"+ab_num);
-		System.out.println(vo.getAb_notice());
 		int result=abservice.abinsert(vo);
 		if (result>0){
 			return "redirect:/admin/ablist";		

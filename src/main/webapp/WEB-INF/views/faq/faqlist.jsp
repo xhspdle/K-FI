@@ -126,8 +126,7 @@
 <c:set var="admin" value="${sessionScope.admininfo }" />
 <a href="aa" class="btn" onclick=""></a>
 <div class="panel-group container" >
-	<h1>Q and A</h1>
-	<h2>Panels with Contextual Classes</h2>
+	<h2>Q and A</h2>
 	<c:forEach var="faqlist" items="${faqlist }" varStatus="status">	
 		<div class="panel panel-default">
 			<div class="panel-heading" >	
@@ -173,7 +172,7 @@
 		</div>
 	</c:forEach>
 	<br>
-	<a href="faqinsert" class="btn btn-default">글작성</a>
+	<!-- <a href="faqinsert" class="btn btn-default">글작성</a> -->
 </div>	
 
 

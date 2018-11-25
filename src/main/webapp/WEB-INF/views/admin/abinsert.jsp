@@ -5,8 +5,8 @@
 <div class="container" style="margin-top: 20px">
 	<form method="post" action="<c:url value='/admin/abinsert'/>">
 		<div class="media">
-			<div class="media-left">
-				<img src="img_avatar1.png" class="media-object" style="width: 60px">
+			<div class="media-left" >
+				<img  style="border-radius: 50%; width: 50px;height: 50px;border: solid 1px gold; " src="<c:url value='/resources/images/ysy/1 (1).jpg'/>" class="media-object" style="width: 60px">
 			</div>
 			<div class="media-body">
 				<h4 class="media-heading">${admin.admin_nick }</h4>
