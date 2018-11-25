@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -58,8 +58,7 @@ public class CommAdminController {
 	public String commadminauth(CommunityVo vo, Model model) {
 		int comm_num=vo.getComm_num();
 		int result = cservice.update(vo);
-		if(result>0) {		
-			System.out.println("//////////"+result);
+		if(result>0) {	
 			return "redirect:/community/commadmin/commuserlist?comm_num="+comm_num;
 		}
 		return null;	
@@ -88,10 +87,22 @@ public class CommAdminController {
 			return null;
 		}
 	}
-
+	//커뮤니티 스킨삭제
+	@RequestMapping(value="/community/commadmin/commskindelete", method=RequestMethod.GET)
+	public String commskindelete(int csc_num,int comm_num,HttpSession session) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("session", session);
+		map.put("csc_num",csc_num);
+		int result=cscservice.delete(map);
+		if(result>0) {
+			return "redirect:/community/commadmin/commskin?comm_num="+comm_num;
+		}else {
+			return null;
+		}	
+	}
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////	
-	//커뮤니티 프로필 변경
+	//커뮤니티 프로필 
 	@RequestMapping(value="/community/commadmin/commprofile", method=RequestMethod.GET)
 	@SuppressWarnings("unchecked")
 	public String commprofileForm(int comm_num, Model model) {
@@ -101,9 +112,10 @@ public class CommAdminController {
 		CommunityVo cvo=(CommunityVo)map.get("cvo");
 		model.addAttribute("commprofile",cspvo);
 		model.addAttribute("commadmininfo",mvo);
-		model.addAttribute("comminfo",cvo);	
+		model.addAttribute("comminfo",cvo);
 		return ".community.commadmin.commprofile";
 	}
+	//커뮤니티 프로필 변경
 	@RequestMapping(value="/community/commadmin/commprofileupdate", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String commprofileupdate(MultipartHttpServletRequest multirequest) {

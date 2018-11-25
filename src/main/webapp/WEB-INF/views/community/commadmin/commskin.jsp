@@ -67,14 +67,14 @@ img {vertical-align: middle;}
   height: 15px;
   width: 15px;
   margin: 0 2px;
-  background-color: #bbb;
+  background-color: #c3daee;
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
 }
 
 .active, .dot:hover {
-  background-color: #717171;
+  background-color: #08395e;
 }
 
 /* Fading animation */
@@ -137,20 +137,19 @@ img {vertical-align: middle;}
 		<button type="button" class="btn btn-primary" onclick="location.href='/kfi/community/commadmin/commuserlist?comm_num=${comm_num}'">MEMBERS</button>
 	</div><!-- <br><br> -->
 	<div id="commskinlist">
-		<div class="modal-header"
-		style="background-color: #0c558d;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+		<div class="modal-header" style="background-color: #08395e;border-top-left-radius: 5px;border-top-right-radius: 5px;">
 			<h4 style="display: inline;color: white;">저장된 스킨</h4>
 			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-success" id="insertcnskinbtn">추가</button>
-				<button type="button" class="btn btn-success">적용</button>
-				<button type="button" class="btn btn-danger" id="deletecnskinbtn">삭제</button>
+				<button type="button" class="btn btn-primary" id="insertcnskinbtn">추가</button>
+				<button type="button" class="btn btn-primary">적용</button>
+				<label class="btn btn-danger" for="deletecnskinbtn">삭제</label>
 			</div>
 		</div>
 		<div class="slideshow-container">
-			<c:forEach var="commskinlist" items="${commskinlist }">
+			<c:forEach var="commskinlist" items="${commskinlist }">	
 			<div class="panel-body mySlides">
-				<div class="communityskin" >
-					<input type="text" value="${commskinlist.csc_num}">	
+				<div class="communityskin">
+					
 					<div class="communityskinimg">				
 						<img class="cnskincover" alt="cover" src="<c:url value='/resources/upload/img/${commskinlist.csc_savimg}'/>">
 					</div>		
@@ -160,22 +159,21 @@ img {vertical-align: middle;}
 							<span class="navskincolor">COMMUNITY</span>
 							<span class="navskincolor">MYPAGE</span>
 							<span class="glyphicon glyphicon-search navskincolor"></span>
+							
 						</div>	
 					</div>
-				</div> 
+				</div>
+				<button type="button" class="btn btn-danger" id="deletecnskinbtn" style="display: none;"
+							onclick="location.href='/kfi/community/commadmin/commskindelete?csc_num=${commskinlist.csc_num}&comm_num=${comm_num}'">삭제</button> 
 			</div>
 			</c:forEach>	
 			<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 			<a class="next" onclick="plusSlides(1)">&#10095;</a>
 		</div>
 		<div style="text-align:center">
-			<span class="dot" onclick="currentSlide(1)"></span> 
-			<span class="dot" onclick="currentSlide(2)"></span> 
-			<span class="dot" onclick="currentSlide(3)"></span> 
-			<span class="dot" onclick="currentSlide(4)"></span> 
-			<span class="dot" onclick="currentSlide(5)"></span> 
-			<span class="dot" onclick="currentSlide(6)"></span> 
-			<span class="dot" onclick="currentSlide(7)"></span> 
+			<c:forEach items="${commskinlist }" varStatus="csccnt">
+				<span class="dot" onclick="currentSlide(${csccnt.count })"></span> 
+			</c:forEach>
 		</div><br> 
 	</div>	
 </div>

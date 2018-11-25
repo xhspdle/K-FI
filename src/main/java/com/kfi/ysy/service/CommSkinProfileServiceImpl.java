@@ -1,5 +1,6 @@
 package com.kfi.ysy.service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -49,6 +50,12 @@ public class CommSkinProfileServiceImpl implements CommonService {
 		try {	
 			int csp_num = Integer.parseInt(multirequest.getParameter("csp_num"));
 			int comm_num = Integer.parseInt(multirequest.getParameter("comm_num"));
+			CommSkinProfileVo beforecspdao = cspdao.select(comm_num);
+			String beforecsp_savimg = beforecspdao.getCsp_savimg();
+			File beforefile=new File(uploadimg + "\\" +beforecsp_savimg);
+			boolean delfile =  beforefile.delete();
+			
+			System.out.println(uploadimg + "에 삭제성공");		
 			MultipartFile orgimgfile = multirequest.getFile("csp_orgimg");
 			String csp_orgimg = orgimgfile.getOriginalFilename();
 			String csp_savimg = UUID.randomUUID() + "_" + csp_orgimg;
@@ -60,14 +67,18 @@ public class CommSkinProfileServiceImpl implements CommonService {
 			System.out.println(uploadimg + "에 업로드성공");
 			is.close();
 			fos.close();
-			cspdao.update(cspvo);
+			int cspresult = cspdao.update(cspvo);
 						
 			String comm_name = multirequest.getParameter("comm_name");
 			String comm_content = multirequest.getParameter("comm_content");
 			CommunityVo cvo=new CommunityVo(comm_num, 0, comm_name, comm_content, null, null);
-			cdao.update(cvo);
+			int cresult = cdao.update(cvo);
 			
-			return 1;
+			if(delfile && cspresult>0 && cresult>0) {
+				return 1;
+			}else {
+				return -1;
+			}
 		}catch(Exception e){
 			e.getMessage();
 			return -1;

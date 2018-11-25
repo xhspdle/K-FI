@@ -16,10 +16,10 @@
 	</select>
 	
 	<delete id="delete" parameterType="int">
-		delete from comm_skin_cover where=csc_num=#{csc_num}
+		delete from comm_skin_cover where csc_num=#{csc_num}
 	</delete>
 	
 	<select id="select" parameterType="int" resultType="commskincover">
-		select * from comm_skin_cover where=csc_num=#{csc_num}
+		select * from comm_skin_cover where csc_num=#{csc_num}
 	</select>
 </mapper>

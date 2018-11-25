@@ -1,10 +1,13 @@
 package com.kfi.ysy.service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,10 +48,7 @@ public class CommSkinCoverServiceImpl implements CommonService {
 			MultipartFile orgimgfile = multirequest.getFile("csc_orgimg");
 			String csc_orgimg = orgimgfile.getOriginalFilename();
 			String csc_savimg = UUID.randomUUID() + csc_orgimg;
-			System.out.println(comm_num+"////////////"+cs_color+"//////////"+csc_orgimg);
-			System.out.println(uploadimg + "\\" + csc_orgimg);
-			
-			
+					
 			InputStream is = orgimgfile.getInputStream();
 			FileOutputStream fos= new FileOutputStream(uploadimg + "\\" + csc_savimg);
 			FileCopyUtils.copy(is, fos);
@@ -61,9 +61,7 @@ public class CommSkinCoverServiceImpl implements CommonService {
 			
 			int comm_num1=Integer.parseInt(multirequest.getParameter("comm_num"));
 			CommunityVo cvo = new CommunityVo(comm_num1, 0, null, null, cs_color, null);
-			System.out.println(cvo.getComm_num()+"///////////");
 			int cresult = cdao.update(cvo);
-			System.out.println();
 			if(cscresult >0 && cresult > 0) {
 				return 1;
 			}else {
@@ -83,13 +81,27 @@ public class CommSkinCoverServiceImpl implements CommonService {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public int delete(Object data) {
-		int csc_num=(Integer)data;
+		HashMap<String, Object> map = (HashMap<String, Object>)data;
+		HttpSession session =(HttpSession)map.get("session");	
+		int csc_num=(Integer)map.get("csc_num");
 		CommSkinCoverVo cscvo = cscdao.select(csc_num);
-		cscvo.getCsc_savimg();
-		cscdao.delete(csc_num);
-
-		return 0;
+		String csc_savimg=cscvo.getCsc_savimg();
+		String uploadimg = session.getServletContext().getRealPath("/resources/upload/img");
+		map.remove("session");
+		File file=new File(uploadimg + "\\" + csc_savimg); 
+		if(file.delete()) {
+			System.out.println(uploadimg + "사진 삭제");
+			int result=cscdao.delete(csc_num);
+			if(result>0) {
+				return 1;
+			}
+			return -1;
+		}else {
+			System.out.println(uploadimg + "사진 실패");
+			return -1;
+		}
 	}
 
 	@Override

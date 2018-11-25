@@ -4,7 +4,7 @@
 <style>
 
 .modal-header{
-	background-color: #0c558d;
+	background-color: #08395e;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
