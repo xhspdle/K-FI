@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kfi.mybatis.ldk.MainCommunitySearchMapper">
+	<select id="getCount" parameterType="string" resultType="int">
+		SELECT NVL(COUNT(*),0) CNT
+		FROM COMMUNITY COMM,COMM_SKIN_PROFILE CSP
+		WHERE COMM.COMM_NUM=CSP.COMM_NUM AND CSP.CSP_USING=1
+		    AND (COMM.COMM_NAME LIKE '%'||#{keyword}||'%' OR COMM.COMM_CONTENT LIKE '%'||#{keyword}||'%')
+	</select>
+	<select id="list" parameterType="string" resultType="com.kfi.ldk.vo.MainCommunitySearchJoinVo">
+		SELECT COMM.COMM_NUM,COMM_NAME,COMM_CONTENT,CS_COLOR,CSP_SAVIMG
+		FROM COMMUNITY COMM,COMM_SKIN_PROFILE CSP
+		WHERE COMM.COMM_NUM=CSP.COMM_NUM AND CSP.CSP_USING=1
+		    AND (COMM.COMM_NAME LIKE '%'||#{keyword}||'%' OR COMM.COMM_CONTENT LIKE '%'||#{keyword}||'%')
+	</select>
+</mapper>

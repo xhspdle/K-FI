@@ -4,9 +4,10 @@
 <div class="jumbotron text-center">
 	<h1><img class="logoImg" alt="logo" src="<c:url value='/resources/images/logo2.png'/>"></h1>
 	<p>We love Korea!</p> 
-	<form>
+	<form action="<c:url value='/communitySearch'/>">
 		<div class="input-group col-sm-offset-4 col-sm-4">
-			<input type="email" class="form-control" placeholder="what is you're favorite k-culture?" required>
+			<input type="text" class="form-control" name="keyword" 
+			placeholder="what is you're favorite k-culture?">
 			<div class="input-group-btn">
 				<button type="submit" class="btn btn-primary">Search</button>
 			</div>
