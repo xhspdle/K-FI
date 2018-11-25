@@ -132,7 +132,8 @@ public class UpdateController {
 	public String update(HttpSession session, RedirectAttributes redirectAttributes, String cb_num, String cb_title,
 			String cb_content, String cb_notice, String[] tag_name, String[] del_Tags, MultipartFile fileP1,
 			MultipartFile fileP2, MultipartFile fileP3, MultipartFile fileP4, MultipartFile fileP5,
-			MultipartFile fileV1, MultipartFile fileV2) {
+			MultipartFile fileV1, MultipartFile fileV2, 
+			MultipartFile[] fileP, MultipartFile[] fileV) {
 		int cbNum = 1;
 		if (!cb_num.equals("") && cb_num != null) {
 			cbNum = Integer.parseInt(cb_num);
@@ -153,6 +154,8 @@ public class UpdateController {
 		map.put("fileP5", fileP5);
 		map.put("fileV1", fileV1);
 		map.put("fileV2", fileV2);
+		map.put("fileP", fileP);
+		map.put("fileV", fileV);
 
 		int result = (Integer) commBoardservice.update(map);
 

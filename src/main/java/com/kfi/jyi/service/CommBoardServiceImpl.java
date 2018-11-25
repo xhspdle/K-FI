@@ -218,6 +218,10 @@ public class CommBoardServiceImpl implements CommonService {
 		MultipartFile fileP3 = (MultipartFile) map.get("fileP3");
 		MultipartFile fileP4 = (MultipartFile) map.get("fileP4");
 		MultipartFile fileP5 = (MultipartFile) map.get("fileP5");
+
+		MultipartFile[] fileP = (MultipartFile[]) map.get("fileP");
+		MultipartFile[] fileV = (MultipartFile[]) map.get("fileV");
+
 		if (fileP1 == null)
 			photoFile.add("0");
 		else
@@ -337,6 +341,43 @@ public class CommBoardServiceImpl implements CommonService {
 				}
 			}
 
+			//
+			if (!fileP[0].isEmpty()) {
+				for (int i = 0; i < fileP.length; i++) {
+					int cp_num = cpdao.getMaxNum() + 1;
+					String cp_orgimg = fileP[i].getOriginalFilename();
+					if (cp_orgimg.equals(""))
+						continue;
+					String cp_savimg = UUID.randomUUID() + "_" + cp_orgimg;
+					deletePhoto.add(cp_savimg);
+					InputStream is = fileP[i].getInputStream();
+					FileOutputStream fos = new FileOutputStream(uploadPathPhoto + "\\" + cp_savimg);
+					FileCopyUtils.copy(is, fos);
+					is.close();
+					fos.close();
+					CommPhotoVo cpvo = new CommPhotoVo(cp_num, cb_num, cp_orgimg, cp_savimg);
+					cpdao.insert(cpvo);
+				}
+			}
+			if (!fileV[0].isEmpty()) {
+				for (int i = 0; i < fileV.length; i++) {
+					int cv_num = cvdao.getMaxNum() + 1;
+					String cv_orgvid = fileV[i].getOriginalFilename();
+					if (cv_orgvid.equals(""))
+						continue;
+					String cv_savvid = UUID.randomUUID() + "_" + cv_orgvid;
+					deleteVideo.add(cv_savvid);
+					InputStream is = fileV[i].getInputStream();
+					FileOutputStream fos = new FileOutputStream(uploadPathVideo + "\\" + cv_savvid);
+					FileCopyUtils.copy(is, fos);
+					is.close();
+					fos.close();
+					CommVideoVo cvvo = new CommVideoVo(cv_num, cb_num, cv_orgvid, cv_savvid);
+					cvdao.insert(cvvo);
+				}
+			}
+			
+			
 			// DelTagList
 			if (del_Tags!=null) {
 				for (String delTag : del_Tags) {

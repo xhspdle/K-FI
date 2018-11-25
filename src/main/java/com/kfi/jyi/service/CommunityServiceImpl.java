@@ -92,8 +92,9 @@ public class CommunityServiceImpl implements CommonService {
 				int csp_num = cspdao.getMaxNum() + 1;
 				String csp_orgimg = "default-profile.png";
 				String csp_savimg = "default-profile.png";
-				if (!comm_skin_profile.isEmpty()) {
+				photo:if (!comm_skin_profile.isEmpty()) {
 					csp_orgimg = comm_skin_profile.getOriginalFilename();
+					if(csp_orgimg.equals("")) break photo;
 					csp_savimg = UUID.randomUUID() + "_" + csp_orgimg;
 					InputStream is = comm_skin_profile.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + csp_savimg);
@@ -107,8 +108,9 @@ public class CommunityServiceImpl implements CommonService {
 				int csc_num = cscdao.getMaxNum() + 1;
 				String csc_orgimg = "logo2.png";
 				String csc_savimg = "logo2.png";
-				if (!comm_skin_cover.isEmpty()) {
+				cover: if (!comm_skin_cover.isEmpty()) {
 					csc_orgimg = comm_skin_cover.getOriginalFilename();
+					if(csc_orgimg.equals("")) break cover;
 					csc_savimg = UUID.randomUUID() + "_" + csc_orgimg;
 					InputStream is = comm_skin_cover.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPath + "\\" + csc_savimg);

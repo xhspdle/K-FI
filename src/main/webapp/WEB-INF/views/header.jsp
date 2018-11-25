@@ -16,13 +16,14 @@
 				<li><a href="#about">ABOUT</a></li>
 				<li><a href="#explore">EXPLORE</a></li>
 				<li><a href="#contact">CONTACT</a></li>
-				<li><a href="<c:url value='/mypage/main'/>">MYPAGE</a></li>
 				<c:choose>
 					<c:when test="${empty user_num }">
-					<li><a href="<c:url value='/login/login'/>">Login</a></li>	
+					<li><a href="<c:url value='/login/login'/>">LOGIN</a></li>	
 					</c:when>
 					<c:otherwise>
-					<li><a href="<c:url value='/login/logout'/>" class="logout-btn">Logout</a></li>
+					<li><a href="<c:url value='/communityMain'/>">COMMUNITY</a></li>
+					<li><a href="<c:url value='/mypage/main'/>">MYPAGE</a></li>
+					<li><a href="<c:url value='/login/logout'/>" class="logout-btn">LOGOUT</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>

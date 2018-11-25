@@ -52,7 +52,7 @@ public class LoginController {
 				System.out.println(vo.getUser_pwd());
 				System.out.println(vo.getUser_nickname());
 				System.out.println((String) session.getAttribute("user_id"));
-				returnURL = "redirect:/mypage/main";
+				returnURL = "redirect:/";
 			} else if (vo.getUser_certi() == 1 && vo.getUser_status() == 2) {
 				/*정지되었습니다 메시지 보내기*/
 				returnURL = "redirect:/login/login";

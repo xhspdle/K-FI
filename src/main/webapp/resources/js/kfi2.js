@@ -572,37 +572,39 @@ $(function() {
 		var imgSize=parseInt(imgListSize);
 		for(var i=0;i<5;i++){
 			console.log(imgSize);
-			$(document).on('change',"[name='fileP"+(i+1)+"']",function(event){
-				  if(event.target.files[0]!==undefined){
-					  var tmppath=URL.createObjectURL(event.target.files[0]);
-					  $(this).next().fadeIn("fast").attr("src", URL.createObjectURL(event.target.files[0]));
-					  URL.revokeObjectURL(event.target.files[0]);
-				  }else{
-					  $(this).next().fadeOut("slow");
-				  }
-				  if($(".imgUpload").children().length<=3){
-					  $("<button type='button' class='btn btn-default btn-block addImg'>" +
-				  		"Upload More?</button>").appendTo(".imgUpload");
-					  console.log("??");
-					  var n=imgSize;
-					  $(".imgUpload").on('click',".addImg",function(){
-						  if(n>=6){
-							  $(this).css('color',"red");
-							  $(this).html("Up to 5 photos can be uploaded")
-						  }else{
-							  fileImgTemplate=document.querySelector("#fileImgTemplate").innerHTML;
-							  let attachImg=fileImgTemplate.replace("{mp_savimg}", '')
-							  			.replace(/{i}/gi, n)
-							  			.replace("{label}", "Upload Photo" + n++);
-							  $(".imgUpload").append(attachImg);
-						  }
-					  });
-				  }
-			  });
+			fileP(i);
 		}
 	}
 	
-	 
+	function fileP(i){
+		$(document).on('change',"[name='fileP"+(i+1)+"']",function(event){
+			  if(event.target.files[i]!==undefined){
+				  var tmppath=URL.createObjectURL(event.target.files[i]);
+				  $(this).next().fadeIn("fast").attr("src", URL.createObjectURL(event.target.files[i]));
+				  URL.revokeObjectURL(event.target.files[0]);
+			  }else{
+				  $(this).next().fadeOut("slow");
+			  }
+			  if($(".imgUpload").children().length<=3){
+				  $("<button type='button' class='btn btn-default btn-block addImg'>" +
+			  		"Upload More?</button>").appendTo(".imgUpload");
+				  console.log("??");
+				  var n=imgSize;
+				  $(".imgUpload").on('click',".addImg",function(){
+					  if(n>=6){
+						  $(this).css('color',"red");
+						  $(this).html("Up to 5 photos can be uploaded")
+					  }else{
+						  fileImgTemplate=document.querySelector("#fileImgTemplate").innerHTML;
+						  let attachImg=fileImgTemplate.replace("{mp_savimg}", '')
+						  			.replace(/{i}/gi, n)
+						  			.replace("{label}", "Upload Photo" + n++);
+						  $(".imgUpload").append(attachImg);
+					  }
+				  });
+			  }
+		  });
+	} 
 	 
 	 
 	 
@@ -724,6 +726,10 @@ function getCommBoard(){
 		var page=result.pageNum;
 		$('#pageNum').val(page);
 		var list=result.list; //List<CommBoardVo>
+		if(list.length==0){
+			alert('마지막 게시물 입니다');
+			return false;
+		}
 		var proflist=result.proflist; //List<CommBoardProfileVo>
 		var cbclist=result.cbclist; //List<CommBoardCntVo>
 		var cplist=result.cplist; //List<CommPhotoVo>
