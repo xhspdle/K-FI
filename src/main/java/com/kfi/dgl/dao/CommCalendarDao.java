@@ -18,7 +18,7 @@ public class CommCalendarDao {
 		this.sqlSession = sqlSession;
 	}
 
-	public int getMaxnum() {
+	public int commgetMaxnum() {
 		return sqlSession.selectOne(NAMESPACE + ".commgetMaxnum");
 	}
 
@@ -30,16 +30,16 @@ public class CommCalendarDao {
 		return sqlSession.update(NAMESPACE + ".updateEvent", vo);
 	}
 
-	public int deleteEvent(int cc_num) {
-		return sqlSession.delete(NAMESPACE + ".deleteEvent", cc_num);
+	public int deleteEvent(String cc_name) {
+		return sqlSession.delete(NAMESPACE + ".deleteEvent", cc_name);
 	}
 
 	public int selectEvent(int comm_num) {
-		return sqlSession.selectOne(NAMESPACE + ".seleteEvent", comm_num);
+		return sqlSession.selectOne(NAMESPACE + ".selectEvent", comm_num);
 	}
 
 	public List<CommCalendarVo> listEvent(int comm_num) {
-		return sqlSession.selectList(NAMESPACE + ".listevent", comm_num);
+		return sqlSession.selectList(NAMESPACE + ".listEvent", comm_num);
 	}
 
 }

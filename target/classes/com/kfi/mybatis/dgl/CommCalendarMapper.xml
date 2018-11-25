@@ -8,7 +8,7 @@
 		insert into comm_calendar values(#{cc_num}, #{comm_num}, #{cc_name}, #{cc_info}, #{cc_begin}, #{cc_end})
 	</insert>
 	<delete id="deleteEvent" parameterType="int">
-		delete from comm_calendar where cc_num=#{cc_num}
+		delete from comm_calendar where cc_title=#{cc_title}
 	</delete>
 	<select id="seleteEvent" parameterType="int" resultType="commcalendar">
 		select * from comm_calendar where cc_num=#{cc_num}
@@ -17,7 +17,7 @@
 	<select id="commgetMaxnum" resultType="int">
 		select NVL(max(cc_num),0) maxnum from comm_calendar
 	</select>
-	<update id="updateevent" parameterType="commcalendar">
+	<update id="updateEvent" parameterType="commcalendar">
 		update comm_calendar
 		<set>
 		 	<if test="cc_name!=null and ucc_name!=''">ucc_name=#{ucc_name},</if>
@@ -27,11 +27,7 @@
 		</set>
 		where comm_num=#{comm_num}
 	</update>
-	
-	<delete id="deleteevent" parameterType="int">
-		delete from comm_calendar where cc_num=#{cc_num} and comm_num=#{comm_num}
-	</delete>
-	<select id="listevent" resultType="commcalendar" parameterType="int">
+	<select id="listEvent" resultType="commcalendar" parameterType="int">
 		select * from comm_calendar where comm_num=#{comm_num}
 	</select>
 </mapper>

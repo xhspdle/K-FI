@@ -67,29 +67,56 @@ body {
 					  title: '${list.cc_name}',  
 	                   start: '${list.cc_begin}',
 	                   end: '${list.cc_end}',
-	                   url: '/community/list'
 				}, 
 				</c:forEach>
 				],
-			/* dayClick : function(date, jsEvent, view, resource) {
-				console.log('dayClick' + date.format())
-				alert(date.format());
-			} */
+			        eventClick: function(event, jsEvent, view) {
+			            console.log(event.start.format());
+			            console.log(event.title);
+			            $('#fullCalModal').modal();
+			            var r = confirm("Delete " + event.title);
+			            if (r === true) {
+			              $('#calendar').fullCalendar('removeEvents', event._id);
+			            } 
+					}
 		});
-		$('#addevent-btn').on('click', function() {
+ 	$('#addevent-btn').on('click', function() {
 			alert("complete");
-			
-		});
-		$('.fc-content').on('click', function() {
-			alert("sss");
-			
+ 	});
+ 	$('#calendar').fullCalendar({
+ 		  eventClick: function(event, jsEvent, element) {
 
-		});
+ 		    event.title = "CLICKED!";
+ 		   $('#fullCalModal').modal();
+ 		  }
+ 		});
+ 	$('.fc-content').on('click', function(){
+ 		var cc_name = $("#schedule-title").val();
+ 		alert(cc_name);
+ 		alert("삭제하시겠습니까?");
+ 		$.ajax({
+			async : false,
+			type : "GET",
+			url : url + '/community/delete',
+			data : {
+				'cc_title' : cc_title
+			},
+			dataType : "json",
+			success : function(data) {
+				console.log(data)
+				
+				}
+			
+ 	});
+ 	});
+ 	$("#update-btn").on('click', function(){
+ 		
+ 	});
 	});
 </script>
 
-<!-- ///////////////////////////////// 모달 //////////////////-->
 <div class="container">
+	<input type="hidden" id="getContextPath" value="<c:url value='/'/>">
 	<div id='createSchedule'>
 		<button class="btn btn-info" id="schedule-btn" data-toggle="modal"
 			data-target="#myModal">Add Event</button>
@@ -97,6 +124,7 @@ body {
 	<div id='calendar' style="z-index: 999"></div>
 </div>
 
+<!-- ///////////////////////////////// Add Event  //////////////////-->
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -156,26 +184,28 @@ body {
 </div>
 
 
-<!-- ///////////////////////////////// 모달 //////////////////-->
+<!-- ///////////////////////////////// Edit Event  //////////////////-->
 
-<div id="fullCalModal" class="modal fade in" role="dialog" style="display:">
+<div id="fullCalModal" class="modal fade in" role="dialog"
+	style="display:">
 	<div class="modal-dialog">
-
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">×</button>
 				<div>
-					<h2 id="modalTitle" class="modal-title">Edit Event</h2>
+					<label class="form-control-label" for="" id="schedule-header">Edit
+						Event</label>
 				</div>
 			</div>
-			<div class="modal-body">
-				<form action="<c:url value='/community/commcalendar'/>"
-					name="addevent" role="form" id="addevent-form" class=""
-					method="post">
+			<div class="modal-body" id="modalBody">
+				<form action="<c:url value='/community/delete'/>" name="eventedit"
+					role="form" id="addevent-form" class="" method="post">
+					<input type="hidden" name="cc_num" id="cc_num">
 					<div class="form-box">
 						<div class="form-group">
-							<label class="form-control-label" for="findpwd-email">Title</label><br>
+							<input type="hidden" name="cc_num" id="cc_num"> <label
+								class="form-control-label" for="findpwd-email">Title</label><br>
 							<input type="text" name="cc_name" id="schedule-title"
 								class="form-control" placeholder="Title" value="" maxlength="50">
 						</div>
@@ -190,7 +220,8 @@ body {
 								<div class="input-group">
 									<span class="input-group-addon"><i
 										class="far fa-calendar-alt"></i></span> <input type="date" id="start"
-										class="startpickDate" name="cc_begin" value="" placeholder="Date">
+										class="startpickDate" name="cc_begin" value=""
+										placeholder="Date">
 								</div>
 							</div>
 						</div>
@@ -206,9 +237,10 @@ body {
 						</div>
 					</div>
 					<div class="modal-footer">
-				<button class="btn btn-primary">수정</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+						<button type="submit" class="btn btn-info" id="update-btn">Edit</button>
+						<button type="submit" class="btn btn-danger" id="del-btn">Delete</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
 				</form>
 			</div>
 		</div>
