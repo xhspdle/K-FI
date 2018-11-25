@@ -48,23 +48,24 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="<c:url value='/community'/>">COMMUNITY</a>
+					<a href="<c:url value='/communityMain'/>">COMMUNITY</a>
 					<ul class="dropdown-menu">
-						<li><a href="<c:url value='/community/newComm/insertForm'/>">커뮤니티 등록(가제)</a></li>
-						<li><a href="#">마이커뮤니티</a></li>
-						<li><a href="<c:url value='/community/commcalendar/list'/>">일정보기</a></li>
+					<li><a href="<c:url value='/community/newComm/insertForm'/>">CREATE</a></li>
+						<li><a href="<c:url value='/communityMain/list'/>">K-FI's LIST</a></li>
+						<li><a href="<c:url value='/mypage/mycomm/list'/>">MY COMMUNITY</a></li>
+						<li><a href="<c:url value='/community/commcalendar'/>">CALENDAR</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
-					<ul class="dropdown-menu">
+					<%-- <ul class="dropdown-menu">
 						<li><a href="#" data-toggle="modal" data-target="#writeModal">글쓰기</a></li>
 						<li><a href="#">마이커뮤니티</a></li>
 						<li><a href="<c:url value='/mypage/mycommcalendar'/>">일정보기</a></li>
 						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
 						<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
 						<li><a href="#">로그아웃</a></li>
-					</ul>
+					</ul> --%>
 				</li>
 				<li><button type="button" class="btn btn-default btn-lg" id="search" style="background-color:${msv.ms_color};">
 				<span class="glyphicon glyphicon-search"></span></button></li>

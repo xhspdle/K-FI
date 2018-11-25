@@ -24,24 +24,26 @@
 				<li><a href="#issue-vid">ISSUE-VID</a></li>
 				<li><a href="#build">BUILD</a></li>
 				<li class="dropdown">
-					<a href="<c:url value='/community'/>">COMMUNITY</a>
+					<a href="<c:url value='/communityMain'/>">COMMUNITY</a>
 					<ul class="dropdown-menu">
-						<li><a href="<c:url value='/community/newComm/insertForm'/>">커뮤니티 등록</a></li>
-						<li><a href="<c:url value='/communityMain/list'/>">커뮤니티 목록</a></li>
-						<li><a href="<c:url value='/community/commcalendar/list'/>">일정보기</a></li>
+						<li><a href="<c:url value='/community/newComm/insertForm'/>">CREATE</a></li>
+						<li><a href="<c:url value='/communityMain/list'/>">K-FI's LIST</a></li>
+						<li><a href="<c:url value='/mypage/mycomm/list'/>">MY COMMUNITY</a></li>
+						<%-- <li><a href="<c:url value='/community/commcalendar'/>">일정보기</a></li> --%>
 					</ul>
 				</li>
+				<c:if test="${!empty user_num }">
 				<li class="dropdown">
 					<a href="<c:url value='/mypage/main'/>">MYPAGE</a>
-					<ul class="dropdown-menu">
-						<li><a href="#" data-toggle="modal" data-target="#writeModal">글쓰기</a></li>
-						<li><a href="#">마이커뮤니티</a></li>
-						<li><a href="<c:url value='/mypage/mycommcalendar'/>">일정보기</a></li>
-						<li><a href="<c:url value='/mypage/myskin/list'/>">MYSKIN</a></li>
-						<li><a href="<c:url value='/mypage/myinfo/password'/>">회원정보</a></li>
-						<li><a href="<c:url value='/login/logout'/>" class="logout-btn">Logout</a></li>
-					</ul>
+				<%-- 	<ul class="dropdown-menu">
+						<li><a href="<c:url value='/mypage/myfriend/list'/>">FRIEND</a></li>
+						<li><a href="<c:url value='/mypage/mycomm/calendar'/>">CALENDAR</a></li>
+						<li><a href="<c:url value='/mypage/myskin/list'/>">SKIN</a></li>
+						<li><a href="<c:url value='/mypage/myinfo/password'/>">INFO</a></li>
+						<li><a href="<c:url value='/login/logout'/>" class="logout-btn">LOGOUT</a></li>
+					</ul> --%>
 				</li>
+				</c:if>
 				<li><button type="button" class="btn btn-default btn-lg" id="search" style="background-color:${msv.ms_color};">
 				<span class="glyphicon glyphicon-search"></span></button></li>
 			</ul>
