@@ -40,7 +40,7 @@ public class AdminMembersController {
 			model.addAttribute("keyword",keyword);
 			return ".admin.mblist";
 		}else {
-			return ".error";
+			return "fail";
 		}
 	}
 	//회원 삭제
@@ -83,7 +83,7 @@ public class AdminMembersController {
 		if(result>0) {
 			return "redirect:/admin/mblist";
 		}else {
-			return null;
+			return "fail";
 		}
 	}
 	@RequestMapping(value="/admin/mbupdate",method=RequestMethod.POST)
@@ -92,7 +92,7 @@ public class AdminMembersController {
 		if(result>0) {
 			return "redirect:/admin/mblist";
 		}else {
-			return null;
+			return "fail";
 		}
 	}
 }

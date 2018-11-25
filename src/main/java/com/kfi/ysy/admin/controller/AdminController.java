@@ -46,7 +46,7 @@ public class AdminController {
 			session.setAttribute("admininfo", vo);
 			return ".admin.adminpage";
 		}else {
-			return ".main.error";
+			return "fail";
 		}
 	}
 //관리자 로그아웃
@@ -159,7 +159,7 @@ public class AdminController {
 		if(result>0) {
 			return "redirect:/admin/adminlist";
 		}else {
-			return null;
+			return "fail";
 		}
 	}
 	//관리자 삭제
@@ -170,7 +170,7 @@ public class AdminController {
 			session.invalidate();
 			return "redirect:/admin/content";
 		}else {
-			return null;
+			return "fail";
 		}
 	}
 	//관리자 정보 및 스킨

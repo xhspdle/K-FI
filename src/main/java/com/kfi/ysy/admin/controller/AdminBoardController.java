@@ -45,7 +45,7 @@ public class AdminBoardController {
 			model.addAttribute("keyword",keyword);
 			return ".admin.adminboard";
 		}else{
-			return ".main.error";
+			return "fail";
 		}
 	}
 	//팝업 게시물
@@ -84,7 +84,7 @@ public class AdminBoardController {
 		if (result>0){
 			return "redirect:/admin/ablist";		
 		}else {
-			return ".admin.error";
+			return "fail";
 		}
 	}
 	//관리자 게시글 삭제
@@ -94,7 +94,7 @@ public class AdminBoardController {
 		if (result>0){
 			return "redirect:/admin/ablist";		
 		}else {
-			return ".admin.error";
+			return "fail";
 		}
 	}
 	//게시글 수정
@@ -128,7 +128,7 @@ public class AdminBoardController {
 		if(result>0) {
 			return "redirect:/admin/ablist";		
 		}else {
-			return ".admin.error";
+			return "fail";
 		}
 	}
 }

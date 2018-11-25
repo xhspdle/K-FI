@@ -45,7 +45,7 @@ public class AccuseController {
 			model.addAttribute("keyword",keyword);
 			return ".admin.accuseboard";
 		}else {
-			return ".error";
+			return "fail";
 		}
 	}
 	@RequestMapping(value="/admin/acdelete", method=RequestMethod.GET)
@@ -54,7 +54,7 @@ public class AccuseController {
 		if(result>0) {
 			return "redirect:/admin/aclist";
 		}else {
-			return ".error";
+			return "fail";
 		}	
 	}
 //신고 내용보기
