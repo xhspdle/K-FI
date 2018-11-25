@@ -4,6 +4,10 @@ public class CommTagVo {
 	private int ctag_num;
 	private int tag_num;
 	private int cb_num;
+	
+	public CommTagVo() {
+		super();
+	}
 	public CommTagVo(int ctag_num, int tag_num, int cb_num) {
 		super();
 		this.ctag_num = ctag_num;

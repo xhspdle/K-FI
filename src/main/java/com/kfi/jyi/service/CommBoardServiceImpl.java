@@ -159,7 +159,6 @@ public class CommBoardServiceImpl implements CommonService {
 			}
 			if (tag_name != null) {
 				for (int i = 0; i < tag_name.length; i++) {
-					System.out.println(tag_name[i]);
 					int tagCount = tdao.getTagCountNum(tag_name[i]);
 					int tag_num = 0;
 					if (tagCount == 0) {
@@ -240,8 +239,6 @@ public class CommBoardServiceImpl implements CommonService {
 		else
 			photoFile.add(fileP1);
 
-		System.out.println(photoFile.toString() + "!!!!!!!!!");
-
 		ArrayList<Object> videoFile = new ArrayList<>();
 		MultipartFile fileV1 = (MultipartFile) map.get("fileV1");
 		if (fileV1 == null)
@@ -254,6 +251,9 @@ public class CommBoardServiceImpl implements CommonService {
 		else
 			videoFile.add(fileV2);
 
+		System.out.println(photoFile.toString()+"!!!!!photoFile");
+		System.out.println(videoFile.toString()+"!!!!!videoFile");
+		
 		String uploadPathPhoto = session.getServletContext().getRealPath("/resources/upload/img");
 		String uploadPathVideo = session.getServletContext().getRealPath("/resources/upload/vid");
 
@@ -305,6 +305,7 @@ public class CommBoardServiceImpl implements CommonService {
 			for (int i = 0; i < videoFile.size(); i++) {
 				Object obj = videoFile.get(i);
 				if (obj.equals("0")) {
+					
 				} else {
 					MultipartFile video = (MultipartFile) videoFile.get(i);
 					String cv_orgvid = video.getOriginalFilename();
@@ -359,10 +360,11 @@ public class CommBoardServiceImpl implements CommonService {
 					} else {
 						TagVo tvo = tdao.select(tag_name[i]);
 						HashMap<String, Object> checkTagNum = new HashMap<>();
-						checkTagNum.put("tag_num", tvo.getTag_num());
+						tag_num=tvo.getTag_num();
+						checkTagNum.put("tag_num", tag_num);
 						checkTagNum.put("cb_num", cb_num);
-						CommTagVo checkVo = commtdao.select_tagNum(checkTagNum);
-						if (checkVo == null) {
+						int checkVo = commtdao.select_tagNum(checkTagNum);
+						if (checkVo==0) {
 							// 새로운 태그 추가
 							int ctag_num = commtdao.getMaxNum() + 1;
 							CommTagVo ctvo = new CommTagVo(ctag_num, tag_num, cb_num);

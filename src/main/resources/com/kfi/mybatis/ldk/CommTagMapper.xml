@@ -30,8 +30,8 @@
 		select * from comm_tag where ctag_num=#{ctag_num}
 	</select>
 	
-	<select id="select_tagNum" parameterType="hashmap" resultType="commtag">
-		select * from comm_tag where tag_num=#{tag_num} and cb_num=#{cb_num}
+	<select id="select_tagNum" parameterType="hashmap" resultType="int">
+		select nvl(count(tag_num),0) from comm_tag where tag_num=#{tag_num} and cb_num=#{cb_num}
 	</select>
 	
 	<select id="list_CommTag" parameterType="int" resultType="commtag">

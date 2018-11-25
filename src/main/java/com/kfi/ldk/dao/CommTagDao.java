@@ -34,7 +34,7 @@ public class CommTagDao {
 	public CommTagVo select(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE + ".select", map);
 	}
-	public CommTagVo select_tagNum(HashMap<String, Object> map){
+	public int select_tagNum(HashMap<String, Object> map){
 		return session.selectOne(NAMESPACE+".select_tagNum",map);
 	}
 	
