@@ -275,6 +275,8 @@ public class CommBoardServiceImpl implements CommonService {
 				} else {
 					MultipartFile photo = (MultipartFile) photoFile.get(i);
 					String cp_orgimg = photo.getOriginalFilename();
+					System.out.println(cp_orgimg+"!!!!!!!cp_orgimg");
+					if(cp_orgimg.equals("")) continue; 
 					String cp_savimg = UUID.randomUUID() + "_" + cp_orgimg;
 					deletePhoto.add(cp_savimg);
 					InputStream is = photo.getInputStream();
@@ -305,10 +307,11 @@ public class CommBoardServiceImpl implements CommonService {
 			for (int i = 0; i < videoFile.size(); i++) {
 				Object obj = videoFile.get(i);
 				if (obj.equals("0")) {
-					
 				} else {
 					MultipartFile video = (MultipartFile) videoFile.get(i);
 					String cv_orgvid = video.getOriginalFilename();
+					System.out.println(cv_orgvid+"!!!!!!!cv_orgvid");
+					if(cv_orgvid.equals("")) continue; 
 					String cv_savvid = UUID.randomUUID() + "_" + cv_orgvid;
 					deleteVideo.add(cv_savvid);
 					InputStream is = video.getInputStream();
