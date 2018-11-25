@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.MultipartFilter;
 import org.xml.sax.InputSource;
 
 import com.kfi.dgl.dao.MembersDao;
@@ -212,16 +213,46 @@ public class CommBoardServiceImpl implements CommonService {
 		String[] del_Tags = (String[]) map.get("del_Tags");
 		String[] tag_name = (String[]) map.get("tag_name");
 
-		ArrayList<MultipartFile> photoFile = new ArrayList<>();
-		photoFile.add((MultipartFile) map.get("fileP1"));
-		photoFile.add((MultipartFile) map.get("fileP2"));
-		photoFile.add((MultipartFile) map.get("fileP3"));
-		photoFile.add((MultipartFile) map.get("fileP4"));
-		photoFile.add((MultipartFile) map.get("fileP5"));
+		ArrayList<Object> photoFile = new ArrayList<>();
+		MultipartFile fileP1 = (MultipartFile) map.get("fileP1");
+		MultipartFile fileP2 = (MultipartFile) map.get("fileP2");
+		MultipartFile fileP3 = (MultipartFile) map.get("fileP3");
+		MultipartFile fileP4 = (MultipartFile) map.get("fileP4");
+		MultipartFile fileP5 = (MultipartFile) map.get("fileP5");
+		if (fileP1 == null)
+			photoFile.add("0");
+		else
+			photoFile.add(fileP1);
+		if (fileP2 == null)
+			photoFile.add("0");
+		else
+			photoFile.add(fileP1);
+		if (fileP3 == null)
+			photoFile.add("0");
+		else
+			photoFile.add(fileP1);
+		if (fileP4 == null)
+			photoFile.add("0");
+		else
+			photoFile.add(fileP1);
+		if (fileP5 == null)
+			photoFile.add("0");
+		else
+			photoFile.add(fileP1);
 
-		ArrayList<MultipartFile> videoFile = new ArrayList<>();
-		videoFile.add((MultipartFile) map.get("fileV1"));
-		videoFile.add((MultipartFile) map.get("fileV2"));
+		System.out.println(photoFile.toString() + "!!!!!!!!!");
+
+		ArrayList<Object> videoFile = new ArrayList<>();
+		MultipartFile fileV1 = (MultipartFile) map.get("fileV1");
+		if (fileV1 == null)
+			videoFile.add("0");
+		else
+			videoFile.add(fileV1);
+		MultipartFile fileV2 = (MultipartFile) map.get("fileV2");
+		if (fileV2 == null)
+			videoFile.add("0");
+		else
+			videoFile.add(fileV2);
 
 		String uploadPathPhoto = session.getServletContext().getRealPath("/resources/upload/img");
 		String uploadPathVideo = session.getServletContext().getRealPath("/resources/upload/vid");
@@ -236,23 +267,22 @@ public class CommBoardServiceImpl implements CommonService {
 			List<CommVideoVo> VideoList = cvdao.select(cb_num);
 
 			// filePhotoList
-			int psize=PhotoList.size();
-			int vsize=VideoList.size();
-			for (int i = 0; i < 5; i++) {
-				if (photoFile.get(i)!=null) {
-					String cp_orgimg = photoFile.get(i).getOriginalFilename();
-					if (cp_orgimg.equals("")) {
-						System.out.println("6");
-						continue;
-					}
+			int psize = PhotoList.size();
+			int vsize = VideoList.size();
+			for (int i = 0; i < photoFile.size(); i++) {
+				Object obj = photoFile.get(i);
+				if (obj.equals("0")) {
+				} else {
+					MultipartFile photo = (MultipartFile) photoFile.get(i);
+					String cp_orgimg = photo.getOriginalFilename();
 					String cp_savimg = UUID.randomUUID() + "_" + cp_orgimg;
 					deletePhoto.add(cp_savimg);
-					InputStream is = photoFile.get(i).getInputStream();
+					InputStream is = photo.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPathPhoto + "\\" + cp_savimg);
 					FileCopyUtils.copy(is, fos);
 					is.close();
 					fos.close();
-					if(psize>=(i+1)) {
+					if (psize >= (i + 1)) {
 						int cp_num = PhotoList.get(i).getCp_num();
 						CommPhotoVo cpvo = new CommPhotoVo(cp_num, cb_num, cp_orgimg, cp_savimg);
 						cpdao.update(cpvo);
@@ -262,9 +292,9 @@ public class CommBoardServiceImpl implements CommonService {
 						} else {
 							System.out.println("이전 파일 삭제 실패");
 						}
-					}else if(psize < (i+1)){
-						int cp_num=cpdao.getMaxNum()+1;
-						CommPhotoVo newPvo=new CommPhotoVo(cp_num, cb_num, cp_orgimg, cp_savimg);
+					} else if (psize < (i + 1)) {
+						int cp_num = cpdao.getMaxNum() + 1;
+						CommPhotoVo newPvo = new CommPhotoVo(cp_num, cb_num, cp_orgimg, cp_savimg);
 						System.out.println("10");
 						cpdao.insert(newPvo);
 					}
@@ -272,20 +302,20 @@ public class CommBoardServiceImpl implements CommonService {
 			}
 
 			// fileVideoList
-			for (int i = 0; i < 2; i++) { 
-				if (videoFile.get(i)!=null) {
-					String cv_orgvid = videoFile.get(i).getOriginalFilename();
-					if (cv_orgvid.equals("")) {
-						continue;
-					}
+			for (int i = 0; i < videoFile.size(); i++) {
+				Object obj = videoFile.get(i);
+				if (obj.equals("0")) {
+				} else {
+					MultipartFile video = (MultipartFile) videoFile.get(i);
+					String cv_orgvid = video.getOriginalFilename();
 					String cv_savvid = UUID.randomUUID() + "_" + cv_orgvid;
 					deleteVideo.add(cv_savvid);
-					InputStream is = videoFile.get(i).getInputStream();
+					InputStream is = video.getInputStream();
 					FileOutputStream fos = new FileOutputStream(uploadPathVideo + "\\" + cv_savvid);
 					FileCopyUtils.copy(is, fos);
 					is.close();
 					fos.close();
-					if(vsize >= (i+1)) {
+					if (vsize >= (i + 1)) {
 						int cv_num = VideoList.get(i).getCv_num();
 						CommVideoVo cvvo = new CommVideoVo(cv_num, cb_num, cv_orgvid, cv_savvid);
 						cvdao.update(cvvo);
@@ -295,16 +325,16 @@ public class CommBoardServiceImpl implements CommonService {
 						} else {
 							System.out.println("이전 영상 삭제 실패");
 						}
-					}else if(vsize < (i+1)) {
-						int cv_num=cvdao.getMaxNum()+1;
-						CommVideoVo newVvo=new CommVideoVo(cv_num, cb_num, cv_orgvid, cv_savvid);
+					} else if (vsize < (i + 1)) {
+						int cv_num = cvdao.getMaxNum() + 1;
+						CommVideoVo newVvo = new CommVideoVo(cv_num, cb_num, cv_orgvid, cv_savvid);
 						cvdao.insert(newVvo);
 					}
 				}
 			}
-			
+
 			// DelTagList
-			if (!del_Tags[0].isEmpty()) {
+			if (del_Tags!=null) {
 				for (String delTag : del_Tags) {
 					int delNum = Integer.parseInt(delTag);
 					HashMap<String, Object> delMap = new HashMap<>();
@@ -315,7 +345,7 @@ public class CommBoardServiceImpl implements CommonService {
 			}
 
 			// tagList
-			if (!tag_name[0].isEmpty()) {
+			if (tag_name!=null) {
 				for (int i = 0; i < tag_name.length; i++) {
 					int tagCount = tdao.getTagCountNum(tag_name[i]);
 					int tag_num = 0;

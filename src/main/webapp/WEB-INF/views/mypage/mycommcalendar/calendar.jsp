@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 	$(function(){
-		var getPageContext=$('#getPageContext').val();
+		var getPageContext=$('#getPageContext').val(); 
 		$('#mypage_comm_calendar').fullCalendar({
 				header : {
 				left : '',
@@ -17,14 +17,16 @@
 			events : [ 
 				<c:forEach var="list" items='${monthlist }'> 
 				{
-						id:'${list.cc_info}', 
+					id:'${list.cc_info}', 
 					  title: '${list.cc_name}',  
 	                   start: '${list.cc_begin}',
 	                   end: '${list.cc_end}',
-	                   url: getPageContext+'/mypage/mycommcalendar'
+	                   url: getPageContext+'/community?comm_num=${list.comm_num}'
 				}, 
 				</c:forEach>
 				],
+				selectable: true,
+				selectHelper: true,
 				eventRender: function(event, element){
 			          element.popover({
 			              animation:true,
@@ -32,21 +34,29 @@
 			              content: event.id,
 			              trigger: 'hover'
 			          });
+			        },
+/* 				eventRender: function(event, element){
+			         element.popover({
+			              animation:true,
+			              delay: 300,
+			              content: event.id,
+			              trigger: 'hover'
+			          });
 			   	},
-		        eventColor: '#00cee8'
+ */		        eventColor: '#00cee8'
 		})
 		$("#mypage_communitylist").on('change',function(){
 			var comm_num=$('#mypage_communitylist option:selected').val();
 			var gathering=$('#comm_gathering option:selected').val();
 			var comm_name=$('#mypage_communitylist option:selected').text();
-			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num
+			location.href=getPageContext+"/mypage/mycomm/calendar?comm_num="+comm_num
 					+"&comm_name="+comm_name+"&gathering="+gathering;
 		});
 		$("#comm_gathering").on('change',function(){
 			var comm_num=$('#mypage_communitylist option:selected').val();
 			var gathering=$('#comm_gathering option:selected').val();
 			var comm_name=$('#mypage_communitylist option:selected').text();
-			location.href=getPageContext+"/mypage/mycommcalendar?comm_num="+comm_num
+			location.href=getPageContext+"/mypage/mycomm/calendar?comm_num="+comm_num
 					+"&comm_name="+comm_name+"&gathering="+gathering;
 		});
 		
